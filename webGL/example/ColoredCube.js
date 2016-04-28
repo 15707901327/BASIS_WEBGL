@@ -76,57 +76,45 @@ function initVertexBuffers(gl) {
   //  | |v7---|-|v4
   //  |/      |/
   //  v2------v3
-  var verticesColors = new Float32Array([
-    // 顶点和颜色坐标
-    1.0,  1.0,  1.0,     1.0,  1.0,  1.0,  // v0 White
-    -1.0,  1.0,  1.0,     1.0,  0.0,  1.0,  // v1 Magenta
-    -1.0, -1.0,  1.0,     1.0,  0.0,  0.0,  // v2 Red
-    1.0, -1.0,  1.0,     1.0,  1.0,  0.0,  // v3 Yellow
-    1.0, -1.0, -1.0,     0.0,  1.0,  0.0,  // v4 Green
-    1.0,  1.0, -1.0,     0.0,  1.0,  1.0,  // v5 Cyan
-    -1.0,  1.0, -1.0,     0.0,  0.0,  1.0,  // v6 Blue
-    -1.0, -1.0, -1.0,     0.0,  0.0,  0.0   // v7 Black
+
+  var vertices = new Float32Array([
+    1.0, 1.0, 1.0,  -1.0, 1.0, 1.0,  -1.0,-1.0, 1.0,   1.0,-1.0, 1.0,  // v0-v1-v2-v3 front
+    1.0, 1.0, 1.0,   1.0,-1.0, 1.0,   1.0,-1.0,-1.0,   1.0, 1.0,-1.0,  // v0-v3-v4-v5 right
+    1.0, 1.0, 1.0,   1.0, 1.0,-1.0,  -1.0, 1.0,-1.0,  -1.0, 1.0, 1.0,  // v0-v5-v6-v1 up
+    -1.0, 1.0, 1.0,  -1.0, 1.0,-1.0,  -1.0,-1.0,-1.0,  -1.0,-1.0, 1.0,  // v1-v6-v7-v2 left
+    -1.0,-1.0,-1.0,   1.0,-1.0,-1.0,   1.0,-1.0, 1.0,  -1.0,-1.0, 1.0,  // v7-v4-v3-v2 down
+    1.0,-1.0,-1.0,  -1.0,-1.0,-1.0,  -1.0, 1.0,-1.0,   1.0, 1.0,-1.0   // v4-v7-v6-v5 back
+  ]);
+
+  var colors = new Float32Array([     // Colors
+    0.4, 0.4, 1.0,  0.4, 0.4, 1.0,  0.4, 0.4, 1.0,  0.4, 0.4, 1.0,  // v0-v1-v2-v3 front(blue)
+    0.4, 1.0, 0.4,  0.4, 1.0, 0.4,  0.4, 1.0, 0.4,  0.4, 1.0, 0.4,  // v0-v3-v4-v5 right(green)
+    1.0, 0.4, 0.4,  1.0, 0.4, 0.4,  1.0, 0.4, 0.4,  1.0, 0.4, 0.4,  // v0-v5-v6-v1 up(red)
+    1.0, 1.0, 0.4,  1.0, 1.0, 0.4,  1.0, 1.0, 0.4,  1.0, 1.0, 0.4,  // v1-v6-v7-v2 left
+    1.0, 1.0, 1.0,  1.0, 1.0, 1.0,  1.0, 1.0, 1.0,  1.0, 1.0, 1.0,  // v7-v4-v3-v2 down
+    0.4, 1.0, 1.0,  0.4, 1.0, 1.0,  0.4, 1.0, 1.0,  0.4, 1.0, 1.0   // v4-v7-v6-v5 back
   ]);
 
   // 顶点索引
-  var indices = new Uint8Array([
+  var indices = new Uint8Array([       // Indices of the vertices
     0, 1, 2,   0, 2, 3,    // front
-    0, 3, 4,   0, 4, 5,    // right
-    0, 5, 6,   0, 6, 1,    // up
-    1, 6, 7,   1, 7, 2,    // left
-    7, 4, 3,   7, 3, 2,    // down
-    4, 7, 6,   4, 6, 5     // back
+    4, 5, 6,   4, 6, 7,    // right
+    8, 9,10,   8,10,11,    // up
+    12,13,14,  12,14,15,    // left
+    16,17,18,  16,18,19,    // down
+    20,21,22,  20,22,23     // back
   ]);
 
   // 创建缓存区对象
-  var vertexColorBuffer = gl.createBuffer();
   var indexBuffer = gl.createBuffer();
-  if (!vertexColorBuffer || !indexBuffer) {
+  if (!indexBuffer)
     return -1;
-  }
 
   // 将顶点坐标和颜色坐标写入缓存区对象
-  gl.bindBuffer(gl.ARRAY_BUFFER, vertexColorBuffer);
-  gl.bufferData(gl.ARRAY_BUFFER, verticesColors, gl.STATIC_DRAW);
-
-  var FSIZE = verticesColors.BYTES_PER_ELEMENT;
-
-  var a_Position = gl.getAttribLocation(gl.program, 'a_Position');
-  if (a_Position < 0) {
-    console.log('Failed to get the storage location of a_Position');
+  if (!initArrayBuffer(gl, vertices, 3, gl.FLOAT, 'a_Position'))
     return -1;
-  }
-  gl.vertexAttribPointer(a_Position, 3, gl.FLOAT, false, FSIZE * 6, 0);
-  gl.enableVertexAttribArray(a_Position);
-
-  // 将颜色坐标分派给a_TexCoord，并开启它
-  var a_Color = gl.getAttribLocation(gl.program, 'a_Color');
-  if(a_Color < 0) {
-    console.log('Failed to get the storage location of a_Color');
+  if (!initArrayBuffer(gl, colors, 3, gl.FLOAT, 'a_Color'))
     return -1;
-  }
-  gl.vertexAttribPointer(a_Color, 3, gl.FLOAT, false, FSIZE * 6, FSIZE * 3);
-  gl.enableVertexAttribArray(a_Color);
 
   // 将顶点索引数据写入缓存区
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
@@ -135,33 +123,25 @@ function initVertexBuffers(gl) {
   return indices.length;
 }
 
-var g_near = 0.0,g_far = 0.5;
-
-/** 键盘点击事件 **/
-function keydown(ev, gl, n, u_ProjMatrix, projMatrix,nf) {
-
-  switch(ev.keyCode){
-    case 39 : g_near +=0.01;break;
-    case 37 : g_near -=0.01;break;
-    case 38 : g_far +=0.01;break;
-    case 40 : g_far -=0.01;break;
-    default : return;
+function initArrayBuffer(gl, data, num, type, attribute) {
+  var buffer = gl.createBuffer();   // Create a buffer object
+  if (!buffer) {
+    console.log('Failed to create the buffer object');
+    return false;
   }
-  draw(gl, n, u_ProjMatrix, projMatrix,nf);
-}
+  // 将数据写入缓存区对象
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+  gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
 
-function draw(gl, n, u_ProjMatrix, projMatrix,nf) {
-  // 使用矩阵设置可视空间
-  projMatrix.setOrtho(-1,1,-1,1,g_near,g_far);
+  // 将缓存区对象分配给变量
+  var a_attribute = gl.getAttribLocation(gl.program, attribute);
+  if (a_attribute < 0) {
+    console.log('Failed to get the storage location of ' + attribute);
+    return false;
+  }
+  gl.vertexAttribPointer(a_attribute, num, type, false, 0, 0);
 
-  /** 将视图矩阵传递给变量 **/
-  gl.uniformMatrix4fv(u_ProjMatrix,false,projMatrix.elements);
+  gl.enableVertexAttribArray(a_attribute);
 
-  gl.clear(gl.COLOR_BUFFER_BIT);     // Clear <canvas>
-
-  // 显示当前的near和far值
-  nf.innerHTML = 'near:' +　Math.round(g_near * 100)/100 + ', far : '+ Math.round(g_far * 100)/100;
-
-  // 绘制图形
-  gl.drawArrays(gl.TRIANGLES, 0, n);
+  return true;
 }

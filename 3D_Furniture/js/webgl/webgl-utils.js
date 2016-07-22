@@ -124,6 +124,7 @@ var setupWebGL = function(canvas, opt_attribs, opt_onError) {
 
   if (canvas.addEventListener) {
     canvas.addEventListener("webglcontextcreationerror", function(event) {
+        console.log(event);
           opt_onError(event.statusMessage);
         }, false);
   }

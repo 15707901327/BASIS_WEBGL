@@ -107,7 +107,7 @@ var OTHER_PROBLEM = '' +
  */
 var setupWebGL = function(canvas, opt_attribs, opt_onError) {
   function handleCreationError(msg) {
-      var container = document.getElementsByTagName("body")[0];
+    var container = document.getElementsByTagName("body")[0];
     //var container = canvas.parentNode;
     if (container) {
       var str = window.WebGLRenderingContext ?

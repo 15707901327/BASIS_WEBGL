@@ -99,6 +99,19 @@ function loadShader(gl, type, source) {
  * @param opt_debug flag to initialize the context for debugging
  * @return the rendering context for WebGL
  */
+/**
+ * getWebGLContext（element,[,debug]）
+ * 获取WebGL绘图的上下文，如果开启来debug属性，遇到错误时将在控制台显示错误消息
+ * 参数：
+ *  element:指定<canvas>元素
+ *  debug：可选，如果设置为true，JavaScript中发生的错误将被显示在控制台上，注意，在调试结束后关闭它，
+ *      否则会影响性能。
+ * 返回值：
+ *  non-null：WebGL绘图上下文
+ *  null：WebGL不可用
+ * 说明：在获取WebGL绘图上下文时，canvas.getContext()函数接收的参数，在不同的浏览器中会不同，
+ *  所以使用getWebGLContext()来隐藏不同浏览器之间的差异。
+ */
 function getWebGLContext(canvas, opt_debug) {
   // Get the rendering context for WebGL
   var gl = WebGLUtils.setupWebGL(canvas);

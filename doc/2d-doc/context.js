@@ -1,6 +1,3 @@
-/**
- * Created by 1231 on 2016/4/14.
- */
 function main(){
     //获取<canvas>元素
     var canvas = document.getElementById("example");
@@ -13,10 +10,16 @@ function main(){
     var ctx = canvas.getContext('2d');
 
     /**
-     * 绘制蓝色的矩形，
+     * 设置填充颜色为蓝色
      * rgb表示颜色（0-255）
      * a ： 透明度 （0.0-1.0）
      */
-    ctx.fillStyle = 'rgba(0,0,255,0.5)';//设置填充颜色为蓝色
-    ctx.fillRect(120,10,150,150);//使用填充颜色填充矩形
+    ctx.fillStyle = 'rgba(0,0,255,0.5)';
+    /**
+     * 使用填充颜色填充矩形
+     * 参数：
+     *  前两个指定了待绘制矩形的顶点在<canvas>中的坐标
+     *  后两个指定了矩形的宽度和高度
+     */
+    ctx.fillRect(120,10,150,150);
 }

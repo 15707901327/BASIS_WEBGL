@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas标签说明</title>
+</head>
+<body onload="main()">
+<!--
+    1. canvas标签只在支持他的浏览器中显示，不支持的浏览器中会忽略它，所以可以在标签间添加提示信息来提示用户。
+    2. canvas标签默认是透明的。
+    3. 由于canvas元素可以灵活的同时支持二维图形和三维图形的，它不直接提供绘图的方法，而是提供一种叫
+        上下文（context）的机制来进行绘图。
+    属性：
+        id:指定唯一的标识符
+        height、width：指定区域
+    <canvas>2d坐标系统：
+        横轴为x轴（正方向朝右），纵轴为y轴（正方向朝下），远点落在左上方。
+        原点****************x轴
+        *
+        *
+        *
+        *
+        y轴
+-->
+<canvas id="example" height="400" width="400">
+    Please use a browser that supports "canvas"
+</canvas>
+<script>
+    function main() {
+        //获取<canvas>元素
+        var canvas = document.getElementById("example");
+        if(!canvas){
+            console.log('Failed to retrieve the <cancas> element');
+            return;
+        }
+
+        /**
+         * 获取绘制二维图形的绘制上下文
+         * canvas.getContext()指定了上下文的类型（二维或三维），注意区分大小写。
+         */
+        var ctx = canvas.getContext('2d');
+    }
+</script>
+</body>
+</html>

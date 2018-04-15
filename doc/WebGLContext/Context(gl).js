@@ -26,4 +26,20 @@ gl.clearColor(red,green,blue,alpha);
  * 错误：
  *  INVALID_VALUE：缓存区不是以上三种类型
  */
-gl.clear(buffer)
+gl.clear(buffer);
+
+/**
+ * gl.drawArrays(mode, first, count)
+ * 执行顶点着色器，按照mode参数指定的方式绘制图形
+ * 参数：
+ *  mode：指定绘制的方式，可以接收一下常量符号：gl_POINTS,
+ *    gl_LINES,gl_LINE_STRIP,gl_LINE_LOOP,gl_TRIANGLES,gl_TRIANGLE_STRIP,
+ *    gl_TRIANGLE_FAN
+ *  first:指定从那个顶点开始绘制
+ *  count：指定绘制需要用到多少个顶点（整形数）
+ * 返回值：无
+ * 错误：
+ *  INVALID_ENUM：传入的mode参数不是前述参数之一
+ *  INVALID_VALUE：参数first或count是负数
+ */
+gl.drawArrays(mode, first, count)

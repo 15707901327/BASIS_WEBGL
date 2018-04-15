@@ -6,6 +6,18 @@
  * @param fshader a fragment shader program (string)
  * @return true, if the program object was created and successfully made current 
  */
+/**
+ * 初始化着色器
+ * initShaders(gl,vshader,fshader)
+ * 在WebGL系统内部建立和初始化着色器
+ * 参数：
+ *  gl：指定渲染的上下文
+ *  vshader：指定顶点着色器程序代码（字符串）
+ *  fshader：指定片元着色器程序代码（字符串）
+ * 返回值：
+ *  true：初始化着色器成功
+ *  false：初始化着色器失败
+ */
 function initShaders(gl, vshader, fshader) {
   var program = createProgram(gl, vshader, fshader);
   if (!program) {

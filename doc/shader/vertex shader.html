@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vertex shader</title>
+    <link rel="stylesheet" href="../css/base.css">
+</head>
+<body>
+<h1>vertex shader</h1>
+
+<pre>
+    // 顶点着色器程序
+    var VSHADER_SOURCE =
+    'void main() {\n' +
+    '  gl_Position = vec4(0.0,0.0,0.0,1.0);\n' + //设置坐标
+    '  gl_PointSize = 10.0;\n' + //设置尺寸
+    '}\n';
+</pre>
+<p>顶点着色器程序必须包含一个main()函数。main()前面的关键子void表示这个函数不会有返回值，
+    不能为main()指定参数</p>
+
+<h1>顶点着色器的内置变量</h1>
+<table border="1px" style="border-collapse: collapse">
+    <tr>
+        <th>类型和变量名</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>vec4 gl_Position</td>
+        <td>
+            表示顶点的位置，注意变量必须被赋值，否则着色器就无法正常工作
+        </td>
+    </tr>
+    <tr>
+        <td>float gl_PointSize</td>
+        <td>
+            表示点的尺寸(像素数)，
+            不是必须的，不过不赋值，着色器会取默认值1.0
+        </td>
+    </tr>
+</table>
+</body>
+</html>

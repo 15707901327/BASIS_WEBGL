@@ -1,9 +1,10 @@
 // 顶点着色器程序
 var VSHADER_SOURCE =
   'attribute vec4 a_Position;\n' +
+  'attribute float a_PointSize;\n' +
   'void main() {\n' +
   '  gl_Position = a_Position;\n' + //设置坐标
-  '  gl_PointSize = 10.0;\n' + //设置尺寸
+  '  gl_PointSize = a_PointSize;\n' + //设置尺寸
   '}\n'; 
 
 // 片元着色器
@@ -47,15 +48,52 @@ function main() {
     return;
   }
 
-  // 获取attribute变量的存储位置
+  /**
+   * gl.getAttribLocation(gl.program, name)
+   * 获取由name参数指定的attribute变量的存储位置
+   * 参数：
+   *    gl.program：指定包含顶点着色器和片元着色器的着色器程序对象。
+   *    name：指定想要获取其存储地址的attribute变量的名称
+   * 返回值：
+   *    大于等于0：attribute变量的存储地址
+   *    -1：指定的attribute变量不存在，或者其命名具有gl_或webgl_前缀
+   * 错误：
+   *    INVALID_OPERATION:程序对象未能成功连接
+   *    INVALID_VALUE：name参数的长度大于attribute变量名的最大长度（默认256字节）
+   */
   var a_Position = gl.getAttribLocation(gl.program, 'a_Position');
   if (a_Position < 0) {
       console.log("Failed to get the storage location of a_position");
       return;
   }
 
-  // 将顶点的位置传输给attribute变量
-  gl.vertexAttrib3f(a_Position, 0.0, 0.0, 0.0);
+  /**
+   * gl.vertexAttrib3f(location, v0, v1, v2);
+   * 将数据（v0，v1，v2）传给由location参数指定的attribute变量
+   * 参数：
+   *    location：指定将要修改的attribute变量的存储位置
+   *    v0：指定填充attribute变量第一个分量的值
+   *    v1：指定填充attribute变量第二个分量的值
+   *    v2：指定填充attribute变量第三个分量的值
+   * 返回值：无
+   * 错误：
+   *    INVALID_OPERATION:程序对象未能成功连接（没有当前program对象）
+   *    INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）
+   * 说明：
+   *    默认第四个分量为1.0
+   */
+  // gl.vertexAttrib3f(a_Position, 0.0, 0.0, 0.0);
+  var position = new Float32Array([0.0,0.0,0.0,1.0]);
+  gl.vertexAttrib4fv(a_Position, position);
+
+  var a_PointSize = gl.getAttribLocation(gl.program, 'a_PointSize');
+  if (a_PointSize < 0) {
+        console.log("Failed to get the storage location of a_position");
+        return;
+    }
+  // gl.vertexAttrib1f(a_PointSize, 20.0);
+  var size = new Float32Array([20.0]);
+  gl.vertexAttrib1fv(a_PointSize, size);
 
   // 设置<canvas>的背景
   gl.clearColor(0.0, 0.0, 0.0, 1.0);

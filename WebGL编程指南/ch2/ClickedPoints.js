@@ -1,5 +1,5 @@
 // ClickedPints.js (c) 2012 matsuda
-// Vertex shader program
+// 顶点着色器
 var VSHADER_SOURCE =
   'attribute vec4 a_Position;\n' +
   'void main() {\n' +
@@ -7,7 +7,7 @@ var VSHADER_SOURCE =
   '  gl_PointSize = 10.0;\n' +
   '}\n';
 
-// Fragment shader program
+// 片元着色器
 var FSHADER_SOURCE =
   'void main() {\n' +
   '  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n' +
@@ -20,21 +20,21 @@ function main() {
     // Get the rendering context for WebGL
     var gl = getWebGLContext(canvas);
     if (!gl) {
-    console.log('Failed to get the rendering context for WebGL');
-    return;
+        console.log('Failed to get the rendering context for WebGL');
+        return;
     }
 
     // Initialize shaders
     if (!initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE)) {
-    console.log('Failed to intialize shaders.');
-    return;
+        console.log('Failed to intialize shaders.');
+        return;
     }
 
-    // // Get the storage location of a_Position
+    // Get the storage location of a_Position
     var a_Position = gl.getAttribLocation(gl.program, 'a_Position');
     if (a_Position < 0) {
-    console.log('Failed to get the storage location of a_Position');
-    return;
+        console.log('Failed to get the storage location of a_Position');
+        return;
     }
 
     // Register function (event handler) to be called on a mouse press
@@ -62,7 +62,7 @@ function click(ev, gl, canvas, a_Position) {
     g_points.push(y);
 
     // Clear <canvas>
-    gl.clear(gl.COLOR_BUFFER_BIT);
+    // gl.clear(gl.COLOR_BUFFER_BIT);
 
     var len = g_points.length;
     for(var i = 0; i < len; i += 2) {

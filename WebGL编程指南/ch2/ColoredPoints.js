@@ -9,6 +9,7 @@ var VSHADER_SOURCE =
 
 // 片元着色器
 var FSHADER_SOURCE =
+    'precision mediump float;\n' +
     'uniform vec4 u_FragColor;\n' +
     'void main() {\n' +
     '  gl_FragColor = u_FragColor;\n' +
@@ -38,7 +39,19 @@ function main() {
         return;
     }
 
-    // Get the storage location of u_FragColor
+    /**
+     * gl.getUniformLocation(program, name)
+     * 获取指定名称的uniform变量的存储位置
+     * 参数：
+     *  program：指定包含顶点着色器和片元着色器程序对象
+     *  name：指定想要获取其存储位置的uniform变量名称
+     * 返回值：
+     *  non-unll:指定uniform变量的位置
+     *  null：指定的uniform变量不存在，或者其命名具有gl_或webgl_前缀
+     * 错误：
+     *  INVALID_OPERATION:程序对象未能成功连接
+     *  INVALID_VALUE：name参数的长度大于attribute变量名的最大长度（默认256字节）
+     */
     var u_FragColor = gl.getUniformLocation(gl.program, 'u_FragColor');
     if (u_FragColor < 0) {
         console.log('Failed to get the storage location of u_FragColor');

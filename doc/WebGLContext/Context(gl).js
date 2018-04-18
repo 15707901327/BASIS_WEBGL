@@ -41,6 +41,8 @@ gl.clear(buffer);
  */
 gl.drawArrays(mode, first, count);
 
+// 变量的相关方法
+// attribute变量相关方法
 /**
  * 获取由name参数指定的attribute变量的存储位置
  * 参数：
@@ -82,3 +84,18 @@ gl.vertexAttrib1f(location, v0);
 gl.vertexAttrib2f(location, v0, v1);
 gl.vertexAttrib3f(location, v0, v1, v2);
 gl.vertexAttrib4f(location, v0, v1, v2, v3);
+
+// uniform变量相关方法
+/**
+ * 获取指定名称的uniform变量的存储位置
+ * 参数：
+ *  program：指定包含顶点着色器和片元着色器程序对象
+ *  name：指定想要获取其存储位置的uniform变量名称
+ * 返回值：
+ *  non-unll:指定uniform变量的位置
+ *  null：指定的uniform变量不存在，或者其命名具有gl_或webgl_前缀
+ * 错误：
+ *  INVALID_OPERATION:程序对象未能成功连接
+ *  INVALID_VALUE：name参数的长度大于attribute变量名的最大长度（默认256字节）
+ */
+gl.getUniformLocation(program, name);

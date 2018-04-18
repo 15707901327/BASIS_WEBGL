@@ -99,3 +99,17 @@ gl.vertexAttrib4f(location, v0, v1, v2, v3);
  *  INVALID_VALUE：name参数的长度大于attribute变量名的最大长度（默认256字节）
  */
 gl.getUniformLocation(program, name);
+/**
+ * 将数据（v0，v1，v2,v3）传给由location参数指定的uniform变量
+ * 参数：
+ *    location：指定将要修改的uniform变量的存储位置
+ *    v0：指定填充uniform变量第一个分量的值
+ *    v1：指定填充uniform变量第二个分量的值
+ *    v2：指定填充uniform变量第三个分量的值
+ *    v3：指定填充uniform变量第四个个分量的值
+ * 返回值：无
+ * 错误：
+ *    INVALID_OPERATION:程序对象未能成功连接（没有当前program对象），
+ *    或者localhost是非法的变量的存储位置
+ */
+gl.uniform[1234]f(location, v0, v1, v2, v3);

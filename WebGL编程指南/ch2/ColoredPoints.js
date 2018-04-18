@@ -100,6 +100,20 @@ function click(ev, gl, canvas, a_Position, u_FragColor) {
         // Pass the position of a point to a_Position variable
         gl.vertexAttrib3f(a_Position, g_points[i], g_points[i+1], 0.0);
 
+        /**
+         * gl.uniform[1234]f(location, v0, v1, v2, v3);
+         * 将数据（v0，v1，v2,v3）传给由location参数指定的uniform变量
+         * 参数：
+         *    location：指定将要修改的uniform变量的存储位置
+         *    v0：指定填充uniform变量第一个分量的值
+         *    v1：指定填充uniform变量第二个分量的值
+         *    v2：指定填充uniform变量第三个分量的值
+         *    v3：指定填充uniform变量第四个个分量的值
+         * 返回值：无
+         * 错误：
+         *    INVALID_OPERATION:程序对象未能成功连接（没有当前program对象），
+         *    或者localhost是非法的变量的存储位置
+         */
         gl.uniform4f(u_FragColor, g_colors[i/2][0], g_colors[i/2][1], g_colors[i/2][2],g_colors[i/2][3]);
 
         // Draw

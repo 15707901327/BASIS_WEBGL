@@ -113,3 +113,32 @@ gl.getUniformLocation(program, name);
  *    或者localhost是非法的变量的存储位置
  */
 gl.uniform[1234]f(location, v0, v1, v2, v3);
+
+/**
+ * 1.创建缓存区对象
+ * 返回值：
+ *  非null：新创建的缓存区对象
+ *  null：创建缓存区对象失败
+ */
+gl.createBuffer();
+/**
+ * 删除参数buffer表示的缓存区对象
+ * 参数：
+ *  buffer：待删除的缓存区对象
+ * 返回值：
+ *  无
+ */
+gl.deleteBuffer(buffer);
+/**
+ * 允许使用buffer表示的缓存区对象并将其绑定到target表示的目标上
+ * 参数：
+ *  target：
+ *      gl.ARRAY_BUFFER：表示缓存区对象中包含来顶点的数据
+ *      gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值
+ *          "OpenGL ES着色器语言[GLSL ES]"
+ *  buffer:指定之前🈶️由gl.createBuffer()返回的待绑定的缓存区对象，
+ *      如果指定为空，则禁用对target的绑定
+ * 返回值：无
+ * 错误：INVALID_ENUM target不是上诉值之一，这时将保持原有的绑定情况不变
+ */
+gl.bindBuffer(target, buffer);

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WebGL上下文</title>
+  <link rel="stylesheet" href="../css/base.css">
+</head>
+<body>
+<div class="l-r-wrapper">
+  <div class="left">
+    <h4>绘制图形的基本方法</h4>
+    <a href="#drawArrays">gl.drawArrays()</a>
+    <h4>与attribute变量相关方法</h4>
+    <a href="#getAttribLocation">gl.getAttribLocation()</a>
+    <a href="#vertexAttrib[1234]f">gl.vertexAttrib[1234]f()</a>
+    <a href="#vertexAttribPointer">gl.vertexAttribPointer()</a>
+    <h4>与缓存区相关方法</h4>
+    <a href="#createBuffer" title="gl.createBuffer()">gl.createBuffer()</a>
+    <a href="#deleteBuffer" title="gl.deleteBuffer()">gl.deleteBuffer()</a>
+    <a href="#bindBuffer" title="gl.bindBuffer()">gl.bindBuffer()</a>
+    <a href="#enableVertexAttribArray" title="gl.enableVertexAttribArray()">gl.enableVertexAttribArray()</a>
+    <a href="#disableVertexAttribArray" title="gl.disableVertexAttribArray()">gl.disableVertexAttribArray()</a>
+  </div>
+  <div class="right">
+    <section id="drawArrays">
+      <h4>gl.drawArrays(mode, first, count);</h4>
+      <p>执行顶点着色器，按照mode参数指定的方式绘制图形</p>
+      <div class="content">
+        <strong>参数：</strong>
+        <ul>
+          <li>
+            mode：指定绘制的方式，可以接收一下常量符号：gl_POINTS,gl_LINES,gl_LINE_STRIP,
+            gl_LINE_LOOP,gl_TRIANGLES,gl_TRIANGLE_STRIP,gl_TRIANGLE_FAN.
+            <p>参考:<a href="WebGL可以绘制的基本图形.html">WebGL可以绘制的基本图形</a></p>
+          </li>
+          <li>first:指定从那个顶点开始绘制</li>
+          <li>count：指定绘制需要用到多少个顶点（整形数）</li>
+        </ul>
+        <strong>返回值：</strong>
+        <p>无</p>
+        <strong>错误：</strong>
+        <ul>
+          <li>INVALID_ENUM：传入的mode参数不是前述参数之一</li>
+          <li>INVALID_VALUE：参数first或count是负数</li>
+        </ul>
+      </div>
+    </section>
+    <section id="getAttribLocation">
+      <h4>gl.getAttribLocation(gl.program, name);</h4>
+      <p>获取由name参数指定的attribute变量的存储位置</p>
+      <div class="content">
+        <strong>参数：</strong>
+        <ul>
+          <li>gl.program：指定包含顶点着色器和片元着色器的着色器程序对象。</li>
+          <li>name：指定想要获取其存储地址的attribute变量的名称</li>
+          <li>name：指定想要获取其存储地址的attribute变量的名称</li>
+        </ul>
+        <strong>返回值：</strong>
+        <ul>
+          <li>大于等于0：attribute变量的存储地址</li>
+          <li>-1：指定的attribute变量不存在，或者其命名具有gl_或webgl_前缀</li>
+        </ul>
+        <strong>错误：</strong>
+        <ul>
+          <li>INVALID_OPERATION:程序对象未能成功连接</li>
+          <li>-1：指定的attribute变量不存在，或者其命名具有gl_或webgl_前缀</li>
+        </ul>
+      </div>
+    </section>
+    <section id="vertexAttrib[1234]f">
+      <h4>gl.vertexAttrib[1234]f(location, v0, v1, v2, v3);</h4>
+      <p>
+        将数据（v0，v1，v2,v3）传给由location参数指定的attribute变量，如果没有传递后面的
+        v1, v2, v3，使用默认值0.0、0.0、1.0
+      </p>
+      <div class="content">
+        <strong>参数：</strong>
+        <ul>
+          <li>location：指定将要修改的attribute变量的存储位置</li>
+          <li>v0：指定填充attribute变量第一个分量的值</li>
+          <li>v1：指定填充attribute变量第二个分量的值</li>
+          <li>v2：指定填充attribute变量第三个分量的值</li>
+          <li>v3：指定填充attribute变量第四个个分量的值</li>
+        </ul>
+        <strong>返回值：</strong>
+        <p>无</p>
+        <strong>错误：</strong>
+        <ul>
+          <li>INVALID_OPERATION:程序对象未能成功连接（没有当前program对象）</li>
+          <li>INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）</li>
+        </ul>
+        <strong>矢量方法：</strong>
+        <ul>
+          <li>gl.vertexAttrib1fv(location,Float32Array);</li>
+          <li>gl.vertexAttrib4fv(location,Float32Array);</li>
+          <li>
+            <strong>实例：</strong>
+            <p>var position = new Float32Array([0.0,0.0,0.0,1.0]);</p>
+            <p>gl.vertexAttrib4fv(a_Position, position);</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section id="vertexAttribPointer">
+      <h4>gl.vertexAttribPointer(location, size, type, normalized, stride, offset);</h4>
+      <p>
+        将绑定到gl.ARRAY_BUFFER上的缓存区对象分配给由location指定的attribute变量
+      </p>
+      <div class="content">
+        <strong>参数：</strong>
+        <ul>
+          <li>location：指定待分配attribute变量的存储位置</li>
+          <li>size：指定缓存区中每个顶点的分量个数（1到4）。若size比attribute变量需要的分量数少，
+            缺失分量将按照与vertexAttrib[1234]f（）相同的规则补全。</li>
+          <li>
+            type:用以下类型之一来指定格式
+            <p>
+              gl.UNSIGNED_BYTE:无符号字节，Unit8Array<br>
+              gl.SHORT:短整型，Int16Array<br>
+              gl.UNSIGNED_SHORT:无符号短整型，Unit16Array<br>
+              gl.INT:无符号整型，Int16Array<br>
+              gl.UNSIGNED_INT:无符号整型，Unit16Array<br>
+              gl.FLOAT:浮点型，Float32Array<br>
+            </p>
+          </li>
+          <li>normalize：传入true或false，表明是否将非浮点型的数据归一化到[0,1]或[-1,1]区间</li>
+          <li>stride：指定相邻两个顶点的字节数，默认为0</li>
+          <li>offset：指定缓存区对象中的偏移量（以字节为单位），即attribute变量从缓存区中的何处开始储存，
+            如果是起始位置开始的，offset设置为0</li>
+        </ul>
+        <strong>返回值：</strong>
+        <p>无</p>
+        <strong>错误：</strong>
+        <ul>
+          <li>INVALID_OPERATION:程序对象未能成功连接（没有当前program对象）</li>
+          <li>INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）,或则stride或offset是负值</li>
+        </ul>
+        <strong>实例：</strong>
+        <ul>
+          <li><a href="../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+        </ul>
+      </div>
+    </section>
+    <section id="createBuffer">
+      <h4>gl.createBuffer();</h4>
+      <p>创建缓存区对象</p>
+      <div class="content">
+        <strong>返回值：</strong>
+        <p>
+          非null：新创建的缓存区对象<br>
+          null：创建缓存区对象失败
+        </p>
+        <strong>实例：</strong>
+        <ul>
+          <li><a href="../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+        </ul>
+      </div>
+    </section>
+    <section id="deleteBuffer">
+      <h4>gl.deleteBuffer(buffer);</h4>
+      <p>删除参数buffer表示的缓存区对象</p>
+      <div class="content">
+        <strong>参数：</strong>
+        <ul>
+          <li>buffer：待删除的缓存区对象</li>
+        </ul>
+        <strong>返回值：</strong>
+        <p>无</p>
+        <strong>实例：</strong>
+        <ul>
+          <li><a href="../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+        </ul>
+      </div>
+    </section>
+    <section id="bindBuffer">
+      <h4>gl.bindBuffer(target, buffer);</h4>
+      <p>允许使用buffer表示的缓存区对象并将其绑定到target表示的目标上</p>
+      <div class="content">
+        <strong>参数：</strong>
+        <ul>
+          <li>
+            target
+            <p>
+              gl.ARRAY_BUFFER：表示缓存区对象中包含来顶点的数据<br>
+              gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值"OpenGL ES着色器语言[GLSL ES]"
+            </p>
+          </li>
+          <li>buffer:指定之前🈶️由gl.createBuffer()返回的待绑定的缓存区对象，如果指定为空，则禁用对target的绑定</li>
+        </ul>
+        <strong>返回值：</strong>
+        <p>无</p>
+        <strong>错误：</strong>
+        <ul>
+          <li>INVALID_ENUM target不是上诉值之一，这时将保持原有的绑定情况不变</li>
+        </ul>
+        <strong>实例：</strong>
+        <ul>
+          <li><a href="../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+        </ul>
+      </div>
+    </section>
+    <section id="enableVertexAttribArray">
+      <h4>gl.enableVertexAttribArray(location)</h4>
+      <p>
+        开启location指定的attribute变量
+      </p>
+      <div class="content">
+        <strong>参数：</strong>
+        <ul>
+          <li>location：指定待分配attribute变量的存储位置</li>
+        </ul>
+        <strong>返回值：</strong>
+        <p>无</p>
+        <strong>错误：</strong>
+        <ul>
+          <li>INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）</li>
+        </ul>
+        <strong>实例：</strong>
+        <ul>
+          <li><a href="../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+        </ul>
+      </div>
+    </section>
+    <section id="disableVertexAttribArray">
+      <h4>gl.disableVertexAttribArray(location)</h4>
+      <p>
+        关闭location指定的attribute变量
+      </p>
+      <div class="content">
+        <strong>参数：</strong>
+        <ul>
+          <li>location：指定attribute变量的存储位置</li>
+        </ul>
+        <strong>返回值：</strong>
+        <p>无</p>
+        <strong>错误：</strong>
+        <ul>
+          <li>INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）</li>
+        </ul>
+        <strong>实例：</strong>
+        <ul>
+          <li><a href="../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</div>
+</body>
+</html>

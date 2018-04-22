@@ -13,7 +13,7 @@
     var VSHADER_SOURCE =
     'void main() {\n' +
     '  gl_Position = vec4(0.0,0.0,0.0,1.0);\n' + //设置坐标
-    '  gl_PointSize = 10.0;\n' + //设置尺寸
+    '  gl_PointSize = 10.0;\n' + //设置尺寸,只有在绘制单个点的时候才起作用
     '}\n';
 </pre>
 <p>顶点着色器程序必须包含一个main()函数。main()前面的关键子void表示这个函数不会有返回值，

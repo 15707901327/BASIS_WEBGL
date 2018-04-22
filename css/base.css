@@ -17,9 +17,29 @@ table{
 th,td{
     padding: 5px;
 }
+ul{
+    margin: auto 2em;
+}
 
 .wrapper{
     margin:  0 auto;
     width:  80%;
     min-width: 800px;
+}
+.l-r-wrapper{
+    background-color: #f0f0f0;
+}
+
+.left{
+    width: 200px;
+    float: left;
+    overflow: hidden;
+}
+.right{
+    background-color: #fff;
+    overflow: hidden;
+}
+
+section .content{
+    margin-left: 2em;
 }

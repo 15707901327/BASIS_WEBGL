@@ -9,11 +9,16 @@
 <div class="l-r-wrapper">
   <div class="left">
     <h4>绘制图形的基本方法</h4>
-    <a href="#drawArrays">gl.drawArrays()</a>
+    <a href="#drawArrays">gl.drawArrays()</a><br>
+    <a href="#clear">gl.clear()</a><br>
+    <a href="#clearColor">gl.clearColor()</a>
     <h4>与attribute变量相关方法</h4>
     <a href="#getAttribLocation">gl.getAttribLocation()</a>
     <a href="#vertexAttrib[1234]f">gl.vertexAttrib[1234]f()</a>
     <a href="#vertexAttribPointer">gl.vertexAttribPointer()</a>
+    <h4>与uniform变量相关方法</h4>
+    <a href="#getUniformLocation" title="gl.getUniformLocation()">gl.getUniformLocation()</a>
+    <a href="#uniform" title="gl.uniform()">gl.uniform()</a>
     <h4>与缓存区相关方法</h4>
     <a href="#createBuffer" title="gl.createBuffer()">gl.createBuffer()</a>
     <a href="#deleteBuffer" title="gl.deleteBuffer()">gl.deleteBuffer()</a>
@@ -22,6 +27,7 @@
     <a href="#disableVertexAttribArray" title="gl.disableVertexAttribArray()">gl.disableVertexAttribArray()</a>
   </div>
   <div class="right">
+    <!--绘制图形的基本方法-->
     <section id="drawArrays">
       <h4>gl.drawArrays(mode, first, count);</h4>
       <p>执行顶点着色器，按照mode参数指定的方式绘制图形</p>
@@ -45,6 +51,47 @@
         </ul>
       </div>
     </section>
+    <section id="clear">
+      <h4>gl.clear(buffer);</h4>
+      <p>将指定缓存区设定为预定的值。如果清空是颜色缓存区，那么将使用gl.clearColor()指定的值（作为预定值）</p>
+      <div class="content">
+        <strong>参数：</strong>
+        <ul>
+          <li>
+            buffer：指定待清空的缓存区，位操作符OR(|)可用来指定多个缓存区<br>
+            gl.COLOR_BUFFER_BIT：指定颜色缓存区<br>
+            gl.DEPTH_BUFFER_BIT：指定深度缓存区<br>
+            gl.STENCIL_BUFFER_BIT：指定模版缓存区<br>
+          </li>
+        </ul>
+        <strong>返回值：</strong>
+        <p>无</p>
+        <strong>错误：</strong>
+        <ul>
+          <li>INVALID_VALUE：缓存区不是以上三种类型</li>
+        </ul>
+      </div>
+    </section>
+    <section id="clearColor">
+      <h4>gl.clearColor(red,green,blue,alpha);</h4>
+      <p>指定绘图区域的背景色</p>
+      <div class="content">
+        <strong>参数：</strong>
+        <ul>
+          <li>red：指定红色值（从0.0到1.0）</li>
+          <li>green：指定绿色值（从0.0到1.0）</li>
+          <li>blue：指定蓝色值（从0.0到1.0）</li>
+          <li>alpha：指定透明度值（从0.0到1.0,如果任何值小于0.0大于1.0，那么就会分别截断为0.0或1.0</li>
+        </ul>
+        <strong>返回值：</strong>
+        <p>无</p>
+        <strong>说明：</strong>
+        <ul>
+          <li>一旦指定背景颜色之后，背景颜色就会被驻存在WebGL系统（WebGL System）中，在下一次调用方法之前不会改变（只需要要设置一次）。</li>
+        </ul>
+      </div>
+    </section>
+    <!--与attribute变量相关方-->
     <section id="getAttribLocation">
       <h4>gl.getAttribLocation(gl.program, name);</h4>
       <p>获取由name参数指定的attribute变量的存储位置</p>
@@ -141,6 +188,49 @@
         </ul>
       </div>
     </section>
+    <!--与uniform变量相关方法-->
+    <section id="getUniformLocation">
+      <h4>gl.getUniformLocation(program, name);</h4>
+      <p>获取指定名称的uniform变量的存储位置</p>
+      <div class="content">
+        <strong>参数：</strong>
+        <ul>
+          <li>program：指定包含顶点着色器和片元着色器的着色器程序对象。</li>
+          <li>name：指定想要获取其存储位置的uniform变量名称</li>
+        </ul>
+        <strong>返回值：</strong>
+        <ul>
+          <li>non-unll:指定uniform变量的位置</li>
+          <li>null：指定的uniform变量不存在，或者其命名具有gl_或webgl_前缀</li>
+        </ul>
+        <strong>错误：</strong>
+        <ul>
+          <li>INVALID_OPERATION:程序对象未能成功连接</li>
+          <li>INVALID_VALUE：name参数的长度大于attribute变量名的最大长度（默认256字节）</li>
+        </ul>
+      </div>
+    </section>
+    <section id="uniform">
+      <h4>gl.uniform[1234]f(location, v0, v1, v2, v3);</h4>
+      <p>将数据（v0，v1，v2,v3）传给由location参数指定的uniform变量</p>
+      <div class="content">
+        <strong>参数：</strong>
+        <ul>
+          <li>location：指定将要修改的uniform变量的存储位置</li>
+          <li>v0：指定填充uniform变量第一个分量的值</li>
+          <li>v1：指定填充uniform变量第二个分量的值</li>
+          <li>v2：指定填充uniform变量第三个分量的值</li>
+          <li>v3：指定填充uniform变量第四个个分量的值</li>
+        </ul>
+        <strong>返回值：</strong>
+        <p>无</p>
+        <strong>错误：</strong>
+        <ul>
+          <li>INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置</li>
+        </ul>
+      </div>
+    </section>
+    <!--与缓存区相关方法-->
     <section id="createBuffer">
       <h4>gl.createBuffer();</h4>
       <p>创建缓存区对象</p>

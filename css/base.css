@@ -43,3 +43,7 @@ ul{
 section .content{
     margin-left: 2em;
 }
+.bg-1{
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}

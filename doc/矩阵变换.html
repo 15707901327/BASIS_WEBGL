@@ -8,12 +8,26 @@
 <body>
 <div class="l-r-wrapper">
   <div class="left">
-    <a href="#rotation">旋转</a>
+    <a href="#rotation">旋转矩阵</a>
   </div>
   <div class="right">
     <section id="rotation">
-      <h4>点旋转推导</h4>
+      <h4>旋转矩阵的推导</h4>
       <div class="content">
+        <strong>矩阵的乘法</strong>
+        <p>
+          将矩阵（中间）和矢量（右边）相乘，就获得一个新的矢量（左边）。<br>
+          注意矩阵的乘法不符合交换律，也就是说AXB和BXA是不相等的。<br>
+          只有在矩阵的列数与矢量的行数相等时，才可以将两者相乘。
+        </p>
+        <div style="height: 200px; width: 300px; background-image: url('../img/3X3矩阵.png')" class="bg-1"></div>
+        <p>
+          上图中x',y',z'的计算：<br>
+          x' = ax + by + cz<br>
+          y' = dx + ey + fz<br>
+          z' = gx + hy + iz<br>
+        </p>
+        <h4>点变换</h4>
         <div style="height: 200px; width: 200px; background-image: url('../img/3.22.png')" class="bg-1"></div>
         <pre>
         r是从原点到点p的距离，而∂是x轴旋转到点p的角度，用这两个点来计算点p的坐标。
@@ -36,6 +50,9 @@
         <ul>
           <li><a href="../WebGL编程指南/ch3/RotatedTriangle.html">旋转三角形</a></li>
         </ul>
+        <strong>旋转矩阵</strong>
+        <p>由上面矩阵乘法和点变换可得旋转矩阵：</p>
+        <div style="height: 200px; width: 400px; background-image: url('../img/3.7.png')" class="bg-1">
       </div>
     </section>
   </div>

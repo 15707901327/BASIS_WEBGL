@@ -8,7 +8,9 @@
 <body>
 <div class="l-r-wrapper">
   <div class="left">
-    <a href="#rotation">旋转矩阵</a>
+    <a href="#rotation">旋转矩阵</a><br>
+    <a href="#translation">平移矩阵</a><br>
+    <a href="#scale">缩放矩阵</a><br>
   </div>
   <div class="right">
     <section id="rotation">
@@ -46,13 +48,37 @@
           x' = x cos𝞫 - y sin𝞫
           y' = x sin𝞫 + y cos𝞫
         </pre>
+        <strong>旋转矩阵</strong>
+        <p>由上面矩阵乘法和点变换可得旋转矩阵：</p>
+        <div style="height: 200px; width: 400px; background-image: url('../img/3.7.png')" class="bg-1"></div>
+        <strong>四阶旋转矩阵</strong>
+        <div style="height: 200px; width: 400px; background-image: url('../img/四阶旋转矩阵.png')" class="bg-1"></div>
         <strong>实例</strong>
         <ul>
           <li><a href="../WebGL编程指南/ch3/RotatedTriangle.html">旋转三角形</a></li>
+          <li><a href="../WebGL编程指南/ch3/RotatedTriangle_Matrix.html">旋转三角形(使用矩阵)</a></li>
         </ul>
-        <strong>旋转矩阵</strong>
-        <p>由上面矩阵乘法和点变换可得旋转矩阵：</p>
-        <div style="height: 200px; width: 400px; background-image: url('../img/3.7.png')" class="bg-1">
+      </div>
+    </section>
+    <section id="translation">
+      <h4>平移矩阵</h4>
+      <div class="content">
+        <div style="height: 200px; width: 400px; background-image: url('../img/3.10.png')" class="bg-1"></div>
+        <strong>实例</strong>
+        <ul>
+          <li><a href="../WebGL编程指南/ch3/TranslatedTriangle.html">平移三角形</a></li>
+          <li><a href="../WebGL编程指南/ch3/RotatedTriangle_Matrix.html">平移三角形(使用矩阵)</a></li>
+        </ul>
+      </div>
+    </section>
+    <section id="scale">
+      <h4>缩放矩阵</h4>
+      <div class="content">
+        <div style="height: 100px; width: 300px; background-image: url('../img/缩放矩阵.png')" class="bg-1"></div>
+        <strong>实例</strong>
+        <ul>
+          <li><a href="../WebGL编程指南/ch3/RotatedTriangle_Matrix.html">缩放三角形(使用矩阵)</a></li>
+        </ul>
       </div>
     </section>
   </div>

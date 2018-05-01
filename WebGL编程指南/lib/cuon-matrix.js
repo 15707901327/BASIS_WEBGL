@@ -706,7 +706,7 @@ var Vector3 = function(opt_src) {
     v[0] = opt_src[0]; v[1] = opt_src[1]; v[2] = opt_src[2];
   } 
   this.elements = v;
-}
+};
 
 /**
   * Normalize.
@@ -738,4 +738,4 @@ var Vector4 = function(opt_src) {
     v[0] = opt_src[0]; v[1] = opt_src[1]; v[2] = opt_src[2]; v[3] = opt_src[3];
   } 
   this.elements = v;
-}
+};

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>矩阵变换库</title>
+  <link rel="stylesheet" href="../../css/base.css">
+</head>
+<body>
+<div class="l-r-wrapper">
+  <div class="left">
+    <a href="#Matrix4">Matrix4</a>
+  </div>
+  <div class="right">
+    <section>
+      <h4 id="Matrix4">Matrix4</h4>
+      <div class="content">
+        <table border="1">
+          <tr>
+            <th colspan="2">Matrix4对象所支持的方法和属性</th>
+          </tr>
+          <tr>
+            <th>方法和属性名称</th>
+            <th>描述</th>
+          </tr>
+          <tr>
+            <td>Matrix4.setIdentity()</td>
+            <td>将Matrix4实例初始化为单位矩阵</td>
+          </tr>
+          <tr>
+            <td>Matrix4.setTranslate(x,y,z)</td>
+            <td>将Matrix4设置为平移变化矩阵，在x轴上平移的距离为x，在y轴上平移的距离为y，
+              在z轴上平移的距离为z</td>
+          </tr>
+          <tr>
+            <td>Matrix4.setRotate(angle,x,y,z)</td>
+            <td>
+              将Matrix4实例设置为旋转变换矩阵，旋转的角度为angle，旋转轴为（x,y,z）.旋转轴
+              为（x,y,z）.旋转轴（x,y,x）无须归一化。
+            </td>
+          </tr>
+          <tr>
+            <td>Matrix4.setScale(x,y,z)</td>
+            <td>
+              将Matrix4实例设置为缩放变换矩阵，在三个轴上的缩放因子为x，y，z。
+            </td>
+          </tr>
+          <tr>
+            <td>Matrix4.translate(x,y,z)</td>
+            <td>
+              将Matrix4实例乘以一个平移变换矩阵，（该矩阵在x轴上平移的距离为x，在y轴上平移的距离为y，
+              在z轴上平移的距z），所得结果还存储在Matrix4中
+            </td>
+          </tr>
+          <tr>
+            <td>Matrix4.rotate(x,y,z)</td>
+            <td>
+              将Matrix4实例乘以一个旋转变换矩阵，（旋转的角度为angle，旋转轴为（x,y,z）.旋转轴
+              为（x,y,z）.旋转轴（x,y,x）无须归一化），所得结果还存储在Matrix4中
+            </td>
+          </tr>
+          <tr>
+            <td>Matrix4.scale(x,y,z)</td>
+            <td>
+              将Matrix4实例乘以一个缩放变换矩阵，（在三个轴上的缩放因子为x，y，z），所得结果还存储在
+              Matrix4中
+            </td>
+          </tr>
+          <tr>
+            <td>Matrix4.set(m)</td>
+            <td>
+              将Matrix4实例设置为m，m必须也是一个Matrix4实例
+            </td>
+          </tr>
+          <tr>
+            <td>Matrix4.elements</td>
+            <td>
+              类型化数组（Float32Array）包含了Matrix4实例的矩阵元素。
+            </td>
+          </tr>
+        </table>
+        <strong>实例</strong>
+        <ul>
+          <li><a href="../ch4/RotatedTriangle_Matrix4.html">旋转三角形</a></li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</div>
+</body>
+</html>

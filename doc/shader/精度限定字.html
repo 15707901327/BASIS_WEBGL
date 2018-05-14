@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GLSL ES 精度限定字</title>
+    <link rel="stylesheet" href="../../css/base.css">
+</head>
+<body>
+<div class="l-r-wrapper">
+    <div class="left">
+        <ul>
+            <li><a href="#precision">精度限定词</a></li>
+        </ul>
+    </div>
+    <div class="right">
+        <section id="precision">
+            <h4>精度限定词</h4>
+            <div class="content">
+                <p>精度限定词用来指定变量的范围（最大值和最小值）和精度</p>
+                <strong>实例一：使用精度限定词限定中等精度</strong>
+<pre>
+// 顶点着色器程序
+var VSHADER_SOURCE =
+  'precision mediump float;\n' +
+  'attribute vec4 a_Position;\n' +
+  'void main() {\n' +
+  '  gl_Position = a_Position;\n' + //设置坐标
+  '  gl_PointSize = 10.0;\n' + //设置尺寸
+  '}\n';
+</pre>
+            </div>
+        </section>
+    </div>
+</div>
+
+</body>
+</html>

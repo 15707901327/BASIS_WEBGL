@@ -87,8 +87,8 @@ function initVertexBuffers(gl) {
   var u_Width = gl.getUniformLocation(gl.program, 'u_Width');
   var u_Height = gl.getUniformLocation(gl.program, 'u_Height');
 
-  gl.uniform1f(u_Width, gl.drawingBufferWidth / 400);
-  gl.uniform1f(u_Height, gl.drawingBufferHeight / 400);
+  gl.uniform1f(u_Width, gl.drawingBufferWidth);
+  gl.uniform1f(u_Height, gl.drawingBufferHeight);
 
   return n;
 }

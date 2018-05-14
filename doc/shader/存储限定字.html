@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>GLSL ES 存储限定字</title>
-    <link rel="stylesheet" href="../../css/base.css">
+  <meta charset="UTF-8">
+  <title>GLSL ES 存储限定字</title>
+  <link rel="stylesheet" href="../../css/base.css">
 </head>
 <body>
 <div class="l-r-wrapper">
-    <div class="left">
+  <div class="left">
+    <ul>
+      <li><a href="#attribute">attribute 变量</a></li>
+      <li><a href="#uniform">uniform 变量</a></li>
+      <li><a href="#varying">varying 变量</a></li>
+    </ul>
+  </div>
+  <div class="right">
+    <section id="attribute">
+      <h4>attribute 变量</h4>
+      <div class="content">
+        <strong>说明</strong>
         <ul>
-            <li><a href="#attribute">attribute 变量</a></li>
-            <li><a href="#uniform">uniform 变量</a></li>
-            <li><a href="#varying">varying 变量</a></li>
+          <li>attribute变量只能出现在顶点着色器中，只能被声明为全局变量，被用来表示逐顶点的信息。</li>
         </ul>
-    </div>
-    <div class="right">
-        <section id="attribute">
-            <h4>attribute 变量</h4>
-            <div class="content">
-                <strong>说明</strong>
-                <ul>
-                    <li>attribute变量只能出现在顶点着色器中，只能被声明为全局变量，被用来表示逐顶点的信息。</li>
-                </ul>
-                <strong>声明变量</strong>
-                <p>变量的声明格式：存储限定符->类型->变量名</p>
-                <p>attribute vec4 a_Position;</p>
-                <ul>
-                    <li>关键词attribute被称为存储限定符,它表示接下来的变量是一个attribute变量</li>
-                </ul>
-                <strong>作用</strong>
-                <ul>
-                    <li>被用来从外部向顶点着色器内传输数据</li>
-                </ul>
-                <strong>实例一：在顶点着色器中声明变量，并使用</strong>
-                <pre>
+        <strong>声明变量</strong>
+        <p>变量的声明格式：存储限定符->类型->变量名</p>
+        <p>attribute vec4 a_Position;</p>
+        <ul>
+          <li>关键词attribute被称为存储限定符,它表示接下来的变量是一个attribute变量</li>
+        </ul>
+        <strong>作用</strong>
+        <ul>
+          <li>被用来从外部向顶点着色器内传输数据</li>
+        </ul>
+        <strong>实例一：在顶点着色器中声明变量，并使用</strong>
+        <pre>
         // 顶点着色器程序
         var VSHADER_SOURCE =
           'attribute vec4 a_Position;\n' +
@@ -42,23 +42,23 @@
           '  gl_PointSize = 10.0;\n' + //设置尺寸
           '}\n';
     </pre>
-            </div>
-        </section>
-        <section id="uniform">
-            <h4>uniform 变量</h4>
-            <div class="content">
-                <strong>说明</strong>
-                <ul>
-                    <li>uniform 变量可以用在顶点着色器和片元着色器中，且必须是全局变量。</li>
-                    <li>uniform 变量是只读的，它可以是除了数组或结构体之外的任意类型。</li>
-                    <li>如果顶点着色器和片元着色器中声明了同名的uniform 变量，那么它就会被这两种着色器共享。</li>
-                    <li>uniform 变量传输的是那些对于所有顶点都相同（或与顶点无关的数据）</li>
-                </ul>
-                <strong>声明变量</strong>
-                <p>变量的声明格式：存储限定符->类型->变量名</p>
-                <p>uniform vec4 u_FragColor</p>
-                <strong>实例一：在片元着色器中声明变量并使用</strong>
-                <pre>
+      </div>
+    </section>
+    <section id="uniform">
+      <h4>uniform 变量</h4>
+      <div class="content">
+        <strong>说明</strong>
+        <ul>
+          <li>uniform 变量可以用在顶点着色器和片元着色器中，且必须是全局变量。</li>
+          <li>uniform 变量是只读的，它可以是除了数组或结构体之外的任意类型。</li>
+          <li>如果顶点着色器和片元着色器中声明了同名的uniform 变量，那么它就会被这两种着色器共享。</li>
+          <li>uniform 变量传输的是那些对于所有顶点都相同（或与顶点无关的数据）</li>
+        </ul>
+        <strong>声明变量</strong>
+        <p>变量的声明格式：存储限定符->类型->变量名</p>
+        <p>uniform vec4 u_FragColor</p>
+        <strong>实例一：在片元着色器中声明变量并使用</strong>
+        <pre>
         // 片元着色器
         var FSHADER_SOURCE =
         'uniform vec4 u_FragColor;\n' +
@@ -66,22 +66,26 @@
         '  gl_FragColor = u_FragColor;\n' +
         '}\n';
     </pre>
-            </div>
-        </section>
-        <section id="varying">
-            <h4>varying 变量</h4>
-            <div class="content">
-                <strong>说明</strong>
-                <ul>
-                    <li>varying 变量必须是全局变量，它的任务是从顶点着色器向片元着色器传输数据，我们必须在两种着色器中声明同名，同类型的变量。</li>
-                    <li>顶点着色器中赋给varying变量的值并不是直接传递给了片元着色器的varying变量，这其中发生了<a href="../WebGL程序.html#section_4">光栅化</a>的过程。</li>
-                </ul>
-                <strong>声明</strong>
-                <p>变量的声明格式：存储限定符->类型->变量名</p>
-                <p>varying vec4 v_Color</p>
-            </div>
-        </section>
-    </div>
+        <strong>实例</strong>
+        <ul>
+          <li><a href="../../WebGL编程指南/ch2/ClickedPoints.html">点击画点</a></li>
+        </ul>
+      </div>
+    </section>
+    <section id="varying">
+      <h4>varying 变量</h4>
+      <div class="content">
+        <strong>说明</strong>
+        <ul>
+          <li>varying 变量必须是全局变量，它的任务是从顶点着色器向片元着色器传输数据，我们必须在两种着色器中声明同名，同类型的变量。</li>
+          <li>顶点着色器中赋给varying变量的值并不是直接传递给了片元着色器的varying变量，这其中发生了<a href="../WebGL程序.html#section_4">光栅化</a>的过程。</li>
+        </ul>
+        <strong>声明</strong>
+        <p>变量的声明格式：存储限定符->类型->变量名</p>
+        <p>varying vec4 v_Color</p>
+      </div>
+    </section>
+  </div>
 </div>
 </body>
 </html>

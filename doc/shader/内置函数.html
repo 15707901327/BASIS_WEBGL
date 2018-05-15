@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>内置函数</title>
+  <link rel="stylesheet" href="../../css/base.css">
+</head>
+<body>
+<div class="l-r-wrapper">
+  <div class="left">
+    <ul class="ul-1">
+      <li><a href="#vec4">创建变量的函数</a></li>
+      <li><a href="#exp">指数函数</a></li>
+      <li><a href="#dot">几何函数</a></li>
+      <li><a href="#clamp">通用函数</a></li>
+      <li><a href="#acos">角度和三角函数</a></li>
+    </ul>
+  </div>
+  <div class="right">
+    <section id="vec4">
+      <h4>创建变量的函数</h4>
+      <div class="content">
+        <p>vec4 vec4(v0,v1,v2,v3)</p>
+        <pre>
+根据v0，v1，v2，v3值创建vec4对象
+参数：
+v0，v1，v2，v3：指定4个浮点型分量
+返回值：
+由v0，v1，v2，v3组成的vec4对象
+</pre>
+      </div>
+    </section>
+    <section id="dot">
+      <h4>几何函数</h4>
+      <div class="content">
+        <table border="1">
+          <tr>
+            <th>语法</th>
+            <th>描述</th>
+          </tr>
+          <tr>
+            <td>
+              float dot(float x, float y);<br>
+              float dot(vec2 x, vec2 y);<br>
+              float dot(vec3 x, vec3 y);<br>
+              float dot(vec4 x, vec4 y);<br>
+            </td>
+            <td>返回x和y的点积, 对于vec3而言就是x[0] * y[0] + x[1] * y[1] + x[2] * y[2]</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+    <section id="exp">
+      <h4>指数函数</h4>
+      <div class="content">
+        <table border="1">
+          <tr>
+            <th>语法</th>
+            <th>描述</th>
+          </tr>
+          <tr>
+            <td>
+              float exp(float x);<br>
+              vec2 exp(vec2 x);<br>
+              vec3 exp(vec3 x);<br>
+              vec4 exp(vec4 x);<br>
+            </td>
+            <td>返回x自然指数幂，即e^x</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+    <section id="clamp">
+      <h4>通用函数</h4>
+      <div class="content">
+        <table border="1">
+          <tr>
+            <th>语法</th>
+            <th>描述</th>
+          </tr>
+          <tr>
+            <td>
+              float clamp(float x, float minVal, float maxVal);<br>
+              vec2 clamp(vec2 x, vec2 minVal, vec2 maxVal);<br>
+              vec3 clamp(vec3 x, vec3 minVal, vec3 maxVal);<br>
+              vec4 clamp(vec4 x, vec4 minVal, vec4 maxVal);<br>
+              vec2 clamp(vec2 x, float minVal, float maxVal);<br>
+              vec3 clamp(vec3 x, float minVal, float maxVal);<br>
+              vec4 clamp(vec4 x, float minVal, float maxVal);<br>
+            </td>
+            <td>将x限制在minVal和maxVal之间，即返回min(max(x,minVal),maxVal)。如果minVal > maxVal，则返回未定义</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+    <section id="acos">
+      <h4>角度和三角函数</h4>
+      <div class="content">
+        <table border="1">
+          <tr>
+            <th>语法</th>
+            <th>描述</th>
+          </tr>
+          <tr>
+            <td>
+              float acos(float x);<br>
+              vec2 acos(vec2 x);<br>
+              vec3 acos(vec3 x);<br>
+              vec4 acos(vec4 x);<br>
+            </td>
+            <td>反余弦函数，返回角度（弧度值）的正弦值为x。返回值在[-π/2，π/2]区间内，如果x < -1 或者 x > +1 则返回未定义的值</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>
+</body>
+</html>

@@ -17,8 +17,16 @@ table{
 th,td{
     padding: 5px;
 }
+a{
+    text-decoration: none;
+    cursor: pointer;
+}
+
 ul{
-    margin: auto 2em;
+    list-style: none;
+}
+.ul-1{
+    margin-left: 20px;
 }
 
 .wrapper{

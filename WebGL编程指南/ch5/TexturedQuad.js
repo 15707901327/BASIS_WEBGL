@@ -96,9 +96,15 @@ function initVertexBuffers(gl) {
 
   return n;
 }
-/** 初始化贴图 **/
+
+/**
+ * 配置和加载纹理
+ * @param gl 上下文
+ * @param n 顶点的数目
+ * @returns {boolean}
+ */
 function initTextures(gl, n) {
-  var texture = gl.createTexture();// 创建缓存区对象
+  var texture = gl.createTexture();// 创建纹理对象
   if (!texture) {
     console.log('Failed to create the texture object');
     return false;

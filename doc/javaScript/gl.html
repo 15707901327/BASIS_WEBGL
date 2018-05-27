@@ -32,6 +32,8 @@
     <a href="#pixelStorei" title="gl.pixelStorei()">gl.pixelStorei()</a>
     <a href="#activeTexture" title="gl.activeTexture()">gl.activeTexture()</a>
     <a href="#bindTexture" title="gl.bindTexture()">gl.bindTexture()</a>
+    <a href="#texParameteri" title="gl.texParameteri()">gl.texParameteri()</a>
+    <a href="#texImage2D" title="gl.texImage2D()">gl.texImage2D()</a>
   </div>
   <div class="right">
     <!--绘制图形的基本方法-->
@@ -489,7 +491,7 @@
                 <td>gl.REPEAT</td>
               </tr>
             </table>
-            </li>
+          </li>
           <li>param：纹理参数值
             <table border="1">
               <tr>
@@ -501,11 +503,30 @@
               </tr>
               <tr>
                 <td>gl.NEAREST</td>
-                <td></td>
+                <td>使用原纹理上距离映射后像素（新像素）中心最近的那个颜色值，作为新像素的值（使用曼哈顿距离）</td>
               </tr>
               <tr>
                 <td>gl.LINEAR</td>
-                <td></td>
+                <td>使用距离新像素中心最近的四个像素的颜色值的加权平均，作为新像素的值（与gl.NEAREST相比，该方法图像质量更好，但会有较大的开销）</td>
+              </tr>
+              <tr>
+                <th colspan="2">可以赋值给gl.TEXTURE_WRAP_S和gl.TEXTURE_WRAP_T的常量</th>
+              </tr>
+              <tr>
+                <td>值</td>
+                <td>描述</td>
+              </tr>
+              <tr>
+                <td>gl.REPEAT</td>
+                <td>平铺式的重复纹理</td>
+              </tr>
+              <tr>
+                <td>gl.MIRRORED_REPEAT</td>
+                <td>镜像对称式的重复纹理</td>
+              </tr>
+              <tr>
+                <td>gl.CLAMP_TO_EDGE</td>
+                <td>使用纹理图像边缘值</td>
               </tr>
             </table>
           </li>
@@ -515,6 +536,94 @@
         <strong>错误</strong>
         <p>INVALID_ENUM：target不是合法的值</p>
         <p>INVALID_OPERATION：当前目标上没有绑定纹理对象</p>
+      </div>
+    </section>
+    <section id="texImage2D">
+      <h4>gl.texImage2D(target，level, internalformat, format,type,image)</h4>
+      <p>将image指定的图像分配给绑定的目标上的纹理对象。</p>
+      <div class="content">
+        <strong>参数</strong>
+        <ul>
+          <li>target: gl.TEXTURE_2D或gl.TEXTURE_CUBE_MAP</li>
+          <li>level: 出入0（实际上该参数是为金字塔纹理准备的）</li>
+          <li>internalformat: 图像的内部格式</li>
+          <li>
+            format: 纹理数据的格式，必须使用与internalformat相同的值
+            <table border="1">
+              <tr>
+                <th colspan="2">文素数据的格式</th>
+              </tr>
+              <tr>
+                <th>格式</th>
+                <th>描述</th>
+              </tr>
+              <tr>
+                <td>gl.RGB</td>
+                <td>红、绿、蓝</td>
+              </tr>
+              <tr>
+                <td>gl.RGBA</td>
+                <td>红、绿、蓝、透明度</td>
+              </tr>
+              <tr>
+                <td>gl.ALPHA</td>
+                <td>（0.0,0.0,0.0,透明度）</td>
+              </tr>
+              <tr>
+                <td>gl.LUMINANCE</td>
+                <td>L、L、L、1L：流明（表示我们感知到的物体表面的亮度。通常使用物体表面红、绿、蓝颜色分量值的加权平均来计算流明）</td>
+              </tr>
+              <tr>
+                <td>gl.LUMINANCE_ALPHA</td>
+                <td>L、L、L、透明度</td>
+              </tr>
+            </table>
+            <table border="1">
+              <tr>
+                <th colspan="2">纹理图片格式说明</th>
+              </tr>
+              <tr>
+                <th>格式</th>
+                <th>像素表示方法</th>
+              </tr>
+              <tr>
+                <td>JPG格式</td>
+                <td>RGB</td>
+              </tr>
+              <tr>
+                <td>PNG格式</td>
+                <td>RGBA</td>
+              </tr>
+              <tr>
+                <td>BMP格式</td>
+                <td>RGB</td>
+              </tr>
+            </table>
+          </li>
+          <li>type: 纹理数据类型
+          <table border="1">
+            <tr>
+              <th colspan="2">纹理数据的数据格式</th>
+            </tr>
+            <tr>
+              <th>格式</th>
+              <th>描述</th>
+            </tr>
+            <tr>
+              <td>gl.UNSIGNED_BYTE</td>
+              <td>无符号整型，每个颜色分量占据1字节</td>
+            </tr>
+          </table>
+          </li>
+          <li>image: 包含纹理图像的Image对象</li>
+        </ul>
+        <strong>返回值</strong>
+        <p>无</p>
+        <strong>错误</strong>
+        <ul>
+          <li>INVALID_ENUM:target不是合法的</li>
+          <li>INVALID_OPERATION:当前目标上没有绑定纹理对象</li>
+        </ul>
       </div>
     </section>
   </div>

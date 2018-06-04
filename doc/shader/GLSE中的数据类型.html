@@ -1,24 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>GLSL ES中的数据类型</title>
+  <meta charset="UTF-8">
+  <title>GLSL ES中的数据类型</title>
+  <link rel="stylesheet" href="../../css/base.css">
 </head>
 <body>
-<h1>GLSE中的数据类型</h1>
-<table border="1" style="border-collapse: collapse">
-    <tr>
-        <th>类型</th>
-        <th>描述</th>
-    </tr>
-    <tr>
-        <td>float</td>
-        <td>表示浮点数</td>
-    </tr>
-    <tr>
-        <td>vec4</td>
-        <td>表示由四个浮点数组成的矢量</td>
-    </tr>
-</table>
+<div class="l-r-wrapper">
+  <div class="left">
+    <ul class="ul-1">
+      <li><a href="#base">基本数据类型</a></li>
+      <li><a href="#texture">专用于纹理的数据类型</a></li>
+    </ul>
+  </div>
+  <div class="right">
+    <section id="base">
+      <h4>基本数据类型</h4>
+      <div class="content">
+        <table border="1" style="border-collapse: collapse">
+          <tr>
+            <th>类型</th>
+            <th>描述</th>
+          </tr>
+          <tr>
+            <td>float</td>
+            <td>表示浮点数</td>
+          </tr>
+          <tr>
+            <td>vec4</td>
+            <td>表示由四个浮点数组成的矢量</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+    <section id="texture">
+      <h4>专用于纹理的数据类型</h4>
+      <div class="content">
+        <table border="1">
+          <tr>
+            <th colspan="2">专用于纹理的数据类型</th>
+          </tr>
+          <tr>
+            <th>类型</th>
+            <th>描述</th>
+          </tr>
+          <tr>
+            <td>sampler2D</td>
+            <td>绑定到gl.TEXTURE_2D上的纹理数据类型</td>
+          </tr>
+          <tr>
+            <td>samplerCube</td>
+            <td>绑定到gl.TEXTURE_CUBE_MAP上的纹理数据类型</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>
 </body>
 </html>

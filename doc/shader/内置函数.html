@@ -14,6 +14,7 @@
       <li><a href="#dot">几何函数</a></li>
       <li><a href="#clamp">通用函数</a></li>
       <li><a href="#acos">角度和三角函数</a></li>
+      <li><a href="#texture">纹理查询函数</a></li>
     </ul>
   </div>
   <div class="right">
@@ -109,6 +110,43 @@ v0，v1，v2，v3：指定4个浮点型分量
               vec4 acos(vec4 x);<br>
             </td>
             <td>反余弦函数，返回角度（弧度值）的正弦值为x。返回值在[-π/2，π/2]区间内，如果x < -1 或者 x > +1 则返回未定义的值</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+    <section id="texture">
+      <h4>纹理查询函数</h4>
+      <div class="content">
+        <table border="1">
+          <tr>
+            <th>语法</th>
+            <th>描述</th>
+          </tr>
+          <tr>
+            <td>
+              vec4 texture2D(sampler2D sampler,vec2 coord)<br>
+              vec4 texture2D(sampler2D sampler,vec2 coord,float bias)<br>
+              vec4 texture2DProj(sampler2D sampler,vec3 coord)<br>
+              vec4 texture2DProj(sampler2D sampler,vec3 coord,float bias)<br>
+              vec4 texture2DProj(sampler2D sampler,vec4 coord)<br>
+              vec4 texture2DProj(sampler2D sampler,vec4 coord,float bias)<br>
+              vec4 texture2DLod(sampler2D sampler,vec2 coord,float lod)<br>
+              vec4 texture2DLod(sampler2D sampler,vec3 coord,float bias)<br>
+              vec4 texture2DLod(sampler2D sampler,vec4 coord,float bias)<br>
+            </td>
+            <td>
+              使用纹理坐标coord，从当前绑定到sampler的二维纹理中读取相应的纹素。对于投影版本（带有Proj的），纹理坐标将从coord的最后一个分量中解析出来，而vec4类型的coord的第3个分量将被忽略，参数bias只可在片元着色器中使用，它表示在sampler是MIPMAP纹理时，加载当前lod上的值
+            </td>
+          </tr>
+          <tr>
+            <td>
+              vec4 textureCube(samplerCube sampler,vec3 coord)<br>
+              vec4 textureCube(samplerCube sampler,vec3 coord,float bias)<br>
+              vec4 textureCubeLoad(samplerCube sampler,vec3 coord,float lod)<br>
+            </td>
+            <td>
+              使用纹理坐标coord，从绑定到sampler的立方体纹理中读取响应纹理。coord的方向可用来指定立方体纹理表面
+            </td>
           </tr>
         </table>
       </div>

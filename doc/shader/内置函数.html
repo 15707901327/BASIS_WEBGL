@@ -14,7 +14,12 @@
       <li><a href="#dot">几何函数</a></li>
       <li><a href="#clamp">通用函数</a></li>
       <li><a href="#acos">角度和三角函数</a></li>
-      <li><a href="#texture">纹理查询函数</a></li>
+      <li>
+        <a href="#texture">纹理查询函数</a>
+        <ul>
+          <li><a href="#texture2D">texture2D()</a></li>
+        </ul>
+      </li>
     </ul>
   </div>
   <div class="right">
@@ -149,6 +154,19 @@ v0，v1，v2，v3：指定4个浮点型分量
             </td>
           </tr>
         </table>
+      </div>
+    </section>
+    <section id="texture2D">
+      <h4>vec4 texture2D(sampler2D sampler,vec2 coord)</h4>
+      <p>从sampler指定的纹理上获取coord指定的纹理坐标处的像素颜色</p>
+      <div class="content">
+        <strong>参数：</strong>
+        <ul class="ul-1">
+          <li>sampler:指定纹理单元编号</li>
+          <li>coord:指定纹理坐标</li>
+        </ul>
+        <strong>返回值：</strong>
+        <p>纹理坐标处像素的颜色值，其格式由gl.texImage2D(）的internalformat参数决定。下标</p>
       </div>
     </section>
   </div>

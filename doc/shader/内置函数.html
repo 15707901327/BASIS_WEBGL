@@ -16,7 +16,7 @@
       <li><a href="#acos">角度和三角函数</a></li>
       <li>
         <a href="#texture">纹理查询函数</a>
-        <ul>
+        <ul class="ul-1">
           <li><a href="#texture2D">texture2D()</a></li>
         </ul>
       </li>
@@ -166,7 +166,41 @@ v0，v1，v2，v3：指定4个浮点型分量
           <li>coord:指定纹理坐标</li>
         </ul>
         <strong>返回值：</strong>
-        <p>纹理坐标处像素的颜色值，其格式由gl.texImage2D(）的internalformat参数决定。下标</p>
+        <p>
+          纹理坐标处像素的颜色值，其格式由gl.texImage2D()的internalformat参数决定。
+          下表显示来不同参数下的返回值。如果由于某些原因导致纹理图像不可使用，那就返回（0.0,0.0,0.0,1.0）
+        <table border="1">
+          <tr>
+            <th>internalformat</th>
+            <th>返回值</th>
+          </tr>
+          <tr>
+            <td>gl.RGB</td>
+            <td>(R,G,B,1.0)</td>
+          </tr>
+          <tr>
+            <td>gl.RGBA</td>
+            <td>(R,G,B,A)</td>
+          </tr>
+          <tr>
+            <td>gl.ALPHA</td>
+            <td>(0.0,0.0,0.0,A)</td>
+          </tr>
+          <tr>
+            <td>gl.LUMINANCE</td>
+            <td>(L,L,L,1.0)</td>
+          </tr>
+          <tr>
+            <td>gl.LUMINANCE_ALPHA</td>
+            <td>(L,L,L,A)</td>
+          </tr>
+        </table>
+        </p>
+        <strong>实例</strong>
+        <ul class="ul-1">
+          <li><a href="../../WebGL编程指南/ch5/TexturedQuad.html">显示纹理贴图</a></li>
+          <li><a href="../../WebGL编程指南/ch5/TexturedQuad_Repeat.html">显示纹理贴图(重复)</a></li>
+        </ul>
       </div>
     </section>
   </div>

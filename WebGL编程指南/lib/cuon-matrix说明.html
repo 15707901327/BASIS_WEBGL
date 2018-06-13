@@ -9,6 +9,9 @@
 <div class="l-r-wrapper">
   <div class="left">
     <a href="#Matrix4">Matrix4</a>
+    <ul class="ul-1">
+      <li><a href="#setLookAt">setLookAt()</a></li>
+    </ul>
   </div>
   <div class="right">
     <section>
@@ -29,7 +32,8 @@
           <tr>
             <td>Matrix4.setTranslate(x,y,z)</td>
             <td>将Matrix4设置为平移变化矩阵，在x轴上平移的距离为x，在y轴上平移的距离为y，
-              在z轴上平移的距离为z</td>
+              在z轴上平移的距离为z
+            </td>
           </tr>
           <tr>
             <td>Matrix4.setRotate(angle,x,y,z)</td>
@@ -82,6 +86,20 @@
         <ul>
           <li><a href="../ch4/RotatedTriangle_Matrix4.html">旋转三角形</a></li>
         </ul>
+      </div>
+    </section>
+    <section id="setLookAt">
+      <h4>Matrix4.setLookAt(eyeX,eyeY,eyeZ,atX,atY,atZ,upX,upY,upZ)</h4>
+      <p>根据视点（eyeX,eyeY,eyeZ）、观察点（atX,atY,atZ）、上方向（upX,upY,upZ）创建视图矩阵。视图矩阵的类型是Matrix4，其观察点映射到《canvas》的中心点。</p>
+      <div class="content">
+        <strong>参数</strong>
+        <ul class="ul-1">
+          <li>eyeX,eyeY,eyeZ :指定视点</li>
+          <li>atX,atY,atZ :指定观察点</li>
+          <li>upX,upY,upZ :指定上方向，如果上方向是Y轴的正方向，那么upX,upY,upZ就是（0，1，0）</li>
+        </ul>
+        <strong>实例</strong>
+        <p><a href="../ch7/LookAtTriangles.html" target="_blank">修改视点</a></p>
       </div>
     </section>
   </div>

@@ -20,6 +20,7 @@
           <li><a href="#texture2D">texture2D()</a></li>
         </ul>
       </li>
+      <li><a href="#typeConversion">类型转换函数</a></li>
     </ul>
   </div>
   <div class="right">
@@ -201,6 +202,54 @@ v0，v1，v2，v3：指定4个浮点型分量
           <li><a href="../../WebGL编程指南/ch5/TexturedQuad.html">显示纹理贴图</a></li>
           <li><a href="../../WebGL编程指南/ch5/TexturedQuad_Repeat.html">显示纹理贴图(重复)</a></li>
         </ul>
+      </div>
+    </section>
+    <section id="typeConversion">
+      <h4>类型转换函数</h4>
+      <div class="content">
+        <table border="1">
+          <tr>
+            <th colspan="3">类型转换内置函数</th>
+          </tr>
+          <tr>
+            <th>转换</th>
+            <th>函数</th>
+            <th>描述</th>
+          </tr>
+          <tr>
+            <td>转换为整形数</td>
+            <td>
+              <p>int(float)</p>
+              <p>int(bool)</p>
+            </td>
+            <td>
+              <p>将浮点数的小数部分删除，转换为整形数</p>
+              <p>true 被转换为1， false被转换为0</p>
+            </td>
+          </tr>
+          <tr>
+            <td>转换为浮点数</td>
+            <td>
+              <p>float(int)</p>
+              <p>float(bool)</p>
+            </td>
+            <td>
+              <p>将整数转换为浮点数</p>
+              <p>true被转换为1.0，false被转换为0.0</p>
+            </td>
+          </tr>
+          <tr>
+            <td>转换为布尔值</td>
+            <td>
+              <p>bool(int)</p>
+              <p>bool(float)</p>
+            </td>
+            <td>
+              <p>0被转换为false，其他非0被转换为true</p>
+              <p>true被转换为1.0，false被转换为0.0</p>
+            </td>
+          </tr>
+        </table>
       </div>
     </section>
   </div>

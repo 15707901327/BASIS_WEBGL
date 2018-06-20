@@ -3,10 +3,10 @@
 var VSHADER_SOURCE =
   'attribute vec4 a_Position;\n' +
   'attribute vec4 a_Color;\n' +
-  'uniform mat4 u_ViewMatrix;\n' +
+  'uniform mat4 u_ModelViewMatrix;\n' +
   'varying vec4 v_Color;\n' +
   'void main() {\n' +
-  ' gl_Position = u_ViewMatrix * a_Position;\n' +
+  ' gl_Position = u_ModelViewMatrix * a_Position;\n' +
   ' v_Color = a_Color;\n' +
   '}\n';
 
@@ -43,16 +43,21 @@ function main() {
     return;
   }
 
-  var u_ViewMatrix = gl.getUniformLocation(gl.program, 'u_ViewMatrix');
-  if (!u_ViewMatrix) {
+  var u_ModelViewMatrix = gl.getUniformLocation(gl.program, 'u_ModelViewMatrix');
+  if (!u_ModelViewMatrix) {
     console.log('Failed to get the u_ViewMatrix');
     return;
   }
   // 设置视点、视线和上方向
   var viewMatrix = new Matrix4();
   viewMatrix.setLookAt(0.20, 0.25, 0.25, 0, 0, 0, 0, 1, 0);
+  var modelMatrix = new Matrix4();
+  modelMatrix.setRotate(-10, 0, 0, 1);
+
+  var modelViewMatrix = viewMatrix.multiply(modelMatrix);
+
   // 将视图矩阵传递给u_ViewMatrix变量
-  gl.uniformMatrix4fv(u_ViewMatrix, false, viewMatrix.elements);
+  gl.uniformMatrix4fv(u_ModelViewMatrix, false, modelViewMatrix.elements);
 
   // Specify the color for clearing <canvas>
   gl.clearColor(0.0, 0.0, 0.0, 1.0);

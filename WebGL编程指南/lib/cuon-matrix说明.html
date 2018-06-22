@@ -11,6 +11,7 @@
     <a href="#Matrix4">Matrix4</a>
     <ul class="ul-1">
       <li><a href="#setLookAt">setLookAt()</a></li>
+      <li><a href="#setOrtho">setOrtho()</a></li>
     </ul>
   </div>
   <div class="right">
@@ -100,6 +101,20 @@
         </ul>
         <strong>实例</strong>
         <p><a href="../ch7/LookAtTriangles.html" target="_blank">修改视点</a></p>
+      </div>
+    </section>
+    <section id="setOrtho">
+      <h4>Matrix4.setOrtho(left,right,bottom,top,near,far)</h4>
+      <p>通过各参数计算正射投影矩阵，将其存储在Matrix4中。注意，left不一定与right相等，bottom不一定与top相等，near与far不相等</p>
+      <div class="content">
+        <strong>参数：</strong>
+        <ul class="ul-1">
+          <li>left,right:指定近裁剪面的左边界和右边界</li>
+          <li>bottom,top:指定近裁剪面的上边界和下边界</li>
+          <li>near,far:指定近裁剪面和远裁剪面的位置，即可视空间的近边界和远边界</li>
+        </ul>
+        <strong>返回值：</strong>
+        <p>无</p>
       </div>
     </section>
   </div>

@@ -40,17 +40,14 @@ function main() {
   // 设置顶点的位置
   var n = initVertexBuffers(gl);
   if (n < 0) {
-    console.log('Failed to set the vertex information');
+    console.log('Failed to set the positions of the vertices');
     return;
   }
 
   // 设置<canvas>背景色
-  gl.clearColor(0.0, 0.0, 0.0, 1.0);
+  gl.clearColor(0, 0, 0, 1);
 
-  /** 获取变量的存储地址 **/
   var u_ProjMatrix = gl.getUniformLocation(gl.program, 'u_ProjMatrix');
-
-  /** 设置视点、视线、和上方向 **/
   var projMatrix = new Matrix4();
 
   document.onkeydown = function (ev) {
@@ -78,7 +75,7 @@ function initVertexBuffers(gl) {
 
     0.0, 0.5, 0.0, 0.4, 0.4, 1.0,  // 蓝色三角形在最前面
     -0.5, -0.5, 0.0, 0.4, 0.4, 1.0,
-    0.5, -0.5, 0.0, 1.0, 0.4, 0.4,
+    0.5, -0.5, 0.0, 1.0, 0.4, 0.4
   ]);
   var n = 9; // 顶点数目
 
@@ -100,7 +97,7 @@ function initVertexBuffers(gl) {
     console.log('Failed to get the storage location of a_Position');
     return -1;
   }
-  gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, FSIZE * 5, 0);
+  gl.vertexAttribPointer(a_Position, 3, gl.FLOAT, false, FSIZE * 6, 0);
   gl.enableVertexAttribArray(a_Position);
 
   // 将纹理坐标分派给a_TexCoord，并开启它
@@ -109,7 +106,7 @@ function initVertexBuffers(gl) {
     console.log('Failed to get the storage location of a_Color');
     return -1;
   }
-  gl.vertexAttribPointer(a_Color, 3, gl.FLOAT, false, FSIZE * 5, FSIZE * 2);
+  gl.vertexAttribPointer(a_Color, 3, gl.FLOAT, false, FSIZE * 6, FSIZE * 3);
   gl.enableVertexAttribArray(a_Color);  // Enable the assignment of the buffer object
 
   // Unbind the buffer object

@@ -40,41 +40,33 @@ function main() {
   // 设置顶点的位置
   var n = initVertexBuffers(gl);
   if (n < 0) {
-    console.log('Failed to set the vertex information');
+    console.log('Failed to set the positions of the vertices');
     return;
   }
 
-  // 设置<canvas>背景色
-  gl.clearColor(0.0, 0.0, 0.0, 1.0);
-
-  // Clear <canvas>
-  gl.clear(gl.COLOR_BUFFER_BIT);
-
-  /** 获取变量的存储地址 **/
   var u_ViewMatrix = gl.getUniformLocation(gl.program, 'u_ViewMatrix');
   var u_ModelMatrix = gl.getUniformLocation(gl.program, 'u_ModelMatrix');
 
   /** 设置视点、视线、和上方向 **/
   var viewMatrix = new Matrix4();
-  viewMatrix.setLookAt(0.20, 0.25, 0.25, 0, 0, 0, 0, 1, 0);
+  viewMatrix.setLookAt(0.25, 0.25, 0.25, 0, 0, 0, 0, 1, 0);
 
   /** 计算旋转矩阵 **/
   var modelMatrix = new Matrix4();
-  modelMatrix.setRotate(-90, 0, 0, 1);
+  modelMatrix.setRotate(-10, 0, 0, 1);
 
   /** 将视图矩阵传递给变量 **/
   gl.uniformMatrix4fv(u_ViewMatrix, false, viewMatrix.elements);
   gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);
 
-  // 绘制图形
+  gl.clearColor(0.0, 0.0, 0.0, 1.0);
+
+  // Clear <canvas>
+  gl.clear(gl.COLOR_BUFFER_BIT);
+
   gl.drawArrays(gl.TRIANGLES, 0, n);
 }
 
-/**
- * 创建顶点缓存区对象，并将多个顶点的数据保存在缓存区中，然后将缓存区传递给着色器。
- * @param gl：上下文
- * @returns {number}：顶点的个数
- */
 function initVertexBuffers(gl) {
   var verticesColors = new Float32Array([
     // 顶点和颜色坐标
@@ -88,19 +80,19 @@ function initVertexBuffers(gl) {
 
     0.0, 0.5, 0.0, 0.4, 0.4, 1.0,  // 蓝色三角形在最前面
     -0.5, -0.5, 0.0, 0.4, 0.4, 1.0,
-    0.5, -0.5, 0.0, 1.0, 0.4, 0.4,
+    0.5, -0.5, 0.0, 1.0, 0.4, 0.4
   ]);
   var n = 9; // 顶点数目
 
-  // 创建缓存区对象
   var vertexColorBuffer = gl.createBuffer();
   if (!vertexColorBuffer) {
     console.log('Failed to create the buffer object');
-    return false;
+    return -1;
   }
 
-  // 将顶点坐标和纹理坐标写入缓存区对象
+  // 2.将缓存区对象绑定到目标
   gl.bindBuffer(gl.ARRAY_BUFFER, vertexColorBuffer);
+  // 3.向缓存区对象写入数据
   gl.bufferData(gl.ARRAY_BUFFER, verticesColors, gl.STATIC_DRAW);
 
   var FSIZE = verticesColors.BYTES_PER_ELEMENT;
@@ -110,7 +102,7 @@ function initVertexBuffers(gl) {
     console.log('Failed to get the storage location of a_Position');
     return -1;
   }
-  gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, FSIZE * 5, 0);
+  gl.vertexAttribPointer(a_Position, 3, gl.FLOAT, false, FSIZE * 6, 0);
   gl.enableVertexAttribArray(a_Position);
 
   // 将纹理坐标分派给a_TexCoord，并开启它
@@ -119,11 +111,8 @@ function initVertexBuffers(gl) {
     console.log('Failed to get the storage location of a_Color');
     return -1;
   }
-  gl.vertexAttribPointer(a_Color, 3, gl.FLOAT, false, FSIZE * 5, FSIZE * 2);
+  gl.vertexAttribPointer(a_Color, 3, gl.FLOAT, false, FSIZE * 6, FSIZE * 3);
   gl.enableVertexAttribArray(a_Color);  // Enable the assignment of the buffer object
-
-  // Unbind the buffer object
-  gl.bindBuffer(gl.ARRAY_BUFFER, null);
 
   return n;
 }

@@ -1,24 +1,24 @@
 // LookAtRotatedTriangles.js
 // Vertex shader program 顶点着色器
 var VSHADER_SOURCE =
-    'attribute vec4 a_Position;\n' +
-    'attribute vec4 a_Color;\n' +
-    'uniform mat4 u_ModelMatrix;\n' +
-    'uniform mat4 u_ViewMatrix;\n' +
-    'uniform mat4 u_ProjMatrix;\n' +
-    'varying vec4 v_Color;\n' +
-    'void main() {\n' +
-    '  gl_Position =  u_ProjMatrix * u_ViewMatrix * u_ModelMatrix * a_Position;\n' +
-    '  v_Color = a_Color;\n' +
-    '}\n';
+  'attribute vec4 a_Position;\n' +
+  'attribute vec4 a_Color;\n' +
+  'uniform mat4 u_ModelMatrix;\n' +
+  'uniform mat4 u_ViewMatrix;\n' +
+  'uniform mat4 u_ProjMatrix;\n' +
+  'varying vec4 v_Color;\n' +
+  'void main() {\n' +
+  '  gl_Position =  u_ProjMatrix * u_ViewMatrix * u_ModelMatrix * a_Position;\n' +
+  '  v_Color = a_Color;\n' +
+  '}\n';
 
 // Fragment shader program 片元着色器
 var FSHADER_SOURCE =
-    'precision mediump float;\n' +
-    'varying vec4 v_Color;\n' +
-    'void main() {\n' +
-    '  gl_FragColor = v_Color;\n' +
-    '}\n';
+  'precision mediump float;\n' +
+  'varying vec4 v_Color;\n' +
+  'void main() {\n' +
+  '  gl_FragColor = v_Color;\n' +
+  '}\n';
 
 function main() {
   // Retrieve <canvas> element
@@ -49,9 +49,9 @@ function main() {
   gl.clearColor(0, 0, 0, 1);
 
   /** 获取变量的存储地址 **/
-  var u_ModelMatrix = gl.getUniformLocation(gl.program,'u_ModelMatrix');
-  var u_ViewMatrix = gl.getUniformLocation(gl.program,'u_ViewMatrix');
-  var u_ProjMatrix = gl.getUniformLocation(gl.program,'u_ProjMatrix');
+  var u_ModelMatrix = gl.getUniformLocation(gl.program, 'u_ModelMatrix');
+  var u_ViewMatrix = gl.getUniformLocation(gl.program, 'u_ViewMatrix');
+  var u_ProjMatrix = gl.getUniformLocation(gl.program, 'u_ProjMatrix');
   if (!u_ModelMatrix || !u_ViewMatrix || !u_ProjMatrix) {
     console.log('Failed to Get the storage locations of u_ModelMatrix, u_ViewMatrix, and/or u_ProjMatrix');
     return;
@@ -62,38 +62,39 @@ function main() {
   var projMatrix = new Matrix4();//投影矩阵
 
   // 计算视图矩阵和投影矩阵
-  modelMatrix.setTranslate(0.75,0,0);//平移0.75单位
-  viewMatrix.setLookAt(0,0,5,0,0,-100,0,1,0);
-  projMatrix.setPerspective(30,canvas.width/canvas.height,1,100);
+  modelMatrix.setTranslate(0.75, 0, 0);//平移0.75单位
+  viewMatrix.setLookAt(0, 0, 5, 0, 0, -100, 0, 1, 0);
+  projMatrix.setPerspective(30, canvas.width / canvas.height, 1, 100);
 
   //将视图矩阵和投影矩阵传递给变量
-  gl.uniformMatrix4fv(u_ModelMatrix,false,modelMatrix.elements);
-  gl.uniformMatrix4fv(u_ViewMatrix,false,viewMatrix.elements);
-  gl.uniformMatrix4fv(u_ProjMatrix,false,projMatrix.elements);
+  gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);
+  gl.uniformMatrix4fv(u_ViewMatrix, false, viewMatrix.elements);
+  gl.uniformMatrix4fv(u_ProjMatrix, false, projMatrix.elements);
 
   gl.clear(gl.COLOR_BUFFER_BIT);//Clear <canvas>
 
   gl.drawArrays(gl.TRIANGLES, 0, n); // 绘制图形
 
-  modelMatrix.setTranslate(-0.75,0,0);
-  gl.uniformMatrix4fv(u_ModelMatrix,false,modelMatrix.elements);
-  gl.drawArrays(gl.TRIANGLES,0,n);
+  modelMatrix.setTranslate(-0.75, 0, 0);
+  gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);
+  gl.drawArrays(gl.TRIANGLES, 0, n);
 }
+
 /** 设置顶点信息（顶点和颜色坐标）**/
 function initVertexBuffers(gl) {
   var verticesColors = new Float32Array([
     // 顶点和颜色坐标
-    0.0,  1.0,  -4.0,  0.4,  1.0,  0.4, // The back green one
-    -0.5, -1.0,  -4.0,  0.4,  1.0,  0.4,
-    0.5, -1.0,  -4.0,  1.0,  0.4,  0.4,
+    0.0, 1.0, -4.0, 0.4, 1.0, 0.4, // The back green one
+    -0.5, -1.0, -4.0, 0.4, 1.0, 0.4,
+    0.5, -1.0, -4.0, 1.0, 0.4, 0.4,
 
-    0.0,  1.0,  -2.0,  1.0,  1.0,  0.4, // The middle yellow one
-    -0.5, -1.0,  -2.0,  1.0,  1.0,  0.4,
-    0.5, -1.0,  -2.0,  1.0,  0.4,  0.4,
+    0.0, 1.0, -2.0, 1.0, 1.0, 0.4, // The middle yellow one
+    -0.5, -1.0, -2.0, 1.0, 1.0, 0.4,
+    0.5, -1.0, -2.0, 1.0, 0.4, 0.4,
 
-    0.0,  1.0,   0.0,  0.4,  0.4,  1.0,  // The front blue one
-    -0.5, -1.0,   0.0,  0.4,  0.4,  1.0,
-    0.5, -1.0,   0.0,  1.0,  0.4,  0.4,
+    0.0, 1.0, 0.0, 0.4, 0.4, 1.0,  // The front blue one
+    -0.5, -1.0, 0.0, 0.4, 0.4, 1.0,
+    0.5, -1.0, 0.0, 1.0, 0.4, 0.4,
   ]);
   var n = 9; // 顶点数目
 
@@ -120,7 +121,7 @@ function initVertexBuffers(gl) {
 
   // 将颜色坐标分派给a_TexCoord，并开启它
   var a_Color = gl.getAttribLocation(gl.program, 'a_Color');
-  if(a_Color < 0) {
+  if (a_Color < 0) {
     console.log('Failed to get the storage location of a_Color');
     return -1;
   }
@@ -129,32 +130,41 @@ function initVertexBuffers(gl) {
   return n;
 }
 
-var g_near = 0.0,g_far = 0.5;
+var g_near = 0.0, g_far = 0.5;
 
 /** 键盘点击事件 **/
-function keydown(ev, gl, n, u_ProjMatrix, projMatrix,nf) {
+function keydown(ev, gl, n, u_ProjMatrix, projMatrix, nf) {
 
-  switch(ev.keyCode){
-    case 39 : g_near +=0.01;break;
-    case 37 : g_near -=0.01;break;
-    case 38 : g_far +=0.01;break;
-    case 40 : g_far -=0.01;break;
-    default : return;
+  switch (ev.keyCode) {
+    case 39 :
+      g_near += 0.01;
+      break;
+    case 37 :
+      g_near -= 0.01;
+      break;
+    case 38 :
+      g_far += 0.01;
+      break;
+    case 40 :
+      g_far -= 0.01;
+      break;
+    default :
+      return;
   }
-  draw(gl, n, u_ProjMatrix, projMatrix,nf);
+  draw(gl, n, u_ProjMatrix, projMatrix, nf);
 }
 
-function draw(gl, n, u_ProjMatrix, projMatrix,nf) {
+function draw(gl, n, u_ProjMatrix, projMatrix, nf) {
   // 使用矩阵设置可视空间
-  projMatrix.setOrtho(-1,1,-1,1,g_near,g_far);
+  projMatrix.setOrtho(-1, 1, -1, 1, g_near, g_far);
 
   /** 将视图矩阵传递给变量 **/
-  gl.uniformMatrix4fv(u_ProjMatrix,false,projMatrix.elements);
+  gl.uniformMatrix4fv(u_ProjMatrix, false, projMatrix.elements);
 
   gl.clear(gl.COLOR_BUFFER_BIT);     // Clear <canvas>
 
   // 显示当前的near和far值
-  nf.innerHTML = 'near:' +　Math.round(g_near * 100)/100 + ', far : '+ Math.round(g_far * 100)/100;
+  nf.innerHTML = 'near:' + Math.round(g_near * 100) / 100 + ', far : ' + Math.round(g_far * 100) / 100;
 
   // 绘制图形
   gl.drawArrays(gl.TRIANGLES, 0, n);

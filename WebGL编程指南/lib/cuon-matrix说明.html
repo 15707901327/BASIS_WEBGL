@@ -12,6 +12,7 @@
     <ul class="ul-1">
       <li><a href="#setLookAt">setLookAt()</a></li>
       <li><a href="#setOrtho">setOrtho()</a></li>
+      <li><a href="#setPerspective">setPerspective()</a></li>
     </ul>
   </div>
   <div class="right">
@@ -115,6 +116,18 @@
         </ul>
         <strong>返回值：</strong>
         <p>无</p>
+      </div>
+    </section>
+    <section id="setPerspective">
+      <h4>Matrix4.setPerspective(fov,aspect,near,far)</h4>
+      <p>通过各参数计算透视投影矩阵，将其存储在Matrix4中。注意，near的值必须小于far</p>
+      <div class="content">
+        <strong>参数：</strong>
+        <ul class="ul-1">
+          <li>fov:指定垂直视角，即可视空间顶面和底面间的夹角，必须大于0</li>
+          <li>aspect：指定近裁剪面的宽度比（宽度/高度）</li>
+          <li>near、far：指定近裁剪面和远裁剪面的位置，即可视空间的近边界和远边界（near、far必须都大于0）</li>
+        </ul>
       </div>
     </section>
   </div>

@@ -47,6 +47,12 @@
     <a href="#shaderSource" title="gl.shaderSource()">gl.shaderSource()</a>
     <a href="#compileShader" title="gl.compileShader()">gl.compileShader()</a>
     <a href="#getShaderParameter" title="gl.getShaderParameter()">gl.getShaderParameter()</a>
+    <h4>开启相关功能</h4>
+    <ul class="ul-1">
+      <li><a href="#enable" title="gl.enable()">gl.enable()</a></li>
+      <li><a href="#disable" title="gl.disable()">gl.disable()</a></li>
+      <li><a href="#polygonOffset" title="gl.polygonOffset()">gl.polygonOffset()</a></li>
+    </ul>
   </div>
   <div class="right">
     <!--绘制图形的基本方法-->
@@ -78,7 +84,7 @@
       <p>将指定缓存区设定为预定的值。如果清空是颜色缓存区，那么将使用gl.clearColor()指定的值（作为预定值）</p>
       <div class="content">
         <strong>参数：</strong>
-        <ul>
+        <ul class="ul-1">
           <li>
             buffer：指定待清空的缓存区，位操作符OR(|)可用来指定多个缓存区<br>
             gl.COLOR_BUFFER_BIT：指定颜色缓存区<br>
@@ -582,8 +588,10 @@
     </section>
     <section id="texImage2D">
       <h4>
-        gl.texImage2D(target, level, internalformat, format, type, pixels: ImageBitmap | ImageData | HTMLVideoElement | HTMLImageElement | HTMLCanvasElement): void;<br>
-        gl.texImage2D(target, level, internalformat, width, height, border, format, type, pixels: ArrayBufferView | null): void;
+        gl.texImage2D(target, level, internalformat, format, type, pixels: ImageBitmap | ImageData | HTMLVideoElement |
+        HTMLImageElement | HTMLCanvasElement): void;<br>
+        gl.texImage2D(target, level, internalformat, width, height, border, format, type, pixels: ArrayBufferView |
+        null): void;
       </h4>
       <p>将image指定的图像分配给绑定的目标上的纹理对象。</p>
       <div class="content">
@@ -625,7 +633,7 @@
           </li>
           <li>width : 纹理的宽度</li>
           <li>height : 纹理的高度</li>
-          <li>border : </li>
+          <li>border :</li>
           <li>
             format: 纹理数据的格式，必须使用与internalformat相同的值
             <table border="1">
@@ -651,31 +659,31 @@
             </table>
           </li>
           <li>type: 纹理数据类型
-          <table border="1">
-            <tr>
-              <th colspan="2">纹理数据的数据格式</th>
-            </tr>
-            <tr>
-              <th>格式</th>
-              <th>描述</th>
-            </tr>
-            <tr>
-              <td>gl.UNSIGNED_BYTE</td>
-              <td>无符号整型，每个颜色分量占据1字节</td>
-            </tr>
-            <tr>
-              <td>gl.UNSIGNED_SHORT_5_6_5</td>
-              <td>RGB:每个分量分别占用5、6、5比特</td>
-            </tr>
-            <tr>
-              <td>gl.UNSIGNED_SHORT_4_4_4_4</td>
-              <td>RGB:每个分量分别占用4、4、4、4比特</td>
-            </tr>
-            <tr>
-              <td>gl.UNSIGNED_SHORT_5_5_5_1</td>
-              <td>RGB:RGB每个分量分别占用5、5、5比特，A分量占据1比特</td>
-            </tr>
-          </table>
+            <table border="1">
+              <tr>
+                <th colspan="2">纹理数据的数据格式</th>
+              </tr>
+              <tr>
+                <th>格式</th>
+                <th>描述</th>
+              </tr>
+              <tr>
+                <td>gl.UNSIGNED_BYTE</td>
+                <td>无符号整型，每个颜色分量占据1字节</td>
+              </tr>
+              <tr>
+                <td>gl.UNSIGNED_SHORT_5_6_5</td>
+                <td>RGB:每个分量分别占用5、6、5比特</td>
+              </tr>
+              <tr>
+                <td>gl.UNSIGNED_SHORT_4_4_4_4</td>
+                <td>RGB:每个分量分别占用4、4、4、4比特</td>
+              </tr>
+              <tr>
+                <td>gl.UNSIGNED_SHORT_5_5_5_1</td>
+                <td>RGB:RGB每个分量分别占用5、5、5比特，A分量占据1比特</td>
+              </tr>
+            </table>
           </li>
           <li>image: 包含纹理图像的Image对象</li>
         </ul>
@@ -756,7 +764,9 @@
         <strong>参数</strong>
         <ul class="ul-1">
           <li>program : 指定程序对象</li>
-          <li>pname : 指定待获取参数的类型，可以是gl.DELETE_STATUS、gl.LINK_STATUS、gl.VALIDATE_STATUS、gl.ATTACHED_SHADERS、gl.ACTIVE_ATTRIBUTES或gl.ACTIVE_UNIFORMS</li>
+          <li>pname :
+            指定待获取参数的类型，可以是gl.DELETE_STATUS、gl.LINK_STATUS、gl.VALIDATE_STATUS、gl.ATTACHED_SHADERS、gl.ACTIVE_ATTRIBUTES或gl.ACTIVE_UNIFORMS
+          </li>
         </ul>
         <strong>返回值</strong>
         <ul class="ul-1">
@@ -857,6 +867,55 @@
         <ul class="ul-1">
           <li>INVALID_ENUM: pname的值无效</li>
         </ul>
+      </div>
+    </section>
+    <!--开启相关功能-->
+    <section id="enable">
+      <h4>gl.enable(cap)</h4>
+      <p>开启cap表示的功能（capability）</p>
+      <div class="content">
+        <strong>参数：</strong>
+        <ul class="ul-1">
+          <li>
+            cap:指定开启的功能，有可能是以下的几个
+            <p>gl.DEPTH_TEST:消除隐藏面</p>
+            <p>gl.BLEND:混合</p>
+            <p>gl.POLYGON_OFFSET_FILL:多边形位移</p>
+          </li>
+        </ul>
+        <strong>返回值</strong>
+        <p>无</p>
+        <strong>错误</strong>
+        <p>INVALID_ENUM:cap的值无效</p>
+      </div>
+    </section>
+    <section id="disable">
+      <h4>gl.disable(cap)</h4>
+      <p>关闭cap表示的功能（capability）</p>
+      <div class="content">
+        <strong>参数：</strong>
+        <ul class="ul-1">
+          <li>
+            cap:指定开启的功能，有可能是以下的几个
+            <p>gl.DEPTH_TEST:消除隐藏面</p>
+            <p>gl.BLEND:混合</p>
+            <p>gl.POLYGON_OFFSET_FILL:多边形位移</p>
+          </li>
+        </ul>
+        <strong>返回值</strong>
+        <p>无</p>
+        <strong>错误</strong>
+        <p>INVALID_ENUM:cap的值无效</p>
+      </div>
+    </section>
+    <section id="polygonOffset">
+      <h4>gl.polygonOffset(factor,units)</h4>
+      <p>指定加到每个顶点绘制后z值上的偏移量，偏移量按照公式m*factor+r*units计算，其中m表示顶点所在表面相对于观察者的视线的角度，而r表示硬件能够区分两个z值之差的最小值。</p>
+      <div class="content">
+        <strong>返回值</strong>
+        <p>无</p>
+        <strong>错误</strong>
+        <p>无</p>
       </div>
     </section>
   </div>

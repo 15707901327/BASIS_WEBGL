@@ -1,3 +1,4 @@
+// LookAtRotatedTriangles.js
 // Vertex shader program 顶点着色器
 var VSHADER_SOURCE =
   'attribute vec4 a_Position;\n' +
@@ -9,16 +10,18 @@ var VSHADER_SOURCE =
   '  v_Color = a_Color;\n' +
   '}\n';
 
-// Fragment shader program 片元着色器
+// 片元着色器
 var FSHADER_SOURCE =
+  '#ifdef GL_ES\n' +
   'precision mediump float;\n' +
+  '#endif\n' +
   'varying vec4 v_Color;\n' +
   'void main() {\n' +
   '  gl_FragColor = v_Color;\n' +
   '}\n';
 
 function main() {
-  // Retrieve <canvas> element
+
   var canvas = document.getElementById('webgl');
 
   // Get the rendering context for WebGL
@@ -55,7 +58,7 @@ function main() {
 
   /** 设置视点和可视空间 **/
   var mvpMatrix = new Matrix4();
-  mvpMatrix.setPerspective(30, 1, 1, 100);
+  mvpMatrix.setPerspective(30, canvas.width / canvas.height, 1, 100);
   mvpMatrix.lookAt(3, 3, 7, 0, 0, 0, 0, 1, 0);
 
   //将视图矩阵和投影矩阵传递给变量

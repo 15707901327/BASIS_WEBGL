@@ -9,9 +9,12 @@
 <div class="l-r-wrapper">
   <div class="left">
     <h4>绘制图形的基本方法</h4>
-    <a href="#drawArrays">gl.drawArrays()</a><br>
-    <a href="#clear">gl.clear()</a><br>
-    <a href="#clearColor">gl.clearColor()</a>
+    <ul class="ul-1">
+      <li><a href="#drawArrays">gl.drawArrays()</a></li>
+      <li><a href="#drawElements">gl.drawElements()</a></li>
+      <li><a href="#clear">gl.clear()</a></li>
+      <li><a href="#clearColor">gl.clearColor()</a></li>
+    </ul>
     <h4>与attribute变量相关方法</h4>
     <a href="#getAttribLocation">gl.getAttribLocation()</a>
     <a href="#vertexAttrib[1234]f">gl.vertexAttrib[1234]f()</a>
@@ -61,7 +64,7 @@
       <p>执行顶点着色器，按照mode参数指定的方式绘制图形</p>
       <div class="content">
         <strong>参数：</strong>
-        <ul>
+        <ul class="ul-1">
           <li>
             mode：指定绘制的方式，可以接收一下常量符号：gl_POINTS,gl_LINES,gl_LINE_STRIP,
             gl_LINE_LOOP,gl_TRIANGLES,gl_TRIANGLE_STRIP,gl_TRIANGLE_FAN.
@@ -76,6 +79,30 @@
         <ul>
           <li>INVALID_ENUM：传入的mode参数不是前述参数之一</li>
           <li>INVALID_VALUE：参数first或count是负数</li>
+        </ul>
+      </div>
+    </section>
+    <section id="drawElements">
+      <h4>gl.drawElements(mode,count,type,offset)</h4>
+      <p>执行着色器，按照mode参数指定的方式，根据绑定到gl.ELEMENT_ARRAY_BUFFER的缓存区中的顶点索引值绘制图形。</p>
+      <div class="content">
+        <strong>参数：</strong>
+        <ul class="ul-1">
+          <li>
+            mode：指定绘制的方式，可以接收一下常量符号：gl_POINTS,gl_LINES,gl_LINE_STRIP,
+            gl_LINE_LOOP,gl_TRIANGLES,gl_TRIANGLE_STRIP,gl_TRIANGLE_FAN.
+            <p>参考:<a href=""></a></p>
+          </li>
+          <li>count：指定绘制需要用到多少个顶点（整形数）</li>
+          <li>type:指定索引值数据类型：gl.UNSIGNED或gl.UNSIGNED_SHORT</li>
+          <li>offset:指定索引数组中开始绘制的位置，以字节为单位</li>
+        </ul>
+        <strong>返回值：</strong>
+        <p>无</p>
+        <strong>错误：</strong>
+        <ul>
+          <li>INVALID_ENUM：传入的mode参数不是前述参数之一</li>
+          <li>INVALID_VALUE：参数offset或count是负数</li>
         </ul>
       </div>
     </section>

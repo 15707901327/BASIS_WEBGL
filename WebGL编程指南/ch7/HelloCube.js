@@ -3,12 +3,10 @@
 var VSHADER_SOURCE =
   'attribute vec4 a_Position;\n' +
   'attribute vec4 a_Color;\n' +
-  'uniform mat4 u_ModelMatrix;\n' +
-  'uniform mat4 u_ViewMatrix;\n' +
-  'uniform mat4 u_ProjMatrix;\n' +
+  'uniform mat4 u_MvpMatrix;\n' +
   'varying vec4 v_Color;\n' +
   'void main() {\n' +
-  '  gl_Position =  u_ProjMatrix * u_ViewMatrix * u_ModelMatrix * a_Position;\n' +
+  '  gl_Position = u_MvpMatrix * a_Position;\n' +
   '  v_Color = a_Color;\n' +
   '}\n';
 
@@ -19,10 +17,11 @@ var FSHADER_SOURCE =
   '#endif\n' +
   'varying vec4 v_Color;\n' +
   'void main() {\n' +
-  ' gl_FragColor = v_Color;\n' +
+  '  gl_FragColor = v_Color;\n' +
   '}\n';
 
 function main() {
+
   var canvas = document.getElementById('webgl');
 
   // Get the rendering context for WebGL
@@ -45,57 +44,71 @@ function main() {
     return;
   }
 
-  // 设置<canvas>背景色
+  // 设置<canvas>背景色，并开启隐藏面消除
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
-  // 开启隐藏面消除
   gl.enable(gl.DEPTH_TEST);
-  // 清空颜色和深度缓存区
+
+  /** 获取变量的存储地址 **/
+    // Get the storage location of u_MvpMatrix
+  var u_MvpMatrix = gl.getUniformLocation(gl.program, 'u_MvpMatrix');
+  if (!u_MvpMatrix) {
+    console.log('Failed to get the storage location of u_MvpMatrix');
+    return;
+  }
+
+  /** 设置视点和可视空间 **/
+  var mvpMatrix = new Matrix4();
+  mvpMatrix.setPerspective(30, canvas.width / canvas.height, 1, 100);
+  mvpMatrix.lookAt(3, 3, 7, 0, 0, 0, 0, 1, 0);
+
+  //将视图矩阵和投影矩阵传递给变量
+  gl.uniformMatrix4fv(u_MvpMatrix, false, mvpMatrix.elements);
+
+  //清空颜色缓存区和深度缓存区
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-  var u_ModelMatrix = gl.getUniformLocation(gl.program, 'u_ModelMatrix');
-  var u_ViewMatrix = gl.getUniformLocation(gl.program, 'u_ViewMatrix');
-  var u_ProjMatrix = gl.getUniformLocation(gl.program, 'u_ProjMatrix');
-
-  var modelMatrix = new Matrix4();
-  var viewMatrix = new Matrix4();
-  var projMatrix = new Matrix4();
-  modelMatrix.setTranslate(0.75, 0, 0); // 平移0.75单位
-  viewMatrix.setLookAt(0, 0, 10, 0, 0, -100, 0, 1, 0);
-  projMatrix.setPerspective(30, canvas.width / canvas.height, 1, 100);
-
-  gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);
-  gl.uniformMatrix4fv(u_ViewMatrix, false, viewMatrix.elements);
-  gl.uniformMatrix4fv(u_ProjMatrix, false, projMatrix.elements);
-
-  // 启用多边形偏移
-  gl.enable(gl.POLYGON_OFFSET_FILL);
-  // 绘制图形
-  gl.drawArrays(gl.TRIANGLES, 0, n / 2);
-  gl.polygonOffset(1.0,1.0);
-  gl.drawArrays(gl.TRIANGLES, n / 2, n / 2);
+  gl.drawElements(gl.TRIANGLES, n, gl.UNSIGNED_BYTE, 0); // 绘制图形
 }
 
+/** 设置顶点信息（顶点和颜色坐标）**/
 function initVertexBuffers(gl) {
+  // Create a cube
+  //    v6----- v5
+  //   /|      /|
+  //  v1------v0|
+  //  | |     | |
+  //  | |v7---|-|v4
+  //  |/      |/
+  //  v2------v3
   var verticesColors = new Float32Array([
     // 顶点和颜色坐标
-    0.0, 2.5, -5.0, 0.0, 1.0, 0.0, // 蓝色
-    -2.5, -2.5, -5.0, 0.0, 1.0, 0.0,
-    2.5, -2.5, -5.0, 1.0, 0.0, 0.0,
-
-    0.0, 3.0, -5.0, 1.0, 0.0, 0.0,//  黄色
-    -3.0, -3.0, -5.0, 1.0, 1.0, 0.0,
-    3.0, -3.0, -5.0, 1.0, 1.0, 0.0
+    1.0, 1.0, 1.0, 1.0, 1.0, 1.0,  // v0 White
+    -1.0, 1.0, 1.0, 1.0, 0.0, 1.0,  // v1 Magenta
+    -1.0, -1.0, 1.0, 1.0, 0.0, 0.0,  // v2 Red
+    1.0, -1.0, 1.0, 1.0, 1.0, 0.0,  // v3 Yellow
+    1.0, -1.0, -1.0, 0.0, 1.0, 0.0,  // v4 Green
+    1.0, 1.0, -1.0, 0.0, 1.0, 1.0,  // v5 Cyan
+    -1.0, 1.0, -1.0, 0.0, 0.0, 1.0,  // v6 Blue
+    -1.0, -1.0, -1.0, 0.0, 0.0, 0.0   // v7 Black
   ]);
-  var n = 6; // 顶点数目
+  // 顶点索引
+  var indices = new Uint8Array([
+    0, 1, 2, 0, 2, 3,    // front
+    0, 3, 4, 0, 4, 5,    // right
+    0, 5, 6, 0, 6, 1,    // up
+    1, 6, 7, 1, 7, 2,    // left
+    7, 4, 3, 7, 3, 2,    // down
+    4, 7, 6, 4, 6, 5     // back
+  ]);
 
   // 创建缓存区对象
   var vertexColorBuffer = gl.createBuffer();
-  if (!vertexColorBuffer) {
-    console.log('Failed to create the buffer object');
-    return false;
+  var indexBuffer = gl.createBuffer();
+  if (!vertexColorBuffer || !indexBuffer) {
+    return -1;
   }
 
-  // 将顶点坐标和纹理坐标写入缓存区对象
+  // 将顶点坐标和颜色坐标写入缓存区对象
   gl.bindBuffer(gl.ARRAY_BUFFER, vertexColorBuffer);
   gl.bufferData(gl.ARRAY_BUFFER, verticesColors, gl.STATIC_DRAW);
 
@@ -118,8 +131,8 @@ function initVertexBuffers(gl) {
   gl.vertexAttribPointer(a_Color, 3, gl.FLOAT, false, FSIZE * 6, FSIZE * 3);
   gl.enableVertexAttribArray(a_Color);  // Enable the assignment of the buffer object
 
-  // Unbind the buffer object
-  gl.bindBuffer(gl.ARRAY_BUFFER, null);
+  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
+  gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indices, gl.STATIC_DRAW);
 
-  return n;
+  return indices.length;
 }

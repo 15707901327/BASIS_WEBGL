@@ -2,35 +2,37 @@
 var VSHADER_SOURCE =
   'attribute vec4 a_Position;\n' +
   'attribute vec4 a_Color;\n' +
-  'attribute vec4 a_Normal;\n' +        // Normal
+  'attribute vec4 a_Normal;\n' + // 法向量
   'uniform mat4 u_MvpMatrix;\n' +
-  'uniform vec3 u_DiffuseLight;\n' +     //Diffuse light color
-  'uniform vec3 u_LightDirection;\n' + // 归一化世界坐标
-  'uniform vec3 u_AmbientLight;\n' + // 环境光颜色
+  'uniform vec3 u_LightColor;\n' + // 光线颜色
+  'uniform vec3 u_LightDirection;\n' + // 归一化的世界坐标
+  'uniform vec3 u_AmbientLight;\n' + //
   'varying vec4 v_Color;\n' +
   'void main() {\n' +
   '  gl_Position = u_MvpMatrix * a_Position;\n' +
   //对法向量进行归一化
-  '  vec3 normal = normalize(a_Normal.xyz);\n' +
+  '  vec3 normal = normalize(vec3(a_Normal));\n' +
   //计算光线方向和法向量的点积
   '  float nDotL = max(dot(u_LightDirection, normal), 0.0);\n' +
   //计算漫反射光的颜色
-  '  vec3 diffuse = u_DiffuseLight * a_Color.rgb * nDotL;\n' +
+  '  vec3 diffuse = u_LightColor * a_Color.rgb * nDotL;\n' +
   // 计算环境光产生的反射光的颜色
   '  vec3 ambient = u_AmbientLight * a_Color.rgb;\n' +
-  '  v_Color = vec4(diffuse + ambient, a_Color.a);\n' +
+  '  v_Color = vec4(diffuse + ambient, a_Color);\n' +
   '}\n';
 
-// Fragment shader program 片元着色器
+// 片元着色器
 var FSHADER_SOURCE =
+  '#ifdef GL_ES\n' +
   'precision mediump float;\n' +
+  '#endif\n' +
   'varying vec4 v_Color;\n' +
   'void main() {\n' +
   '  gl_FragColor = v_Color;\n' +
   '}\n';
 
 function main() {
-  // Retrieve <canvas> element
+
   var canvas = document.getElementById('webgl');
 
   // Get the rendering context for WebGL
@@ -58,8 +60,9 @@ function main() {
   gl.enable(gl.DEPTH_TEST);
 
   /** 获取变量的存储地址 **/
+    // Get the storage location of u_MvpMatrix
   var u_MvpMatrix = gl.getUniformLocation(gl.program, 'u_MvpMatrix');
-  var u_DiffuseLight = gl.getUniformLocation(gl.program, 'u_DiffuseLight');
+  var u_LightColor = gl.getUniformLocation(gl.program, 'u_LightColor');
   var u_LightDirection = gl.getUniformLocation(gl.program, 'u_LightDirection');
   var u_AmbientLight = gl.getUniformLocation(gl.program, 'u_AmbientLight');
   if (!u_MvpMatrix || !u_DiffuseLight || !u_LightDirection || !u_AmbientLight) {
@@ -67,18 +70,17 @@ function main() {
     return;
   }
 
-  // 设置光线的颜色
-  gl.uniform3f(u_DiffuseLight, 1.0, 1.0, 1.0);
-  // 设置光线的方向
+  gl.uniform3f(u_LightColor, 1.0, 1.0, 1.0);
   var lightDirection = new Vector3([0.5, 3.0, 4.0]);
   lightDirection.normalize();     // Normalize
   gl.uniform3fv(u_LightDirection, lightDirection.elements);
   gl.uniform3f(u_AmbientLight, 0.2, 0.2, 0.2);
 
-  /** 计算模型视图投影矩阵 **/
+  /** 设置视点和可视空间 **/
   var mvpMatrix = new Matrix4();
   mvpMatrix.setPerspective(30, canvas.width / canvas.height, 1, 100);
   mvpMatrix.lookAt(3, 3, 7, 0, 0, 0, 0, 1, 0);
+
   //将视图矩阵和投影矩阵传递给变量
   gl.uniformMatrix4fv(u_MvpMatrix, false, mvpMatrix.elements);
 
@@ -98,6 +100,7 @@ function initVertexBuffers(gl) {
   //  | |v7---|-|v4
   //  |/      |/
   //  v2------v3
+
   var vertices = new Float32Array([
     1.0, 1.0, 1.0, -1.0, 1.0, 1.0, -1.0, -1.0, 1.0, 1.0, -1.0, 1.0,  // v0-v1-v2-v3 front
     1.0, 1.0, 1.0, 1.0, -1.0, 1.0, 1.0, -1.0, -1.0, 1.0, 1.0, -1.0,  // v0-v3-v4-v5 right

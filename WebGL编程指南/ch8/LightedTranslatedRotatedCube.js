@@ -4,6 +4,7 @@ var VSHADER_SOURCE =
   'attribute vec4 a_Color;\n' +
   'attribute vec4 a_Normal;\n' + // 法向量
   'uniform mat4 u_MvpMatrix;\n' +
+  'uniform mat4 u_NormalMatrix;\n' + // 用来变换法向量的矩阵
   'uniform vec3 u_LightColor;\n' + // 光线颜色
   'uniform vec3 u_LightDirection;\n' + // 归一化的世界坐标
   'uniform vec3 u_AmbientLight;\n' + //
@@ -11,7 +12,7 @@ var VSHADER_SOURCE =
   'void main() {\n' +
   '  gl_Position = u_MvpMatrix * a_Position;\n' +
   //对法向量进行归一化
-  '  vec3 normal = normalize(vec3(a_Normal));\n' +
+  '  vec3 normal = normalize(vec3(u_NormalMatrix * a_Normal));\n' +
   //计算光线方向和法向量的点积
   '  float nDotL = max(dot(u_LightDirection, normal), 0.0);\n' +
   //计算漫反射光的颜色
@@ -62,28 +63,43 @@ function main() {
   /** 获取变量的存储地址 **/
     // Get the storage location of u_MvpMatrix
   var u_MvpMatrix = gl.getUniformLocation(gl.program, 'u_MvpMatrix');
+  var u_NormalMatrix = gl.getUniformLocation(gl.program, 'u_NormalMatrix');
   var u_LightColor = gl.getUniformLocation(gl.program, 'u_LightColor');
   var u_LightDirection = gl.getUniformLocation(gl.program, 'u_LightDirection');
   var u_AmbientLight = gl.getUniformLocation(gl.program, 'u_AmbientLight');
-  if (!u_MvpMatrix || !u_LightColor || !u_LightDirection || !u_AmbientLight) {
+  if (!u_MvpMatrix || !u_NormalMatrix || !u_LightColor || !u_LightDirection || !u_AmbientLight) {
     console.log('Failed to get the storage location');
     return;
   }
 
+  // 设置光线的颜色
   gl.uniform3f(u_LightColor, 1.0, 1.0, 1.0);
-  var lightDirection = new Vector3([0.5, 3.0, 4.0]);
+  // 设置光线的方向
+  var lightDirection = new Vector3([0.0, 3.0, 4.0]);
   lightDirection.normalize();     // Normalize
   gl.uniform3fv(u_LightDirection, lightDirection.elements);
   gl.uniform3f(u_AmbientLight, 0.2, 0.2, 0.2);
 
   /** 设置视点和可视空间 **/
+  var modelMatrix = new Matrix4();
   var mvpMatrix = new Matrix4();
+  var normalMatrix = new Matrix4();
+
+  modelMatrix.setTranslate(0, 1, 0);
+  modelMatrix.rotate(90, 0, 0, 1);
+
   mvpMatrix.setPerspective(30, canvas.width / canvas.height, 1, 100);
-  mvpMatrix.lookAt(3, 3, 7, 0, 0, 0, 0, 1, 0);
+  mvpMatrix.lookAt(-7, 2.5, 6, 0, 0, 0, 0, 1, 0);
+  mvpMatrix.multiply(modelMatrix);
 
   //将视图矩阵和投影矩阵传递给变量
   gl.uniformMatrix4fv(u_MvpMatrix, false, mvpMatrix.elements);
 
+  normalMatrix.setInverseOf(modelMatrix);
+
+  normalMatrix.transpose();
+
+  gl.uniformMatrix4fv(u_NormalMatrix, false, normalMatrix.elements);
   //清空颜色缓存区和深度缓存区
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
@@ -100,7 +116,6 @@ function initVertexBuffers(gl) {
   //  | |v7---|-|v4
   //  |/      |/
   //  v2------v3
-
   var vertices = new Float32Array([
     1.0, 1.0, 1.0, -1.0, 1.0, 1.0, -1.0, -1.0, 1.0, 1.0, -1.0, 1.0,  // v0-v1-v2-v3 front
     1.0, 1.0, 1.0, 1.0, -1.0, 1.0, 1.0, -1.0, -1.0, 1.0, 1.0, -1.0,  // v0-v3-v4-v5 right

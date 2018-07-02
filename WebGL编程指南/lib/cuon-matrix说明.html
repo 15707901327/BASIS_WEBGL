@@ -13,6 +13,8 @@
       <li><a href="#setLookAt">setLookAt()</a></li>
       <li><a href="#setOrtho">setOrtho()</a></li>
       <li><a href="#setPerspective">setPerspective()</a></li>
+      <li><a href="#setInverseOf">setInverseOf()</a></li>
+      <li><a href="#transpose">transpose()</a></li>
     </ul>
   </div>
   <div class="right">
@@ -129,6 +131,14 @@
           <li>near、far：指定近裁剪面和远裁剪面的位置，即可视空间的近边界和远边界（near、far必须都大于0）</li>
         </ul>
       </div>
+    </section>
+    <section id="setInverseOf">
+      <h4>Matrix4.setInverseOf(m)</h4>
+      <p>使自身（调用本方法的Matrix4类型的实例）成为矩阵m的逆矩阵</p>
+    </section>
+    <section id="transpose">
+      <h4>Matrix4.transpose()</h4>
+      <p>对自身进行转置操作，并将自身设为转置后的结果</p>
     </section>
   </div>
 </div>

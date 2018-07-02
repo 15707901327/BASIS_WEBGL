@@ -1,34 +1,34 @@
 // Vertex shader program 顶点着色器
 var VSHADER_SOURCE =
-    'attribute vec4 a_Position;\n' +
-    'attribute vec4 a_Color;\n' +
-    'attribute vec4 a_Normal;\n' +        // Normal
-    'uniform mat4 u_MvpMatrix;\n' +
-    'uniform mat4 u_NormalMatrix;\n' +   // Transformation matrix of the normal
-    'uniform vec3 u_LightColor;\n' +     // Light color
-    'uniform vec3 u_LightDirection;\n' + // 归一化世界坐标
-    'uniform vec3 u_AmbientLight;\n' + // 环境光颜色
-    'varying vec4 v_Color;\n' +
-    'void main() {\n' +
-    '  gl_Position = u_MvpMatrix * a_Position;\n' +
-      //对法向量进行归一化
-    '  vec3 normal = normalize(vec3(u_NormalMatrix * a_Normal));\n' +
-      //计算光线方向和法向量的点积
-    '  float nDotL = max(dot(u_LightDirection, normal), 0.0);\n' +
-      //计算漫反射光的颜色
-    '  vec3 diffuse = u_LightColor * a_Color.rgb * nDotL;\n' +
-      // 计算环境光产生的反射光的颜色
-    '  vec3 ambient = u_AmbientLight * a_Color.rgb;\n' +
-    '  v_Color = vec4(diffuse + ambient, a_Color.a);\n' +
-    '}\n';
+  'attribute vec4 a_Position;\n' +
+  'attribute vec4 a_Color;\n' +
+  'attribute vec4 a_Normal;\n' +        // Normal
+  'uniform mat4 u_MvpMatrix;\n' +
+  'uniform mat4 u_NormalMatrix;\n' +   // Transformation matrix of the normal
+  'uniform vec3 u_LightColor;\n' +     // Light color
+  'uniform vec3 u_LightDirection;\n' + // 归一化世界坐标
+  'uniform vec3 u_AmbientLight;\n' + // 环境光颜色
+  'varying vec4 v_Color;\n' +
+  'void main() {\n' +
+  '  gl_Position = u_MvpMatrix * a_Position;\n' +
+  //对法向量进行归一化
+  '  vec3 normal = normalize(vec3(u_NormalMatrix * a_Normal));\n' +
+  //计算光线方向和法向量的点积
+  '  float nDotL = max(dot(u_LightDirection, normal), 0.0);\n' +
+  //计算漫反射光的颜色
+  '  vec3 diffuse = u_LightColor * a_Color.rgb * nDotL;\n' +
+  // 计算环境光产生的反射光的颜色
+  '  vec3 ambient = u_AmbientLight * a_Color.rgb;\n' +
+  '  v_Color = vec4(diffuse + ambient, a_Color.a);\n' +
+  '}\n';
 
 // Fragment shader program 片元着色器
 var FSHADER_SOURCE =
-    'precision mediump float;\n' +
-    'varying vec4 v_Color;\n' +
-    'void main() {\n' +
-    '  gl_FragColor = v_Color;\n' +
-    '}\n';
+  'precision mediump float;\n' +
+  'varying vec4 v_Color;\n' +
+  'void main() {\n' +
+  '  gl_FragColor = v_Color;\n' +
+  '}\n';
 
 function main() {
   // Retrieve <canvas> element
@@ -85,7 +85,7 @@ function main() {
   modelMatrix.setTranslate(0, 0.9, 0); // Translate to the y-axis direction
   modelMatrix.rotate(90, 0, 0, 1);
 
-  mvpMatrix.setPerspective(30, canvas.width/canvas.height, 1, 100);
+  mvpMatrix.setPerspective(30, canvas.width / canvas.height, 1, 100);
   mvpMatrix.lookAt(3, 3, 7, 0, 0, 0, 0, 1, 0);
   mvpMatrix.multiply(modelMatrix);
   //将视图矩阵和投影矩阵传递给变量
@@ -100,6 +100,7 @@ function main() {
 
   gl.drawElements(gl.TRIANGLES, n, gl.UNSIGNED_BYTE, 0); // 绘制图形
 }
+
 /** 设置顶点信息（顶点和颜色坐标）**/
 function initVertexBuffers(gl) {
   // Create a cube
@@ -111,40 +112,40 @@ function initVertexBuffers(gl) {
   //  |/      |/
   //  v2------v3
   var vertices = new Float32Array([
-    1.0, 1.0, 1.0,  -1.0, 1.0, 1.0,  -1.0,-1.0, 1.0,   1.0,-1.0, 1.0,  // v0-v1-v2-v3 front
-    1.0, 1.0, 1.0,   1.0,-1.0, 1.0,   1.0,-1.0,-1.0,   1.0, 1.0,-1.0,  // v0-v3-v4-v5 right
-    1.0, 1.0, 1.0,   1.0, 1.0,-1.0,  -1.0, 1.0,-1.0,  -1.0, 1.0, 1.0,  // v0-v5-v6-v1 up
-    -1.0, 1.0, 1.0,  -1.0, 1.0,-1.0,  -1.0,-1.0,-1.0,  -1.0,-1.0, 1.0,  // v1-v6-v7-v2 left
-    -1.0,-1.0,-1.0,   1.0,-1.0,-1.0,   1.0,-1.0, 1.0,  -1.0,-1.0, 1.0,  // v7-v4-v3-v2 down
-    1.0,-1.0,-1.0,  -1.0,-1.0,-1.0,  -1.0, 1.0,-1.0,   1.0, 1.0,-1.0   // v4-v7-v6-v5 back
+    1.0, 1.0, 1.0, -1.0, 1.0, 1.0, -1.0, -1.0, 1.0, 1.0, -1.0, 1.0,  // v0-v1-v2-v3 front
+    1.0, 1.0, 1.0, 1.0, -1.0, 1.0, 1.0, -1.0, -1.0, 1.0, 1.0, -1.0,  // v0-v3-v4-v5 right
+    1.0, 1.0, 1.0, 1.0, 1.0, -1.0, -1.0, 1.0, -1.0, -1.0, 1.0, 1.0,  // v0-v5-v6-v1 up
+    -1.0, 1.0, 1.0, -1.0, 1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, 1.0,  // v1-v6-v7-v2 left
+    -1.0, -1.0, -1.0, 1.0, -1.0, -1.0, 1.0, -1.0, 1.0, -1.0, -1.0, 1.0,  // v7-v4-v3-v2 down
+    1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, 1.0, -1.0, 1.0, 1.0, -1.0   // v4-v7-v6-v5 back
   ]);
 
   var colors = new Float32Array([     // Colors
-    1, 0, 0,   1, 0, 0,   1, 0, 0,  1, 0, 0,     // v0-v1-v2-v3 front
-    1, 0, 0,   1, 0, 0,   1, 0, 0,  1, 0, 0,     // v0-v3-v4-v5 right
-    1, 0, 0,   1, 0, 0,   1, 0, 0,  1, 0, 0,     // v0-v5-v6-v1 up
-    1, 0, 0,   1, 0, 0,   1, 0, 0,  1, 0, 0,     // v1-v6-v7-v2 left
-    1, 0, 0,   1, 0, 0,   1, 0, 0,  1, 0, 0,     // v7-v4-v3-v2 down
-    1, 0, 0,   1, 0, 0,   1, 0, 0,  1, 0, 0　    // v4-v7-v6-v5 back
+    1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,     // v0-v1-v2-v3 front
+    1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,     // v0-v3-v4-v5 right
+    1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,     // v0-v5-v6-v1 up
+    1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,     // v1-v6-v7-v2 left
+    1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,     // v7-v4-v3-v2 down
+    1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0　    // v4-v7-v6-v5 back
   ]);
 
   var normals = new Float32Array([    // Normal
-    0.0, 0.0, 1.0,   0.0, 0.0, 1.0,   0.0, 0.0, 1.0,   0.0, 0.0, 1.0,  // v0-v1-v2-v3 front
-    1.0, 0.0, 0.0,   1.0, 0.0, 0.0,   1.0, 0.0, 0.0,   1.0, 0.0, 0.0,  // v0-v3-v4-v5 right
-    0.0, 1.0, 0.0,   0.0, 1.0, 0.0,   0.0, 1.0, 0.0,   0.0, 1.0, 0.0,  // v0-v5-v6-v1 up
-    -1.0, 0.0, 0.0,  -1.0, 0.0, 0.0,  -1.0, 0.0, 0.0,  -1.0, 0.0, 0.0,  // v1-v6-v7-v2 left
-    0.0,-1.0, 0.0,   0.0,-1.0, 0.0,   0.0,-1.0, 0.0,   0.0,-1.0, 0.0,  // v7-v4-v3-v2 down
-    0.0, 0.0,-1.0,   0.0, 0.0,-1.0,   0.0, 0.0,-1.0,   0.0, 0.0,-1.0   // v4-v7-v6-v5 back
+    0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0,  // v0-v1-v2-v3 front
+    1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0,  // v0-v3-v4-v5 right
+    0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0,  // v0-v5-v6-v1 up
+    -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0,  // v1-v6-v7-v2 left
+    0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0,  // v7-v4-v3-v2 down
+    0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0, 0.0, 0.0, -1.0   // v4-v7-v6-v5 back
   ]);
 
   // 顶点索引
   var indices = new Uint8Array([
-    0, 1, 2,   0, 2, 3,    // front
-    4, 5, 6,   4, 6, 7,    // right
-    8, 9,10,   8,10,11,    // up
-    12,13,14,  12,14,15,    // left
-    16,17,18,  16,18,19,    // down
-    20,21,22,  20,22,23     // back
+    0, 1, 2, 0, 2, 3,    // front
+    4, 5, 6, 4, 6, 7,    // right
+    8, 9, 10, 8, 10, 11,    // up
+    12, 13, 14, 12, 14, 15,    // left
+    16, 17, 18, 16, 18, 19,    // down
+    20, 21, 22, 20, 22, 23     // back
   ]);
 
   // 将顶点坐标和颜色坐标写入缓存区对象

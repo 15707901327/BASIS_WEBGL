@@ -96,12 +96,12 @@ function keydown(ev, gl, o, viewProjMatrix, a_Position, u_MvpMatrix, u_NormalMat
       break;
     case 90: // 'ｚ'key -> the positive rotation of joint2
       g_joint2Angle = (g_joint2Angle + ANGLE_STEP) % 360;
-      break; 
+      break;
     case 88: // 'x'key -> the negative rotation of joint2
       g_joint2Angle = (g_joint2Angle - ANGLE_STEP) % 360;
       break;
     case 86: // 'v'key -> the positive rotation of joint3
-      if (g_joint3Angle < 60.0)  g_joint3Angle = (g_joint3Angle + ANGLE_STEP) % 360;
+      if (g_joint3Angle < 60.0) g_joint3Angle = (g_joint3Angle + ANGLE_STEP) % 360;
       break;
     case 67: // 'c'key -> the nagative rotation of joint3
       if (g_joint3Angle > -60.0) g_joint3Angle = (g_joint3Angle - ANGLE_STEP) % 360;

@@ -64,8 +64,8 @@ function main() {
 
   // 计算视图的投影矩阵
   var viewProjMatrix = new Matrix4();
-  viewProjMatrix.setPerspective(50.0, canvas.width / canvas.height, 1.0, 100.0);
-  viewProjMatrix.lookAt(20.0, 10.0, 30.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+  viewProjMatrix.setPerspective(50.0, canvas.width / canvas.height, 1.0, 1000.0);
+  viewProjMatrix.lookAt(20.0, 1.0, 30.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
   document.onkeydown = function (ev) { // 注册鼠标响应函数
     keydown(ev, gl, n, viewProjMatrix, u_MvpMatrix, u_NormalMatrix);
@@ -113,12 +113,12 @@ function keydown(ev, gl, n, viewProjMatrix, u_MvpMatrix, u_NormalMatrix) {
 
 function initVertexBuffers(gl) {
   var vertices = new Float32Array([
-    1.5, 10.0, 1.5, -1.5, 10.0, 1.5, -1.5, 0.0, 1.5, 1.5, 0.0, 1.5, // v0-v1-v2-v3 front
-    1.5, 10.0, 1.5, 1.5, 0.0, 1.5, 1.5, 0.0, -1.5, 1.5, 10.0, -1.5, // v0-v3-v4-v5 right
-    1.5, 10.0, 1.5, 1.5, 10.0, -1.5, -1.5, 10.0, -1.5, -1.5, 10.0, 1.5, // v0-v5-v6-v1 up
-    -1.5, 10.0, 1.5, -1.5, 10.0, -1.5, -1.5, 0.0, -1.5, -1.5, 0.0, 1.5, // v1-v6-v7-v2 left
-    -1.5, 0.0, -1.5, 1.5, 0.0, -1.5, 1.5, 0.0, 1.5, -1.5, 0.0, 1.5, // v7-v4-v3-v2 down
-    1.5, 0.0, -1.5, -1.5, 0.0, -1.5, -1.5, 10.0, -1.5, 1.5, 10.0, -1.5  // v4-v7-v6-v5 back
+    0.5, 1.0, 0.5, -0.5, 1.0, 0.5, -0.5, 0.0, 0.5, 0.5, 0.0, 0.5, // v0-v1-v2-v3 front
+    0.5, 1.0, 0.5, 0.5, 0.0, 0.5, 0.5, 0.0, -0.5, 0.5, 1.0, -0.5, // v0-v3-v4-v5 right
+    0.5, 1.0, 0.5, 0.5, 1.0, -0.5, -0.5, 1.0, -0.5, -0.5, 1.0, 0.5, // v0-v5-v6-v1 up
+    -0.5, 1.0, 0.5, -0.5, 1.0, -0.5, -0.5, 0.0, -0.5, -0.5, 0.0, 0.5, // v1-v6-v7-v2 left
+    -0.5, 0.0, -0.5, 0.5, 0.0, -0.5, 0.5, 0.0, 0.5, -0.5, 0.0, 0.5, // v7-v4-v3-v2 down
+    0.5, 0.0, -0.5, -0.5, 0.0, -0.5, -0.5, 1.0, -0.5, 0.5, 1.0, -0.5  // v4-v7-v6-v5 back
   ]);
 
   // Normal
@@ -207,13 +207,13 @@ function draw(gl, n, viewProjMatrix, u_MvpMatrix, u_NormalMatrix) {
   var arm2Length = 10.0;
   g_modelMatrix.translate(0.0, arm1Length, 0.0); // 移至joint1处
   g_modelMatrix.rotate(g_joint1Angle, 0.0, 0.0, 1.0);// 绕Z轴旋转
-  drawBox(gl, n, 3.0, arm1Length, 3.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix); // 绘制
+  drawBox(gl, n, 4.0, arm2Length, 4.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix); // 绘制
 
   // A palm
   var palmLength = 2.0;
   g_modelMatrix.translate(0.0, arm2Length, 0.0);       // Move to palm
   g_modelMatrix.rotate(g_joint2Angle, 0.0, 1.0, 0.0);  // Rotate around the y-axis
-  drawBox(gl, n, 3.0, palmLength, 3.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix);
+  drawBox(gl, n, 2.0, palmLength, 6.0, viewProjMatrix, u_MvpMatrix, u_NormalMatrix);
 
   // 移动至palm一端的中点
   g_modelMatrix.translate(0.0, palmLength, 0.0);

@@ -1,22 +1,17 @@
 // cuon-utils.js (c) 2012 kanda and matsuda
 /**
- * Create a program object and make current
- * @param gl GL context
- * @param vshader a vertex shader program (string)
- * @param fshader a fragment shader program (string)
- * @return true, if the program object was created and successfully made current 
- */
-/**
- * 初始化着色器
- * initShaders(gl,vshader,fshader)
- * 在WebGL系统内部建立和初始化着色器
- * 参数：
- *  gl：指定渲染的上下文
- *  vshader：指定顶点着色器程序代码（字符串）
- *  fshader：指定片元着色器程序代码（字符串）
- * 返回值：
- *  true：初始化着色器成功
- *  false：初始化着色器失败
+ * 在WebGL系统内部建立和初始化着色器 （Create a program object and make current）
+ *  1. 创建着色器对象（gl.createShader）
+ *  2. 向着色器对象中填充着色器程序的源代码(gl.shaderSource())
+ *  3. 编译着色器(gl.compileShader())
+ *  4. 创建程序对象(gl.createProgram())
+ *  5. 为程序对象分配着色器(gl.attachShader())
+ *  6. 链接程序对象(gl.linkProgram())
+ *  7. 使用程序对象(gl.useProgram())
+ * @param gl GL context 指定渲染的上下文
+ * @param vshader a vertex shader program (string) 指定顶点着色器程序代码（字符串）
+ * @param fshader a fragment shader program (string) 指定片元着色器程序代码（字符串）
+ * @return true, if the program object was created and successfully made current (true：初始化着色器成功 false：初始化着色器失败)
  */
 function initShaders(gl, vshader, fshader) {
   var program = createProgram(gl, vshader, fshader);
@@ -32,34 +27,34 @@ function initShaders(gl, vshader, fshader) {
 }
 
 /**
- * Create the linked program object
+ * Create the linked program object (创建一个链接好的程序对象)
  * @param gl GL context
  * @param vshader a vertex shader program (string)
  * @param fshader a fragment shader program (string)
  * @return created program object, or null if the creation has failed
  */
 function createProgram(gl, vshader, fshader) {
-  // Create shader object
+  // 创建着色器对象
   var vertexShader = loadShader(gl, gl.VERTEX_SHADER, vshader);
   var fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fshader);
   if (!vertexShader || !fragmentShader) {
     return null;
   }
 
-  // Create a program object
+  // 创建程序对象
   var program = gl.createProgram();
   if (!program) {
     return null;
   }
 
-  // Attach the shader objects
+  // 为程序对象分配顶点着色器和片元着色器
   gl.attachShader(program, vertexShader);
   gl.attachShader(program, fragmentShader);
 
-  // Link the program object
+  // 链接着色器
   gl.linkProgram(program);
 
-  // Check the result of linking
+  // 检查链接
   var linked = gl.getProgramParameter(program, gl.LINK_STATUS);
   if (!linked) {
     var error = gl.getProgramInfoLog(program);
@@ -73,27 +68,27 @@ function createProgram(gl, vshader, fshader) {
 }
 
 /**
- * Create a shader object
+ * Create a shader object （创建一个编译好的着色器对象）
  * @param gl GL context
  * @param type the type of the shader object to be created
  * @param source shader program (string)
  * @return created shader object, or null if the creation has failed.
  */
 function loadShader(gl, type, source) {
-  // Create shader object
+  // 创建着色器对象
   var shader = gl.createShader(type);
   if (shader == null) {
     console.log('unable to create shader');
     return null;
   }
 
-  // Set the shader program
+  // 设置着色器的源代码
   gl.shaderSource(shader, source);
 
-  // Compile the shader
+  // 编译着色器
   gl.compileShader(shader);
 
-  // Check the result of compilation
+  // 检查着色器的编译状态
   var compiled = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
   if (!compiled) {
     var error = gl.getShaderInfoLog(shader);
@@ -105,7 +100,7 @@ function loadShader(gl, type, source) {
   return shader;
 }
 
-/** 
+/**
  * Initialize and get the rendering for WebGL
  * @param canvas <cavnas> element
  * @param opt_debug flag to initialize the context for debugging

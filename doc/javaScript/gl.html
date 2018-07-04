@@ -38,18 +38,27 @@
     <a href="#bindTexture" title="gl.bindTexture()">gl.bindTexture()</a>
     <a href="#texParameteri" title="gl.texParameteri()">gl.texParameteri()</a>
     <a href="#texImage2D" title="gl.texImage2D()">gl.texImage2D()</a>
-    <h4>程序对象</h4>
-    <a href="#createProgram" title="gl.createProgram()">gl.createProgram()</a>
-    <a href="#deleteProgram" title="gl.deleteProgram()">gl.deleteProgram()</a>
-    <a href="#attachShader" title="gl.attachShader()">gl.attachShader()</a>
-    <a href="#linkProgram" title="gl.linkProgram()">gl.linkProgram()</a>
-    <a href="#getProgramParameter" title="gl.getProgramParameter()">gl.getProgramParameter()</a>
-    <h4>着色器对象</h4>
-    <a href="#createShader" title="gl.createShader()">gl.createShader()</a>
-    <a href="#deleteShader" title="gl.deleteShader()">gl.deleteShader()</a>
-    <a href="#shaderSource" title="gl.shaderSource()">gl.shaderSource()</a>
-    <a href="#compileShader" title="gl.compileShader()">gl.compileShader()</a>
-    <a href="#getShaderParameter" title="gl.getShaderParameter()">gl.getShaderParameter()</a>
+    <h4><a href="#baseShaderProgram">着色器和着色器程序对象</a></h4>
+    <h4><a href="#baseShader">着色器对象</a></h4>
+    <ul class="ul-1">
+      <li><a href="#createShader" title="gl.createShader()">gl.createShader()</a></li>
+      <li><a href="#deleteShader" title="gl.deleteShader()">gl.deleteShader()</a></li>
+      <li><a href="#shaderSource" title="gl.shaderSource()">gl.shaderSource()</a></li>
+      <li><a href="#compileShader" title="gl.compileShader()">gl.compileShader()</a></li>
+      <li><a href="#getShaderParameter" title="gl.getShaderParameter()">gl.getShaderParameter()</a></li>
+      <li><a href="#getShaderInfoLog" title="gl.getShaderInfoLog()">gl.getShaderInfoLog()</a></li>
+    </ul>
+    <h4><a href="#baseProgram">程序对象</a></h4>
+    <ul class="ul-1">
+      <li><a href="#createProgram" title="gl.createProgram()">gl.createProgram()</a></li>
+      <li><a href="#deleteProgram" title="gl.deleteProgram()">gl.deleteProgram()</a></li>
+      <li><a href="#attachShader" title="gl.attachShader()">gl.attachShader()</a></li>
+      <li><a href="#detachShader" title="gl.detachShader()">gl.detachShader()</a></li>
+      <li><a href="#linkProgram" title="gl.linkProgram()">gl.linkProgram()</a></li>
+      <li><a href="#getProgramParameter" title="gl.getProgramParameter()">gl.getProgramParameter()</a></li>
+      <li><a href="#getProgramInfoLog" title="gl.getProgramInfoLog()">gl.getProgramInfoLog()</a></li>
+      <li><a href="#useProgram" title="gl.useProgram()">gl.useProgram()</a></li>
+    </ul>
     <h4>开启相关功能</h4>
     <ul class="ul-1">
       <li><a href="#enable" title="gl.enable()">gl.enable()</a></li>
@@ -723,7 +732,138 @@
         </ul>
       </div>
     </section>
+    <!--着色器对象-->
+    <section id="baseShaderProgram">
+      <h4>着色器和着色器程序对象</h4>
+      <p>创建和初始化着色器对象</p>
+      <div class="content">
+        <strong>7个步骤:</strong>
+        <ul class="ul-1-num">
+          <li>创建着色器对象(<a href="#createShader" title="gl.createShader()">gl.createShader()</a>)</li>
+          <li>向着色器对象中填充着色器程序的源代码(<a href="#shaderSource" title="gl.shaderSource()">gl.shaderSource()</a>)</li>
+          <li>编译着色器(<a href="#compileShader" title="gl.compileShader()">gl.compileShader()</a>)</li>
+          <li>创建程序对象(<a href="#createProgram" title="gl.createProgram()">gl.createProgram()</a>)</li>
+          <li>为程序对象分配着色器(<a href="#attachShader" title="gl.attachShader()">gl.attachShader()</a>)</li>
+          <li>链接程序对象(<a href="#linkProgram" title="gl.linkProgram()">gl.linkProgram()</a>)</li>
+          <li>使用程序对象(<a href="#" title="gl.useProgram()">gl.useProgram()</a>)</li>
+        </ul>
+      </div>
+    </section>
+    <section id="baseShader">
+      <h4>着色器对象</h4>
+      <p>着色器对象管理一个顶点着色器或一个片元着色器，每一个着色器都有一个着色器对象。</p>
+    </section>
+    <section id="createShader">
+      <h4>gl.createShader(type)</h4>
+      <p>创建由type指定的着色器对象</p>
+      <div class="content">
+        <strong>参数</strong>
+        <ul class="ul-1">
+          <li>type : 指定创建着色器的类型，gl.VERTEX_SHADER表示顶点着色器，gl.FRAGMENT_SHADER表示片元着色器</li>
+        </ul>
+        <strong>返回值</strong>
+        <ul class="ul-1">
+          <li>non-null:新创建的着色器对象</li>
+          <li>null:创建失败</li>
+        </ul>
+        <strong>错误</strong>
+        <ul class="ul-1">
+          <li>INVALID_ENUM: type参数既不是gl.VERTEX_SHADER，也不是gl.FRAGMENT_SHADER</li>
+        </ul>
+      </div>
+    </section>
+    <section id="deleteShader">
+      <h4>gl.deleteShader(shader)</h4>
+      <p>删除shader指定的着色器</p>
+      <div class="content">
+        <strong>参数</strong>
+        <ul class="ul-1">
+          <li>shader : 待删除的着色器对象</li>
+        </ul>
+        <strong>返回值</strong>
+        <p>无</p>
+        <strong>错误</strong>
+        <p>无</p>
+        <strong>注意：</strong>
+        <p>
+          如果着色器程序对象还在使用（也就是说已经使用gl.attachShader()函数使之附加在了程序对象上），那么gl.deleteShader（）并不会立刻删除着色器，而是要等到程序对象不在使用该着色器后，才将其删除。</p>
+      </div>
+    </section>
+    <section id="shaderSource">
+      <h4>gl.shaderSource(shader,source)</h4>
+      <p>将source指定的字符串形式的代码传入shader指定的着色器。如果之前已经向shader传入过代码了，旧的代码将会被替换掉。</p>
+      <div class="content">
+        <strong>参数</strong>
+        <ul class="ul-1">
+          <li>shader : 指定需要传入代码的着色器对象</li>
+          <li>source : 指定字符串形式的代码</li>
+        </ul>
+        <strong>返回值</strong>
+        <p>无</p>
+        <strong>错误</strong>
+        <p>无</p>
+      </div>
+    </section>
+    <section id="compileShader">
+      <h4>gl.compileShader(shader)</h4>
+      <p>编译shader指定的着色器中的源代码</p>
+      <div class="content">
+        <strong>参数</strong>
+        <ul class="ul-1">
+          <li>shader : 待编译的着色器</li>
+        </ul>
+        <strong>返回值</strong>
+        <p>无</p>
+        <strong>错误</strong>
+        <p>无</p>
+        <strong>注意</strong>
+        <p>如果通过gl.shaderSource(),用新的代码替换到旧的代码，WebGL系统中的用旧的编译出的可执行部分不会被替换掉，需要手动第重新进行编译。</p>
+      </div>
+    </section>
+    <section id="getShaderParameter">
+      <h4>gl.getShaderParameter(shader，pname)</h4>
+      <p>获取shader指定的着色器中，pname指定的参数信息</p>
+      <div class="content">
+        <strong>参数</strong>
+        <ul class="ul-1">
+          <li>shader : 指定待获取参数着色器</li>
+          <li>pname : 指定待获取参数的类型，可以是gl.SHADER_TYPE、gl.DELETE_STATUS或则gl.COMPILE_STATUS</li>
+        </ul>
+        <strong>返回值</strong>
+        <ul class="ul-1">
+          <li>根据pname的不同，返回不同的值</li>
+          <li>gl.SHADER_TYPE：返回是顶点的着色器（gl.VERTEX_SHADER）还是片元着色器（gl.FRAGMENT_SHADER）</li>
+          <li>gl.DELETE_STATUS：返回是着色器是否被删除成功（true或false）</li>
+          <li>gl.COMPILE_STATUS：返回是着色器是否被编译成功（true或false）</li>
+        </ul>
+        <strong>错误</strong>
+        <ul class="ul-1">
+          <li>INVALID_ENUM: pname的值无效</li>
+        </ul>
+      </div>
+    </section>
+    <section id="getShaderInfoLog">
+      <h4>gl.getShaderInfoLog(shader)</h4>
+      <p>获取shader指定的着色器的信息日志。</p>
+      <div class="content">
+        <strong>参数</strong>
+        <ul class="ul-1">
+          <li>shader : 指定待获取信息日志的着色器</li>
+        </ul>
+        <strong>返回值</strong>
+        <ul class="ul-1">
+          <li>non-null: 包含日志信息的字符串</li>
+          <li>null: 没有编译错误</li>
+        </ul>
+        <strong>错误</strong>
+        <p>无</p>
+      </div>
+    </section>
     <!--程序对象-->
+    <section id="baseProgram">
+      <h4>程序对象</h4>
+      <p>程序对象是管理着色器对象的容器。Webgl中，一个程序对象必须包含一个顶点着色器和一个片元着色器。</p>
+    </section>
     <section id="createProgram">
       <h4>gl.createProgram()</h4>
       <p>创建程序对象,程序对象包含了顶点着色器和片元着色器</p>
@@ -756,6 +896,25 @@
     <section id="attachShader">
       <h4>gl.attachShader(program,shader)</h4>
       <p>将shader指定的着色器对象分配给program指定的程序对象</p>
+      <div class="content">
+        <strong>参数</strong>
+        <ul class="ul-1">
+          <li>program : 指定程序对象</li>
+          <li>shader : 指定着色器对象</li>
+        </ul>
+        <strong>返回值</strong>
+        <p>无</p>
+        <strong>错误</strong>
+        <ul class="ul-1">
+          <li>INVALID_OPERATION:shader没有被分配给program</li>
+        </ul>
+        <strong>注意</strong>
+        <p>着色器在赋给程序对象之前，并不一定要为其指定代码或进行编译（也就是说把空的着色器赋给程序对象也可以）。</p>
+      </div>
+    </section>
+    <section id="detachShader">
+      <h4>gl.detachShader(program,shader)</h4>
+      <p>取消shader指定的着色器对象对program指定的程序对象的分配。</p>
       <div class="content">
         <strong>参数</strong>
         <ul class="ul-1">
@@ -811,89 +970,35 @@
         </ul>
       </div>
     </section>
-    <!--着色器对象-->
-    <section id="createShader">
-      <h4>gl.createShader(type)</h4>
-      <p>创建由type指定的着色器对象</p>
+    <section id="getProgramInfoLog">
+      <h4>gl.getProgramInfoLog(program)</h4>
+      <p>获取program指定的程序对象的信息日志。</p>
       <div class="content">
         <strong>参数</strong>
         <ul class="ul-1">
-          <li>type : 指定创建着色器的类型，gl.VERTEX_SHADER表示顶点着色器，gl.FRAGMENT_SHADER表示片元着色器</li>
+          <li>program : 指定待获取信息日志的程序对象。</li>
         </ul>
         <strong>返回值</strong>
         <ul class="ul-1">
-          <li>non-null:新创建的着色器对象</li>
-          <li>null:创建失败</li>
+          <li>non-null: 包含日志信息的字符串</li>
+          <li>null: 没有编译错误</li>
         </ul>
-        <strong>错误</strong>
-        <ul class="ul-1">
-          <li>INVALID_ENUM: type参数既不是gl.VERTEX_SHADER，也不是gl.FRAGMENT_SHADER</li>
-        </ul>
-      </div>
-    </section>
-    <section id="deleteShader">
-      <h4>gl.deleteShader(shader)</h4>
-      <p>删除shader指定的着色器</p>
-      <div class="content">
-        <strong>参数</strong>
-        <ul class="ul-1">
-          <li>shader : 待删除的着色器对象</li>
-        </ul>
-        <strong>返回值</strong>
-        <p>无</p>
         <strong>错误</strong>
         <p>无</p>
       </div>
     </section>
-    <section id="shaderSource">
-      <h4>gl.shaderSource(shader,source)</h4>
-      <p>将source指定的字符串形式的代码传入shader指定的着色器。如果之前已经向shader传入过代码了，旧的代码将会被替换掉</p>
+    <section id="useProgram">
+      <h4>gl.useProgram(program)</h4>
+      <p>告知WebGL系统绘制时使用program指定的程序对象。</p>
       <div class="content">
         <strong>参数</strong>
         <ul class="ul-1">
-          <li>shader : 指定需要传入代码的着色器对象</li>
-          <li>source : 指定字符串形式的代码</li>
+          <li>program : 指定待使用的程序对象。</li>
         </ul>
         <strong>返回值</strong>
         <p>无</p>
         <strong>错误</strong>
         <p>无</p>
-      </div>
-    </section>
-    <section id="compileShader">
-      <h4>gl.compileShader(shader)</h4>
-      <p>编译shader指定的着色器中的源代码</p>
-      <div class="content">
-        <strong>参数</strong>
-        <ul class="ul-1">
-          <li>shader : 待编译的着色器</li>
-        </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <p>无</p>
-      </div>
-    </section>
-    <section id="getShaderParameter">
-      <h4>gl.getShaderParameter(shader，pname)</h4>
-      <p>获取shader指定的着色器中，pname指定的参数信息</p>
-      <div class="content">
-        <strong>参数</strong>
-        <ul class="ul-1">
-          <li>shader : 指定待获取参数着色器</li>
-          <li>pname : 指定待获取参数的类型，可以是gl.SHADER_TYPE、gl.DELETE_STATUS或则gl.COMPILE_STATUS</li>
-        </ul>
-        <strong>返回值</strong>
-        <ul class="ul-1">
-          <li>根据pname的不同，返回不同的值</li>
-          <li>gl.SHADER_TYPE：返回是顶点的着色器（gl.VERTEX_SHADER）还是片元着色器（gl.FRAGMENT_SHADER）</li>
-          <li>gl.DELETE_STATUS：返回是着色器是否被删除成功（true或false）</li>
-          <li>gl.COMPILE_STATUS：返回是着色器是否被编译成功（true或false）</li>
-        </ul>
-        <strong>错误</strong>
-        <ul class="ul-1">
-          <li>INVALID_ENUM: pname的值无效</li>
-        </ul>
       </div>
     </section>
     <!--开启相关功能-->

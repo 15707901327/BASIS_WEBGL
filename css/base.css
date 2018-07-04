@@ -1,57 +1,71 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
-h1{
+
+h1 {
     text-align: center;
 }
-p{
+
+p {
     text-indent: 2em;
     line-height: 1.5;
 }
-table{
+
+table {
     border-collapse: collapse;
     margin-left: 30px;
     text-align: center;
 }
-th,td{
+
+th, td {
     padding: 5px;
 }
-a{
+
+a {
     text-decoration: none;
     cursor: pointer;
 }
 
-ul{
+ul {
     list-style: none;
 }
-.ul-1{
+
+.ul-1 {
     margin-left: 20px;
 }
 
-.wrapper{
-    margin:  0 auto;
-    width:  80%;
+.ul-1-num {
+    margin-left: 20px;
+    list-style: decimal;
+}
+
+.wrapper {
+    margin: 0 auto;
+    width: 80%;
     min-width: 800px;
 }
-.l-r-wrapper{
+
+.l-r-wrapper {
     background-color: #f0f0f0;
 }
 
-.left{
+.left {
     width: 200px;
     float: left;
     overflow: hidden;
 }
-.right{
+
+.right {
     background-color: #fff;
     overflow: hidden;
 }
 
-section .content{
+section .content {
     margin-left: 2em;
 }
-.bg-1{
+
+.bg-1 {
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }

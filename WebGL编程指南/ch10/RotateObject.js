@@ -61,7 +61,7 @@ function main() {
   viewProjMatrix.setPerspective(30.0, canvas.width / canvas.height, 1.0, 100.0);
   viewProjMatrix.lookAt(3.0, 3.0, 7.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
-  // Register the event handler
+  // 注册事件响应函数
   var currentAngle = [0.0, 0.0]; // Current rotation angle ([x-axis, y-axis] degrees)
   initEventHandlers(canvas, currentAngle);
 

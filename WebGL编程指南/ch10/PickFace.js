@@ -71,7 +71,7 @@ function main() {
   viewProjMatrix.setPerspective(30.0, canvas.width / canvas.height, 1.0, 100.0);
   viewProjMatrix.lookAt(0.0, 0.0, 7.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
-  // Initialize selected surface
+  // 初始化被选中的表面
   gl.uniform1i(u_PickedFace, -1);
 
   var currentAngle = 0.0; // Current rotation angle
@@ -86,7 +86,7 @@ function main() {
       gl.uniform1i(u_PickedFace, face); // Pass the surface number to u_PickedFace
       draw(gl, n, currentAngle, viewProjMatrix, u_MvpMatrix);
     }
-  }
+  };
 
   var tick = function() {   // Start drawing
     currentAngle = animate(currentAngle);
@@ -130,7 +130,7 @@ function initVertexBuffers(gl) {
     3, 3, 3, 3,     // v0-v5-v6-v1 up
     4, 4, 4, 4,     // v1-v6-v7-v2 left
     5, 5, 5, 5,     // v7-v4-v3-v2 down
-    6, 6, 6, 6,     // v4-v7-v6-v5 back
+    6, 6, 6, 6     // v4-v7-v6-v5 back
   ]);
 
   var indices = new Uint8Array([   // Indices of the vertices

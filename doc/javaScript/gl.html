@@ -38,6 +38,10 @@
     <a href="#bindTexture" title="gl.bindTexture()">gl.bindTexture()</a>
     <a href="#texParameteri" title="gl.texParameteri()">gl.texParameteri()</a>
     <a href="#texImage2D" title="gl.texImage2D()">gl.texImage2D()</a>
+    <h4>与像素点相关的方法</h4>
+    <ul class="ul-1">
+      <li><a href="#readPixels">readPixels()</a></li>
+    </ul>
     <h4><a href="#baseShaderProgram">着色器和着色器程序对象</a></h4>
     <h4><a href="#baseShader">着色器对象</a></h4>
     <ul class="ul-1">
@@ -729,6 +733,29 @@
         <ul>
           <li>INVALID_ENUM:target不是合法的</li>
           <li>INVALID_OPERATION:当前目标上没有绑定纹理对象</li>
+        </ul>
+      </div>
+    </section>
+    <!--与像素点相关的方法-->
+    <section id="readPixels">
+      <h4>readPixels(x,y,width,height,format,type,pixels)</h4>
+      <p>从颜色缓存区中读取由x,y,width,height参数确定的矩形块中的所有像素值，并保存在pixels指定的数组中。</p>
+      <div class="content">
+        <strong>参数</strong>
+        <ul class="ul-1">
+          <li>x,y: 指定颜色缓存区中矩形块左上角的坐标，同时也是读取的第一个像素的坐标</li>
+          <li>width,height: 指定矩形块的宽度和高度，以像素为单位</li>
+          <li>format：指定像素的颜色格式，必须为gl.RGB</li>
+          <li>type : 指定像素的数据格式，必须为gl.UNSIGNED_BYTE</li>
+          <li>pixels : 指定用来接收像素值数据的Uint8Array类型化数组</li>
+        </ul>
+        <strong>返回值</strong>
+        <p>无</p>
+        <strong>错误</strong>
+        <ul class="ul-1">
+          <li>INVALID_VALUE:pixels为null，或则，width或height为负值</li>
+          <li>INVALID_ENUM:format、type值无效</li>
+          <li>INVALID_OPERATION:pixels的长度不够存储所有像素值数据</li>
         </ul>
       </div>
     </section>

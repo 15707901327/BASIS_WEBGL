@@ -11,7 +11,7 @@ var VSHADER_SOURCE =
 var FSHADER_SOURCE =
   '#ifdef GL_ES\n' +
   'precision mediump float;\n' +
-  '#endif GL_ES\n' +
+  '#endif\n' +
   'void main() {\n' +    // Center coordinate is (0.5, 0.5)
   '  float d = distance(gl_PointCoord, vec2(0.5, 0.5));\n' +
   '  if(d < 0.5) {\n' +  // Radius is 0.5
@@ -36,31 +36,36 @@ function main() {
     return;
   }
 
-  // Set the vertex information
+  // 设置顶点的位置
   var n = initVertexBuffers(gl);
   if (n < 0) {
-    console.log('Failed to set the vertex information');
+    console.log('Failed to set the positions of the vertices');
     return;
   }
 
   // Specify the color for clearing <canvas>
-  gl.clearColor(0, 0, 0, 1);
+  gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
   // Clear <canvas>
   gl.clear(gl.COLOR_BUFFER_BIT);
 
-  // Draw three points
   gl.drawArrays(gl.POINTS, 0, n);
 }
 
 function initVertexBuffers(gl) {
   var vertices = new Float32Array([
-    0, 0.5,   -0.5, -0.5,   0.5, -0.5
+    0.0, 0.5, -0.5, -0.5, 0.5, -0.5
   ]);
-  var n = 3; // The number of vertices
+  var n = 3; // 点的个数
 
-  // Create a buffer object
-  var vertexBuffer = gl.createBuffer();  
+  /**
+   * gl.createBuffer()
+   * 1.创建缓存区对象
+   * 返回值：
+   *  非null：新创建的缓存区对象
+   *  null：创建缓存区对象失败
+   */
+  var vertexBuffer = gl.createBuffer();
   if (!vertexBuffer) {
     console.log('Failed to create the buffer object');
     return -1;
@@ -81,7 +86,7 @@ function initVertexBuffers(gl) {
 
   // Unbind the buffer object
   gl.bindBuffer(gl.ARRAY_BUFFER, null);
- 
+
   // Enable the assignment to a_Position variable
   gl.enableVertexAttribArray(a_Position);
 

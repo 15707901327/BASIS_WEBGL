@@ -10,7 +10,6 @@
   <div class="left">
     <ul class="ul-1">
       <li><a href="#vertexShader">vertex shader</a></li>
-      <li><a href="#Built-inVariables">内置变量</a></li>
     </ul>
   </div>
   <div class="right">
@@ -27,33 +26,6 @@
 </pre>
         <p>顶点着色器程序必须包含一个main()函数。main()前面的关键子void表示这个函数不会有返回值，
           不能为main()指定参数</p>
-      </div>
-    </section>
-    <section id="Built-inVariables">
-      <h4>内置变量</h4>
-      <div class="content">
-        <table border="1px" style="border-collapse: collapse">
-          <tr>
-            <th colspan="2">顶点着色器的内置变量</th>
-          </tr>
-          <tr>
-            <th>类型和变量名</th>
-            <th>描述</th>
-          </tr>
-          <tr>
-            <td>vec4 gl_Position</td>
-            <td>
-              表示顶点的位置，注意变量必须被赋值，否则着色器就无法正常工作
-            </td>
-          </tr>
-          <tr>
-            <td>float gl_PointSize</td>
-            <td>
-              表示点的尺寸(像素数)，
-              不是必须的，不过不赋值，着色器会取默认值1.0
-            </td>
-          </tr>
-        </table>
       </div>
     </section>
   </div>

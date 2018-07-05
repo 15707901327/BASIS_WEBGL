@@ -88,7 +88,7 @@ function main() {
       var x_in_canvas = x - rect.left, y_in_canvas = rect.bottom - y;
       var picked = check(gl, n, x_in_canvas, y_in_canvas, currentAngle, u_Clicked, viewProjMatrix, u_MvpMatrix);
       if (picked) alert('The cube was selected! '); }
-  }
+  };
 
   var tick = function() {   // Start drawing
     currentAngle = animate(currentAngle);

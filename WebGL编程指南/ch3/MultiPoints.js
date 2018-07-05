@@ -25,33 +25,33 @@ var FSHADER_SOURCE =
 function main() {
   // Retrieve <canvas> element
   var canvas = document.getElementById('webgl');
-  
+
   // Get the rendering context for WebGL
   var gl = getWebGLContext(canvas);
   if (!gl) {
     console.log('Failed to get the rendering context for WebGL');
     return;
   }
-  
+
   // Initialize shaders
   if (!initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE)) {
     console.log('Failed to intialize shaders.');
     return;
   }
-  
+
   // 设置顶点的位置
   var n = initVertexBuffers(gl);
   if (n < 0) {
     console.log('Failed to set the positions of the vertices');
     return;
   }
-  
+
   // Specify the color for clearing <canvas>
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
-  
+
   // Clear <canvas>
   gl.clear(gl.COLOR_BUFFER_BIT);
-  
+
   gl.drawArrays(gl.POINTS, 0, n);
 }
 
@@ -65,7 +65,7 @@ function initVertexBuffers(gl) {
     0.0, 0.5, -0.5, -0.5, 0.5, -0.5
   ]);
   var n = 3; // 点的个数
-  
+
   /**
    * gl.createBuffer()
    * 1.创建缓存区对象
@@ -78,7 +78,7 @@ function initVertexBuffers(gl) {
     console.log('Failed to create the buffer object');
     return -1;
   }
-  
+
   /**
    * gl.bindBuffer(target, buffer);
    * 允许使用buffer表示的缓存区对象并将其绑定到target表示的目标上
@@ -94,7 +94,7 @@ function initVertexBuffers(gl) {
    */
   // 2.将缓存区对象绑定到目标
   gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-  
+
   /**
    * gl.bufferData(target, data, usage)
    * 开辟存储空间，向绑定在target上的缓存区对象中写入数据data
@@ -113,14 +113,14 @@ function initVertexBuffers(gl) {
    */
   // 3.向缓存区对象写入数据
   gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
-  
+
   // Get the storage location of a_Position
   var a_Position = gl.getAttribLocation(gl.program, 'a_Position');
   if (a_Position < 0) {
     console.log('Failed to get the storage location of a_Position');
     return;
   }
-  
+
   /**
    * 4.将缓存区对象分配给a_Position变量
    * gl.vertexAttribPointer(location, size, type, normalized, stride, offset);
@@ -148,7 +148,7 @@ function initVertexBuffers(gl) {
    *          offset是负值
    */
   gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 0, 0);
-  
+
   /**
    * 5.连接a_Position变量与分配给它的缓存区对象
    * gl.enableVertexAttribArray(location)
@@ -159,6 +159,6 @@ function initVertexBuffers(gl) {
    *  INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）
    */
   gl.enableVertexAttribArray(a_Position);
-  
+
   return n;
 }

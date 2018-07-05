@@ -68,6 +68,7 @@
       <li><a href="#enable" title="gl.enable()">gl.enable()</a></li>
       <li><a href="#disable" title="gl.disable()">gl.disable()</a></li>
       <li><a href="#polygonOffset" title="gl.polygonOffset()">gl.polygonOffset()</a></li>
+      <li><a href="#blendFunc" title="gl.blendFunc()">gl.blendFunc()</a></li>
     </ul>
   </div>
   <div class="right">
@@ -1075,6 +1076,100 @@
         <p>无</p>
         <strong>错误</strong>
         <p>无</p>
+      </div>
+    </section>
+    <section id="blendFunc">
+      <h4>gl.blendFunc(src_factor, dst_factor)</h4>
+      <p>通过参数src_factor和dst_factor指定进行混合操作的函数，混合后的颜色如下计算：</p>
+      <p>混合后的颜色 = 源颜色 * src_factor + 目标颜色 * dst_factor</p>
+      <div class="content">
+        <strong>参数</strong>
+        <ul class="ul-1">
+          <li>src_factor：指定源颜色在混合后颜色中的权重因子，如表10.2所示</li>
+          <li>dst_factor：指定目标颜色在混合后颜色中的权重因子，如表10.2所示</li>
+        </ul>
+        <strong>返回值</strong>
+        <p>无</p>
+        <strong>错误</strong>
+        <p>INVALID_ENUM:src_factor, dst_factor的值不在表10.2中</p>
+        <strong>表10.2</strong>
+        <table border="1">
+          <tr>
+            <th colspan="4">可以指定给src_factor, dst_factor的常量</th>
+          </tr>
+          <tr>
+            <th>常量</th>
+            <th>R分量的系数</th>
+            <th>G分量的系数</th>
+            <th>B分量的系数</th>
+          </tr>
+          <tr>
+            <td>gl.ZERO</td>
+            <td>0.0</td>
+            <td>0.0</td>
+            <td>0.0</td>
+          </tr>
+          <tr>
+            <td>gl.ONE</td>
+            <td>1.0</td>
+            <td>1.0</td>
+            <td>1.0</td>
+          </tr>
+          <tr>
+            <td>gl.SRC_COLOR</td>
+            <td>Rs</td>
+            <td>Gs</td>
+            <td>Bs</td>
+          </tr>
+          <tr>
+            <td>gl.ONE_MINUS_SRC_COLOR</td>
+            <td>(1-Rs)</td>
+            <td>(1-Gs)</td>
+            <td>(1-Bs)</td>
+          </tr>
+          <tr>
+            <td>gl.DST_COLOR</td>
+            <td>Rd</td>
+            <td>Gd</td>
+            <td>Bd</td>
+          </tr>
+          <tr>
+            <td>gl.ONE_MINUS_DST_COLOR</td>
+            <td>(1-Rd)</td>
+            <td>(1-Gd)</td>
+            <td>(1-Bd)</td>
+          </tr>
+          <tr>
+            <td>gl.SRC_ALPHA</td>
+            <td>As</td>
+            <td>As</td>
+            <td>As</td>
+          </tr>
+          <tr>
+            <td>gl.ONE_MINUS_SRC_ALPHA</td>
+            <td>(1-As)</td>
+            <td>(1-As)</td>
+            <td>(1-As)</td>
+          </tr>
+          <tr>
+            <td>gl.DST_ALPHA</td>
+            <td>Ad</td>
+            <td>Ad</td>
+            <td>Ad</td>
+          </tr>
+          <tr>
+            <td>gl.ONE_MINUS_DST_ALPHA</td>
+            <td>(1-Ad)</td>
+            <td>(1-Ad)</td>
+            <td>(1-Ad)</td>
+          </tr>
+          <tr>
+            <td>gl.SRC_ALPHA_SATURATE</td>
+            <td>min(As,Ad)</td>
+            <td>min(As,Ad)</td>
+            <td>min(As,Ad)</td>
+          </tr>
+        </table>
       </div>
     </section>
   </div>

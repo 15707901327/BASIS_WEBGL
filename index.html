@@ -8,34 +8,58 @@
 <body>
 <div class="l-r-wrapper">
   <div class="left">
+    <h4><a href="#base" target="_blank">基本概念</a></h4>
+    <h4><a href="WebGL%20API/WebGL可以绘制的基本图形.html" target="_blank">WebGL绘制的基本图形</a></h4>
+    <h4><a href="#WebGL">WebGL程序</a></h4>
     <ul class="ul-1">
-      <li><a href="#WebGL">WebGL程序</a></li>
+      <li><a href="#WebGL_System">WebGL系统</a></li>
+      <li><a href="#JavaScript">JavaScript</a></li>
       <li><a href="#shader">GLSL ES基础</a></li>
       <li><a href="#WebGL-example">WebGL实例</a></li>
     </ul>
     <h4>WebGL内置功能</h4>
     <ul class="ul-1">
+      <li><a href="#depth_test">隐藏面消除</a></li>
       <li><a href="#blendFunc">混合功能</a></li>
+      <li><a href="#ploygonOffset">多边形偏移机制</a></li>
     </ul>
   </div>
   <div class="right">
+    <section id="base">
+      <h4>WebGL中的基本概念</h4>
+      <div class="content">
+        <strong>缓存区对象:</strong>
+        <p>缓存区对象是WebGL系统中的一块内存区域，我们可以一次性地向缓存区对象中填充大量的顶点数据，然后将这些数据保存在
+          其中，供顶点使用。</p>
+        <strong>图元光栅化:</strong>
+        <p>发生在顶点着色器和片元着色器之间的从图形到片元的转化过程。</p>
+      </div>
+    </section>
     <section id="WebGL">
-      <h4><a href="WebGL%20API/WebGL程序.html">WebGL程序</a></h4>
+      <h4>WebGL程序</h4>
+      <p>WebGL程序包括运行在浏览器中的JavaScript和运行在<a href="#WebGL_System">WebGL系统</a>中的着色器程序这两个部分。 </p>
+      <div class="content">
+        <strong>将信息从JavaScript程序中传递给顶点着色器，由两种方式可以做到：</strong>
+        <ul class="ul-1">
+          <li><a href="shader/存储限定字.html#attribute">attribute变量</a></li>
+          <li><a href="shader/存储限定字.html#uniform">uniform变量</a></li>
+        </ul>
+      </div>
+    </section>
+    <section id="WebGL_System">
+      <h4>WebGL系统</h4>
+      <p>由两部分组成，即顶点着色器和片元着色器。着色器运行在WebGL系统中。</p>
+      <div class="content">
+        <ul class="ul-1">
+          <li><a href="WebGL%20API/shader/着色器.html">着色器及着色器之间关系</a></li>
+        </ul>
+      </div>
+    </section>
+    <section id="JavaScript">
+      <h4>javaScript相关函数</h4>
       <div class="content">
         <ul>
-          <li><a href="WebGL%20API/WebGL程序.html#section_2">WebGL系统</a></li>
-          <li>
-            <ul class="ul-1">
-              <li><a href="WebGL%20API/shader/着色器.html">着色器</a></li>
-              <li><a href="WebGL%20API/WebGL可以绘制的基本图形.html">WebGL可以绘制的基本图形</a></li>
-            </ul>
-          </li>
-          <li><a href="javascript:void(0)">javaScript相关函数</a></li>
-          <li>
-            <ul class="ul-1">
-              <li><a href="WebGL%20API/javaScript/gl.html">gl上下文说明</a></li>
-            </ul>
-          </li>
+          <li><a href="WebGL%20API/javaScript/gl.html">gl上下文说明</a></li>
         </ul>
       </div>
     </section>
@@ -57,6 +81,75 @@
         <strong>实例</strong>
         <ul class="ul-1-num">
           <li><a href="WebGL编程指南/ch10/LookAtBlendedTriangles.html" target="_blank">α混合</a></li>
+        </ul>
+        <strong>透明与不透明物体共存:</strong>
+        <ul class="ul-1-num">
+          <li>
+            开启隐藏面消除功能<br>
+            <a href="WebGL%20API/javaScript/gl.html#enable">gl.enable(DEPTH_TEST)</a>
+          </li>
+          <li>
+            绘制所有不透明的物体<br>
+          </li>
+          <li>
+            锁定用于进行隐藏面消除的深度缓存区的写入操着，使之只读。<br>
+            <a href="WebGL%20API/javaScript/gl.html#depthMask">gl.depthMask(false)</a>
+          </li>
+          <li>绘制所有半透明的物体（α小于1.0），注意他们应当按照深度排序，然后从后向前绘制</li>
+          <li>
+            释放深度缓存区，使之可读可写。<br>
+            <a href="WebGL%20API/javaScript/gl.html#depthMask">gl.depthMask(false)</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section id="depth_test">
+      <h4>隐藏面消除</h4>
+      <p>可以消除那些被遮挡的表面，绘制时，就不需要顾及各个物体在缓存区中的顺序。</p>
+      <div class="content">
+        <strong>启动功能</strong>
+        <ul class="ul-1-num">
+          <li>
+            开启隐藏面消除功能<br>
+            <a href="WebGL%20API/javaScript/gl.html#enable">gl.enable(DEPTH_TEST)</a>
+          </li>
+          <li>
+            在绘制之前，清除深度缓存区<br>
+            <a href="WebGL%20API/javaScript/gl.html#clear">gl.clear(gl.DEPTH_BUFFER_BIT)</a>
+          </li>
+        </ul>
+        <strong>实例</strong>
+        <ul class="ul-1-num">
+          <li><a href="WebGL编程指南/ch07/DepthBuffer.html" target="_blank">隐藏面消除</a></li>
+        </ul>
+        <strong>问题:</strong>
+        <ul class="ul-1-num">
+          <li>
+            深度冲突：
+            <p>在使用隐藏面消除时，当几何图形或物体的两个表面极为接近时，就会发生深度冲突的问题.</p>
+            <p>WebGL提供了一种<a href="#ploygonOffset">多边形偏移</a>的机制来解决这个问题。</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section id="ploygonOffset">
+      <h4>多边形偏移</h4>
+      <p>在使用隐藏面消除时，解决深度缓存的问题</p>
+      <div class="content">
+        <strong>启动功能</strong>
+        <ul class="ul-1-num">
+          <li>
+            启动多边形偏移<br>
+            <a href="WebGL%20API/javaScript/gl.html#enable">gl.enable(gl.POLYGON_OFFSET_FILL)</a>
+          </li>
+          <li>
+            在绘制之前，指定用来计算偏移量的参数<br>
+            <a href="WebGL%20API/javaScript/gl.html#polygonOffset">gl.polygonOffset(1.0,1.0)</a>
+          </li>
+        </ul>
+        <strong>实例</strong>
+        <ul class="ul-1-num">
+          <li><a href="WebGL编程指南/ch07/Zfighting.html" target="_blank">深度缓存</a></li>
         </ul>
       </div>
     </section>

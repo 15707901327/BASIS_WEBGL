@@ -46,7 +46,7 @@ function main() {
 
   // Set the clear color and enable the depth test
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
-  gl.enable(gl.DEPTH_TEST);
+  // gl.enable(gl.DEPTH_TEST);
   // Enable alpha blending
   gl.enable (gl.BLEND);
   // Set blending function

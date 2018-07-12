@@ -27,27 +27,27 @@ function initShaders(gl, vshader, fshader) {
  * @return created program object, or null if the creation has failed
  */
 function createProgram(gl, vshader, fshader) {
-  // Create shader object
+  // 创建着色器程序
   var vertexShader = loadShader(gl, gl.VERTEX_SHADER, vshader);
   var fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fshader);
   if (!vertexShader || !fragmentShader) {
     return null;
   }
 
-  // Create a program object
+  // 创建程序对象
   var program = gl.createProgram();
   if (!program) {
     return null;
   }
 
-  // Attach the shader objects
+  // 为程序分配顶点着色器和片元着色器
   gl.attachShader(program, vertexShader);
   gl.attachShader(program, fragmentShader);
 
-  // Link the program object
+  // 连接着色器
   gl.linkProgram(program);
 
-  // Check the result of linking
+  // 检查连接
   var linked = gl.getProgramParameter(program, gl.LINK_STATUS);
   if (!linked) {
     var error = gl.getProgramInfoLog(program);

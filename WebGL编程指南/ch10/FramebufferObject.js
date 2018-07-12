@@ -21,7 +21,7 @@ var FSHADER_SOURCE =
   '  gl_FragColor = texture2D(u_Sampler, v_TexCoord);\n' +
   '}\n';
 
-// Size of off screen
+// 里屏绘制的尺寸
 var OFFSCREEN_WIDTH = 256;
 var OFFSCREEN_HEIGHT = 256;
 
@@ -67,7 +67,7 @@ function main() {
     return;
   }
 
-  // Initialize framebuffer object (FBO)
+  // 初始化帧缓存区
   var fbo = initFramebufferObject(gl);
   if (!fbo) {
     console.log('Failed to intialize the framebuffer object (FBO)');
@@ -269,16 +269,16 @@ function initFramebufferObject(gl) {
     if (texture) gl.deleteTexture(texture);
     if (depthBuffer) gl.deleteRenderbuffer(depthBuffer);
     return null;
-  }
+  };
 
-  // Create a frame buffer object (FBO)
+  // 初始化帧缓存区(FBO)
   framebuffer = gl.createFramebuffer();
   if (!framebuffer) {
     console.log('Failed to create frame buffer object');
     return error();
   }
 
-  // Create a texture object and set its size and parameters
+  // 创建纹理对象并设置其尺寸和参数
   texture = gl.createTexture(); // Create a texture object
   if (!texture) {
     console.log('Failed to create texture object');
@@ -289,28 +289,29 @@ function initFramebufferObject(gl) {
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
   framebuffer.texture = texture; // Store the texture object
 
-  // Create a renderbuffer object and Set its size and parameters
+  // 创建渲染缓存区对象
   depthBuffer = gl.createRenderbuffer(); // Create a renderbuffer object
   if (!depthBuffer) {
     console.log('Failed to create renderbuffer object');
     return error();
   }
+  // 绑定缓存区对象并设置其尺寸
   gl.bindRenderbuffer(gl.RENDERBUFFER, depthBuffer); // Bind the object to target
   gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, OFFSCREEN_WIDTH, OFFSCREEN_HEIGHT);
 
-  // Attach the texture and the renderbuffer object to the FBO
+  // 将帧缓存区的颜色关联对象指定为一个纹理对象
   gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
   gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0);
   gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, depthBuffer);
 
-  // Check if FBO is configured correctly
+  // 检查帧缓存区是否正确配置
   var e = gl.checkFramebufferStatus(gl.FRAMEBUFFER);
   if (gl.FRAMEBUFFER_COMPLETE !== e) {
     console.log('Frame buffer object is incomplete: ' + e.toString());
     return error();
   }
 
-  // Unbind the buffer object
+  // 在帧缓存区中进行配置
   gl.bindFramebuffer(gl.FRAMEBUFFER, null);
   gl.bindTexture(gl.TEXTURE_2D, null);
   gl.bindRenderbuffer(gl.RENDERBUFFER, null);

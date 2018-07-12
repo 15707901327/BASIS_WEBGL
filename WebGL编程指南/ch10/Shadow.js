@@ -1,5 +1,5 @@
 // Shadow.js (c) 2012 matsuda and tanaka
-// Vertex shader program for generating a shadow map
+// 生成阴影贴图的顶点缓冲区
 var SHADOW_VSHADER_SOURCE =
   'attribute vec4 a_Position;\n' +
   'uniform mat4 u_MvpMatrix;\n' +
@@ -60,7 +60,7 @@ function main() {
     return;
   }
 
-  // Initialize shaders for generating a shadow map
+  // 初始化以生成阴影贴图的着色器
   var shadowProgram = createProgram(gl, SHADOW_VSHADER_SOURCE, SHADOW_FSHADER_SOURCE);
   shadowProgram.a_Position = gl.getAttribLocation(shadowProgram, 'a_Position');
   shadowProgram.u_MvpMatrix = gl.getUniformLocation(shadowProgram, 'u_MvpMatrix');
@@ -69,7 +69,7 @@ function main() {
     return;
   }
 
-  // Initialize shaders for regular drawing
+  // 初始化正常绘制的着色器
   var normalProgram = createProgram(gl, VSHADER_SOURCE, FSHADER_SOURCE);
   normalProgram.a_Position = gl.getAttribLocation(normalProgram, 'a_Position');
   normalProgram.a_Color = gl.getAttribLocation(normalProgram, 'a_Color');
@@ -82,7 +82,7 @@ function main() {
     return;
   }
 
-  // Set the vertex information
+  // 设置顶点信息
   var triangle = initVertexBuffersForTriangle(gl);
   var plane = initVertexBuffersForPlane(gl);
   if (!triangle || !plane) {
@@ -90,7 +90,7 @@ function main() {
     return;
   }
 
-  // Initialize framebuffer object (FBO)  
+  // 初始化帧缓冲区(FBO)
   var fbo = initFramebufferObject(gl);
   if (!fbo) {
     console.log('Failed to initialize frame buffer object');
@@ -235,7 +235,7 @@ function initVertexBuffersForTriangle(gl) {
   // Indices of the vertices
   var indices = new Uint8Array([0, 1, 2]);
 
-  var o = new Object();  // Utilize Object object to return multiple buffer objects together
+  var o = {};  // Utilize Object object to return multiple buffer objects together
 
   // Write vertex information to buffer object
   o.vertexBuffer = initArrayBufferForLaterUse(gl, vertices, 3, gl.FLOAT);
@@ -252,6 +252,14 @@ function initVertexBuffersForTriangle(gl) {
   return o;
 }
 
+/**
+ * 创建缓存区对象，以供以后使用
+ * @param gl
+ * @param data 写入缓冲区对象的的数据
+ * @param num 指定缓冲区中每个顶点的分量的个数
+ * @param type 指定格式
+ * @return {*} 缓冲区对象
+ */
 function initArrayBufferForLaterUse(gl, data, num, type) {
   // Create a buffer object
   var buffer = gl.createBuffer();

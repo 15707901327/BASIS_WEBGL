@@ -35,16 +35,9 @@
       <h4>WebGL中的基本概念</h4>
       <div class="content">
         <strong>绘图</strong>
-        <p>WebGl在颜色缓存区中进行绘图，在开启隐藏面消除功能时，还会用到深度缓存。总之，绘图的结果图像是存储在颜色缓存区中的。</p>
+        <p>WebGl在颜色缓冲区中进行绘图，在开启隐藏面消除功能时，还会用到深度缓冲区。总之，绘图的结果图像是存储在颜色缓冲区中的。</p>
         <strong>图元光栅化:</strong>
         <p>发生在顶点着色器和片元着色器之间的从图形到片元的转化过程。</p>
-        <strong>帧缓存对象（framebuffer object）</strong>
-        <p>可以用来代替颜色缓存区或深度缓存区。绘制咋帧缓存区中的对象并不会直接显示在canvas上，你可以先对帧缓存区中的内容进行一些处理再显示，或则直接用其中的内容作为纹理图像。</p>
-        <p>在帧缓存区中进行绘制的过程又称为离屏绘制（offscreen drawing）。</p>
-        <p>绘制操作不是直接发生在帧缓存区中的，而是发生在帧缓存区所关联（attachment）的对象上。一个帧缓存区又3个关联对象：颜色关联对象（color attachment）、深度关联对象（depth attachment）和模板关联对象（stencil attachment），分别用来代替颜色缓存区、深度缓存区和模板缓存区。</p>
-        <p>关联对象可以有两种类型：纹理对象或渲染缓存区对象（renderbuffer object）</p>
-        <strong>渲染缓存区对象（renderbuffer object）</strong>
-        <p>表示一种更佳通用的绘图区域，可以向其中写入多种数据。</p>
       </div>
     </section>
     <section id="WebGL">
@@ -67,17 +60,43 @@
         </ul>
       </div>
     </section>
-    <section id="JavaScript">
-      <h4>javaScript相关函数概念</h4>
-      <div class="content">
-        <strong id="bufferObject">缓存区对象:</strong>
+    <section id="JavaScript" class="section1">
+      <div class="title">javaScript相关函数概念</div>
+      <section id="bufferObject">
+        <h4>缓存区对象</h4>
         <p>缓存区对象是WebGL系统中的一块内存区域，我们可以一次性地向缓存区对象中填充大量的顶点数据，然后将这些数据保存在其中，供顶点使用。</p>
-        <strong>着色器对象（shader object）：</strong>
+      </section>
+      <section>
+        <h4>着色器对象（shader object）</h4>
         <p>着色器对象管理一个顶点着色器或一个片元着色器。每一个着色器都有一个着色器对象。</p>
-        <strong>程序对象（program object）：</strong>
+      </section>
+      <section>
+        <h4>程序对象（program object）</h4>
         <p>管理着色器对象的容器。WebGL中，一个程序对象必须包含一个顶点着色器和一个片元着色器。</p>
-        <img src="img/9_10.png">
-      </div>
+        <p><img src="img/9_10.png"></p>
+      </section>
+      <section>
+        <h4>帧缓冲对象（framebuffer object）</h4>
+        <p>可以用来代替颜色缓冲区或深度缓冲区。绘制在帧缓冲区中的对象并不会直接显示在canvas上，你可以先对帧缓冲区中的内容进行一些处理再显示，或则直接用其中的内容作为纹理图像.
+          在帧缓冲区中进行绘制的过程又称为离屏绘制（offscreen drawing）。绘制操作不是直接发生在帧缓冲区中的，而是发生在帧缓冲区所关联（attachment）的对象上。</p>
+        <div class="content">
+          <strong>一个帧缓冲区有三个关联对象：</strong>
+          <ul class="ul-1">
+            <li>颜色关联对象（color attachment）,对应颜色缓冲区</li>
+            <li>深度关联对象（depth attachment）,对应深度缓冲区</li>
+            <li>模板关联对象（stencil attachment）,对应模板缓冲区</li>
+          </ul>
+          <strong>每个关联对象的类型:</strong>
+          <ul class="ul-1">
+            <li>纹理对象</li>
+            <li>渲染缓冲区对象（renderbuffer object）</li>
+          </ul>
+        </div>
+      </section>
+      <section>
+        <h4>渲染缓冲区对象（renderbuffer object）</h4>
+        <p>表示一种更佳通用的绘图区域，可以向其中写入多种数据。</p>
+      </section>
     </section>
     <section id="blendFunc">
       <h4>混合功能</h4>

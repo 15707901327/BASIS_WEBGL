@@ -61,6 +61,18 @@ ul {
     overflow: hidden;
 }
 
+.section1 {
+    margin-top: 20px;
+    border-top: 1px dashed burlywood;
+}
+
+.section1 .title {
+    text-align: center;
+    font-size: 26px;
+    border-bottom: 1px dashed burlywood;
+    padding: 5px 0;
+}
+
 section .content {
     margin-left: 2em;
 }

@@ -31,13 +31,15 @@
     <a href="#enableVertexAttribArray" title="gl.enableVertexAttribArray()">gl.enableVertexAttribArray()</a>
     <a href="#disableVertexAttribArray" title="gl.disableVertexAttribArray()">gl.disableVertexAttribArray()</a>
     <h4>与加载纹理相关的方法</h4>
-    <a href="#createTexture" title="gl.createTexture()">gl.createTexture()</a>
-    <a href="#deleteTexture" title="gl.deleteTexture()">gl.deleteTexture()</a>
-    <a href="#pixelStorei" title="gl.pixelStorei()">gl.pixelStorei()</a>
-    <a href="#activeTexture" title="gl.activeTexture()">gl.activeTexture()</a>
-    <a href="#bindTexture" title="gl.bindTexture()">gl.bindTexture()</a>
-    <a href="#texParameteri" title="gl.texParameteri()">gl.texParameteri()</a>
-    <a href="#texImage2D" title="gl.texImage2D()">gl.texImage2D()</a>
+    <ul class="ul-1">
+      <li><a href="#createTexture" title="gl.createTexture()">gl.createTexture()</a></li>
+      <li><a href="#deleteTexture" title="gl.deleteTexture()">gl.deleteTexture()</a></li>
+      <li><a href="#pixelStorei" title="gl.pixelStorei()">gl.pixelStorei()</a></li>
+      <li><a href="#activeTexture" title="gl.activeTexture()">gl.activeTexture()</a></li>
+      <li><a href="#bindTexture" title="gl.bindTexture()">gl.bindTexture()</a></li>
+      <li><a href="#texParameteri" title="gl.texParameteri()">gl.texParameteri()</a></li>
+      <li><a href="#texImage2D" title="gl.texImage2D()">gl.texImage2D()</a></li>
+    </ul>
     <h4>与像素点相关的方法</h4>
     <ul class="ul-1">
       <li><a href="#readPixels">readPixels()</a></li>
@@ -85,7 +87,7 @@
     <ul class="ul-1">
       <li><a href="#createRenderbuffer">createRenderbuffer()</a></li>
       <li><a href="#deleteRenderbuffer">deleteRenderbuffer()</a></li>
-      <li><a href="#bingdRenderbuffer">bingdRenderbuffer()</a></li>
+      <li><a href="#bindRenderbuffer">bindRenderbuffer()</a></li>
       <li><a href="#renderbufferStorage">renderbufferStorage()</a></li>
     </ul>
   </div>
@@ -528,7 +530,7 @@
       <p>激活texUnit指定的纹理单元</p>
       <div class="content">
         <strong>参数</strong>
-        <ul>
+        <ul class="ul-1">
           <li>
             texUnit：指定准备激活的纹理单元：gl.TEXTURE0、gl.TEXTURE1、gl.TEXTURE2、
             gl.TEXTURE03、gl.TEXTURE4、gl.TEXTURE5、gl.TEXTURE6、gl.TEXTURE7。
@@ -549,7 +551,7 @@
       </p>
       <div class="content">
         <strong>参数</strong>
-        <ul>
+        <ul class="ul-1">
           <li>target：gl.TEXTURE_2D或者gl.TEXTURE_CUBE_MAP</li>
           <li>texture：表示绑定的纹理单元</li>
         </ul>
@@ -1332,17 +1334,17 @@
         <p>无</p>
       </div>
     </section>
-    <!--渲染缓存区对象-->
+    <!--渲染缓冲区对象-->
     <section id="createRenderbuffer">
       <h4>gl.createRenderbuffer()</h4>
-      <p>创建渲染缓存区对象。</p>
+      <p>创建渲染缓冲区对象。</p>
       <div class="content">
         <strong>参数</strong>
         <p>无</p>
         <strong>返回值</strong>
         <ul class="ul-1">
-          <li>non-null: 新创建的渲染缓存区对象</li>
-          <li>null: 创建渲染缓存区对象失败</li>
+          <li>non-null: 新创建的渲染缓冲区对象</li>
+          <li>null: 创建渲染缓冲区对象失败</li>
         </ul>
         <strong>错误</strong>
         <p>无</p>
@@ -1350,24 +1352,24 @@
     </section>
     <section id="deleteRenderbuffer">
       <h4>deleteRenderbuffer(renderbuffer)</h4>
-      <p>删除渲染缓存区对象。</p>
+      <p>删除渲染缓冲区对象。</p>
       <div class="content">
         <strong>参数</strong>
-        <p>renderbuffer：指定被删除的渲染缓存对象</p>
+        <p>renderbuffer：指定被删除的渲染缓冲对象</p>
         <strong>返回值</strong>
         <p>无</p>
         <strong>错误</strong>
         <p>无</p>
       </div>
     </section>
-    <section id="bingdRenderbuffer">
-      <h4>bingdRenderbuffer(targer,renderbuffer)</h4>
-      <p>将renderbuffer指定的渲染缓存区对象绑定到target目标上。如果renderbuffer为null，则将已经绑定在target目标上的渲染缓存区对象解除绑定.</p>
+    <section id="bindRenderbuffer">
+      <h4>bindRenderbuffer(targer,renderbuffer)</h4>
+      <p>将renderbuffer指定的渲染缓冲区对象绑定到target目标上。如果renderbuffer为null，则将已经绑定在target目标上的渲染缓冲区对象解除绑定.</p>
       <div class="content">
         <strong>参数</strong>
         <ul class="ul-1">
           <li>target:必须为gl.RENDERBUFFER</li>
-          <li>renderbuffer:指定被绑定的渲染缓存区</li>
+          <li>renderbuffer:指定被绑定的渲染缓冲区</li>
         </ul>
         <strong>返回值</strong>
         <p>无</p>
@@ -1377,7 +1379,7 @@
     </section>
     <section id="renderbufferStorage">
       <h4>renderbufferStorage(targer,internalformat,width,height)</h4>
-      <p>创建并初始化渲染缓存区的数据</p>
+      <p>创建并初始化渲染缓冲区的数据</p>
       <div class="content">
         <strong>参数</strong>
         <ul class="ul-1">
@@ -1388,7 +1390,7 @@
               <tr><th colspan="2">渲染缓冲区中的数据格式</th></tr>
               <tr>
                 <td>gl.DEPTH_COMPONENT16</td>
-                <td>表示渲染缓冲区将替代深度缓存区</td>
+                <td>表示渲染缓冲区将替代深度缓冲区</td>
               </tr>
               <tr>
                 <td>gl.STENCIL_INDEX8</td>
@@ -1408,16 +1410,17 @@
               </tr>
               <tr>
                 <td>width,height</td>
-                <td>指定渲染缓存区的宽度和高度，以像素为单位</td>
+                <td>指定渲染缓冲区的宽度和高度，以像素为单位</td>
               </tr>
             </table>
           </li>
+          <li>width,height:指定缓冲区对象的宽度和高度</li>
         </ul>
         <strong>返回值</strong>
         <p>无</p>
         <strong>错误</strong>
         <p>INVALID_ENUM:target不是gl.RENDERBUFFER</p>
-        <p>INVALID_:targetOPERATION没有绑定渲染缓存区</p>
+        <p>INVALID_:targetOPERATION没有绑定渲染缓冲区</p>
       </div>
     </section>
   </div>

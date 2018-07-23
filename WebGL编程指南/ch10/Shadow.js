@@ -47,7 +47,7 @@ var FSHADER_SOURCE =
   '}\n';
 
 var OFFSCREEN_WIDTH = 2048, OFFSCREEN_HEIGHT = 2048;
-var LIGHT_X = 0, LIGHT_Y = 7, LIGHT_Z = 2; // Position of the light source
+var LIGHT_X = 0, LIGHT_Y = 40, LIGHT_Z = 2; // Position of the light source
 
 function main() {
   // Retrieve <canvas> element
@@ -319,7 +319,7 @@ function initFramebufferObject(gl) {
     return null;
   };
 
-  // Create a framebuffer object (FBO)
+  // 创建帧缓存对象(FBO)
   framebuffer = gl.createFramebuffer();
   if (!framebuffer) {
     console.log('Failed to create frame buffer object');

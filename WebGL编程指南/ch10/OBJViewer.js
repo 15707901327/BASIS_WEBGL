@@ -60,7 +60,7 @@ function main() {
     return;
   }
 
-  // Prepare empty buffer objects for vertex coordinates, colors, and normals
+  // 为顶点坐标、颜色和法线准备空缓存区对象
   var model = initVertexBuffers(gl, program);
   if (!model) {
     console.log('Failed to set the vertex information');
@@ -86,7 +86,7 @@ function main() {
 
 // Create an buffer object and perform an initial configuration
 function initVertexBuffers(gl, program) {
-  var o = new Object(); // Utilize Object object to return multiple buffer objects
+  var o = {}; // Utilize Object object to return multiple buffer objects
   o.vertexBuffer = createEmptyArrayBuffer(gl, program.a_Position, 3, gl.FLOAT); 
   o.normalBuffer = createEmptyArrayBuffer(gl, program.a_Normal, 3, gl.FLOAT);
   o.colorBuffer = createEmptyArrayBuffer(gl, program.a_Color, 4, gl.FLOAT);
@@ -120,7 +120,7 @@ function readOBJFile(fileName, gl, model, scale, reverse) {
     if (request.readyState === 4 && request.status !== 404) {
       onReadOBJFile(request.responseText, fileName, gl, model, scale, reverse);
     }
-  }
+  };
   request.open('GET', fileName, true); // Create a request to acquire the file
   request.send();                      // Send the request
 }

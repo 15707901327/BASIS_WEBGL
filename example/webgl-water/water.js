@@ -1,4 +1,4 @@
-﻿/*
+/*
  * WebGL Water
  * http://madebyevan.com/webgl-water/
  *
@@ -15,14 +15,19 @@ function Water() {
       gl_Position = vec4(gl_Vertex.xyz, 1.0);\
     }\
   ';
-  this.plane = GL.Mesh.plane();
-  if (!GL.Texture.canUseFloatingPointTextures()) {
+  this.plane = PGL.Mesh.plane();
+  if (!PGL.Texture.canUseFloatingPointTextures()) {
     throw new Error('This demo requires the OES_texture_float extension');
   }
-  var filter = GL.Texture.canUseFloatingPointLinearFiltering() ? gl.LINEAR : gl.NEAREST;
-  this.textureA = new GL.Texture(256, 256, { type: gl.FLOAT, filter: filter });
-  this.textureB = new GL.Texture(256, 256, { type: gl.FLOAT, filter: filter });
-  this.dropShader = new GL.Shader(vertexShader, '\
+  var filter = PGL.Texture.canUseFloatingPointLinearFiltering() ? gl.LINEAR : gl.NEAREST;
+  this.textureA = new PGL.Texture(256, 256, { type: gl.FLOAT, filter: filter });
+  this.textureB = new PGL.Texture(256, 256, { type: gl.FLOAT, filter: filter });
+  if ((!this.textureA.canDrawTo() || !this.textureB.canDrawTo()) && PGL.Texture.canUseHalfFloatingPointTextures()) {
+    filter = PGL.Texture.canUseHalfFloatingPointLinearFiltering() ? gl.LINEAR : gl.NEAREST;
+    this.textureA = new PGL.Texture(256, 256, { type: gl.HALF_FLOAT_OES, filter: filter });
+    this.textureB = new PGL.Texture(256, 256, { type: gl.HALF_FLOAT_OES, filter: filter });
+  }
+  this.dropShader = new PGL.Shader(vertexShader, '\
     const float PI = 3.141592653589793;\
     uniform sampler2D texture;\
     uniform vec2 center;\
@@ -41,7 +46,7 @@ function Water() {
       gl_FragColor = info;\
     }\
   ');
-  this.updateShader = new GL.Shader(vertexShader, '\
+  this.updateShader = new PGL.Shader(vertexShader, '\
     uniform sampler2D texture;\
     uniform vec2 delta;\
     varying vec2 coord;\
@@ -71,7 +76,7 @@ function Water() {
       gl_FragColor = info;\
     }\
   ');
-  this.normalShader = new GL.Shader(vertexShader, '\
+  this.normalShader = new PGL.Shader(vertexShader, '\
     uniform sampler2D texture;\
     uniform vec2 delta;\
     varying vec2 coord;\
@@ -87,7 +92,7 @@ function Water() {
       gl_FragColor = info;\
     }\
   ');
-  this.sphereShader = new GL.Shader(vertexShader, '\
+  this.sphereShader = new PGL.Shader(vertexShader, '\
     uniform sampler2D texture;\
     uniform vec3 oldCenter;\
     uniform vec3 newCenter;\

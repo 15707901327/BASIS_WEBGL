@@ -1,4 +1,4 @@
-﻿/*
+/*
  * lightgl.js
  * http://github.com/evanw/lightgl.js/
  *
@@ -7,12 +7,9 @@
  */
 var GL = (function () {
 
-// src/main.js
-// The internal `gl` variable holds the current WebGL context.
+  // src/main.js
+  // The internal `gl` variable holds the current WebGL context.
   var gl;
-  // A value to bitwise-or with new enums to make them distinguishable from the
-  // standard WebGL enums.
-  var ENUM = 0x12340000;
 
   var GL = {
     // ### Initialization
@@ -20,35 +17,15 @@ var GL = (function () {
     // `GL.create()` creates a new WebGL context and augments it with more
     // methods. The alpha channel is disabled by default because it usually causes
     // unintended transparencies in the canvas.
-    /**
-     * `GL.create（）`创建一个新的WebGL上下文，并用更多的内容来扩充它的方法。 默认情况下，alpha通道是禁用的，因为它通常会导致画布中无意识的透明胶片。
-     * @param options{{
-     *  alpha: false
-     * }}
-     * @returns {*}
-     */
     create: function (options) {
       options = options || {};
-      var canvas = document.createElement('canvas');
-      canvas.width = 800;
-      canvas.height = 600;
-      // 获取WebGL上下文
+      gl = options.gl;
       if (!('alpha' in options)) options.alpha = false;
-      try {
-        gl = canvas.getContext('webgl', options);
-      } catch (e) {
-      }
-      try {
-        gl = gl || canvas.getContext('experimental-webgl', options);
-      } catch (e) {
-      }
-      if (!gl) throw new Error('WebGL not supported');
-
+      gl.HALF_FLOAT_OES = 0x8D61;
       addMatrixStack();
       addImmediateMode();
       addEventListeners();
       addOtherMethods();
-      return gl;
     },
 
     // `GL.keys` contains a mapping of key codes to booleans indicating whether
@@ -67,10 +44,11 @@ var GL = (function () {
     Vector: Vector
   };
 
-  // ### Matrix stack
-  //
-  // Implement the OpenGL modelview and projection matrix stacks, along with some
-  // other useful GLU matrix functions.
+// ### Matrix stack
+//
+// Implement the OpenGL modelview and projection matrix stacks, along with some
+// other useful GLU matrix functions.
+
   function addMatrixStack() {
     gl.MODELVIEW = ENUM | 1;
     gl.PROJECTION = ENUM | 2;
@@ -230,12 +208,12 @@ var GL = (function () {
     };
   }
 
-  // ### Improved mouse events
-  //
-  // This adds event listeners on the `gl.canvas` element that call
-  // `gl.onmousedown()`, `gl.onmousemove()`, and `gl.onmouseup()` with an
-  // augmented event object. The event object also has the properties `x`, `y`,
-  // `deltaX`, `deltaY`, and `dragging`.
+// ### Improved mouse events
+//
+// This adds event listeners on the `gl.canvas` element that call
+// `gl.onmousedown()`, `gl.onmousemove()`, and `gl.onmouseup()` with an
+// augmented event object. The event object also has the properties `x`, `y`,
+// `deltaX`, `deltaY`, and `dragging`.
   function addEventListeners() {
     var context = gl, oldX = 0, oldY = 0, buttons = {}, hasOld = false;
     var has = Object.prototype.hasOwnProperty;
@@ -486,6 +464,10 @@ var GL = (function () {
       resize();
     };
   }
+
+// A value to bitwise-or with new enums to make them distinguishable from the
+// standard WebGL enums.
+  var ENUM = 0x12340000;
 
 // src/matrix.js
 // Represents a 4x4 matrix stored in row-major order that uses Float32Arrays
@@ -990,11 +972,6 @@ var GL = (function () {
     // This could have used `[].concat.apply([], this.data)` to flatten
     // the array but Google Chrome has a maximum number of arguments so the
     // concatenations are chunked to avoid that limit.
-    /**
-     * 将data的内容上传到GPU一准备渲染，data必须是一个列表，并且每个列表项具有相同的长度。
-     * 例如,顶点法线每个数据元素都是一个长度为三的列表。这些记录的数据长度和元素长度稍后会被shader使用。
-     * @param type ：该类型可以是`gl.STATIC_DRAW`或`gl.DYNAMIC_DRAW`，默认为`gl.STATIC_DRAW`
-     */
     compile: function (type) {
       var data = [];
       for (var i = 0, chunk = 10000; i < this.data.length; i += chunk) {
@@ -1002,44 +979,26 @@ var GL = (function () {
       }
       var spacing = this.data.length ? data.length / this.data.length : 0;
       if (spacing != Math.round(spacing)) throw new Error('buffer elements not of consistent size, average size is ' + spacing);
-      // 1. 创建缓存区对象
       this.buffer = this.buffer || gl.createBuffer();
       this.buffer.length = data.length;
       this.buffer.spacing = spacing;
-      // 2. 将缓存区对象绑定到目标
       gl.bindBuffer(this.target, this.buffer);
-      // 3. 向缓存区对象中写入数据
       gl.bufferData(this.target, new this.type(data), type || gl.STATIC_DRAW);
     }
   };
 
-  // ### new GL.Mesh([options])
-  //
-  // Represents a collection of vertex buffers and index buffers. Each vertex
-  // buffer maps to one attribute in GLSL and has a corresponding property set
-  // on the Mesh instance. There is one vertex buffer by default: `vertices`,
-  // which maps to `gl_Vertex`. The `coords`, `normals`, and `colors` vertex
-  // buffers map to `gl_TexCoord`, `gl_Normal`, and `gl_Color` respectively,
-  // and can be enabled by setting the corresponding options to true. There are
-  // two index buffers, `triangles` and `lines`, which are used for rendering
-  // `gl.TRIANGLES` and `gl.LINES`, respectively. Only `triangles` is enabled by
-  // default, although `computeWireframe()` will add a normal buffer if it wasn't
-  // initially enabled.
-  /**
-   * 表示顶点缓冲区和索引缓冲区的集合。每个顶点缓冲区映射到GLSL中的一个属性并具有相应的属性集。
-   * 在Mesh实例上。 默认情况下有一个顶点缓冲区：`vertices`，映射到`gl_Vertex`。
-   * 'coords`，`normals`和`colors`顶点缓冲区分别映射到`gl_TexCoord`，`gl_Normal`和`gl_Color`，
-   * 并可以通过将相应的选项设置为true来启用。有两个索引缓冲区，“三角形”和“线条”，用于渲
-   * 染分别是“gl.TRIANGLES”和“gl.LINES”。 只有`triangles`被启用最初启用
-   * @param options{{
-   *  coords :true
-   *  normals:undefined,
-   *  colors:true,
-   *  triangles: false,
-   *  lines: undefined
-   * }}
-   * @constructor
-   */
+// ### new GL.Mesh([options])
+//
+// Represents a collection of vertex buffers and index buffers. Each vertex
+// buffer maps to one attribute in GLSL and has a corresponding property set
+// on the Mesh instance. There is one vertex buffer by default: `vertices`,
+// which maps to `gl_Vertex`. The `coords`, `normals`, and `colors` vertex
+// buffers map to `gl_TexCoord`, `gl_Normal`, and `gl_Color` respectively,
+// and can be enabled by setting the corresponding options to true. There are
+// two index buffers, `triangles` and `lines`, which are used for rendering
+// `gl.TRIANGLES` and `gl.LINES`, respectively. Only `triangles` is enabled by
+// default, although `computeWireframe()` will add a normal buffer if it wasn't
+// initially enabled.
   function Mesh(options) {
     options = options || {};
     this.vertexBuffers = {};
@@ -1076,9 +1035,6 @@ var GL = (function () {
     // Upload all attached buffers to the GPU in preparation for rendering. This
     // doesn't need to be called every frame, only needs to be done when the data
     // changes.
-    /**
-     * 将所有链接的缓存区上传到GPU以准备渲染。这些数据不需要每帧调用，仅仅在数据改变时才需要调用。
-     */
     compile: function () {
       for (var attribute in this.vertexBuffers) {
         var buffer = this.vertexBuffers[attribute];
@@ -1198,14 +1154,13 @@ var GL = (function () {
 //     var mesh1 = GL.Mesh.plane();
 //     var mesh2 = GL.Mesh.plane({ detail: 5 });
 //     var mesh3 = GL.Mesh.plane({ detailX: 20, detailY: 40 });
-//
+
   Mesh.plane = function (options) {
     options = options || {};
     var mesh = new Mesh(options);
     detailX = options.detailX || options.detail || 1;
     detailY = options.detailY || options.detail || 1;
 
-    // 生成顶点数据，三角形索引
     for (var y = 0; y <= detailY; y++) {
       var t = y / detailY;
       for (var x = 0; x <= detailX; x++) {
@@ -1405,7 +1360,7 @@ var GL = (function () {
     var axisY = new Vector(m[1], m[5], m[9]);
     var axisZ = new Vector(m[2], m[6], m[10]);
     var offset = new Vector(m[3], m[7], m[11]);
-    this.eye = new Vector(-offset.dot(axisX), -offset.dot(axisY), -offset.dot(axisZ));
+    this.eye = new PGL.Vector3(-offset.dot(axisX), -offset.dot(axisY), -offset.dot(axisZ));
 
     var minX = v[0], maxX = minX + v[2];
     var minY = v[1], maxY = minY + v[3];
@@ -1506,27 +1461,28 @@ var GL = (function () {
     return null;
   };
 
-  // src/shader.js
-  // Provides a convenient wrapper for WebGL shaders. A few uniforms and attributes,
-  // prefixed with `gl_`, are automatically added to all shader sources to make
-  // simple shaders easier to write.
-  //
-  // Example usage:
-  //
-  //     var shader = new GL.Shader('\
-  //       void main() {\
-  //         gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\
-  //       }\
-  //     ', '\
-  //       uniform vec4 color;\
-  //       void main() {\
-  //         gl_FragColor = color;\
-  //       }\
-  //     ');
-  //
-  //     shader.uniforms({
-  //       color: [1, 0, 0, 1]
-  //     }).draw(mesh);
+// src/shader.js
+// Provides a convenient wrapper for WebGL shaders. A few uniforms and attributes,
+// prefixed with `gl_`, are automatically added to all shader sources to make
+// simple shaders easier to write.
+//
+// Example usage:
+//
+//     var shader = new GL.Shader('\
+//       void main() {\
+//         gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\
+//       }\
+//     ', '\
+//       uniform vec4 color;\
+//       void main() {\
+//         gl_FragColor = color;\
+//       }\
+//     ');
+//
+//     shader.uniforms({
+//       color: [1, 0, 0, 1]
+//     }).draw(mesh);
+
   function regexMap(regex, text, callback) {
     while ((result = regex.exec(text)) != null) {
       callback(result);
@@ -1537,9 +1493,9 @@ var GL = (function () {
 // otherwise cause a compiler error.
   var LIGHTGL_PREFIX = 'LIGHTGL';
 
-  // ### new GL.Shader(vertexSource, fragmentSource)
-  //
-  // Compiles a shader program using the provided vertex and fragment shaders.
+// ### new GL.Shader(vertexSource, fragmentSource)
+//
+// Compiles a shader program using the provided vertex and fragment shaders.
   function Shader(vertexSource, fragmentSource) {
     // Allow passing in the id of an HTML script tag with the source
     function followScriptTagById(id) {
@@ -1607,17 +1563,11 @@ var GL = (function () {
     vertexSource = fix(vertexHeader, vertexSource);
     fragmentSource = fix(fragmentHeader, fragmentSource);
 
-    /**
-     * 创建shader，并完成编译（Compile and link errors are thrown as strings.）
-     * @param type：shader的类型（顶点着色器、片元着色器）
-     * @param source：源码的字符串
-     * @returns {*|WebGLShader}
-     */
+    // Compile and link errors are thrown as strings.
     function compileSource(type, source) {
       var shader = gl.createShader(type);
       gl.shaderSource(shader, source);
       gl.compileShader(shader);
-      // 检测shader是否编译成功
       if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
         throw new Error('compile error: ' + gl.getShaderInfoLog(shader));
       }
@@ -1628,7 +1578,6 @@ var GL = (function () {
     gl.attachShader(this.program, compileSource(gl.VERTEX_SHADER, vertexSource));
     gl.attachShader(this.program, compileSource(gl.FRAGMENT_SHADER, fragmentSource));
     gl.linkProgram(this.program);
-    // 检测着色器是否链接成功
     if (!gl.getProgramParameter(this.program, gl.LINK_STATUS)) {
       throw new Error('link error: ' + gl.getProgramInfoLog(this.program));
     }
@@ -1795,46 +1744,31 @@ var GL = (function () {
     }
   };
 
-  // src/texture.js
-  // Provides a simple wrapper around WebGL textures that supports render-to-texture.
-  // ### new GL.Texture(width, height[, options])
-  //
-  // The arguments `width` and `height` give the size of the texture in texels.
-  // WebGL texture dimensions must be powers of two unless `filter` is set to
-  // either `gl.NEAREST` or `gl.LINEAR` and `wrap` is set to `gl.CLAMP_TO_EDGE`
-  // (which they are by default).
-  //
-  // Texture parameters can be passed in via the `options` argument.
-  // Example usage:
-  //
-  //     var t = new GL.Texture(256, 256, {
-  //       // Defaults to gl.LINEAR, set both at once with "filter"
-  //       magFilter: gl.NEAREST,
-  //       minFilter: gl.LINEAR,
-  //
-  //       // Defaults to gl.CLAMP_TO_EDGE, set both at once with "wrap"
-  //       wrapS: gl.REPEAT,
-  //       wrapT: gl.REPEAT,
-  //
-  //       format: gl.RGB, // Defaults to gl.RGBA
-  //       type: gl.FLOAT // Defaults to gl.UNSIGNED_BYTE
-  //     });
-  /**
-   * 参数`width`和`height`以纹素的形式给出纹理的大小。WebGL纹理尺寸必须是2的幂，除非`filter`设置为`gl.NEAREST`或`gl.LINEAR`和`wrap`设置为`gl.CLAMP_TO_EDGE`
-   * @param width：纹理的长度
-   * @param height：纹理的宽度
-   * @param options{{
-   *  format: gl.RGBA 纹素的数据格式
-   *  type: gl.UNSIGNED_BYTE 纹理的数据类型
-   *  filter: gl.LINEAR 纹理放大缩小
-   *  magFilter: gl.LINEAR 纹理放大
-   *  minFilter: gl.LINEAR 纹理缩小
-   *  wrap: gl.CLAMP_TO_EDGE 纹理水平垂直填充方法
-   *  wrapS: gl.CLAMP_TO_EDGE 纹理水平填充方法
-   *  wrapT: gl.CLAMP_TO_EDGE 纹理垂直填充方法
-   * }}
-   * @constructor
-   */
+// src/texture.js
+// Provides a simple wrapper around WebGL textures that supports render-to-texture.
+
+// ### new GL.Texture(width, height[, options])
+//
+// The arguments `width` and `height` give the size of the texture in texels.
+// WebGL texture dimensions must be powers of two unless `filter` is set to
+// either `gl.NEAREST` or `gl.LINEAR` and `wrap` is set to `gl.CLAMP_TO_EDGE`
+// (which they are by default).
+//
+// Texture parameters can be passed in via the `options` argument.
+// Example usage:
+//
+//     var t = new GL.Texture(256, 256, {
+//       // Defaults to gl.LINEAR, set both at once with "filter"
+//       magFilter: gl.NEAREST,
+//       minFilter: gl.LINEAR,
+//
+//       // Defaults to gl.CLAMP_TO_EDGE, set both at once with "wrap"
+//       wrapS: gl.REPEAT,
+//       wrapT: gl.REPEAT,
+//
+//       format: gl.RGB, // Defaults to gl.RGBA
+//       type: gl.FLOAT // Defaults to gl.UNSIGNED_BYTE
+//     });
   function Texture(width, height, options) {
     options = options || {};
     this.id = gl.createTexture();
@@ -1852,6 +1786,14 @@ var GL = (function () {
         !Texture.canUseFloatingPointLinearFiltering()) {
         throw new Error('OES_texture_float_linear is required but not supported');
       }
+    } else if (this.type === gl.HALF_FLOAT_OES) {
+      if (!Texture.canUseHalfFloatingPointTextures()) {
+        throw new Error('OES_texture_half_float is required but not supported');
+      }
+      if ((minFilter !== gl.NEAREST || magFilter !== gl.NEAREST) &&
+        !Texture.canUseHalfFloatingPointLinearFiltering()) {
+        throw new Error('OES_texture_half_float_linear is required but not supported');
+      }
     }
     gl.bindTexture(gl.TEXTURE_2D, this.id);
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
@@ -1861,9 +1803,11 @@ var GL = (function () {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, options.wrap || options.wrapT || gl.CLAMP_TO_EDGE);
     gl.texImage2D(gl.TEXTURE_2D, 0, this.format, width, height, 0, this.format, this.type, null);
   }
+
   var framebuffer;
   var renderbuffer;
   var checkerboardCanvas;
+
   Texture.prototype = {
     // ### .bind([unit])
     //
@@ -2001,18 +1945,36 @@ var GL = (function () {
 
 // ### GL.Texture.canUseFloatingPointTextures()
 //
-// Returns false if gl.FLOAT is not supported as a texture type. This is the
-// OES_texture_float extension.
+// Returns false if `gl.FLOAT` is not supported as a texture type. This is the
+// `OES_texture_float` extension.
   Texture.canUseFloatingPointTextures = function () {
     return !!gl.getExtension('OES_texture_float');
   };
 
 // ### GL.Texture.canUseFloatingPointLinearFiltering()
 //
-// Returns false if gl.LINEAR is not supported as a texture filter mode for
-// textures of type gl.FLOAT. This is the OES_texture_float_linear extension.
+// Returns false if `gl.LINEAR` is not supported as a texture filter mode for
+// textures of type `gl.FLOAT`. This is the `OES_texture_float_linear`
+// extension.
   Texture.canUseFloatingPointLinearFiltering = function () {
     return !!gl.getExtension('OES_texture_float_linear');
+  };
+
+// ### GL.Texture.canUseFloatingPointTextures()
+//
+// Returns false if `gl.HALF_FLOAT_OES` is not supported as a texture type.
+// This is the `OES_texture_half_float` extension.
+  Texture.canUseHalfFloatingPointTextures = function () {
+    return !!gl.getExtension('OES_texture_half_float');
+  };
+
+// ### GL.Texture.canUseFloatingPointLinearFiltering()
+//
+// Returns false if `gl.LINEAR` is not supported as a texture filter mode for
+// textures of type `gl.HALF_FLOAT_OES`. This is the
+// `OES_texture_half_float_linear` extension.
+  Texture.canUseHalfFloatingPointLinearFiltering = function () {
+    return !!gl.getExtension('OES_texture_half_float_linear');
   };
 
 // src/vector.js
@@ -2078,6 +2040,9 @@ var GL = (function () {
         theta: Math.atan2(this.z, this.x),
         phi: Math.asin(this.y / this.length())
       };
+    },
+    angleTo: function (a) {
+      return Math.acos(this.dot(a) / (this.length() * a.length()));
     },
     toArray: function (n) {
       return [this.x, this.y, this.z].slice(0, n || 3);
@@ -2185,6 +2150,9 @@ var GL = (function () {
   };
   Vector.fromArray = function (a) {
     return new Vector(a[0], a[1], a[2]);
+  };
+  Vector.angleBetween = function (a, b) {
+    return a.angleTo(b);
   };
 
   return GL;

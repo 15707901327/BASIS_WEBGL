@@ -119,7 +119,7 @@ function loadShader(gl, type, source) {
  * 说明：在获取WebGL绘图上下文时，canvas.getContext()函数接收的参数，在不同的浏览器中会不同，
  *  所以使用getWebGLContext()来隐藏不同浏览器之间的差异。
  */
-function getWebGLContext(canvas, opt_debug) {
+function getWebGLContext(canvas, opt_debug)                                                                                     {
   // Get the rendering context for WebGL
   var gl = WebGLUtils.setupWebGL(canvas);
   if (!gl) return null;

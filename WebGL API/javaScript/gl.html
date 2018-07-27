@@ -8,6 +8,10 @@
 <body>
 <div class="l-r-wrapper">
   <div class="left">
+    <h4>声明函数</h4>
+    <ul class="ul-1">
+      <li><a href="#matrixMode">gl.matrixMode()</a></li>
+    </ul>
     <h4>绘制图形的基本方法</h4>
     <ul class="ul-1">
       <li><a href="#drawArrays">gl.drawArrays()</a></li>
@@ -90,8 +94,27 @@
       <li><a href="#bindRenderbuffer">bindRenderbuffer()</a></li>
       <li><a href="#renderbufferStorage">renderbufferStorage()</a></li>
     </ul>
+    <h4>扩展方法</h4>
+    <ul class="ul-1">
+      <li><a href="#getExtension">getExtension()</a></li>
+    </ul>
   </div>
   <div class="right">
+    <!--声明函数-->
+    <section id="matrixMode">
+      <h4>gl.matrixMode(target)</h4>
+      <p>用来指定哪个矩阵是当前的矩阵，而它的参数代表要操作的目标。</p>
+      <div class="content">
+        <strong>参数：</strong>
+        <p>target:
+        <ul>
+          <li>GL_PROJECTION:对投影矩阵操作，要对投影相关进行操作,接下来的语句可以是跟透视相关的函数，比如glFrustum()或gluPerspective()</li>
+          <li>GL_MODELVIEW:对模型视景矩阵操作，对模型视景的操作,接下来的语句描绘一个以模型为基础的适应，这样来设置参数，接下来用到的就是像gluLookAt()这样的函数；</li>
+          <li>GL_TEXTURE:对纹理矩阵进行随后的操作，就是对纹理相关进行操作</li>
+        </ul>
+        </p>
+      </div>
+    </section>
     <!--绘制图形的基本方法-->
     <section id="drawArrays">
       <h4>gl.drawArrays(mode, first, count);</h4>
@@ -1387,7 +1410,9 @@
           <li>
             internalformat:指定渲染缓冲区中的数据格式
             <table border="1">
-              <tr><th colspan="2">渲染缓冲区中的数据格式</th></tr>
+              <tr>
+                <th colspan="2">渲染缓冲区中的数据格式</th>
+              </tr>
               <tr>
                 <td>gl.DEPTH_COMPONENT16</td>
                 <td>表示渲染缓冲区将替代深度缓冲区</td>
@@ -1421,6 +1446,24 @@
         <strong>错误</strong>
         <p>INVALID_ENUM:target不是gl.RENDERBUFFER</p>
         <p>INVALID_:targetOPERATION没有绑定渲染缓冲区</p>
+      </div>
+    </section>
+    <!--扩展方法-->
+    <section id="getExtension">
+      <h4>gl.getExtension(name)</h4>
+      <p>启用WebGL扩展</p>
+      <div class="ul-1">
+        <strong>参数：</strong>
+        <ul class="ul-1">
+          <li>name:WebGL扩展功能的名称</li>
+        </ul>
+        <strong>返回值：</strong>
+        <ul class="ul-1">
+          <li>WebGL扩展对象</li>
+          <li>null:如果name的值不能正确匹配</li>
+        </ul>
+        <strong>扩展</strong>
+        <p><a href="WebGL_extensions.html" target="_blank">扩展项</a></p>
       </div>
     </section>
   </div>

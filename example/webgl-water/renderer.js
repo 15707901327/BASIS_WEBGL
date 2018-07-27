@@ -1,4 +1,4 @@
-﻿/*
+/*
  * WebGL Water
  * http://madebyevan.com/webgl-water/
  *
@@ -108,12 +108,12 @@ function Renderer() {
     wrap: gl.REPEAT,
     format: gl.RGB
   });
-  this.lightDir = new GL.Vector(2.0, 2.0, -1.0).unit();
-  this.causticTex = new GL.Texture(1024, 1024);
-  this.waterMesh = GL.Mesh.plane({ detail: 200 });
+  this.lightDir = new PGL.Vector3(2.0, 2.0, -1.0).unit();
+  this.causticTex = new PGL.Texture(1024, 1024);
+  this.waterMesh = PGL.Mesh.plane({ detail: 200 });
   this.waterShaders = [];
   for (var i = 0; i < 2; i++) {
-    this.waterShaders[i] = new GL.Shader('\
+    this.waterShaders[i] = new PGL.Shader('\
       uniform sampler2D water;\
       varying vec3 position;\
       void main() {\
@@ -186,7 +186,7 @@ function Renderer() {
     ');
   }
   this.sphereMesh = GL.Mesh.sphere({ detail: 10 });
-  this.sphereShader = new GL.Shader(helperFunctions + '\
+  this.sphereShader = new PGL.Shader(helperFunctions + '\
     varying vec3 position;\
     void main() {\
       position = sphereCenter + gl_Vertex.xyz * sphereRadius;\
@@ -205,7 +205,7 @@ function Renderer() {
   this.cubeMesh = GL.Mesh.cube();
   this.cubeMesh.triangles.splice(4, 2);
   this.cubeMesh.compile();
-  this.cubeShader = new GL.Shader(helperFunctions + '\
+  this.cubeShader = new PGL.Shader(helperFunctions + '\
     varying vec3 position;\
     void main() {\
       position = gl_Vertex.xyz;\
@@ -222,10 +222,10 @@ function Renderer() {
       }\
     }\
   ');
-  this.sphereCenter = new GL.Vector();
+  this.sphereCenter = new PGL.Vector3();
   this.sphereRadius = 0;
   var hasDerivatives = !!gl.getExtension('OES_standard_derivatives');
-  this.causticsShader = new GL.Shader(helperFunctions + '\
+  this.causticsShader = new PGL.Shader(helperFunctions + '\
     varying vec3 oldPos;\
     varying vec3 newPos;\
     varying vec3 ray;\

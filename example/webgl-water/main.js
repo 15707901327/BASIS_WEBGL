@@ -1,4 +1,4 @@
-﻿/*
+/*
  * WebGL Water
  * http://madebyevan.com/webgl-water/
  *
@@ -24,7 +24,11 @@ function handleError(text) {
 
 window.onerror = handleError;
 
-var gl = GL.create();
+var webGLRenderer = new PGL.WebGLRenderer();
+var gl = webGLRenderer.getContext();
+GL.create({gl: gl});
+
+// var gl = GL.create();
 var water;
 var cubemap;
 var renderer;
@@ -40,11 +44,12 @@ var gravity;
 var radius;
 var paused = false;
 
-window.onload = function() {
+window.onload = function () {
   var ratio = window.devicePixelRatio || 1;
+  var help = document.getElementById('help');
 
   function onresize() {
-    var width = innerWidth - 300;
+    var width = innerWidth - help.clientWidth - 20;
     var height = innerHeight;
     gl.canvas.width = width * ratio;
     gl.canvas.height = height * ratio;
@@ -62,7 +67,6 @@ window.onload = function() {
   gl.clearColor(0, 0, 0, 1);
 
   water = new Water();
-  console.log(water);
   renderer = new Renderer();
   cubemap = new Cubemap({
     xneg: document.getElementById('xneg'),
@@ -77,9 +81,9 @@ window.onload = function() {
     throw new Error('Rendering to floating-point textures is required but not supported');
   }
 
-  center = oldCenter = new GL.Vector(-0.4, -0.75, 0.2);
-  velocity = new GL.Vector();
-  gravity = new GL.Vector(0, -4, 0);
+  center = oldCenter = new PGL.Vector3(-0.4, -0.75, 0.2);
+  velocity = new PGL.Vector3();
+  gravity = new PGL.Vector3(0, -4, 0);
   radius = 0.25;
 
   for (var i = 0; i < 20; i++) {
@@ -89,12 +93,12 @@ window.onload = function() {
   document.getElementById('loading').innerHTML = '';
   onresize();
 
-  var requestAnimationFrame =
-    window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    function(callback) { setTimeout(callback, 0); };
+  var requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || function (callback) {
+    setTimeout(callback, 0);
+  };
 
   var prevTime = new Date().getTime();
+
   function animate() {
     var nextTime = new Date().getTime();
     if (!paused) {
@@ -104,6 +108,7 @@ window.onload = function() {
     prevTime = nextTime;
     requestAnimationFrame(animate);
   }
+
   requestAnimationFrame(animate);
 
   window.onresize = onresize;
@@ -117,11 +122,11 @@ window.onload = function() {
 
   var oldX, oldY;
 
-  document.onmousedown = function(e) {
-    oldX = e.pageX;
-    oldY = e.pageY;
+  function startDrag(x, y) {
+    oldX = x;
+    oldY = y;
     var tracer = new GL.Raytracer();
-    var ray = tracer.getRayForPixel(e.pageX * ratio, e.pageY * ratio);
+    var ray = tracer.getRayForPixel(x * ratio, y * ratio);
     var pointOnPlane = tracer.eye.add(ray.multiply(-tracer.eye.y / ray.y));
     var sphereHitTest = GL.Raytracer.hitTestSphere(tracer.eye, ray, center, radius);
     if (sphereHitTest) {
@@ -130,21 +135,17 @@ window.onload = function() {
       planeNormal = tracer.getRayForPixel(gl.canvas.width / 2, gl.canvas.height / 2).negative();
     } else if (Math.abs(pointOnPlane.x) < 1 && Math.abs(pointOnPlane.z) < 1) {
       mode = MODE_ADD_DROPS;
-      document.onmousemove(e);
+      duringDrag(x, y);
     } else {
       mode = MODE_ORBIT_CAMERA;
     }
-  };
+  }
 
-  document.onmouseup = function(e) {
-    mode = -1;
-  };
-
-  document.onmousemove = function(e) {
+  function duringDrag(x, y) {
     switch (mode) {
-      case MODE_ADD_DROPS:
+      case MODE_ADD_DROPS: {
         var tracer = new GL.Raytracer();
-        var ray = tracer.getRayForPixel(e.pageX * ratio, e.pageY * ratio);
+        var ray = tracer.getRayForPixel(x * ratio, y * ratio);
         var pointOnPlane = tracer.eye.add(ray.multiply(-tracer.eye.y / ray.y));
         water.addDrop(pointOnPlane.x, pointOnPlane.z, 0.03, 0.01);
         if (paused) {
@@ -152,9 +153,10 @@ window.onload = function() {
           renderer.updateCaustics(water);
         }
         break;
-      case MODE_MOVE_SPHERE:
+      }
+      case MODE_MOVE_SPHERE: {
         var tracer = new GL.Raytracer();
-        var ray = tracer.getRayForPixel(e.pageX * ratio, e.pageY * ratio);
+        var ray = tracer.getRayForPixel(x * ratio, y * ratio);
         var t = -planeNormal.dot(tracer.eye.subtract(prevHit)) / planeNormal.dot(ray);
         var nextHit = tracer.eye.add(ray.multiply(t));
         center = center.add(nextHit.subtract(prevHit));
@@ -164,18 +166,62 @@ window.onload = function() {
         prevHit = nextHit;
         if (paused) renderer.updateCaustics(water);
         break;
-      case MODE_ORBIT_CAMERA:
-        angleY -= e.pageX - oldX;
-        angleX -= e.pageY - oldY;
+      }
+      case MODE_ORBIT_CAMERA: {
+        angleY -= x - oldX;
+        angleX -= y - oldY;
         angleX = Math.max(-89.999, Math.min(89.999, angleX));
         break;
+      }
     }
-    oldX = e.pageX;
-    oldY = e.pageY;
+    oldX = x;
+    oldY = y;
     if (paused) draw();
+  }
+
+  function stopDrag() {
+    mode = -1;
+  }
+
+  function isHelpElement(element) {
+    return element === help || element.parentNode && isHelpElement(element.parentNode);
+  }
+
+  document.onmousedown = function (e) {
+    if (!isHelpElement(e.target)) {
+      e.preventDefault();
+      startDrag(e.pageX, e.pageY);
+    }
   };
 
-  document.onkeydown = function(e) {
+  document.onmousemove = function (e) {
+    duringDrag(e.pageX, e.pageY);
+  };
+
+  document.onmouseup = function () {
+    stopDrag();
+  };
+
+  document.ontouchstart = function (e) {
+    if (e.touches.length === 1 && !isHelpElement(e.target)) {
+      e.preventDefault();
+      startDrag(e.touches[0].pageX, e.touches[0].pageY);
+    }
+  };
+
+  document.ontouchmove = function (e) {
+    if (e.touches.length === 1) {
+      duringDrag(e.touches[0].pageX, e.touches[0].pageY);
+    }
+  };
+
+  document.ontouchend = function (e) {
+    if (e.touches.length == 0) {
+      stopDrag();
+    }
+  };
+
+  document.onkeydown = function (e) {
     if (e.which == ' '.charCodeAt(0)) paused = !paused;
     else if (e.which == 'G'.charCodeAt(0)) useSpherePhysics = !useSpherePhysics;
     else if (e.which == 'L'.charCodeAt(0) && paused) draw();
@@ -187,9 +233,9 @@ window.onload = function() {
     if (seconds > 1) return;
     frame += seconds * 2;
 
-    if (mode == MODE_MOVE_SPHERE) {
+    if (mode === MODE_MOVE_SPHERE) {
       // Start from rest when the player releases the mouse after moving the sphere
-      velocity = new GL.Vector();
+      velocity = new PGL.Vector3();
     } else if (useSpherePhysics) {
       // Fall down with viscosity under water
       var percentUnderWater = Math.max(0, Math.min(1, (radius - center.y) / (2 * radius)));
@@ -218,7 +264,7 @@ window.onload = function() {
   function draw() {
     // Change the light direction to the camera look vector when the L key is pressed
     if (GL.keys.L) {
-      renderer.lightDir = GL.Vector.fromAngles((90 - angleY) * Math.PI / 180, -angleX * Math.PI / 180);
+      renderer.lightDir = PGL.Vector3.fromAngles((90 - angleY) * Math.PI / 180, -angleX * Math.PI / 180);
       if (paused) renderer.updateCaustics(water);
     }
 

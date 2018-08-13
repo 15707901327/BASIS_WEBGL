@@ -103,7 +103,7 @@ var helperFunctions = '\
 ';
 
 function Renderer() {
-  this.tileTexture = GL.Texture.fromImage(document.getElementById('tiles'), {
+  this.tileTexture = PGL.Texture.fromImage(document.getElementById('tiles'), {
     minFilter: gl.LINEAR_MIPMAP_LINEAR,
     wrap: gl.REPEAT,
     format: gl.RGB
@@ -185,7 +185,7 @@ function Renderer() {
       }\
     ');
   }
-  this.sphereMesh = GL.Mesh.sphere({ detail: 10 });
+  this.sphereMesh = PGL.Mesh.sphere({ detail: 10 });
   this.sphereShader = new PGL.Shader(helperFunctions + '\
     varying vec3 position;\
     void main() {\
@@ -202,7 +202,7 @@ function Renderer() {
       }\
     }\
   ');
-  this.cubeMesh = GL.Mesh.cube();
+  this.cubeMesh = PGL.Mesh.cube();
   this.cubeMesh.triangles.splice(4, 2);
   this.cubeMesh.compile();
   this.cubeShader = new PGL.Shader(helperFunctions + '\
@@ -302,7 +302,7 @@ Renderer.prototype.updateCaustics = function(water) {
 };
 
 Renderer.prototype.renderWater = function(water, sky) {
-  var tracer = new GL.Raytracer();
+  var tracer = new PGL.Raytracer();
   water.textureA.bind(0);
   this.tileTexture.bind(1);
   sky.bind(2);

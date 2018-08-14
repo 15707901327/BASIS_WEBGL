@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>上下文</title>
+  <link rel="stylesheet" href="../css/base.css">
+</head>
+<body>
+<div class="l-r-wrapper">
+  <div class="left">
+    <h4><a href="#fillStyle">ctx.fillStyle</a></h4>
+    <h4><a href="#fillRect">ctx.fillRect()</a></h4>
+  </div>
+  <div class="right">
+    <section id="fillStyle">
+      <h4>ctx.fillStyle = 'rgba(0,0,255,0.5)';</h4>
+      <div class="content">
+        <p>设置填充颜色为蓝色</p>
+        <strong>参数：</strong>
+        <p>rgb表示颜色（0-255）a ： 透明度 （0.0-1.0）</p>
+        <strong>实例</strong>
+        <ul class="ul-1-num">
+          <li><a href="../WebGL编程指南/ch2/DrawingRectangle.html" target="_blank">绘制蓝色矩形</a></li>
+        </ul>
+      </div>
+    </section>
+    <section id="fillRect">
+      <h4>ctx.fillRect(120,10,150,150);</h4>
+      <div class="content">
+        <p>使用填充颜色填充矩形</p>
+        <strong>参数：</strong>
+        <p>前两个指定了待绘制矩形的顶点在《canvas》中的坐标，后两个指定了矩形的宽度和高度</p>
+        <strong>实例</strong>
+        <ul class="ul-1-num">
+          <li><a href="../WebGL编程指南/ch2/DrawingRectangle.html" target="_blank">绘制蓝色矩形</a></li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</div>
+</body>
+</html>

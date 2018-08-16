@@ -47,6 +47,8 @@ ul {
 }
 
 .l-r-wrapper {
+    min-width: 800px;
+    min-height: 929px;
     background-color: #f0f0f0;
 }
 
@@ -59,6 +61,8 @@ ul {
 .right {
     background-color: #fff;
     overflow: hidden;
+    height: 100%;
+    min-height: 929px;
 }
 
 .section1 {

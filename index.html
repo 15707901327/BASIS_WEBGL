@@ -10,19 +10,20 @@
   <div class="left">
     <h4><a href="#base">基本概念</a></h4>
     <ul class="ul-1">
-      <li><a href="visualSpace">相机的可视空间</a></li>
+      <li><a href="#WebGL">WebGL程序</a></li>
+      <li><a href="#WebGL_System">WebGL系统</a></li>
+      <li><a href="#visualSpace">相机的可视空间</a></li>
     </ul>
     <h4><a href="canvas标签.html" target="_blank">canvas标签</a></h4>
     <h4><a href="canvas%202D%20API/ctx.html" target="_blank">canvas 2D API</a></h4>
     <h4><a href="WebGL%20API/gl.html" target="_blank">WebGL API</a></h4>
+    <h4><a href="WebGL%20API/shader/shader.html" target="_blank">shader（GLSL ES）</a></h4>
     <h4><a href="WebGL%20API/WebGL可以绘制的基本图形.html" target="_blank">WebGL绘制的基本图形</a></h4>
     <h4><a href="#WebGL_Event">WebGL相关事件</a></h4>
     <ul class="ul-1">
       <li><a href="#ContextLost">上下文丢失事件</a></li>
     </ul>
-    <h4><a href="#WebGL">WebGL程序</a></h4>
     <ul class="ul-1">
-      <li><a href="#WebGL_System">WebGL系统</a></li>
       <li>
         <a href="#JavaScript">JavaScript</a>
         <ul class="ul-1">
@@ -30,7 +31,6 @@
           <li><a href="#type_array">类型化数组</a></li>
         </ul>
       </li>
-      <li><a href="#shader">GLSL ES基础</a></li>
     </ul>
     <h4>WebGL内置功能</h4>
     <ul class="ul-1">
@@ -48,12 +48,44 @@
   <div class="right">
     <section id="base" class="section1">
       <h4 class="title">WebGL中的基本概念</h4>
-      <div class="content">
-        <strong>绘图</strong>
-        <p>WebGl在颜色缓冲区中进行绘图，在开启隐藏面消除功能时，还会用到深度缓冲区。总之，绘图的结果图像是存储在颜色缓冲区中的。</p>
-        <strong>图元光栅化:</strong>
-        <p>发生在顶点着色器和片元着色器之间的从图形到片元的转化过程。</p>
-      </div>
+      <section>
+        <h4>基本概念</h4>
+        <div class="content">
+          <strong>绘图</strong>
+          <p>WebGl在颜色缓冲区中进行绘图，在开启隐藏面消除功能时，还会用到深度缓冲区。总之，绘图的结果图像是存储在颜色缓冲区中的。</p>
+          <strong>图元光栅化:</strong>
+          <p>发生在顶点着色器和片元着色器之间的从图形到片元的转化过程。</p>
+          <strong>顶点（vertex)</strong>
+          <p>指二维或三维空间中的一个点，比如二维或三维图形的端点或交点。</p>
+          <strong>片元（Fragment）：</strong>
+          <p>片元就是显示在屏幕上的一个像素（严格意义上来说，片元包括这个像素的位置、颜色和其他信息）。</p>
+          <strong>图形装配过程：</strong>
+          <p>将孤立的顶点坐标装配成几何图形。</p>
+          <strong>光栅化过程：</strong>
+          <p>将装配好的几何图形转化为片元。一旦光栅化过程结束后，程序就开始逐片元调用片元着色器。</p>
+        </div>
+      </section>
+      <section id="WebGL">
+        <h4>WebGL程序</h4>
+        <p>WebGL程序包括运行在浏览器中的JavaScript和运行在<a href="#WebGL_System">WebGL系统</a>中的着色器程序这两个部分。 </p>
+        <div class="content">
+          <strong>将信息从JavaScript程序中传递给顶点着色器，由两种方式可以做到：</strong>
+          <ul class="ul-1">
+            <li><a href="WebGL%20API/shader/存储限定字.html#attribute" target="_blank">attribute变量</a></li>
+            <li><a href="WebGL%20API/shader/存储限定字.html#uniform" target="_blank">uniform变量</a></li>
+          </ul>
+        </div>
+      </section>
+      <section id="WebGL_System">
+        <h4>WebGL系统</h4>
+        <p>由两部分组成，即顶点着色器（Vertex shader）和片元着色器（Fragment shader）。着色器运行在WebGL系统中。</p>
+        <div class="content">
+          <strong>顶点着色器（Vertex shader）</strong>
+          <p>顶点着色器用用来描述顶点特性（如位置、颜色等）的程序。</p>
+          <strong>片元着色器（Fragment shader）。</strong>
+          <p>处理片元，使其显示在屏幕上。进行逐片元处理过程如光照的程序。</p>
+        </div>
+      </section>
       <section id="visualSpace">
         <h4>相机的可视空间</h4>
         <div class="content">
@@ -96,26 +128,6 @@
           </ul>
         </div>
       </section>
-    </section>
-    <section id="WebGL">
-      <h4>WebGL程序</h4>
-      <p>WebGL程序包括运行在浏览器中的JavaScript和运行在<a href="#WebGL_System">WebGL系统</a>中的着色器程序这两个部分。 </p>
-      <div class="content">
-        <strong>将信息从JavaScript程序中传递给顶点着色器，由两种方式可以做到：</strong>
-        <ul class="ul-1">
-          <li><a href="shader/存储限定字.html#attribute">attribute变量</a></li>
-          <li><a href="shader/存储限定字.html#uniform">uniform变量</a></li>
-        </ul>
-      </div>
-    </section>
-    <section id="WebGL_System">
-      <h4>WebGL系统</h4>
-      <p>由两部分组成，即顶点着色器和片元着色器。着色器运行在WebGL系统中。</p>
-      <div class="content">
-        <ul class="ul-1">
-          <li><a href="WebGL%20API/shader/着色器.html">着色器及着色器之间关系</a></li>
-        </ul>
-      </div>
     </section>
     <section id="JavaScript" class="section1">
       <div class="title">javaScript相关函数概念</div>
@@ -366,33 +378,6 @@
         <strong>实例</strong>
         <ul class="ul-1-num">
           <li><a href="WebGL编程指南/ch07/Zfighting.html" target="_blank">深度缓存</a></li>
-        </ul>
-      </div>
-    </section>
-    <section id="shader">
-      <h4>GLSL ES基础</h4>
-      <div class="content">
-        <strong>GLSE ES概述</strong>
-        <p>GLSE ES编程语言是在OpenGL着色器语言（GLSL）的基础上，删除和简化一部分功能后形成的。</p>
-        <strong>编码规范</strong>
-        <ul class="ul-1">
-          <li>程序是大小写敏感的</li>
-          <li>每个语句都应该以一个英文分号(;)结束</li>
-        </ul>
-        <strong>注释</strong>
-        <ul class="ul-1">
-          <li>单行注释 //</li>
-          <li>多行注释 /**/</li>
-        </ul>
-        <strong>详细说明</strong>
-        <ul class="ul-1">
-          <li><a href="WebGL%20API/shader/数据类型.html">数据类型</a></li>
-          <li><a href="WebGL%20API/shader/变量.html">变量</a></li>
-          <li><a href="WebGL%20API/shader/存储限定字.html">存储限定字</a></li>
-          <li><a href="WebGL%20API/shader/精度限定字.html">精度限定字</a></li>
-          <li><a href="WebGL%20API/shader/vertex%20shader.html">顶点着色器</a></li>
-          <li><a href="WebGL%20API/shader/内置函数.html">内置函数</a></li>
-          <li><a href="WebGL%20API/矩阵变换.html">矩阵变换</a></li>
         </ul>
       </div>
     </section>

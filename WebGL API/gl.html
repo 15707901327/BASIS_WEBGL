@@ -16,8 +16,13 @@
     <ul class="ul-1">
       <li><a href="#drawArrays">gl.drawArrays()</a></li>
       <li><a href="#drawElements">gl.drawElements()</a></li>
+    </ul>
+    <h4><a href="#clear">清空缓存区相关方法</a></h4>
+    <ul class="ul-1">
       <li><a href="#clear">gl.clear()</a></li>
       <li><a href="#clearColor">gl.clearColor()</a></li>
+      <li><a href="#clearDepth">gl.clearDepth()</a></li>
+      <li><a href="#clearStencil">gl.clearStencil()</a></li>
     </ul>
     <h4>与attribute变量相关方法</h4>
     <a href="#getAttribLocation">gl.getAttribLocation()</a>
@@ -166,45 +171,75 @@
         </ul>
       </div>
     </section>
-    <section id="clear">
-      <h4>gl.clear(buffer);</h4>
-      <p>将指定缓存区设定为预定的值。如果清空是颜色缓存区，那么将使用gl.clearColor()指定的值（作为预定值）</p>
-      <div class="content">
-        <strong>参数：</strong>
-        <ul class="ul-1">
-          <li>
-            buffer：指定待清空的缓存区，位操作符OR(|)可用来指定多个缓存区<br>
-            gl.COLOR_BUFFER_BIT：指定颜色缓存区<br>
-            gl.DEPTH_BUFFER_BIT：指定深度缓存区<br>
-            gl.STENCIL_BUFFER_BIT：指定模版缓存区<br>
-          </li>
-        </ul>
-        <strong>返回值：</strong>
-        <p>无</p>
-        <strong>错误：</strong>
-        <ul>
-          <li>INVALID_VALUE：缓存区不是以上三种类型</li>
-        </ul>
-      </div>
-    </section>
-    <section id="clearColor">
-      <h4>gl.clearColor(red,green,blue,alpha);</h4>
-      <p>指定绘图区域的背景色</p>
-      <div class="content">
-        <strong>参数：</strong>
-        <ul>
-          <li>red：指定红色值（从0.0到1.0）</li>
-          <li>green：指定绿色值（从0.0到1.0）</li>
-          <li>blue：指定蓝色值（从0.0到1.0）</li>
-          <li>alpha：指定透明度值（从0.0到1.0,如果任何值小于0.0大于1.0，那么就会分别截断为0.0或1.0</li>
-        </ul>
-        <strong>返回值：</strong>
-        <p>无</p>
-        <strong>说明：</strong>
-        <ul>
-          <li>一旦指定背景颜色之后，背景颜色就会被驻存在WebGL系统（WebGL System）中，在下一次调用方法之前不会改变（只需要要设置一次）。</li>
-        </ul>
-      </div>
+    <!--清空缓存区相关方法-->
+    <section id="clear" class="section1">
+      <h4 class="title">清空缓存区相关方法</h4>
+      <section>
+        <h4>gl.clear(buffer);</h4>
+        <p>将指定缓存区设定为预定的值。如果清空是颜色缓存区，那么将使用gl.clearColor()指定的值（作为预定值）</p>
+        <div class="content">
+          <strong>参数：</strong>
+          <ul class="ul-1">
+            <li>
+              buffer：指定待清空的缓存区，位操作符OR(|)可用来指定多个缓存区<br>
+              gl.COLOR_BUFFER_BIT：指定颜色缓存区<br>
+              gl.DEPTH_BUFFER_BIT：指定深度缓存区<br>
+              gl.STENCIL_BUFFER_BIT：指定模版缓存区<br>
+            </li>
+          </ul>
+          <strong>返回值：</strong>
+          <p>无</p>
+          <strong>错误：</strong>
+          <ul>
+            <li>INVALID_VALUE：缓存区不是以上三种类型</li>
+          </ul>
+        </div>
+      </section>
+      <section id="clearColor">
+        <h4>gl.clearColor(red,green,blue,alpha);</h4>
+        <p>指定绘图区域的背景色，默认值（0.0，0.0，0.0，0.0）</p>
+        <div class="content">
+          <strong>参数：</strong>
+          <ul class="ul-1">
+            <li>red：指定红色值（从0.0到1.0）</li>
+            <li>green：指定绿色值（从0.0到1.0）</li>
+            <li>blue：指定蓝色值（从0.0到1.0）</li>
+            <li>alpha：指定透明度值（从0.0到1.0,如果任何值小于0.0大于1.0，那么就会分别截断为0.0或1.0</li>
+          </ul>
+          <strong>返回值：</strong>
+          <p>无</p>
+          <strong>说明：</strong>
+          <ul class="ul-1">
+            <li>一旦指定背景颜色之后，背景颜色就会被驻存在WebGL系统（WebGL System）中，在下一次调用方法之前不会改变（只需要要设置一次）。</li>
+          </ul>
+        </div>
+      </section>
+      <section id="clearDepth">
+        <h4>gl.clearDepth(depth);</h4>
+        <p>指定绘图区域的深度，默认值 1.0</p>
+        <div class="content">
+          <strong>参数：</strong>
+          <ul class="ul-1">
+            <li>depth：深度</li>
+          </ul>
+          <strong>返回值：</strong>
+          <p>无</p>
+          <strong>说明：</strong>
+        </div>
+      </section>
+      <section id="clearStencil">
+        <h4>gl.clearStencil(s);</h4>
+        <p>默认值 0</p>
+        <div class="content">
+          <strong>参数：</strong>
+          <ul class="ul-1">
+            <li>s：</li>
+          </ul>
+          <strong>返回值：</strong>
+          <p>无</p>
+          <strong>说明：</strong>
+        </div>
+      </section>
     </section>
     <!--与attribute变量相关方-->
     <section id="getAttribLocation">

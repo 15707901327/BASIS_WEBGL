@@ -152,14 +152,35 @@ var PGL = {
     'yellowgreen': 0x9ACD32
   } // 对颜色的映射
 };
-// 基础对象
+// Math
 (function (PGL) {
   PGL.Math = {
+
+    generateUUID: (function () {
+      var lut = [];
+      for (var i = 0; i < 256; i++) {
+        lut[i] = (i < 16 ? '0' : '') + (i).toString(16).toUpperCase();
+      }
+
+      return function generateUUID() {
+        var d0 = Math.random() * 0xffffffff | 0;
+        var d1 = Math.random() * 0xffffffff | 0;
+        var d2 = Math.random() * 0xffffffff | 0;
+        var d3 = Math.random() * 0xffffffff | 0;
+        return lut[d0 & 0xff] + lut[d0 >> 8 & 0xff] + lut[d0 >> 16 & 0xff] + lut[d0 >> 24 & 0xff] + '-' +
+          lut[d1 & 0xff] + lut[d1 >> 8 & 0xff] + '-' + lut[d1 >> 16 & 0x0f | 0x40] + lut[d1 >> 24 & 0xff] + '-' +
+          lut[d2 & 0x3f | 0x80] + lut[d2 >> 8 & 0xff] + '-' + lut[d2 >> 16 & 0xff] + lut[d2 >> 24 & 0xff] +
+          lut[d3 & 0xff] + lut[d3 >> 8 & 0xff] + lut[d3 >> 16 & 0xff] + lut[d3 >> 24 & 0xff];
+      };
+
+    })(),
+
     euclideanModulo: function (n, m) {
 
       return ((n % m) + m) % m;
 
     },
+
     clamp: function (value, min, max) {
 
       return Math.max(min, Math.min(max, value));
@@ -785,7 +806,239 @@ var PGL = {
 
     }
   });
+
+  PGL.Vector3 = function (x, y, z) {
+    this.x = x || 0;
+    this.y = y || 0;
+    this.z = z || 0;
+  };
+  Object.assign(PGL.Vector3.prototype, {
+    isVector3: true
+  });
 })(PGL);
+// core
+(function (PGL) {
+  PGL.EventDispatcher = function () {
+  };
+  Object.assign(PGL.EventDispatcher.prototype, {
+    dispatchEvent: function (event) {
+
+      if (this._listeners === undefined) return;
+
+      var listeners = this._listeners;
+      var listenerArray = listeners[event.type];
+
+      if (listenerArray !== undefined) {
+        event.target = this;
+        var array = listenerArray.slice(0);
+
+        for (var i = 0, l = array.length; i < l; i++) {
+          array[i].call(this, event);
+        }
+      }
+    },
+
+    addEventListener: function ( type, listener ) {
+
+      if ( this._listeners === undefined ) this._listeners = {};
+
+      var listeners = this._listeners;
+
+      if ( listeners[ type ] === undefined ) {
+
+        listeners[ type ] = [];
+
+      }
+
+      if ( listeners[ type ].indexOf( listener ) === - 1 ) {
+
+        listeners[ type ].push( listener );
+
+      }
+
+    }
+  });
+
+  var object3DId = 0;
+  PGL.Object3D = function () {
+
+    Object.defineProperty(this, 'id', {value: object3DId++});
+
+    this.uuid = PGL.Math.generateUUID();
+
+    this.name = '';
+    this.type = 'Object3D';
+
+    this.parent = null;
+    this.children = [];
+
+    this.visible = true;
+
+    this.userData = {};
+  };
+  PGL.Object3D.prototype = Object.assign(Object.create(PGL.EventDispatcher.prototype), {
+    constructor: PGL.Object3D,
+
+    isObject3D: true,
+
+    /**
+     * 把object对象放到children数组中，object的parent指向这个类别
+     * @param object 可以是一个值，也可以是多个值
+     * @return {add}
+     */
+    add: function (object) {
+
+      if (arguments.length > 1) {
+        for (var i = 0; i < arguments.length; i++) {
+          this.add(arguments[i]);
+        }
+        return this;
+      }
+
+      if (object === this) {
+        console.error("PGL.Object3D.add: object can't be added as a child of itself.", object);
+        return this;
+      }
+
+      if ((object && object.isObject3D)) {
+        if (object.parent !== null) {
+          object.parent.remove(object);
+        }
+
+        object.parent = this;
+        object.dispatchEvent({type: 'added'});
+
+        this.children.push(object);
+
+      } else {
+        console.error("PGL.Object3D.add: object not an instance of PGL.Object3D.", object);
+      }
+
+      return this;
+    }
+  });
+
+  var geometryId = 0;
+  PGL.Geometry = function () {
+    Object.defineProperty(this, 'id', {value: geometryId += 2});
+
+    this.uuid = PGL.Math.generateUUID();
+
+    this.name = '';
+    this.type = 'Geometry';
+
+    this.vertices = [];
+  };
+  PGL.Geometry.prototype = Object.assign(Object.create(PGL.EventDispatcher.prototype),{
+    constructor: PGL.Geometry,
+
+    isGeometry: true
+  });
+})(PGL);
+// materials
+(function (PGL) {
+  var materialId = 0;
+  PGL.Material = function () {
+    Object.defineProperty(this, 'id', {value: materialId++});
+
+    this.uuid = PGL.Math.generateUUID();
+
+    this.name = '';
+    this.type = 'Material';
+  };
+  PGL.Material.prototype = Object.assign(Object.create(PGL.EventDispatcher.prototype), {
+    constructor: PGL.Material,
+
+    isMaterial: true,
+
+    /**
+     * 把给定的参数设置到当前的对象中去
+     * @param values
+     */
+    setValues: function (values) {
+
+      if (values === undefined) return;
+
+      for (var key in values) {
+        var newValue = values[key];
+
+        if (newValue === undefined) {
+          console.warn("PGL.Material: '" + key + "' parameter is undefined.");
+          continue;
+        }
+
+        // for backward compatability if shading is set in the constructor
+        if (key === 'shading') {
+          console.warn('PGL.' + this.type + ': .shading has been removed. Use the boolean .flatShading instead.');
+          this.flatShading = (newValue === FlatShading) ? true : false;
+          continue;
+        }
+
+        var currentValue = this[key];
+
+        if (currentValue === undefined) {
+          console.warn("PGL." + this.type + ": '" + key + "' is not a property of this material.");
+          continue;
+        }
+
+        if (currentValue && currentValue.isColor) {
+          currentValue.set(newValue);
+        } else if ((currentValue && currentValue.isVector3) && (newValue && newValue.isVector3)) {
+          currentValue.copy(newValue);
+        } else if (key === 'overdraw') {
+          // ensure overdraw is backwards-compatible with legacy boolean type
+          this[key] = Number(newValue);
+        } else {
+          this[key] = newValue;
+        }
+      }
+    }
+  });
+
+  PGL.PointsMaterial = function (parameters) {
+    PGL.Material.call(this);
+
+    this.type = 'PointsMaterial';
+
+    this.color = new PGL.Color(0xffffff);
+
+    this.setValues(parameters);
+  };
+  PGL.PointsMaterial.prototype = Object.create(PGL.Material.prototype);
+  PGL.PointsMaterial.prototype.constructor = PGL.PointsMaterial;
+  PGL.PointsMaterial.prototype.isPointsMaterial = true;
+})(PGL);
+// scene
+(function (PGL) {
+  PGL.Scene = function () {
+    PGL.Object3D.call(this);
+
+    this.type = 'Scene';
+
+    this.autoUpdate = true;
+  };
+  PGL.Scene.prototype = Object.assign(Object.create(PGL.Object3D.prototype), {
+    constructor: PGL.Scene
+  });
+})(PGL);
+// objects
+(function (PGL) {
+  PGL.Points = function (geometry, material) {
+    PGL.Object3D.call(this);
+
+    this.type = 'Points';
+
+    this.geometry = geometry;
+    this.material = material !== undefined ? material : new PointsMaterial({color: Math.random() * 0xffffff});
+  };
+  PGL.Points.prototype = Object.assign(Object.create(PGL.Object3D.prototype), {
+    constructor: PGL.Points,
+
+    isPoints: true
+  });
+})(PGL);
+
+// renderer
 (function (PGL) {
 
   PGL.Color = function (r, g, b) {
@@ -1003,9 +1256,9 @@ var PGL = {
         return clearAlpha;
       },
       // 设置默认的透明度
-      setClearAlpha: function ( alpha ) {
+      setClearAlpha: function (alpha) {
         clearAlpha = alpha;
-        setClear( clearColor, clearAlpha );
+        setClear(clearColor, clearAlpha);
       },
       render: render
     }
@@ -1057,6 +1310,214 @@ var PGL = {
     }
   };
 
+  PGL.WebGLInfo = function (gl) {
+    var memory = {
+      geometries: 0,
+      textures: 0
+    };
+
+    var render = {
+      frame: 0,
+      calls: 0,
+      triangles: 0,
+      points: 0,
+      lines: 0
+    };
+
+    function update(count, mode, instanceCount) {
+
+      instanceCount = instanceCount || 1;
+
+      render.calls++;
+
+      switch (mode) {
+
+        case gl.TRIANGLES:
+          render.triangles += instanceCount * (count / 3);
+          break;
+
+        case gl.TRIANGLE_STRIP:
+        case gl.TRIANGLE_FAN:
+          render.triangles += instanceCount * (count - 2);
+          break;
+
+        case gl.LINES:
+          render.lines += instanceCount * (count / 2);
+          break;
+
+        case gl.LINE_STRIP:
+          render.lines += instanceCount * (count - 1);
+          break;
+
+        case gl.LINE_LOOP:
+          render.lines += instanceCount * count;
+          break;
+
+        case gl.POINTS:
+          render.points += instanceCount * count;
+          break;
+
+        default:
+          console.error('THREE.WebGLInfo: Unknown draw mode:', mode);
+          break;
+
+      }
+
+    }
+
+    function reset() {
+
+      render.frame++;
+      render.calls = 0;
+      render.triangles = 0;
+      render.points = 0;
+      render.lines = 0;
+
+    }
+
+    return {
+      memory: memory,
+      render: render,
+      programs: null,
+      autoReset: true,
+      reset: reset,
+      update: update
+    };
+  };
+
+  PGL.WebGLAttributes = function (gl) {
+
+  };
+
+  PGL.WebGLGeometries = function (gl, attributes, info) {
+
+    var geometries = {};
+    var wireframeAttributes = {};
+
+    function onGeometryDispose( event ) {
+      console.log("onGeometryDispose");
+    }
+
+    function get(object, geometry) {
+      var buffergeometry = geometries[ geometry.id ];
+
+      if ( buffergeometry ) return buffergeometry;
+
+      geometry.addEventListener( 'dispose', onGeometryDispose );
+
+      if ( geometry.isBufferGeometry ) {
+
+        buffergeometry = geometry;
+
+      } else if ( geometry.isGeometry ) {
+
+        if ( geometry._bufferGeometry === undefined ) {
+
+          geometry._bufferGeometry = new BufferGeometry().setFromObject( object );
+
+        }
+
+        buffergeometry = geometry._bufferGeometry;
+
+      }
+
+      geometries[ geometry.id ] = buffergeometry;
+
+      info.memory.geometries ++;
+
+      return buffergeometry;
+    }
+
+    return {
+      get: get
+    }
+  };
+
+  PGL.WebGLObjects = function (geometries, info) {
+
+    var updateList = {};
+
+    function update(object) {
+      var frame = info.render.frame;
+
+      var geometry = object.geometry;
+      var buffergeometry = geometries.get(object, geometry);
+
+      // Update once per frame
+
+      if (updateList[buffergeometry.id] !== frame) {
+
+        if (geometry.isGeometry) {
+
+          buffergeometry.updateFromObject(object);
+
+        }
+
+        geometries.update(buffergeometry);
+
+        updateList[buffergeometry.id] = frame;
+
+      }
+
+      return buffergeometry;
+    }
+
+    function dispose() {
+
+      updateList = {};
+
+    }
+
+    return {
+      update: update,
+      dispose: dispose
+    }
+  };
+
+  PGL.WebGLRenderList = function () {
+    var renderItemsIndex = 0;
+
+    var opaque = [];
+    var transparent = [];
+
+    function init() {
+      renderItemsIndex = 0;
+
+      opaque.length = 0;
+      transparent.length = 0;
+    }
+
+    return {
+      opaque: opaque,
+      transparent: transparent,
+
+      init: init
+    }
+  };
+  /**
+   * 场景渲染列表
+   * @constructor
+   */
+  PGL.WebGLRenderLists = function () {
+    var lists = {};
+
+    function get(scene) {
+      var hash = scene.id;
+      var list = lists[hash];
+
+      if (list === undefined) {
+        list = new PGL.WebGLRenderList();
+        lists[hash] = list;
+      }
+
+      return list;
+    }
+
+    return {
+      get: get
+    }
+  };
+
   /**
    * 渲染器
    * @param parameters
@@ -1072,12 +1533,17 @@ var PGL = {
     this._canvas = parameters.canvas !== undefined ? parameters.canvas : document.createElementNS('http://www.w3.org/1999/xhtml', 'canvas');
     this._context = parameters.context !== undefined ? parameters.context : null;
 
+    var currentRenderList = null;
+
     // public properties
     this.domElement = this._canvas;
 
     // clearing 清空缓存区参数
     this.autoClear = true;
     this.autoClearColor = true;
+
+    // scene graph
+    this.sortObjects = true;
 
     // internal properties
     var _this = this;
@@ -1087,17 +1553,54 @@ var PGL = {
 
     initGLContext();
 
-    var state;
+    var state, info;
+    var attributes, geometries, objects;
+    var renderLists;
+
     var background;
 
     function initGLContext() {
       state = new PGL.WebGLState(_gl); // 初始化管理状态
+      info = new PGL.WebGLInfo(_gl);
+      attributes = new PGL.WebGLAttributes(_gl);
+      geometries = new PGL.WebGLGeometries(_gl, attributes, info);
+      objects = new PGL.WebGLObjects(geometries, info);
+      renderLists = new PGL.WebGLRenderLists();
       background = new PGL.WebGLBackground(_this, state); // 初始化背景控制
     }
 
+    function projectObject(object, sortObjects) {
+      if (object.visible === false) return;
+
+      var visible = true;
+      if (visible) {
+        if (object.isPoints) {
+          var geometry = objects.update(object);
+        }
+      }
+
+      var children = object.children;
+
+      for (var i = 0, l = children.length; i < l; i++) {
+        projectObject(children[i], sortObjects);
+      }
+    }
+
     // Rendering
-    this.render = function () {
+    this.render = function (scene) {
+
+      currentRenderList = renderLists.get(scene);
+      currentRenderList.init();
+
+      projectObject(scene, _this.sortObjects);
+
       background.render();
+    };
+
+    // API
+    // 获取上下文
+    this.getContext = function () {
+      return _gl;
     };
 
     // 设置背景颜色以及透明度

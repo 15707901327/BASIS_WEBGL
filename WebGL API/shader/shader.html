@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>着色器（GLSL ES）</title>
+  <link rel="stylesheet" href="../../css/base.css">
+</head>
+<body>
+<div class="l-r-wrapper">
+  <div class="left">
+    <h4><a href="#base">着色器概述</a></h4>
+    <h4><a href="#variable">着色器中的变量</a></h4>
+    <ul class="ul-1">
+      <li><a href="#fragmentBuiltVariable">片元着色器中的内置变量</a></li>
+      <li><a href="#vertexBuiltVariable">顶点着色器中的内置变量</a></li>
+    </ul>
+    <h4><a href="#dataType">数据类型</a></h4>
+    <ul class="ul-1">
+      <li><a href="#numberType">数据值类型</a></li>
+      <li><a href="#baseType">基本数据类型</a></li>
+      <li><a href="#vectorMatrix">矢量和矩阵</a></li>
+      <li><a href="#texture">专用于纹理的数据类型</a></li>
+    </ul>
+    <h4><a href="#fun">函数</a></h4>
+    <ul class="ul-1">
+      <li><a href="内置函数.html" target="_blank">内置函数</a></li>
+    </ul>
+  </div>
+  <div class="right">
+    <section id="base" class="section1">
+      <h4 class="title">着色器概述</h4>
+      <strong>GLSE ES概述</strong>
+      <p>GLSE ES编程语言是在OpenGL着色器语言（GLSL）的基础上，删除和简化一部分功能后形成的。</p>
+      <strong>编码规范</strong>
+      <ul class="ul-1">
+        <li>程序是大小写敏感的</li>
+        <li>每个语句都应该以一个英文分号(;)结束</li>
+      </ul>
+      <strong>注释</strong>
+      <ul class="ul-1">
+        <li>单行注释 //</li>
+        <li>多行注释 /**/</li>
+      </ul>
+      <strong>详细说明</strong>
+      <ul class="ul-1">
+        <li><a href="存储限定字.html">存储限定字</a></li>
+        <li><a href="精度限定字.html">精度限定字</a></li>
+        <li><a href="vertex%20shader.html">顶点着色器</a></li>
+        <li><a href="内置函数.html">内置函数</a></li>
+        <li><a href="矩阵变换.html">矩阵变换</a></li>
+      </ul>
+    </section>
+    <section id="variable" class="section1">
+      <h4 class="title">着色器中的变量</h4>
+      <section>
+        <h4>变量概述</h4>
+        <p>声明在函数外部的是全局变量，声明在函数内部的是局部变量。</p>
+        <div class="content">
+          <strong>规范</strong>
+          <ul class="ul-1">
+            <li>只包含a-z\A-Z和下划线_</li>
+            <li>首字母大写</li>
+            <li>不能使用保留字</li>
+          </ul>
+        </div>
+      </section>
+      <section id="fragmentBuiltVariable">
+        <h4>片元着色器中的内置变量</h4>
+        <div class="content">
+          <table border="1">
+            <tr>
+              <th colspan="3">片元着色器中的内置变量</th>
+            </tr>
+            <tr>
+              <th>类型和变量名</th>
+              <th>描述</th>
+              <th>实例</th>
+            </tr>
+            <tr>
+              <td>vec4 gl_FragColor</td>
+              <td>指定片元颜色（RGBA格式）</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>vec4 gl_FragCoord</td>
+              <td>片元的窗口坐标，第1个x和第2个y分量表示在canvas坐标系统中（窗口坐标系统）的坐标值。z值是深度值。</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>vec4 gl_PointCoord</td>
+              <td>片元在被绘制的点内的坐标（0.0到1.0）</td>
+              <td>
+                <ul class="ul-1-num">
+                  <li><a href="../../WebGL编程指南/ch10/RoundedPoints.html" target="_blank">实现画圆</a></li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </section>
+      <section id="vertexBuiltVariable">
+        <h4>顶点着色器中的内置变量</h4>
+        <div class="content">
+          <table border="1px">
+            <tr>
+              <th colspan="2">顶点着色器的内置变量</th>
+            </tr>
+            <tr>
+              <th>类型和变量名</th>
+              <th>描述</th>
+            </tr>
+            <tr>
+              <td>vec4 gl_Position</td>
+              <td>
+                表示顶点的位置，注意变量必须被赋值，否则着色器就无法正常工作
+              </td>
+            </tr>
+            <tr>
+              <td>float gl_PointSize</td>
+              <td>
+                表示点的尺寸(像素数)，
+                不是必须的，不过不赋值，着色器会取默认值1.0
+              </td>
+            </tr>
+          </table>
+        </div>
+      </section>
+    </section>
+    <section id="dataType" class="section1">
+      <h4 class="title">数据类型</h4>
+      <section id="numberType">
+        <h4>数据值类型</h4>
+        <div class="content">
+          <table border="1" style="border-collapse: collapse">
+            <tr>
+              <th>类型</th>
+              <th>描述</th>
+            </tr>
+            <tr>
+              <td>数值类型</td>
+              <td>支持整数和浮点数</td>
+            </tr>
+            <tr>
+              <td>布尔值类型</td>
+              <td>true\false</td>
+            </tr>
+          </table>
+          <p>不支持字符串类型</p>
+        </div>
+      </section>
+      <section id="baseType">
+        <h4>基本数据类型</h4>
+        <div class="content">
+          <table border="1" style="border-collapse: collapse">
+            <tr>
+              <th>类型</th>
+              <th>描述</th>
+            </tr>
+            <tr>
+              <td>float</td>
+              <td>单精度浮点数</td>
+            </tr>
+            <tr>
+              <td>int</td>
+              <td>整型数</td>
+            </tr>
+            <tr>
+              <td>bool</td>
+              <td>布尔值</td>
+            </tr>
+          </table>
+          <p>不同类型之间的变量赋值，需要使用<a href="内置函数.html#typeConversion">类型转换函数</a>进行类型转换</p>
+        </div>
+      </section>
+      <section id="vectorMatrix">
+        <h4>矢量和矩阵</h4>
+        <div class="content">
+          <table border="1">
+            <tr>
+              <th colspan="3">矢量和矩阵类型</th>
+            </tr>
+            <tr>
+              <th>类别</th>
+              <th>数据类型</th>
+              <th>描述</th>
+            </tr>
+            <tr>
+              <td>矢量</td>
+              <td>
+                <p>vec2、vec3、vec4</p>
+                <p>ivec2、ivec3、ivec4</p>
+                <p>bvec2、bvec3、bvec4</p>
+              </td>
+              <td>
+                <p>具有2、3、4个浮点数元素的矢量</p>
+                <p>具有2、3、4个整形数元素的矢量</p>
+                <p>具有2、3、4个布尔值元素的矢量</p>
+              </td>
+            </tr>
+            <tr>
+              <td>矩阵</td>
+              <td>mat2、mat3、mat4</td>
+              <td>
+                2*2、3*3、4*4的浮点元素的矩阵
+              </td>
+            </tr>
+          </table>
+        </div>
+      </section>
+      <section id="texture">
+        <h4>专用于纹理的数据类型</h4>
+        <div class="content">
+          <table border="1">
+            <tr>
+              <th colspan="2">专用于纹理的数据类型</th>
+            </tr>
+            <tr>
+              <th>类型</th>
+              <th>描述</th>
+            </tr>
+            <tr>
+              <td>sampler2D</td>
+              <td>绑定到gl.TEXTURE_2D上的纹理数据类型</td>
+            </tr>
+            <tr>
+              <td>samplerCube</td>
+              <td>绑定到gl.TEXTURE_CUBE_MAP上的纹理数据类型</td>
+            </tr>
+          </table>
+        </div>
+      </section>
+    </section>
+  </div>
+</div>
+</body>
+</html>

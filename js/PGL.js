@@ -874,7 +874,7 @@ var PGL = (function () {
   // Generates indices into a list of unique objects from a stream of objects
   // that may contain duplicates. This is useful for generating compact indexed
   // meshes from unindexed data.
-  PGL.Indexer =function () {
+  PGL.Indexer = function () {
     this.unique = [];
     this.indices = [];
     this.map = {};

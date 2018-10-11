@@ -188,6 +188,330 @@ var PGL = {
     }
   };
 
+  /**
+   * @param normal
+   * @param constant
+   * @constructor
+   */
+  PGL.Plane = function (normal, constant) {
+    // normal is assumed to be normalized
+    this.normal = (normal !== undefined) ? normal : new PGL.Vector3(1, 0, 0);
+    this.constant = (constant !== undefined) ? constant : 0;
+  };
+  Object.assign(PGL.Plane.prototype, {
+    distanceToPoint: function (point) {
+      return this.normal.dot(point) + this.constant;
+    }
+  });
+
+  PGL.Vector3 = function (x, y, z) {
+    this.x = x || 0;
+    this.y = y || 0;
+    this.z = z || 0;
+  };
+  Object.assign(PGL.Vector3.prototype, {
+    isVector3: true,
+
+    clone: function () {
+      return new this.constructor(this.x, this.y, this.z);
+    },
+
+    copy: function (v) {
+      this.x = v.x;
+      this.y = v.y;
+      this.z = v.z;
+      return this;
+    },
+
+    addVectors: function (a, b) {
+      this.x = a.x + b.x;
+      this.y = a.y + b.y;
+      this.z = a.z + b.z;
+      return this;
+    },
+
+    multiplyScalar: function (scalar) {
+
+      this.x *= scalar;
+      this.y *= scalar;
+      this.z *= scalar;
+
+      return this;
+
+    },
+
+    applyMatrix4: function (m) {
+
+      var x = this.x, y = this.y, z = this.z;
+      var e = m.elements;
+
+      var w = 1 / (e[3] * x + e[7] * y + e[11] * z + e[15]);
+
+      this.x = (e[0] * x + e[4] * y + e[8] * z + e[12]) * w;
+      this.y = (e[1] * x + e[5] * y + e[9] * z + e[13]) * w;
+      this.z = (e[2] * x + e[6] * y + e[10] * z + e[14]) * w;
+
+      return this;
+
+    },
+
+    /**
+     * 获得x\y\z的最小值
+     * @param v
+     * @return {min}
+     */
+    min: function (v) {
+      this.x = Math.min(this.x, v.x);
+      this.y = Math.min(this.y, v.y);
+      this.z = Math.min(this.z, v.z);
+      return this;
+    },
+
+    /**
+     * 获得x\y\z的最大值
+     * @param v
+     * @return {min}
+     */
+    max: function (v) {
+
+      this.x = Math.max(this.x, v.x);
+      this.y = Math.max(this.y, v.y);
+      this.z = Math.max(this.z, v.z);
+
+      return this;
+
+    },
+
+    dot: function (v) {
+      return this.x * v.x + this.y * v.y + this.z * v.z;
+    },
+
+    /**
+     * 计算两点距离的平方
+     * @param v
+     * @return {number}
+     */
+    distanceToSquared: function (v) {
+      var dx = this.x - v.x, dy = this.y - v.y, dz = this.z - v.z;
+      return dx * dx + dy * dy + dz * dz;
+    }
+  });
+
+  PGL.Box3 = function (min, max) {
+    this.min = (min !== undefined) ? min : new PGL.Vector3(+Infinity, +Infinity, +Infinity);
+    this.max = (max !== undefined) ? max : new PGL.Vector3(-Infinity, -Infinity, -Infinity);
+  };
+  Object.assign(PGL.Box3.prototype, {
+    isBox3: true,
+
+    /**
+     * 设置这些点的最大最小值
+     * @param points
+     * @return {setFromPoints}
+     */
+    setFromPoints: function (points) {
+
+      this.makeEmpty();
+
+      for (var i = 0, il = points.length; i < il; i++) {
+        this.expandByPoint(points[i]);
+      }
+      return this;
+    },
+
+    /**
+     * 设置min、max的值为Infinity
+     * @return {makeEmpty}
+     */
+    makeEmpty: function () {
+      this.min.x = this.min.y = this.min.z = +Infinity;
+      this.max.x = this.max.y = this.max.z = -Infinity;
+
+      return this;
+    },
+
+    /**
+     * 对比点，设置最大最小值
+     * @param point
+     * @return {expandByPoint}
+     */
+    expandByPoint: function (point) {
+      this.min.min(point);
+      this.max.max(point);
+      return this;
+    },
+
+    /**
+     * 如果max < min 的值，返回false 否则返回true
+     * @return {boolean}
+     */
+    isEmpty: function () {
+      // this is a more robust check for empty than ( volume <= 0 ) because volume can get positive with two negative axes
+      return (this.max.x < this.min.x) || (this.max.y < this.min.y) || (this.max.z < this.min.z);
+    },
+
+    /**
+     * 获取中点坐标
+     */
+    getCenter: function (target) {
+      if (target === undefined) {
+        console.warn('PGL.Box3: .getCenter() target is now required');
+        target = new PGL.Vector3();
+      }
+      return this.isEmpty() ? target.set(0, 0, 0) : target.addVectors(this.min, this.max).multiplyScalar(0.5);
+    }
+  });
+
+  PGL.Matrix4 = function () {
+    this.elements = [
+
+      1, 0, 0, 0,
+      0, 1, 0, 0,
+      0, 0, 1, 0,
+      0, 0, 0, 1
+
+    ];
+    if (arguments.length > 0) {
+      console.error('PGL.Matrix4: the constructor no longer reads arguments. use .set() instead.');
+    }
+  };
+  Object.assign(PGL.Matrix4.prototype, {
+    getMaxScaleOnAxis: function () {
+
+      var te = this.elements;
+
+      var scaleXSq = te[0] * te[0] + te[1] * te[1] + te[2] * te[2];
+      var scaleYSq = te[4] * te[4] + te[5] * te[5] + te[6] * te[6];
+      var scaleZSq = te[8] * te[8] + te[9] * te[9] + te[10] * te[10];
+
+      return Math.sqrt(Math.max(scaleXSq, scaleYSq, scaleZSq));
+
+    }
+  });
+
+  PGL.Sphere = function (center, radius) {
+    this.center = (center !== undefined) ? center : new PGL.Vector3();
+    this.radius = (radius !== undefined) ? radius : 0;
+  };
+  Object.assign(PGL.Sphere.prototype, {
+    /**
+     * 设置圆心和半径
+     */
+    setFromPoints: function () {
+      var box = new PGL.Box3();
+      /**
+       * points:点坐标的集合
+       * optionalCenter：物体的中心
+       */
+      return function setFromPoints(points, optionalCenter) {
+
+        var center = this.center;
+
+        if (optionalCenter !== undefined) {
+          center.copy(optionalCenter);
+        } else {
+          box.setFromPoints(points).getCenter(center);
+        }
+
+        var maxRadiusSq = 0;
+        for (var i = 0, il = points.length; i < il; i++) {
+          maxRadiusSq = Math.max(maxRadiusSq, center.distanceToSquared(points[i]));
+        }
+
+        this.radius = Math.sqrt(maxRadiusSq);
+
+        return this;
+      };
+    }(),
+
+    clone: function () {
+      return new this.constructor().copy(this);
+    },
+
+    /**
+     * 拷贝圆心和半径
+     * @param sphere
+     * @return {copy}
+     */
+    copy: function (sphere) {
+      this.center.copy(sphere.center);
+      this.radius = sphere.radius;
+      return this;
+    },
+
+    applyMatrix4: function (matrix) {
+
+      this.center.applyMatrix4(matrix);
+      this.radius = this.radius * matrix.getMaxScaleOnAxis();
+
+      return this;
+
+    }
+  });
+
+  /**
+   * 由六个平面组成的锥体
+   * @param p0
+   * @param p1
+   * @param p2
+   * @param p3
+   * @param p4
+   * @param p5
+   * @constructor
+   */
+  PGL.Frustum = function (p0, p1, p2, p3, p4, p5) {
+    this.planes = [
+      (p0 !== undefined) ? p0 : new PGL.Plane(),
+      (p1 !== undefined) ? p1 : new PGL.Plane(),
+      (p2 !== undefined) ? p2 : new PGL.Plane(),
+      (p3 !== undefined) ? p3 : new PGL.Plane(),
+      (p4 !== undefined) ? p4 : new PGL.Plane(),
+      (p5 !== undefined) ? p5 : new PGL.Plane()
+    ];
+  };
+  Object.assign(PGL.Frustum.prototype, {
+    /**
+     * 检查对象的边界球是否与Frustum相交。
+     * 请注意，对象必须具有Geometry或BufferGeometry，以便可以计算边界球。
+     */
+    intersectsObject: function () {
+      var sphere = new PGL.Sphere();
+      return function intersectsObject(object) {
+
+        var geometry = object.geometry;
+
+        if (geometry.boundingSphere === null)
+          geometry.computeBoundingSphere();
+
+        sphere.copy(geometry.boundingSphere)
+          .applyMatrix4(object.matrixWorld);
+
+        return this.intersectsSphere(sphere);
+      };
+    }(),
+
+    /**
+     * 如果球体与此平截头体相交，则返回true。
+     * @param sphere
+     * @return {boolean}
+     */
+    intersectsSphere: function (sphere) {
+
+      var planes = this.planes;
+      var center = sphere.center;
+      var negRadius = -sphere.radius;
+
+      for (var i = 0; i < 6; i++) {
+        var distance = planes[i].distanceToPoint(center);
+
+        if (distance < negRadius) {
+          return false;
+        }
+      }
+      return true;
+    }
+  });
+
   PGL.Vector4 = function (x, y, z, w) {
     this.x = x || 0;
     this.y = y || 0;
@@ -806,18 +1130,98 @@ var PGL = {
 
     }
   });
-
-  PGL.Vector3 = function (x, y, z) {
-    this.x = x || 0;
-    this.y = y || 0;
-    this.z = z || 0;
-  };
-  Object.assign(PGL.Vector3.prototype, {
-    isVector3: true
-  });
 })(PGL);
 // core
 (function (PGL) {
+  /**
+   * @param array {Float32Array}
+   * @param itemSize 一组数据的长度
+   * @param normalized
+   * @constructor
+   */
+  PGL.BufferAttribute = function (array, itemSize, normalized) {
+    if (Array.isArray(array)) {
+      throw new TypeError('PGL.BufferAttribute: array should be a Typed Array.');
+    }
+
+    this.name = '';
+
+    this.array = array;
+    this.itemSize = itemSize;
+    this.count = array !== undefined ? array.length / itemSize : 0; // 数据有多少组
+    this.normalized = normalized === true;
+  };
+  Object.assign(PGL.BufferAttribute.prototype, {
+    isBufferAttribute: true,
+
+    copyArray: function (array) {
+      this.array.set(array);
+      return this;
+    },
+
+    /**
+     * 将color类型的数组，放置到当前的一维数组（Float32Array）中
+     * @param colors color类型的数组
+     * @return {copyVector3sArray}
+     */
+    copyColorsArray: function (colors) {
+
+      var array = this.array, offset = 0;
+
+      for (var i = 0, l = colors.length; i < l; i++) {
+        var color = colors[i];
+        if (color === undefined) {
+          console.warn('PGL.BufferAttribute.copyColorsArray(): color is undefined', i);
+          color = new PGL.Color();
+        }
+        array[offset++] = color.r;
+        array[offset++] = color.g;
+        array[offset++] = color.b;
+      }
+      return this;
+    },
+
+    /**
+     * 将vector3类型的数组，放置到当前的一维数组（Float32Array）中
+     * @param vectors vector3类型的数组
+     * @return {copyVector3sArray}
+     */
+    copyVector3sArray: function (vectors) {
+
+      var array = this.array, offset = 0;
+
+      for (var i = 0, l = vectors.length; i < l; i++) {
+        var vector = vectors[i];
+        if (vector === undefined) {
+          console.warn('PGL.BufferAttribute.copyVector3sArray(): vector is undefined', i);
+          vector = new Vector3();
+        }
+        array[offset++] = vector.x;
+        array[offset++] = vector.y;
+        array[offset++] = vector.z;
+      }
+      return this;
+    }
+  });
+
+  PGL.Int32BufferAttribute = function (array, itemSize, normalized) {
+    PGL.BufferAttribute.call(this, new Int32Array(array), itemSize, normalized);
+  };
+  PGL.Int32BufferAttribute.prototype = Object.create(PGL.BufferAttribute.prototype);
+  PGL.Int32BufferAttribute.prototype.constructor = PGL.Int32BufferAttribute;
+
+  /**
+   * @param array 数组的长度
+   * @param itemSize 一组数据的大小
+   * @param normalized
+   * @constructor
+   */
+  PGL.Float32BufferAttribute = function (array, itemSize, normalized) {
+    PGL.BufferAttribute.call(this, new Float32Array(array), itemSize, normalized);
+  };
+  PGL.Float32BufferAttribute.prototype = Object.create(PGL.BufferAttribute.prototype);
+  PGL.Float32BufferAttribute.prototype.constructor = PGL.Float32BufferAttribute;
+
   PGL.EventDispatcher = function () {
   };
   Object.assign(PGL.EventDispatcher.prototype, {
@@ -838,24 +1242,277 @@ var PGL = {
       }
     },
 
-    addEventListener: function ( type, listener ) {
+    addEventListener: function (type, listener) {
 
-      if ( this._listeners === undefined ) this._listeners = {};
+      if (this._listeners === undefined) this._listeners = {};
 
       var listeners = this._listeners;
 
-      if ( listeners[ type ] === undefined ) {
+      if (listeners[type] === undefined) {
 
-        listeners[ type ] = [];
-
-      }
-
-      if ( listeners[ type ].indexOf( listener ) === - 1 ) {
-
-        listeners[ type ].push( listener );
+        listeners[type] = [];
 
       }
 
+      if (listeners[type].indexOf(listener) === -1) {
+
+        listeners[type].push(listener);
+
+      }
+
+    }
+  });
+
+  var bufferGeometryId = 0;
+  PGL.BufferGeometry = function () {
+    Object.defineProperty(this, 'id', {value: bufferGeometryId += 2});
+
+    this.uuid = PGL.Math.generateUUID();
+
+    this.name = '';
+    this.type = 'BufferGeometry';
+
+    this.index = null;
+    this.attributes = {};
+
+    this.morphAttributes = {};
+
+    this.groups = [];
+
+    this.boundingBox = null;
+    this.boundingSphere = null;
+
+    this.drawRange = {start: 0, count: Infinity};
+
+    this.userData = {};
+  };
+  PGL.BufferGeometry.prototype = Object.assign(Object.create(PGL.EventDispatcher.prototype), {
+
+    constructor: PGL.BufferGeometry,
+
+    isBufferGeometry: true,
+
+    addAttribute: function (name, attribute) {
+      if (!(attribute && attribute.isBufferAttribute) && !(attribute && attribute.isInterleavedBufferAttribute)) {
+
+        console.warn('PGL.BufferGeometry: .addAttribute() now expects ( name, attribute ).');
+        return this.addAttribute(name, new PGL.BufferAttribute(arguments[1], arguments[2]));
+      }
+
+      this.attributes[name] = attribute;
+      return this;
+    },
+
+    /**
+     * 设置顶点坐标、颜色、外围圆、外围包围盒子
+     * @param object
+     * @return {setFromObject}
+     */
+    setFromObject: function (object) {
+      // console.log( 'PGL.BufferGeometry.setFromObject(). Converting', object, this );
+      var geometry = object.geometry;
+      if (object.isPoints) {
+
+        var positions = new PGL.Float32BufferAttribute(geometry.vertices.length * 3, 3);
+        var colors = new PGL.Float32BufferAttribute(geometry.colors.length * 3, 3);
+
+        this.addAttribute('position', positions.copyVector3sArray(geometry.vertices));
+        this.addAttribute('color', colors.copyColorsArray(geometry.colors));
+
+        if (geometry.lineDistances && geometry.lineDistances.length === geometry.vertices.length) {
+          var lineDistances = new PGL.Float32BufferAttribute(geometry.lineDistances.length, 1);
+          this.addAttribute('lineDistance', lineDistances.copyArray(geometry.lineDistances));
+        }
+
+        if (geometry.boundingSphere !== null) {
+          this.boundingSphere = geometry.boundingSphere.clone();
+        }
+
+        if (geometry.boundingBox !== null) {
+
+          this.boundingBox = geometry.boundingBox.clone();
+
+        }
+
+      }
+      return this;
+    },
+
+    updateFromObject: function (object) {
+
+      var geometry = object.geometry;
+
+      if (object.isMesh) {
+
+        var direct = geometry.__directGeometry;
+
+        if (geometry.elementsNeedUpdate === true) {
+
+          direct = undefined;
+          geometry.elementsNeedUpdate = false;
+
+        }
+
+        if (direct === undefined) {
+
+          return this.fromGeometry(geometry);
+
+        }
+
+        direct.verticesNeedUpdate = geometry.verticesNeedUpdate;
+        direct.normalsNeedUpdate = geometry.normalsNeedUpdate;
+        direct.colorsNeedUpdate = geometry.colorsNeedUpdate;
+        direct.uvsNeedUpdate = geometry.uvsNeedUpdate;
+        direct.groupsNeedUpdate = geometry.groupsNeedUpdate;
+
+        geometry.verticesNeedUpdate = false;
+        geometry.normalsNeedUpdate = false;
+        geometry.colorsNeedUpdate = false;
+        geometry.uvsNeedUpdate = false;
+        geometry.groupsNeedUpdate = false;
+
+        geometry = direct;
+
+      }
+
+      var attribute;
+
+      if (geometry.verticesNeedUpdate === true) {
+
+        attribute = this.attributes.position;
+
+        if (attribute !== undefined) {
+
+          attribute.copyVector3sArray(geometry.vertices);
+          attribute.needsUpdate = true;
+
+        }
+
+        geometry.verticesNeedUpdate = false;
+
+      }
+
+      if (geometry.normalsNeedUpdate === true) {
+
+        attribute = this.attributes.normal;
+
+        if (attribute !== undefined) {
+
+          attribute.copyVector3sArray(geometry.normals);
+          attribute.needsUpdate = true;
+
+        }
+
+        geometry.normalsNeedUpdate = false;
+
+      }
+
+      if (geometry.colorsNeedUpdate === true) {
+
+        attribute = this.attributes.color;
+
+        if (attribute !== undefined) {
+
+          attribute.copyColorsArray(geometry.colors);
+          attribute.needsUpdate = true;
+
+        }
+
+        geometry.colorsNeedUpdate = false;
+
+      }
+
+      if (geometry.uvsNeedUpdate) {
+
+        attribute = this.attributes.uv;
+
+        if (attribute !== undefined) {
+
+          attribute.copyVector2sArray(geometry.uvs);
+          attribute.needsUpdate = true;
+
+        }
+
+        geometry.uvsNeedUpdate = false;
+
+      }
+
+      if (geometry.lineDistancesNeedUpdate) {
+
+        attribute = this.attributes.lineDistance;
+
+        if (attribute !== undefined) {
+
+          attribute.copyArray(geometry.lineDistances);
+          attribute.needsUpdate = true;
+
+        }
+
+        geometry.lineDistancesNeedUpdate = false;
+
+      }
+
+      if (geometry.groupsNeedUpdate) {
+
+        geometry.computeGroups(object.geometry);
+        this.groups = geometry.groups;
+
+        geometry.groupsNeedUpdate = false;
+
+      }
+
+      return this;
+
+    }
+
+  });
+
+  var geometryId = 0;
+  PGL.Geometry = function () {
+    Object.defineProperty(this, 'id', {value: geometryId += 2});
+
+    this.uuid = PGL.Math.generateUUID();
+
+    this.name = '';
+    this.type = 'Geometry';
+
+    this.vertices = [];
+
+    this.colors = [];
+    this.faces = [];
+    this.faceVertexUvs = [[]];
+
+    this.morphTargets = [];
+    this.morphNormals = [];
+
+    this.skinWeights = [];
+    this.skinIndices = [];
+
+    this.lineDistances = [];
+
+    this.boundingBox = null;
+    this.boundingSphere = null;
+
+    // update flags
+
+    this.elementsNeedUpdate = false;
+    this.verticesNeedUpdate = false;
+    this.uvsNeedUpdate = false;
+    this.normalsNeedUpdate = false;
+    this.colorsNeedUpdate = false;
+    this.lineDistancesNeedUpdate = false;
+    this.groupsNeedUpdate = false;
+  };
+  PGL.Geometry.prototype = Object.assign(Object.create(PGL.EventDispatcher.prototype), {
+    constructor: PGL.Geometry,
+
+    isGeometry: true,
+
+    computeBoundingSphere: function () {
+      if (this.boundingSphere === null) {
+        this.boundingSphere = new PGL.Sphere();
+      }
+      this.boundingSphere.setFromPoints(this.vertices);
     }
   });
 
@@ -872,10 +1529,38 @@ var PGL = {
     this.parent = null;
     this.children = [];
 
+    this.up = PGL.Object3D.DefaultUp.clone();
+
+    var position = new PGL.Vector3();
+
+    Object.defineProperties(this, {
+      position: {
+        enumerable: true,
+        value: position
+      },
+      modelViewMatrix: {
+        value: new PGL.Matrix4()
+      }
+    });
+
+    this.matrix = new PGL.Matrix4();
+    this.matrixWorld = new PGL.Matrix4();
+
+    this.matrixAutoUpdate = PGL.Object3D.DefaultMatrixAutoUpdate;
+    this.matrixWorldNeedsUpdate = false;
+
     this.visible = true;
+
+    this.castShadow = false;
+    this.receiveShadow = false;
+
+    this.frustumCulled = true;
+    this.renderOrder = 0;
 
     this.userData = {};
   };
+  PGL.Object3D.DefaultUp = new PGL.Vector3(0, 1, 0);
+  PGL.Object3D.DefaultMatrixAutoUpdate = true;
   PGL.Object3D.prototype = Object.assign(Object.create(PGL.EventDispatcher.prototype), {
     constructor: PGL.Object3D,
 
@@ -916,23 +1601,6 @@ var PGL = {
 
       return this;
     }
-  });
-
-  var geometryId = 0;
-  PGL.Geometry = function () {
-    Object.defineProperty(this, 'id', {value: geometryId += 2});
-
-    this.uuid = PGL.Math.generateUUID();
-
-    this.name = '';
-    this.type = 'Geometry';
-
-    this.vertices = [];
-  };
-  PGL.Geometry.prototype = Object.assign(Object.create(PGL.EventDispatcher.prototype),{
-    constructor: PGL.Geometry,
-
-    isGeometry: true
   });
 })(PGL);
 // materials
@@ -1387,6 +2055,88 @@ var PGL = {
 
   PGL.WebGLAttributes = function (gl) {
 
+    var buffers = new WeakMap();
+
+    function createBuffer( attribute, bufferType ) {
+
+      var array = attribute.array;
+      var usage = attribute.dynamic ? gl.DYNAMIC_DRAW : gl.STATIC_DRAW;
+
+      var buffer = gl.createBuffer();
+
+      gl.bindBuffer( bufferType, buffer );
+      gl.bufferData( bufferType, array, usage );
+
+      // attribute.onUploadCallback();
+
+      var type = gl.FLOAT;
+
+      if ( array instanceof Float32Array ) {
+
+        type = gl.FLOAT;
+
+      } else if ( array instanceof Float64Array ) {
+
+        console.warn( 'THREE.WebGLAttributes: Unsupported data buffer format: Float64Array.' );
+
+      } else if ( array instanceof Uint16Array ) {
+
+        type = gl.UNSIGNED_SHORT;
+
+      } else if ( array instanceof Int16Array ) {
+
+        type = gl.SHORT;
+
+      } else if ( array instanceof Uint32Array ) {
+
+        type = gl.UNSIGNED_INT;
+
+      } else if ( array instanceof Int32Array ) {
+
+        type = gl.INT;
+
+      } else if ( array instanceof Int8Array ) {
+
+        type = gl.BYTE;
+
+      } else if ( array instanceof Uint8Array ) {
+
+        type = gl.UNSIGNED_BYTE;
+
+      }
+
+      return {
+        buffer: buffer,
+        type: type,
+        bytesPerElement: array.BYTES_PER_ELEMENT,
+        version: attribute.version
+      };
+
+    }
+
+    function update(attribute, bufferType) {
+
+      if (attribute.isInterleavedBufferAttribute) attribute = attribute.data;
+
+      var data = buffers.get(attribute);
+
+      if (data === undefined) {
+
+        buffers.set(attribute, createBuffer(attribute, bufferType));
+
+      } else if (data.version < attribute.version) {
+
+        updateBuffer(data.buffer, attribute, bufferType);
+
+        data.version = attribute.version;
+
+      }
+
+    }
+
+    return {
+      update: update
+    }
   };
 
   PGL.WebGLGeometries = function (gl, attributes, info) {
@@ -1394,42 +2144,70 @@ var PGL = {
     var geometries = {};
     var wireframeAttributes = {};
 
-    function onGeometryDispose( event ) {
+    function onGeometryDispose(event) {
       console.log("onGeometryDispose");
     }
 
+    /**
+     * 获取buffergeometry
+     * @param object
+     * @param geometry
+     * @return {*}
+     */
     function get(object, geometry) {
-      var buffergeometry = geometries[ geometry.id ];
+      var buffergeometry = geometries[geometry.id];
 
-      if ( buffergeometry ) return buffergeometry;
+      if (buffergeometry) return buffergeometry;
 
-      geometry.addEventListener( 'dispose', onGeometryDispose );
+      geometry.addEventListener('dispose', onGeometryDispose);
 
-      if ( geometry.isBufferGeometry ) {
+      if (geometry.isBufferGeometry) {
 
         buffergeometry = geometry;
 
-      } else if ( geometry.isGeometry ) {
+      } else if (geometry.isGeometry) {
 
-        if ( geometry._bufferGeometry === undefined ) {
-
-          geometry._bufferGeometry = new BufferGeometry().setFromObject( object );
-
+        if (geometry._bufferGeometry === undefined) {
+          geometry._bufferGeometry = new PGL.BufferGeometry().setFromObject(object);
         }
 
         buffergeometry = geometry._bufferGeometry;
-
       }
 
-      geometries[ geometry.id ] = buffergeometry;
+      geometries[geometry.id] = buffergeometry;
 
-      info.memory.geometries ++;
+      info.memory.geometries++;
 
       return buffergeometry;
     }
 
+    function update(geometry) {
+
+      var index = geometry.index;
+      var geometryAttributes = geometry.attributes;
+
+      if (index !== null) {
+        attributes.update(index, gl.ELEMENT_ARRAY_BUFFER);
+      }
+
+      for (var name in geometryAttributes) {
+        attributes.update(geometryAttributes[name], gl.ARRAY_BUFFER);
+      }
+
+      // morph targets
+      var morphAttributes = geometry.morphAttributes;
+
+      for (var name in morphAttributes) {
+        var array = morphAttributes[name];
+        for (var i = 0, l = array.length; i < l; i++) {
+          attributes.update(array[i], gl.ARRAY_BUFFER);
+        }
+      }
+    }
+
     return {
-      get: get
+      get: get,
+      update: update
     }
   };
 
@@ -1548,6 +2326,9 @@ var PGL = {
     // internal properties
     var _this = this;
 
+    // frustum
+    var _frustum = new PGL.Frustum();
+
     // 获取上下文
     var _gl = this.getWebGLContext();
 
@@ -1575,7 +2356,11 @@ var PGL = {
       var visible = true;
       if (visible) {
         if (object.isPoints) {
-          var geometry = objects.update(object);
+
+          // 判断是否在可视范围
+          if (!object.frustumCulled || _frustum.intersectsObject(object)) {
+            var geometry = objects.update(object);
+          }
         }
       }
 

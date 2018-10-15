@@ -93,6 +93,10 @@
       <li><a href="#framebufferTexture2D">framebufferTexture2D()</a></li>
       <li><a href="#framebufferRenderbuffer">framebufferRenderbuffer()</a></li>
       <li><a href="#checkFramebufferStatus">checkFramebufferStatus()</a></li>
+    </ul>
+    <h4>绘图区域设置</h4>
+    <ul class="ul-1">
+      <li><a href="#scissor">scissor()</a></li>
       <li><a href="#viewport">viewport()</a></li>
     </ul>
     <h4>渲染缓存区对象</h4>
@@ -105,6 +109,7 @@
     <h4>扩展方法</h4>
     <ul class="ul-1">
       <li><a href="#getExtension">getExtension()</a></li>
+      <li><a href="#getParameter">getParameter()</a></li>
     </ul>
   </div>
   <div class="right">
@@ -845,6 +850,17 @@
     <section id="getShaderPrecisionFormat">
       <h4>gl.getShaderPrecisionFormat()</h4>
       <p>获取着色器的精度值</p>
+      <div class="content">
+        <strong>example</strong>
+        <ul class="ul-1">
+          <li>gl.getShaderPrecisionFormat(gl.VERTEX_SHADER, gl.MEDIUM_FLOAT).precision; // 23</li>
+          <li>gl.getShaderPrecisionFormat(gl.FRAGMENT_SHADER, gl.LOW_INT).precision; // 0</li>
+        </ul>
+        <strong>返回值</strong>
+        <ul class="ul-1">
+          <li>可以表示的精度位数，对于整数，此值始终为0</li>
+        </ul>
+      </div>
     </section>
     <!--着色器对象-->
     <section id="baseShaderProgram">
@@ -1385,6 +1401,21 @@
         </ul>
       </div>
     </section>
+    <section id="scissor">
+      <h4>gl.scissor(x,y,width,height)</h4>
+      <p>剪裁测试用于限制绘制区域。我们可以指定一个矩形的剪裁窗口，当启用剪裁测试后，只有在这个窗口之内的像素才能被绘制，其它像素则会被丢弃。换句话说，无论怎么绘制，剪裁窗口以外的像素将不会被修改。</p>
+      <div class="content">
+        <strong>参数</strong>
+        <ul class="ul-1">
+          <li>x,y:指定绘图区域的左上角，以像素为单位</li>
+          <li>width,height:指定绘图区域的宽度和高度</li>
+        </ul>
+        <strong>返回值</strong>
+        <p>无</p>
+        <strong>错误</strong>
+        <p>无</p>
+      </div>
+    </section>
     <section id="viewport">
       <h4>viewport(x,y,width,height)</h4>
       <p>设置gl.drawArrays()和gl.drawElements()函数的绘图区域。在canvas上绘图时，x和y就是canvas中的坐标</p>
@@ -1507,6 +1538,16 @@
         </ul>
         <strong>扩展</strong>
         <p><a href="javaScript/WebGL_extensions.html" target="_blank">扩展项</a></p>
+      </div>
+    </section>
+    <section id="getParameter">
+      <h4>gl.getParameter(pname)</h4>
+      <p>返回传递参数名称的值</p>
+      <div class="ul-1">
+        <strong>参数：</strong>
+        <ul class="ul-1">
+          <li>pname:指定要返回的参数值</li>
+        </ul>
       </div>
     </section>
   </div>

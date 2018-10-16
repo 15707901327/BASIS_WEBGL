@@ -87,10 +87,10 @@
     <h4><a href="#blending">混合方法</a></h4>
     <ul class="ul-1">
       <li><a href="#blendFunc" title="gl.blendFunc()">gl.blendFunc()</a></li>
-      <li><a href="#blendFuncSeparate" title="gl.blendFuncSeparate()">gl.blendFuncSeparate()</a></li>
       <li><a href="#blendColor" title="gl.blendColor()">gl.blendColor()</a></li>
       <li><a href="#blendEquation" title="gl.blendEquation()">gl.blendEquation()</a></li>
       <li><a href="#blendEquationSeparate" title="gl.blendEquationSeparate()">gl.blendEquationSeparate()</a></li>
+      <li><a href="#blendFuncSeparate" title="gl.blendFuncSeparate()">gl.blendFuncSeparate()</a></li>
     </ul>
     <h4>帧缓存区对象</h4>
     <ul class="ul-1">
@@ -1296,20 +1296,6 @@
           </table>
         </div>
       </section>
-      <section id="blendFuncSeparate">
-        <h4>gl.blendFuncSeparate(srcRGB, destRGB, srcAlpha, destAlpha)</h4>
-        <div class="content">
-          <strong>参数</strong>
-          <ul class="ul-1">
-            <li>srcRGB：指定颜色值的源混合因子</li>
-            <li>destRGB：颜色在的目标混合因子</li>
-            <li>srcAlpha：Alpha值的源混合因子</li>
-            <li>destAlpha：Alpha值的目标混合因子</li>
-          </ul>
-          <strong>返回值</strong>
-          <p>无</p>
-        </div>
-      </section>
       <section id="blendColor">
         <h4>gl.blendColor(red, green, blue, alpha)</h4>
         <p>使当前颜色作为混合操作的常量颜色</p>
@@ -1328,6 +1314,14 @@
       <section id="blendEquation">
         <h4>gl.blendEquation(mode)</h4>
         <p>指定帧缓存区与源颜色混合的方式</p>
+        <div class="content">
+          <strong>参数</strong>
+          <ul class="ul-1">
+            <li>mode：混合模式参数</li>
+          </ul>
+          <strong>返回值</strong>
+          <p>无</p>
+        </div>
       </section>
       <section id="blendEquationSeparate">
         <h4>gl.blendEquationSeparate(modeRGB,modeAlpha)</h4>
@@ -1370,6 +1364,21 @@
               <td>gl.LOGIC_OP</td>
             </tr>
           </table>
+        </div>
+      </section>
+      <section id="blendFuncSeparate">
+        <h4>gl.blendFuncSeparate(srcRGB, destRGB, srcAlpha, destAlpha)</h4>
+        <p>分别指定源和目标的颜色（RGB）分量和A（alpha）分量</p>
+        <div class="content">
+          <strong>参数</strong>
+          <ul class="ul-1">
+            <li>srcRGB：指定颜色值的源混合因子,如表10.2所示</li>
+            <li>destRGB：颜色在的目标混合因子,如表10.2所示</li>
+            <li>srcAlpha：Alpha值的源混合因子,如表10.2所示</li>
+            <li>destAlpha：Alpha值的目标混合因子,如表10.2所示</li>
+          </ul>
+          <strong>返回值</strong>
+          <p>无</p>
         </div>
       </section>
     </section>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>矩阵变换库</title>
+  <link rel="stylesheet" href="../../css/base.css">
+</head>
+<body>
+<div class="l-r-wrapper">
+  <div class="left">
+    <a href="#Matrix4">Matrix4</a>
+    <ul class="ul-1">
+      <li><a href="#setLookAt">setLookAt()</a></li>
+      <li><a href="#setOrtho">setOrtho()</a></li>
+      <li><a href="#setPerspective">setPerspective()</a></li>
+      <li><a href="#setInverseOf">setInverseOf()</a></li>
+      <li><a href="#transpose">transpose()</a></li>
+    </ul>
+  </div>
+  <div class="right">
+    <section>
+      <h4 id="Matrix4">Matrix4</h4>
+      <div class="content">
+        <table border="1">
+          <tr>
+            <th colspan="2">Matrix4对象所支持的方法和属性</th>
+          </tr>
+          <tr>
+            <th>方法和属性名称</th>
+            <th>描述</th>
+          </tr>
+          <tr>
+            <td>Matrix4.setIdentity()</td>
+            <td>将Matrix4实例初始化为单位矩阵</td>
+          </tr>
+          <tr>
+            <td>Matrix4.setTranslate(x,y,z)</td>
+            <td>将Matrix4设置为平移变化矩阵，在x轴上平移的距离为x，在y轴上平移的距离为y，
+              在z轴上平移的距离为z
+            </td>
+          </tr>
+          <tr>
+            <td>Matrix4.setRotate(angle,x,y,z)</td>
+            <td>
+              将Matrix4实例设置为旋转变换矩阵，旋转的角度为angle，旋转轴为（x,y,z）.旋转轴
+              为（x,y,z）.旋转轴（x,y,x）无须归一化。
+            </td>
+          </tr>
+          <tr>
+            <td>Matrix4.setScale(x,y,z)</td>
+            <td>
+              将Matrix4实例设置为缩放变换矩阵，在三个轴上的缩放因子为x，y，z。
+            </td>
+          </tr>
+          <tr>
+            <td>Matrix4.translate(x,y,z)</td>
+            <td>
+              将Matrix4实例乘以一个平移变换矩阵，（该矩阵在x轴上平移的距离为x，在y轴上平移的距离为y，
+              在z轴上平移的距z），所得结果还存储在Matrix4中
+            </td>
+          </tr>
+          <tr>
+            <td>Matrix4.rotate(x,y,z)</td>
+            <td>
+              将Matrix4实例乘以一个旋转变换矩阵，（旋转的角度为angle，旋转轴为（x,y,z）.旋转轴
+              为（x,y,z）.旋转轴（x,y,x）无须归一化），所得结果还存储在Matrix4中
+            </td>
+          </tr>
+          <tr>
+            <td>Matrix4.scale(x,y,z)</td>
+            <td>
+              将Matrix4实例乘以一个缩放变换矩阵，（在三个轴上的缩放因子为x，y，z），所得结果还存储在
+              Matrix4中
+            </td>
+          </tr>
+          <tr>
+            <td>Matrix4.set(m)</td>
+            <td>
+              将Matrix4实例设置为m，m必须也是一个Matrix4实例
+            </td>
+          </tr>
+          <tr>
+            <td>Matrix4.elements</td>
+            <td>
+              类型化数组（Float32Array）包含了Matrix4实例的矩阵元素。
+            </td>
+          </tr>
+        </table>
+        <strong>实例</strong>
+        <ul>
+          <li><a href="../ch4/RotatedTriangle_Matrix4.html">旋转三角形</a></li>
+        </ul>
+      </div>
+    </section>
+    <section id="setLookAt">
+      <h4>Matrix4.setLookAt(eyeX,eyeY,eyeZ,atX,atY,atZ,upX,upY,upZ)</h4>
+      <p>根据视点（eyeX,eyeY,eyeZ）、观察点（atX,atY,atZ）、上方向（upX,upY,upZ）创建视图矩阵。视图矩阵的类型是Matrix4，其观察点映射到《canvas》的中心点。</p>
+      <div class="content">
+        <strong>参数</strong>
+        <ul class="ul-1">
+          <li>eyeX,eyeY,eyeZ :指定视点</li>
+          <li>atX,atY,atZ :指定观察点</li>
+          <li>upX,upY,upZ :指定上方向，如果上方向是Y轴的正方向，那么upX,upY,upZ就是（0，1，0）</li>
+        </ul>
+        <strong>实例</strong>
+        <p><a href="../ch7/LookAtTriangles.html" target="_blank">修改视点</a></p>
+      </div>
+    </section>
+    <section id="setOrtho">
+      <h4>Matrix4.setOrtho(left,right,bottom,top,near,far)</h4>
+      <p>通过各参数计算正射投影矩阵，将其存储在Matrix4中。注意，left不一定与right相等，bottom不一定与top相等，near与far不相等</p>
+      <div class="content">
+        <strong>参数：</strong>
+        <ul class="ul-1">
+          <li>left,right:指定近裁剪面的左边界和右边界</li>
+          <li>bottom,top:指定近裁剪面的上边界和下边界</li>
+          <li>near,far:指定近裁剪面和远裁剪面的位置，即可视空间的近边界和远边界</li>
+        </ul>
+        <strong>返回值：</strong>
+        <p>无</p>
+      </div>
+    </section>
+    <section id="setPerspective">
+      <h4>Matrix4.setPerspective(fov,aspect,near,far)</h4>
+      <p>通过各参数计算透视投影矩阵，将其存储在Matrix4中。注意，near的值必须小于far</p>
+      <div class="content">
+        <strong>参数：</strong>
+        <ul class="ul-1">
+          <li>fov:指定垂直视角，即可视空间顶面和底面间的夹角，必须大于0</li>
+          <li>aspect：指定近裁剪面的宽度比（宽度/高度）</li>
+          <li>near、far：指定近裁剪面和远裁剪面的位置，即可视空间的近边界和远边界（near、far必须都大于0）</li>
+        </ul>
+      </div>
+    </section>
+    <section id="setInverseOf">
+      <h4>Matrix4.setInverseOf(m)</h4>
+      <p>使自身（调用本方法的Matrix4类型的实例）成为矩阵m的逆矩阵</p>
+    </section>
+    <section id="transpose">
+      <h4>Matrix4.transpose()</h4>
+      <p>对自身进行转置操作，并将自身设为转置后的结果</p>
+    </section>
+  </div>
+</div>
+</body>
+</html>

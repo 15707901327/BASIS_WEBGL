@@ -268,7 +268,7 @@ var PGL = (function () {
 
 // 使用的常量
 (function (PGL) {
-  PGL.REVISION = 1;
+  PGL.REVISION = 2;
   PGL.ENUM = 0x12340000; // A value to bitwise-or with new enums to make them distinguishable from the standard WebGL enums.
   PGL.keys = {} // `GL.keys` contains a mapping of key codes to booleans indicating whether that key is currently pressed.
 })(PGL);
@@ -2402,6 +2402,14 @@ var PGL = (function () {
       gl = PGL.WebGLDebugUtils.makeDebugContext(gl);
     }
 
+    // 渲染物体
+    this.render = function () {
+      gl.clearColor(0.5, 0.5, 0.0, 1.0);
+
+      gl.clear(gl.COLOR_BUFFER_BIT);
+    };
+
+    // 获取上下文
     this.getContext = function () {
       return gl;
     }

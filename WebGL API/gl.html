@@ -83,6 +83,7 @@
       <li><a href="#enable" title="gl.enable()">gl.enable()</a></li>
       <li><a href="#disable" title="gl.disable()">gl.disable()</a></li>
       <li><a href="#polygonOffset" title="gl.polygonOffset()">gl.polygonOffset()</a></li>
+      <li><a href="#cullFace" title="gl.cullFace()">gl.cullFace()</a></li>
     </ul>
     <h4><a href="#depth">深度方法</a></h4>
     <ul class="ul-1">
@@ -1210,6 +1211,34 @@
         <p>无</p>
         <strong>错误</strong>
         <p>无</p>
+      </div>
+    </section>
+    <section id="cullFace">
+      <h4>gl.cullFace(mode)</h4>
+      <p>指定前面或后面的多边形是否剔除。默认情况下禁用多边形剔除。</p>
+      <div class="content">
+        <strong>参数</strong>
+        <ul>
+          <li>gl.FRONT</li>
+          <li>gl.BACK</li>
+          <li>gl.FRONT_AND_BACK</li>
+        </ul>
+        <strong>返回值</strong>
+        <p>无</p>
+        <strong>错误</strong>
+        <p>无</p>
+        <strong>实例</strong>
+        <ul>
+          <li>
+            <p>开启</p>
+            <p>gl.enable(gl.CULL_FACE);</p>
+            <p>gl.cullFace(gl.FRONT_AND_BACK);</p>
+          </li>
+          <li>
+            <p>获取当前模式</p>
+            <p>gl.getParameter(gl.CULL_FACE_MODE) === gl.FRONT_AND_BACK;</p>
+          </li>
+        </ul>
       </div>
     </section>
     <!-- 深度方法 -->

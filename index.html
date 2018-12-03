@@ -32,11 +32,12 @@
         </ul>
       </li>
     </ul>
-    <h4>WebGL内置功能</h4>
+    <h4><a href="#inner">WebGL内置功能</a></h4>
     <ul class="ul-1">
       <li><a href="#depth_test">隐藏面消除</a></li>
       <li><a href="#blendFunc">混合功能</a></li>
       <li><a href="#ploygonOffset">多边形偏移机制</a></li>
+      <li><a href="#polygonCulling">多边形剔除</a></li>
     </ul>
     <h4><a href="#WebGL-example">WebGL实例</a></h4>
     <ul class="ul-1">
@@ -291,95 +292,102 @@
         <p>表示一种更佳通用的绘图区域，可以向其中写入多种数据。</p>
       </section>
     </section>
-    <section id="blendFunc">
-      <h4>混合功能</h4>
-      <p>实现半透明效果。</p>
-      <div class="content">
-        <strong>启动功能</strong>
-        <ul class="ul-1-num">
-          <li>
-            开启混合功能<br>
-            <a href="WebGL%20API/gl.html#enable">gl.enable(gl.BLEND)</a>
-          </li>
-          <li>
-            指定混合函数<br>
-            <a href="WebGL%20API/gl.html#blendFunc">gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)</a>
-          </li>
-        </ul>
-        <strong>实例</strong>
-        <ul class="ul-1-num">
-          <li><a href="WebGL编程指南/ch10/LookAtBlendedTriangles.html" target="_blank">α混合</a></li>
-        </ul>
-        <strong>透明与不透明物体共存:</strong>
-        <ul class="ul-1-num">
-          <li>
-            开启隐藏面消除功能<br>
-            <a href="WebGL%20API/gl.html#enable">gl.enable(DEPTH_TEST)</a>
-          </li>
-          <li>
-            绘制所有不透明的物体<br>
-          </li>
-          <li>
-            锁定用于进行隐藏面消除的深度缓存区的写入操着，使之只读。<br>
-            <a href="WebGL%20API/gl.html#depthMask">gl.depthMask(false)</a>
-          </li>
-          <li>绘制所有半透明的物体（α小于1.0），注意他们应当按照深度排序，然后从后向前绘制</li>
-          <li>
-            释放深度缓存区，使之可读可写。<br>
-            <a href="WebGL%20API/gl.html#depthMask">gl.depthMask(false)</a>
-          </li>
-        </ul>
-      </div>
-    </section>
-    <section id="depth_test">
-      <h4>隐藏面消除</h4>
-      <p>可以消除那些被遮挡的表面，绘制时，就不需要顾及各个物体在缓存区中的顺序。</p>
-      <div class="content">
-        <strong>启动功能</strong>
-        <ul class="ul-1-num">
-          <li>
-            开启隐藏面消除功能<br>
-            <a href="WebGL%20API/gl.html#enable">gl.enable(DEPTH_TEST)</a>
-          </li>
-          <li>
-            在绘制之前，清除深度缓存区<br>
-            <a href="WebGL%20API/gl.html#clear">gl.clear(gl.DEPTH_BUFFER_BIT)</a>
-          </li>
-        </ul>
-        <strong>实例</strong>
-        <ul class="ul-1-num">
-          <li><a href="WebGL编程指南/ch07/DepthBuffer.html" target="_blank">隐藏面消除</a></li>
-        </ul>
-        <strong>问题:</strong>
-        <ul class="ul-1-num">
-          <li>
-            深度冲突：
-            <p>在使用隐藏面消除时，当几何图形或物体的两个表面极为接近时，就会发生深度冲突的问题.</p>
-            <p>WebGL提供了一种<a href="#ploygonOffset">多边形偏移</a>的机制来解决这个问题。</p>
-          </li>
-        </ul>
-      </div>
-    </section>
-    <section id="ploygonOffset">
-      <h4>多边形偏移</h4>
-      <p>在使用隐藏面消除时，解决深度缓存的问题</p>
-      <div class="content">
-        <strong>启动功能</strong>
-        <ul class="ul-1-num">
-          <li>
-            启动多边形偏移<br>
-            <a href="WebGL%20API/gl.html#enable">gl.enable(gl.POLYGON_OFFSET_FILL)</a>
-          </li>
-          <li>
-            在绘制之前，指定用来计算偏移量的参数<br>
-            <a href="WebGL%20API/gl.html#polygonOffset">gl.polygonOffset(1.0,1.0)</a>
-          </li>
-        </ul>
-        <strong>实例</strong>
-        <ul class="ul-1-num">
-          <li><a href="WebGL编程指南/ch07/Zfighting.html" target="_blank">深度缓存</a></li>
-        </ul>
-      </div>
+    <section id="inner" class="section1">
+      <div class="title">WebGL内置功能</div>
+      <section id="blendFunc">
+        <h4>混合功能</h4>
+        <p>实现半透明效果。</p>
+        <div class="content">
+          <strong>启动功能</strong>
+          <ul class="ul-1-num">
+            <li>
+              开启混合功能<br>
+              <a href="WebGL%20API/gl.html#enable">gl.enable(gl.BLEND)</a>
+            </li>
+            <li>
+              指定混合函数<br>
+              <a href="WebGL%20API/gl.html#blendFunc">gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)</a>
+            </li>
+          </ul>
+          <strong>实例</strong>
+          <ul class="ul-1-num">
+            <li><a href="WebGL编程指南/ch10/LookAtBlendedTriangles.html" target="_blank">α混合</a></li>
+          </ul>
+          <strong>透明与不透明物体共存:</strong>
+          <ul class="ul-1-num">
+            <li>
+              开启隐藏面消除功能<br>
+              <a href="WebGL%20API/gl.html#enable">gl.enable(DEPTH_TEST)</a>
+            </li>
+            <li>
+              绘制所有不透明的物体<br>
+            </li>
+            <li>
+              锁定用于进行隐藏面消除的深度缓存区的写入操着，使之只读。<br>
+              <a href="WebGL%20API/gl.html#depthMask">gl.depthMask(false)</a>
+            </li>
+            <li>绘制所有半透明的物体（α小于1.0），注意他们应当按照深度排序，然后从后向前绘制</li>
+            <li>
+              释放深度缓存区，使之可读可写。<br>
+              <a href="WebGL%20API/gl.html#depthMask">gl.depthMask(false)</a>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section id="depth_test">
+        <h4>隐藏面消除</h4>
+        <p>可以消除那些被遮挡的表面，绘制时，就不需要顾及各个物体在缓存区中的顺序。</p>
+        <div class="content">
+          <strong>启动功能</strong>
+          <ul class="ul-1-num">
+            <li>
+              开启隐藏面消除功能<br>
+              <a href="WebGL%20API/gl.html#enable">gl.enable(DEPTH_TEST)</a>
+            </li>
+            <li>
+              在绘制之前，清除深度缓存区<br>
+              <a href="WebGL%20API/gl.html#clear">gl.clear(gl.DEPTH_BUFFER_BIT)</a>
+            </li>
+          </ul>
+          <strong>实例</strong>
+          <ul class="ul-1-num">
+            <li><a href="WebGL编程指南/ch07/DepthBuffer.html" target="_blank">隐藏面消除</a></li>
+          </ul>
+          <strong>问题:</strong>
+          <ul class="ul-1-num">
+            <li>
+              深度冲突：
+              <p>在使用隐藏面消除时，当几何图形或物体的两个表面极为接近时，就会发生深度冲突的问题.</p>
+              <p>WebGL提供了一种<a href="#ploygonOffset">多边形偏移</a>的机制来解决这个问题。</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section id="ploygonOffset">
+        <h4>多边形偏移</h4>
+        <p>在使用隐藏面消除时，解决深度缓存的问题</p>
+        <div class="content">
+          <strong>启动功能</strong>
+          <ul class="ul-1-num">
+            <li>
+              启动多边形偏移<br>
+              <a href="WebGL%20API/gl.html#enable">gl.enable(gl.POLYGON_OFFSET_FILL)</a>
+            </li>
+            <li>
+              在绘制之前，指定用来计算偏移量的参数<br>
+              <a href="WebGL%20API/gl.html#polygonOffset">gl.polygonOffset(1.0,1.0)</a>
+            </li>
+          </ul>
+          <strong>实例</strong>
+          <ul class="ul-1-num">
+            <li><a href="WebGL编程指南/ch07/Zfighting.html" target="_blank">深度缓存</a></li>
+          </ul>
+        </div>
+      </section>
+      <section id="polygonCulling">
+        <h4>多边形剔除</h4>
+        <p>多边形剔除可以用来减少渲染的面</p>
+      </section>
     </section>
     <section id="WebGL-example" class="section1">
       <div class="title">WebGL相关实例</div>

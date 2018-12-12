@@ -84,6 +84,7 @@
       <li><a href="#disable" title="gl.disable()">gl.disable()</a></li>
       <li><a href="#polygonOffset" title="gl.polygonOffset()">gl.polygonOffset()</a></li>
       <li><a href="#cullFace" title="gl.cullFace()">gl.cullFace()</a></li>
+      <li><a href="#frontFace" title="gl.frontFace()">gl.frontFace()</a></li>
     </ul>
     <h4><a href="#depth">深度方法</a></h4>
     <ul class="ul-1">
@@ -1163,83 +1164,101 @@
       </div>
     </section>
     <!--开启相关功能-->
-    <section id="enable">
-      <h4>gl.enable(cap)</h4>
-      <p>开启cap表示的功能（capability）</p>
-      <div class="content">
-        <strong>参数：</strong>
-        <ul class="ul-1">
-          <li>
-            cap:指定开启的功能，有可能是以下的几个
-            <p>gl.DEPTH_TEST:消除隐藏面</p>
-            <p>gl.BLEND:混合</p>
-            <p>gl.POLYGON_OFFSET_FILL:多边形位移</p>
-            <p>gl.CULL_FACE:开启剔除效果</p>
-          </li>
-        </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <p>INVALID_ENUM:cap的值无效</p>
-      </div>
-    </section>
-    <section id="disable">
-      <h4>gl.disable(cap)</h4>
-      <p>关闭cap表示的功能（capability）</p>
-      <div class="content">
-        <strong>参数：</strong>
-        <ul class="ul-1">
-          <li>
-            cap:指定开启的功能，有可能是以下的几个
-            <p>gl.DEPTH_TEST:消除隐藏面</p>
-            <p>gl.BLEND:混合</p>
-            <p>gl.POLYGON_OFFSET_FILL:多边形位移</p>
-            <p>gl.CULL_FACE:关闭剔除效果</p>
-          </li>
-        </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <p>INVALID_ENUM:cap的值无效</p>
-      </div>
-    </section>
-    <section id="polygonOffset">
-      <h4>gl.polygonOffset(factor,units)</h4>
-      <p>指定加到每个顶点绘制后z值上的偏移量，偏移量按照公式m*factor+r*units计算，其中m表示顶点所在表面相对于观察者的视线的角度，而r表示硬件能够区分两个z值之差的最小值。</p>
-      <div class="content">
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <p>无</p>
-      </div>
-    </section>
-    <section id="cullFace">
-      <h4>gl.cullFace(mode)</h4>
-      <p>指定前面或后面的多边形是否剔除。默认情况下禁用多边形剔除。</p>
-      <div class="content">
-        <strong>参数</strong>
-        <ul>
-          <li>gl.FRONT</li>
-          <li>gl.BACK</li>
-          <li>gl.FRONT_AND_BACK</li>
-        </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <p>无</p>
-        <strong>实例</strong>
-        <ul>
-          <li>
-            <p>开启</p>
-            <p>gl.enable(gl.CULL_FACE);</p>
-            <p>gl.cullFace(gl.FRONT_AND_BACK);</p>
-          </li>
-          <li>
-            <p>获取当前模式</p>
-            <p>gl.getParameter(gl.CULL_FACE_MODE) === gl.FRONT_AND_BACK;</p>
-          </li>
-        </ul>
-      </div>
+    <section class="section1">
+      <div class="title">开启相关功能</div>
+      <section id="enable">
+        <h4>gl.enable(cap)</h4>
+        <p>开启cap表示的功能（capability）</p>
+        <div class="content">
+          <strong>参数：</strong>
+          <ul class="ul-1">
+            <li>
+              cap:指定开启的功能，有可能是以下的几个
+              <p>gl.DEPTH_TEST:消除隐藏面</p>
+              <p>gl.BLEND:混合</p>
+              <p>gl.POLYGON_OFFSET_FILL:多边形位移</p>
+              <p>gl.CULL_FACE:开启剔除效果</p>
+            </li>
+          </ul>
+          <strong>返回值</strong>
+          <p>无</p>
+          <strong>错误</strong>
+          <p>INVALID_ENUM:cap的值无效</p>
+        </div>
+      </section>
+      <section id="disable">
+        <h4>gl.disable(cap)</h4>
+        <p>关闭cap表示的功能（capability）</p>
+        <div class="content">
+          <strong>参数：</strong>
+          <ul class="ul-1">
+            <li>
+              cap:指定开启的功能，有可能是以下的几个
+              <p>gl.DEPTH_TEST:消除隐藏面</p>
+              <p>gl.BLEND:混合</p>
+              <p>gl.POLYGON_OFFSET_FILL:多边形位移</p>
+              <p>gl.CULL_FACE:关闭剔除效果</p>
+            </li>
+          </ul>
+          <strong>返回值</strong>
+          <p>无</p>
+          <strong>错误</strong>
+          <p>INVALID_ENUM:cap的值无效</p>
+        </div>
+      </section>
+      <section id="polygonOffset">
+        <h4>gl.polygonOffset(factor,units)</h4>
+        <p>指定加到每个顶点绘制后z值上的偏移量，偏移量按照公式m*factor+r*units计算，其中m表示顶点所在表面相对于观察者的视线的角度，而r表示硬件能够区分两个z值之差的最小值。</p>
+        <div class="content">
+          <strong>返回值</strong>
+          <p>无</p>
+          <strong>错误</strong>
+          <p>无</p>
+        </div>
+      </section>
+      <section id="cullFace">
+        <h4>gl.cullFace(mode)</h4>
+        <p>指定前面或后面的多边形是否剔除。默认情况下禁用多边形剔除。</p>
+        <div class="content">
+          <strong>参数</strong>
+          <ul>
+            <li>gl.FRONT</li>
+            <li>gl.BACK</li>
+            <li>gl.FRONT_AND_BACK</li>
+          </ul>
+          <strong>返回值</strong>
+          <p>无</p>
+          <strong>错误</strong>
+          <p>无</p>
+          <strong>实例</strong>
+          <ul>
+            <li>
+              <p>开启</p>
+              <p>gl.enable(gl.CULL_FACE);</p>
+              <p>gl.cullFace(gl.FRONT_AND_BACK);</p>
+            </li>
+            <li>
+              <p>获取当前模式</p>
+              <p>gl.getParameter(gl.CULL_FACE_MODE) === gl.FRONT_AND_BACK;</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section id="frontFace">
+        <h4>gl.frontFace(mode)</h4>
+        <p>通过设置缠绕方向来指定多边形是正面还是背面。默认 gl.CW</p>
+        <div class="content">
+          <strong>参数</strong>
+          <ul>
+            <li>gl.CW：顺时针缠绕</li>
+            <li>gl.CCW：逆时针缠绕</li>
+          </ul>
+          <strong>返回值</strong>
+          <p>无</p>
+          <strong>错误</strong>
+          <p>无</p>
+        </div>
+      </section>
     </section>
     <!-- 深度方法 -->
     <section id="depth" class="section1">

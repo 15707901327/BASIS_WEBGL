@@ -54,6 +54,17 @@ v0，v1，v2，v3：指定4个浮点型分量
             </td>
             <td>返回x和y的点积, 对于vec3而言就是x[0] * y[0] + x[1] * y[1] + x[2] * y[2]</td>
           </tr>
+          <tr>
+            <td>
+              vec3 cross(vec3 x,vec3 y)<br>
+            </td>
+            <td>
+              返回x和y的叉积，对于vec3而言，就是<br>
+              result[0] = x[1]*y[2]-y[1]*x[2];<br>
+              result[1] = x[2]*y[0]-y[2]*x[0];<br>
+              result[2] = x[0]*y[1]-y[0]*x[1];<br>
+            </td>
+          </tr>
         </table>
       </div>
     </section>
@@ -87,6 +98,15 @@ v0，v1，v2，v3：指定4个浮点型分量
           </tr>
           <tr>
             <td>
+              float abs(float x);<br>
+              vec2 abs(vec2 x);<br>
+              vec3 abs(vec3 x);<br>
+              vec4 abs(vec4 x);<br>
+            </td>
+            <td>返回x的无符号绝对值，即如果x》= 0，返回x，否则返回-x</td>
+          </tr>
+          <tr>
+            <td>
               float clamp(float x, float minVal, float maxVal);<br>
               vec2 clamp(vec2 x, vec2 minVal, vec2 maxVal);<br>
               vec3 clamp(vec3 x, vec3 minVal, vec3 maxVal);<br>
@@ -96,6 +116,57 @@ v0，v1，v2，v3：指定4个浮点型分量
               vec4 clamp(vec4 x, float minVal, float maxVal);<br>
             </td>
             <td>将x限制在minVal和maxVal之间，即返回min(max(x,minVal),maxVal)。如果minVal > maxVal，则返回未定义</td>
+          </tr>
+          <tr>
+            <td>
+              float mod(float x, float y);<br>
+              vec2 mod(vec2 x, vec2 y);<br>
+              vec3 mod(vec3 x, vec3 y);<br>
+              vec4 mod(vec4 x, vec4 y);<br>
+              vec2 mod(vec2 x, float y);<br>
+              vec3 mod(vec3 x, float y);<br>
+              vec4 mod(vec4 x, float y);<br>
+            </td>
+            <td>模数（模），返回x除以y的余数，即（x-y*floor(x/y)）.给定两个正整数x和y，mod(x,y)可以求得x除以y的余数。注意对于矢量而言，这是一个逐分量的运算。</td>
+          </tr>
+          <tr>
+            <td>
+              float min(float x, float y);<br>
+              vec2 min(vec2 x, vec2 y);<br>
+              vec3 min(vec3 x, vec3 y);<br>
+              vec4 min(vec4 x, vec4 y);<br>
+              vec2 min(vec2 x, float y);<br>
+              vec3 min(vec3 x, float y);<br>
+              vec4 min(vec4 x, float y);<br>
+            </td>
+            <td>返回最小值，即如果y《x则返回y，否则返回x。注意对于矢量而言，这是一个逐分量的运算。</td>
+          </tr>
+          <tr>
+            <td>
+              float max(float x, float y);<br>
+              vec2 max(vec2 x, vec2 y);<br>
+              vec3 max(vec3 x, vec3 y);<br>
+              vec4 max(vec4 x, vec4 y);<br>
+              vec2 max(vec2 x, float y);<br>
+              vec3 max(vec3 x, float y);<br>
+              vec4 max(vec4 x, float y);<br>
+            </td>
+            <td>返回最大值，即如果x《y则返回y，否则返回x。注意对于矢量而言，这是一个逐分量的运算。</td>
+          </tr>
+          <tr>
+            <td>
+              float mix(float x, float y,float a);<br>
+              vec2 mix(vec2 x, vec2 y,float a);<br>
+              vec3 mix(vec3 x, vec3 y,float a);<br>
+              vec4 mix(vec4 x, vec4 y,float a);<br>
+              vec2 mix(vec2 x, float y,vec2 a);<br>
+              vec3 mix(vec3 x, float y,vec3 a);<br>
+              vec4 mix(vec4 x, float y,vec4 a);<br>
+              vec2 mix(vec2 x, vec2 y,vec2 a);<br>
+              vec3 mix(vec3 x, vec3 y,vec3 a);<br>
+              vec4 mix(vec4 x, vec4 y,vec4 a);<br>
+            </td>
+            <td>返回x和y的线性混合，即x*(1-a)+y*a</td>
           </tr>
         </table>
       </div>

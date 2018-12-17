@@ -16,7 +16,7 @@
     </ul>
     <h4><a href="canvas标签.html" target="_blank">canvas标签</a></h4>
     <h4><a href="canvas%202D%20API/ctx.html" target="_blank">canvas 2D API</a></h4>
-    <h4><a href="WebGL%20API/gl.html" target="_blank">WebGL API</a></h4>
+    <h4><a href="WebGL%20API/javaScript%20API/gl.html" target="_blank">WebGL API</a></h4>
     <h4><a href="WebGL%20API/shader/shader.html" target="_blank">shader（GLSL ES）</a></h4>
     <h4><a href="WebGL%20API/WebGL可以绘制的基本图形.html" target="_blank">WebGL绘制的基本图形</a></h4>
     <h4><a href="#WebGL_Event">WebGL相关事件</a></h4>
@@ -138,13 +138,13 @@
         <div class="content">
           <strong>使用缓冲区对象向着色器中传入多个数据步骤：</strong>
           <ul class="ul-1-num">
-            <li>创建缓冲区对象（<a href="WebGL%20API/gl.html#createBuffer" target="_blank">gl.createBuffer()</a>）
+            <li>创建缓冲区对象（<a href="WebGL%20API/javaScript%20API/gl.html#createBuffer" target="_blank">gl.createBuffer()</a>）
             </li>
-            <li>绑定缓冲区对象（<a href="WebGL%20API/gl.html#bindBuffer" target="_blank">gl.bindBuffer()</a>）</li>
-            <li>将数据写入缓冲区对象（<a href="WebGL%20API/gl.html#bufferData" target="_blank">gl.bufferData()</a>）</li>
-            <li>将缓冲区对象分配给一个attribute变量（<a href="WebGL%20API/gl.html#vertexAttribPointer" target="_blank">gl.vertexAttribPointer()</a>）
+            <li>绑定缓冲区对象（<a href="WebGL%20API/javaScript%20API/gl.html#bindBuffer" target="_blank">gl.bindBuffer()</a>）</li>
+            <li>将数据写入缓冲区对象（<a href="WebGL%20API/javaScript%20API/gl.html#bufferData" target="_blank">gl.bufferData()</a>）</li>
+            <li>将缓冲区对象分配给一个attribute变量（<a href="WebGL%20API/javaScript%20API/gl.html#vertexAttribPointer" target="_blank">gl.vertexAttribPointer()</a>）
             </li>
-            <li>开启attribute变量（<a href="WebGL%20API/gl.html#enableVertexAttribArray" target="_blank">gl.enableVertexAttribArray()</a>）
+            <li>开启attribute变量（<a href="WebGL%20API/javaScript%20API/gl.html#enableVertexAttribArray" target="_blank">gl.enableVertexAttribArray()</a>）
             </li>
           </ul>
           <strong>实例</strong>
@@ -302,11 +302,11 @@
           <ul class="ul-1-num">
             <li>
               开启混合功能<br>
-              <a href="WebGL%20API/gl.html#enable">gl.enable(gl.BLEND)</a>
+              <a href="WebGL%20API/javaScript%20API/gl.html#enable">gl.enable(gl.BLEND)</a>
             </li>
             <li>
               指定混合函数<br>
-              <a href="WebGL%20API/gl.html#blendFunc">gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)</a>
+              <a href="WebGL%20API/javaScript%20API/gl.html#blendFunc">gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)</a>
             </li>
           </ul>
           <strong>实例</strong>
@@ -317,19 +317,19 @@
           <ul class="ul-1-num">
             <li>
               开启隐藏面消除功能<br>
-              <a href="WebGL%20API/gl.html#enable">gl.enable(DEPTH_TEST)</a>
+              <a href="WebGL%20API/javaScript%20API/gl.html#enable">gl.enable(DEPTH_TEST)</a>
             </li>
             <li>
               绘制所有不透明的物体<br>
             </li>
             <li>
               锁定用于进行隐藏面消除的深度缓存区的写入操着，使之只读。<br>
-              <a href="WebGL%20API/gl.html#depthMask">gl.depthMask(false)</a>
+              <a href="WebGL%20API/javaScript%20API/gl.html#depthMask">gl.depthMask(false)</a>
             </li>
             <li>绘制所有半透明的物体（α小于1.0），注意他们应当按照深度排序，然后从后向前绘制</li>
             <li>
               释放深度缓存区，使之可读可写。<br>
-              <a href="WebGL%20API/gl.html#depthMask">gl.depthMask(false)</a>
+              <a href="WebGL%20API/javaScript%20API/gl.html#depthMask">gl.depthMask(false)</a>
             </li>
           </ul>
         </div>
@@ -342,11 +342,11 @@
           <ul class="ul-1-num">
             <li>
               开启隐藏面消除功能<br>
-              <a href="WebGL%20API/gl.html#enable">gl.enable(DEPTH_TEST)</a>
+              <a href="WebGL%20API/javaScript%20API/gl.html#enable">gl.enable(DEPTH_TEST)</a>
             </li>
             <li>
               在绘制之前，清除深度缓存区<br>
-              <a href="WebGL%20API/gl.html#clear">gl.clear(gl.DEPTH_BUFFER_BIT)</a>
+              <a href="WebGL%20API/javaScript%20API/gl.html#clear">gl.clear(gl.DEPTH_BUFFER_BIT)</a>
             </li>
           </ul>
           <strong>实例</strong>
@@ -371,11 +371,11 @@
           <ul class="ul-1-num">
             <li>
               启动多边形偏移<br>
-              <a href="WebGL%20API/gl.html#enable">gl.enable(gl.POLYGON_OFFSET_FILL)</a>
+              <a href="WebGL%20API/javaScript%20API/gl.html#enable">gl.enable(gl.POLYGON_OFFSET_FILL)</a>
             </li>
             <li>
               在绘制之前，指定用来计算偏移量的参数<br>
-              <a href="WebGL%20API/gl.html#polygonOffset">gl.polygonOffset(1.0,1.0)</a>
+              <a href="WebGL%20API/javaScript%20API/gl.html#polygonOffset">gl.polygonOffset(1.0,1.0)</a>
             </li>
           </ul>
           <strong>实例</strong>

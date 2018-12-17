@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>WebGL上下文</title>
-  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../../css/base.css">
 </head>
 <body>
 <div class="l-r-wrapper">
@@ -25,14 +25,20 @@
       <li><a href="#clearDepth">gl.clearDepth()</a></li>
       <li><a href="#clearStencil">gl.clearStencil()</a></li>
     </ul>
-    <h4>与attribute变量相关方法</h4>
-    <a href="#getAttribLocation">gl.getAttribLocation()</a>
-    <a href="#vertexAttrib[1234]f">gl.vertexAttrib[1234]f()</a>
-    <a href="#vertexAttribPointer">gl.vertexAttribPointer()</a>
-    <h4>与uniform变量相关方法</h4>
-    <a href="#getUniformLocation" title="gl.getUniformLocation()">gl.getUniformLocation()</a>
-    <a href="#uniform" title="gl.uniform()">gl.uniform()</a>
-    <a href="#uniformMatrix4fv" title="gl.uniformMatrix4fv()">gl.uniformMatrix4fv()</a>
+    <h4><a href="#variable">变量相关方法</a></h4>
+    <ul class="ul-1">
+      <li><h4>attribute变量相关方法</h4></li>
+      <li><a href="#getAttribLocation">gl.getAttribLocation()</a></li>
+      <li><a href="#vertexAttrib[1234]f">gl.vertexAttrib[1234]f()</a></li>
+      <li><a href="#vertexAttribPointer">gl.vertexAttribPointer()</a></li>
+      <li><a href="#getActiveAttrib">gl.getActiveAttrib()</a></li>
+      <li><a href="#WebGLActiveInfo">WebGLActiveInfo</a></li>
+      <li><h4>与uniform变量相关方法</h4></li>
+      <li><a href="#getUniformLocation" title="gl.getUniformLocation()">gl.getUniformLocation()</a></li>
+      <li><a href="#uniform" title="gl.uniform()">gl.uniform()</a></li>
+      <li><a href="#uniformMatrix4fv" title="gl.uniformMatrix4fv()">gl.uniformMatrix4fv()</a></li>
+      <li><a href="#getActiveUniform" title="gl.getActiveUniform()">gl.getActiveUniform()</a></li>
+    </ul>
     <h4>与缓存区相关方法</h4>
     <a href="#createBuffer" title="gl.createBuffer()">gl.createBuffer()</a>
     <a href="#deleteBuffer" title="gl.deleteBuffer()">gl.deleteBuffer()</a>
@@ -56,19 +62,13 @@
     </ul>
     <h4><a href="#baseShaderProgram">着色器和着色器程序对象</a></h4>
     <ul class="ul-1">
-      <li><a href="getShaderPrecisionFormat">gl.getShaderPrecisionFormat()</a></li>
-    </ul>
-    <h4><a href="#baseShader">着色器对象</a></h4>
-    <ul class="ul-1">
       <li><a href="#createShader" title="gl.createShader()">gl.createShader()</a></li>
       <li><a href="#deleteShader" title="gl.deleteShader()">gl.deleteShader()</a></li>
       <li><a href="#shaderSource" title="gl.shaderSource()">gl.shaderSource()</a></li>
       <li><a href="#compileShader" title="gl.compileShader()">gl.compileShader()</a></li>
       <li><a href="#getShaderParameter" title="gl.getShaderParameter()">gl.getShaderParameter()</a></li>
       <li><a href="#getShaderInfoLog" title="gl.getShaderInfoLog()">gl.getShaderInfoLog()</a></li>
-    </ul>
-    <h4><a href="#baseProgram">程序对象</a></h4>
-    <ul class="ul-1">
+      <li><a href="#getShaderPrecisionFormat">gl.getShaderPrecisionFormat()</a></li>
       <li><a href="#createProgram" title="gl.createProgram()">gl.createProgram()</a></li>
       <li><a href="#deleteProgram" title="gl.deleteProgram()">gl.deleteProgram()</a></li>
       <li><a href="#attachShader" title="gl.attachShader()">gl.attachShader()</a></li>
@@ -154,7 +154,7 @@
             <li>
               mode：指定绘制的方式，可以接收一下常量符号：gl_POINTS,gl_LINES,gl_LINE_STRIP,
               gl_LINE_LOOP,gl_TRIANGLES,gl_TRIANGLE_STRIP,gl_TRIANGLE_FAN.
-              <p>参考:<a href="WebGL可以绘制的基本图形.html">WebGL可以绘制的基本图形</a></p>
+              <p>参考:<a href="../WebGL可以绘制的基本图形.html">WebGL可以绘制的基本图形</a></p>
             </li>
             <li>first:指定从那个顶点开始绘制</li>
             <li>count：指定绘制需要用到多少个顶点（整形数）</li>
@@ -278,171 +278,271 @@
         </div>
       </section>
     </section>
-    <!--与attribute变量相关方-->
-    <section id="getAttribLocation">
-      <h4>gl.getAttribLocation(gl.program, name);</h4>
-      <p>获取由name参数指定的attribute变量的存储位置</p>
-      <div class="content">
-        <strong>参数：</strong>
-        <ul>
-          <li>gl.program：指定包含顶点着色器和片元着色器的着色器程序对象。</li>
-          <li>name：指定想要获取其存储地址的attribute变量的名称</li>
-          <li>name：指定想要获取其存储地址的attribute变量的名称</li>
-        </ul>
-        <strong>返回值：</strong>
-        <ul>
-          <li>大于等于0：attribute变量的存储地址</li>
-          <li>-1：指定的attribute变量不存在，或者其命名具有gl_或webgl_前缀</li>
-        </ul>
-        <strong>错误：</strong>
-        <ul>
-          <li>INVALID_OPERATION:程序对象未能成功连接</li>
-          <li>-1：指定的attribute变量不存在，或者其命名具有gl_或webgl_前缀</li>
-        </ul>
-      </div>
-    </section>
-    <section id="vertexAttrib[1234]f">
-      <h4>gl.vertexAttrib[1234]f(location, v0, v1, v2, v3);</h4>
-      <p>
-        将数据（v0，v1，v2,v3）传给由location参数指定的attribute变量，如果没有传递后面的
-        v1, v2, v3，使用默认值0.0、0.0、1.0
-      </p>
-      <div class="content">
-        <strong>参数：</strong>
-        <ul>
-          <li>location：指定将要修改的attribute变量的存储位置</li>
-          <li>v0：指定填充attribute变量第一个分量的值</li>
-          <li>v1：指定填充attribute变量第二个分量的值</li>
-          <li>v2：指定填充attribute变量第三个分量的值</li>
-          <li>v3：指定填充attribute变量第四个个分量的值</li>
-        </ul>
-        <strong>返回值：</strong>
-        <p>无</p>
-        <strong>错误：</strong>
-        <ul>
-          <li>INVALID_OPERATION:程序对象未能成功连接（没有当前program对象）</li>
-          <li>INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）</li>
-        </ul>
-        <strong>矢量方法：</strong>
-        <ul>
-          <li>gl.vertexAttrib1fv(location,Float32Array);</li>
-          <li>gl.vertexAttrib4fv(location,Float32Array);</li>
-          <li>
-            <strong>实例：</strong>
-            <p>var position = new Float32Array([0.0,0.0,0.0,1.0]);</p>
-            <p>gl.vertexAttrib4fv(a_Position, position);</p>
-          </li>
-        </ul>
-      </div>
-    </section>
-    <section id="vertexAttribPointer">
-      <h4>gl.vertexAttribPointer(location, size, type, normalized, stride, offset);</h4>
-      <p>
-        将绑定到gl.ARRAY_BUFFER上的缓存区对象分配给由location指定的attribute变量
-      </p>
-      <div class="content">
-        <strong>参数：</strong>
-        <ul>
-          <li>location：指定待分配attribute变量的存储位置</li>
-          <li>size：指定缓存区中每个顶点的分量个数（1到4）。若size比attribute变量需要的分量数少，
-            缺失分量将按照与vertexAttrib[1234]f（）相同的规则补全。
-          </li>
-          <li>
-            type:用以下类型之一来指定格式
-            <p>
-              gl.UNSIGNED_BYTE:无符号字节，Unit8Array<br>
-              gl.SHORT:短整型，Int16Array<br>
-              gl.UNSIGNED_SHORT:无符号短整型，Unit16Array<br>
-              gl.INT:无符号整型，Int16Array<br>
-              gl.UNSIGNED_INT:无符号整型，Unit16Array<br>
-              gl.FLOAT:浮点型，Float32Array<br>
-            </p>
-          </li>
-          <li>normalize：传入true或false，表明是否将非浮点型的数据归一化到[0,1]或[-1,1]区间</li>
-          <li>stride：指定相邻两个顶点的字节数，默认为0</li>
-          <li>offset：指定缓存区对象中的偏移量（以字节为单位），即attribute变量从缓存区中的何处开始储存，
-            如果是起始位置开始的，offset设置为0
-          </li>
-        </ul>
-        <strong>返回值：</strong>
-        <p>无</p>
-        <strong>错误：</strong>
-        <ul>
-          <li>INVALID_OPERATION:程序对象未能成功连接（没有当前program对象）</li>
-          <li>INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）,或则stride或offset是负值</li>
-        </ul>
-        <strong>实例：</strong>
-        <ul>
-          <li><a href="../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
-        </ul>
-      </div>
-    </section>
-    <!--与uniform变量相关方法-->
-    <section id="getUniformLocation">
-      <h4>gl.getUniformLocation(program, name);</h4>
-      <p>获取指定名称的uniform变量的存储位置</p>
-      <div class="content">
-        <strong>参数：</strong>
-        <ul>
-          <li>program：指定包含顶点着色器和片元着色器的着色器程序对象。</li>
-          <li>name：指定想要获取其存储位置的uniform变量名称</li>
-        </ul>
-        <strong>返回值：</strong>
-        <ul>
-          <li>non-unll:指定uniform变量的位置</li>
-          <li>null：指定的uniform变量不存在，或者其命名具有gl_或webgl_前缀</li>
-        </ul>
-        <strong>错误：</strong>
-        <ul>
-          <li>INVALID_OPERATION:程序对象未能成功连接</li>
-          <li>INVALID_VALUE：name参数的长度大于attribute变量名的最大长度（默认256字节）</li>
-        </ul>
-      </div>
-    </section>
-    <section id="uniform">
-      <h4>gl.uniform[1234]f(location, v0, v1, v2, v3);</h4>
-      <p>将数据（v0，v1，v2,v3）传给由location参数指定的uniform变量</p>
-      <div class="content">
-        <strong>参数：</strong>
-        <ul>
-          <li>location：指定将要修改的uniform变量的存储位置</li>
-          <li>v0：指定填充uniform变量第一个分量的值</li>
-          <li>v1：指定填充uniform变量第二个分量的值</li>
-          <li>v2：指定填充uniform变量第三个分量的值</li>
-          <li>v3：指定填充uniform变量第四个个分量的值</li>
-        </ul>
-        <strong>返回值：</strong>
-        <p>无</p>
-        <strong>错误：</strong>
-        <ul>
-          <li>INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置</li>
-        </ul>
-      </div>
-    </section>
-    <section id="uniformMatrix4fv">
-      <h4>gl.uniformMatrix4fv(location, transpose, array)</h4>
-      <p>将array表示的4X4矩阵分配给由location指定的uniform存储的变量</p>
-      <div class="content">
-        <strong>参数：</strong>
-        <ul>
-          <li>location：uniform变量的存储位置</li>
-          <li>transpose：在WebGL中必须指定为false。该参数表示是否转置矩阵。转置操作将交换矩阵的行和列，
-            WebGL实现没有提供矩阵转置的方法，所以该参数必须设为false
-          </li>
-          <li>array：待传输的类型化数组，4X4矩阵按列主序存储在其中</li>
-        </ul>
-        <strong>返回值：</strong>
-        <p>无</p>
-        <strong>错误：</strong>
-        <ul>
-          <li>INVALID_OPERATION:不存在当前程序对象</li>
-          <li>INVALID_VALUE:transpose不为false，或者数组的长度小于16</li>
-        </ul>
-        <strong>列子</strong>
-        <ul>
-          <li><a href="../WebGL编程指南/ch3/RotatedTriangle_Matrix.html">用矩阵旋转三角形</a></li>
-        </ul>
-      </div>
+    <!-- 变量相关方法 -->
+    <section class="section1" id="variable">
+      <div class="title">变量相关方法</div>
+      <section id="getAttribLocation">
+        <h4>gl.getAttribLocation(gl.program, name);</h4>
+        <p>获取由name参数指定的attribute变量的存储位置</p>
+        <div class="content">
+          <strong>参数：</strong>
+          <ul class="ul-1">
+            <li>gl.program：指定包含顶点着色器和片元着色器的着色器程序对象。</li>
+            <li>name：指定想要获取其存储地址的attribute变量的名称</li>
+            <li>name：指定想要获取其存储地址的attribute变量的名称</li>
+          </ul>
+          <strong>返回值：</strong>
+          <ul class="ul-1">
+            <li>大于等于0：attribute变量的存储地址</li>
+            <li>-1：指定的attribute变量不存在，或者其命名具有gl_或webgl_前缀</li>
+          </ul>
+          <strong>错误：</strong>
+          <ul class="ul-1">
+            <li>INVALID_OPERATION:程序对象未能成功连接</li>
+            <li>-1：指定的attribute变量不存在，或者其命名具有gl_或webgl_前缀</li>
+          </ul>
+        </div>
+      </section>
+      <section id="vertexAttrib[1234]f">
+        <h4>gl.vertexAttrib[1234]f(location, v0, v1, v2, v3);</h4>
+        <p>
+          将数据（v0，v1，v2,v3）传给由location参数指定的attribute变量，如果没有传递后面的
+          v1, v2, v3，使用默认值0.0、0.0、1.0
+        </p>
+        <div class="content">
+          <strong>参数：</strong>
+          <ul>
+            <li>location：指定将要修改的attribute变量的存储位置</li>
+            <li>v0：指定填充attribute变量第一个分量的值</li>
+            <li>v1：指定填充attribute变量第二个分量的值</li>
+            <li>v2：指定填充attribute变量第三个分量的值</li>
+            <li>v3：指定填充attribute变量第四个个分量的值</li>
+          </ul>
+          <strong>返回值：</strong>
+          <p>无</p>
+          <strong>错误：</strong>
+          <ul>
+            <li>INVALID_OPERATION:程序对象未能成功连接（没有当前program对象）</li>
+            <li>INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）</li>
+          </ul>
+          <strong>矢量方法：</strong>
+          <ul>
+            <li>gl.vertexAttrib1fv(location,Float32Array);</li>
+            <li>gl.vertexAttrib4fv(location,Float32Array);</li>
+            <li>
+              <strong>实例：</strong>
+              <p>var position = new Float32Array([0.0,0.0,0.0,1.0]);</p>
+              <p>gl.vertexAttrib4fv(a_Position, position);</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section id="vertexAttribPointer">
+        <h4>gl.vertexAttribPointer(location, size, type, normalized, stride, offset);</h4>
+        <p>
+          将绑定到gl.ARRAY_BUFFER上的缓存区对象分配给由location指定的attribute变量
+        </p>
+        <div class="content">
+          <strong>参数：</strong>
+          <ul>
+            <li>location：指定待分配attribute变量的存储位置</li>
+            <li>size：指定缓存区中每个顶点的分量个数（1到4）。若size比attribute变量需要的分量数少，
+              缺失分量将按照与vertexAttrib[1234]f（）相同的规则补全。
+            </li>
+            <li>
+              type:用以下类型之一来指定格式
+              <p>
+                gl.UNSIGNED_BYTE:无符号字节，Unit8Array<br>
+                gl.SHORT:短整型，Int16Array<br>
+                gl.UNSIGNED_SHORT:无符号短整型，Unit16Array<br>
+                gl.INT:无符号整型，Int16Array<br>
+                gl.UNSIGNED_INT:无符号整型，Unit16Array<br>
+                gl.FLOAT:浮点型，Float32Array<br>
+              </p>
+            </li>
+            <li>normalize：传入true或false，表明是否将非浮点型的数据归一化到[0,1]或[-1,1]区间</li>
+            <li>stride：指定相邻两个顶点的字节数，默认为0</li>
+            <li>offset：指定缓存区对象中的偏移量（以字节为单位），即attribute变量从缓存区中的何处开始储存，
+              如果是起始位置开始的，offset设置为0
+            </li>
+          </ul>
+          <strong>返回值：</strong>
+          <p>无</p>
+          <strong>错误：</strong>
+          <ul>
+            <li>INVALID_OPERATION:程序对象未能成功连接（没有当前program对象）</li>
+            <li>INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）,或则stride或offset是负值</li>
+          </ul>
+          <strong>实例：</strong>
+          <ul>
+            <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+          </ul>
+        </div>
+      </section>
+      <section id="WebGLActiveInfo">
+        <h4>WebGLActiveInfo</h4>
+        <p>代表了调用 <a href="#getActiveAttrib">WebGLRenderingContext.getActiveAttrib()</a>
+          和<a href="#getActiveUniform">WebGLRenderingContext.getActiveUniform()</a> 这两个方法后传回的信息。</p>
+        <div class="ul-1">
+          <strong>返回值：</strong>
+          <ul class="ul-1">
+            <li>info.name:请求变量的只读名称。</li>
+            <li>info.size:请求变量的只读尺寸。</li>
+            <li>info.type:请求变量的只读类型。</li>
+          </ul>
+        </div>
+      </section>
+      <section id="getActiveAttrib">
+        <h4>gl.getActiveAttrib(program,index)</h4>
+        <p>WebGL API的WebGLRenderingContext.getActiveAttrib（）方法返回包含顶点属性的大小，类型和名称的WebGLActiveInfo对象。
+          它通常在查询未知的制服时用于调试或创建通用库。</p>
+        <div class="ul-1">
+          <strong>参数：</strong>
+          <ul class="ul-1">
+            <li>program:包含顶点属性的WebGL程序。</li>
+            <li>index:一个GLuint，指定要获取的顶点属性的索引。 该值是<a href="#getProgramParameter">gl.getProgramParameter（program，gl.ACTIVE_ATTRIBUTES）</a>返回的索引0到N-1。
+            </li>
+          </ul>
+          <strong>返回值：</strong>
+          <p>A WebGLActiveInfo object.</p>
+          <strong>实例：</strong>
+          <p>var info = gl.getActiveAttrib( program, i );</p>
+          <p>var name = info.name;</p>
+        </div>
+      </section>
+      <!--与uniform变量相关方法-->
+      <section id="getUniformLocation">
+        <h4>gl.getUniformLocation(program, name);</h4>
+        <p>获取指定名称的uniform变量的存储位置</p>
+        <div class="content">
+          <strong>参数：</strong>
+          <ul>
+            <li>program：指定包含顶点着色器和片元着色器的着色器程序对象。</li>
+            <li>name：指定想要获取其存储位置的uniform变量名称</li>
+          </ul>
+          <strong>返回值：</strong>
+          <ul>
+            <li>non-unll:指定uniform变量的位置</li>
+            <li>null：指定的uniform变量不存在，或者其命名具有gl_或webgl_前缀</li>
+          </ul>
+          <strong>错误：</strong>
+          <ul>
+            <li>INVALID_OPERATION:程序对象未能成功连接</li>
+            <li>INVALID_VALUE：name参数的长度大于attribute变量名的最大长度（默认256字节）</li>
+          </ul>
+        </div>
+      </section>
+      <section id="uniform">
+        <h4>gl.uniform[1234]f(location, v0, v1, v2, v3);</h4>
+        <p>将数据（v0，v1，v2,v3）传给由location参数指定的uniform变量</p>
+        <div class="content">
+          <strong>参数：</strong>
+          <ul>
+            <li>location：指定将要修改的uniform变量的存储位置</li>
+            <li>v0：指定填充uniform变量第一个分量的值</li>
+            <li>v1：指定填充uniform变量第二个分量的值</li>
+            <li>v2：指定填充uniform变量第三个分量的值</li>
+            <li>v3：指定填充uniform变量第四个个分量的值</li>
+          </ul>
+          <strong>返回值：</strong>
+          <p>无</p>
+          <strong>错误：</strong>
+          <ul>
+            <li>INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置</li>
+          </ul>
+        </div>
+      </section>
+      <section id="uniformMatrix4fv">
+        <h4>gl.uniformMatrix4fv(location, transpose, array)</h4>
+        <p>将array表示的4X4矩阵分配给由location指定的uniform存储的变量</p>
+        <div class="content">
+          <strong>参数：</strong>
+          <ul>
+            <li>location：uniform变量的存储位置</li>
+            <li>transpose：在WebGL中必须指定为false。该参数表示是否转置矩阵。转置操作将交换矩阵的行和列，
+              WebGL实现没有提供矩阵转置的方法，所以该参数必须设为false
+            </li>
+            <li>array：待传输的类型化数组，4X4矩阵按列主序存储在其中</li>
+          </ul>
+          <strong>返回值：</strong>
+          <p>无</p>
+          <strong>错误：</strong>
+          <ul>
+            <li>INVALID_OPERATION:不存在当前程序对象</li>
+            <li>INVALID_VALUE:transpose不为false，或者数组的长度小于16</li>
+          </ul>
+          <strong>列子</strong>
+          <ul>
+            <li><a href="../../WebGL编程指南/ch3/RotatedTriangle_Matrix.html">用矩阵旋转三角形</a></li>
+          </ul>
+        </div>
+      </section>
+      <section id="getActiveUniform">
+        <h4>gl.getActiveUniform(program,index)</h4>
+        <p>WebGL API的WebGLRenderingContext.getActiveUniform（）方法返回包含统一属性的大小，类型和名称的WebGLActiveInfo对象。
+          它通常在查询未知的制服时用于调试或创建通用库。</p>
+        <div class="ul-1">
+          <strong>参数：</strong>
+          <ul class="ul-1">
+            <li>program:一个WebGL程序，指定WebGL着色器程序，从中获取统一变量的信息。</li>
+            <li>index:一个GLuint，指定要获取的顶点属性的索引。 该值是<a href="#getProgramParameter">gl.getProgramParameter（program，gl.ACTIVE_ATTRIBUTES）</a>返回的索引0到N-1。
+            </li>
+          </ul>
+          <strong>返回值：</strong>
+          <p>A WebGLActiveInfo object describing the uniform.</p>
+          <strong>The type attribute of the return value will be one of the following:</strong>
+          <ul class="ul-1">
+            <li>gl.FLOAT</li>
+            <li>gl.FLOAT_VEC2</li>
+            <li> gl.FLOAT_VEC3</li>
+            <li> gl.FLOAT_VEC4</li>
+            <li> gl.INT</li>
+            <li> gl.INT_VEC2</li>
+            <li> gl.INT_VEC3</li>
+            <li> gl.INT_VEC4</li>
+            <li> gl.BOOL</li>
+            <li> gl.BOOL_VEC2</li>
+            <li>gl.BOOL_VEC3</li>
+            <li> gl.BOOL_VEC4</li>
+            <li>gl.FLOAT_MAT2</li>
+            <li>gl.FLOAT_MAT3</li>
+            <li>gl.FLOAT_MAT4</li>
+            <li>gl.SAMPLER_2D</li>
+            <li>gl.SAMPLER_CUBE</li>
+          </ul>
+          <strong>When using a WebGL 2 context, the following values are possible additionally:</strong>
+          <ul class="ul-1">
+            <li>gl.UNSIGNED_INT</li>
+            <li>gl.UNSIGNED_INT_VEC2</li>
+            <li>gl.UNSIGNED_INT_VEC3</li>
+            <li>gl.UNSIGNED_INT_VEC4</li>
+            <li>gl.FLOAT_MAT2x3</li>
+            <li>gl.FLOAT_MAT2x4</li>
+            <li>gl.FLOAT_MAT3x2</li>
+            <li>gl.FLOAT_MAT3x4</li>
+            <li>gl.FLOAT_MAT4x2</li>
+            <li>gl.FLOAT_MAT4x3</li>
+            <li>gl.SAMPLER_2D</li>
+            <li>gl.SAMPLER_3D</li>
+            <li> gl.SAMPLER_CUBE</li>
+            <li>gl.SAMPLER_2D_SHADOW</li>
+            <li>gl.SAMPLER_2D_ARRAY</li>
+            <li>gl.SAMPLER_2D_ARRAY_SHADOW</li>
+            <li>gl.SAMPLER_CUBE_SHADOW</li>
+            <li>gl.INT_SAMPLER_2D</li>
+            <li>gl.INT_SAMPLER_3D</li>
+            <li>gl.INT_SAMPLER_CUBE</li>
+            <li>gl.INT_SAMPLER_2D_ARRAY</li>
+            <li>gl.UNSIGNED_INT_SAMPLER_2D</li>
+            <li>gl.UNSIGNED_INT_SAMPLER_3D</li>
+            <li>gl.UNSIGNED_INT_SAMPLER_CUBE</li>
+            <li>gl.UNSIGNED_INT_SAMPLER_2D_ARRAY</li>
+          </ul>
+          <strong>实例：</strong>
+          <p>var info = gl.getActiveAttrib( program, i );</p>
+          <p>var name = info.name;</p>
+        </div>
+      </section>
     </section>
     <!--与缓存区相关方法-->
     <section id="createBuffer">
@@ -456,7 +556,7 @@
         </p>
         <strong>实例：</strong>
         <ul>
-          <li><a href="../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+          <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
         </ul>
       </div>
     </section>
@@ -472,7 +572,7 @@
         <p>无</p>
         <strong>实例：</strong>
         <ul>
-          <li><a href="../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+          <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
         </ul>
       </div>
     </section>
@@ -497,7 +597,7 @@
         </ul>
         <strong>实例：</strong>
         <ul>
-          <li><a href="../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+          <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
         </ul>
       </div>
     </section>
@@ -528,7 +628,7 @@
         </ul>
         <strong>实例：</strong>
         <ul>
-          <li><a href="../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+          <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
         </ul>
       </div>
     </section>
@@ -550,7 +650,7 @@
         </ul>
         <strong>实例：</strong>
         <ul>
-          <li><a href="../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+          <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
         </ul>
       </div>
     </section>
@@ -572,7 +672,7 @@
         </ul>
         <strong>实例：</strong>
         <ul>
-          <li><a href="../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+          <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
         </ul>
       </div>
     </section>
@@ -879,289 +979,287 @@
       </div>
     </section>
     <!--着色器和着色器程序对象-->
-    <section id="getShaderPrecisionFormat">
-      <h4>gl.getShaderPrecisionFormat()</h4>
-      <p>获取着色器的精度值</p>
-      <div class="content">
-        <strong>example</strong>
-        <ul class="ul-1">
-          <li>gl.getShaderPrecisionFormat(gl.VERTEX_SHADER, gl.MEDIUM_FLOAT).precision; // 23</li>
-          <li>gl.getShaderPrecisionFormat(gl.FRAGMENT_SHADER, gl.LOW_INT).precision; // 0</li>
-        </ul>
-        <strong>返回值</strong>
-        <ul class="ul-1">
-          <li>可以表示的精度位数，对于整数，此值始终为0</li>
-        </ul>
-      </div>
-    </section>
-    <!--着色器对象-->
-    <section id="baseShaderProgram">
-      <h4>着色器和着色器程序对象</h4>
-      <p>创建和初始化着色器对象</p>
-      <div class="content">
-        <strong>7个步骤:</strong>
-        <ul class="ul-1-num">
-          <li>创建着色器对象(<a href="#createShader" title="gl.createShader()">gl.createShader()</a>)</li>
-          <li>向着色器对象中填充着色器程序的源代码(<a href="#shaderSource" title="gl.shaderSource()">gl.shaderSource()</a>)</li>
-          <li>编译着色器(<a href="#compileShader" title="gl.compileShader()">gl.compileShader()</a>)</li>
-          <li>创建程序对象(<a href="#createProgram" title="gl.createProgram()">gl.createProgram()</a>)</li>
-          <li>为程序对象分配着色器(<a href="#attachShader" title="gl.attachShader()">gl.attachShader()</a>)</li>
-          <li>链接程序对象(<a href="#linkProgram" title="gl.linkProgram()">gl.linkProgram()</a>)</li>
-          <li>使用程序对象(<a href="#" title="gl.useProgram()">gl.useProgram()</a>)</li>
-        </ul>
-      </div>
-    </section>
-    <section id="baseShader">
-      <h4>着色器对象</h4>
-      <p>着色器对象管理一个顶点着色器或一个片元着色器，每一个着色器都有一个着色器对象。</p>
-    </section>
-    <section id="createShader">
-      <h4>gl.createShader(type)</h4>
-      <p>创建由type指定的着色器对象</p>
-      <div class="content">
-        <strong>参数</strong>
-        <ul class="ul-1">
-          <li>type : 指定创建着色器的类型，gl.VERTEX_SHADER表示顶点着色器，gl.FRAGMENT_SHADER表示片元着色器</li>
-        </ul>
-        <strong>返回值</strong>
-        <ul class="ul-1">
-          <li>non-null:新创建的着色器对象</li>
-          <li>null:创建失败</li>
-        </ul>
-        <strong>错误</strong>
-        <ul class="ul-1">
-          <li>INVALID_ENUM: type参数既不是gl.VERTEX_SHADER，也不是gl.FRAGMENT_SHADER</li>
-        </ul>
-      </div>
-    </section>
-    <section id="deleteShader">
-      <h4>gl.deleteShader(shader)</h4>
-      <p>删除shader指定的着色器</p>
-      <div class="content">
-        <strong>参数</strong>
-        <ul class="ul-1">
-          <li>shader : 待删除的着色器对象</li>
-        </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <p>无</p>
-        <strong>注意：</strong>
-        <p>
-          如果着色器程序对象还在使用（也就是说已经使用gl.attachShader()函数使之附加在了程序对象上），那么gl.deleteShader（）并不会立刻删除着色器，而是要等到程序对象不在使用该着色器后，才将其删除。</p>
-      </div>
-    </section>
-    <section id="shaderSource">
-      <h4>gl.shaderSource(shader,source)</h4>
-      <p>将source指定的字符串形式的代码传入shader指定的着色器。如果之前已经向shader传入过代码了，旧的代码将会被替换掉。</p>
-      <div class="content">
-        <strong>参数</strong>
-        <ul class="ul-1">
-          <li>shader : 指定需要传入代码的着色器对象</li>
-          <li>source : 指定字符串形式的代码</li>
-        </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <p>无</p>
-      </div>
-    </section>
-    <section id="compileShader">
-      <h4>gl.compileShader(shader)</h4>
-      <p>编译shader指定的着色器中的源代码</p>
-      <div class="content">
-        <strong>参数</strong>
-        <ul class="ul-1">
-          <li>shader : 待编译的着色器</li>
-        </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <p>无</p>
-        <strong>注意</strong>
-        <p>如果通过gl.shaderSource(),用新的代码替换到旧的代码，WebGL系统中的用旧的编译出的可执行部分不会被替换掉，需要手动第重新进行编译。</p>
-      </div>
-    </section>
-    <section id="getShaderParameter">
-      <h4>gl.getShaderParameter(shader，pname)</h4>
-      <p>获取shader指定的着色器中，pname指定的参数信息</p>
-      <div class="content">
-        <strong>参数</strong>
-        <ul class="ul-1">
-          <li>shader : 指定待获取参数着色器</li>
-          <li>pname : 指定待获取参数的类型，可以是gl.SHADER_TYPE、gl.DELETE_STATUS或则gl.COMPILE_STATUS</li>
-        </ul>
-        <strong>返回值</strong>
-        <ul class="ul-1">
-          <li>根据pname的不同，返回不同的值</li>
-          <li>gl.SHADER_TYPE：返回是顶点的着色器（gl.VERTEX_SHADER）还是片元着色器（gl.FRAGMENT_SHADER）</li>
-          <li>gl.DELETE_STATUS：返回是着色器是否被删除成功（true或false）</li>
-          <li>gl.COMPILE_STATUS：返回是着色器是否被编译成功（true或false）</li>
-        </ul>
-        <strong>错误</strong>
-        <ul class="ul-1">
-          <li>INVALID_ENUM: pname的值无效</li>
-        </ul>
-      </div>
-    </section>
-    <section id="getShaderInfoLog">
-      <h4>gl.getShaderInfoLog(shader)</h4>
-      <p>获取shader指定的着色器的信息日志。</p>
-      <div class="content">
-        <strong>参数</strong>
-        <ul class="ul-1">
-          <li>shader : 指定待获取信息日志的着色器</li>
-        </ul>
-        <strong>返回值</strong>
-        <ul class="ul-1">
-          <li>non-null: 包含日志信息的字符串</li>
-          <li>null: 没有编译错误</li>
-        </ul>
-        <strong>错误</strong>
-        <p>无</p>
-      </div>
-    </section>
-    <!--程序对象-->
-    <section id="baseProgram">
-      <h4>程序对象</h4>
-      <p>程序对象是管理着色器对象的容器。Webgl中，一个程序对象必须包含一个顶点着色器和一个片元着色器。</p>
-    </section>
-    <section id="createProgram">
-      <h4>gl.createProgram()</h4>
-      <p>创建程序对象,程序对象包含了顶点着色器和片元着色器</p>
-      <div class="content">
-        <strong>参数</strong>
-        <p>无</p>
-        <strong>返回值</strong>
-        <ul class="ul-1">
-          <li>non-null:新创建的程序对象</li>
-          <li>null:创建失败</li>
-        </ul>
-        <strong>错误</strong>
-        <p>无</p>
-      </div>
-    </section>
-    <section id="deleteProgram">
-      <h4>gl.deleteProgram(program)</h4>
-      <p>删除program指定的程序对象，如果该程序对象正在被使用，则不立即删除，而是等它不在被使用后在删除</p>
-      <div class="content">
-        <strong>参数</strong>
-        <ul>
-          <li>program : 指定待删除的程序对象</li>
-        </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <p>无</p>
-      </div>
-    </section>
-    <section id="attachShader">
-      <h4>gl.attachShader(program,shader)</h4>
-      <p>将shader指定的着色器对象分配给program指定的程序对象</p>
-      <div class="content">
-        <strong>参数</strong>
-        <ul class="ul-1">
-          <li>program : 指定程序对象</li>
-          <li>shader : 指定着色器对象</li>
-        </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <ul class="ul-1">
-          <li>INVALID_OPERATION:shader没有被分配给program</li>
-        </ul>
-        <strong>注意</strong>
-        <p>着色器在赋给程序对象之前，并不一定要为其指定代码或进行编译（也就是说把空的着色器赋给程序对象也可以）。</p>
-      </div>
-    </section>
-    <section id="detachShader">
-      <h4>gl.detachShader(program,shader)</h4>
-      <p>取消shader指定的着色器对象对program指定的程序对象的分配。</p>
-      <div class="content">
-        <strong>参数</strong>
-        <ul class="ul-1">
-          <li>program : 指定程序对象</li>
-          <li>shader : 指定着色器对象</li>
-        </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <ul class="ul-1">
-          <li>INVALID_OPERATION:shader没有被分配给program</li>
-        </ul>
-      </div>
-    </section>
-    <section id="linkProgram">
-      <h4>gl.linkProgram(program)</h4>
-      <p>链接program指定的着色器对象中的着色器</p>
-      <div class="content">
-        <strong>参数</strong>
-        <ul class="ul-1">
-          <li>program : 指定程序对象</li>
-        </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <p>无</p>
-      </div>
-    </section>
-    <section id="getProgramParameter">
-      <h4>gl.getProgramParameter(program，pname)</h4>
-      <p>获取program指定的程序对象中，pname指定的参数信息。返回的值随着panme的不同而不同</p>
-      <div class="content">
-        <strong>参数</strong>
-        <ul class="ul-1">
-          <li>program : 指定程序对象</li>
-          <li>pname :
-            指定待获取参数的类型，可以是gl.DELETE_STATUS、gl.LINK_STATUS、gl.VALIDATE_STATUS、gl.ATTACHED_SHADERS、gl.ACTIVE_ATTRIBUTES或gl.ACTIVE_UNIFORMS
-          </li>
-        </ul>
-        <strong>返回值</strong>
-        <ul class="ul-1">
-          <li>根据pname的不同，返回不同的值</li>
-          <li>gl.DELETE_STATUS：返回是程序是否已被删除（true或false）</li>
-          <li>gl.LINK_STATUS：返回是程序是否已连接成功（true或false）</li>
-          <li>gl.VALIDATE_STATUS：返回是程序是否已通过验证（true或false）</li>
-          <li>gl.ATTACHED_SHADERS：已被分配给着色器的数量</li>
-          <li>gl.ACTIVE_ATTRIBUTES：顶点着色器中attribute变量的数量</li>
-          <li>gl.ACTIVE_UNIFORMS：程序中uniform变量的数量</li>
-        </ul>
-        <strong>错误</strong>
-        <ul class="ul-1">
-          <li>INVALID_ENUM: pname的值无效</li>
-        </ul>
-      </div>
-    </section>
-    <section id="getProgramInfoLog">
-      <h4>gl.getProgramInfoLog(program)</h4>
-      <p>获取program指定的程序对象的信息日志。</p>
-      <div class="content">
-        <strong>参数</strong>
-        <ul class="ul-1">
-          <li>program : 指定待获取信息日志的程序对象。</li>
-        </ul>
-        <strong>返回值</strong>
-        <ul class="ul-1">
-          <li>non-null: 包含日志信息的字符串</li>
-          <li>null: 没有编译错误</li>
-        </ul>
-        <strong>错误</strong>
-        <p>无</p>
-      </div>
-    </section>
-    <section id="useProgram">
-      <h4>gl.useProgram(program)</h4>
-      <p>告知WebGL系统绘制时使用program指定的程序对象。</p>
-      <div class="content">
-        <strong>参数</strong>
-        <ul class="ul-1">
-          <li>program : 指定待使用的程序对象。</li>
-        </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <p>无</p>
-      </div>
+    <section id="baseShaderProgram" class="section1">
+      <div class="title">着色器和着色器程序对象</div>
+      <section>
+        <h4>概述</h4>
+        <div class="content">
+          <strong>着色器对象</strong>
+          <p>着色器对象管理一个顶点着色器或一个片元着色器，每一个着色器都有一个着色器对象。</p>
+          <strong>程序对象</strong>
+          <p>程序对象是管理着色器对象的容器。Webgl中，一个程序对象必须包含一个顶点着色器和一个片元着色器。</p>
+          <strong>创建和初始化着色器对象7个步骤:</strong>
+          <ul class="ul-1-num">
+            <li>创建着色器对象(<a href="#createShader" title="gl.createShader()">gl.createShader()</a>)</li>
+            <li>向着色器对象中填充着色器程序的源代码(<a href="#shaderSource" title="gl.shaderSource()">gl.shaderSource()</a>)</li>
+            <li>编译着色器(<a href="#compileShader" title="gl.compileShader()">gl.compileShader()</a>)</li>
+            <li>创建程序对象(<a href="#createProgram" title="gl.createProgram()">gl.createProgram()</a>)</li>
+            <li>为程序对象分配着色器(<a href="#attachShader" title="gl.attachShader()">gl.attachShader()</a>)</li>
+            <li>链接程序对象(<a href="#linkProgram" title="gl.linkProgram()">gl.linkProgram()</a>)</li>
+            <li>使用程序对象(<a href="#" title="gl.useProgram()">gl.useProgram()</a>)</li>
+          </ul>
+        </div>
+      </section>
+      <!--着色器对象-->
+      <section id="createShader">
+        <h4>gl.createShader(type)</h4>
+        <p>创建由type指定的着色器对象</p>
+        <div class="content">
+          <strong>参数</strong>
+          <ul class="ul-1">
+            <li>type : 指定创建着色器的类型，gl.VERTEX_SHADER表示顶点着色器，gl.FRAGMENT_SHADER表示片元着色器</li>
+          </ul>
+          <strong>返回值</strong>
+          <ul class="ul-1">
+            <li>non-null:新创建的着色器对象</li>
+            <li>null:创建失败</li>
+          </ul>
+          <strong>错误</strong>
+          <ul class="ul-1">
+            <li>INVALID_ENUM: type参数既不是gl.VERTEX_SHADER，也不是gl.FRAGMENT_SHADER</li>
+          </ul>
+        </div>
+      </section>
+      <section id="deleteShader">
+        <h4>gl.deleteShader(shader)</h4>
+        <p>删除shader指定的着色器</p>
+        <div class="content">
+          <strong>参数</strong>
+          <ul class="ul-1">
+            <li>shader : 待删除的着色器对象</li>
+          </ul>
+          <strong>返回值</strong>
+          <p>无</p>
+          <strong>错误</strong>
+          <p>无</p>
+          <strong>注意：</strong>
+          <p>
+            如果着色器程序对象还在使用（也就是说已经使用gl.attachShader()函数使之附加在了程序对象上），那么gl.deleteShader（）并不会立刻删除着色器，而是要等到程序对象不在使用该着色器后，才将其删除。</p>
+        </div>
+      </section>
+      <section id="shaderSource">
+        <h4>gl.shaderSource(shader,source)</h4>
+        <p>将source指定的字符串形式的代码传入shader指定的着色器。如果之前已经向shader传入过代码了，旧的代码将会被替换掉。</p>
+        <div class="content">
+          <strong>参数</strong>
+          <ul class="ul-1">
+            <li>shader : 指定需要传入代码的着色器对象</li>
+            <li>source : 指定字符串形式的代码</li>
+          </ul>
+          <strong>返回值</strong>
+          <p>无</p>
+          <strong>错误</strong>
+          <p>无</p>
+        </div>
+      </section>
+      <section id="compileShader">
+        <h4>gl.compileShader(shader)</h4>
+        <p>编译shader指定的着色器中的源代码</p>
+        <div class="content">
+          <strong>参数</strong>
+          <ul class="ul-1">
+            <li>shader : 待编译的着色器</li>
+          </ul>
+          <strong>返回值</strong>
+          <p>无</p>
+          <strong>错误</strong>
+          <p>无</p>
+          <strong>注意</strong>
+          <p>如果通过gl.shaderSource(),用新的代码替换到旧的代码，WebGL系统中的用旧的编译出的可执行部分不会被替换掉，需要手动第重新进行编译。</p>
+        </div>
+      </section>
+      <section id="getShaderParameter">
+        <h4>gl.getShaderParameter(shader，pname)</h4>
+        <p>获取shader指定的着色器中，pname指定的参数信息</p>
+        <div class="content">
+          <strong>参数</strong>
+          <ul class="ul-1">
+            <li>shader : 指定待获取参数着色器</li>
+            <li>pname : 指定待获取参数的类型，可以是gl.SHADER_TYPE、gl.DELETE_STATUS或则gl.COMPILE_STATUS</li>
+          </ul>
+          <strong>返回值</strong>
+          <ul class="ul-1">
+            <li>根据pname的不同，返回不同的值</li>
+            <li>gl.SHADER_TYPE：返回是顶点的着色器（gl.VERTEX_SHADER）还是片元着色器（gl.FRAGMENT_SHADER）</li>
+            <li>gl.DELETE_STATUS：返回是着色器是否被删除成功（true或false）</li>
+            <li>gl.COMPILE_STATUS：返回是着色器是否被编译成功（true或false）</li>
+          </ul>
+          <strong>错误</strong>
+          <ul class="ul-1">
+            <li>INVALID_ENUM: pname的值无效</li>
+          </ul>
+        </div>
+      </section>
+      <section id="getShaderInfoLog">
+        <h4>gl.getShaderInfoLog(shader)</h4>
+        <p>获取shader指定的着色器的信息日志。</p>
+        <div class="content">
+          <strong>参数</strong>
+          <ul class="ul-1">
+            <li>shader : 指定待获取信息日志的着色器</li>
+          </ul>
+          <strong>返回值</strong>
+          <ul class="ul-1">
+            <li>non-null: 包含日志信息的字符串</li>
+            <li>null: 没有编译错误</li>
+          </ul>
+          <strong>错误</strong>
+          <p>无</p>
+        </div>
+      </section>
+      <section id="getShaderPrecisionFormat">
+        <h4>gl.getShaderPrecisionFormat()</h4>
+        <p>获取着色器的精度值</p>
+        <div class="content">
+          <strong>example</strong>
+          <ul class="ul-1">
+            <li>gl.getShaderPrecisionFormat(gl.VERTEX_SHADER, gl.MEDIUM_FLOAT).precision; // 23</li>
+            <li>gl.getShaderPrecisionFormat(gl.FRAGMENT_SHADER, gl.LOW_INT).precision; // 0</li>
+          </ul>
+          <strong>返回值</strong>
+          <ul class="ul-1">
+            <li>可以表示的精度位数，对于整数，此值始终为0</li>
+          </ul>
+        </div>
+      </section>
+      <!--程序对象-->
+      <section id="createProgram">
+        <h4>gl.createProgram()</h4>
+        <p>创建程序对象,程序对象包含了顶点着色器和片元着色器</p>
+        <div class="content">
+          <strong>参数</strong>
+          <p>无</p>
+          <strong>返回值</strong>
+          <ul class="ul-1">
+            <li>non-null:新创建的程序对象</li>
+            <li>null:创建失败</li>
+          </ul>
+          <strong>错误</strong>
+          <p>无</p>
+        </div>
+      </section>
+      <section id="deleteProgram">
+        <h4>gl.deleteProgram(program)</h4>
+        <p>删除program指定的程序对象，如果该程序对象正在被使用，则不立即删除，而是等它不在被使用后在删除</p>
+        <div class="content">
+          <strong>参数</strong>
+          <ul>
+            <li>program : 指定待删除的程序对象</li>
+          </ul>
+          <strong>返回值</strong>
+          <p>无</p>
+          <strong>错误</strong>
+          <p>无</p>
+        </div>
+      </section>
+      <section id="attachShader">
+        <h4>gl.attachShader(program,shader)</h4>
+        <p>将shader指定的着色器对象分配给program指定的程序对象</p>
+        <div class="content">
+          <strong>参数</strong>
+          <ul class="ul-1">
+            <li>program : 指定程序对象</li>
+            <li>shader : 指定着色器对象</li>
+          </ul>
+          <strong>返回值</strong>
+          <p>无</p>
+          <strong>错误</strong>
+          <ul class="ul-1">
+            <li>INVALID_OPERATION:shader没有被分配给program</li>
+          </ul>
+          <strong>注意</strong>
+          <p>着色器在赋给程序对象之前，并不一定要为其指定代码或进行编译（也就是说把空的着色器赋给程序对象也可以）。</p>
+        </div>
+      </section>
+      <section id="detachShader">
+        <h4>gl.detachShader(program,shader)</h4>
+        <p>取消shader指定的着色器对象对program指定的程序对象的分配。</p>
+        <div class="content">
+          <strong>参数</strong>
+          <ul class="ul-1">
+            <li>program : 指定程序对象</li>
+            <li>shader : 指定着色器对象</li>
+          </ul>
+          <strong>返回值</strong>
+          <p>无</p>
+          <strong>错误</strong>
+          <ul class="ul-1">
+            <li>INVALID_OPERATION:shader没有被分配给program</li>
+          </ul>
+        </div>
+      </section>
+      <section id="linkProgram">
+        <h4>gl.linkProgram(program)</h4>
+        <p>链接program指定的着色器对象中的着色器</p>
+        <div class="content">
+          <strong>参数</strong>
+          <ul class="ul-1">
+            <li>program : 指定程序对象</li>
+          </ul>
+          <strong>返回值</strong>
+          <p>无</p>
+          <strong>错误</strong>
+          <p>无</p>
+        </div>
+      </section>
+      <section id="getProgramParameter">
+        <h4>gl.getProgramParameter(program，pname)</h4>
+        <p>获取program指定的程序对象中，pname指定的参数信息。返回的值随着panme的不同而不同</p>
+        <div class="content">
+          <strong>参数</strong>
+          <ul class="ul-1">
+            <li>program : 指定程序对象</li>
+            <li>pname :
+              指定待获取参数的类型，可以是gl.DELETE_STATUS、gl.LINK_STATUS、gl.VALIDATE_STATUS、gl.ATTACHED_SHADERS、gl.ACTIVE_ATTRIBUTES或gl.ACTIVE_UNIFORMS
+            </li>
+          </ul>
+          <strong>返回值</strong>
+          <ul class="ul-1">
+            <li>根据pname的不同，返回不同的值</li>
+            <li>gl.DELETE_STATUS：返回是程序是否已被删除（true或false）</li>
+            <li>gl.LINK_STATUS：返回是程序是否已连接成功（true或false）</li>
+            <li>gl.VALIDATE_STATUS：返回是程序是否已通过验证（true或false）</li>
+            <li>gl.ATTACHED_SHADERS：已被分配给着色器的数量</li>
+            <li>gl.ACTIVE_ATTRIBUTES：顶点着色器中attribute变量的数量</li>
+            <li>gl.ACTIVE_UNIFORMS：程序中uniform变量的数量</li>
+          </ul>
+          <strong>错误</strong>
+          <ul class="ul-1">
+            <li>INVALID_ENUM: pname的值无效</li>
+          </ul>
+        </div>
+      </section>
+      <section id="getProgramInfoLog">
+        <h4>gl.getProgramInfoLog(program)</h4>
+        <p>获取program指定的程序对象的信息日志。</p>
+        <div class="content">
+          <strong>参数</strong>
+          <ul class="ul-1">
+            <li>program : 指定待获取信息日志的程序对象。</li>
+          </ul>
+          <strong>返回值</strong>
+          <ul class="ul-1">
+            <li>non-null: 包含日志信息的字符串</li>
+            <li>null: 没有编译错误</li>
+          </ul>
+          <strong>错误</strong>
+          <p>无</p>
+        </div>
+      </section>
+      <section id="useProgram">
+        <h4>gl.useProgram(program)</h4>
+        <p>告知WebGL系统绘制时使用program指定的程序对象。</p>
+        <div class="content">
+          <strong>参数</strong>
+          <ul class="ul-1">
+            <li>program : 指定待使用的程序对象。</li>
+          </ul>
+          <strong>返回值</strong>
+          <p>无</p>
+          <strong>错误</strong>
+          <p>无</p>
+        </div>
+      </section>
     </section>
     <!--开启相关功能-->
     <section class="section1">

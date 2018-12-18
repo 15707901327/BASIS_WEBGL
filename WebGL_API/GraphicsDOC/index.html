@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>图形学</title>
+  <link rel="stylesheet" href="../../css/base.css">
+</head>
+<body>
+<div class="l-r-wrapper">
+  <div class="left">
+    <a href="#homogeneousCoordinates">齐次坐标</a><br>
+    <h4><a href="#rotation">旋转(Rotation)</a></h4>
+    <ul class="ul-1">
+      <li><a href="#rotation_matrix">旋转矩阵推导</a></li>
+    </ul>
+    <h4><a href="#translation">位移(translation)</a></h4>
+    <ul class="ul-1">
+      <li><a href="#translation_matrix">四维平移矩阵</a></li>
+    </ul>
+    <h4><a href="#scale">缩放（scale)</a></h4>
+    <ul class="ul-1">
+      <li><a href="#scale_matrix">缩放矩阵</a></li>
+    </ul>
+    <a href="#library">矩阵变换库</a><br>
+  </div>
+  <div class="right">
+    <section id="homogeneousCoordinates">
+      <h4>概念</h4>
+      <div class="content">
+        <strong>齐次坐标</strong>
+        <p>由四个分量组成的矢量（x,y,z,w）。</p>
+        <strong>线性变换</strong>
+        <div>
+          <p>线性变换（Linear Transformation / Xforms）是渲染和游戏引擎等图形学工具进行坐标变换的方式，是可逆的。 线性变换的等式如下： V2 = M*V1</p>
+          <ul class="ul-1-num">
+            <li>V是齐次（homogeneous）四维向量（x,y,z,w），竖着写的</li>
+            <li>M是齐次4×4矩阵</li>
+            <li>当w=1时，四维坐标会变成三维坐标</li>
+            <li>对于三维坐标（x, y, z），将其转换为四维坐标，可以直接加个1，即变成（x, y, z, 1）</li>
+            <li>对于四维坐标（x, y, z, w），都除以w即可转换为三维坐标，即（x/w, y/w, z/w）</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section id="rotation" class="section1">
+      <div class="title">旋转(Rotation)</div>
+      <section>
+        <div class="content">
+          <p>对于一个三维坐标（x, y, z），让其绕x, y, z轴旋转θ角的方法是在其左边乘上一个旋转矩阵。绕x轴，绕y轴，绕z轴的旋转矩阵分别是：</p>
+          <div style="height: 300px; width: 300px; background-image: url('../../img/rotation_01.webp')" class="bg-1"></div>
+          <p>如果我们想更加通用一点，即点（x, y, z）绕轴（u, v, w）旋转θ的矩阵是什么？
+            如果u, v, w三者的平方和为1，即该向量是个单位向量，那么矩阵如下：</p>
+          <div style="height: 250px; width: 1000px; background-image: url('../../img/rotation_02.webp')" class="bg-1"></div>
+          <strong>四维旋转(绕x轴转θ)</strong>
+          <div style="height: 250px; width: 1000px; background-image: url('../../img/rotation_03.webp')" class="bg-1"></div>
+          <p>从上图中可以看到，四维旋转矩阵，是在我们上面刚说的三维绕轴旋转矩阵的基础上，在最后一行和最后一列补上一个（0，0，0，1）。</p>
+        </div>
+      </section>
+      <section id="rotation_matrix">
+        <h4>旋转矩阵的推导</h4>
+        <div class="content">
+          <strong>矩阵的乘法</strong>
+          <p>将矩阵（中间）和矢量（右边）相乘，就获得一个新的矢量（左边）。</p>
+          <p>注意矩阵的乘法不符合交换律，也就是说AXB和BXA是不相等的。</p>
+          <p>只有在矩阵的列数与矢量的行数相等时，才可以将两者相乘。</p>
+          <div style="height: 200px; width: 300px; background-image: url('../../img/3X3矩阵.png')" class="bg-1"></div>
+          <p>上图中x',y',z'的计算：</p>
+          <p>x' = ax + by + cz</p>
+          <p>y' = dx + ey + fz</p>
+          <p>z' = gx + hy + iz</p>
+          <h4>点变换</h4>
+          <div style="height: 200px; width: 200px; background-image: url('../../img/3.22.png')" class="bg-1"></div>
+          <pre>
+        r是从原点到点p的距离，而∂是x轴旋转到点p的角度，用这两个点来计算点p的坐标。
+          x = r cos∂
+          y = r sin∂
+        类似的，可以使用r、∂、𝞫来表示点p'的坐标
+          x' = r cos(∂+𝞫)
+          y' = r sin(∂+𝞫)
+        利用三角函数两角和公式：
+          sin(a±b) = sina cosb ∓ cosa sinb
+          cos(a±b) = cosa cosb ∓ sina sinb
+        可得：
+          x' = r(cos∂ cos𝞫 - sin∂ sin𝞫)
+          y' = r(sin∂ cos𝞫 + cos∂ sin𝞫)
+        最后，消除r、∂，可得
+          x' = x cos𝞫 - y sin𝞫
+          y' = x sin𝞫 + y cos𝞫
+        </pre>
+          <strong>旋转矩阵</strong>
+          <p>由上面矩阵乘法和点变换可得旋转矩阵：</p>
+          <div style="height: 200px; width: 400px; background-image: url('../../img/3.7.png')" class="bg-1"></div>
+          <strong>四阶旋转矩阵</strong>
+          <div style="height: 200px; width: 400px; background-image: url('../../img/四阶旋转矩阵.png')" class="bg-1"></div>
+          <strong>实例</strong>
+          <ul>
+            <li><a href="../../WebGL编程指南/ch3/RotatedTriangle.html">旋转三角形</a></li>
+            <li><a href="../../WebGL编程指南/ch3/RotatedTriangle_Matrix.html">旋转三角形(使用矩阵)</a></li>
+          </ul>
+        </div>
+      </section>
+    </section>
+    <section id="translation" class="section1">
+      <div class="title">位移(translation)</div>
+      <section>
+        <p>对于一个三维坐标（x, y, z），我们想让它往x轴正方向移动1个单位，往y轴正方向移动1个单位，往z轴正方向移动1个单位，则可以让它加上一个向量（1, 1, 1）。</p>
+      </section>
+      <section id="translation_matrix">
+        <h4>四维平移矩阵</h4>
+        <div class="content">
+          <div style="height: 200px; width: 800px; background-image: url('../../img/3.10.webp')" class="bg-1"></div>
+          <p>从上图中可以看到，四维位移矩阵，是在一个四维单位矩阵（就是对角线都是1，其他都是0的矩阵）的最后一列，放入你想要位移的向量（tx, ty, tz）</p>
+          <strong>实例</strong>
+          <ul>
+            <li><a href="../../WebGL编程指南/ch3/TranslatedTriangle.html">平移三角形</a></li>
+            <li><a href="../../WebGL编程指南/ch3/RotatedTriangle_Matrix.html">平移三角形(使用矩阵)</a></li>
+          </ul>
+        </div>
+      </section>
+    </section>
+    <section id="scale" class="section1">
+      <div class="title">缩放（scale)</div>
+      <section>
+        <div class="content">
+          <p>对于一个三维坐标（x, y, z），我们想让它扩大2倍，则可以让它变成（2x, 2y, 2z）。写成矩阵乘法的话，V2 = M*V1，M如下图：</p>
+          <div style="height: 200px; width: 400px; background-image: url('../../img/03.png')" class="bg-1"></div>
+        </div>
+      </section>
+      <section id="scale_matrix">
+        <h4>缩放矩阵</h4>
+        <div class="content">
+          <div style="height: 100px; width: 300px; background-image: url('../../img/缩放矩阵.png')" class="bg-1"></div>
+          <strong>实例</strong>
+          <ul>
+            <li><a href="../../WebGL编程指南/ch3/RotatedTriangle_Matrix.html">缩放三角形(使用矩阵)</a></li>
+          </ul>
+        </div>
+      </section>
+    </section>
+    <section id="library">
+      <h4>矩阵变换库</h4>
+      <ul>
+        <li><a href="../../WebGL编程指南/lib/cuon-matrix说明.html">WebGL编程指南书中提供的矩阵变换库</a></li>
+      </ul>
+    </section>
+  </div>
+</div>
+</body>
+</html>

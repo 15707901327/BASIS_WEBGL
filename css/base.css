@@ -35,8 +35,17 @@ ul {
     margin-left: 20px;
 }
 
+.ul-2 {
+    margin-left: 2em;
+}
+
 .ul-1-num {
     margin-left: 20px;
+    list-style: decimal;
+}
+
+.ul-2-num {
+    margin-left: 2em;
     list-style: decimal;
 }
 

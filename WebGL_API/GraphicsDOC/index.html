@@ -8,7 +8,11 @@
 <body>
 <div class="l-r-wrapper">
   <div class="left">
-    <a href="#homogeneousCoordinates">齐次坐标</a><br>
+    <h4><a href="#concept">概念</a></h4>
+    <ul class="ul-1">
+      <li><a href="#homogeneousCoordinates">齐次坐标</a></li>
+      <li><a href="#LinearTransformation">线性变换</a></li>
+    </ul>
     <h4><a href="#rotation">旋转(Rotation)</a></h4>
     <ul class="ul-1">
       <li><a href="#rotation_matrix">旋转矩阵推导</a></li>
@@ -24,23 +28,43 @@
     <a href="#library">矩阵变换库</a><br>
   </div>
   <div class="right">
-    <section id="homogeneousCoordinates">
-      <h4>概念</h4>
-      <div class="content">
-        <strong>齐次坐标</strong>
+    <section  class="section1" id="concept">
+      <div class="title">概念</div>
+      <section id="homogeneousCoordinates">
+        <h4>齐次坐标</h4>
         <p>由四个分量组成的矢量（x,y,z,w）。</p>
-        <strong>线性变换</strong>
-        <div>
-          <p>线性变换（Linear Transformation / Xforms）是渲染和游戏引擎等图形学工具进行坐标变换的方式，是可逆的。 线性变换的等式如下： V2 = M*V1</p>
-          <ul class="ul-1-num">
+      </section>
+      <section id="LinearTransformation">
+        <h4>线性变换</h4>
+        <p>线性变换（Linear Transformation / Xforms）是渲染和游戏引擎等图形学工具进行坐标变换的方式，是可逆的。 线性变换的等式如下： </p>
+        <div class="content">
+          <p>V2 = M*V1</p>
+          <strong>说明：</strong>
+          <ul class="ul-2">
             <li>V是齐次（homogeneous）四维向量（x,y,z,w），竖着写的</li>
             <li>M是齐次4×4矩阵</li>
             <li>当w=1时，四维坐标会变成三维坐标</li>
             <li>对于三维坐标（x, y, z），将其转换为四维坐标，可以直接加个1，即变成（x, y, z, 1）</li>
             <li>对于四维坐标（x, y, z, w），都除以w即可转换为三维坐标，即（x/w, y/w, z/w）</li>
           </ul>
+          <strong>拆解：</strong>
+          <p>对于任何一个线性变换矩阵，我们可以把它拆解（decompose）为TRS或TSR三个矩阵的乘积的形式。</p>
+          <div style="height: 400px; width: 600px; background-image: url('../../img/LinearTrans_01.webp')" class="bg-1"></div>
+          <ul class="ul-2-num">
+            <li>首先提取最后一列，得到位移</li>
+            <li>剩余的矩阵是R和S相乘的矩阵</li>
+          </ul>
+          <div style="height: 350px; width: 800px; background-image: url('../../img/LinearTrans_02.webp')" class="bg-1"></div>
+          <p>从图中可以看出，SR矩阵，第一行的平方和开根就是Sx，第二行的平方和开根就是Sy，第三行的平方和开根就是Sz。第一行除以Sx，第二行除以Sy，第三行除以Sz，即可得到旋转矩阵。</p>
+          <strong>四维变换的逆变换：</strong>
+          <ul class="ul-2">
+            <li>位移:T的逆矩阵是-T，即向反方向移动.</li>
+            <li>旋转: R的逆矩阵是R的转置矩阵，即以对角线翻转矩阵。 怎么理解呢？比如R是绕X轴旋转θ，那么逆操作就是绕X轴旋转-θ，带入-θ就会发现它变成了转置矩阵。</li>
+            <li>缩放:S的逆矩阵是1/S，即把对角线上的三个元素都变成倒数，即反向缩放。</li>
+            <li>线性变换Xforms: TSR的逆矩阵 = R的逆×S的逆×T的逆</li>
+          </ul>
         </div>
-      </div>
+      </section>
     </section>
     <section id="rotation" class="section1">
       <div class="title">旋转(Rotation)</div>
@@ -127,9 +151,9 @@
         </div>
       </section>
       <section id="scale_matrix">
-        <h4>缩放矩阵</h4>
+        <h4>四维缩放矩阵</h4>
         <div class="content">
-          <div style="height: 100px; width: 300px; background-image: url('../../img/缩放矩阵.png')" class="bg-1"></div>
+          <div style="height: 250px; width: 900px; background-image: url('../../img/rotation_04.webp')" class="bg-1"></div>
           <strong>实例</strong>
           <ul>
             <li><a href="../../WebGL编程指南/ch3/RotatedTriangle_Matrix.html">缩放三角形(使用矩阵)</a></li>

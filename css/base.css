@@ -49,6 +49,13 @@ ul {
     list-style: decimal;
 }
 
+.code{
+    background-color: #5d5443;
+    color: #e7e9f1;
+    font-size: 24px;
+    border-radius: 28px;
+}
+
 .wrapper {
     margin: 0 auto;
     width: 80%;

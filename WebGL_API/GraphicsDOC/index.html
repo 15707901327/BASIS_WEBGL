@@ -12,6 +12,7 @@
     <ul class="ul-1">
       <li><a href="#homogeneousCoordinates">齐次坐标</a></li>
       <li><a href="#LinearTransformation">线性变换</a></li>
+      <li><a href="#Quaternion">四元数</a></li>
     </ul>
     <h4><a href="#rotation">旋转(Rotation)</a></h4>
     <ul class="ul-1">
@@ -62,6 +63,18 @@
             <li>旋转: R的逆矩阵是R的转置矩阵，即以对角线翻转矩阵。 怎么理解呢？比如R是绕X轴旋转θ，那么逆操作就是绕X轴旋转-θ，带入-θ就会发现它变成了转置矩阵。</li>
             <li>缩放:S的逆矩阵是1/S，即把对角线上的三个元素都变成倒数，即反向缩放。</li>
             <li>线性变换Xforms: TSR的逆矩阵 = R的逆×S的逆×T的逆</li>
+          </ul>
+        </div>
+      </section>
+      <section id="Quaternion">
+        <h4>四元数</h4>
+        <div class="content">
+          <strong>使用：</strong>
+          <ul class="ul-2-num">
+            <li>
+              <span>计算位置：position += 2.0 * cross( quaternion.xyz, cross( quaternion.xyz, position ) + quaternion.w * position );</span>
+              <p><a href="https://15707901327.github.io/ThreeSourceCodeAnalysis/example/instance_buffergeometry/webgl_buffergeometry_instancing2.html" target="_blank">实例</a></p>
+            </li>
           </ul>
         </div>
       </section>

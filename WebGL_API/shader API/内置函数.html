@@ -88,8 +88,8 @@ v0，v1，v2，v3：指定4个浮点型分量
         </table>
       </div>
     </section>
-    <section id="clamp">
-      <h4>通用函数</h4>
+    <section id="clamp" class="section1">
+      <div class="title">通用函数</div>
       <div class="content">
         <table border="1">
           <tr>
@@ -170,6 +170,37 @@ v0，v1，v2，v3：指定4个浮点型分量
           </tr>
         </table>
       </div>
+      <section id="mix">
+        <h4>线性函数（mix()）</h4>
+        <table border="1">
+          <tr>
+            <th>语法</th>
+            <th>描述</th>
+          </tr>
+          <tr>
+            <td>
+              float mix(float x, float y,float a);<br>
+              vec2 mix(vec2 x, vec2 y,float a);<br>
+              vec3 mix(vec3 x, vec3 y,float a);<br>
+              vec4 mix(vec4 x, vec4 y,float a);<br>
+              vec2 mix(vec2 x, float y,vec2 a);<br>
+              vec3 mix(vec3 x, float y,vec3 a);<br>
+              vec4 mix(vec4 x, float y,vec4 a);<br>
+              vec2 mix(vec2 x, vec2 y,vec2 a);<br>
+              vec3 mix(vec3 x, vec3 y,vec3 a);<br>
+              vec4 mix(vec4 x, vec4 y,vec4 a);<br>
+            </td>
+            <td>
+              返回x和y的线性混合，即x*(1-a)+y*a
+              <ul class="ul-2-num">
+                <li>当a的值在[0-1]时,返回x、y连线上的一个点</li>
+                <li>当a的值在大于1时,返回yx延长线上的一个点</li>
+                <li>当a的值小于1时,返回xy延长线上的一个点</li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+      </section>
     </section>
     <section id="acos">
       <h4>角度和三角函数</h4>

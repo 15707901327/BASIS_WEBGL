@@ -32,9 +32,9 @@ window.onload = function init() {
   // Specify a starting point p for our iterations
   // p must lie inside any set of three vertices
   // ((a+b)/2 + (a+c)/2)/2 = ((a+b)+(a+c))/4
-  var u = add(vertices[0], vertices[1]);
-  var v = add(vertices[0], vertices[2]);
-  var p = scale(0.25, add(u, v));
+  var u = mix(vertices[0], vertices[1], 0.5);
+  var v = mix(vertices[0], vertices[2], 0.5);
+  var p = mix(u, v, 0.5);
 
   // And, add our initial point into our array of points
 
@@ -46,8 +46,7 @@ window.onload = function init() {
 
   for (var i = 0; points.length < NumPoints; ++i) {
     var j = Math.floor(Math.random() * 3);
-    p = add(points[i], vertices[j]);
-    p = scale(0.5, p);
+    p = mix(points[i], vertices[j], 0.5);
     points.push(p);
   }
 

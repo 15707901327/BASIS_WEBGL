@@ -2,10 +2,9 @@
 
 var canvas;
 var gl;
+var points;
 
-var points = [];
-
-var NumTimesToSubdivide = 5; // 三角形划分次数
+var NumPoints = 50000;
 
 window.onload = function init() {
   canvas = document.getElementById("gl-canvas");
@@ -19,20 +18,29 @@ window.onload = function init() {
   //  Initialize our data for the Sierpinski Gasket
   //
 
-  // First, initialize the corners of our gasket with three points.
+  // First, initialize the vertices of our 3D gasket
 
   var vertices = [
-    vec2(-1, -1),
-    vec2(0, 1),
-    vec2(1, -1)
+    vec3(-1.0, -1.0, -1.0),
+    vec3(1.0, -1.0, -1.0),
+    vec3(0.0, 1.0, 0.0),
+    vec3(0.0, -1.0, 1.0)
   ];
-  divideTriangle(vertices[0], vertices[1], vertices[2], NumTimesToSubdivide);
+
+  points = [vec3(0.0, 0.0, 0.0)];
+
+  for (var i = 0; points.length < NumPoints; ++i) {
+    var j = Math.floor(Math.random() * 4);
+
+    points.push(mix(points[i], vertices[j], 0.5));
+  }
 
   //
   //  Configure WebGL
   //
   gl.viewport(0, 0, canvas.width, canvas.height);
   gl.clearColor(1.0, 1.0, 1.0, 1.0);
+  gl.enable(gl.DEPTH_TEST);
 
   //  Load shaders and initialize attribute buffers
 
@@ -48,42 +56,13 @@ window.onload = function init() {
   // Associate out shader variables with our data buffer
 
   var vPosition = gl.getAttribLocation(program, "vPosition");
-  gl.vertexAttribPointer(vPosition, 2, gl.FLOAT, false, 0, 0);
+  gl.vertexAttribPointer(vPosition, 3, gl.FLOAT, false, 0, 0);
   gl.enableVertexAttribArray(vPosition);
 
   render();
 };
 
-function triangle(a, b, c) {
-  points.push(a, b, c);
-}
-
-function divideTriangle(a, b, c, count) {
-
-  // check for end of recursion
-
-  if (count === 0) {
-    triangle(a, b, c);
-  }
-  else {
-
-    //bisect the sides
-
-    var ab = mix(a, b, 0.5);
-    var ac = mix(a, c, 0.5);
-    var bc = mix(b, c, 0.5);
-
-    --count;
-
-    // three new triangles
-
-    divideTriangle(a, ab, ac, count);
-    divideTriangle(c, ac, bc, count);
-    divideTriangle(b, bc, ab, count);
-  }
-}
-
 function render() {
-  gl.clear(gl.COLOR_BUFFER_BIT);
-  gl.drawArrays(gl.TRIANGLES, 0, points.length);
+  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+  gl.drawArrays(gl.POINTS, 0, points.length);
 }

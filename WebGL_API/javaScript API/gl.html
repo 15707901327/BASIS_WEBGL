@@ -40,12 +40,15 @@
       <li><a href="#getActiveUniform" title="gl.getActiveUniform()">gl.getActiveUniform()</a></li>
     </ul>
     <h4>与缓存区相关方法</h4>
-    <a href="#createBuffer" title="gl.createBuffer()">gl.createBuffer()</a>
-    <a href="#deleteBuffer" title="gl.deleteBuffer()">gl.deleteBuffer()</a>
-    <a href="#bindBuffer" title="gl.bindBuffer()">gl.bindBuffer()</a>
-    <a href="#bufferData" title="gl.bufferData()">gl.bufferData()</a>
-    <a href="#enableVertexAttribArray" title="gl.enableVertexAttribArray()">gl.enableVertexAttribArray()</a>
-    <a href="#disableVertexAttribArray" title="gl.disableVertexAttribArray()">gl.disableVertexAttribArray()</a>
+    <ul class="ul-1">
+      <li><a href="#createBuffer" title="gl.createBuffer()">gl.createBuffer()</a></li>
+      <li><a href="#deleteBuffer" title="gl.deleteBuffer()">gl.deleteBuffer()</a></li>
+      <li><a href="#bindBuffer" title="gl.bindBuffer()">gl.bindBuffer()</a></li>
+      <li><a href="#bufferData" title="gl.bufferData()">gl.bufferData()</a></li>
+      <li><a href="#enableVertexAttribArray" title="gl.enableVertexAttribArray()">gl.enableVertexAttribArray()</a></li>
+      <li><a href="#disableVertexAttribArray" title="gl.disableVertexAttribArray()">gl.disableVertexAttribArray()</a>
+      </li>
+    </ul>
     <h4>与加载纹理相关的方法</h4>
     <ul class="ul-1">
       <li><a href="#createTexture" title="gl.createTexture()">gl.createTexture()</a></li>
@@ -545,136 +548,180 @@
       </section>
     </section>
     <!--与缓存区相关方法-->
-    <section id="createBuffer">
-      <h4>gl.createBuffer();</h4>
-      <p>创建缓存区对象</p>
-      <div class="content">
-        <strong>返回值：</strong>
+    <section class="section1" id="buffer">
+      <div class="title">与缓存区相关方法</div>
+      <section id="createBuffer">
+        <h4>gl.createBuffer();</h4>
+        <p>创建缓存区对象</p>
+        <div class="content">
+          <strong>返回值：</strong>
+          <p>
+            非null：新创建的缓存区对象<br>
+            null：创建缓存区对象失败
+          </p>
+          <strong>实例：</strong>
+          <ul>
+            <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+          </ul>
+        </div>
+      </section>
+      <section id="deleteBuffer">
+        <h4>gl.deleteBuffer(buffer);</h4>
+        <p>删除参数buffer表示的缓存区对象</p>
+        <div class="content">
+          <strong>参数：</strong>
+          <ul>
+            <li>buffer：待删除的缓存区对象</li>
+          </ul>
+          <strong>返回值：</strong>
+          <p>无</p>
+          <strong>实例：</strong>
+          <ul>
+            <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+          </ul>
+        </div>
+      </section>
+      <section id="bindBuffer">
+        <h4>gl.bindBuffer(target, buffer);</h4>
+        <p>允许使用buffer表示的缓存区对象并将其绑定到target表示的目标上</p>
+        <div class="content">
+          <strong>参数：</strong>
+          <ul>
+            <li>
+              target
+              <p>gl.ARRAY_BUFFER：表示缓存区对象中包含了顶点的数据</p>
+              <p>gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值"OpenGL ES着色器语言[GLSL ES]"</p>
+            </li>
+            <li>buffer:指定之前🈶️由gl.createBuffer()返回的待绑定的缓存区对象，如果指定为空，则禁用对target的绑定</li>
+          </ul>
+          <strong>返回值：</strong>
+          <p>无</p>
+          <strong>错误：</strong>
+          <ul>
+            <li>INVALID_ENUM target不是上诉值之一，这时将保持原有的绑定情况不变</li>
+          </ul>
+          <strong>实例：</strong>
+          <ul>
+            <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+          </ul>
+        </div>
+      </section>
+      <section id="bufferData">
+        <h4>gl.bufferData(target, data,usage);</h4>
+        <p>开辟存储空间，向绑定在target上的缓存区对象中写入数据data</p>
+        <div class="content">
+          <strong>参数：</strong>
+          <ul class="ul-2">
+            <li>
+              target
+              <p>gl.ARRAY_BUFFER：表示缓存区对象中包含了顶点的数据</p>
+              <p>gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值"OpenGL ES着色器语言[GLSL ES]"</p>
+            </li>
+            <li>data:写入缓存区对象的数据（类型化数组）</li>
+            <li>
+              usage:表示程序将如何使用存储在缓存区对象中的数据。该参数将帮助webgl优化操作，但是就算你传入了错误的值，也不会终止程序（仅仅是降低程序的效率）
+              <p>gl.STATIC_DRAW:只会向缓存区对象中写入一次数据，但需要绘制很多次</p>
+              <p>gl.STREAM_DRAW:只会向缓存区对象中写入一次数据，然后绘制若干次</p>
+              <p>gl.DYNAMIC_DRAW:会向缓存区对象中写入多次数据，并绘制很多次</p>
+            </li>
+          </ul>
+          <strong>返回值：</strong>
+          <p>无</p>
+          <strong>错误：</strong>
+          <ul class="ul-2">
+            <li>INVALID_ENUM target不是上诉值之一，这时将保持原有的绑定情况不变</li>
+          </ul>
+          <strong>实例：</strong>
+          <ul class="ul-2">
+            <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+          </ul>
+        </div>
+      </section>
+      <section id="bufferSubData">
+        <h4>void gl.bufferSubData(target, offset, ArrayBuffer srcData);</h4>
+        <div class="content">
+          <strong>webGL1:</strong>
+          <p>void gl.bufferSubData(target, offset, ArrayBufferView srcData);</p>
+          <p>void gl.bufferSubData(target, offset, ArrayBuffer srcData);</p>
+          <strong>webGL2:</strong>
+          <p>void gl.bufferSubData(target, dstByteOffset, ArrayBufferView srcData, srcOffset, length);</p>
+          <p>更新缓冲区对象的数据存储的子集。</p>
+        </div>
+        <div class="content">
+          <strong>参数：</strong>
+          <ul class="ul-2">
+            <li>
+              target
+              <p>gl.ARRAY_BUFFER：包含顶点属性的缓存区，例如顶点坐标、纹理坐标数据或顶点颜色数据。</p>
+              <p>gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值"OpenGL ES着色器语言[GLSL ES]"</p>
+              <p><strong>webgl2添加：</strong></p>
+              <ul class="ul-2">
+                <li>gl.COPY_READ_BUFFER:用于从一个缓冲区对象复制到另一个</li>
+                <li>gl.COPY_WRITE_BUFFER:用于从一个缓冲区对象复制到另一个</li>
+                <li>gl.TRANSFORM_FEEDBACK_BUFFER:缓冲区用于变换反馈操作</li>
+                <li>gl.UNIFORM_BUFFER:缓冲区用于存储统一块</li>
+                <li>gl.PIXEL_PACK_BUFFER:用于像素传输操作的缓冲区</li>
+                <li>gl.PIXEL_UNPACK_BUFFER:用于像素传输操作的缓冲区</li>
+              </ul>
+            </li>
+            <li>dstByteOffset:GLintptr指定数据替换将开始的字节偏移量。</li>
+            <li>srcData:ArrayBuffer，SharedArrayBuffer或将复制到数据存储中的ArrayBufferView类型数组类型之一。</li>
+            <li>srcOffset:一个GLuint，指定元素索引偏移量从哪里开始读取缓冲区。</li>
+            <li>length:GLuint默认为0。</li>
+          </ul>
+          <strong>返回值：</strong>
+          <p>无</p>
+          <strong>错误：</strong>
+          <ul class="ul-2">
+            <li>A gl.INVALID_VALUE error is thrown if the data would be written past the end of the buffer or if data is null.</li>
+            <li>A gl.INVALID_ENUM error is thrown if target is not one of the allowed enums.</li>
+          </ul>
+        </div>
+      </section>
+      <section id="enableVertexAttribArray">
+        <h4>gl.enableVertexAttribArray(location)</h4>
         <p>
-          非null：新创建的缓存区对象<br>
-          null：创建缓存区对象失败
+          开启location指定的attribute变量
         </p>
-        <strong>实例：</strong>
-        <ul>
-          <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
-        </ul>
-      </div>
-    </section>
-    <section id="deleteBuffer">
-      <h4>gl.deleteBuffer(buffer);</h4>
-      <p>删除参数buffer表示的缓存区对象</p>
-      <div class="content">
-        <strong>参数：</strong>
-        <ul>
-          <li>buffer：待删除的缓存区对象</li>
-        </ul>
-        <strong>返回值：</strong>
-        <p>无</p>
-        <strong>实例：</strong>
-        <ul>
-          <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
-        </ul>
-      </div>
-    </section>
-    <section id="bindBuffer">
-      <h4>gl.bindBuffer(target, buffer);</h4>
-      <p>允许使用buffer表示的缓存区对象并将其绑定到target表示的目标上</p>
-      <div class="content">
-        <strong>参数：</strong>
-        <ul>
-          <li>
-            target
-            <p>gl.ARRAY_BUFFER：表示缓存区对象中包含了顶点的数据</p>
-            <p>gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值"OpenGL ES着色器语言[GLSL ES]"</p>
-          </li>
-          <li>buffer:指定之前🈶️由gl.createBuffer()返回的待绑定的缓存区对象，如果指定为空，则禁用对target的绑定</li>
-        </ul>
-        <strong>返回值：</strong>
-        <p>无</p>
-        <strong>错误：</strong>
-        <ul>
-          <li>INVALID_ENUM target不是上诉值之一，这时将保持原有的绑定情况不变</li>
-        </ul>
-        <strong>实例：</strong>
-        <ul>
-          <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
-        </ul>
-      </div>
-    </section>
-    <section id="bufferData">
-      <h4>gl.bufferData(target, data,usage);</h4>
-      <p>开辟存储空间，向绑定在target上的缓存区对象中写入数据data</p>
-      <div class="content">
-        <strong>参数：</strong>
-        <ul>
-          <li>
-            target
-            <p>gl.ARRAY_BUFFER：表示缓存区对象中包含了顶点的数据</p>
-            <p>gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值"OpenGL ES着色器语言[GLSL ES]"</p>
-          </li>
-          <li>data:写入缓存区对象的数据（类型化数组）</li>
-          <li>
-            usage:表示程序将如何使用存储在缓存区对象中的数据。该参数将帮助webgl优化操作，但是就算你传入了错误的值，也不会终止程序（仅仅是降低程序的效率）
-            <p>gl.STATIC_DRAW:只会向缓存区对象中写入一次数据，但需要绘制很多次</p>
-            <p>gl.STREAM_DRAW:只会向缓存区对象中写入一次数据，然后绘制若干次</p>
-            <p>gl.DYNAMIC_DRAW:会向缓存区对象中写入多次数据，并绘制很多次</p>
-          </li>
-        </ul>
-        <strong>返回值：</strong>
-        <p>无</p>
-        <strong>错误：</strong>
-        <ul>
-          <li>INVALID_ENUM target不是上诉值之一，这时将保持原有的绑定情况不变</li>
-        </ul>
-        <strong>实例：</strong>
-        <ul>
-          <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
-        </ul>
-      </div>
-    </section>
-    <section id="enableVertexAttribArray">
-      <h4>gl.enableVertexAttribArray(location)</h4>
-      <p>
-        开启location指定的attribute变量
-      </p>
-      <div class="content">
-        <strong>参数：</strong>
-        <ul>
-          <li>location：指定待分配attribute变量的存储位置</li>
-        </ul>
-        <strong>返回值：</strong>
-        <p>无</p>
-        <strong>错误：</strong>
-        <ul>
-          <li>INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）</li>
-        </ul>
-        <strong>实例：</strong>
-        <ul>
-          <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
-        </ul>
-      </div>
-    </section>
-    <section id="disableVertexAttribArray">
-      <h4>gl.disableVertexAttribArray(location)</h4>
-      <p>
-        关闭location指定的attribute变量
-      </p>
-      <div class="content">
-        <strong>参数：</strong>
-        <ul>
-          <li>location：指定attribute变量的存储位置</li>
-        </ul>
-        <strong>返回值：</strong>
-        <p>无</p>
-        <strong>错误：</strong>
-        <ul>
-          <li>INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）</li>
-        </ul>
-        <strong>实例：</strong>
-        <ul>
-          <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
-        </ul>
-      </div>
+        <div class="content">
+          <strong>参数：</strong>
+          <ul>
+            <li>location：指定待分配attribute变量的存储位置</li>
+          </ul>
+          <strong>返回值：</strong>
+          <p>无</p>
+          <strong>错误：</strong>
+          <ul>
+            <li>INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）</li>
+          </ul>
+          <strong>实例：</strong>
+          <ul>
+            <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+          </ul>
+        </div>
+      </section>
+      <section id="disableVertexAttribArray">
+        <h4>gl.disableVertexAttribArray(location)</h4>
+        <p>
+          关闭location指定的attribute变量
+        </p>
+        <div class="content">
+          <strong>参数：</strong>
+          <ul>
+            <li>location：指定attribute变量的存储位置</li>
+          </ul>
+          <strong>返回值：</strong>
+          <p>无</p>
+          <strong>错误：</strong>
+          <ul>
+            <li>INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）</li>
+          </ul>
+          <strong>实例：</strong>
+          <ul>
+            <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+          </ul>
+        </div>
+      </section>
     </section>
     <!--与加载纹理相关的方法-->
     <section id="createTexture">

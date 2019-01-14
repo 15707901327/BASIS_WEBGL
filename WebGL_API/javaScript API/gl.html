@@ -342,26 +342,24 @@
       </section>
       <section id="vertexAttribPointer">
         <h4>gl.vertexAttribPointer(location, size, type, normalized, stride, offset);</h4>
-        <p>
-          将绑定到gl.ARRAY_BUFFER上的缓存区对象分配给由location指定的attribute变量
-        </p>
+        <p>将绑定到gl.ARRAY_BUFFER上的缓存区对象分配给由location指定的attribute变量</p>
         <div class="content">
           <strong>参数：</strong>
-          <ul>
+          <ul class="ul-2">
             <li>location：指定待分配attribute变量的存储位置</li>
             <li>size：指定缓存区中每个顶点的分量个数（1到4）。若size比attribute变量需要的分量数少，
               缺失分量将按照与vertexAttrib[1234]f（）相同的规则补全。
             </li>
             <li>
               type:用以下类型之一来指定格式
-              <p>
-                gl.UNSIGNED_BYTE:无符号字节，Unit8Array<br>
-                gl.SHORT:短整型，Int16Array<br>
-                gl.UNSIGNED_SHORT:无符号短整型，Unit16Array<br>
-                gl.INT:无符号整型，Int16Array<br>
-                gl.UNSIGNED_INT:无符号整型，Unit16Array<br>
-                gl.FLOAT:浮点型，Float32Array<br>
-              </p>
+              <ul class="ul-2">
+                <li>gl.UNSIGNED_BYTE:无符号字节，Unit8Array</li>
+                <li>gl.SHORT:短整型，Int16Array</li>
+                <li>gl.UNSIGNED_SHORT:无符号短整型，Unit16Array</li>
+                <li>gl.INT:无符号整型，Int16Array</li>
+                <li>gl.UNSIGNED_INT:无符号整型，Unit16Array</li>
+                <li>gl.FLOAT:浮点型，Float32Array</li>
+              </ul>
             </li>
             <li>normalize：传入true或false，表明是否将非浮点型的数据归一化到[0,1]或[-1,1]区间</li>
             <li>stride：指定相邻两个顶点的字节数，默认为0</li>
@@ -555,12 +553,12 @@
         <p>创建缓存区对象</p>
         <div class="content">
           <strong>返回值：</strong>
-          <p>
-            非null：新创建的缓存区对象<br>
-            null：创建缓存区对象失败
-          </p>
+          <ul class="ul-2">
+            <li>非null：新创建的缓存区对象</li>
+            <li>null：创建缓存区对象失败</li>
+          </ul>
           <strong>实例：</strong>
-          <ul>
+          <ul class="ul-2">
             <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
           </ul>
         </div>
@@ -586,44 +584,55 @@
         <p>允许使用buffer表示的缓存区对象并将其绑定到target表示的目标上</p>
         <div class="content">
           <strong>参数：</strong>
-          <ul>
+          <ul class="ul-2">
             <li>
-              target
+              target:
               <p>gl.ARRAY_BUFFER：表示缓存区对象中包含了顶点的数据</p>
               <p>gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值"OpenGL ES着色器语言[GLSL ES]"</p>
             </li>
-            <li>buffer:指定之前🈶️由gl.createBuffer()返回的待绑定的缓存区对象，如果指定为空，则禁用对target的绑定</li>
+            <li>buffer:指定之前由gl.createBuffer()返回的待绑定的缓存区对象，如果指定为空，则禁用对target的绑定</li>
           </ul>
           <strong>返回值：</strong>
           <p>无</p>
           <strong>错误：</strong>
-          <ul>
+          <ul class="ul-2">
             <li>INVALID_ENUM target不是上诉值之一，这时将保持原有的绑定情况不变</li>
           </ul>
           <strong>实例：</strong>
-          <ul>
+          <ul class="ul-2">
             <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
           </ul>
         </div>
       </section>
       <section id="bufferData">
-        <h4>gl.bufferData(target, data,usage);</h4>
+        <h4>gl.bufferData(target, srcData,usage);</h4>
         <p>开辟存储空间，向绑定在target上的缓存区对象中写入数据data</p>
         <div class="content">
+          <strong>重载函数</strong>
+          <ul class="ul-2">
+            <li>void gl.bufferData(target, size, usage); </li>
+            <li>void gl.bufferData(target, ArrayBuffer? srcData, usage);</li>
+            <li>void gl.bufferData(target, ArrayBufferView srcData, usage);</li>
+            <li><strong>WebGL2:</strong></li>
+            <li>void gl.bufferData(target, ArrayBufferView srcData, usage, srcOffset, length);</li>
+          </ul>
           <strong>参数：</strong>
           <ul class="ul-2">
             <li>
-              target
+              target:
               <p>gl.ARRAY_BUFFER：表示缓存区对象中包含了顶点的数据</p>
               <p>gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值"OpenGL ES着色器语言[GLSL ES]"</p>
             </li>
-            <li>data:写入缓存区对象的数据（类型化数组）</li>
+            <li>size:设定Buffer对象的数据存储区大小</li>
+            <li>srcData:一个ArrayBuffer，SharedArrayBuffer 或者 ArrayBufferView 类型的数组对象，将被复制到Buffer的数据存储区。 如果为null，数据存储区仍会被创建，但是不会进行初始化和定义。</li>
             <li>
               usage:表示程序将如何使用存储在缓存区对象中的数据。该参数将帮助webgl优化操作，但是就算你传入了错误的值，也不会终止程序（仅仅是降低程序的效率）
               <p>gl.STATIC_DRAW:只会向缓存区对象中写入一次数据，但需要绘制很多次</p>
               <p>gl.STREAM_DRAW:只会向缓存区对象中写入一次数据，然后绘制若干次</p>
               <p>gl.DYNAMIC_DRAW:会向缓存区对象中写入多次数据，并绘制很多次</p>
             </li>
+            <li>srcOffset:指定读取缓冲时的初始元素索引偏移量。</li>
+            <li>length:默认为0</li>
           </ul>
           <strong>返回值：</strong>
           <p>无</p>

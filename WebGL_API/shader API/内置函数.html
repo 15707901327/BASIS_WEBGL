@@ -219,6 +219,24 @@ v0，v1，v2，v3：指定4个浮点型分量
             </td>
             <td>反余弦函数，返回角度（弧度值）的正弦值为x。返回值在[-π/2，π/2]区间内，如果x < -1 或者 x > +1 则返回未定义的值</td>
           </tr>
+          <tr>
+            <td>
+              float radians(float degree);<br>
+              vec2 radians(vec2 degree);<br>
+              vec3 radians(vec3 degree);<br>
+              vec4 radians(vec4 degree);<br>
+            </td>
+            <td>将角度值转换为弧度值，即π*degree/180</td>
+          </tr>
+          <tr>
+            <td>
+              float degree(float radians);<br>
+              vec2 degree(vec2 radians);<br>
+              vec3 degree(vec3 radians);<br>
+              vec4 degree(vec4 radians);<br>
+            </td>
+            <td>将弧度值转换为角度值，即180 * radians/π</td>
+          </tr>
         </table>
       </div>
     </section>

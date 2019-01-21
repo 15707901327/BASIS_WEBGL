@@ -13,6 +13,7 @@
       <li><a href="#homogeneousCoordinates">齐次坐标</a></li>
       <li><a href="#LinearTransformation">线性变换</a></li>
       <li><a href="#Quaternion">四元数</a></li>
+      <li><a href="#CoordinateSystemConversion">坐标系转换</a></li>
     </ul>
     <h4><a href="#rotation">旋转(Rotation)</a></h4>
     <ul class="ul-1">
@@ -77,6 +78,21 @@
             <li><a href="https://15707901327.github.io/ThreeSourceCodeAnalysis/example/instance_buffergeometry/webgl_buffergeometry_instancing2.html" target="_blank">实例webgl_buffergeometry_instancing2</a></li>
             <li><a href="https://15707901327.github.io/ThreeSourceCodeAnalysis/example/instance_buffergeometry/webgl_buffergeometry_instancing_dynamic.html" target="_blank">实例webgl_buffergeometry_instancing_dynamic</a></li>
           </ul>
+        </div>
+      </section>
+      <section id="CoordinateSystemConversion">
+        <h4>坐标系转换</h4>
+        <div class="content">
+          <strong>矩阵法：</strong>
+          <ul class="ul-2-num">
+            <li>获取原坐标系到目标坐标系的矩阵m</li>
+            <li>计算矩阵m的逆转置矩阵T</li>
+            <li>原坐标系中的点在目标坐标系中的对应点 v1 = T * v2</li>
+          </ul>
+          <strong>实例</strong>
+          <p>var matrix = new THREE.Matrix4();</p>
+          <p>matrix.set(0, 1, 0, 0,0, 0, 1, 0,1, 0, 0, 0,0, 0, 0, 1);</p>
+          <p>矩阵matrix可以把c中的坐标系转换到three中</p>
         </div>
       </section>
     </section>

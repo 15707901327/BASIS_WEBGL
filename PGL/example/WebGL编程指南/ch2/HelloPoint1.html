@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Hello Point</title>
+  <script src="../../../src/built/PGL.js"></script>
+  <script src="HelloPoint1.js"></script>
+
+  <script type="x-shader/x-vertex" id="vertexShader">
+    void main(){
+      gl_Position = vec4(0.1,0.5,0.5,1.0); //设置坐标
+      gl_PointSize = 10.0; //设置尺寸
+     }
+  </script>
+  <script type="x-shader/x-fragment" id="fragmentShader">
+    void main() {
+      gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+     }
+  </script>
+</head>
+
+<body>
+<canvas id="webgl" width="400" height="400">
+  Please use a browser that supports "canvas"
+</canvas>
+</body>
+</html>

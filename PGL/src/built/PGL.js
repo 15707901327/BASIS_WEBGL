@@ -1392,6 +1392,38 @@ var PGL = {
 	});
 })(PGL);
 
+// 场景
+PGL.Scene = function () {
+	this.children = [];
+};
+Object.assign(PGL.Scene.prototype, {
+
+	/**
+	 * 添加子类
+	 * @param object
+	 */
+	add: function (object) {
+		this.children.push(object);
+	}
+});
+PGL.Mesh = function (geometry, material) {
+	this.geometry = geometry;
+	this.material = material;
+};
+PGL.Geometry = function () {
+
+};
+PGL.Material = function () {
+};
+PGL.ShaderMaterial = function (options) {
+
+	PGL.Material.call(this);
+
+	var options = options || {};
+	this.vertexShader = options.vertexShader;
+	this.fragmentShader = options.fragmentShader;
+};
+
 /**
  * WebGL渲染器
  * 1. 获取绘画的上下文
@@ -1416,10 +1448,122 @@ PGL.WebGLRenderer = function (parameters) {
 	var _gl = getWebGLContext();
 	if (!_gl) return null;
 
+	function initShaders(gl, vshader, fshader) {
+		var program = createProgram(gl, vshader, fshader);
+		if (!program) {
+			console.log('Failed to create program');
+			return false;
+		}
+
+		gl.useProgram(program);
+		gl.program = program;
+
+		return true;
+	}
+
+	/**
+	 * Create the linked program object (创建一个链接好的程序对象)
+	 * @param gl GL context
+	 * @param vshader a vertex shader program (string)
+	 * @param fshader a fragment shader program (string)
+	 * @return created program object, or null if the creation has failed
+	 */
+	function createProgram(gl, vshader, fshader) {
+		// 创建着色器对象
+		var vertexShader = loadShader(gl, gl.VERTEX_SHADER, vshader);
+		var fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fshader);
+		if (!vertexShader || !fragmentShader) {
+			return null;
+		}
+
+		// 创建程序对象
+		var program = gl.createProgram();
+		if (!program) {
+			return null;
+		}
+
+		// 为程序对象分配顶点着色器和片元着色器
+		gl.attachShader(program, vertexShader);
+		gl.attachShader(program, fragmentShader);
+
+		// 链接着色器
+		gl.linkProgram(program);
+
+		// 检查链接
+		var linked = gl.getProgramParameter(program, gl.LINK_STATUS);
+		if (!linked) {
+			var error = gl.getProgramInfoLog(program);
+			console.log('Failed to link program: ' + error);
+			gl.deleteProgram(program);
+			gl.deleteShader(fragmentShader);
+			gl.deleteShader(vertexShader);
+			return null;
+		}
+		return program;
+	}
+
+	/**
+	 * Create a shader object （创建一个编译好的着色器对象）
+	 * @param gl GL context
+	 * @param type the type of the shader object to be created
+	 * @param source shader program (string)
+	 * @return created shader object, or null if the creation has failed.
+	 */
+	function loadShader(gl, type, source) {
+		// 创建着色器对象
+		var shader = gl.createShader(type);
+		if (shader == null) {
+			console.log('unable to create shader');
+			return null;
+		}
+
+		// 设置着色器的源代码
+		gl.shaderSource(shader, source);
+
+		// 编译着色器
+		gl.compileShader(shader);
+
+		// 检查着色器的编译状态
+		var compiled = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
+		if (!compiled) {
+			var error = gl.getShaderInfoLog(shader);
+			console.log('Failed to compile shader: ' + error);
+			gl.deleteShader(shader);
+			return null;
+		}
+
+		return shader;
+	}
+
 	var state = new PGL.WebGLState(_gl);
 
 	// 渲染物体
-	this.render = function () {
+	this.render = function (scene) {
+
+		var VSHADER_SOURCE = scene.children[0].material.vertexShader;
+		var FSHADER_SOURCE = scene.children[0].material.fragmentShader;
+
+		if (!initShaders(_gl, VSHADER_SOURCE, FSHADER_SOURCE)) {
+			console.log('Failed to intialize shaders.');
+			return;
+		}
+
+		/**
+		 * 绘制一个点
+		 * gl.drawArrays(mode, first, count)
+		 * 执行顶点着色器，按照mode参数指定的方式绘制图形
+		 * 参数：
+		 *  mode：指定绘制的方式，可以接收一下常量符号：gl_POINTS,
+		 *    gl_LINES,gl_LINE_STRIP,gl_LINE_LOOP,gl_TRIANGLES,gl_TRIANGLE_STRIP,
+		 *    gl_TRIANGLE_FAN
+		 *  first:指定从那个顶点开始绘制
+		 *  count：指定绘制需要用到多少个顶点（整形数）
+		 * 返回值：无
+		 * 错误：
+		 *  INVALID_ENUM：传入的mode参数不是前述参数之一
+		 *  INVALID_VALUE：参数first或count是负数
+		 */
+		_gl.drawArrays(_gl.POINTS, 0, 1);
 	};
 
 	// 获取上下文

@@ -11,7 +11,7 @@
     <h4><a href="#base">基本概念</a></h4>
     <ul class="ul-1">
       <li><a href="#WebGL">WebGL程序</a></li>
-      <li><a href="#WebGL_System">WebGL系统</a></li>
+      <li><a href="#WebGL_System">着色器</a></li>
       <li><a href="#visualSpace">相机的可视空间</a></li>
       <li><a href="WebGL_API/WebGL可以绘制的基本图形.html" target="_blank">WebGL绘制的基本图形</a></li>
       <li><a href="WebGL_API/canvas标签.html" target="_blank">canvas标签</a></li>
@@ -35,7 +35,6 @@
     <h4><a href="WebGL_API/GraphicsDOC/index.html" target="_blank">图形学（Graphics）</a></h4>
     <h4><a href="canvas%202D%20API/ctx.html" target="_blank">canvas 2D API</a></h4>
     <h4><a href="WebGL_API/javaScript%20API/gl.html" target="_blank">WebGL API</a></h4>
-    <h4><a href="WebGL_API/shader%20API/index.html" target="_blank">shader（GLSL ES）</a></h4>
     <h4><a href="#WebGL-example">WebGL实例</a></h4>
     <ul class="ul-1">
       <li><a href="#example_1">WebGL编程指南</a></li>
@@ -66,7 +65,7 @@
       </section>
       <section id="WebGL">
         <h4>WebGL程序</h4>
-        <p>WebGL程序包括运行在浏览器中的JavaScript和运行在<a href="#WebGL_System">WebGL系统</a>中的着色器程序这两个部分。 </p>
+        <p>WebGL程序包括运行在浏览器中的JavaScript和运行在WebGL系统中的<a href="#WebGL_System">着色器程序</a>这两个部分。 </p>
         <div class="content">
           <strong>将信息从JavaScript程序中传递给顶点着色器，由两种方式可以做到：</strong>
           <ul class="ul-1">
@@ -76,13 +75,15 @@
         </div>
       </section>
       <section id="WebGL_System">
-        <h4>WebGL系统</h4>
-        <p>由两部分组成，即顶点着色器（Vertex shader）和片元着色器（Fragment shader）。着色器运行在WebGL系统中。</p>
+        <h4>着色器</h4>
+        <p>WebGL需要两种着色器，即顶点着色器（Vertex shader）和片元着色器（Fragment shader）。着色器运行在WebGL系统中。</p>
         <div class="content">
           <strong>顶点着色器（Vertex shader）</strong>
           <p>顶点着色器用用来描述顶点特性（如位置、颜色等）的程序。</p>
           <strong>片元着色器（Fragment shader）。</strong>
-          <p>处理片元，使其显示在屏幕上。进行逐片元处理过程如光照的程序。</p>
+          <p>使其显示在屏幕上。进行逐片元处理过程如光照的程序。</p>
+          <strong>WebGL中的着色器详细说明：</strong>
+          <p><a href="WebGL_API/shader%20API/index.html" target="_blank">shader（GLSL ES）</a></p>
         </div>
       </section>
       <section id="visualSpace">

@@ -1390,7 +1390,501 @@ var PGL = {
 			return this;
 		}
 	});
+
+	PGL.Matrix3 = function () {
+
+		this.elements = [
+			1, 0, 0,
+			0, 1, 0,
+			0, 0, 1
+		];
+
+		if (arguments.length > 0) {
+			console.error('THREE.Matrix3: the constructor no longer reads arguments. use .set() instead.');
+		}
+
+	};
+	Object.assign(PGL.Matrix3.prototype, {
+
+		isMatrix3: true,
+
+		set: function (n11, n12, n13, n21, n22, n23, n31, n32, n33) {
+
+			var te = this.elements;
+
+			te[0] = n11;
+			te[1] = n21;
+			te[2] = n31;
+			te[3] = n12;
+			te[4] = n22;
+			te[5] = n32;
+			te[6] = n13;
+			te[7] = n23;
+			te[8] = n33;
+
+			return this;
+
+		},
+
+		identity: function () {
+
+			this.set(
+				1, 0, 0,
+				0, 1, 0,
+				0, 0, 1
+			);
+
+			return this;
+
+		},
+
+		clone: function () {
+
+			return new this.constructor().fromArray(this.elements);
+
+		},
+
+		copy: function (m) {
+
+			var te = this.elements;
+			var me = m.elements;
+
+			te[0] = me[0];
+			te[1] = me[1];
+			te[2] = me[2];
+			te[3] = me[3];
+			te[4] = me[4];
+			te[5] = me[5];
+			te[6] = me[6];
+			te[7] = me[7];
+			te[8] = me[8];
+
+			return this;
+
+		},
+
+		setFromMatrix4: function (m) {
+
+			var me = m.elements;
+
+			this.set(
+				me[0], me[4], me[8],
+				me[1], me[5], me[9],
+				me[2], me[6], me[10]
+			);
+
+			return this;
+
+		},
+
+		applyToBufferAttribute: function () {
+
+			var v1 = new PGL.Vector3();
+
+			return function applyToBufferAttribute(attribute) {
+
+				for (var i = 0, l = attribute.count; i < l; i++) {
+
+					v1.x = attribute.getX(i);
+					v1.y = attribute.getY(i);
+					v1.z = attribute.getZ(i);
+
+					v1.applyMatrix3(this);
+
+					attribute.setXYZ(i, v1.x, v1.y, v1.z);
+
+				}
+
+				return attribute;
+
+			};
+
+		}(),
+
+		multiply: function (m) {
+
+			return this.multiplyMatrices(this, m);
+
+		},
+
+		premultiply: function (m) {
+
+			return this.multiplyMatrices(m, this);
+
+		},
+
+		multiplyMatrices: function (a, b) {
+
+			var ae = a.elements;
+			var be = b.elements;
+			var te = this.elements;
+
+			var a11 = ae[0], a12 = ae[3], a13 = ae[6];
+			var a21 = ae[1], a22 = ae[4], a23 = ae[7];
+			var a31 = ae[2], a32 = ae[5], a33 = ae[8];
+
+			var b11 = be[0], b12 = be[3], b13 = be[6];
+			var b21 = be[1], b22 = be[4], b23 = be[7];
+			var b31 = be[2], b32 = be[5], b33 = be[8];
+
+			te[0] = a11 * b11 + a12 * b21 + a13 * b31;
+			te[3] = a11 * b12 + a12 * b22 + a13 * b32;
+			te[6] = a11 * b13 + a12 * b23 + a13 * b33;
+
+			te[1] = a21 * b11 + a22 * b21 + a23 * b31;
+			te[4] = a21 * b12 + a22 * b22 + a23 * b32;
+			te[7] = a21 * b13 + a22 * b23 + a23 * b33;
+
+			te[2] = a31 * b11 + a32 * b21 + a33 * b31;
+			te[5] = a31 * b12 + a32 * b22 + a33 * b32;
+			te[8] = a31 * b13 + a32 * b23 + a33 * b33;
+
+			return this;
+
+		},
+
+		multiplyScalar: function (s) {
+
+			var te = this.elements;
+
+			te[0] *= s;
+			te[3] *= s;
+			te[6] *= s;
+			te[1] *= s;
+			te[4] *= s;
+			te[7] *= s;
+			te[2] *= s;
+			te[5] *= s;
+			te[8] *= s;
+
+			return this;
+
+		},
+
+		determinant: function () {
+
+			var te = this.elements;
+
+			var a = te[0], b = te[1], c = te[2],
+				d = te[3], e = te[4], f = te[5],
+				g = te[6], h = te[7], i = te[8];
+
+			return a * e * i - a * f * h - b * d * i + b * f * g + c * d * h - c * e * g;
+
+		},
+
+		getInverse: function (matrix, throwOnDegenerate) {
+
+			if (matrix && matrix.isMatrix4) {
+
+				console.error("THREE.Matrix3: .getInverse() no longer takes a Matrix4 argument.");
+
+			}
+
+			var me = matrix.elements,
+				te = this.elements,
+
+				n11 = me[0], n21 = me[1], n31 = me[2],
+				n12 = me[3], n22 = me[4], n32 = me[5],
+				n13 = me[6], n23 = me[7], n33 = me[8],
+
+				t11 = n33 * n22 - n32 * n23,
+				t12 = n32 * n13 - n33 * n12,
+				t13 = n23 * n12 - n22 * n13,
+
+				det = n11 * t11 + n21 * t12 + n31 * t13;
+
+			if (det === 0) {
+
+				var msg = "THREE.Matrix3: .getInverse() can't invert matrix, determinant is 0";
+
+				if (throwOnDegenerate === true) {
+
+					throw new Error(msg);
+
+				} else {
+
+					console.warn(msg);
+
+				}
+
+				return this.identity();
+
+			}
+
+			var detInv = 1 / det;
+
+			te[0] = t11 * detInv;
+			te[1] = (n31 * n23 - n33 * n21) * detInv;
+			te[2] = (n32 * n21 - n31 * n22) * detInv;
+
+			te[3] = t12 * detInv;
+			te[4] = (n33 * n11 - n31 * n13) * detInv;
+			te[5] = (n31 * n12 - n32 * n11) * detInv;
+
+			te[6] = t13 * detInv;
+			te[7] = (n21 * n13 - n23 * n11) * detInv;
+			te[8] = (n22 * n11 - n21 * n12) * detInv;
+
+			return this;
+
+		},
+
+		transpose: function () {
+
+			var tmp, m = this.elements;
+
+			tmp = m[1];
+			m[1] = m[3];
+			m[3] = tmp;
+			tmp = m[2];
+			m[2] = m[6];
+			m[6] = tmp;
+			tmp = m[5];
+			m[5] = m[7];
+			m[7] = tmp;
+
+			return this;
+
+		},
+
+		getNormalMatrix: function (matrix4) {
+
+			return this.setFromMatrix4(matrix4).getInverse(this).transpose();
+
+		},
+
+		transposeIntoArray: function (r) {
+
+			var m = this.elements;
+
+			r[0] = m[0];
+			r[1] = m[3];
+			r[2] = m[6];
+			r[3] = m[1];
+			r[4] = m[4];
+			r[5] = m[7];
+			r[6] = m[2];
+			r[7] = m[5];
+			r[8] = m[8];
+
+			return this;
+
+		},
+
+		setUvTransform: function (tx, ty, sx, sy, rotation, cx, cy) {
+
+			var c = Math.cos(rotation);
+			var s = Math.sin(rotation);
+
+			this.set(
+				sx * c, sx * s, -sx * (c * cx + s * cy) + cx + tx,
+				-sy * s, sy * c, -sy * (-s * cx + c * cy) + cy + ty,
+				0, 0, 1
+			);
+
+		},
+
+		scale: function (sx, sy) {
+
+			var te = this.elements;
+
+			te[0] *= sx;
+			te[3] *= sx;
+			te[6] *= sx;
+			te[1] *= sy;
+			te[4] *= sy;
+			te[7] *= sy;
+
+			return this;
+
+		},
+
+		rotate: function (theta) {
+
+			var c = Math.cos(theta);
+			var s = Math.sin(theta);
+
+			var te = this.elements;
+
+			var a11 = te[0], a12 = te[3], a13 = te[6];
+			var a21 = te[1], a22 = te[4], a23 = te[7];
+
+			te[0] = c * a11 + s * a21;
+			te[3] = c * a12 + s * a22;
+			te[6] = c * a13 + s * a23;
+
+			te[1] = -s * a11 + c * a21;
+			te[4] = -s * a12 + c * a22;
+			te[7] = -s * a13 + c * a23;
+
+			return this;
+
+		},
+
+		translate: function (tx, ty) {
+
+			var te = this.elements;
+
+			te[0] += tx * te[2];
+			te[3] += tx * te[5];
+			te[6] += tx * te[8];
+			te[1] += ty * te[2];
+			te[4] += ty * te[5];
+			te[7] += ty * te[8];
+
+			return this;
+
+		},
+
+		equals: function (matrix) {
+
+			var te = this.elements;
+			var me = matrix.elements;
+
+			for (var i = 0; i < 9; i++) {
+
+				if (te[i] !== me[i]) return false;
+
+			}
+
+			return true;
+
+		},
+
+		fromArray: function (array, offset) {
+
+			if (offset === undefined) offset = 0;
+
+			for (var i = 0; i < 9; i++) {
+
+				this.elements[i] = array[i + offset];
+
+			}
+
+			return this;
+
+		},
+
+		toArray: function (array, offset) {
+
+			if (array === undefined) array = [];
+			if (offset === undefined) offset = 0;
+
+			var te = this.elements;
+
+			array[offset] = te[0];
+			array[offset + 1] = te[1];
+			array[offset + 2] = te[2];
+
+			array[offset + 3] = te[3];
+			array[offset + 4] = te[4];
+			array[offset + 5] = te[5];
+
+			array[offset + 6] = te[6];
+			array[offset + 7] = te[7];
+			array[offset + 8] = te[8];
+
+			return array;
+
+		}
+
+	});
 })(PGL);
+
+var points_vert = "attribute vec4 position;\n" +
+	"void main(){\n" +
+	" gl_Position = position; //设置坐标\n" +
+	" gl_PointSize = 10.0; //设置尺寸\n" +
+	"}";
+var points_frag = " void main() {\n" +
+	"gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n" +
+	"}";
+var ShaderChunk = {
+	points_frag: points_frag,
+	points_vert: points_vert
+};
+PGL.UniformsUtils = {
+	merge: function (uniforms) {
+		var merged = {};
+		for (var u = 0; u < uniforms.length; u++) {
+			var tmp = this.clone(uniforms[u]);
+			for (var p in tmp) {
+				merged[p] = tmp[p];
+			}
+		}
+		return merged;
+	},
+	clone: function (uniforms_src) {
+
+		var uniforms_dst = {};
+
+		for (var u in uniforms_src) {
+
+			uniforms_dst[u] = {};
+
+			for (var p in uniforms_src[u]) {
+
+				var parameter_src = uniforms_src[u][p];
+
+				if (parameter_src && (parameter_src.isColor ||
+						parameter_src.isMatrix3 || parameter_src.isMatrix4 ||
+						parameter_src.isVector2 || parameter_src.isVector3 || parameter_src.isVector4 ||
+						parameter_src.isTexture)) {
+
+					uniforms_dst[u][p] = parameter_src.clone();
+
+				} else if (Array.isArray(parameter_src)) {
+
+					uniforms_dst[u][p] = parameter_src.slice();
+
+				} else {
+
+					uniforms_dst[u][p] = parameter_src;
+
+				}
+
+			}
+
+		}
+
+		return uniforms_dst;
+
+	}
+};
+PGL.UniformsLib = {
+	fog: {
+
+		fogDensity: {value: 0.00025},
+		fogNear: {value: 1},
+		fogFar: {value: 2000},
+		fogColor: {value: new PGL.Color(0xffffff)}
+
+	},
+	points: {
+
+		diffuse: {value: new PGL.Color(0xeeeeee)},
+		opacity: {value: 1.0},
+		size: {value: 1.0},
+		scale: {value: 1.0},
+		map: {value: null},
+		uvTransform: {value: new PGL.Matrix3()}
+
+	}
+};
+PGL.ShaderLib = {
+	points: {
+
+		uniforms: PGL.UniformsUtils.merge([
+			PGL.UniformsLib.points,
+			PGL.UniformsLib.fog
+		]),
+
+		vertexShader: ShaderChunk.points_vert,
+		fragmentShader: ShaderChunk.points_frag
+
+	}
+};
 
 // 场景
 PGL.Scene = function () {
@@ -1406,13 +1900,62 @@ Object.assign(PGL.Scene.prototype, {
 		this.children.push(object);
 	}
 });
+
+PGL.Object3D = function () {
+
+	this.parent = null;
+	this.children = [];
+
+	this.visible = true;
+};
+
+PGL.Points = function (geometry, material) {
+
+	PGL.Object3D.call(this);
+
+	this.geometry = geometry !== undefined ? geometry : new PGL.BufferGeometry();
+	this.material = material !== undefined ? material : new PGL.PointsMaterial({color: Math.random() * 0xffffff});
+};
+PGL.Points.prototype = Object.assign(Object.create(PGL.Object3D.prototype), {
+	constructor: PGL.Points,
+
+	isPoints: true
+});
+
 PGL.Mesh = function (geometry, material) {
+
+	PGL.Object3D.call(this);
+
+	this.type = 'Mesh';
+
 	this.geometry = geometry;
 	this.material = material;
 };
-PGL.Geometry = function () {
+PGL.Mesh.prototype = Object.assign(Object.create(PGL.Object3D.prototype), {
+	constructor: PGL.Mesh,
 
+	isMesh: true
+});
+
+PGL.BufferGeometry = function () {
+	this.attributes = {}; // 保存属性信息
 };
+Object.assign(PGL.BufferGeometry.prototype, {
+	/**
+	 * 把属性添加到this.attributes中
+	 * @param name
+	 * @param attribute
+	 * @return {*}
+	 */
+	addAttribute: function (name, attribute) {
+		this.attributes[name] = attribute;
+		return this;
+	}
+});
+
+PGL.Geometry = function () {
+};
+
 PGL.Material = function () {
 };
 PGL.ShaderMaterial = function (options) {
@@ -1422,6 +1965,26 @@ PGL.ShaderMaterial = function (options) {
 	var options = options || {};
 	this.vertexShader = options.vertexShader;
 	this.fragmentShader = options.fragmentShader;
+};
+PGL.PointsMaterial = function (parameters) {
+	PGL.Material.call(this);
+
+	this.type = 'PointsMaterial';
+};
+
+/**
+ *
+ * @param array 数组
+ * @param itemSize 数据长度
+ * @constructor
+ */
+PGL.BufferAttribute = function (array, itemSize) {
+	this.array = array;
+	this.count = array !== undefined ? array.length / itemSize : 0;
+	this.itemSize = itemSize;
+};
+PGL.Float32BufferAttribute = function (array, itemSize, normalized) {
+	PGL.BufferAttribute.call(this, new Float32Array(array), itemSize, normalized);
 };
 
 /**
@@ -1443,128 +2006,180 @@ PGL.WebGLRenderer = function (parameters) {
 
 	// public properties
 	this.domElement = _canvas;
+	this.context = null;
+
+	var _this = this;
 
 	// Get the rendering context for WebGL
 	var _gl = getWebGLContext();
 	if (!_gl) return null;
 
-	function initShaders(gl, vshader, fshader) {
-		var program = createProgram(gl, vshader, fshader);
-		if (!program) {
-			console.log('Failed to create program');
-			return false;
-		}
+	var state;
+	var renderLists;
+	var programCache, bufferRenderer;
 
-		gl.useProgram(program);
-		gl.program = program;
+	function initGLContext() {
+		state = new PGL.WebGLState(_gl);
+		programCache = new PGL.WebGLPrograms(_this);
+		renderLists = PGL.WebGLRenderList();
 
-		return true;
+		bufferRenderer = new PGL.WebGLBufferRenderer(_gl);
+
+		_this.context = _gl;
 	}
+
+	initGLContext();
 
 	/**
-	 * Create the linked program object (创建一个链接好的程序对象)
-	 * @param gl GL context
-	 * @param vshader a vertex shader program (string)
-	 * @param fshader a fragment shader program (string)
-	 * @return created program object, or null if the creation has failed
+	 * 渲染缓存区
 	 */
-	function createProgram(gl, vshader, fshader) {
-		// 创建着色器对象
-		var vertexShader = loadShader(gl, gl.VERTEX_SHADER, vshader);
-		var fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fshader);
-		if (!vertexShader || !fragmentShader) {
-			return null;
+	this.renderBufferDirect = function (object) {
+
+		var program = setProgram(object);
+		program = object.material.program;
+		var updateBuffers = false;
+		updateBuffers = true;
+
+		var renderer = bufferRenderer;
+
+		var position = object.geometry.attributes !== undefined ? object.geometry.attributes.position : undefined;
+
+		// 着色器关联顶点属性
+		if (updateBuffers) {
+			// 设置顶点相关信息
+			setupVertexAttributes(object.material, program, object.geometry);
 		}
 
-		// 创建程序对象
-		var program = gl.createProgram();
-		if (!program) {
-			return null;
+		var dataCount = Infinity;
+		if (position !== undefined) {
+			dataCount = position.count;
+		}
+		else {
+			dataCount = 1;
 		}
 
-		// 为程序对象分配顶点着色器和片元着色器
-		gl.attachShader(program, vertexShader);
-		gl.attachShader(program, fragmentShader);
-
-		// 链接着色器
-		gl.linkProgram(program);
-
-		// 检查链接
-		var linked = gl.getProgramParameter(program, gl.LINK_STATUS);
-		if (!linked) {
-			var error = gl.getProgramInfoLog(program);
-			console.log('Failed to link program: ' + error);
-			gl.deleteProgram(program);
-			gl.deleteShader(fragmentShader);
-			gl.deleteShader(vertexShader);
-			return null;
+		if (object.isPoints) {
+			renderer.setMode(_gl.POINTS);
 		}
-		return program;
-	}
+
+		renderer.render(0, dataCount);
+	};
 
 	/**
-	 * Create a shader object （创建一个编译好的着色器对象）
-	 * @param gl GL context
-	 * @param type the type of the shader object to be created
-	 * @param source shader program (string)
-	 * @return created shader object, or null if the creation has failed.
+	 * 设置顶点属性
+	 * @param material 材质
+	 * @param program 着色器
+	 * @param geometry 几何体
 	 */
-	function loadShader(gl, type, source) {
-		// 创建着色器对象
-		var shader = gl.createShader(type);
-		if (shader == null) {
-			console.log('unable to create shader');
-			return null;
+	function setupVertexAttributes(material, program, geometry) {
+		var geometryAttributes = geometry.attributes;
+		for (var name in geometryAttributes) {
+
+			var localPosition = _gl.getAttribLocation(program.program, name);
+			var value = geometryAttributes[name].array;
+
+			switch (value.length) {
+				case 3:
+					_gl.vertexAttrib3fv(localPosition, value);
+				case 4:
+					_gl.vertexAttrib4fv(localPosition, value);
+				default:
+					_gl.vertexAttrib1fv(localPosition, value)
+			}
+
 		}
-
-		// 设置着色器的源代码
-		gl.shaderSource(shader, source);
-
-		// 编译着色器
-		gl.compileShader(shader);
-
-		// 检查着色器的编译状态
-		var compiled = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
-		if (!compiled) {
-			var error = gl.getShaderInfoLog(shader);
-			console.log('Failed to compile shader: ' + error);
-			gl.deleteShader(shader);
-			return null;
-		}
-
-		return shader;
 	}
-
-	var state = new PGL.WebGLState(_gl);
 
 	// 渲染物体
 	this.render = function (scene) {
 
-		var VSHADER_SOURCE = scene.children[0].material.vertexShader;
-		var FSHADER_SOURCE = scene.children[0].material.fragmentShader;
+		projectObject(scene);
 
-		if (!initShaders(_gl, VSHADER_SOURCE, FSHADER_SOURCE)) {
-			console.log('Failed to intialize shaders.');
-			return;
+		var opaqueObjects = renderLists.opaque;
+
+		if (opaqueObjects.length) renderObjects(opaqueObjects, scene);
+	};
+
+	/**
+	 * 拆分渲染对象
+	 * @param object PGL.Scene
+	 */
+	function projectObject(object) {
+		if (object.visible === false) return;
+
+		var visible = true;
+
+		if (visible) {
+			if (object.isPoints || object.isMesh) {
+				renderLists.opaque.push(object);
+			}
 		}
 
-		/**
-		 * 绘制一个点
-		 * gl.drawArrays(mode, first, count)
-		 * 执行顶点着色器，按照mode参数指定的方式绘制图形
-		 * 参数：
-		 *  mode：指定绘制的方式，可以接收一下常量符号：gl_POINTS,
-		 *    gl_LINES,gl_LINE_STRIP,gl_LINE_LOOP,gl_TRIANGLES,gl_TRIANGLE_STRIP,
-		 *    gl_TRIANGLE_FAN
-		 *  first:指定从那个顶点开始绘制
-		 *  count：指定绘制需要用到多少个顶点（整形数）
-		 * 返回值：无
-		 * 错误：
-		 *  INVALID_ENUM：传入的mode参数不是前述参数之一
-		 *  INVALID_VALUE：参数first或count是负数
-		 */
-		_gl.drawArrays(_gl.POINTS, 0, 1);
-	};
+		var children = object.children;
+
+		for (var i = 0, l = children.length; i < l; i++) {
+			projectObject(children[i]);
+		}
+	}
+
+	/**
+	 * 渲染多个物体
+	 * @param renderList
+	 * @param scene
+	 */
+	function renderObjects(renderList, scene) {
+		for (var i = 0; i < renderList.length; i++) {
+			renderObject(renderList[i], scene);
+		}
+	}
+
+	/**
+	 * 渲染单个物体
+	 * @param object
+	 * @param scene
+	 */
+	function renderObject(object, scene) {
+		_this.renderBufferDirect(object);
+	}
+
+	function initMaterial(object) {
+
+		var program;
+		var programChange = true;
+
+		// 获取参数
+		var parameters = programCache.getParameters(object);
+
+		if (programChange) {
+			var shader;
+			if (parameters.shaderID) {
+				shader = PGL.ShaderLib[parameters.shaderID];
+			}
+			else {
+				shader = {
+					vertexShader: object.material.vertexShader,
+					fragmentShader: object.material.fragmentShader
+				}
+			}
+
+			program = programCache.acquireProgram(object.material, shader, parameters);
+
+			object.material.program = program;
+		}
+	}
+
+	/**
+	 * 设置着色器程序
+	 * @param object
+	 */
+	function setProgram(object) {
+		initMaterial(object);
+
+		var program = object.material.program;
+		if (state.useProgram(program.program)) {
+
+		}
+	}
 
 	// 获取上下文
 	this.getContext = function () {
@@ -1673,11 +2288,150 @@ PGL.WebGLState = function (gl) {
 	}
 
 	var colorBuffer = new ColorBuffer();
+
+	var currentProgram = null; // 当前使用的着色器程序
+
 	colorBuffer.setClear(0, 0, 0, 1);
+
+	function useProgram(program) {
+		if (currentProgram !== program) {
+
+			gl.useProgram(program);
+
+			currentProgram = program;
+
+			return true;
+
+		}
+
+		return false;
+	}
 
 	return {
 		buffers: {
 			color: colorBuffer
-		}
+		},
+
+		useProgram: useProgram
 	}
+};
+/**
+ * 渲染列表
+ * @return {{opaque: Array, transparent: Array}}
+ * @constructor
+ */
+PGL.WebGLRenderList = function () {
+	var opaque = [];
+	var transparent = [];
+
+	return {
+		opaque: opaque,
+		transparent: transparent
+	};
+};
+
+/**
+ * 着色器程序管理
+ * @constructor
+ */
+PGL.WebGLPrograms = function (renderer) {
+
+	var programs = []; // 保存所有的着色器程序
+	var shaderIDs = {
+		PointsMaterial: 'points'
+	};
+
+	this.getParameters = function (object) {
+		var shaderID = shaderIDs[object.material.type];
+
+		var parameters = {
+			shaderID: shaderID
+		};
+
+		return parameters;
+	};
+
+	this.acquireProgram = function (material, shader, parameters) {
+
+		var program;
+
+		program = new PGL.WebGLProgram(renderer, shader);
+
+		programs.push(program);
+
+		return program;
+	};
+
+	this.programs = programs;
+};
+
+/**
+ * 着色器程序
+ * @param renderer
+ * @param shader
+ * @return {PGL.WebGLProgram}
+ * @constructor
+ */
+PGL.WebGLProgram = function (renderer, shader) {
+	var gl = renderer.context;
+
+	var vertexShader = shader.vertexShader;
+	var fragmentShader = shader.fragmentShader;
+
+	var program = gl.createProgram();
+
+	// 创建着色器
+	var glVertexShader = PGL.WebGLShader(gl, gl.VERTEX_SHADER, vertexShader);
+	var glFragmentShader = PGL.WebGLShader(gl, gl.FRAGMENT_SHADER, fragmentShader);
+
+	gl.attachShader(program, glVertexShader);
+	gl.attachShader(program, glFragmentShader);
+
+	gl.linkProgram(program);
+
+	gl.deleteShader(glVertexShader);
+	gl.deleteShader(glFragmentShader);
+
+	this.program = program;
+	this.vertexShader = glVertexShader;
+	this.fragmentShader = glFragmentShader;
+
+	return this;
+};
+
+/**
+ * 实例化一个着色器
+ * @param gl 上下文
+ * @param type 类型
+ * @param string 字符串
+ * @return {*|WebGLShader}
+ * @constructor
+ */
+PGL.WebGLShader = function (gl, type, string) {
+	var shader = gl.createShader(type);
+
+	gl.shaderSource(shader, string);
+	gl.compileShader(shader);
+
+	return shader;
+};
+
+/**
+ * 绘制图形
+ * @param gl
+ * @constructor
+ */
+PGL.WebGLBufferRenderer = function (gl) {
+	var mode;
+
+	function setMode(value) {
+		mode = value;
+	}
+
+	function render(start, count) {
+		gl.drawArrays(mode, start, count);
+	}
+
+	this.setMode = setMode;
+	this.render = render;
 };

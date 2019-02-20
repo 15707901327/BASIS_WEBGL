@@ -1930,6 +1930,8 @@ PGL.ShaderLib = {
 // 场景
 PGL.Scene = function () {
 	this.children = [];
+
+	this.background = null;
 };
 Object.assign(PGL.Scene.prototype, {
 
@@ -2004,54 +2006,54 @@ PGL.Material.prototype = {
 	 * 把给定的参数设置到当前的对象中去
 	 * @param values
 	 */
-	setValues:function (values) {
-		if ( values === undefined ) return;
+	setValues: function (values) {
+		if (values === undefined) return;
 
-		for ( var key in values ) {
+		for (var key in values) {
 
-			var newValue = values[ key ];
+			var newValue = values[key];
 
-			if ( newValue === undefined ) {
+			if (newValue === undefined) {
 
-				console.warn( "THREE.Material: '" + key + "' parameter is undefined." );
+				console.warn("THREE.Material: '" + key + "' parameter is undefined.");
 				continue;
 
 			}
 
 			// for backward compatability if shading is set in the constructor
-			if ( key === 'shading' ) {
+			if (key === 'shading') {
 
-				console.warn( 'THREE.' + this.type + ': .shading has been removed. Use the boolean .flatShading instead.' );
-				this.flatShading = ( newValue === FlatShading ) ? true : false;
+				console.warn('THREE.' + this.type + ': .shading has been removed. Use the boolean .flatShading instead.');
+				this.flatShading = (newValue === FlatShading) ? true : false;
 				continue;
 
 			}
 
-			var currentValue = this[ key ];
+			var currentValue = this[key];
 
-			if ( currentValue === undefined ) {
+			if (currentValue === undefined) {
 
-				console.warn( "THREE." + this.type + ": '" + key + "' is not a property of this material." );
+				console.warn("THREE." + this.type + ": '" + key + "' is not a property of this material.");
 				continue;
 
 			}
 
-			if ( currentValue && currentValue.isColor ) {
+			if (currentValue && currentValue.isColor) {
 
-				currentValue.set( newValue );
+				currentValue.set(newValue);
 
-			} else if ( ( currentValue && currentValue.isVector3 ) && ( newValue && newValue.isVector3 ) ) {
+			} else if ((currentValue && currentValue.isVector3) && (newValue && newValue.isVector3)) {
 
-				currentValue.copy( newValue );
+				currentValue.copy(newValue);
 
-			} else if ( key === 'overdraw' ) {
+			} else if (key === 'overdraw') {
 
 				// ensure overdraw is backwards-compatible with legacy boolean type
-				this[ key ] = Number( newValue );
+				this[key] = Number(newValue);
 
 			} else {
 
-				this[ key ] = newValue;
+				this[key] = newValue;
 
 			}
 
@@ -2115,6 +2117,12 @@ PGL.WebGLRenderer = function (parameters) {
 	this.domElement = _canvas;
 	this.context = null;
 
+	// clearing
+	this.autoClear = true;
+	this.autoClearColor = true;
+	this.autoClearDepth = true;
+	this.autoClearStencil = true;
+
 	var _this = this;
 
 	// Get the rendering context for WebGL
@@ -2123,9 +2131,9 @@ PGL.WebGLRenderer = function (parameters) {
 
 	var state;
 	var properties;
-	var renderLists;
+	var programCache, renderLists;
 
-	var programCache, bufferRenderer;
+	var background, bufferRenderer;
 
 	function initGLContext() {
 		state = new PGL.WebGLState(_gl);
@@ -2134,6 +2142,8 @@ PGL.WebGLRenderer = function (parameters) {
 
 		programCache = new PGL.WebGLPrograms(_this);
 		renderLists = PGL.WebGLRenderList();
+
+		background = new PGL.WebGLBackground(_this, state);
 
 		bufferRenderer = new PGL.WebGLBufferRenderer(_gl);
 
@@ -2211,7 +2221,11 @@ PGL.WebGLRenderer = function (parameters) {
 
 		var opaqueObjects = renderLists.opaque;
 
+		// 渲染背景
+		background.render(scene);
+
 		if (opaqueObjects.length) renderObjects(opaqueObjects, scene);
+
 	};
 
 	/**
@@ -2351,10 +2365,8 @@ PGL.WebGLRenderer = function (parameters) {
 	};
 
 	// 设置背景颜色
-	this.setClearColor = function (color, alpha) {
-		state.buffers.color.setClear(color.r, color.g, color.b, alpha);
-
-		this.clear(true, false, false)
+	this.setClearColor = function () {
+		background.setClearColor.apply(background, arguments);
 	};
 
 	/**
@@ -2635,5 +2647,64 @@ PGL.WebGLProperties = function () {
 
 	return {
 		get: get
+	}
+};
+
+/**
+ * 背景管理
+ * @param renderer
+ * @param state
+ * @param objects
+ * @constructor
+ */
+PGL.WebGLBackground = function (renderer, state) {
+
+	var clearColor = new PGL.Color(0x000000);
+	var clearAlpha = 0;
+
+	/**
+	 * 设置清空背景颜色值，
+	 * @param scene
+	 * @param forceClear 强制清空缓存区
+	 */
+	function render(scene, forceClear) {
+		var background = scene.background;
+		if (background === null) {
+			setClear(clearColor, clearAlpha);
+		}
+
+		if (renderer.autoClear || forceClear) {
+			renderer.clear(renderer.autoClearColor, renderer.autoClearDepth, renderer.autoClearStencil);
+		}
+	}
+
+	/**
+	 * 设置背景颜色
+	 * @param color
+	 * @param alpha
+	 */
+	function setClear(color, alpha) {
+		state.buffers.color.setClear(color.r, color.g, color.b, alpha);
+	}
+
+	return {
+		getClearColor: function () {
+
+			return clearColor;
+
+		},
+		setClearColor: function (color, alpha) {
+			clearColor.set(color);
+			clearAlpha = alpha !== undefined ? alpha : 1;
+			setClear(clearColor, clearAlpha);
+		},
+		getClearAlpha: function () {
+			return clearAlpha;
+		},
+		setClearAlpha: function (alpha) {
+			clearAlpha = alpha;
+			setClear(clearColor, clearAlpha);
+		},
+		render: render
 	}
 };

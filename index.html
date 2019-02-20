@@ -15,15 +15,11 @@
       <li><a href="#visualSpace">相机的可视空间</a></li>
       <li><a href="WebGL_API/WebGL可以绘制的基本图形.html" target="_blank">WebGL绘制的基本图形</a></li>
       <li><a href="WebGL_API/canvas标签.html" target="_blank">canvas标签</a></li>
+      <li><a href="#type_array">类型化数组</a></li>
     </ul>
     <h4><a href="#WebGL_Event">WebGL相关事件</a></h4>
     <ul class="ul-1">
       <li><a href="#ContextLost">上下文丢失事件</a></li>
-    </ul>
-    <h4><a href="#JavaScript">JavaScript</a></h4>
-    <ul class="ul-1">
-      <li><a href="#bufferObject">缓存区对象</a></li>
-      <li><a href="#type_array">类型化数组</a></li>
     </ul>
     <h4><a href="#inner">WebGL内置功能</a></h4>
     <ul class="ul-1">
@@ -72,6 +68,27 @@
             <li><a href="WebGL_API/shader API/存储限定字.html#attribute" target="_blank">attribute变量</a></li>
             <li><a href="WebGL_API/shader API/存储限定字.html#uniform" target="_blank">uniform变量</a></li>
           </ul>
+          <strong>缓存区对象</strong>
+          <p>缓存区对象是WebGL系统中的一块内存区域，我们可以一次性地向缓存区对象中填充大量的顶点数据，然后将这些数据保存在其中，供顶点使用。</p>
+          <strong>使用缓冲区对象向着色器中传入多个数据步骤：</strong>
+          <ul class="ul-1-num">
+            <li>创建缓冲区对象（<a href="WebGL_API/javaScript API/gl.html#createBuffer"
+                           target="_blank">gl.createBuffer()</a>）
+            </li>
+            <li>绑定缓冲区对象（<a href="WebGL_API/javaScript API/gl.html#bindBuffer" target="_blank">gl.bindBuffer()</a>）
+            </li>
+            <li>将数据写入缓冲区对象（<a href="WebGL_API/javaScript API/gl.html#bufferData" target="_blank">gl.bufferData()</a>）
+            </li>
+            <li>将缓冲区对象分配给一个attribute变量（<a href="WebGL_API/javaScript API/gl.html#vertexAttribPointer"
+                                          target="_blank">gl.vertexAttribPointer()</a>）
+            </li>
+            <li>开启attribute变量（<a href="WebGL_API/javaScript API/gl.html#enableVertexAttribArray" target="_blank">gl.enableVertexAttribArray()</a>）
+            </li>
+          </ul>
+          <strong>实例</strong>
+          <ul class="ul-1-num">
+            <li><a href="WebGL编程指南/ch3/MultiPoints.html" target="_blank">显示多个顶点</a></li>
+          </ul>
         </div>
       </section>
       <section id="WebGL_System">
@@ -93,66 +110,6 @@
           <ul class="ul-1-num">
             <li>长方形可视空间，也称盒状空间，由正射投影（orthographic projection）产生。</li>
             <li>四棱锥/金字塔可视空间，由透视投影(perspective projection)产生</li>
-          </ul>
-        </div>
-      </section>
-    </section>
-    <section id="WebGL_Event" class="section1">
-      <h4 class="title">WebGL相关事件</h4>
-      <section id="ContextLost">
-        <h4>上下文丢失事件</h4>
-        <div class="content">
-          <strong>说明</strong>
-          <table border="1">
-            <tr>
-              <th colspan="2">上下文丢失事件</th>
-            </tr>
-            <tr>
-              <th>事件</th>
-              <th>描述</th>
-            </tr>
-            <tr>
-              <td>webglcontextlost</td>
-              <td>当WebGl上下文丢失时触发</td>
-            </tr>
-            <tr>
-              <td>webglcontextrestored</td>
-              <td>当浏览器完成WebGL系统的重置后触发</td>
-            </tr>
-          </table>
-          <strong>使用</strong>
-          <p>只能使用addEventListener来注册事件</p>
-          <strong>实例</strong>
-          <ul class="ul-1-num">
-            <li><a href="WebGL编程指南/ch10/RotatingTriangle_contextLost.html" target="_blank">上下文丢失</a></li>
-          </ul>
-        </div>
-      </section>
-    </section>
-    <section id="JavaScript" class="section1">
-      <div class="title">javaScript相关函数概念</div>
-      <section id="bufferObject">
-        <h4>缓存区对象</h4>
-        <p>缓存区对象是WebGL系统中的一块内存区域，我们可以一次性地向缓存区对象中填充大量的顶点数据，然后将这些数据保存在其中，供顶点使用。</p>
-        <div class="content">
-          <strong>使用缓冲区对象向着色器中传入多个数据步骤：</strong>
-          <ul class="ul-1-num">
-            <li>创建缓冲区对象（<a href="WebGL%20API/javaScript%20API/gl.html#createBuffer"
-                           target="_blank">gl.createBuffer()</a>）
-            </li>
-            <li>绑定缓冲区对象（<a href="WebGL%20API/javaScript%20API/gl.html#bindBuffer" target="_blank">gl.bindBuffer()</a>）
-            </li>
-            <li>将数据写入缓冲区对象（<a href="WebGL%20API/javaScript%20API/gl.html#bufferData" target="_blank">gl.bufferData()</a>）
-            </li>
-            <li>将缓冲区对象分配给一个attribute变量（<a href="WebGL%20API/javaScript%20API/gl.html#vertexAttribPointer"
-                                          target="_blank">gl.vertexAttribPointer()</a>）
-            </li>
-            <li>开启attribute变量（<a href="WebGL%20API/javaScript%20API/gl.html#enableVertexAttribArray" target="_blank">gl.enableVertexAttribArray()</a>）
-            </li>
-          </ul>
-          <strong>实例</strong>
-          <ul class="ul-1-num">
-            <li><a href="WebGL编程指南/ch3/MultiPoints.html" target="_blank">显示多个顶点</a></li>
           </ul>
         </div>
       </section>
@@ -263,6 +220,41 @@
           </ul>
         </div>
       </section>
+    </section>
+    <section id="WebGL_Event" class="section1">
+      <h4 class="title">WebGL相关事件</h4>
+      <section id="ContextLost">
+        <h4>上下文丢失事件</h4>
+        <div class="content">
+          <strong>说明</strong>
+          <table border="1">
+            <tr>
+              <th colspan="2">上下文丢失事件</th>
+            </tr>
+            <tr>
+              <th>事件</th>
+              <th>描述</th>
+            </tr>
+            <tr>
+              <td>webglcontextlost</td>
+              <td>当WebGl上下文丢失时触发</td>
+            </tr>
+            <tr>
+              <td>webglcontextrestored</td>
+              <td>当浏览器完成WebGL系统的重置后触发</td>
+            </tr>
+          </table>
+          <strong>使用</strong>
+          <p>只能使用addEventListener来注册事件</p>
+          <strong>实例</strong>
+          <ul class="ul-1-num">
+            <li><a href="WebGL编程指南/ch10/RotatingTriangle_contextLost.html" target="_blank">上下文丢失</a></li>
+          </ul>
+        </div>
+      </section>
+    </section>
+    <section id="JavaScript" class="section1">
+      <div class="title">javaScript相关函数概念</div>
       <section>
         <h4>着色器对象（shader object）</h4>
         <p>着色器对象管理一个顶点着色器或一个片元着色器。每一个着色器都有一个着色器对象。</p>

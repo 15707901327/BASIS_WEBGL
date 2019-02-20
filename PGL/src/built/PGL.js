@@ -3,6 +3,61 @@ var PGL = {
 	REVISION: 1 // 版本
 };
 
+PGL.UniformsUtils = {
+
+	merge: function (uniforms) {
+
+		var merged = {};
+
+		for (var u = 0; u < uniforms.length; u++) {
+			var tmp = this.clone(uniforms[u]);
+			for (var p in tmp) {
+				merged[p] = tmp[p];
+			}
+		}
+		return merged;
+
+	},
+
+	clone: function (uniforms_src) {
+
+		var uniforms_dst = {};
+
+		for (var u in uniforms_src) {
+
+			uniforms_dst[u] = {};
+
+			for (var p in uniforms_src[u]) {
+
+				var parameter_src = uniforms_src[u][p];
+
+				if (parameter_src && (parameter_src.isColor ||
+						parameter_src.isMatrix3 || parameter_src.isMatrix4 ||
+						parameter_src.isVector2 || parameter_src.isVector3 || parameter_src.isVector4 ||
+						parameter_src.isTexture)) {
+
+					uniforms_dst[u][p] = parameter_src.clone();
+
+				} else if (Array.isArray(parameter_src)) {
+
+					uniforms_dst[u][p] = parameter_src.slice();
+
+				} else {
+
+					uniforms_dst[u][p] = parameter_src;
+
+				}
+
+			}
+
+		}
+
+		return uniforms_dst;
+
+	}
+
+};
+
 // Math
 (function (PGL) {
 	PGL.Vector2 = function (x, y) {
@@ -1792,10 +1847,12 @@ var PGL = {
 	});
 })(PGL);
 
-var points_vert = "attribute vec4 position;\n" +
+var points_vert =
+	"attribute vec4 position;\n" +
+	"uniform float size;\n" +
 	"void main(){\n" +
 	" gl_Position = position; //设置坐标\n" +
-	" gl_PointSize = 10.0; //设置尺寸\n" +
+	" gl_PointSize = size; //设置尺寸\n" +
 	"}";
 var points_frag = " void main() {\n" +
 	"gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n" +
@@ -1853,31 +1910,15 @@ PGL.UniformsUtils = {
 	}
 };
 PGL.UniformsLib = {
-	fog: {
-
-		fogDensity: {value: 0.00025},
-		fogNear: {value: 1},
-		fogFar: {value: 2000},
-		fogColor: {value: new PGL.Color(0xffffff)}
-
-	},
 	points: {
-
-		diffuse: {value: new PGL.Color(0xeeeeee)},
-		opacity: {value: 1.0},
-		size: {value: 1.0},
-		scale: {value: 1.0},
-		map: {value: null},
-		uvTransform: {value: new PGL.Matrix3()}
-
+		size: {value: 1.0}
 	}
 };
 PGL.ShaderLib = {
 	points: {
 
 		uniforms: PGL.UniformsUtils.merge([
-			PGL.UniformsLib.points,
-			PGL.UniformsLib.fog
+			PGL.UniformsLib.points
 		]),
 
 		vertexShader: ShaderChunk.points_vert,
@@ -1958,6 +1999,65 @@ PGL.Geometry = function () {
 
 PGL.Material = function () {
 };
+PGL.Material.prototype = {
+	/**
+	 * 把给定的参数设置到当前的对象中去
+	 * @param values
+	 */
+	setValues:function (values) {
+		if ( values === undefined ) return;
+
+		for ( var key in values ) {
+
+			var newValue = values[ key ];
+
+			if ( newValue === undefined ) {
+
+				console.warn( "THREE.Material: '" + key + "' parameter is undefined." );
+				continue;
+
+			}
+
+			// for backward compatability if shading is set in the constructor
+			if ( key === 'shading' ) {
+
+				console.warn( 'THREE.' + this.type + ': .shading has been removed. Use the boolean .flatShading instead.' );
+				this.flatShading = ( newValue === FlatShading ) ? true : false;
+				continue;
+
+			}
+
+			var currentValue = this[ key ];
+
+			if ( currentValue === undefined ) {
+
+				console.warn( "THREE." + this.type + ": '" + key + "' is not a property of this material." );
+				continue;
+
+			}
+
+			if ( currentValue && currentValue.isColor ) {
+
+				currentValue.set( newValue );
+
+			} else if ( ( currentValue && currentValue.isVector3 ) && ( newValue && newValue.isVector3 ) ) {
+
+				currentValue.copy( newValue );
+
+			} else if ( key === 'overdraw' ) {
+
+				// ensure overdraw is backwards-compatible with legacy boolean type
+				this[ key ] = Number( newValue );
+
+			} else {
+
+				this[ key ] = newValue;
+
+			}
+
+		}
+	}
+};
 PGL.ShaderMaterial = function (options) {
 
 	PGL.Material.call(this);
@@ -1970,7 +2070,14 @@ PGL.PointsMaterial = function (parameters) {
 	PGL.Material.call(this);
 
 	this.type = 'PointsMaterial';
+
+	this.size = 1;// 点的大小
+
+	this.setValues(parameters);
 };
+PGL.PointsMaterial.prototype = Object.create(PGL.Material.prototype);
+PGL.PointsMaterial.prototype.constructor = PGL.PointsMaterial;
+PGL.PointsMaterial.prototype.isPointsMaterial = true;
 
 /**
  *
@@ -2015,11 +2122,16 @@ PGL.WebGLRenderer = function (parameters) {
 	if (!_gl) return null;
 
 	var state;
+	var properties;
 	var renderLists;
+
 	var programCache, bufferRenderer;
 
 	function initGLContext() {
 		state = new PGL.WebGLState(_gl);
+
+		properties = new PGL.WebGLProperties();
+
 		programCache = new PGL.WebGLPrograms(_this);
 		renderLists = PGL.WebGLRenderList();
 
@@ -2081,8 +2193,10 @@ PGL.WebGLRenderer = function (parameters) {
 			switch (value.length) {
 				case 3:
 					_gl.vertexAttrib3fv(localPosition, value);
+					break;
 				case 4:
 					_gl.vertexAttrib4fv(localPosition, value);
+					break;
 				default:
 					_gl.vertexAttrib1fv(localPosition, value)
 			}
@@ -2129,7 +2243,8 @@ PGL.WebGLRenderer = function (parameters) {
 	 */
 	function renderObjects(renderList, scene) {
 		for (var i = 0; i < renderList.length; i++) {
-			renderObject(renderList[i], scene);
+			var renderItem = renderList[i];
+			renderObject(renderItem, scene);
 		}
 	}
 
@@ -2142,30 +2257,49 @@ PGL.WebGLRenderer = function (parameters) {
 		_this.renderBufferDirect(object);
 	}
 
-	function initMaterial(object) {
+	/**
+	 * 根据材质组件着色器字符串
+	 * @param material 材质
+	 * @param object 对象
+	 */
+	function initMaterial(material, object) {
 
-		var program;
-		var programChange = true;
+		var materialProperties = properties.get(material);
 
 		// 获取参数
 		var parameters = programCache.getParameters(object);
 
+		var program;
+		var programChange = true;
+
 		if (programChange) {
-			var shader;
 			if (parameters.shaderID) {
-				shader = PGL.ShaderLib[parameters.shaderID];
-			}
-			else {
-				shader = {
-					vertexShader: object.material.vertexShader,
-					fragmentShader: object.material.fragmentShader
+				var shader = PGL.ShaderLib[parameters.shaderID];
+				materialProperties.shader = {
+					name: material.type,
+					uniforms: PGL.UniformsUtils.clone(shader.uniforms),
+					vertexShader: shader.vertexShader,
+					fragmentShader: shader.fragmentShader
 				}
 			}
+			else {
+				materialProperties.shader = {
+					name: material.type,
+					vertexShader: material.vertexShader,
+					fragmentShader: material.fragmentShader
+				};
+			}
 
-			program = programCache.acquireProgram(object.material, shader, parameters);
+			program = programCache.acquireProgram(material, materialProperties.shader, parameters);
 
-			object.material.program = program;
+			materialProperties.program = program;
+			material.program = program;
 		}
+
+		var uniforms = materialProperties.shader.uniforms;
+		var progUniforms = materialProperties.program.getUniforms();
+		var uniformsList = PGL.WebGLUniforms.seqWithValue(progUniforms.seq, uniforms);
+		materialProperties.uniformsList = uniformsList;
 	}
 
 	/**
@@ -2173,12 +2307,38 @@ PGL.WebGLRenderer = function (parameters) {
 	 * @param object
 	 */
 	function setProgram(object) {
-		initMaterial(object);
 
-		var program = object.material.program;
+		var materialProperties = properties.get(object.material);
+
+		initMaterial(object.material, object);
+
+		var refreshMaterial = false;
+
+		var program = materialProperties.program,
+			p_uniforms = program.getUniforms(),
+			m_uniforms = materialProperties.shader.uniforms;
+
 		if (state.useProgram(program.program)) {
-
+			refreshMaterial = true;
 		}
+
+		if (refreshMaterial) {
+			if (object.material.isPointsMaterial) {
+				refreshUniformsPoints(m_uniforms, object.material);
+			}
+
+			// 将uniforms变量传送给着色器
+			PGL.WebGLUniforms.upload(_gl, materialProperties.uniformsList, m_uniforms, _this);
+		}
+	}
+
+	/**
+	 * 更新uniforms属性
+	 * @param uniforms
+	 * @param material
+	 */
+	function refreshUniformsPoints(uniforms, material) {
+		uniforms.size.value = material.size;
 	}
 
 	// 获取上下文
@@ -2392,6 +2552,20 @@ PGL.WebGLProgram = function (renderer, shader) {
 	gl.deleteShader(glVertexShader);
 	gl.deleteShader(glFragmentShader);
 
+	// set up caching for uniform locations
+	var cachedUniforms;
+
+	/**
+	 * 获取uniform变量的地址
+	 * @return {*}
+	 */
+	this.getUniforms = function () {
+		if (cachedUniforms === undefined) {
+			cachedUniforms = new PGL.WebGLUniforms(gl, program, renderer);
+		}
+		return cachedUniforms;
+	};
+
 	this.program = program;
 	this.vertexShader = glVertexShader;
 	this.fragmentShader = glFragmentShader;
@@ -2434,4 +2608,32 @@ PGL.WebGLBufferRenderer = function (gl) {
 
 	this.setMode = setMode;
 	this.render = render;
+};
+
+/**
+ * 材质属性管理器
+ * @constructor
+ */
+PGL.WebGLProperties = function () {
+	var properties = new WeakMap();
+
+	/**
+	 * 获取map，如果未定义，设置为{}
+	 * @param object
+	 */
+	function get(object) {
+
+		var map = properties.get(object);
+
+		if (map === undefined) {
+			map = {};
+			properties.set(object, map);
+		}
+
+		return map;
+	}
+
+	return {
+		get: get
+	}
 };

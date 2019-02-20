@@ -10,10 +10,12 @@ window.onload = function (ev) {
 	var scene = new PGL.Scene();
 
 	var geometry = new PGL.BufferGeometry();
-	var vertices = [0.5, 0.5, 0.5, 1.0];
-	geometry.addAttribute('position', new PGL.Float32BufferAttribute(vertices, 4));
+	var vertices = [0.8, 0.3, 0];
+	geometry.addAttribute('position', new PGL.Float32BufferAttribute(vertices, 3));
 
-	var pointsMaterial = new PGL.PointsMaterial();
+	var pointsMaterial = new PGL.PointsMaterial({
+		size: 20
+	});
 
 	var particles = new PGL.Points(geometry, pointsMaterial);
 	scene.add(particles);

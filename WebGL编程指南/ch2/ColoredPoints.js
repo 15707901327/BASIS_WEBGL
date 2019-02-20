@@ -71,7 +71,7 @@ function main() {
 }
 
 var g_points = []; // The array for the position of a mouse press
-var g_color = []; // 存储点颜色的数组
+var g_colors = []; // 存储点颜色的数组
 function click(ev, gl, canvas, a_Position, u_FragColor) {
     var x = ev.clientX; // x coordinate of a mouse pointer
     var y = ev.clientY; // y coordinate of a mouse pointer

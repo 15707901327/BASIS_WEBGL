@@ -1854,8 +1854,11 @@ var points_vert =
 	" gl_Position = position; //设置坐标\n" +
 	" gl_PointSize = size; //设置尺寸\n" +
 	"}";
-var points_frag = " void main() {\n" +
-	"gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n" +
+var points_frag =
+	"precision highp float;\n" +
+	"uniform vec3 diffuse;\n" + // 必须加上精度限定
+	"void main() {\n" +
+	" gl_FragColor = vec4(diffuse,1.0);\n" +
 	"}";
 var ShaderChunk = {
 	points_frag: points_frag,
@@ -1911,7 +1914,8 @@ PGL.UniformsUtils = {
 };
 PGL.UniformsLib = {
 	points: {
-		size: {value: 1.0}
+		size: {value: 1.0},
+		diffuse: {value: new PGL.Color(0xeeeeee)}
 	}
 };
 PGL.ShaderLib = {
@@ -2072,6 +2076,8 @@ PGL.PointsMaterial = function (parameters) {
 	PGL.Material.call(this);
 
 	this.type = 'PointsMaterial';
+
+	this.color = new PGL.Color(0xffffff);
 
 	this.size = 1;// 点的大小
 
@@ -2338,6 +2344,7 @@ PGL.WebGLRenderer = function (parameters) {
 
 		if (refreshMaterial) {
 			if (object.material.isPointsMaterial) {
+				// 更新uniform相关变量
 				refreshUniformsPoints(m_uniforms, object.material);
 			}
 
@@ -2352,6 +2359,7 @@ PGL.WebGLRenderer = function (parameters) {
 	 * @param material
 	 */
 	function refreshUniformsPoints(uniforms, material) {
+		uniforms.diffuse.value = material.color;
 		uniforms.size.value = material.size;
 	}
 

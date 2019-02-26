@@ -1984,10 +1984,18 @@ PGL.Mesh.prototype = Object.assign(Object.create(PGL.Object3D.prototype), {
 	isMesh: true
 });
 
+var bufferGeometryId = 1; // BufferGeometry uses odd numbers as Id
 PGL.BufferGeometry = function () {
+	Object.defineProperty(this, 'id', {value: bufferGeometryId += 2});
+
 	this.attributes = {}; // 保存属性信息
 };
 Object.assign(PGL.BufferGeometry.prototype, {
+
+	constructor: PGL.BufferGeometry,
+
+	isBufferGeometry: true,
+
 	/**
 	 * 把属性添加到this.attributes中
 	 * @param name
@@ -2091,12 +2099,19 @@ PGL.PointsMaterial.prototype.isPointsMaterial = true;
  *
  * @param array 数组
  * @param itemSize 数据长度
+ * @param normalized 表明是否是浮点数
  * @constructor
  */
-PGL.BufferAttribute = function (array, itemSize) {
+PGL.BufferAttribute = function (array, itemSize, normalized) {
 	this.array = array;
-	this.count = array !== undefined ? array.length / itemSize : 0;
 	this.itemSize = itemSize;
+	this.count = array !== undefined ? array.length / itemSize : 0;
+
+	this.normalized = normalized === true; // 表明是否是浮点数
+
+	this.dynamic = false; // false 只会向缓存区对象中写入一次数据，但需要绘制很多次 true 多次写入，绘制多次
+
+	this.version = 0; // 版本
 };
 PGL.Float32BufferAttribute = function (array, itemSize, normalized) {
 	PGL.BufferAttribute.call(this, new Float32Array(array), itemSize, normalized);
@@ -2136,7 +2151,7 @@ PGL.WebGLRenderer = function (parameters) {
 	if (!_gl) return null;
 
 	var state;
-	var properties;
+	var properties, attributes, geometries, objects;
 	var programCache, renderLists;
 
 	var background, bufferRenderer;
@@ -2145,6 +2160,9 @@ PGL.WebGLRenderer = function (parameters) {
 		state = new PGL.WebGLState(_gl);
 
 		properties = new PGL.WebGLProperties();
+		attributes = new PGL.WebGLAttributes(_gl);
+		geometries = new PGL.WebGLGeometries(_gl, attributes);
+		objects = new PGL.WebGLObjects(geometries);
 
 		programCache = new PGL.WebGLPrograms(_this);
 		renderLists = PGL.WebGLRenderList();
@@ -2200,23 +2218,54 @@ PGL.WebGLRenderer = function (parameters) {
 	 * @param geometry 几何体
 	 */
 	function setupVertexAttributes(material, program, geometry) {
+
+		state.initAttributes();
+
 		var geometryAttributes = geometry.attributes;
-		for (var name in geometryAttributes) {
 
-			var localPosition = _gl.getAttribLocation(program.program, name);
-			var value = geometryAttributes[name].array;
+		var programAttributes = program.getAttributes();
 
-			switch (value.length) {
-				case 3:
-					_gl.vertexAttrib3fv(localPosition, value);
-					break;
-				case 4:
-					_gl.vertexAttrib4fv(localPosition, value);
-					break;
-				default:
-					_gl.vertexAttrib1fv(localPosition, value)
+		var materialDefaultAttributeValues = material.defaultAttributeValues;
+
+		for (var name in programAttributes) {
+
+			var programAttribute = programAttributes[name];
+
+			if (programAttribute >= 0) {
+				var geometryAttribute = geometryAttributes[name];
+
+				if (geometryAttribute !== undefined) {
+					var normalized = geometryAttribute.normalized;
+					var size = geometryAttribute.itemSize;
+
+					var attribute = attributes.get(geometryAttribute);
+
+					if (attribute === undefined) continue;
+
+					var buffer = attribute.buffer;
+					var type = attribute.type;
+					var bytesPerElement = attribute.bytesPerElement;
+
+					state.enableAttribute(programAttribute);
+
+					_gl.bindBuffer(_gl.ARRAY_BUFFER, buffer);
+					_gl.vertexAttribPointer(programAttribute, size, type, normalized, 0, 0);
+				}
+				else if(materialDefaultAttributeValues !== undefined){
+					var value = materialDefaultAttributeValues[name];
+
+					switch (value.length) {
+						case 3:
+							_gl.vertexAttrib3fv(programAttribute, value);
+							break;
+						case 4:
+							_gl.vertexAttrib4fv(programAttribute, value);
+							break;
+						default:
+							_gl.vertexAttrib1fv(programAttribute, value)
+					}
+				}
 			}
-
 		}
 	}
 
@@ -2235,7 +2284,7 @@ PGL.WebGLRenderer = function (parameters) {
 	};
 
 	/**
-	 * 拆分渲染对象
+	 * 拆分渲染对象，解析几何体、以及几何体中的attribute变量
 	 * @param object PGL.Scene
 	 */
 	function projectObject(object) {
@@ -2245,6 +2294,10 @@ PGL.WebGLRenderer = function (parameters) {
 
 		if (visible) {
 			if (object.isPoints || object.isMesh) {
+				// 获取bufferGeometry 获取缓存区
+				var geometry = objects.update(object);
+				var material = object.material;
+
 				renderLists.opaque.push(object);
 			}
 		}
@@ -2469,9 +2522,57 @@ PGL.WebGLState = function (gl) {
 
 	var colorBuffer = new ColorBuffer();
 
+	var maxVertexAttributes = gl.getParameter(gl.MAX_VERTEX_ATTRIBS);
+	var newAttributes = new Uint8Array(maxVertexAttributes);
+	var enabledAttributes = new Uint8Array(maxVertexAttributes);
+	var attributeDivisors = new Uint8Array(maxVertexAttributes);
+
+	var enabledCapabilities = {}; // 保存功能开启状态
+
 	var currentProgram = null; // 当前使用的着色器程序
 
 	colorBuffer.setClear(0, 0, 0, 1);
+
+	// 初始化newAttributes为0
+	function initAttributes() {
+		for (var i = 0, l = newAttributes.length; i < l; i++) {
+			newAttributes[i] = 0;
+		}
+	}
+
+	/**
+	 * 开启功能
+	 * @param attribute
+	 */
+	function enableAttribute(attribute) {
+		enableAttributeAndDivisor(attribute, 0);
+	}
+
+	/**
+	 * 开启buffer地址
+	 * @param attribute
+	 * @param meshPerAttribute
+	 */
+	function enableAttributeAndDivisor(attribute, meshPerAttribute) {
+
+		newAttributes[attribute] = 1;
+
+		if (enabledAttributes[attribute] === 0) {
+			gl.enableVertexAttribArray(attribute);
+			enabledAttributes[attribute] = 1;
+		}
+	}
+
+	/**
+	 * 开启功能
+	 * @param id
+	 */
+	function enable(id) {
+		if (enabledCapabilities[id] !== true) {
+			gl.enable(id);
+			enabledCapabilities[id] = true;
+		}
+	}
 
 	function useProgram(program) {
 		if (currentProgram !== program) {
@@ -2491,6 +2592,11 @@ PGL.WebGLState = function (gl) {
 		buffers: {
 			color: colorBuffer
 		},
+
+		initAttributes: initAttributes,
+		enableAttribute: enableAttribute,
+		enableAttributeAndDivisor: enableAttributeAndDivisor,
+		enable: enable,
 
 		useProgram: useProgram
 	}
@@ -2546,6 +2652,33 @@ PGL.WebGLPrograms = function (renderer) {
 };
 
 /**
+ * 获取Attribute属性对应的存储地址
+ * @param gl
+ * @param program
+ * @return {{}}
+ */
+function fetchAttributeLocations(gl, program) {
+
+	var attributes = {};
+
+	var n = gl.getProgramParameter(program, gl.ACTIVE_ATTRIBUTES);
+
+	for (var i = 0; i < n; i++) {
+
+		var info = gl.getActiveAttrib(program, i);
+		var name = info.name;
+
+		// console.log( 'THREE.WebGLProgram: ACTIVE VERTEX ATTRIBUTE:', name, i );
+
+		attributes[name] = gl.getAttribLocation(program, name);
+
+	}
+
+	return attributes;
+
+}
+
+/**
  * 着色器程序
  * @param renderer
  * @param shader
@@ -2584,6 +2717,20 @@ PGL.WebGLProgram = function (renderer, shader) {
 			cachedUniforms = new PGL.WebGLUniforms(gl, program, renderer);
 		}
 		return cachedUniforms;
+	};
+
+	// set up caching for attribute locations
+	var cachedAttributes;
+
+	/**
+	 * 获取Attribute的存储地址
+	 * @return {*}
+	 */
+	this.getAttributes = function () {
+		if (cachedAttributes === undefined) {
+			cachedAttributes = fetchAttributeLocations(gl, program);
+		}
+		return cachedAttributes;
 	};
 
 	this.program = program;
@@ -2714,5 +2861,167 @@ PGL.WebGLBackground = function (renderer, state) {
 			setClear(clearColor, clearAlpha);
 		},
 		render: render
+	}
+};
+
+/**
+ * 管理attribute变量（创建buffer）
+ * @param gl
+ * @constructor
+ */
+PGL.WebGLAttributes = function (gl) {
+
+	var buffers = new WeakMap();
+
+	/**
+	 * 创建缓存区
+	 * @param attribute
+	 * @param bufferType
+	 * @return {{buffer: AudioBuffer | WebGLBuffer, type: number, bytesPerElement: number, version}}
+	 */
+	function createBuffer(attribute, bufferType) {
+		var array = attribute.array;
+		var usage = attribute.dynamic ? gl.DYNAMIC_DRAW : gl.STATIC_DRAW;
+
+		var buffer = gl.createBuffer();
+
+		gl.bindBuffer(bufferType, buffer);
+		gl.bufferData(bufferType, array, usage);
+
+		var type = gl.FLOAT;
+
+		if (array instanceof Float32Array) {
+
+			type = gl.FLOAT;
+
+		}
+		else if (array instanceof Float64Array) {
+			console.warn('THREE.WebGLAttributes: Unsupported data buffer format: Float64Array.');
+		}
+		else if (array instanceof Uint16Array) {
+			type = gl.UNSIGNED_SHORT;
+		}
+		else if (array instanceof Int16Array) {
+			type = gl.SHORT;
+		}
+		else if (array instanceof Uint32Array) {
+			type = gl.UNSIGNED_INT;
+		}
+		else if (array instanceof Int32Array) {
+			type = gl.INT;
+		}
+		else if (array instanceof Int8Array) {
+			type = gl.BYTE;
+		}
+		else if (array instanceof Uint8Array) {
+			type = gl.UNSIGNED_BYTE;
+		}
+
+		return {
+			buffer: buffer,
+			type: type,
+			bytesPerElement: array.BYTES_PER_ELEMENT,
+			version: attribute.version
+		};
+	}
+
+	function get(attribute) {
+		if (attribute.isInterleavedBufferAttribute) attribute = attribute.data;
+		return buffers.get(attribute);
+	}
+
+	/**
+	 * 创建或则更新buffer
+	 * @param attribute
+	 * @param bufferType
+	 */
+	function update(attribute, bufferType) {
+		if (attribute.isInterleavedBufferAttribute) attribute = attribute.data;
+
+		var data = buffers.get(attribute);
+
+		if (data === undefined) {
+			buffers.set(attribute, createBuffer(attribute, bufferType));
+		}
+	}
+
+	return {
+		get: get,
+		update: update
+	}
+};
+
+/**
+ * 管理几何体
+ * @param gl
+ * @param attributes
+ * @return
+ * @constructor
+ */
+PGL.WebGLGeometries = function (gl, attributes) {
+	var geometries = {};
+	var wireframeAttributes = {};
+
+	/**
+	 * 获取对象的buffer几何体
+	 * @param object 对象
+	 * @param geometry 几何体
+	 * @return {*}
+	 */
+	function get(object, geometry) {
+		var buffergeometry = geometries[geometry.id];
+
+		if (buffergeometry) return buffergeometry;
+
+		if (geometry.isBufferGeometry) {
+			buffergeometry = geometry;
+		}
+
+		geometries[geometry.id] = buffergeometry;
+
+		return buffergeometry;
+	}
+
+	function update(geometry) {
+		var index = geometry.index;
+		var geometryAttributes = geometry.attributes;
+
+		for (var name in geometryAttributes) {
+			attributes.update(geometryAttributes[name], gl.ARRAY_BUFFER);
+		}
+	}
+
+	return {
+		get: get,
+		update: update
+	}
+};
+
+/**
+ * 管理几何体对象
+ * @param geometries
+ * @return {{update: update}}
+ * @constructor
+ */
+PGL.WebGLObjects = function (geometries) {
+	var updateList = {};
+
+	function update(object) {
+		var frame = 0;
+
+		var geometry = object.geometry;
+		var buffergeometry = geometries.get(object, geometry);
+
+		if (updateList[buffergeometry.id] !== frame) {
+			geometries.update(buffergeometry);
+
+			updateList[buffergeometry.id] = frame;
+		}
+
+		return buffergeometry;
+	}
+
+	return {
+		update: update
 	}
 };

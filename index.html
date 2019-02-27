@@ -11,6 +11,7 @@
     <h4><a href="#base">基本概念</a></h4>
     <ul class="ul-1">
       <li><a href="#WebGL">WebGL程序</a></li>
+      <li><a href="#buffer">缓存区对象</a></li>
       <li><a href="#WebGL_System">着色器</a></li>
       <li><a href="#visualSpace">相机的可视空间</a></li>
       <li><a href="WebGL_API/WebGL可以绘制的基本图形.html" target="_blank">WebGL绘制的基本图形</a></li>
@@ -68,22 +69,19 @@
             <li><a href="WebGL_API/shader API/存储限定字.html#attribute" target="_blank">attribute变量</a></li>
             <li><a href="WebGL_API/shader API/存储限定字.html#uniform" target="_blank">uniform变量</a></li>
           </ul>
-          <strong>缓存区对象</strong>
-          <p>缓存区对象是WebGL系统中的一块内存区域，我们可以一次性地向缓存区对象中填充大量的顶点数据，然后将这些数据保存在其中，供顶点使用。</p>
+        </div>
+      </section>
+      <section id="buffer">
+        <h4>缓存区对象</h4>
+        <p>缓存区对象是WebGL系统中的一块内存区域，我们可以一次性地向缓存区对象中填充大量的顶点数据，然后将这些数据保存在其中，供顶点使用。</p>
+        <div class="content">
           <strong>使用缓冲区对象向着色器中传入多个数据步骤：</strong>
           <ul class="ul-1-num">
-            <li>创建缓冲区对象（<a href="WebGL_API/javaScript API/gl.html#createBuffer"
-                           target="_blank">gl.createBuffer()</a>）
-            </li>
-            <li>绑定缓冲区对象（<a href="WebGL_API/javaScript API/gl.html#bindBuffer" target="_blank">gl.bindBuffer()</a>）
-            </li>
-            <li>将数据写入缓冲区对象（<a href="WebGL_API/javaScript API/gl.html#bufferData" target="_blank">gl.bufferData()</a>）
-            </li>
-            <li>将缓冲区对象分配给一个attribute变量（<a href="WebGL_API/javaScript API/gl.html#vertexAttribPointer"
-                                          target="_blank">gl.vertexAttribPointer()</a>）
-            </li>
-            <li>开启attribute变量（<a href="WebGL_API/javaScript API/gl.html#enableVertexAttribArray" target="_blank">gl.enableVertexAttribArray()</a>）
-            </li>
+            <li>创建缓冲区对象（<a href="WebGL_API/javaScript API/gl.html#createBuffer" target="_blank">gl.createBuffer()</a>）</li>
+            <li>绑定缓冲区对象（<a href="WebGL_API/javaScript API/gl.html#bindBuffer" target="_blank">gl.bindBuffer()</a>）</li>
+            <li>将数据写入缓冲区对象（<a href="WebGL_API/javaScript API/gl.html#bufferData" target="_blank">gl.bufferData()</a>）</li>
+            <li>将缓冲区对象分配给一个attribute变量（<a href="WebGL_API/javaScript API/gl.html#vertexAttribPointer" target="_blank">gl.vertexAttribPointer()</a>）</li>
+            <li>开启attribute变量（<a href="WebGL_API/javaScript API/gl.html#enableVertexAttribArray" target="_blank">gl.enableVertexAttribArray()</a>）</li>
           </ul>
           <strong>实例</strong>
           <ul class="ul-1-num">

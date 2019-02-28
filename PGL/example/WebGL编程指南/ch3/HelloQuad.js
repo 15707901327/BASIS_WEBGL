@@ -20,6 +20,7 @@ window.onload = function (ev) {
 	});
 
 	var mesh = new PGL.Mesh(bufferGeometry, meshPhongMaterial);
+	mesh.drawMode = PGL.TriangleStripDrawMode;
 	scene.add(mesh);
 
 	webGlRenderer.render(scene);

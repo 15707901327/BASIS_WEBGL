@@ -1,6 +1,10 @@
 // 定义常量
 var PGL = {
-	REVISION: 1 // 版本
+	REVISION: 1, // 版本
+
+	TrianglesDrawMode: 0, // 绘制三角形
+	TriangleStripDrawMode: 1, // 带状的三角形
+	TriangleFanDrawMode: 2 // 扇形的图形
 };
 
 PGL.UniformsUtils = {
@@ -1860,9 +1864,23 @@ var points_frag =
 	"void main() {\n" +
 	" gl_FragColor = vec4(diffuse,1.0);\n" +
 	"}";
+
+var meshphong_vert =
+	"attribute vec4 position;\n" +
+	"void main(){\n" +
+	" gl_Position = position; //设置坐标\n" +
+	"}";
+var meshphong_frag =
+	"precision highp float;\n" +
+	"uniform vec3 diffuse;\n" + // 必须加上精度限定
+	"void main() {\n" +
+	" gl_FragColor = vec4(diffuse,1.0);\n" +
+	"}";
 var ShaderChunk = {
 	points_frag: points_frag,
-	points_vert: points_vert
+	points_vert: points_vert,
+	meshphong_vert: meshphong_vert,
+	meshphong_frag: meshphong_frag
 };
 PGL.UniformsUtils = {
 	merge: function (uniforms) {
@@ -1913,12 +1931,23 @@ PGL.UniformsUtils = {
 	}
 };
 PGL.UniformsLib = {
+	phone: {
+		diffuse: {value: new PGL.Color(0xeeeeee)}
+	},
 	points: {
 		size: {value: 1.0},
 		diffuse: {value: new PGL.Color(0xeeeeee)}
 	}
 };
 PGL.ShaderLib = {
+	phong: {
+		uniforms: PGL.UniformsUtils.merge([
+			PGL.UniformsLib.phone
+		]),
+
+		vertexShader: ShaderChunk.meshphong_vert,
+		fragmentShader: ShaderChunk.meshphong_frag
+	},
 	points: {
 
 		uniforms: PGL.UniformsUtils.merge([
@@ -1977,6 +2006,8 @@ PGL.Mesh = function (geometry, material) {
 
 	this.geometry = geometry;
 	this.material = material;
+
+	this.drawMode = PGL.TrianglesDrawMode; // 绘制图形的方式
 };
 PGL.Mesh.prototype = Object.assign(Object.create(PGL.Object3D.prototype), {
 	constructor: PGL.Mesh,
@@ -2080,6 +2111,7 @@ PGL.ShaderMaterial = function (options) {
 	this.vertexShader = options.vertexShader;
 	this.fragmentShader = options.fragmentShader;
 };
+
 PGL.PointsMaterial = function (parameters) {
 	PGL.Material.call(this);
 
@@ -2094,6 +2126,19 @@ PGL.PointsMaterial = function (parameters) {
 PGL.PointsMaterial.prototype = Object.create(PGL.Material.prototype);
 PGL.PointsMaterial.prototype.constructor = PGL.PointsMaterial;
 PGL.PointsMaterial.prototype.isPointsMaterial = true;
+
+PGL.MeshPhongMaterial = function (parameters) {
+	PGL.Material.call(this);
+
+	this.type = 'MeshPhongMaterial';
+
+	this.color = new PGL.Color( 0xffffff ); // diffuse
+
+	this.setValues(parameters);
+};
+PGL.MeshPhongMaterial.prototype = Object.create(PGL.Material.prototype);
+PGL.MeshPhongMaterial.prototype.constructor = PGL.MeshPhongMaterial;
+PGL.MeshPhongMaterial.prototype.isMeshPhongMaterial = true;
 
 /**
  *
@@ -2204,7 +2249,20 @@ PGL.WebGLRenderer = function (parameters) {
 			dataCount = 1;
 		}
 
-		if (object.isPoints) {
+		if (object.isMesh) {
+			switch (object.drawMode) {
+				case PGL.TrianglesDrawMode:
+					renderer.setMode(_gl.TRIANGLES);
+					break;
+				case PGL.TriangleStripDrawMode:
+					renderer.setMode(_gl.TRIANGLE_STRIP);
+					break;
+				case PGL.TriangleFanDrawMode:
+					renderer.setMode(_gl.TRIANGLE_FAN);
+					break;
+			}
+		}
+		else if (object.isPoints) {
 			renderer.setMode(_gl.POINTS);
 		}
 
@@ -2251,7 +2309,7 @@ PGL.WebGLRenderer = function (parameters) {
 					_gl.bindBuffer(_gl.ARRAY_BUFFER, buffer);
 					_gl.vertexAttribPointer(programAttribute, size, type, normalized, 0, 0);
 				}
-				else if(materialDefaultAttributeValues !== undefined){
+				else if (materialDefaultAttributeValues !== undefined) {
 					var value = materialDefaultAttributeValues[name];
 
 					switch (value.length) {
@@ -2396,7 +2454,10 @@ PGL.WebGLRenderer = function (parameters) {
 		}
 
 		if (refreshMaterial) {
-			if (object.material.isPointsMaterial) {
+			if(object.material.isMeshPhongMaterial){
+				refreshUniformsCommon(m_uniforms, object.material);
+			}
+			else if (object.material.isPointsMaterial) {
 				// 更新uniform相关变量
 				refreshUniformsPoints(m_uniforms, object.material);
 			}
@@ -2411,6 +2472,12 @@ PGL.WebGLRenderer = function (parameters) {
 	 * @param uniforms
 	 * @param material
 	 */
+	function refreshUniformsCommon(uniforms, material) {
+		if (material.color) {
+			uniforms.diffuse.value = material.color;
+		}
+	}
+
 	function refreshUniformsPoints(uniforms, material) {
 		uniforms.diffuse.value = material.color;
 		uniforms.size.value = material.size;
@@ -2624,6 +2691,7 @@ PGL.WebGLPrograms = function (renderer) {
 
 	var programs = []; // 保存所有的着色器程序
 	var shaderIDs = {
+		MeshPhongMaterial: "phong",
 		PointsMaterial: 'points'
 	};
 

@@ -2039,7 +2039,9 @@ Object.assign(PGL.BufferGeometry.prototype, {
 	}
 });
 
+var geometryId = 0; // Geometry uses even numbers as Id
 PGL.Geometry = function () {
+	Object.defineProperty(this, 'id', {value: geometryId += 2});
 };
 
 PGL.Material = function () {
@@ -3080,11 +3082,14 @@ PGL.WebGLObjects = function (geometries) {
 		var geometry = object.geometry;
 		var buffergeometry = geometries.get(object, geometry);
 
-		if (updateList[buffergeometry.id] !== frame) {
-			geometries.update(buffergeometry);
+		if(buffergeometry){
+			if (updateList[buffergeometry.id] !== frame) {
+				geometries.update(buffergeometry);
 
-			updateList[buffergeometry.id] = frame;
+				updateList[buffergeometry.id] = frame;
+			}
 		}
+
 
 		return buffergeometry;
 	}

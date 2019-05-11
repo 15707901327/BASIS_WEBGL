@@ -6,7 +6,6 @@ window.onload = function (ev) {
 		canvas: canvas
 	});
 	webGlRenderer.setClearColor(new PGL.Color(0, 0, 0), 1);
-	var gl = webGlRenderer.getContext();
 
 	var scene = new PGL.Scene();
 

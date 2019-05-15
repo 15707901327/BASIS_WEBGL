@@ -1,2142 +1,2270 @@
 // 定义常量
 var PGL = {
-	REVISION: 1, // 版本
+    REVISION: 1, // 版本
 
-	TrianglesDrawMode: 0, // 绘制三角形
-	TriangleStripDrawMode: 1, // 带状的三角形
-	TriangleFanDrawMode: 2 // 扇形的图形
+    TrianglesDrawMode: 0, // 绘制三角形
+    TriangleStripDrawMode: 1, // 带状的三角形
+    TriangleFanDrawMode: 2 // 扇形的图形
 };
 
 PGL.UniformsUtils = {
 
-	merge: function (uniforms) {
+    merge: function (uniforms) {
 
-		var merged = {};
+        var merged = {};
 
-		for (var u = 0; u < uniforms.length; u++) {
-			var tmp = this.clone(uniforms[u]);
-			for (var p in tmp) {
-				merged[p] = tmp[p];
-			}
-		}
-		return merged;
+        for (var u = 0; u < uniforms.length; u++) {
+            var tmp = this.clone(uniforms[u]);
+            for (var p in tmp) {
+                merged[p] = tmp[p];
+            }
+        }
+        return merged;
 
-	},
+    },
 
-	clone: function (uniforms_src) {
+    clone: function (uniforms_src) {
 
-		var uniforms_dst = {};
+        var uniforms_dst = {};
 
-		for (var u in uniforms_src) {
+        for (var u in uniforms_src) {
 
-			uniforms_dst[u] = {};
+            uniforms_dst[u] = {};
 
-			for (var p in uniforms_src[u]) {
+            for (var p in uniforms_src[u]) {
 
-				var parameter_src = uniforms_src[u][p];
+                var parameter_src = uniforms_src[u][p];
 
-				if (parameter_src && (parameter_src.isColor ||
-						parameter_src.isMatrix3 || parameter_src.isMatrix4 ||
-						parameter_src.isVector2 || parameter_src.isVector3 || parameter_src.isVector4 ||
-						parameter_src.isTexture)) {
+                if (parameter_src && (parameter_src.isColor ||
+                    parameter_src.isMatrix3 || parameter_src.isMatrix4 ||
+                    parameter_src.isVector2 || parameter_src.isVector3 || parameter_src.isVector4 ||
+                    parameter_src.isTexture)) {
 
-					uniforms_dst[u][p] = parameter_src.clone();
+                    uniforms_dst[u][p] = parameter_src.clone();
 
-				} else if (Array.isArray(parameter_src)) {
+                } else if (Array.isArray(parameter_src)) {
 
-					uniforms_dst[u][p] = parameter_src.slice();
+                    uniforms_dst[u][p] = parameter_src.slice();
 
-				} else {
+                } else {
 
-					uniforms_dst[u][p] = parameter_src;
+                    uniforms_dst[u][p] = parameter_src;
 
-				}
+                }
 
-			}
+            }
 
-		}
+        }
 
-		return uniforms_dst;
+        return uniforms_dst;
 
-	}
+    }
 
 };
 
 // Math
 (function (PGL) {
-	PGL.Vector2 = function (x, y) {
+    PGL.Vector2 = function (x, y) {
 
-		this.x = x || 0;
-		this.y = y || 0;
+        this.x = x || 0;
+        this.y = y || 0;
 
-	};
-	Object.defineProperties(PGL.Vector2.prototype, {
+    };
+    Object.defineProperties(PGL.Vector2.prototype, {
 
-		"width": {
+        "width": {
 
-			get: function () {
+            get: function () {
 
-				return this.x;
+                return this.x;
 
-			},
+            },
 
-			set: function (value) {
+            set: function (value) {
 
-				this.x = value;
+                this.x = value;
 
-			}
+            }
 
-		},
+        },
 
-		"height": {
+        "height": {
 
-			get: function () {
+            get: function () {
 
-				return this.y;
+                return this.y;
 
-			},
+            },
 
-			set: function (value) {
+            set: function (value) {
 
-				this.y = value;
+                this.y = value;
 
-			}
+            }
 
-		}
+        }
 
-	});
-	Object.assign(PGL.Vector2.prototype, {
+    });
+    Object.assign(PGL.Vector2.prototype, {
 
-		isVector2: true,
+        isVector2: true,
 
-		set: function (x, y) {
+        set: function (x, y) {
 
-			this.x = x;
-			this.y = y;
+            this.x = x;
+            this.y = y;
 
-			return this;
+            return this;
 
-		},
+        },
 
-		setScalar: function (scalar) {
+        setScalar: function (scalar) {
 
-			this.x = scalar;
-			this.y = scalar;
+            this.x = scalar;
+            this.y = scalar;
 
-			return this;
+            return this;
 
-		},
+        },
 
-		setX: function (x) {
+        setX: function (x) {
 
-			this.x = x;
+            this.x = x;
 
-			return this;
+            return this;
 
-		},
+        },
 
-		setY: function (y) {
+        setY: function (y) {
 
-			this.y = y;
+            this.y = y;
 
-			return this;
+            return this;
 
-		},
+        },
 
-		setComponent: function (index, value) {
+        setComponent: function (index, value) {
 
-			switch (index) {
+            switch (index) {
 
-				case 0:
-					this.x = value;
-					break;
-				case 1:
-					this.y = value;
-					break;
-				default:
-					throw new Error('index is out of range: ' + index);
+                case 0:
+                    this.x = value;
+                    break;
+                case 1:
+                    this.y = value;
+                    break;
+                default:
+                    throw new Error('index is out of range: ' + index);
 
-			}
+            }
 
-			return this;
+            return this;
 
-		},
+        },
 
-		getComponent: function (index) {
+        getComponent: function (index) {
 
-			switch (index) {
+            switch (index) {
 
-				case 0:
-					return this.x;
-				case 1:
-					return this.y;
-				default:
-					throw new Error('index is out of range: ' + index);
+                case 0:
+                    return this.x;
+                case 1:
+                    return this.y;
+                default:
+                    throw new Error('index is out of range: ' + index);
 
-			}
+            }
 
-		},
+        },
 
-		clone: function () {
+        clone: function () {
 
-			return new this.constructor(this.x, this.y);
+            return new this.constructor(this.x, this.y);
 
-		},
+        },
 
-		copy: function (v) {
+        copy: function (v) {
 
-			this.x = v.x;
-			this.y = v.y;
+            this.x = v.x;
+            this.y = v.y;
 
-			return this;
+            return this;
 
-		},
+        },
 
-		add: function (v, w) {
+        add: function (v, w) {
 
-			if (w !== undefined) {
+            if (w !== undefined) {
 
-				console.warn('THREE.Vector2: .add() now only accepts one argument. Use .addVectors( a, b ) instead.');
-				return this.addVectors(v, w);
+                console.warn('THREE.Vector2: .add() now only accepts one argument. Use .addVectors( a, b ) instead.');
+                return this.addVectors(v, w);
 
-			}
+            }
 
-			this.x += v.x;
-			this.y += v.y;
+            this.x += v.x;
+            this.y += v.y;
 
-			return this;
+            return this;
 
-		},
+        },
 
-		addScalar: function (s) {
+        addScalar: function (s) {
 
-			this.x += s;
-			this.y += s;
+            this.x += s;
+            this.y += s;
 
-			return this;
+            return this;
 
-		},
+        },
 
-		addVectors: function (a, b) {
+        addVectors: function (a, b) {
 
-			this.x = a.x + b.x;
-			this.y = a.y + b.y;
+            this.x = a.x + b.x;
+            this.y = a.y + b.y;
 
-			return this;
+            return this;
 
-		},
+        },
 
-		addScaledVector: function (v, s) {
+        addScaledVector: function (v, s) {
 
-			this.x += v.x * s;
-			this.y += v.y * s;
+            this.x += v.x * s;
+            this.y += v.y * s;
 
-			return this;
+            return this;
 
-		},
+        },
 
-		sub: function (v, w) {
+        sub: function (v, w) {
 
-			if (w !== undefined) {
+            if (w !== undefined) {
 
-				console.warn('THREE.Vector2: .sub() now only accepts one argument. Use .subVectors( a, b ) instead.');
-				return this.subVectors(v, w);
+                console.warn('THREE.Vector2: .sub() now only accepts one argument. Use .subVectors( a, b ) instead.');
+                return this.subVectors(v, w);
 
-			}
+            }
 
-			this.x -= v.x;
-			this.y -= v.y;
+            this.x -= v.x;
+            this.y -= v.y;
 
-			return this;
+            return this;
 
-		},
+        },
 
-		subScalar: function (s) {
+        subScalar: function (s) {
 
-			this.x -= s;
-			this.y -= s;
+            this.x -= s;
+            this.y -= s;
 
-			return this;
+            return this;
 
-		},
+        },
 
-		subVectors: function (a, b) {
+        subVectors: function (a, b) {
 
-			this.x = a.x - b.x;
-			this.y = a.y - b.y;
+            this.x = a.x - b.x;
+            this.y = a.y - b.y;
 
-			return this;
+            return this;
 
-		},
+        },
 
-		multiply: function (v) {
+        multiply: function (v) {
 
-			this.x *= v.x;
-			this.y *= v.y;
+            this.x *= v.x;
+            this.y *= v.y;
 
-			return this;
+            return this;
 
-		},
+        },
 
-		multiplyScalar: function (scalar) {
+        multiplyScalar: function (scalar) {
 
-			this.x *= scalar;
-			this.y *= scalar;
+            this.x *= scalar;
+            this.y *= scalar;
 
-			return this;
+            return this;
 
-		},
+        },
 
-		divide: function (v) {
+        divide: function (v) {
 
-			this.x /= v.x;
-			this.y /= v.y;
+            this.x /= v.x;
+            this.y /= v.y;
 
-			return this;
+            return this;
 
-		},
+        },
 
-		divideScalar: function (scalar) {
+        divideScalar: function (scalar) {
 
-			return this.multiplyScalar(1 / scalar);
+            return this.multiplyScalar(1 / scalar);
 
-		},
+        },
 
-		applyMatrix3: function (m) {
+        applyMatrix3: function (m) {
 
-			var x = this.x, y = this.y;
-			var e = m.elements;
+            var x = this.x, y = this.y;
+            var e = m.elements;
 
-			this.x = e[0] * x + e[3] * y + e[6];
-			this.y = e[1] * x + e[4] * y + e[7];
+            this.x = e[0] * x + e[3] * y + e[6];
+            this.y = e[1] * x + e[4] * y + e[7];
 
-			return this;
+            return this;
 
-		},
+        },
 
-		min: function (v) {
+        min: function (v) {
 
-			this.x = Math.min(this.x, v.x);
-			this.y = Math.min(this.y, v.y);
+            this.x = Math.min(this.x, v.x);
+            this.y = Math.min(this.y, v.y);
 
-			return this;
+            return this;
 
-		},
+        },
 
-		max: function (v) {
+        max: function (v) {
 
-			this.x = Math.max(this.x, v.x);
-			this.y = Math.max(this.y, v.y);
+            this.x = Math.max(this.x, v.x);
+            this.y = Math.max(this.y, v.y);
 
-			return this;
+            return this;
 
-		},
+        },
 
-		clamp: function (min, max) {
+        clamp: function (min, max) {
 
-			// assumes min < max, componentwise
+            // assumes min < max, componentwise
 
-			this.x = Math.max(min.x, Math.min(max.x, this.x));
-			this.y = Math.max(min.y, Math.min(max.y, this.y));
+            this.x = Math.max(min.x, Math.min(max.x, this.x));
+            this.y = Math.max(min.y, Math.min(max.y, this.y));
 
-			return this;
+            return this;
 
-		},
+        },
 
-		clampScalar: function () {
+        clampScalar: function () {
 
-			var min = new PGL.Vector2();
-			var max = new PGL.Vector2();
+            var min = new PGL.Vector2();
+            var max = new PGL.Vector2();
 
-			return function clampScalar(minVal, maxVal) {
+            return function clampScalar(minVal, maxVal) {
 
-				min.set(minVal, minVal);
-				max.set(maxVal, maxVal);
+                min.set(minVal, minVal);
+                max.set(maxVal, maxVal);
 
-				return this.clamp(min, max);
+                return this.clamp(min, max);
 
-			};
+            };
 
-		}(),
+        }(),
 
-		clampLength: function (min, max) {
+        clampLength: function (min, max) {
 
-			var length = this.length();
+            var length = this.length();
 
-			return this.divideScalar(length || 1).multiplyScalar(Math.max(min, Math.min(max, length)));
+            return this.divideScalar(length || 1).multiplyScalar(Math.max(min, Math.min(max, length)));
 
-		},
+        },
 
-		floor: function () {
+        floor: function () {
 
-			this.x = Math.floor(this.x);
-			this.y = Math.floor(this.y);
+            this.x = Math.floor(this.x);
+            this.y = Math.floor(this.y);
 
-			return this;
+            return this;
 
-		},
+        },
 
-		ceil: function () {
+        ceil: function () {
 
-			this.x = Math.ceil(this.x);
-			this.y = Math.ceil(this.y);
+            this.x = Math.ceil(this.x);
+            this.y = Math.ceil(this.y);
 
-			return this;
+            return this;
 
-		},
+        },
 
-		round: function () {
+        round: function () {
 
-			this.x = Math.round(this.x);
-			this.y = Math.round(this.y);
+            this.x = Math.round(this.x);
+            this.y = Math.round(this.y);
 
-			return this;
+            return this;
 
-		},
+        },
 
-		roundToZero: function () {
+        roundToZero: function () {
 
-			this.x = (this.x < 0) ? Math.ceil(this.x) : Math.floor(this.x);
-			this.y = (this.y < 0) ? Math.ceil(this.y) : Math.floor(this.y);
+            this.x = (this.x < 0) ? Math.ceil(this.x) : Math.floor(this.x);
+            this.y = (this.y < 0) ? Math.ceil(this.y) : Math.floor(this.y);
 
-			return this;
+            return this;
 
-		},
+        },
 
-		negate: function () {
+        negate: function () {
 
-			this.x = -this.x;
-			this.y = -this.y;
+            this.x = -this.x;
+            this.y = -this.y;
 
-			return this;
+            return this;
 
-		},
+        },
 
-		dot: function (v) {
+        dot: function (v) {
 
-			return this.x * v.x + this.y * v.y;
+            return this.x * v.x + this.y * v.y;
 
-		},
+        },
 
-		cross: function (v) {
+        cross: function (v) {
 
-			return this.x * v.y - this.y * v.x;
+            return this.x * v.y - this.y * v.x;
 
-		},
+        },
 
-		lengthSq: function () {
+        lengthSq: function () {
 
-			return this.x * this.x + this.y * this.y;
+            return this.x * this.x + this.y * this.y;
 
-		},
+        },
 
-		length: function () {
+        length: function () {
 
-			return Math.sqrt(this.x * this.x + this.y * this.y);
+            return Math.sqrt(this.x * this.x + this.y * this.y);
 
-		},
+        },
 
-		manhattanLength: function () {
+        manhattanLength: function () {
 
-			return Math.abs(this.x) + Math.abs(this.y);
+            return Math.abs(this.x) + Math.abs(this.y);
 
-		},
+        },
 
-		normalize: function () {
+        normalize: function () {
 
-			return this.divideScalar(this.length() || 1);
+            return this.divideScalar(this.length() || 1);
 
-		},
+        },
 
-		angle: function () {
+        angle: function () {
 
-			// computes the angle in radians with respect to the positive x-axis
+            // computes the angle in radians with respect to the positive x-axis
 
-			var angle = Math.atan2(this.y, this.x);
+            var angle = Math.atan2(this.y, this.x);
 
-			if (angle < 0) angle += 2 * Math.PI;
+            if (angle < 0) angle += 2 * Math.PI;
 
-			return angle;
+            return angle;
 
-		},
+        },
 
-		distanceTo: function (v) {
+        distanceTo: function (v) {
 
-			return Math.sqrt(this.distanceToSquared(v));
+            return Math.sqrt(this.distanceToSquared(v));
 
-		},
+        },
 
-		distanceToSquared: function (v) {
+        distanceToSquared: function (v) {
 
-			var dx = this.x - v.x, dy = this.y - v.y;
-			return dx * dx + dy * dy;
+            var dx = this.x - v.x, dy = this.y - v.y;
+            return dx * dx + dy * dy;
 
-		},
+        },
 
-		manhattanDistanceTo: function (v) {
+        manhattanDistanceTo: function (v) {
 
-			return Math.abs(this.x - v.x) + Math.abs(this.y - v.y);
+            return Math.abs(this.x - v.x) + Math.abs(this.y - v.y);
 
-		},
+        },
 
-		setLength: function (length) {
+        setLength: function (length) {
 
-			return this.normalize().multiplyScalar(length);
+            return this.normalize().multiplyScalar(length);
 
-		},
+        },
 
-		lerp: function (v, alpha) {
+        lerp: function (v, alpha) {
 
-			this.x += (v.x - this.x) * alpha;
-			this.y += (v.y - this.y) * alpha;
+            this.x += (v.x - this.x) * alpha;
+            this.y += (v.y - this.y) * alpha;
 
-			return this;
+            return this;
 
-		},
+        },
 
-		lerpVectors: function (v1, v2, alpha) {
+        lerpVectors: function (v1, v2, alpha) {
 
-			return this.subVectors(v2, v1).multiplyScalar(alpha).add(v1);
+            return this.subVectors(v2, v1).multiplyScalar(alpha).add(v1);
 
-		},
+        },
 
-		equals: function (v) {
+        equals: function (v) {
 
-			return ((v.x === this.x) && (v.y === this.y));
+            return ((v.x === this.x) && (v.y === this.y));
 
-		},
+        },
 
-		fromArray: function (array, offset) {
+        fromArray: function (array, offset) {
 
-			if (offset === undefined) offset = 0;
+            if (offset === undefined) offset = 0;
 
-			this.x = array[offset];
-			this.y = array[offset + 1];
+            this.x = array[offset];
+            this.y = array[offset + 1];
 
-			return this;
+            return this;
 
-		},
+        },
 
-		toArray: function (array, offset) {
+        toArray: function (array, offset) {
 
-			if (array === undefined) array = [];
-			if (offset === undefined) offset = 0;
+            if (array === undefined) array = [];
+            if (offset === undefined) offset = 0;
 
-			array[offset] = this.x;
-			array[offset + 1] = this.y;
+            array[offset] = this.x;
+            array[offset + 1] = this.y;
 
-			return array;
+            return array;
 
-		},
+        },
 
-		fromBufferAttribute: function (attribute, index, offset) {
+        fromBufferAttribute: function (attribute, index, offset) {
 
-			if (offset !== undefined) {
+            if (offset !== undefined) {
 
-				console.warn('THREE.Vector2: offset has been removed from .fromBufferAttribute().');
+                console.warn('THREE.Vector2: offset has been removed from .fromBufferAttribute().');
 
-			}
+            }
 
-			this.x = attribute.getX(index);
-			this.y = attribute.getY(index);
+            this.x = attribute.getX(index);
+            this.y = attribute.getY(index);
 
-			return this;
+            return this;
 
-		},
+        },
 
-		rotateAround: function (center, angle) {
+        rotateAround: function (center, angle) {
 
-			var c = Math.cos(angle), s = Math.sin(angle);
+            var c = Math.cos(angle), s = Math.sin(angle);
 
-			var x = this.x - center.x;
-			var y = this.y - center.y;
+            var x = this.x - center.x;
+            var y = this.y - center.y;
 
-			this.x = x * c - y * s + center.x;
-			this.y = x * s + y * c + center.y;
+            this.x = x * c - y * s + center.x;
+            this.y = x * s + y * c + center.y;
 
-			return this;
+            return this;
 
-		}
+        }
 
-	});
+    });
 
-	PGL.Vector3 = function (x, y, z) {
-		this.x = x || 0;
-		this.y = y || 0;
-		this.z = z || 0;
-	};
-	Object.assign(PGL.Vector3.prototype, {
-		isVector3: true,
+    PGL.Vector3 = function (x, y, z) {
+        this.x = x || 0;
+        this.y = y || 0;
+        this.z = z || 0;
+    };
+    Object.assign(PGL.Vector3.prototype, {
+        isVector3: true,
 
-		clone: function () {
-			return new this.constructor(this.x, this.y, this.z);
-		},
+        add: function (v, w) {
 
-		copy: function (v) {
-			this.x = v.x;
-			this.y = v.y;
-			this.z = v.z;
-			return this;
-		},
+            if (w !== undefined) {
 
-		addVectors: function (a, b) {
-			this.x = a.x + b.x;
-			this.y = a.y + b.y;
-			this.z = a.z + b.z;
-			return this;
-		},
+                console.warn('THREE.Vector3: .add() now only accepts one argument. Use .addVectors( a, b ) instead.');
+                return this.addVectors(v, w);
 
-		multiplyScalar: function (scalar) {
+            }
 
-			this.x *= scalar;
-			this.y *= scalar;
-			this.z *= scalar;
+            this.x += v.x;
+            this.y += v.y;
+            this.z += v.z;
 
-			return this;
+            return this;
 
-		},
+        },
 
-		applyMatrix4: function (m) {
+        clone: function () {
+            return new this.constructor(this.x, this.y, this.z);
+        },
 
-			var x = this.x, y = this.y, z = this.z;
-			var e = m.elements;
+        copy: function (v) {
+            this.x = v.x;
+            this.y = v.y;
+            this.z = v.z;
+            return this;
+        },
 
-			var w = 1 / (e[3] * x + e[7] * y + e[11] * z + e[15]);
+        addVectors: function (a, b) {
+            this.x = a.x + b.x;
+            this.y = a.y + b.y;
+            this.z = a.z + b.z;
+            return this;
+        },
 
-			this.x = (e[0] * x + e[4] * y + e[8] * z + e[12]) * w;
-			this.y = (e[1] * x + e[5] * y + e[9] * z + e[13]) * w;
-			this.z = (e[2] * x + e[6] * y + e[10] * z + e[14]) * w;
+        multiplyScalar: function (scalar) {
 
-			return this;
+            this.x *= scalar;
+            this.y *= scalar;
+            this.z *= scalar;
 
-		},
+            return this;
 
-		/**
-		 * 获得x\y\z的最小值
-		 * @param v
-		 * @return {min}
-		 */
-		min: function (v) {
-			this.x = Math.min(this.x, v.x);
-			this.y = Math.min(this.y, v.y);
-			this.z = Math.min(this.z, v.z);
-			return this;
-		},
+        },
 
-		/**
-		 * 获得x\y\z的最大值
-		 * @param v
-		 * @return {min}
-		 */
-		max: function (v) {
+        applyMatrix4: function (m) {
 
-			this.x = Math.max(this.x, v.x);
-			this.y = Math.max(this.y, v.y);
-			this.z = Math.max(this.z, v.z);
+            var x = this.x, y = this.y, z = this.z;
+            var e = m.elements;
 
-			return this;
+            var w = 1 / (e[3] * x + e[7] * y + e[11] * z + e[15]);
 
-		},
+            this.x = (e[0] * x + e[4] * y + e[8] * z + e[12]) * w;
+            this.y = (e[1] * x + e[5] * y + e[9] * z + e[13]) * w;
+            this.z = (e[2] * x + e[6] * y + e[10] * z + e[14]) * w;
 
-		dot: function (v) {
-			return this.x * v.x + this.y * v.y + this.z * v.z;
-		},
+            return this;
 
-		/**
-		 * 计算两点距离的平方
-		 * @param v
-		 * @return {number}
-		 */
-		distanceToSquared: function (v) {
-			var dx = this.x - v.x, dy = this.y - v.y, dz = this.z - v.z;
-			return dx * dx + dy * dy + dz * dz;
-		}
-	});
+        },
 
-	PGL.Vector4 = function (x, y, z, w) {
-		this.x = x || 0;
-		this.y = y || 0;
-		this.z = z || 0;
-		this.w = (w !== undefined) ? w : 1;
-	};
-	Object.assign(PGL.Vector4.prototype, {
-		isVector4: true,
+        /**
+         * 获得x\y\z的最小值
+         * @param v
+         * @return {min}
+         */
+        min: function (v) {
+            this.x = Math.min(this.x, v.x);
+            this.y = Math.min(this.y, v.y);
+            this.z = Math.min(this.z, v.z);
+            return this;
+        },
 
-		set: function (x, y, z, w) {
+        /**
+         * 获得x\y\z的最大值
+         * @param v
+         * @return {min}
+         */
+        max: function (v) {
 
-			this.x = x;
-			this.y = y;
-			this.z = z;
-			this.w = w;
+            this.x = Math.max(this.x, v.x);
+            this.y = Math.max(this.y, v.y);
+            this.z = Math.max(this.z, v.z);
 
-			return this;
+            return this;
 
-		},
+        },
 
-		setScalar: function (scalar) {
+        dot: function (v) {
+            return this.x * v.x + this.y * v.y + this.z * v.z;
+        },
 
-			this.x = scalar;
-			this.y = scalar;
-			this.z = scalar;
-			this.w = scalar;
+        /**
+         * 计算两点距离的平方
+         * @param v
+         * @return {number}
+         */
+        distanceToSquared: function (v) {
+            var dx = this.x - v.x, dy = this.y - v.y, dz = this.z - v.z;
+            return dx * dx + dy * dy + dz * dz;
+        },
 
-			return this;
+        applyQuaternion: function (q) {
 
-		},
+            var x = this.x, y = this.y, z = this.z;
+            var qx = q.x, qy = q.y, qz = q.z, qw = q.w;
 
-		setX: function (x) {
+            // calculate quat * vector
 
-			this.x = x;
+            var ix = qw * x + qy * z - qz * y;
+            var iy = qw * y + qz * x - qx * z;
+            var iz = qw * z + qx * y - qy * x;
+            var iw = -qx * x - qy * y - qz * z;
 
-			return this;
+            // calculate result * inverse quat
 
-		},
+            this.x = ix * qw + iw * -qx + iy * -qz - iz * -qy;
+            this.y = iy * qw + iw * -qy + iz * -qx - ix * -qz;
+            this.z = iz * qw + iw * -qz + ix * -qy - iy * -qx;
 
-		setY: function (y) {
+            return this;
 
-			this.y = y;
+        }
+    });
 
-			return this;
+    PGL.Vector4 = function (x, y, z, w) {
+        this.x = x || 0;
+        this.y = y || 0;
+        this.z = z || 0;
+        this.w = (w !== undefined) ? w : 1;
+    };
+    Object.assign(PGL.Vector4.prototype, {
+        isVector4: true,
 
-		},
+        set: function (x, y, z, w) {
 
-		setZ: function (z) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+            this.w = w;
 
-			this.z = z;
+            return this;
 
-			return this;
+        },
 
-		},
+        setScalar: function (scalar) {
 
-		setW: function (w) {
+            this.x = scalar;
+            this.y = scalar;
+            this.z = scalar;
+            this.w = scalar;
 
-			this.w = w;
+            return this;
 
-			return this;
+        },
 
-		},
+        setX: function (x) {
 
-		setComponent: function (index, value) {
+            this.x = x;
 
-			switch (index) {
+            return this;
 
-				case 0:
-					this.x = value;
-					break;
-				case 1:
-					this.y = value;
-					break;
-				case 2:
-					this.z = value;
-					break;
-				case 3:
-					this.w = value;
-					break;
-				default:
-					throw new Error('index is out of range: ' + index);
+        },
 
-			}
+        setY: function (y) {
 
-			return this;
+            this.y = y;
 
-		},
+            return this;
 
-		getComponent: function (index) {
+        },
 
-			switch (index) {
+        setZ: function (z) {
 
-				case 0:
-					return this.x;
-				case 1:
-					return this.y;
-				case 2:
-					return this.z;
-				case 3:
-					return this.w;
-				default:
-					throw new Error('index is out of range: ' + index);
+            this.z = z;
 
-			}
+            return this;
 
-		},
+        },
 
-		clone: function () {
+        setW: function (w) {
 
-			return new this.constructor(this.x, this.y, this.z, this.w);
+            this.w = w;
 
-		},
+            return this;
 
-		/**
-		 * 拷贝对象中的每个值
-		 * @param v
-		 * @return {copy}
-		 */
-		copy: function (v) {
-			this.x = v.x;
-			this.y = v.y;
-			this.z = v.z;
-			this.w = (v.w !== undefined) ? v.w : 1;
+        },
 
-			return this;
-		},
+        setComponent: function (index, value) {
 
-		add: function (v) {
+            switch (index) {
 
-			this.x += v.x;
-			this.y += v.y;
-			this.z += v.z;
-			this.w += v.w;
+                case 0:
+                    this.x = value;
+                    break;
+                case 1:
+                    this.y = value;
+                    break;
+                case 2:
+                    this.z = value;
+                    break;
+                case 3:
+                    this.w = value;
+                    break;
+                default:
+                    throw new Error('index is out of range: ' + index);
 
-			return this;
+            }
 
-		},
+            return this;
 
-		addScalar: function (s) {
+        },
 
-			this.x += s;
-			this.y += s;
-			this.z += s;
-			this.w += s;
+        getComponent: function (index) {
 
-			return this;
+            switch (index) {
 
-		},
+                case 0:
+                    return this.x;
+                case 1:
+                    return this.y;
+                case 2:
+                    return this.z;
+                case 3:
+                    return this.w;
+                default:
+                    throw new Error('index is out of range: ' + index);
 
-		addVectors: function (a, b) {
+            }
 
-			this.x = a.x + b.x;
-			this.y = a.y + b.y;
-			this.z = a.z + b.z;
-			this.w = a.w + b.w;
+        },
 
-			return this;
+        clone: function () {
 
-		},
+            return new this.constructor(this.x, this.y, this.z, this.w);
 
-		addScaledVector: function (v, s) {
+        },
 
-			this.x += v.x * s;
-			this.y += v.y * s;
-			this.z += v.z * s;
-			this.w += v.w * s;
+        /**
+         * 拷贝对象中的每个值
+         * @param v
+         * @return {copy}
+         */
+        copy: function (v) {
+            this.x = v.x;
+            this.y = v.y;
+            this.z = v.z;
+            this.w = (v.w !== undefined) ? v.w : 1;
 
-			return this;
+            return this;
+        },
 
-		},
+        add: function (v) {
 
-		sub: function (v) {
+            this.x += v.x;
+            this.y += v.y;
+            this.z += v.z;
+            this.w += v.w;
 
-			this.x -= v.x;
-			this.y -= v.y;
-			this.z -= v.z;
-			this.w -= v.w;
+            return this;
 
-			return this;
+        },
 
-		},
+        addScalar: function (s) {
 
-		subScalar: function (s) {
+            this.x += s;
+            this.y += s;
+            this.z += s;
+            this.w += s;
 
-			this.x -= s;
-			this.y -= s;
-			this.z -= s;
-			this.w -= s;
+            return this;
 
-			return this;
+        },
 
-		},
+        addVectors: function (a, b) {
 
-		subVectors: function (a, b) {
+            this.x = a.x + b.x;
+            this.y = a.y + b.y;
+            this.z = a.z + b.z;
+            this.w = a.w + b.w;
 
-			this.x = a.x - b.x;
-			this.y = a.y - b.y;
-			this.z = a.z - b.z;
-			this.w = a.w - b.w;
+            return this;
 
-			return this;
+        },
 
-		},
+        addScaledVector: function (v, s) {
 
-		multiplyScalar: function (scalar) {
+            this.x += v.x * s;
+            this.y += v.y * s;
+            this.z += v.z * s;
+            this.w += v.w * s;
 
-			this.x *= scalar;
-			this.y *= scalar;
-			this.z *= scalar;
-			this.w *= scalar;
+            return this;
 
-			return this;
+        },
 
-		},
+        sub: function (v) {
 
-		applyMatrix4: function (m) {
+            this.x -= v.x;
+            this.y -= v.y;
+            this.z -= v.z;
+            this.w -= v.w;
 
-			var x = this.x, y = this.y, z = this.z, w = this.w;
-			var e = m.elements;
+            return this;
 
-			this.x = e[0] * x + e[4] * y + e[8] * z + e[12] * w;
-			this.y = e[1] * x + e[5] * y + e[9] * z + e[13] * w;
-			this.z = e[2] * x + e[6] * y + e[10] * z + e[14] * w;
-			this.w = e[3] * x + e[7] * y + e[11] * z + e[15] * w;
+        },
 
-			return this;
+        subScalar: function (s) {
 
-		},
+            this.x -= s;
+            this.y -= s;
+            this.z -= s;
+            this.w -= s;
 
-		divideScalar: function (scalar) {
+            return this;
 
-			return this.multiplyScalar(1 / scalar);
+        },
 
-		},
+        subVectors: function (a, b) {
 
-		setAxisAngleFromQuaternion: function (q) {
+            this.x = a.x - b.x;
+            this.y = a.y - b.y;
+            this.z = a.z - b.z;
+            this.w = a.w - b.w;
 
-			// http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToAngle/index.htm
+            return this;
 
-			// q is assumed to be normalized
+        },
 
-			this.w = 2 * Math.acos(q.w);
+        multiplyScalar: function (scalar) {
 
-			var s = Math.sqrt(1 - q.w * q.w);
+            this.x *= scalar;
+            this.y *= scalar;
+            this.z *= scalar;
+            this.w *= scalar;
 
-			if (s < 0.0001) {
+            return this;
 
-				this.x = 1;
-				this.y = 0;
-				this.z = 0;
+        },
 
-			} else {
+        applyMatrix4: function (m) {
 
-				this.x = q.x / s;
-				this.y = q.y / s;
-				this.z = q.z / s;
+            var x = this.x, y = this.y, z = this.z, w = this.w;
+            var e = m.elements;
 
-			}
+            this.x = e[0] * x + e[4] * y + e[8] * z + e[12] * w;
+            this.y = e[1] * x + e[5] * y + e[9] * z + e[13] * w;
+            this.z = e[2] * x + e[6] * y + e[10] * z + e[14] * w;
+            this.w = e[3] * x + e[7] * y + e[11] * z + e[15] * w;
 
-			return this;
+            return this;
 
-		},
+        },
 
-		setAxisAngleFromRotationMatrix: function (m) {
+        divideScalar: function (scalar) {
 
-			// http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToAngle/index.htm
+            return this.multiplyScalar(1 / scalar);
 
-			// assumes the upper 3x3 of m is a pure rotation matrix (i.e, unscaled)
+        },
 
-			var angle, x, y, z,		// variables for result
-				epsilon = 0.01,		// margin to allow for rounding errors
-				epsilon2 = 0.1,		// margin to distinguish between 0 and 180 degrees
+        setAxisAngleFromQuaternion: function (q) {
 
-				te = m.elements,
+            // http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToAngle/index.htm
 
-				m11 = te[0], m12 = te[4], m13 = te[8],
-				m21 = te[1], m22 = te[5], m23 = te[9],
-				m31 = te[2], m32 = te[6], m33 = te[10];
+            // q is assumed to be normalized
 
-			if ((Math.abs(m12 - m21) < epsilon) &&
-				(Math.abs(m13 - m31) < epsilon) &&
-				(Math.abs(m23 - m32) < epsilon)) {
+            this.w = 2 * Math.acos(q.w);
 
-				// singularity found
-				// first check for identity matrix which must have +1 for all terms
-				// in leading diagonal and zero in other terms
+            var s = Math.sqrt(1 - q.w * q.w);
 
-				if ((Math.abs(m12 + m21) < epsilon2) &&
-					(Math.abs(m13 + m31) < epsilon2) &&
-					(Math.abs(m23 + m32) < epsilon2) &&
-					(Math.abs(m11 + m22 + m33 - 3) < epsilon2)) {
+            if (s < 0.0001) {
 
-					// this singularity is identity matrix so angle = 0
+                this.x = 1;
+                this.y = 0;
+                this.z = 0;
 
-					this.set(1, 0, 0, 0);
+            } else {
 
-					return this; // zero angle, arbitrary axis
+                this.x = q.x / s;
+                this.y = q.y / s;
+                this.z = q.z / s;
 
-				}
+            }
 
-				// otherwise this singularity is angle = 180
+            return this;
 
-				angle = Math.PI;
+        },
 
-				var xx = (m11 + 1) / 2;
-				var yy = (m22 + 1) / 2;
-				var zz = (m33 + 1) / 2;
-				var xy = (m12 + m21) / 4;
-				var xz = (m13 + m31) / 4;
-				var yz = (m23 + m32) / 4;
+        setAxisAngleFromRotationMatrix: function (m) {
 
-				if ((xx > yy) && (xx > zz)) {
+            // http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToAngle/index.htm
 
-					// m11 is the largest diagonal term
+            // assumes the upper 3x3 of m is a pure rotation matrix (i.e, unscaled)
 
-					if (xx < epsilon) {
+            var angle, x, y, z,		// variables for result
+                epsilon = 0.01,		// margin to allow for rounding errors
+                epsilon2 = 0.1,		// margin to distinguish between 0 and 180 degrees
 
-						x = 0;
-						y = 0.707106781;
-						z = 0.707106781;
+                te = m.elements,
 
-					} else {
+                m11 = te[0], m12 = te[4], m13 = te[8],
+                m21 = te[1], m22 = te[5], m23 = te[9],
+                m31 = te[2], m32 = te[6], m33 = te[10];
 
-						x = Math.sqrt(xx);
-						y = xy / x;
-						z = xz / x;
+            if ((Math.abs(m12 - m21) < epsilon) &&
+                (Math.abs(m13 - m31) < epsilon) &&
+                (Math.abs(m23 - m32) < epsilon)) {
 
-					}
+                // singularity found
+                // first check for identity matrix which must have +1 for all terms
+                // in leading diagonal and zero in other terms
 
-				} else if (yy > zz) {
+                if ((Math.abs(m12 + m21) < epsilon2) &&
+                    (Math.abs(m13 + m31) < epsilon2) &&
+                    (Math.abs(m23 + m32) < epsilon2) &&
+                    (Math.abs(m11 + m22 + m33 - 3) < epsilon2)) {
 
-					// m22 is the largest diagonal term
+                    // this singularity is identity matrix so angle = 0
 
-					if (yy < epsilon) {
+                    this.set(1, 0, 0, 0);
 
-						x = 0.707106781;
-						y = 0;
-						z = 0.707106781;
+                    return this; // zero angle, arbitrary axis
 
-					} else {
+                }
 
-						y = Math.sqrt(yy);
-						x = xy / y;
-						z = yz / y;
+                // otherwise this singularity is angle = 180
 
-					}
+                angle = Math.PI;
 
-				} else {
+                var xx = (m11 + 1) / 2;
+                var yy = (m22 + 1) / 2;
+                var zz = (m33 + 1) / 2;
+                var xy = (m12 + m21) / 4;
+                var xz = (m13 + m31) / 4;
+                var yz = (m23 + m32) / 4;
 
-					// m33 is the largest diagonal term so base result on this
+                if ((xx > yy) && (xx > zz)) {
 
-					if (zz < epsilon) {
+                    // m11 is the largest diagonal term
 
-						x = 0.707106781;
-						y = 0.707106781;
-						z = 0;
+                    if (xx < epsilon) {
 
-					} else {
+                        x = 0;
+                        y = 0.707106781;
+                        z = 0.707106781;
 
-						z = Math.sqrt(zz);
-						x = xz / z;
-						y = yz / z;
+                    } else {
 
-					}
+                        x = Math.sqrt(xx);
+                        y = xy / x;
+                        z = xz / x;
 
-				}
+                    }
 
-				this.set(x, y, z, angle);
+                } else if (yy > zz) {
 
-				return this; // return 180 deg rotation
+                    // m22 is the largest diagonal term
 
-			}
+                    if (yy < epsilon) {
 
-			// as we have reached here there are no singularities so we can handle normally
+                        x = 0.707106781;
+                        y = 0;
+                        z = 0.707106781;
 
-			var s = Math.sqrt((m32 - m23) * (m32 - m23) +
-				(m13 - m31) * (m13 - m31) +
-				(m21 - m12) * (m21 - m12)); // used to normalize
+                    } else {
 
-			if (Math.abs(s) < 0.001) s = 1;
+                        y = Math.sqrt(yy);
+                        x = xy / y;
+                        z = yz / y;
 
-			// prevent divide by zero, should not happen if matrix is orthogonal and should be
-			// caught by singularity test above, but I've left it in just in case
+                    }
 
-			this.x = (m32 - m23) / s;
-			this.y = (m13 - m31) / s;
-			this.z = (m21 - m12) / s;
-			this.w = Math.acos((m11 + m22 + m33 - 1) / 2);
+                } else {
 
-			return this;
+                    // m33 is the largest diagonal term so base result on this
 
-		},
+                    if (zz < epsilon) {
 
-		min: function (v) {
+                        x = 0.707106781;
+                        y = 0.707106781;
+                        z = 0;
 
-			this.x = Math.min(this.x, v.x);
-			this.y = Math.min(this.y, v.y);
-			this.z = Math.min(this.z, v.z);
-			this.w = Math.min(this.w, v.w);
+                    } else {
 
-			return this;
+                        z = Math.sqrt(zz);
+                        x = xz / z;
+                        y = yz / z;
 
-		},
+                    }
 
-		max: function (v) {
+                }
 
-			this.x = Math.max(this.x, v.x);
-			this.y = Math.max(this.y, v.y);
-			this.z = Math.max(this.z, v.z);
-			this.w = Math.max(this.w, v.w);
+                this.set(x, y, z, angle);
 
-			return this;
+                return this; // return 180 deg rotation
 
-		},
+            }
 
-		clamp: function (min, max) {
+            // as we have reached here there are no singularities so we can handle normally
 
-			// assumes min < max, componentwise
+            var s = Math.sqrt((m32 - m23) * (m32 - m23) +
+                (m13 - m31) * (m13 - m31) +
+                (m21 - m12) * (m21 - m12)); // used to normalize
 
-			this.x = Math.max(min.x, Math.min(max.x, this.x));
-			this.y = Math.max(min.y, Math.min(max.y, this.y));
-			this.z = Math.max(min.z, Math.min(max.z, this.z));
-			this.w = Math.max(min.w, Math.min(max.w, this.w));
+            if (Math.abs(s) < 0.001) s = 1;
 
-			return this;
+            // prevent divide by zero, should not happen if matrix is orthogonal and should be
+            // caught by singularity test above, but I've left it in just in case
 
-		},
+            this.x = (m32 - m23) / s;
+            this.y = (m13 - m31) / s;
+            this.z = (m21 - m12) / s;
+            this.w = Math.acos((m11 + m22 + m33 - 1) / 2);
 
-		clampScalar: function () {
+            return this;
 
-			var min, max;
+        },
 
-			return function clampScalar(minVal, maxVal) {
+        min: function (v) {
 
-				if (min === undefined) {
+            this.x = Math.min(this.x, v.x);
+            this.y = Math.min(this.y, v.y);
+            this.z = Math.min(this.z, v.z);
+            this.w = Math.min(this.w, v.w);
 
-					min = new Vector4();
-					max = new Vector4();
+            return this;
 
-				}
+        },
 
-				min.set(minVal, minVal, minVal, minVal);
-				max.set(maxVal, maxVal, maxVal, maxVal);
+        max: function (v) {
 
-				return this.clamp(min, max);
+            this.x = Math.max(this.x, v.x);
+            this.y = Math.max(this.y, v.y);
+            this.z = Math.max(this.z, v.z);
+            this.w = Math.max(this.w, v.w);
 
-			};
+            return this;
 
-		}(),
+        },
 
-		clampLength: function (min, max) {
+        clamp: function (min, max) {
 
-			var length = this.length();
+            // assumes min < max, componentwise
 
-			return this.divideScalar(length || 1).multiplyScalar(Math.max(min, Math.min(max, length)));
+            this.x = Math.max(min.x, Math.min(max.x, this.x));
+            this.y = Math.max(min.y, Math.min(max.y, this.y));
+            this.z = Math.max(min.z, Math.min(max.z, this.z));
+            this.w = Math.max(min.w, Math.min(max.w, this.w));
 
-		},
+            return this;
 
-		floor: function () {
+        },
 
-			this.x = Math.floor(this.x);
-			this.y = Math.floor(this.y);
-			this.z = Math.floor(this.z);
-			this.w = Math.floor(this.w);
+        clampScalar: function () {
 
-			return this;
+            var min, max;
 
-		},
+            return function clampScalar(minVal, maxVal) {
 
-		ceil: function () {
+                if (min === undefined) {
 
-			this.x = Math.ceil(this.x);
-			this.y = Math.ceil(this.y);
-			this.z = Math.ceil(this.z);
-			this.w = Math.ceil(this.w);
+                    min = new Vector4();
+                    max = new Vector4();
 
-			return this;
+                }
 
-		},
+                min.set(minVal, minVal, minVal, minVal);
+                max.set(maxVal, maxVal, maxVal, maxVal);
 
-		round: function () {
+                return this.clamp(min, max);
 
-			this.x = Math.round(this.x);
-			this.y = Math.round(this.y);
-			this.z = Math.round(this.z);
-			this.w = Math.round(this.w);
+            };
 
-			return this;
+        }(),
 
-		},
+        clampLength: function (min, max) {
 
-		roundToZero: function () {
+            var length = this.length();
 
-			this.x = (this.x < 0) ? Math.ceil(this.x) : Math.floor(this.x);
-			this.y = (this.y < 0) ? Math.ceil(this.y) : Math.floor(this.y);
-			this.z = (this.z < 0) ? Math.ceil(this.z) : Math.floor(this.z);
-			this.w = (this.w < 0) ? Math.ceil(this.w) : Math.floor(this.w);
+            return this.divideScalar(length || 1).multiplyScalar(Math.max(min, Math.min(max, length)));
 
-			return this;
+        },
 
-		},
+        floor: function () {
 
-		negate: function () {
+            this.x = Math.floor(this.x);
+            this.y = Math.floor(this.y);
+            this.z = Math.floor(this.z);
+            this.w = Math.floor(this.w);
 
-			this.x = -this.x;
-			this.y = -this.y;
-			this.z = -this.z;
-			this.w = -this.w;
+            return this;
 
-			return this;
+        },
 
-		},
+        ceil: function () {
 
-		dot: function (v) {
+            this.x = Math.ceil(this.x);
+            this.y = Math.ceil(this.y);
+            this.z = Math.ceil(this.z);
+            this.w = Math.ceil(this.w);
 
-			return this.x * v.x + this.y * v.y + this.z * v.z + this.w * v.w;
+            return this;
 
-		},
+        },
 
-		lengthSq: function () {
+        round: function () {
 
-			return this.x * this.x + this.y * this.y + this.z * this.z + this.w * this.w;
+            this.x = Math.round(this.x);
+            this.y = Math.round(this.y);
+            this.z = Math.round(this.z);
+            this.w = Math.round(this.w);
 
-		},
+            return this;
 
-		length: function () {
+        },
 
-			return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z + this.w * this.w);
+        roundToZero: function () {
 
-		},
+            this.x = (this.x < 0) ? Math.ceil(this.x) : Math.floor(this.x);
+            this.y = (this.y < 0) ? Math.ceil(this.y) : Math.floor(this.y);
+            this.z = (this.z < 0) ? Math.ceil(this.z) : Math.floor(this.z);
+            this.w = (this.w < 0) ? Math.ceil(this.w) : Math.floor(this.w);
 
-		manhattanLength: function () {
+            return this;
 
-			return Math.abs(this.x) + Math.abs(this.y) + Math.abs(this.z) + Math.abs(this.w);
+        },
 
-		},
+        negate: function () {
 
-		normalize: function () {
+            this.x = -this.x;
+            this.y = -this.y;
+            this.z = -this.z;
+            this.w = -this.w;
 
-			return this.divideScalar(this.length() || 1);
+            return this;
 
-		},
+        },
 
-		setLength: function (length) {
+        dot: function (v) {
 
-			return this.normalize().multiplyScalar(length);
+            return this.x * v.x + this.y * v.y + this.z * v.z + this.w * v.w;
 
-		},
+        },
 
-		lerp: function (v, alpha) {
+        lengthSq: function () {
 
-			this.x += (v.x - this.x) * alpha;
-			this.y += (v.y - this.y) * alpha;
-			this.z += (v.z - this.z) * alpha;
-			this.w += (v.w - this.w) * alpha;
+            return this.x * this.x + this.y * this.y + this.z * this.z + this.w * this.w;
 
-			return this;
+        },
 
-		},
+        length: function () {
 
-		lerpVectors: function (v1, v2, alpha) {
+            return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z + this.w * this.w);
 
-			return this.subVectors(v2, v1).multiplyScalar(alpha).add(v1);
+        },
 
-		},
+        manhattanLength: function () {
 
-		/**
-		 * 如果各个分量的值都相等，返回true 否则 返回false
-		 * @param v
-		 * @return {boolean}
-		 */
-		equals: function (v) {
-			return ((v.x === this.x) && (v.y === this.y) && (v.z === this.z) && (v.w === this.w));
-		},
+            return Math.abs(this.x) + Math.abs(this.y) + Math.abs(this.z) + Math.abs(this.w);
 
-		fromArray: function (array, offset) {
+        },
 
-			if (offset === undefined) offset = 0;
+        normalize: function () {
 
-			this.x = array[offset];
-			this.y = array[offset + 1];
-			this.z = array[offset + 2];
-			this.w = array[offset + 3];
+            return this.divideScalar(this.length() || 1);
 
-			return this;
+        },
 
-		},
+        setLength: function (length) {
 
-		toArray: function (array, offset) {
+            return this.normalize().multiplyScalar(length);
 
-			if (array === undefined) array = [];
-			if (offset === undefined) offset = 0;
+        },
 
-			array[offset] = this.x;
-			array[offset + 1] = this.y;
-			array[offset + 2] = this.z;
-			array[offset + 3] = this.w;
+        lerp: function (v, alpha) {
 
-			return array;
+            this.x += (v.x - this.x) * alpha;
+            this.y += (v.y - this.y) * alpha;
+            this.z += (v.z - this.z) * alpha;
+            this.w += (v.w - this.w) * alpha;
 
-		},
+            return this;
 
-		fromBufferAttribute: function (attribute, index, offset) {
+        },
 
-			if (offset !== undefined) {
+        lerpVectors: function (v1, v2, alpha) {
 
-				console.warn('THREE.Vector4: offset has been removed from .fromBufferAttribute().');
+            return this.subVectors(v2, v1).multiplyScalar(alpha).add(v1);
 
-			}
+        },
 
-			this.x = attribute.getX(index);
-			this.y = attribute.getY(index);
-			this.z = attribute.getZ(index);
-			this.w = attribute.getW(index);
+        /**
+         * 如果各个分量的值都相等，返回true 否则 返回false
+         * @param v
+         * @return {boolean}
+         */
+        equals: function (v) {
+            return ((v.x === this.x) && (v.y === this.y) && (v.z === this.z) && (v.w === this.w));
+        },
 
-			return this;
+        fromArray: function (array, offset) {
 
-		}
-	});
+            if (offset === undefined) offset = 0;
 
-	PGL.Color = function (r, g, b) {
-		if (g === undefined && b === undefined) {
-			// r is PGL.Color, hex or string
-			return this.set(r);
-		}
-		return this.setRGB(r, g, b);
-	};
-	Object.assign(PGL.Color.prototype, {
+            this.x = array[offset];
+            this.y = array[offset + 1];
+            this.z = array[offset + 2];
+            this.w = array[offset + 3];
 
-		isColor: true,
+            return this;
 
-		r: 1, g: 1, b: 1,
+        },
 
-		set: function (value) {
-			if (value && value.isColor) {
-				this.copy(value);
-			} else if (typeof value === 'number') {
-				this.setHex(value);
-			} else if (typeof value === 'string') {
-				this.setStyle(value);
-			}
-			return this;
-		},
+        toArray: function (array, offset) {
 
-		setHex: function (hex) {
-			hex = Math.floor(hex);
+            if (array === undefined) array = [];
+            if (offset === undefined) offset = 0;
 
-			this.r = (hex >> 16 & 255) / 255;
-			this.g = (hex >> 8 & 255) / 255;
-			this.b = (hex & 255) / 255;
+            array[offset] = this.x;
+            array[offset + 1] = this.y;
+            array[offset + 2] = this.z;
+            array[offset + 3] = this.w;
 
-			return this;
-		},
+            return array;
 
-		setRGB: function (r, g, b) {
+        },
 
-			this.r = r;
-			this.g = g;
-			this.b = b;
+        fromBufferAttribute: function (attribute, index, offset) {
 
-			return this;
+            if (offset !== undefined) {
 
-		},
+                console.warn('THREE.Vector4: offset has been removed from .fromBufferAttribute().');
 
-		setHSL: function () {
-			function hue2rgb(p, q, t) {
+            }
 
-				if (t < 0) t += 1;
-				if (t > 1) t -= 1;
-				if (t < 1 / 6) return p + (q - p) * 6 * t;
-				if (t < 1 / 2) return q;
-				if (t < 2 / 3) return p + (q - p) * 6 * (2 / 3 - t);
-				return p;
+            this.x = attribute.getX(index);
+            this.y = attribute.getY(index);
+            this.z = attribute.getZ(index);
+            this.w = attribute.getW(index);
 
-			}
+            return this;
 
-			return function setHSL(h, s, l) {
+        }
+    });
 
-				// h,s,l ranges are in 0.0 - 1.0
-				h = PGL.Math.euclideanModulo(h, 1);
-				s = PGL.Math.clamp(s, 0, 1);
-				l = PGL.Math.clamp(l, 0, 1);
+    PGL.Color = function (r, g, b) {
+        if (g === undefined && b === undefined) {
+            // r is PGL.Color, hex or string
+            return this.set(r);
+        }
+        return this.setRGB(r, g, b);
+    };
+    Object.assign(PGL.Color.prototype, {
 
-				if (s === 0) {
-					this.r = this.g = this.b = l;
-				} else {
+        isColor: true,
 
-					var p = l <= 0.5 ? l * (1 + s) : l + s - (l * s);
-					var q = (2 * l) - p;
-					this.r = hue2rgb(q, p, h + 1 / 3);
-					this.g = hue2rgb(q, p, h);
-					this.b = hue2rgb(q, p, h - 1 / 3);
-				}
-				return this;
-			};
-		}(),
+        r: 1, g: 1, b: 1,
 
-		setStyle: function (style) {
+        set: function (value) {
+            if (value && value.isColor) {
+                this.copy(value);
+            } else if (typeof value === 'number') {
+                this.setHex(value);
+            } else if (typeof value === 'string') {
+                this.setStyle(value);
+            }
+            return this;
+        },
 
-			function handleAlpha(string) {
-				if (string === undefined) return;
-				if (parseFloat(string) < 1) {
-					console.warn('PGL.Color: Alpha component of ' + style + ' will be ignored.');
-				}
-			}
+        setHex: function (hex) {
+            hex = Math.floor(hex);
 
-			var m;
-			if (m = /^((?:rgb|hsl)a?)\(\s*([^\)]*)\)/.exec(style)) {
-				// rgb / hsl
-				var color;
-				var name = m[1];
-				var components = m[2];
-				switch (name) {
-					case 'rgb':
-					case 'rgba':
-						if (color = /^(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(,\s*([0-9]*\.?[0-9]+)\s*)?$/.exec(components)) {
-							// rgb(255,0,0) rgba(255,0,0,0.5)
-							this.r = Math.min(255, parseInt(color[1], 10)) / 255;
-							this.g = Math.min(255, parseInt(color[2], 10)) / 255;
-							this.b = Math.min(255, parseInt(color[3], 10)) / 255;
-							handleAlpha(color[5]);
-							return this;
-						}
-						if (color = /^(\d+)\%\s*,\s*(\d+)\%\s*,\s*(\d+)\%\s*(,\s*([0-9]*\.?[0-9]+)\s*)?$/.exec(components)) {
-							// rgb(100%,0%,0%) rgba(100%,0%,0%,0.5)
-							this.r = Math.min(100, parseInt(color[1], 10)) / 100;
-							this.g = Math.min(100, parseInt(color[2], 10)) / 100;
-							this.b = Math.min(100, parseInt(color[3], 10)) / 100;
-							handleAlpha(color[5]);
-							return this;
-						}
-						break;
-					case 'hsl':
-					case 'hsla':
-						if (color = /^([0-9]*\.?[0-9]+)\s*,\s*(\d+)\%\s*,\s*(\d+)\%\s*(,\s*([0-9]*\.?[0-9]+)\s*)?$/.exec(components)) {
-							// hsl(120,50%,50%) hsla(120,50%,50%,0.5)
-							var h = parseFloat(color[1]) / 360;
-							var s = parseInt(color[2], 10) / 100;
-							var l = parseInt(color[3], 10) / 100;
-							handleAlpha(color[5]);
-							return this.setHSL(h, s, l);
-						}
-						break;
-				}
-			} else if (m = /^\#([A-Fa-f0-9]+)$/.exec(style)) {
+            this.r = (hex >> 16 & 255) / 255;
+            this.g = (hex >> 8 & 255) / 255;
+            this.b = (hex & 255) / 255;
 
-				// hex color
-				var hex = m[1];
-				var size = hex.length;
+            return this;
+        },
 
-				if (size === 3) {
-					// #ff0
-					this.r = parseInt(hex.charAt(0) + hex.charAt(0), 16) / 255;
-					this.g = parseInt(hex.charAt(1) + hex.charAt(1), 16) / 255;
-					this.b = parseInt(hex.charAt(2) + hex.charAt(2), 16) / 255;
-					return this;
-				} else if (size === 6) {
-					// #ff0000
-					this.r = parseInt(hex.charAt(0) + hex.charAt(1), 16) / 255;
-					this.g = parseInt(hex.charAt(2) + hex.charAt(3), 16) / 255;
-					this.b = parseInt(hex.charAt(4) + hex.charAt(5), 16) / 255;
+        setRGB: function (r, g, b) {
 
-					return this;
+            this.r = r;
+            this.g = g;
+            this.b = b;
 
-				}
+            return this;
 
-			}
+        },
 
-			if (style && style.length > 0) {
+        setHSL: function () {
+            function hue2rgb(p, q, t) {
 
-				// color keywords
-				var hex = PGL.ColorKeywords[style];
+                if (t < 0) t += 1;
+                if (t > 1) t -= 1;
+                if (t < 1 / 6) return p + (q - p) * 6 * t;
+                if (t < 1 / 2) return q;
+                if (t < 2 / 3) return p + (q - p) * 6 * (2 / 3 - t);
+                return p;
 
-				if (hex !== undefined) {
-					// red
-					this.setHex(hex);
-				} else {
-					// unknown color
-					console.warn('THREE.Color: Unknown color ' + style);
-				}
-			}
-			return this;
-		},
+            }
 
-		clone: function () {
-			return new this.constructor(this.r, this.g, this.b);
-		},
+            return function setHSL(h, s, l) {
 
-		copy: function (color) {
-			this.r = color.r;
-			this.g = color.g;
-			this.b = color.b;
+                // h,s,l ranges are in 0.0 - 1.0
+                h = PGL.Math.euclideanModulo(h, 1);
+                s = PGL.Math.clamp(s, 0, 1);
+                l = PGL.Math.clamp(l, 0, 1);
 
-			return this;
-		}
-	});
+                if (s === 0) {
+                    this.r = this.g = this.b = l;
+                } else {
 
-	PGL.Matrix3 = function () {
+                    var p = l <= 0.5 ? l * (1 + s) : l + s - (l * s);
+                    var q = (2 * l) - p;
+                    this.r = hue2rgb(q, p, h + 1 / 3);
+                    this.g = hue2rgb(q, p, h);
+                    this.b = hue2rgb(q, p, h - 1 / 3);
+                }
+                return this;
+            };
+        }(),
 
-		this.elements = [
-			1, 0, 0,
-			0, 1, 0,
-			0, 0, 1
-		];
+        setStyle: function (style) {
 
-		if (arguments.length > 0) {
-			console.error('THREE.Matrix3: the constructor no longer reads arguments. use .set() instead.');
-		}
+            function handleAlpha(string) {
+                if (string === undefined) return;
+                if (parseFloat(string) < 1) {
+                    console.warn('PGL.Color: Alpha component of ' + style + ' will be ignored.');
+                }
+            }
 
-	};
-	Object.assign(PGL.Matrix3.prototype, {
+            var m;
+            if (m = /^((?:rgb|hsl)a?)\(\s*([^\)]*)\)/.exec(style)) {
+                // rgb / hsl
+                var color;
+                var name = m[1];
+                var components = m[2];
+                switch (name) {
+                    case 'rgb':
+                    case 'rgba':
+                        if (color = /^(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(,\s*([0-9]*\.?[0-9]+)\s*)?$/.exec(components)) {
+                            // rgb(255,0,0) rgba(255,0,0,0.5)
+                            this.r = Math.min(255, parseInt(color[1], 10)) / 255;
+                            this.g = Math.min(255, parseInt(color[2], 10)) / 255;
+                            this.b = Math.min(255, parseInt(color[3], 10)) / 255;
+                            handleAlpha(color[5]);
+                            return this;
+                        }
+                        if (color = /^(\d+)\%\s*,\s*(\d+)\%\s*,\s*(\d+)\%\s*(,\s*([0-9]*\.?[0-9]+)\s*)?$/.exec(components)) {
+                            // rgb(100%,0%,0%) rgba(100%,0%,0%,0.5)
+                            this.r = Math.min(100, parseInt(color[1], 10)) / 100;
+                            this.g = Math.min(100, parseInt(color[2], 10)) / 100;
+                            this.b = Math.min(100, parseInt(color[3], 10)) / 100;
+                            handleAlpha(color[5]);
+                            return this;
+                        }
+                        break;
+                    case 'hsl':
+                    case 'hsla':
+                        if (color = /^([0-9]*\.?[0-9]+)\s*,\s*(\d+)\%\s*,\s*(\d+)\%\s*(,\s*([0-9]*\.?[0-9]+)\s*)?$/.exec(components)) {
+                            // hsl(120,50%,50%) hsla(120,50%,50%,0.5)
+                            var h = parseFloat(color[1]) / 360;
+                            var s = parseInt(color[2], 10) / 100;
+                            var l = parseInt(color[3], 10) / 100;
+                            handleAlpha(color[5]);
+                            return this.setHSL(h, s, l);
+                        }
+                        break;
+                }
+            } else if (m = /^\#([A-Fa-f0-9]+)$/.exec(style)) {
 
-		isMatrix3: true,
+                // hex color
+                var hex = m[1];
+                var size = hex.length;
 
-		set: function (n11, n12, n13, n21, n22, n23, n31, n32, n33) {
+                if (size === 3) {
+                    // #ff0
+                    this.r = parseInt(hex.charAt(0) + hex.charAt(0), 16) / 255;
+                    this.g = parseInt(hex.charAt(1) + hex.charAt(1), 16) / 255;
+                    this.b = parseInt(hex.charAt(2) + hex.charAt(2), 16) / 255;
+                    return this;
+                } else if (size === 6) {
+                    // #ff0000
+                    this.r = parseInt(hex.charAt(0) + hex.charAt(1), 16) / 255;
+                    this.g = parseInt(hex.charAt(2) + hex.charAt(3), 16) / 255;
+                    this.b = parseInt(hex.charAt(4) + hex.charAt(5), 16) / 255;
 
-			var te = this.elements;
+                    return this;
 
-			te[0] = n11;
-			te[1] = n21;
-			te[2] = n31;
-			te[3] = n12;
-			te[4] = n22;
-			te[5] = n32;
-			te[6] = n13;
-			te[7] = n23;
-			te[8] = n33;
+                }
 
-			return this;
+            }
 
-		},
+            if (style && style.length > 0) {
 
-		identity: function () {
+                // color keywords
+                var hex = PGL.ColorKeywords[style];
 
-			this.set(
-				1, 0, 0,
-				0, 1, 0,
-				0, 0, 1
-			);
+                if (hex !== undefined) {
+                    // red
+                    this.setHex(hex);
+                } else {
+                    // unknown color
+                    console.warn('THREE.Color: Unknown color ' + style);
+                }
+            }
+            return this;
+        },
 
-			return this;
+        clone: function () {
+            return new this.constructor(this.r, this.g, this.b);
+        },
 
-		},
+        copy: function (color) {
+            this.r = color.r;
+            this.g = color.g;
+            this.b = color.b;
 
-		clone: function () {
+            return this;
+        }
+    });
 
-			return new this.constructor().fromArray(this.elements);
+    PGL.Matrix3 = function () {
 
-		},
+        this.elements = [
+            1, 0, 0,
+            0, 1, 0,
+            0, 0, 1
+        ];
 
-		copy: function (m) {
+        if (arguments.length > 0) {
+            console.error('THREE.Matrix3: the constructor no longer reads arguments. use .set() instead.');
+        }
 
-			var te = this.elements;
-			var me = m.elements;
+    };
+    Object.assign(PGL.Matrix3.prototype, {
 
-			te[0] = me[0];
-			te[1] = me[1];
-			te[2] = me[2];
-			te[3] = me[3];
-			te[4] = me[4];
-			te[5] = me[5];
-			te[6] = me[6];
-			te[7] = me[7];
-			te[8] = me[8];
+        isMatrix3: true,
 
-			return this;
+        set: function (n11, n12, n13, n21, n22, n23, n31, n32, n33) {
 
-		},
+            var te = this.elements;
 
-		setFromMatrix4: function (m) {
+            te[0] = n11;
+            te[1] = n21;
+            te[2] = n31;
+            te[3] = n12;
+            te[4] = n22;
+            te[5] = n32;
+            te[6] = n13;
+            te[7] = n23;
+            te[8] = n33;
 
-			var me = m.elements;
+            return this;
 
-			this.set(
-				me[0], me[4], me[8],
-				me[1], me[5], me[9],
-				me[2], me[6], me[10]
-			);
+        },
 
-			return this;
+        identity: function () {
 
-		},
+            this.set(
+                1, 0, 0,
+                0, 1, 0,
+                0, 0, 1
+            );
 
-		applyToBufferAttribute: function () {
+            return this;
 
-			var v1 = new PGL.Vector3();
+        },
 
-			return function applyToBufferAttribute(attribute) {
+        clone: function () {
 
-				for (var i = 0, l = attribute.count; i < l; i++) {
+            return new this.constructor().fromArray(this.elements);
 
-					v1.x = attribute.getX(i);
-					v1.y = attribute.getY(i);
-					v1.z = attribute.getZ(i);
+        },
 
-					v1.applyMatrix3(this);
+        copy: function (m) {
 
-					attribute.setXYZ(i, v1.x, v1.y, v1.z);
+            var te = this.elements;
+            var me = m.elements;
 
-				}
+            te[0] = me[0];
+            te[1] = me[1];
+            te[2] = me[2];
+            te[3] = me[3];
+            te[4] = me[4];
+            te[5] = me[5];
+            te[6] = me[6];
+            te[7] = me[7];
+            te[8] = me[8];
 
-				return attribute;
+            return this;
 
-			};
+        },
 
-		}(),
+        setFromMatrix4: function (m) {
 
-		multiply: function (m) {
+            var me = m.elements;
 
-			return this.multiplyMatrices(this, m);
+            this.set(
+                me[0], me[4], me[8],
+                me[1], me[5], me[9],
+                me[2], me[6], me[10]
+            );
 
-		},
+            return this;
 
-		premultiply: function (m) {
+        },
 
-			return this.multiplyMatrices(m, this);
+        applyToBufferAttribute: function () {
 
-		},
+            var v1 = new PGL.Vector3();
 
-		multiplyMatrices: function (a, b) {
+            return function applyToBufferAttribute(attribute) {
 
-			var ae = a.elements;
-			var be = b.elements;
-			var te = this.elements;
+                for (var i = 0, l = attribute.count; i < l; i++) {
 
-			var a11 = ae[0], a12 = ae[3], a13 = ae[6];
-			var a21 = ae[1], a22 = ae[4], a23 = ae[7];
-			var a31 = ae[2], a32 = ae[5], a33 = ae[8];
+                    v1.x = attribute.getX(i);
+                    v1.y = attribute.getY(i);
+                    v1.z = attribute.getZ(i);
 
-			var b11 = be[0], b12 = be[3], b13 = be[6];
-			var b21 = be[1], b22 = be[4], b23 = be[7];
-			var b31 = be[2], b32 = be[5], b33 = be[8];
+                    v1.applyMatrix3(this);
 
-			te[0] = a11 * b11 + a12 * b21 + a13 * b31;
-			te[3] = a11 * b12 + a12 * b22 + a13 * b32;
-			te[6] = a11 * b13 + a12 * b23 + a13 * b33;
+                    attribute.setXYZ(i, v1.x, v1.y, v1.z);
 
-			te[1] = a21 * b11 + a22 * b21 + a23 * b31;
-			te[4] = a21 * b12 + a22 * b22 + a23 * b32;
-			te[7] = a21 * b13 + a22 * b23 + a23 * b33;
+                }
 
-			te[2] = a31 * b11 + a32 * b21 + a33 * b31;
-			te[5] = a31 * b12 + a32 * b22 + a33 * b32;
-			te[8] = a31 * b13 + a32 * b23 + a33 * b33;
+                return attribute;
 
-			return this;
+            };
 
-		},
+        }(),
 
-		multiplyScalar: function (s) {
+        multiply: function (m) {
 
-			var te = this.elements;
+            return this.multiplyMatrices(this, m);
 
-			te[0] *= s;
-			te[3] *= s;
-			te[6] *= s;
-			te[1] *= s;
-			te[4] *= s;
-			te[7] *= s;
-			te[2] *= s;
-			te[5] *= s;
-			te[8] *= s;
+        },
 
-			return this;
+        premultiply: function (m) {
 
-		},
+            return this.multiplyMatrices(m, this);
 
-		determinant: function () {
+        },
 
-			var te = this.elements;
+        multiplyMatrices: function (a, b) {
 
-			var a = te[0], b = te[1], c = te[2],
-				d = te[3], e = te[4], f = te[5],
-				g = te[6], h = te[7], i = te[8];
+            var ae = a.elements;
+            var be = b.elements;
+            var te = this.elements;
 
-			return a * e * i - a * f * h - b * d * i + b * f * g + c * d * h - c * e * g;
+            var a11 = ae[0], a12 = ae[3], a13 = ae[6];
+            var a21 = ae[1], a22 = ae[4], a23 = ae[7];
+            var a31 = ae[2], a32 = ae[5], a33 = ae[8];
 
-		},
+            var b11 = be[0], b12 = be[3], b13 = be[6];
+            var b21 = be[1], b22 = be[4], b23 = be[7];
+            var b31 = be[2], b32 = be[5], b33 = be[8];
 
-		getInverse: function (matrix, throwOnDegenerate) {
+            te[0] = a11 * b11 + a12 * b21 + a13 * b31;
+            te[3] = a11 * b12 + a12 * b22 + a13 * b32;
+            te[6] = a11 * b13 + a12 * b23 + a13 * b33;
 
-			if (matrix && matrix.isMatrix4) {
+            te[1] = a21 * b11 + a22 * b21 + a23 * b31;
+            te[4] = a21 * b12 + a22 * b22 + a23 * b32;
+            te[7] = a21 * b13 + a22 * b23 + a23 * b33;
 
-				console.error("THREE.Matrix3: .getInverse() no longer takes a Matrix4 argument.");
+            te[2] = a31 * b11 + a32 * b21 + a33 * b31;
+            te[5] = a31 * b12 + a32 * b22 + a33 * b32;
+            te[8] = a31 * b13 + a32 * b23 + a33 * b33;
 
-			}
+            return this;
 
-			var me = matrix.elements,
-				te = this.elements,
+        },
 
-				n11 = me[0], n21 = me[1], n31 = me[2],
-				n12 = me[3], n22 = me[4], n32 = me[5],
-				n13 = me[6], n23 = me[7], n33 = me[8],
+        multiplyScalar: function (s) {
 
-				t11 = n33 * n22 - n32 * n23,
-				t12 = n32 * n13 - n33 * n12,
-				t13 = n23 * n12 - n22 * n13,
+            var te = this.elements;
 
-				det = n11 * t11 + n21 * t12 + n31 * t13;
+            te[0] *= s;
+            te[3] *= s;
+            te[6] *= s;
+            te[1] *= s;
+            te[4] *= s;
+            te[7] *= s;
+            te[2] *= s;
+            te[5] *= s;
+            te[8] *= s;
 
-			if (det === 0) {
+            return this;
 
-				var msg = "THREE.Matrix3: .getInverse() can't invert matrix, determinant is 0";
+        },
 
-				if (throwOnDegenerate === true) {
+        determinant: function () {
 
-					throw new Error(msg);
+            var te = this.elements;
 
-				} else {
+            var a = te[0], b = te[1], c = te[2],
+                d = te[3], e = te[4], f = te[5],
+                g = te[6], h = te[7], i = te[8];
 
-					console.warn(msg);
+            return a * e * i - a * f * h - b * d * i + b * f * g + c * d * h - c * e * g;
 
-				}
+        },
 
-				return this.identity();
+        getInverse: function (matrix, throwOnDegenerate) {
 
-			}
+            if (matrix && matrix.isMatrix4) {
 
-			var detInv = 1 / det;
+                console.error("THREE.Matrix3: .getInverse() no longer takes a Matrix4 argument.");
 
-			te[0] = t11 * detInv;
-			te[1] = (n31 * n23 - n33 * n21) * detInv;
-			te[2] = (n32 * n21 - n31 * n22) * detInv;
+            }
 
-			te[3] = t12 * detInv;
-			te[4] = (n33 * n11 - n31 * n13) * detInv;
-			te[5] = (n31 * n12 - n32 * n11) * detInv;
+            var me = matrix.elements,
+                te = this.elements,
 
-			te[6] = t13 * detInv;
-			te[7] = (n21 * n13 - n23 * n11) * detInv;
-			te[8] = (n22 * n11 - n21 * n12) * detInv;
+                n11 = me[0], n21 = me[1], n31 = me[2],
+                n12 = me[3], n22 = me[4], n32 = me[5],
+                n13 = me[6], n23 = me[7], n33 = me[8],
 
-			return this;
+                t11 = n33 * n22 - n32 * n23,
+                t12 = n32 * n13 - n33 * n12,
+                t13 = n23 * n12 - n22 * n13,
 
-		},
+                det = n11 * t11 + n21 * t12 + n31 * t13;
 
-		transpose: function () {
+            if (det === 0) {
 
-			var tmp, m = this.elements;
+                var msg = "THREE.Matrix3: .getInverse() can't invert matrix, determinant is 0";
 
-			tmp = m[1];
-			m[1] = m[3];
-			m[3] = tmp;
-			tmp = m[2];
-			m[2] = m[6];
-			m[6] = tmp;
-			tmp = m[5];
-			m[5] = m[7];
-			m[7] = tmp;
+                if (throwOnDegenerate === true) {
 
-			return this;
+                    throw new Error(msg);
 
-		},
+                } else {
 
-		getNormalMatrix: function (matrix4) {
+                    console.warn(msg);
 
-			return this.setFromMatrix4(matrix4).getInverse(this).transpose();
+                }
 
-		},
+                return this.identity();
 
-		transposeIntoArray: function (r) {
+            }
 
-			var m = this.elements;
+            var detInv = 1 / det;
 
-			r[0] = m[0];
-			r[1] = m[3];
-			r[2] = m[6];
-			r[3] = m[1];
-			r[4] = m[4];
-			r[5] = m[7];
-			r[6] = m[2];
-			r[7] = m[5];
-			r[8] = m[8];
+            te[0] = t11 * detInv;
+            te[1] = (n31 * n23 - n33 * n21) * detInv;
+            te[2] = (n32 * n21 - n31 * n22) * detInv;
 
-			return this;
+            te[3] = t12 * detInv;
+            te[4] = (n33 * n11 - n31 * n13) * detInv;
+            te[5] = (n31 * n12 - n32 * n11) * detInv;
 
-		},
+            te[6] = t13 * detInv;
+            te[7] = (n21 * n13 - n23 * n11) * detInv;
+            te[8] = (n22 * n11 - n21 * n12) * detInv;
 
-		setUvTransform: function (tx, ty, sx, sy, rotation, cx, cy) {
+            return this;
 
-			var c = Math.cos(rotation);
-			var s = Math.sin(rotation);
+        },
 
-			this.set(
-				sx * c, sx * s, -sx * (c * cx + s * cy) + cx + tx,
-				-sy * s, sy * c, -sy * (-s * cx + c * cy) + cy + ty,
-				0, 0, 1
-			);
+        transpose: function () {
 
-		},
+            var tmp, m = this.elements;
 
-		scale: function (sx, sy) {
+            tmp = m[1];
+            m[1] = m[3];
+            m[3] = tmp;
+            tmp = m[2];
+            m[2] = m[6];
+            m[6] = tmp;
+            tmp = m[5];
+            m[5] = m[7];
+            m[7] = tmp;
 
-			var te = this.elements;
+            return this;
 
-			te[0] *= sx;
-			te[3] *= sx;
-			te[6] *= sx;
-			te[1] *= sy;
-			te[4] *= sy;
-			te[7] *= sy;
+        },
 
-			return this;
+        getNormalMatrix: function (matrix4) {
 
-		},
+            return this.setFromMatrix4(matrix4).getInverse(this).transpose();
 
-		rotate: function (theta) {
+        },
 
-			var c = Math.cos(theta);
-			var s = Math.sin(theta);
+        transposeIntoArray: function (r) {
 
-			var te = this.elements;
+            var m = this.elements;
 
-			var a11 = te[0], a12 = te[3], a13 = te[6];
-			var a21 = te[1], a22 = te[4], a23 = te[7];
+            r[0] = m[0];
+            r[1] = m[3];
+            r[2] = m[6];
+            r[3] = m[1];
+            r[4] = m[4];
+            r[5] = m[7];
+            r[6] = m[2];
+            r[7] = m[5];
+            r[8] = m[8];
 
-			te[0] = c * a11 + s * a21;
-			te[3] = c * a12 + s * a22;
-			te[6] = c * a13 + s * a23;
+            return this;
 
-			te[1] = -s * a11 + c * a21;
-			te[4] = -s * a12 + c * a22;
-			te[7] = -s * a13 + c * a23;
+        },
 
-			return this;
+        setUvTransform: function (tx, ty, sx, sy, rotation, cx, cy) {
 
-		},
+            var c = Math.cos(rotation);
+            var s = Math.sin(rotation);
 
-		translate: function (tx, ty) {
+            this.set(
+                sx * c, sx * s, -sx * (c * cx + s * cy) + cx + tx,
+                -sy * s, sy * c, -sy * (-s * cx + c * cy) + cy + ty,
+                0, 0, 1
+            );
 
-			var te = this.elements;
+        },
 
-			te[0] += tx * te[2];
-			te[3] += tx * te[5];
-			te[6] += tx * te[8];
-			te[1] += ty * te[2];
-			te[4] += ty * te[5];
-			te[7] += ty * te[8];
+        scale: function (sx, sy) {
 
-			return this;
+            var te = this.elements;
 
-		},
+            te[0] *= sx;
+            te[3] *= sx;
+            te[6] *= sx;
+            te[1] *= sy;
+            te[4] *= sy;
+            te[7] *= sy;
 
-		equals: function (matrix) {
+            return this;
 
-			var te = this.elements;
-			var me = matrix.elements;
+        },
 
-			for (var i = 0; i < 9; i++) {
+        rotate: function (theta) {
 
-				if (te[i] !== me[i]) return false;
+            var c = Math.cos(theta);
+            var s = Math.sin(theta);
 
-			}
+            var te = this.elements;
 
-			return true;
+            var a11 = te[0], a12 = te[3], a13 = te[6];
+            var a21 = te[1], a22 = te[4], a23 = te[7];
 
-		},
+            te[0] = c * a11 + s * a21;
+            te[3] = c * a12 + s * a22;
+            te[6] = c * a13 + s * a23;
 
-		fromArray: function (array, offset) {
+            te[1] = -s * a11 + c * a21;
+            te[4] = -s * a12 + c * a22;
+            te[7] = -s * a13 + c * a23;
 
-			if (offset === undefined) offset = 0;
+            return this;
 
-			for (var i = 0; i < 9; i++) {
+        },
 
-				this.elements[i] = array[i + offset];
+        translate: function (tx, ty) {
 
-			}
+            var te = this.elements;
 
-			return this;
+            te[0] += tx * te[2];
+            te[3] += tx * te[5];
+            te[6] += tx * te[8];
+            te[1] += ty * te[2];
+            te[4] += ty * te[5];
+            te[7] += ty * te[8];
 
-		},
+            return this;
 
-		toArray: function (array, offset) {
+        },
 
-			if (array === undefined) array = [];
-			if (offset === undefined) offset = 0;
+        equals: function (matrix) {
 
-			var te = this.elements;
+            var te = this.elements;
+            var me = matrix.elements;
 
-			array[offset] = te[0];
-			array[offset + 1] = te[1];
-			array[offset + 2] = te[2];
+            for (var i = 0; i < 9; i++) {
 
-			array[offset + 3] = te[3];
-			array[offset + 4] = te[4];
-			array[offset + 5] = te[5];
+                if (te[i] !== me[i]) return false;
 
-			array[offset + 6] = te[6];
-			array[offset + 7] = te[7];
-			array[offset + 8] = te[8];
+            }
 
-			return array;
+            return true;
 
-		}
+        },
 
-	});
+        fromArray: function (array, offset) {
+
+            if (offset === undefined) offset = 0;
+
+            for (var i = 0; i < 9; i++) {
+
+                this.elements[i] = array[i + offset];
+
+            }
+
+            return this;
+
+        },
+
+        toArray: function (array, offset) {
+
+            if (array === undefined) array = [];
+            if (offset === undefined) offset = 0;
+
+            var te = this.elements;
+
+            array[offset] = te[0];
+            array[offset + 1] = te[1];
+            array[offset + 2] = te[2];
+
+            array[offset + 3] = te[3];
+            array[offset + 4] = te[4];
+            array[offset + 5] = te[5];
+
+            array[offset + 6] = te[6];
+            array[offset + 7] = te[7];
+            array[offset + 8] = te[8];
+
+            return array;
+
+        }
+
+    });
+
+    /**
+     * 四元数
+     * @param x
+     * @param y
+     * @param z
+     * @param w
+     * @constructor
+     */
+    PGL.Quaternion = function (x, y, z, w) {
+        this._x = x || 0;
+        this._y = y || 0;
+        this._z = z || 0;
+        this._w = (w !== undefined) ? w : 1;
+    }
 })(PGL);
 
 var points_vert =
-	"attribute vec4 position;\n" +
-	"uniform float size;\n" +
-	"void main(){\n" +
-	" gl_Position = position; //设置坐标\n" +
-	" gl_PointSize = size; //设置尺寸\n" +
-	"}";
+    "attribute vec4 position;\n" +
+    "uniform float size;\n" +
+    "void main(){\n" +
+    " gl_Position = position; //设置坐标\n" +
+    " gl_PointSize = size; //设置尺寸\n" +
+    "}";
 var points_frag =
-	"precision highp float;\n" +
-	"uniform vec3 diffuse;\n" + // 必须加上精度限定
-	"void main() {\n" +
-	" gl_FragColor = vec4(diffuse,1.0);\n" +
-	"}";
+    "precision highp float;\n" +
+    "uniform vec3 diffuse;\n" + // 必须加上精度限定
+    "void main() {\n" +
+    " gl_FragColor = vec4(diffuse,1.0);\n" +
+    "}";
 
 var meshphong_vert =
-	"attribute vec4 position;\n" +
-	"void main(){\n" +
-	" gl_Position = position; //设置坐标\n" +
-	"}";
+    "attribute vec4 position;\n" +
+    "void main(){\n" +
+    " gl_Position = position; //设置坐标\n" +
+    "}";
 var meshphong_frag =
-	"precision highp float;\n" +
-	"uniform vec3 diffuse;\n" + // 必须加上精度限定
-	"void main() {\n" +
-	" gl_FragColor = vec4(diffuse,1.0);\n" +
-	"}";
+    "precision highp float;\n" +
+    "uniform vec3 diffuse;\n" + // 必须加上精度限定
+    "void main() {\n" +
+    " gl_FragColor = vec4(diffuse,1.0);\n" +
+    "}";
 var ShaderChunk = {
-	points_frag: points_frag,
-	points_vert: points_vert,
-	meshphong_vert: meshphong_vert,
-	meshphong_frag: meshphong_frag
+    points_frag: points_frag,
+    points_vert: points_vert,
+    meshphong_vert: meshphong_vert,
+    meshphong_frag: meshphong_frag
 };
 PGL.UniformsUtils = {
-	merge: function (uniforms) {
-		var merged = {};
-		for (var u = 0; u < uniforms.length; u++) {
-			var tmp = this.clone(uniforms[u]);
-			for (var p in tmp) {
-				merged[p] = tmp[p];
-			}
-		}
-		return merged;
-	},
-	clone: function (uniforms_src) {
+    merge: function (uniforms) {
+        var merged = {};
+        for (var u = 0; u < uniforms.length; u++) {
+            var tmp = this.clone(uniforms[u]);
+            for (var p in tmp) {
+                merged[p] = tmp[p];
+            }
+        }
+        return merged;
+    },
+    clone: function (uniforms_src) {
 
-		var uniforms_dst = {};
+        var uniforms_dst = {};
 
-		for (var u in uniforms_src) {
+        for (var u in uniforms_src) {
 
-			uniforms_dst[u] = {};
+            uniforms_dst[u] = {};
 
-			for (var p in uniforms_src[u]) {
+            for (var p in uniforms_src[u]) {
 
-				var parameter_src = uniforms_src[u][p];
+                var parameter_src = uniforms_src[u][p];
 
-				if (parameter_src && (parameter_src.isColor ||
-						parameter_src.isMatrix3 || parameter_src.isMatrix4 ||
-						parameter_src.isVector2 || parameter_src.isVector3 || parameter_src.isVector4 ||
-						parameter_src.isTexture)) {
+                if (parameter_src && (parameter_src.isColor ||
+                    parameter_src.isMatrix3 || parameter_src.isMatrix4 ||
+                    parameter_src.isVector2 || parameter_src.isVector3 || parameter_src.isVector4 ||
+                    parameter_src.isTexture)) {
 
-					uniforms_dst[u][p] = parameter_src.clone();
+                    uniforms_dst[u][p] = parameter_src.clone();
 
-				} else if (Array.isArray(parameter_src)) {
+                } else if (Array.isArray(parameter_src)) {
 
-					uniforms_dst[u][p] = parameter_src.slice();
+                    uniforms_dst[u][p] = parameter_src.slice();
 
-				} else {
+                } else {
 
-					uniforms_dst[u][p] = parameter_src;
+                    uniforms_dst[u][p] = parameter_src;
 
-				}
+                }
 
-			}
+            }
 
-		}
+        }
 
-		return uniforms_dst;
+        return uniforms_dst;
 
-	}
+    }
 };
 PGL.UniformsLib = {
-	phone: {
-		diffuse: {value: new PGL.Color(0xeeeeee)}
-	},
-	points: {
-		size: {value: 1.0},
-		diffuse: {value: new PGL.Color(0xeeeeee)}
-	}
+    phone: {
+        diffuse: {value: new PGL.Color(0xeeeeee)}
+    },
+    points: {
+        size: {value: 1.0},
+        diffuse: {value: new PGL.Color(0xeeeeee)}
+    }
 };
 PGL.ShaderLib = {
-	phong: {
-		uniforms: PGL.UniformsUtils.merge([
-			PGL.UniformsLib.phone
-		]),
+    phong: {
+        uniforms: PGL.UniformsUtils.merge([
+            PGL.UniformsLib.phone
+        ]),
 
-		vertexShader: ShaderChunk.meshphong_vert,
-		fragmentShader: ShaderChunk.meshphong_frag
-	},
-	points: {
+        vertexShader: ShaderChunk.meshphong_vert,
+        fragmentShader: ShaderChunk.meshphong_frag
+    },
+    points: {
 
-		uniforms: PGL.UniformsUtils.merge([
-			PGL.UniformsLib.points
-		]),
+        uniforms: PGL.UniformsUtils.merge([
+            PGL.UniformsLib.points
+        ]),
 
-		vertexShader: ShaderChunk.points_vert,
-		fragmentShader: ShaderChunk.points_frag
+        vertexShader: ShaderChunk.points_vert,
+        fragmentShader: ShaderChunk.points_frag
 
-	}
+    }
 };
 
 // 场景
 PGL.Scene = function () {
-	this.children = [];
+    this.children = [];
 
-	this.background = null;
+    this.background = null;
 };
 Object.assign(PGL.Scene.prototype, {
 
-	/**
-	 * 添加子类
-	 * @param object
-	 */
-	add: function (object) {
-		this.children.push(object);
-	}
+    /**
+     * 添加子类
+     * @param object
+     */
+    add: function (object) {
+        this.children.push(object);
+    }
 });
 
 PGL.Object3D = function () {
 
-	this.parent = null;
-	this.children = [];
+    this.parent = null;
+    this.children = [];
 
-	this.visible = true;
+    this.visible = true;
+
+    var position = new PGL.Vector3();
+    var quaternion = new PGL.Quaternion();
+
+    Object.defineProperties(this, {
+        position: {
+            configurable: true,
+            enumerable: true,
+            value: position
+        },
+        quaternion: {
+            configurable: true,
+            enumerable: true,
+            value: quaternion
+        }
+    });
+};
+PGL.Object3D.prototype = {
+
+
+    translateOnAxis: function () {
+
+        // translate object by distance along axis in object space
+        // axis is assumed to be normalized
+
+        var v1 = new PGL.Vector3();
+
+        return function translateOnAxis(axis, distance) {
+
+            v1.copy(axis).applyQuaternion(this.quaternion);
+
+            this.position.add(v1.multiplyScalar(distance));
+
+            return this;
+
+        };
+
+    }(),
+
+    translateX: function () {
+
+        var v1 = new PGL.Vector3(1, 0, 0);
+
+        return function translateX(distance) {
+
+            return this.translateOnAxis(v1, distance);
+
+        };
+
+    }(),
+
+    translateY: function () {
+
+        var v1 = new PGL.Vector3(0, 1, 0);
+
+        return function translateY(distance) {
+
+            return this.translateOnAxis(v1, distance);
+
+        };
+
+    }(),
+
+    translateZ: function () {
+
+        var v1 = new PGL.Vector3(0, 0, 1);
+
+        return function translateZ(distance) {
+
+            return this.translateOnAxis(v1, distance);
+
+        };
+
+    }()
 };
 
 PGL.Points = function (geometry, material) {
 
-	PGL.Object3D.call(this);
+    PGL.Object3D.call(this);
 
-	this.geometry = geometry !== undefined ? geometry : new PGL.BufferGeometry();
-	this.material = material !== undefined ? material : new PGL.PointsMaterial({color: Math.random() * 0xffffff});
+    this.geometry = geometry !== undefined ? geometry : new PGL.BufferGeometry();
+    this.material = material !== undefined ? material : new PGL.PointsMaterial({color: Math.random() * 0xffffff});
 };
 PGL.Points.prototype = Object.assign(Object.create(PGL.Object3D.prototype), {
-	constructor: PGL.Points,
+    constructor: PGL.Points,
 
-	isPoints: true
+    isPoints: true
 });
 
 PGL.Mesh = function (geometry, material) {
 
-	PGL.Object3D.call(this);
+    PGL.Object3D.call(this);
 
-	this.type = 'Mesh';
+    this.type = 'Mesh';
 
-	this.geometry = geometry;
-	this.material = material;
+    this.geometry = geometry;
+    this.material = material;
 
-	this.drawMode = PGL.TrianglesDrawMode; // 绘制图形的方式
+    this.drawMode = PGL.TrianglesDrawMode; // 绘制图形的方式
 };
 PGL.Mesh.prototype = Object.assign(Object.create(PGL.Object3D.prototype), {
-	constructor: PGL.Mesh,
+    constructor: PGL.Mesh,
 
-	isMesh: true
+    isMesh: true
 });
 
 var bufferGeometryId = 1; // BufferGeometry uses odd numbers as Id
 PGL.BufferGeometry = function () {
-	Object.defineProperty(this, 'id', {value: bufferGeometryId += 2});
+    Object.defineProperty(this, 'id', {value: bufferGeometryId += 2});
 
-	this.attributes = {}; // 保存属性信息
+    this.attributes = {}; // 保存属性信息
 };
 Object.assign(PGL.BufferGeometry.prototype, {
 
-	constructor: PGL.BufferGeometry,
+    constructor: PGL.BufferGeometry,
 
-	isBufferGeometry: true,
+    isBufferGeometry: true,
 
-	/**
-	 * 把属性添加到this.attributes中
-	 * @param name
-	 * @param attribute
-	 * @return {*}
-	 */
-	addAttribute: function (name, attribute) {
-		this.attributes[name] = attribute;
-		return this;
-	}
+    /**
+     * 把属性添加到this.attributes中
+     * @param name
+     * @param attribute
+     * @return {*}
+     */
+    addAttribute: function (name, attribute) {
+        this.attributes[name] = attribute;
+        return this;
+    }
 });
 
 var geometryId = 0; // Geometry uses even numbers as Id
 PGL.Geometry = function () {
-	Object.defineProperty(this, 'id', {value: geometryId += 2});
+    Object.defineProperty(this, 'id', {value: geometryId += 2});
 };
 
 PGL.Material = function () {
 };
 PGL.Material.prototype = {
-	/**
-	 * 把给定的参数设置到当前的对象中去
-	 * @param values
-	 */
-	setValues: function (values) {
-		if (values === undefined) return;
+    /**
+     * 把给定的参数设置到当前的对象中去
+     * @param values
+     */
+    setValues: function (values) {
+        if (values === undefined) return;
 
-		for (var key in values) {
+        for (var key in values) {
 
-			var newValue = values[key];
+            var newValue = values[key];
 
-			if (newValue === undefined) {
+            if (newValue === undefined) {
 
-				console.warn("THREE.Material: '" + key + "' parameter is undefined.");
-				continue;
+                console.warn("THREE.Material: '" + key + "' parameter is undefined.");
+                continue;
 
-			}
+            }
 
-			// for backward compatability if shading is set in the constructor
-			if (key === 'shading') {
+            // for backward compatability if shading is set in the constructor
+            if (key === 'shading') {
 
-				console.warn('THREE.' + this.type + ': .shading has been removed. Use the boolean .flatShading instead.');
-				this.flatShading = (newValue === FlatShading) ? true : false;
-				continue;
+                console.warn('THREE.' + this.type + ': .shading has been removed. Use the boolean .flatShading instead.');
+                this.flatShading = (newValue === FlatShading) ? true : false;
+                continue;
 
-			}
+            }
 
-			var currentValue = this[key];
+            var currentValue = this[key];
 
-			if (currentValue === undefined) {
+            if (currentValue === undefined) {
 
-				console.warn("THREE." + this.type + ": '" + key + "' is not a property of this material.");
-				continue;
+                console.warn("THREE." + this.type + ": '" + key + "' is not a property of this material.");
+                continue;
 
-			}
+            }
 
-			if (currentValue && currentValue.isColor) {
+            if (currentValue && currentValue.isColor) {
 
-				currentValue.set(newValue);
+                currentValue.set(newValue);
 
-			} else if ((currentValue && currentValue.isVector3) && (newValue && newValue.isVector3)) {
+            } else if ((currentValue && currentValue.isVector3) && (newValue && newValue.isVector3)) {
 
-				currentValue.copy(newValue);
+                currentValue.copy(newValue);
 
-			} else if (key === 'overdraw') {
+            } else if (key === 'overdraw') {
 
-				// ensure overdraw is backwards-compatible with legacy boolean type
-				this[key] = Number(newValue);
+                // ensure overdraw is backwards-compatible with legacy boolean type
+                this[key] = Number(newValue);
 
-			} else {
+            } else {
 
-				this[key] = newValue;
+                this[key] = newValue;
 
-			}
+            }
 
-		}
-	}
+        }
+    }
 };
 PGL.ShaderMaterial = function (options) {
 
-	PGL.Material.call(this);
+    PGL.Material.call(this);
 
-	var options = options || {};
-	this.vertexShader = options.vertexShader;
-	this.fragmentShader = options.fragmentShader;
+    var options = options || {};
+    this.vertexShader = options.vertexShader;
+    this.fragmentShader = options.fragmentShader;
 };
 
 PGL.PointsMaterial = function (parameters) {
-	PGL.Material.call(this);
+    PGL.Material.call(this);
 
-	this.type = 'PointsMaterial';
+    this.type = 'PointsMaterial';
 
-	this.color = new PGL.Color(0xffffff);
+    this.color = new PGL.Color(0xffffff);
 
-	this.size = 1;// 点的大小
+    this.size = 1;// 点的大小
 
-	this.setValues(parameters);
+    this.setValues(parameters);
 };
 PGL.PointsMaterial.prototype = Object.create(PGL.Material.prototype);
 PGL.PointsMaterial.prototype.constructor = PGL.PointsMaterial;
 PGL.PointsMaterial.prototype.isPointsMaterial = true;
 
 PGL.MeshPhongMaterial = function (parameters) {
-	PGL.Material.call(this);
+    PGL.Material.call(this);
 
-	this.type = 'MeshPhongMaterial';
+    this.type = 'MeshPhongMaterial';
 
-	this.color = new PGL.Color( 0xffffff ); // diffuse
+    this.color = new PGL.Color(0xffffff); // diffuse
 
-	this.setValues(parameters);
+    this.setValues(parameters);
 };
 PGL.MeshPhongMaterial.prototype = Object.create(PGL.Material.prototype);
 PGL.MeshPhongMaterial.prototype.constructor = PGL.MeshPhongMaterial;
@@ -2150,18 +2278,18 @@ PGL.MeshPhongMaterial.prototype.isMeshPhongMaterial = true;
  * @constructor
  */
 PGL.BufferAttribute = function (array, itemSize, normalized) {
-	this.array = array;
-	this.itemSize = itemSize;
-	this.count = array !== undefined ? array.length / itemSize : 0;
+    this.array = array;
+    this.itemSize = itemSize;
+    this.count = array !== undefined ? array.length / itemSize : 0;
 
-	this.normalized = normalized === true; // 表明是否是浮点数
+    this.normalized = normalized === true; // 表明是否是浮点数
 
-	this.dynamic = false; // false 只会向缓存区对象中写入一次数据，但需要绘制很多次 true 多次写入，绘制多次
+    this.dynamic = false; // false 只会向缓存区对象中写入一次数据，但需要绘制很多次 true 多次写入，绘制多次
 
-	this.version = 0; // 版本
+    this.version = 0; // 版本
 };
 PGL.Float32BufferAttribute = function (array, itemSize, normalized) {
-	PGL.BufferAttribute.call(this, new Float32Array(array), itemSize, normalized);
+    PGL.BufferAttribute.call(this, new Float32Array(array), itemSize, normalized);
 };
 
 /**
@@ -2175,394 +2303,389 @@ PGL.Float32BufferAttribute = function (array, itemSize, normalized) {
  */
 PGL.WebGLRenderer = function (parameters) {
 
-	console.log('PGL.WebGLRenderer', PGL.REVISION);
-
-	parameters = parameters || {};
-	var _canvas = parameters.canvas !== undefined ? parameters.canvas : document.createElementNS('http://www.w3.org/1999/xhtml', 'canvas'),
-		_context = parameters.context !== undefined ? parameters.context : null;
-
-	// public properties
-	this.domElement = _canvas;
-	this.context = null;
-
-	// clearing
-	this.autoClear = true;
-	this.autoClearColor = true;
-	this.autoClearDepth = true;
-	this.autoClearStencil = true;
+    console.log('PGL.WebGLRenderer', PGL.REVISION);
+
+    parameters = parameters || {};
+    var _canvas = parameters.canvas !== undefined ? parameters.canvas : document.createElementNS('http://www.w3.org/1999/xhtml', 'canvas'),
+        _context = parameters.context !== undefined ? parameters.context : null;
+
+    // public properties
+    this.domElement = _canvas;
+    this.context = null;
+
+    // clearing
+    this.autoClear = true;
+    this.autoClearColor = true;
+    this.autoClearDepth = true;
+    this.autoClearStencil = true;
 
-	var _this = this;
+    var _this = this;
 
-	// Get the rendering context for WebGL
-	var _gl = getWebGLContext();
-	if (!_gl) return null;
+    // Get the rendering context for WebGL
+    var _gl = getWebGLContext();
+    if (!_gl) return null;
 
-	var state;
-	var properties, attributes, geometries, objects;
-	var programCache, renderLists;
+    var state;
+    var properties, attributes, geometries, objects;
+    var programCache, renderLists;
 
-	var background, bufferRenderer;
+    var background, bufferRenderer;
 
-	function initGLContext() {
-		state = new PGL.WebGLState(_gl);
+    function initGLContext() {
+        state = new PGL.WebGLState(_gl);
 
-		properties = new PGL.WebGLProperties();
-		attributes = new PGL.WebGLAttributes(_gl);
-		geometries = new PGL.WebGLGeometries(_gl, attributes);
-		objects = new PGL.WebGLObjects(geometries);
+        properties = new PGL.WebGLProperties();
+        attributes = new PGL.WebGLAttributes(_gl);
+        geometries = new PGL.WebGLGeometries(_gl, attributes);
+        objects = new PGL.WebGLObjects(geometries);
 
-		programCache = new PGL.WebGLPrograms(_this);
-		renderLists = PGL.WebGLRenderList();
+        programCache = new PGL.WebGLPrograms(_this);
+        renderLists = PGL.WebGLRenderList();
 
-		background = new PGL.WebGLBackground(_this, state);
+        background = new PGL.WebGLBackground(_this, state);
 
-		bufferRenderer = new PGL.WebGLBufferRenderer(_gl);
+        bufferRenderer = new PGL.WebGLBufferRenderer(_gl);
 
-		_this.context = _gl;
-	}
+        _this.context = _gl;
+    }
 
-	initGLContext();
+    initGLContext();
 
-	/**
-	 * 渲染缓存区
-	 */
-	this.renderBufferDirect = function (object) {
-
-		var program = setProgram(object);
-		program = object.material.program;
-		var updateBuffers = false;
-		updateBuffers = true;
-
-		var renderer = bufferRenderer;
+    /**
+     * 渲染缓存区
+     */
+    this.renderBufferDirect = function (object) {
 
-		var position = object.geometry.attributes !== undefined ? object.geometry.attributes.position : undefined;
+        var program = setProgram(object);
+        program = object.material.program;
+        var updateBuffers = false;
+        updateBuffers = true;
 
-		// 着色器关联顶点属性
-		if (updateBuffers) {
-			// 设置顶点相关信息
-			setupVertexAttributes(object.material, program, object.geometry);
-		}
+        var renderer = bufferRenderer;
 
-		var dataCount = Infinity;
-		if (position !== undefined) {
-			dataCount = position.count;
-		}
-		else {
-			dataCount = 1;
-		}
+        var position = object.geometry.attributes !== undefined ? object.geometry.attributes.position : undefined;
 
-		if (object.isMesh) {
-			switch (object.drawMode) {
-				case PGL.TrianglesDrawMode:
-					renderer.setMode(_gl.TRIANGLES);
-					break;
-				case PGL.TriangleStripDrawMode:
-					renderer.setMode(_gl.TRIANGLE_STRIP);
-					break;
-				case PGL.TriangleFanDrawMode:
-					renderer.setMode(_gl.TRIANGLE_FAN);
-					break;
-			}
-		}
-		else if (object.isPoints) {
-			renderer.setMode(_gl.POINTS);
-		}
+        // 着色器关联顶点属性
+        if (updateBuffers) {
+            // 设置顶点相关信息
+            setupVertexAttributes(object.material, program, object.geometry);
+        }
 
-		renderer.render(0, dataCount);
-	};
+        var dataCount = Infinity;
+        if (position !== undefined) {
+            dataCount = position.count;
+        } else {
+            dataCount = 1;
+        }
 
-	/**
-	 * 设置顶点属性
-	 * @param material 材质
-	 * @param program 着色器
-	 * @param geometry 几何体
-	 */
-	function setupVertexAttributes(material, program, geometry) {
+        if (object.isMesh) {
+            switch (object.drawMode) {
+                case PGL.TrianglesDrawMode:
+                    renderer.setMode(_gl.TRIANGLES);
+                    break;
+                case PGL.TriangleStripDrawMode:
+                    renderer.setMode(_gl.TRIANGLE_STRIP);
+                    break;
+                case PGL.TriangleFanDrawMode:
+                    renderer.setMode(_gl.TRIANGLE_FAN);
+                    break;
+            }
+        } else if (object.isPoints) {
+            renderer.setMode(_gl.POINTS);
+        }
 
-		state.initAttributes();
+        renderer.render(0, dataCount);
+    };
 
-		var geometryAttributes = geometry.attributes;
+    /**
+     * 设置顶点属性
+     * @param material 材质
+     * @param program 着色器
+     * @param geometry 几何体
+     */
+    function setupVertexAttributes(material, program, geometry) {
 
-		var programAttributes = program.getAttributes();
+        state.initAttributes();
 
-		var materialDefaultAttributeValues = material.defaultAttributeValues;
+        var geometryAttributes = geometry.attributes;
 
-		for (var name in programAttributes) {
-
-			var programAttribute = programAttributes[name];
+        var programAttributes = program.getAttributes();
 
-			if (programAttribute >= 0) {
-				var geometryAttribute = geometryAttributes[name];
-
-				if (geometryAttribute !== undefined) {
-					var normalized = geometryAttribute.normalized;
-					var size = geometryAttribute.itemSize;
-
-					var attribute = attributes.get(geometryAttribute);
+        var materialDefaultAttributeValues = material.defaultAttributeValues;
 
-					if (attribute === undefined) continue;
-
-					var buffer = attribute.buffer;
-					var type = attribute.type;
-					var bytesPerElement = attribute.bytesPerElement;
+        for (var name in programAttributes) {
 
-					state.enableAttribute(programAttribute);
+            var programAttribute = programAttributes[name];
 
-					_gl.bindBuffer(_gl.ARRAY_BUFFER, buffer);
-					_gl.vertexAttribPointer(programAttribute, size, type, normalized, 0, 0);
-				}
-				else if (materialDefaultAttributeValues !== undefined) {
-					var value = materialDefaultAttributeValues[name];
-
-					switch (value.length) {
-						case 3:
-							_gl.vertexAttrib3fv(programAttribute, value);
-							break;
-						case 4:
-							_gl.vertexAttrib4fv(programAttribute, value);
-							break;
-						default:
-							_gl.vertexAttrib1fv(programAttribute, value)
-					}
-				}
-			}
-		}
-	}
-
-	// 渲染物体
-	this.render = function (scene) {
-
-		projectObject(scene);
-
-		var opaqueObjects = renderLists.opaque;
-
-		// 渲染背景
-		background.render(scene);
-
-		if (opaqueObjects.length) renderObjects(opaqueObjects, scene);
-
-	};
-
-	/**
-	 * 拆分渲染对象，解析几何体、以及几何体中的attribute变量
-	 * @param object PGL.Scene
-	 */
-	function projectObject(object) {
-		if (object.visible === false) return;
-
-		var visible = true;
-
-		if (visible) {
-			if (object.isPoints || object.isMesh) {
-				// 获取bufferGeometry 获取缓存区
-				var geometry = objects.update(object);
-				var material = object.material;
-
-				renderLists.opaque.push(object);
-			}
-		}
-
-		var children = object.children;
-
-		for (var i = 0, l = children.length; i < l; i++) {
-			projectObject(children[i]);
-		}
-	}
-
-	/**
-	 * 渲染多个物体
-	 * @param renderList
-	 * @param scene
-	 */
-	function renderObjects(renderList, scene) {
-		for (var i = 0; i < renderList.length; i++) {
-			var renderItem = renderList[i];
-			renderObject(renderItem, scene);
-		}
-	}
-
-	/**
-	 * 渲染单个物体
-	 * @param object
-	 * @param scene
-	 */
-	function renderObject(object, scene) {
-		_this.renderBufferDirect(object);
-	}
-
-	/**
-	 * 根据材质组件着色器字符串
-	 * @param material 材质
-	 * @param object 对象
-	 */
-	function initMaterial(material, object) {
-
-		var materialProperties = properties.get(material);
-
-		// 获取参数
-		var parameters = programCache.getParameters(object);
-
-		var program;
-		var programChange = true;
-
-		if (programChange) {
-			if (parameters.shaderID) {
-				var shader = PGL.ShaderLib[parameters.shaderID];
-				materialProperties.shader = {
-					name: material.type,
-					uniforms: PGL.UniformsUtils.clone(shader.uniforms),
-					vertexShader: shader.vertexShader,
-					fragmentShader: shader.fragmentShader
-				}
-			}
-			else {
-				materialProperties.shader = {
-					name: material.type,
-					vertexShader: material.vertexShader,
-					fragmentShader: material.fragmentShader
-				};
-			}
-
-			program = programCache.acquireProgram(material, materialProperties.shader, parameters);
-
-			materialProperties.program = program;
-			material.program = program;
-		}
-
-		var uniforms = materialProperties.shader.uniforms;
-		var progUniforms = materialProperties.program.getUniforms();
-		var uniformsList = PGL.WebGLUniforms.seqWithValue(progUniforms.seq, uniforms);
-		materialProperties.uniformsList = uniformsList;
-	}
-
-	/**
-	 * 设置着色器程序
-	 * @param object
-	 */
-	function setProgram(object) {
-
-		var materialProperties = properties.get(object.material);
-
-		initMaterial(object.material, object);
-
-		var refreshMaterial = false;
-
-		var program = materialProperties.program,
-			p_uniforms = program.getUniforms(),
-			m_uniforms = materialProperties.shader.uniforms;
-
-		if (state.useProgram(program.program)) {
-			refreshMaterial = true;
-		}
-
-		if (refreshMaterial) {
-			if(object.material.isMeshPhongMaterial){
-				refreshUniformsCommon(m_uniforms, object.material);
-			}
-			else if (object.material.isPointsMaterial) {
-				// 更新uniform相关变量
-				refreshUniformsPoints(m_uniforms, object.material);
-			}
-
-			// 将uniforms变量传送给着色器
-			PGL.WebGLUniforms.upload(_gl, materialProperties.uniformsList, m_uniforms, _this);
-		}
-	}
-
-	/**
-	 * 更新uniforms属性
-	 * @param uniforms
-	 * @param material
-	 */
-	function refreshUniformsCommon(uniforms, material) {
-		if (material.color) {
-			uniforms.diffuse.value = material.color;
-		}
-	}
-
-	function refreshUniformsPoints(uniforms, material) {
-		uniforms.diffuse.value = material.color;
-		uniforms.size.value = material.size;
-	}
-
-	// 获取上下文
-	this.getContext = function () {
-		return _gl;
-	};
-
-	this.clearColor = function () {
-		_gl.clear(_gl.COLOR_BUFFER_BIT);
-	};
-
-	// 设置背景颜色
-	this.setClearColor = function () {
-		background.setClearColor.apply(background, arguments);
-	};
-
-	/**
-	 * 根据参数清空颜色缓存区、深度缓存区、模版缓存区
-	 * @param color
-	 * @param depth
-	 * @param stencil
-	 */
-	this.clear = function (color, depth, stencil) {
-
-		var bits = 0;
-
-		if (color === undefined || color) bits |= _gl.COLOR_BUFFER_BIT;
-		if (depth === undefined || depth) bits |= _gl.DEPTH_BUFFER_BIT;
-		if (stencil === undefined || stencil) bits |= _gl.STENCIL_BUFFER_BIT;
-
-		_gl.clear(bits);
-
-	};
-
-	this.clearColor = function () {
-
-		this.clear(true, false, false);
-
-	};
-
-	this.clearDepth = function () {
-
-		this.clear(false, true, false);
-
-	};
-
-	this.clearStencil = function () {
-
-		this.clear(false, false, true);
-
-	};
-
-	/**
-	 * 获取上下文
-	 * @return {*|CanvasRenderingContext2D|WebGLRenderingContext}
-	 * @private
-	 */
-	function getWebGLContext() {
-		try {
-			var gl = _context || _canvas.getContext('webgl') || _canvas.getContext('experimental-webgl');
-			if (gl === null) {
-				if (_canvas.getContext('webgl') !== null) {
-					throw new Error('Error creating WebGL context with your selected attributes.');
-				} else {
-					throw new Error('Error creating WebGL context.');
-				}
-			}
-
-			// Some experimental-webgl implementations do not have getShaderPrecisionFormat
-			if (gl.getShaderPrecisionFormat === undefined) {
-				gl.getShaderPrecisionFormat = function () {
-					return {'rangeMin': 1, 'rangeMax': 1, 'precision': 1};
-				};
-			}
-
-			return gl;
-		} catch (error) {
-			console.error('THREE.WebGLRenderer: ' + error.message);
-		}
-	}
+            if (programAttribute >= 0) {
+                var geometryAttribute = geometryAttributes[name];
+
+                if (geometryAttribute !== undefined) {
+                    var normalized = geometryAttribute.normalized;
+                    var size = geometryAttribute.itemSize;
+
+                    var attribute = attributes.get(geometryAttribute);
+
+                    if (attribute === undefined) continue;
+
+                    var buffer = attribute.buffer;
+                    var type = attribute.type;
+                    var bytesPerElement = attribute.bytesPerElement;
+
+                    state.enableAttribute(programAttribute);
+
+                    _gl.bindBuffer(_gl.ARRAY_BUFFER, buffer);
+                    _gl.vertexAttribPointer(programAttribute, size, type, normalized, 0, 0);
+                } else if (materialDefaultAttributeValues !== undefined) {
+                    var value = materialDefaultAttributeValues[name];
+
+                    switch (value.length) {
+                        case 3:
+                            _gl.vertexAttrib3fv(programAttribute, value);
+                            break;
+                        case 4:
+                            _gl.vertexAttrib4fv(programAttribute, value);
+                            break;
+                        default:
+                            _gl.vertexAttrib1fv(programAttribute, value)
+                    }
+                }
+            }
+        }
+    }
+
+    // 渲染物体
+    this.render = function (scene) {
+
+        projectObject(scene);
+
+        var opaqueObjects = renderLists.opaque;
+
+        // 渲染背景
+        background.render(scene);
+
+        if (opaqueObjects.length) renderObjects(opaqueObjects, scene);
+
+    };
+
+    /**
+     * 拆分渲染对象，解析几何体、以及几何体中的attribute变量
+     * @param object PGL.Scene
+     */
+    function projectObject(object) {
+        if (object.visible === false) return;
+
+        var visible = true;
+
+        if (visible) {
+            if (object.isPoints || object.isMesh) {
+                // 获取bufferGeometry 获取缓存区
+                var geometry = objects.update(object);
+                var material = object.material;
+
+                renderLists.opaque.push(object);
+            }
+        }
+
+        var children = object.children;
+
+        for (var i = 0, l = children.length; i < l; i++) {
+            projectObject(children[i]);
+        }
+    }
+
+    /**
+     * 渲染多个物体
+     * @param renderList
+     * @param scene
+     */
+    function renderObjects(renderList, scene) {
+        for (var i = 0; i < renderList.length; i++) {
+            var renderItem = renderList[i];
+            renderObject(renderItem, scene);
+        }
+    }
+
+    /**
+     * 渲染单个物体
+     * @param object
+     * @param scene
+     */
+    function renderObject(object, scene) {
+        _this.renderBufferDirect(object);
+    }
+
+    /**
+     * 根据材质组件着色器字符串
+     * @param material 材质
+     * @param object 对象
+     */
+    function initMaterial(material, object) {
+
+        var materialProperties = properties.get(material);
+
+        // 获取参数
+        var parameters = programCache.getParameters(object);
+
+        var program;
+        var programChange = true;
+
+        if (programChange) {
+            if (parameters.shaderID) {
+                var shader = PGL.ShaderLib[parameters.shaderID];
+                materialProperties.shader = {
+                    name: material.type,
+                    uniforms: PGL.UniformsUtils.clone(shader.uniforms),
+                    vertexShader: shader.vertexShader,
+                    fragmentShader: shader.fragmentShader
+                }
+            } else {
+                materialProperties.shader = {
+                    name: material.type,
+                    vertexShader: material.vertexShader,
+                    fragmentShader: material.fragmentShader
+                };
+            }
+
+            program = programCache.acquireProgram(material, materialProperties.shader, parameters);
+
+            materialProperties.program = program;
+            material.program = program;
+        }
+
+        var uniforms = materialProperties.shader.uniforms;
+        var progUniforms = materialProperties.program.getUniforms();
+        var uniformsList = PGL.WebGLUniforms.seqWithValue(progUniforms.seq, uniforms);
+        materialProperties.uniformsList = uniformsList;
+    }
+
+    /**
+     * 设置着色器程序
+     * @param object
+     */
+    function setProgram(object) {
+
+        var materialProperties = properties.get(object.material);
+
+        initMaterial(object.material, object);
+
+        var refreshMaterial = false;
+
+        var program = materialProperties.program,
+            p_uniforms = program.getUniforms(),
+            m_uniforms = materialProperties.shader.uniforms;
+
+        if (state.useProgram(program.program)) {
+            refreshMaterial = true;
+        }
+
+        if (refreshMaterial) {
+            if (object.material.isMeshPhongMaterial) {
+                refreshUniformsCommon(m_uniforms, object.material);
+            } else if (object.material.isPointsMaterial) {
+                // 更新uniform相关变量
+                refreshUniformsPoints(m_uniforms, object.material);
+            }
+
+            // 将uniforms变量传送给着色器
+            PGL.WebGLUniforms.upload(_gl, materialProperties.uniformsList, m_uniforms, _this);
+        }
+    }
+
+    /**
+     * 更新uniforms属性
+     * @param uniforms
+     * @param material
+     */
+    function refreshUniformsCommon(uniforms, material) {
+        if (material.color) {
+            uniforms.diffuse.value = material.color;
+        }
+    }
+
+    function refreshUniformsPoints(uniforms, material) {
+        uniforms.diffuse.value = material.color;
+        uniforms.size.value = material.size;
+    }
+
+    // 获取上下文
+    this.getContext = function () {
+        return _gl;
+    };
+
+    this.clearColor = function () {
+        _gl.clear(_gl.COLOR_BUFFER_BIT);
+    };
+
+    // 设置背景颜色
+    this.setClearColor = function () {
+        background.setClearColor.apply(background, arguments);
+    };
+
+    /**
+     * 根据参数清空颜色缓存区、深度缓存区、模版缓存区
+     * @param color
+     * @param depth
+     * @param stencil
+     */
+    this.clear = function (color, depth, stencil) {
+
+        var bits = 0;
+
+        if (color === undefined || color) bits |= _gl.COLOR_BUFFER_BIT;
+        if (depth === undefined || depth) bits |= _gl.DEPTH_BUFFER_BIT;
+        if (stencil === undefined || stencil) bits |= _gl.STENCIL_BUFFER_BIT;
+
+        _gl.clear(bits);
+
+    };
+
+    this.clearColor = function () {
+
+        this.clear(true, false, false);
+
+    };
+
+    this.clearDepth = function () {
+
+        this.clear(false, true, false);
+
+    };
+
+    this.clearStencil = function () {
+
+        this.clear(false, false, true);
+
+    };
+
+    /**
+     * 获取上下文
+     * @return {*|CanvasRenderingContext2D|WebGLRenderingContext}
+     * @private
+     */
+    function getWebGLContext() {
+        try {
+            var gl = _context || _canvas.getContext('webgl') || _canvas.getContext('experimental-webgl');
+            if (gl === null) {
+                if (_canvas.getContext('webgl') !== null) {
+                    throw new Error('Error creating WebGL context with your selected attributes.');
+                } else {
+                    throw new Error('Error creating WebGL context.');
+                }
+            }
+
+            // Some experimental-webgl implementations do not have getShaderPrecisionFormat
+            if (gl.getShaderPrecisionFormat === undefined) {
+                gl.getShaderPrecisionFormat = function () {
+                    return {'rangeMin': 1, 'rangeMax': 1, 'precision': 1};
+                };
+            }
+
+            return gl;
+        } catch (error) {
+            console.error('THREE.WebGLRenderer: ' + error.message);
+        }
+    }
 };
 
 /**
@@ -2572,103 +2695,103 @@ PGL.WebGLRenderer = function (parameters) {
  */
 PGL.WebGLState = function (gl) {
 
-	function ColorBuffer() {
+    function ColorBuffer() {
 
-		var color = new PGL.Vector4();
-		var currentColorClear = new PGL.Vector4(0, 0, 0, 0);
+        var color = new PGL.Vector4();
+        var currentColorClear = new PGL.Vector4(0, 0, 0, 0);
 
-		return {
-			setClear: function (r, g, b, a) {
-				color.set(r, g, b, a);
+        return {
+            setClear: function (r, g, b, a) {
+                color.set(r, g, b, a);
 
-				if (currentColorClear.equals(color) === false) {
-					gl.clearColor(r, g, b, a);
-					currentColorClear.copy(color);
-				}
-			}
-		}
-	}
+                if (currentColorClear.equals(color) === false) {
+                    gl.clearColor(r, g, b, a);
+                    currentColorClear.copy(color);
+                }
+            }
+        }
+    }
 
-	var colorBuffer = new ColorBuffer();
+    var colorBuffer = new ColorBuffer();
 
-	var maxVertexAttributes = gl.getParameter(gl.MAX_VERTEX_ATTRIBS);
-	var newAttributes = new Uint8Array(maxVertexAttributes);
-	var enabledAttributes = new Uint8Array(maxVertexAttributes);
-	var attributeDivisors = new Uint8Array(maxVertexAttributes);
+    var maxVertexAttributes = gl.getParameter(gl.MAX_VERTEX_ATTRIBS);
+    var newAttributes = new Uint8Array(maxVertexAttributes);
+    var enabledAttributes = new Uint8Array(maxVertexAttributes);
+    var attributeDivisors = new Uint8Array(maxVertexAttributes);
 
-	var enabledCapabilities = {}; // 保存功能开启状态
+    var enabledCapabilities = {}; // 保存功能开启状态
 
-	var currentProgram = null; // 当前使用的着色器程序
+    var currentProgram = null; // 当前使用的着色器程序
 
-	colorBuffer.setClear(0, 0, 0, 1);
+    colorBuffer.setClear(0, 0, 0, 1);
 
-	// 初始化newAttributes为0
-	function initAttributes() {
-		for (var i = 0, l = newAttributes.length; i < l; i++) {
-			newAttributes[i] = 0;
-		}
-	}
+    // 初始化newAttributes为0
+    function initAttributes() {
+        for (var i = 0, l = newAttributes.length; i < l; i++) {
+            newAttributes[i] = 0;
+        }
+    }
 
-	/**
-	 * 开启功能
-	 * @param attribute
-	 */
-	function enableAttribute(attribute) {
-		enableAttributeAndDivisor(attribute, 0);
-	}
+    /**
+     * 开启功能
+     * @param attribute
+     */
+    function enableAttribute(attribute) {
+        enableAttributeAndDivisor(attribute, 0);
+    }
 
-	/**
-	 * 开启buffer地址
-	 * @param attribute
-	 * @param meshPerAttribute
-	 */
-	function enableAttributeAndDivisor(attribute, meshPerAttribute) {
+    /**
+     * 开启buffer地址
+     * @param attribute
+     * @param meshPerAttribute
+     */
+    function enableAttributeAndDivisor(attribute, meshPerAttribute) {
 
-		newAttributes[attribute] = 1;
+        newAttributes[attribute] = 1;
 
-		if (enabledAttributes[attribute] === 0) {
-			gl.enableVertexAttribArray(attribute);
-			enabledAttributes[attribute] = 1;
-		}
-	}
+        if (enabledAttributes[attribute] === 0) {
+            gl.enableVertexAttribArray(attribute);
+            enabledAttributes[attribute] = 1;
+        }
+    }
 
-	/**
-	 * 开启功能
-	 * @param id
-	 */
-	function enable(id) {
-		if (enabledCapabilities[id] !== true) {
-			gl.enable(id);
-			enabledCapabilities[id] = true;
-		}
-	}
+    /**
+     * 开启功能
+     * @param id
+     */
+    function enable(id) {
+        if (enabledCapabilities[id] !== true) {
+            gl.enable(id);
+            enabledCapabilities[id] = true;
+        }
+    }
 
-	function useProgram(program) {
-		if (currentProgram !== program) {
+    function useProgram(program) {
+        if (currentProgram !== program) {
 
-			gl.useProgram(program);
+            gl.useProgram(program);
 
-			currentProgram = program;
+            currentProgram = program;
 
-			return true;
+            return true;
 
-		}
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	return {
-		buffers: {
-			color: colorBuffer
-		},
+    return {
+        buffers: {
+            color: colorBuffer
+        },
 
-		initAttributes: initAttributes,
-		enableAttribute: enableAttribute,
-		enableAttributeAndDivisor: enableAttributeAndDivisor,
-		enable: enable,
+        initAttributes: initAttributes,
+        enableAttribute: enableAttribute,
+        enableAttributeAndDivisor: enableAttributeAndDivisor,
+        enable: enable,
 
-		useProgram: useProgram
-	}
+        useProgram: useProgram
+    }
 };
 /**
  * 渲染列表
@@ -2676,13 +2799,13 @@ PGL.WebGLState = function (gl) {
  * @constructor
  */
 PGL.WebGLRenderList = function () {
-	var opaque = [];
-	var transparent = [];
+    var opaque = [];
+    var transparent = [];
 
-	return {
-		opaque: opaque,
-		transparent: transparent
-	};
+    return {
+        opaque: opaque,
+        transparent: transparent
+    };
 };
 
 /**
@@ -2691,34 +2814,34 @@ PGL.WebGLRenderList = function () {
  */
 PGL.WebGLPrograms = function (renderer) {
 
-	var programs = []; // 保存所有的着色器程序
-	var shaderIDs = {
-		MeshPhongMaterial: "phong",
-		PointsMaterial: 'points'
-	};
+    var programs = []; // 保存所有的着色器程序
+    var shaderIDs = {
+        MeshPhongMaterial: "phong",
+        PointsMaterial: 'points'
+    };
 
-	this.getParameters = function (object) {
-		var shaderID = shaderIDs[object.material.type];
+    this.getParameters = function (object) {
+        var shaderID = shaderIDs[object.material.type];
 
-		var parameters = {
-			shaderID: shaderID
-		};
+        var parameters = {
+            shaderID: shaderID
+        };
 
-		return parameters;
-	};
+        return parameters;
+    };
 
-	this.acquireProgram = function (material, shader, parameters) {
+    this.acquireProgram = function (material, shader, parameters) {
 
-		var program;
+        var program;
 
-		program = new PGL.WebGLProgram(renderer, shader);
+        program = new PGL.WebGLProgram(renderer, shader);
 
-		programs.push(program);
+        programs.push(program);
 
-		return program;
-	};
+        return program;
+    };
 
-	this.programs = programs;
+    this.programs = programs;
 };
 
 /**
@@ -2729,22 +2852,22 @@ PGL.WebGLPrograms = function (renderer) {
  */
 function fetchAttributeLocations(gl, program) {
 
-	var attributes = {};
+    var attributes = {};
 
-	var n = gl.getProgramParameter(program, gl.ACTIVE_ATTRIBUTES);
+    var n = gl.getProgramParameter(program, gl.ACTIVE_ATTRIBUTES);
 
-	for (var i = 0; i < n; i++) {
+    for (var i = 0; i < n; i++) {
 
-		var info = gl.getActiveAttrib(program, i);
-		var name = info.name;
+        var info = gl.getActiveAttrib(program, i);
+        var name = info.name;
 
-		// console.log( 'THREE.WebGLProgram: ACTIVE VERTEX ATTRIBUTE:', name, i );
+        // console.log( 'THREE.WebGLProgram: ACTIVE VERTEX ATTRIBUTE:', name, i );
 
-		attributes[name] = gl.getAttribLocation(program, name);
+        attributes[name] = gl.getAttribLocation(program, name);
 
-	}
+    }
 
-	return attributes;
+    return attributes;
 
 }
 
@@ -2756,58 +2879,58 @@ function fetchAttributeLocations(gl, program) {
  * @constructor
  */
 PGL.WebGLProgram = function (renderer, shader) {
-	var gl = renderer.context;
+    var gl = renderer.context;
 
-	var vertexShader = shader.vertexShader;
-	var fragmentShader = shader.fragmentShader;
+    var vertexShader = shader.vertexShader;
+    var fragmentShader = shader.fragmentShader;
 
-	var program = gl.createProgram();
+    var program = gl.createProgram();
 
-	// 创建着色器
-	var glVertexShader = PGL.WebGLShader(gl, gl.VERTEX_SHADER, vertexShader);
-	var glFragmentShader = PGL.WebGLShader(gl, gl.FRAGMENT_SHADER, fragmentShader);
+    // 创建着色器
+    var glVertexShader = PGL.WebGLShader(gl, gl.VERTEX_SHADER, vertexShader);
+    var glFragmentShader = PGL.WebGLShader(gl, gl.FRAGMENT_SHADER, fragmentShader);
 
-	gl.attachShader(program, glVertexShader);
-	gl.attachShader(program, glFragmentShader);
+    gl.attachShader(program, glVertexShader);
+    gl.attachShader(program, glFragmentShader);
 
-	gl.linkProgram(program);
+    gl.linkProgram(program);
 
-	gl.deleteShader(glVertexShader);
-	gl.deleteShader(glFragmentShader);
+    gl.deleteShader(glVertexShader);
+    gl.deleteShader(glFragmentShader);
 
-	// set up caching for uniform locations
-	var cachedUniforms;
+    // set up caching for uniform locations
+    var cachedUniforms;
 
-	/**
-	 * 获取uniform变量的地址
-	 * @return {*}
-	 */
-	this.getUniforms = function () {
-		if (cachedUniforms === undefined) {
-			cachedUniforms = new PGL.WebGLUniforms(gl, program, renderer);
-		}
-		return cachedUniforms;
-	};
+    /**
+     * 获取uniform变量的地址
+     * @return {*}
+     */
+    this.getUniforms = function () {
+        if (cachedUniforms === undefined) {
+            cachedUniforms = new PGL.WebGLUniforms(gl, program, renderer);
+        }
+        return cachedUniforms;
+    };
 
-	// set up caching for attribute locations
-	var cachedAttributes;
+    // set up caching for attribute locations
+    var cachedAttributes;
 
-	/**
-	 * 获取Attribute的存储地址
-	 * @return {*}
-	 */
-	this.getAttributes = function () {
-		if (cachedAttributes === undefined) {
-			cachedAttributes = fetchAttributeLocations(gl, program);
-		}
-		return cachedAttributes;
-	};
+    /**
+     * 获取Attribute的存储地址
+     * @return {*}
+     */
+    this.getAttributes = function () {
+        if (cachedAttributes === undefined) {
+            cachedAttributes = fetchAttributeLocations(gl, program);
+        }
+        return cachedAttributes;
+    };
 
-	this.program = program;
-	this.vertexShader = glVertexShader;
-	this.fragmentShader = glFragmentShader;
+    this.program = program;
+    this.vertexShader = glVertexShader;
+    this.fragmentShader = glFragmentShader;
 
-	return this;
+    return this;
 };
 
 /**
@@ -2819,12 +2942,12 @@ PGL.WebGLProgram = function (renderer, shader) {
  * @constructor
  */
 PGL.WebGLShader = function (gl, type, string) {
-	var shader = gl.createShader(type);
+    var shader = gl.createShader(type);
 
-	gl.shaderSource(shader, string);
-	gl.compileShader(shader);
+    gl.shaderSource(shader, string);
+    gl.compileShader(shader);
 
-	return shader;
+    return shader;
 };
 
 /**
@@ -2833,18 +2956,18 @@ PGL.WebGLShader = function (gl, type, string) {
  * @constructor
  */
 PGL.WebGLBufferRenderer = function (gl) {
-	var mode;
+    var mode;
 
-	function setMode(value) {
-		mode = value;
-	}
+    function setMode(value) {
+        mode = value;
+    }
 
-	function render(start, count) {
-		gl.drawArrays(mode, start, count);
-	}
+    function render(start, count) {
+        gl.drawArrays(mode, start, count);
+    }
 
-	this.setMode = setMode;
-	this.render = render;
+    this.setMode = setMode;
+    this.render = render;
 };
 
 /**
@@ -2852,27 +2975,27 @@ PGL.WebGLBufferRenderer = function (gl) {
  * @constructor
  */
 PGL.WebGLProperties = function () {
-	var properties = new WeakMap();
+    var properties = new WeakMap();
 
-	/**
-	 * 获取map，如果未定义，设置为{}
-	 * @param object
-	 */
-	function get(object) {
+    /**
+     * 获取map，如果未定义，设置为{}
+     * @param object
+     */
+    function get(object) {
 
-		var map = properties.get(object);
+        var map = properties.get(object);
 
-		if (map === undefined) {
-			map = {};
-			properties.set(object, map);
-		}
+        if (map === undefined) {
+            map = {};
+            properties.set(object, map);
+        }
 
-		return map;
-	}
+        return map;
+    }
 
-	return {
-		get: get
-	}
+    return {
+        get: get
+    }
 };
 
 /**
@@ -2884,54 +3007,54 @@ PGL.WebGLProperties = function () {
  */
 PGL.WebGLBackground = function (renderer, state) {
 
-	var clearColor = new PGL.Color(0x000000);
-	var clearAlpha = 0;
+    var clearColor = new PGL.Color(0x000000);
+    var clearAlpha = 0;
 
-	/**
-	 * 设置清空背景颜色值，
-	 * @param scene
-	 * @param forceClear 强制清空缓存区
-	 */
-	function render(scene, forceClear) {
-		var background = scene.background;
-		if (background === null) {
-			setClear(clearColor, clearAlpha);
-		}
+    /**
+     * 设置清空背景颜色值，
+     * @param scene
+     * @param forceClear 强制清空缓存区
+     */
+    function render(scene, forceClear) {
+        var background = scene.background;
+        if (background === null) {
+            setClear(clearColor, clearAlpha);
+        }
 
-		if (renderer.autoClear || forceClear) {
-			renderer.clear(renderer.autoClearColor, renderer.autoClearDepth, renderer.autoClearStencil);
-		}
-	}
+        if (renderer.autoClear || forceClear) {
+            renderer.clear(renderer.autoClearColor, renderer.autoClearDepth, renderer.autoClearStencil);
+        }
+    }
 
-	/**
-	 * 设置背景颜色
-	 * @param color
-	 * @param alpha
-	 */
-	function setClear(color, alpha) {
-		state.buffers.color.setClear(color.r, color.g, color.b, alpha);
-	}
+    /**
+     * 设置背景颜色
+     * @param color
+     * @param alpha
+     */
+    function setClear(color, alpha) {
+        state.buffers.color.setClear(color.r, color.g, color.b, alpha);
+    }
 
-	return {
-		getClearColor: function () {
+    return {
+        getClearColor: function () {
 
-			return clearColor;
+            return clearColor;
 
-		},
-		setClearColor: function (color, alpha) {
-			clearColor.set(color);
-			clearAlpha = alpha !== undefined ? alpha : 1;
-			setClear(clearColor, clearAlpha);
-		},
-		getClearAlpha: function () {
-			return clearAlpha;
-		},
-		setClearAlpha: function (alpha) {
-			clearAlpha = alpha;
-			setClear(clearColor, clearAlpha);
-		},
-		render: render
-	}
+        },
+        setClearColor: function (color, alpha) {
+            clearColor.set(color);
+            clearAlpha = alpha !== undefined ? alpha : 1;
+            setClear(clearColor, clearAlpha);
+        },
+        getClearAlpha: function () {
+            return clearAlpha;
+        },
+        setClearAlpha: function (alpha) {
+            clearAlpha = alpha;
+            setClear(clearColor, clearAlpha);
+        },
+        render: render
+    }
 };
 
 /**
@@ -2941,84 +3064,77 @@ PGL.WebGLBackground = function (renderer, state) {
  */
 PGL.WebGLAttributes = function (gl) {
 
-	var buffers = new WeakMap();
+    var buffers = new WeakMap();
 
-	/**
-	 * 创建缓存区
-	 * @param attribute
-	 * @param bufferType
-	 * @return {{buffer: AudioBuffer | WebGLBuffer, type: number, bytesPerElement: number, version}}
-	 */
-	function createBuffer(attribute, bufferType) {
-		var array = attribute.array;
-		var usage = attribute.dynamic ? gl.DYNAMIC_DRAW : gl.STATIC_DRAW;
+    /**
+     * 创建缓存区
+     * @param attribute
+     * @param bufferType
+     * @return {{buffer: AudioBuffer | WebGLBuffer, type: number, bytesPerElement: number, version}}
+     */
+    function createBuffer(attribute, bufferType) {
+        var array = attribute.array;
+        var usage = attribute.dynamic ? gl.DYNAMIC_DRAW : gl.STATIC_DRAW;
 
-		var buffer = gl.createBuffer();
+        var buffer = gl.createBuffer();
 
-		gl.bindBuffer(bufferType, buffer);
-		gl.bufferData(bufferType, array, usage);
+        gl.bindBuffer(bufferType, buffer);
+        gl.bufferData(bufferType, array, usage);
 
-		var type = gl.FLOAT;
+        var type = gl.FLOAT;
 
-		if (array instanceof Float32Array) {
+        if (array instanceof Float32Array) {
 
-			type = gl.FLOAT;
+            type = gl.FLOAT;
 
-		}
-		else if (array instanceof Float64Array) {
-			console.warn('THREE.WebGLAttributes: Unsupported data buffer format: Float64Array.');
-		}
-		else if (array instanceof Uint16Array) {
-			type = gl.UNSIGNED_SHORT;
-		}
-		else if (array instanceof Int16Array) {
-			type = gl.SHORT;
-		}
-		else if (array instanceof Uint32Array) {
-			type = gl.UNSIGNED_INT;
-		}
-		else if (array instanceof Int32Array) {
-			type = gl.INT;
-		}
-		else if (array instanceof Int8Array) {
-			type = gl.BYTE;
-		}
-		else if (array instanceof Uint8Array) {
-			type = gl.UNSIGNED_BYTE;
-		}
+        } else if (array instanceof Float64Array) {
+            console.warn('THREE.WebGLAttributes: Unsupported data buffer format: Float64Array.');
+        } else if (array instanceof Uint16Array) {
+            type = gl.UNSIGNED_SHORT;
+        } else if (array instanceof Int16Array) {
+            type = gl.SHORT;
+        } else if (array instanceof Uint32Array) {
+            type = gl.UNSIGNED_INT;
+        } else if (array instanceof Int32Array) {
+            type = gl.INT;
+        } else if (array instanceof Int8Array) {
+            type = gl.BYTE;
+        } else if (array instanceof Uint8Array) {
+            type = gl.UNSIGNED_BYTE;
+        }
 
-		return {
-			buffer: buffer,
-			type: type,
-			bytesPerElement: array.BYTES_PER_ELEMENT,
-			version: attribute.version
-		};
-	}
+        return {
+            buffer: buffer,
+            type: type,
+            bytesPerElement: array.BYTES_PER_ELEMENT,
+            version: attribute.version
+        };
+    }
 
-	function get(attribute) {
-		if (attribute.isInterleavedBufferAttribute) attribute = attribute.data;
-		return buffers.get(attribute);
-	}
+    function get(attribute) {
+        if (attribute.isInterleavedBufferAttribute) attribute = attribute.data;
+        return buffers.get(attribute);
+    }
 
-	/**
-	 * 创建或则更新buffer
-	 * @param attribute
-	 * @param bufferType
-	 */
-	function update(attribute, bufferType) {
-		if (attribute.isInterleavedBufferAttribute) attribute = attribute.data;
+    /**
+     * 创建或则更新buffer
+     * @param attribute
+     * @param bufferType
+     */
+    function update(attribute, bufferType) {
+        if (attribute.isInterleavedBufferAttribute) attribute = attribute.data;
 
-		var data = buffers.get(attribute);
+        var data = buffers.get(attribute);
 
-		if (data === undefined) {
-			buffers.set(attribute, createBuffer(attribute, bufferType));
-		}
-	}
+        if (data === undefined) {
+            buffers.set(attribute, createBuffer(attribute, bufferType));
+        }
+    }
 
-	return {
-		get: get,
-		update: update
-	}
+    return {
+        get: get,
+        update: update
+    }
 };
 
 /**
@@ -3029,42 +3145,42 @@ PGL.WebGLAttributes = function (gl) {
  * @constructor
  */
 PGL.WebGLGeometries = function (gl, attributes) {
-	var geometries = {};
-	var wireframeAttributes = {};
+    var geometries = {};
+    var wireframeAttributes = {};
 
-	/**
-	 * 获取对象的buffer几何体
-	 * @param object 对象
-	 * @param geometry 几何体
-	 * @return {*}
-	 */
-	function get(object, geometry) {
-		var buffergeometry = geometries[geometry.id];
+    /**
+     * 获取对象的buffer几何体
+     * @param object 对象
+     * @param geometry 几何体
+     * @return {*}
+     */
+    function get(object, geometry) {
+        var buffergeometry = geometries[geometry.id];
 
-		if (buffergeometry) return buffergeometry;
+        if (buffergeometry) return buffergeometry;
 
-		if (geometry.isBufferGeometry) {
-			buffergeometry = geometry;
-		}
+        if (geometry.isBufferGeometry) {
+            buffergeometry = geometry;
+        }
 
-		geometries[geometry.id] = buffergeometry;
+        geometries[geometry.id] = buffergeometry;
 
-		return buffergeometry;
-	}
+        return buffergeometry;
+    }
 
-	function update(geometry) {
-		var index = geometry.index;
-		var geometryAttributes = geometry.attributes;
+    function update(geometry) {
+        var index = geometry.index;
+        var geometryAttributes = geometry.attributes;
 
-		for (var name in geometryAttributes) {
-			attributes.update(geometryAttributes[name], gl.ARRAY_BUFFER);
-		}
-	}
+        for (var name in geometryAttributes) {
+            attributes.update(geometryAttributes[name], gl.ARRAY_BUFFER);
+        }
+    }
 
-	return {
-		get: get,
-		update: update
-	}
+    return {
+        get: get,
+        update: update
+    }
 };
 
 /**
@@ -3074,27 +3190,27 @@ PGL.WebGLGeometries = function (gl, attributes) {
  * @constructor
  */
 PGL.WebGLObjects = function (geometries) {
-	var updateList = {};
+    var updateList = {};
 
-	function update(object) {
-		var frame = 0;
+    function update(object) {
+        var frame = 0;
 
-		var geometry = object.geometry;
-		var buffergeometry = geometries.get(object, geometry);
+        var geometry = object.geometry;
+        var buffergeometry = geometries.get(object, geometry);
 
-		if(buffergeometry){
-			if (updateList[buffergeometry.id] !== frame) {
-				geometries.update(buffergeometry);
+        if (buffergeometry) {
+            if (updateList[buffergeometry.id] !== frame) {
+                geometries.update(buffergeometry);
 
-				updateList[buffergeometry.id] = frame;
-			}
-		}
+                updateList[buffergeometry.id] = frame;
+            }
+        }
 
 
-		return buffergeometry;
-	}
+        return buffergeometry;
+    }
 
-	return {
-		update: update
-	}
+    return {
+        update: update
+    }
 };

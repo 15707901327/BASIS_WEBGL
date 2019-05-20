@@ -103,17 +103,17 @@ var helperFunctions = '\
 ';
 
 function Renderer() {
-  this.tileTexture = PGL.Texture.fromImage(document.getElementById('tiles'), {
+  this.tileTexture = Math.Texture.fromImage(document.getElementById('tiles'), {
     minFilter: gl.LINEAR_MIPMAP_LINEAR,
     wrap: gl.REPEAT,
     format: gl.RGB
   });
-  this.lightDir = new PGL.Vector3(2.0, 2.0, -1.0).unit();
-  this.causticTex = new PGL.Texture(1024, 1024);
-  this.waterMesh = PGL.Mesh.plane({ detail: 200 });
+  this.lightDir = new Math.Vector3(2.0, 2.0, -1.0).unit();
+  this.causticTex = new Math.Texture(1024, 1024);
+  this.waterMesh = Math.Mesh.plane({ detail: 200 });
   this.waterShaders = [];
   for (var i = 0; i < 2; i++) {
-    this.waterShaders[i] = new PGL.Shader('\
+    this.waterShaders[i] = new Math.Shader('\
       uniform sampler2D water;\
       varying vec3 position;\
       void main() {\
@@ -185,8 +185,8 @@ function Renderer() {
       }\
     ');
   }
-  this.sphereMesh = PGL.Mesh.sphere({ detail: 10 });
-  this.sphereShader = new PGL.Shader(helperFunctions + '\
+  this.sphereMesh = Math.Mesh.sphere({ detail: 10 });
+  this.sphereShader = new Math.Shader(helperFunctions + '\
     varying vec3 position;\
     void main() {\
       position = sphereCenter + gl_Vertex.xyz * sphereRadius;\
@@ -202,10 +202,10 @@ function Renderer() {
       }\
     }\
   ');
-  this.cubeMesh = PGL.Mesh.cube();
+  this.cubeMesh = Math.Mesh.cube();
   this.cubeMesh.triangles.splice(4, 2);
   this.cubeMesh.compile();
-  this.cubeShader = new PGL.Shader(helperFunctions + '\
+  this.cubeShader = new Math.Shader(helperFunctions + '\
     varying vec3 position;\
     void main() {\
       position = gl_Vertex.xyz;\
@@ -222,10 +222,10 @@ function Renderer() {
       }\
     }\
   ');
-  this.sphereCenter = new PGL.Vector3();
+  this.sphereCenter = new Math.Vector3();
   this.sphereRadius = 0;
   var hasDerivatives = !!gl.getExtension('OES_standard_derivatives');
-  this.causticsShader = new PGL.Shader(helperFunctions + '\
+  this.causticsShader = new Math.Shader(helperFunctions + '\
     varying vec3 oldPos;\
     varying vec3 newPos;\
     varying vec3 ray;\
@@ -302,7 +302,7 @@ Renderer.prototype.updateCaustics = function(water) {
 };
 
 Renderer.prototype.renderWater = function(water, sky) {
-  var tracer = new PGL.Raytracer();
+  var tracer = new Math.Raytracer();
   water.textureA.bind(0);
   this.tileTexture.bind(1);
   sky.bind(2);

@@ -16,8 +16,8 @@ function main() {
     gl.clearColor(1.0, 1.0, 0.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
-    var vert = PGL.WebGLShader(gl, gl.VERTEX_SHADER, VSHADER_SOURCE);
-    var fragment = PGL.WebGLShader(gl, gl.FRAGMENT_SHADER, FSHADER_SOURCE);
+    var vert = Math.WebGLShader(gl, gl.VERTEX_SHADER, VSHADER_SOURCE);
+    var fragment = Math.WebGLShader(gl, gl.FRAGMENT_SHADER, FSHADER_SOURCE);
 
     var program = gl.createProgram();
     gl.attachShader(program, vert);

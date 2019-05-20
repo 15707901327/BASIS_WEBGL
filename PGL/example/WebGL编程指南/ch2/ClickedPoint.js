@@ -2,12 +2,12 @@ window.onload = function (ev) {
 	// 获取<canvas>元素
 	var canvas = document.getElementById('webgl');
 
-	var webGlRenderer = new PGL.WebGLRenderer({
+	var webGlRenderer = new Math.WebGLRenderer({
 		canvas: canvas
 	});
-	webGlRenderer.setClearColor(new PGL.Color(0.5, 1, 1), 1);
+	webGlRenderer.setClearColor(new Math.Color(0.5, 1, 1), 1);
 
-	var scene = new PGL.Scene();
+	var scene = new Math.Scene();
 	canvas.onmousedown = function (ev) {
 		click(ev, canvas);
 	};
@@ -23,13 +23,13 @@ window.onload = function (ev) {
 
 		var vertices = [x, y, 1.0];
 
-		var geometry = new PGL.BufferGeometry();
-		geometry.addAttribute('position', new PGL.Float32BufferAttribute(vertices, 3));
-		var pointsMaterial = new PGL.PointsMaterial({
+		var geometry = new Math.BufferGeometry();
+		geometry.addAttribute('position', new Math.Float32BufferAttribute(vertices, 3));
+		var pointsMaterial = new Math.PointsMaterial({
 			size: 20
 		});
 
-		var particles = new PGL.Points(geometry, pointsMaterial);
+		var particles = new Math.Points(geometry, pointsMaterial);
 		scene.add(particles);
 		webGlRenderer.render(scene);
 	}

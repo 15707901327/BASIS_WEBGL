@@ -24,7 +24,7 @@ function handleError(text) {
 
 window.onerror = handleError;
 
-var webGLRenderer = new PGL.WebGLRenderer();
+var webGLRenderer = new Math.WebGLRenderer();
 var gl = webGLRenderer.getContext();
 gl.HALF_FLOAT_OES = 0x8D61;
 
@@ -56,16 +56,16 @@ function on(element, name, callback) {
 on(document, 'keydown', function (e) {
   if (!e.altKey && !e.ctrlKey && !e.metaKey) {
     var key = mapKeyCode(e.keyCode);
-    if (key) PGL.keys[key] = true;
-    PGL.keys[e.keyCode] = true;
+    if (key) Math.keys[key] = true;
+    Math.keys[e.keyCode] = true;
   }
 });
 
 on(document, 'keyup', function (e) {
   if (!e.altKey && !e.ctrlKey && !e.metaKey) {
     var key = mapKeyCode(e.keyCode);
-    if (key) PGL.keys[key] = false;
-    PGL.keys[e.keyCode] = false;
+    if (key) Math.keys[key] = false;
+    Math.keys[e.keyCode] = false;
   }
 });
 
@@ -74,12 +74,12 @@ on(document, 'keyup', function (e) {
 // Implement the OpenGL modelview and projection matrix stacks, along with some
 // other useful GLU matrix functions.
 function addMatrixStack() {
-  gl.MODELVIEW = PGL.ENUM | 1;
-  gl.PROJECTION = PGL.ENUM | 2;
-  var tempMatrix = new PGL.Matrix();
-  var resultMatrix = new PGL.Matrix();
-  gl.modelviewMatrix = new PGL.Matrix();
-  gl.projectionMatrix = new PGL.Matrix();
+  gl.MODELVIEW = Math.ENUM | 1;
+  gl.PROJECTION = Math.ENUM | 2;
+  var tempMatrix = new Math.Matrix();
+  var resultMatrix = new Math.Matrix();
+  gl.modelviewMatrix = new Math.Matrix();
+  gl.projectionMatrix = new Math.Matrix();
   var modelviewStack = [];
   var projectionStack = [];
   var matrix, stack;
@@ -98,7 +98,7 @@ function addMatrixStack() {
     }
   };
   gl.loadIdentity = function () {
-    PGL.Matrix.identity(gl[matrix]);
+    Math.Matrix.identity(gl[matrix]);
   };
   gl.loadMatrix = function (m) {
     var from = m.m, to = gl[matrix].m;
@@ -107,10 +107,10 @@ function addMatrixStack() {
     }
   };
   gl.multMatrix = function (m) {
-    gl.loadMatrix(PGL.Matrix.multiply(gl[matrix], m, resultMatrix));
+    gl.loadMatrix(Math.Matrix.multiply(gl[matrix], m, resultMatrix));
   };
   gl.perspective = function (fov, aspect, near, far) {
-    gl.multMatrix(PGL.Matrix.perspective(fov, aspect, near, far, tempMatrix));
+    gl.multMatrix(Math.Matrix.perspective(fov, aspect, near, far, tempMatrix));
   };
   gl.frustum = function (l, r, b, t, n, f) {
     gl.multMatrix(Matrix.frustum(l, r, b, t, n, f, tempMatrix));
@@ -122,10 +122,10 @@ function addMatrixStack() {
     gl.multMatrix(Matrix.scale(x, y, z, tempMatrix));
   };
   gl.translate = function (x, y, z) {
-    gl.multMatrix(PGL.Matrix.translate(x, y, z, tempMatrix));
+    gl.multMatrix(Math.Matrix.translate(x, y, z, tempMatrix));
   };
   gl.rotate = function (a, x, y, z) {
-    gl.multMatrix(PGL.Matrix.rotate(a, x, y, z, tempMatrix));
+    gl.multMatrix(Math.Matrix.rotate(a, x, y, z, tempMatrix));
   };
   gl.lookAt = function (ex, ey, ez, cx, cy, cz, ux, uy, uz) {
     gl.multMatrix(Matrix.lookAt(ex, ey, ez, cx, cy, cz, ux, uy, uz, tempMatrix));
@@ -152,12 +152,12 @@ function addMatrixStack() {
     modelview = modelview || gl.modelviewMatrix;
     projection = projection || gl.projectionMatrix;
     viewport = viewport || gl.getParameter(gl.VIEWPORT);
-    var point = new PGL.Vector3(
+    var point = new Math.Vector3(
       (winX - viewport[0]) / viewport[2] * 2 - 1,
       (winY - viewport[1]) / viewport[3] * 2 - 1,
       winZ * 2 - 1
     );
-    return PGL.Matrix.inverse(PGL.Matrix.multiply(projection, modelview, tempMatrix), resultMatrix).transformPoint(point);
+    return Math.Matrix.inverse(Math.Matrix.multiply(projection, modelview, tempMatrix), resultMatrix).transformPoint(point);
   };
   gl.matrixMode(gl.MODELVIEW);
 }
@@ -173,12 +173,12 @@ function addMatrixStack() {
 // because it's only meant for quick debugging tasks.
 function addImmediateMode() {
   var immediateMode = {
-    mesh: new PGL.Mesh({coords: true, colors: true, triangles: false}),
+    mesh: new Math.Mesh({coords: true, colors: true, triangles: false}),
     mode: -1,
     coord: [0, 0, 0, 0],
     color: [1, 1, 1, 1],
     pointSize: 1,
-    shader: new PGL.Shader('\
+    shader: new Math.Shader('\
       uniform float pointSize;\
       varying vec4 color;\
       varying vec4 coord;\
@@ -496,9 +496,9 @@ window.onload = function () {
     throw new Error('Rendering to floating-point textures is required but not supported');
   }
 
-  center = oldCenter = new PGL.Vector3(-0.4, -0.75, 0.2);
-  velocity = new PGL.Vector3();
-  gravity = new PGL.Vector3(0, -4, 0);
+  center = oldCenter = new Math.Vector3(-0.4, -0.75, 0.2);
+  velocity = new Math.Vector3();
+  gravity = new Math.Vector3(0, -4, 0);
   radius = 0.25;
 
   for (var i = 0; i < 20; i++) {
@@ -540,10 +540,10 @@ window.onload = function () {
   function startDrag(x, y) {
     oldX = x;
     oldY = y;
-    var tracer = new PGL.Raytracer();
+    var tracer = new Math.Raytracer();
     var ray = tracer.getRayForPixel(x * ratio, y * ratio);
     var pointOnPlane = tracer.eye.add(ray.multiply(-tracer.eye.y / ray.y));
-    var sphereHitTest = PGL.Raytracer.hitTestSphere(tracer.eye, ray, center, radius);
+    var sphereHitTest = Math.Raytracer.hitTestSphere(tracer.eye, ray, center, radius);
     if (sphereHitTest) {
       mode = MODE_MOVE_SPHERE;
       prevHit = sphereHitTest.hit;
@@ -559,7 +559,7 @@ window.onload = function () {
   function duringDrag(x, y) {
     switch (mode) {
       case MODE_ADD_DROPS: {
-        var tracer = new PGL.Raytracer();
+        var tracer = new Math.Raytracer();
         var ray = tracer.getRayForPixel(x * ratio, y * ratio);
         var pointOnPlane = tracer.eye.add(ray.multiply(-tracer.eye.y / ray.y));
         water.addDrop(pointOnPlane.x, pointOnPlane.z, 0.03, 0.01);
@@ -570,7 +570,7 @@ window.onload = function () {
         break;
       }
       case MODE_MOVE_SPHERE: {
-        var tracer = new PGL.Raytracer();
+        var tracer = new Math.Raytracer();
         var ray = tracer.getRayForPixel(x * ratio, y * ratio);
         var t = -planeNormal.dot(tracer.eye.subtract(prevHit)) / planeNormal.dot(ray);
         var nextHit = tracer.eye.add(ray.multiply(t));
@@ -650,7 +650,7 @@ window.onload = function () {
 
     if (mode === MODE_MOVE_SPHERE) {
       // Start from rest when the player releases the mouse after moving the sphere
-      velocity = new PGL.Vector3();
+      velocity = new Math.Vector3();
     } else if (useSpherePhysics) {
       // Fall down with viscosity under water
       var percentUnderWater = Math.max(0, Math.min(1, (radius - center.y) / (2 * radius)));
@@ -678,8 +678,8 @@ window.onload = function () {
 
   function draw() {
     // Change the light direction to the camera look vector when the L key is pressed
-    if (PGL.keys.L) {
-      renderer.lightDir = PGL.Vector3.fromAngles((90 - angleY) * Math.PI / 180, -angleX * Math.PI / 180);
+    if (Math.keys.L) {
+      renderer.lightDir = Math.Vector3.fromAngles((90 - angleY) * Math.PI / 180, -angleX * Math.PI / 180);
       if (paused) renderer.updateCaustics(water);
     }
 

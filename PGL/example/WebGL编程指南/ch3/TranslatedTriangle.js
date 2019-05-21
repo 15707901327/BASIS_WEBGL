@@ -16,8 +16,8 @@ function main() {
     gl.clearColor(1.0, 1.0, 0.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
-    var vert = Math.WebGLShader(gl, gl.VERTEX_SHADER, VSHADER_SOURCE);
-    var fragment = Math.WebGLShader(gl, gl.FRAGMENT_SHADER, FSHADER_SOURCE);
+    var vert = PGL.WebGLShader(gl, gl.VERTEX_SHADER, VSHADER_SOURCE);
+    var fragment = PGL.WebGLShader(gl, gl.FRAGMENT_SHADER, FSHADER_SOURCE);
 
     var program = gl.createProgram();
     gl.attachShader(program, vert);
@@ -41,6 +41,8 @@ function main() {
 }
 
 window.onload = function (ev) {
+    // main();
+
     // 获取<canvas>元素
     var canvas = document.getElementById('webgl');
 
@@ -63,8 +65,7 @@ window.onload = function (ev) {
 
     var mesh = new PGL.Mesh(bufferGeometry, meshPhongMaterial);
     mesh.drawMode = gl.LINES;
-    mesh.translateX(1);
-    mesh.translateZ(1);
+    mesh.translateX(0.5);
     scene.add(mesh);
 
     webGlRenderer.render(scene);

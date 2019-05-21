@@ -211,6 +211,81 @@ PGL.Object3D.prototype = {
 
     isObject3D: true,
 
+    rotateOnAxis: function () {
+
+        // rotate object on axis in object space
+        // axis is assumed to be normalized
+
+        var q1 = new PGL.Quaternion();
+
+        return function rotateOnAxis(axis, angle) {
+
+            q1.setFromAxisAngle(axis, angle);
+
+            this.quaternion.multiply(q1);
+
+            return this;
+
+        };
+
+    }(),
+
+    rotateOnWorldAxis: function () {
+
+        // rotate object on axis in world space
+        // axis is assumed to be normalized
+        // method assumes no rotated parent
+
+        var q1 = new PGL.Quaternion();
+
+        return function rotateOnWorldAxis(axis, angle) {
+
+            q1.setFromAxisAngle(axis, angle);
+
+            this.quaternion.premultiply(q1);
+
+            return this;
+
+        };
+
+    }(),
+
+    rotateX: function () {
+
+        var v1 = new PGL.Vector3(1, 0, 0);
+
+        return function rotateX(angle) {
+
+            return this.rotateOnAxis(v1, angle);
+
+        };
+
+    }(),
+
+    rotateY: function () {
+
+        var v1 = new PGL.Vector3(0, 1, 0);
+
+        return function rotateY(angle) {
+
+            return this.rotateOnAxis(v1, angle);
+
+        };
+
+    }(),
+
+    rotateZ: function () {
+
+        var v1 = new PGL.Vector3(0, 0, 1);
+
+        return function rotateZ(angle) {
+
+            return this.rotateOnAxis(v1, angle);
+
+        };
+
+    }(),
+
     translateOnAxis: function () {
 
         // translate object by distance along axis in object space

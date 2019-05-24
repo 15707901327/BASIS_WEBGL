@@ -535,7 +535,16 @@ PGL.Geometry = function () {
     Object.defineProperty(this, 'id', {value: geometryId += 2});
 };
 
+var materialId = 0;
 PGL.Material = function () {
+    Object.defineProperty(this, 'id', {value: materialId++});
+
+    this.name = '';
+    this.type = 'Material';
+
+    this.userData = {};
+
+    this.needsUpdate = true; // 设置是否需要修改材质
 };
 PGL.Material.prototype = {
     /**
@@ -670,7 +679,15 @@ PGL.WebGLRenderer = function (parameters) {
 
     parameters = parameters || {};
     var _canvas = parameters.canvas !== undefined ? parameters.canvas : document.createElementNS('http://www.w3.org/1999/xhtml', 'canvas'),
-        _context = parameters.context !== undefined ? parameters.context : null;
+        _context = parameters.context !== undefined ? parameters.context : null,
+
+        _alpha = parameters.alpha !== undefined ? parameters.alpha : false,
+        _depth = parameters.depth !== undefined ? parameters.depth : true,
+        _stencil = parameters.stencil !== undefined ? parameters.stencil : true,
+        _antialias = parameters.antialias !== undefined ? parameters.antialias : false,
+        _premultipliedAlpha = parameters.premultipliedAlpha !== undefined ? parameters.premultipliedAlpha : true,
+        _preserveDrawingBuffer = parameters.preserveDrawingBuffer !== undefined ? parameters.preserveDrawingBuffer : false,
+        _powerPreference = parameters.powerPreference !== undefined ? parameters.powerPreference : 'default';
 
     // public properties
     this.domElement = _canvas;
@@ -682,11 +699,48 @@ PGL.WebGLRenderer = function (parameters) {
     this.autoClearDepth = true;
     this.autoClearStencil = true;
 
-    var _this = this;
+    var _this = this,
+        // 标记丢失上下文
+        _isContextLost = false;
 
-    // Get the rendering context for WebGL
-    var _gl = getWebGLContext();
-    if (!_gl) return null;
+    var _gl;
+    try {
+
+        var contextAttributes = {
+            alpha: _alpha,
+            depth: _depth,
+            stencil: _stencil,
+            antialias: _antialias,
+            premultipliedAlpha: _premultipliedAlpha,
+            preserveDrawingBuffer: _preserveDrawingBuffer,
+            powerPreference: _powerPreference
+        };
+
+        // event listeners must be registered before WebGL context is created, see #12753
+
+        _canvas.addEventListener('webglcontextlost', onContextLost, false);
+        _canvas.addEventListener('webglcontextrestored', onContextRestore, false);
+
+        _gl = _context || _canvas.getContext('webgl', contextAttributes) || _canvas.getContext('experimental-webgl', contextAttributes);
+
+        if (_gl === null) {
+            if (_canvas.getContext('webgl') !== null) {
+                throw new Error('Error creating WebGL context with your selected attributes.');
+            } else {
+                throw new Error('Error creating WebGL context.');
+            }
+        }
+
+        // Some experimental-webgl implementations do not have getShaderPrecisionFormat
+        if (_gl.getShaderPrecisionFormat === undefined) {
+            _gl.getShaderPrecisionFormat = function () {
+                return {'rangeMin': 1, 'rangeMax': 1, 'precision': 1};
+            };
+        }
+    } catch (error) {
+        console.error('THREE.WebGLRenderer: ' + error.message);
+        throw error;
+    }
 
     var extensions, capabilities, state;
     var properties, attributes, geometries, objects;
@@ -717,16 +771,94 @@ PGL.WebGLRenderer = function (parameters) {
         bufferRenderer = new PGL.WebGLBufferRenderer(_gl);
 
         _this.context = _gl;
+        _this.capabilities = capabilities;
+        _this.extensions = extensions;
+        _this.properties = properties;
+        _this.renderLists = renderLists;
+        _this.state = state;
     }
 
     initGLContext();
+
+    // API
+
+    // 获取上下文
+    this.getContext = function () {
+        return _gl;
+    };
+
+    // Clearing
+
+    // 设置背景颜色
+    this.setClearColor = function () {
+        background.setClearColor.apply(background, arguments);
+    };
+
+    /**
+     * 根据参数清空颜色缓存区、深度缓存区、模版缓存区
+     * @param color
+     * @param depth
+     * @param stencil
+     */
+    this.clear = function (color, depth, stencil) {
+
+        var bits = 0;
+
+        if (color === undefined || color) bits |= _gl.COLOR_BUFFER_BIT;
+        if (depth === undefined || depth) bits |= _gl.DEPTH_BUFFER_BIT;
+        if (stencil === undefined || stencil) bits |= _gl.STENCIL_BUFFER_BIT;
+
+        _gl.clear(bits);
+
+    };
+
+    this.clearColor = function () {
+
+        this.clear(true, false, false);
+
+    };
+
+    this.clearDepth = function () {
+
+        this.clear(false, true, false);
+
+    };
+
+    this.clearStencil = function () {
+
+        this.clear(false, false, true);
+
+    };
+
+    // Events
+
+    /**
+     * 丢失上下文
+     * @param event
+     */
+    function onContextLost(event) {
+        event.preventDefault();
+        console.log('THREE.WebGLRenderer: Context Lost.');
+        _isContextLost = true;
+    }
+
+    /**
+     * 恢复上下文，初始化之前的参数
+     */
+    function onContextRestore(/* event */) {
+        console.log('THREE.WebGLRenderer: Context Restored.');
+
+        _isContextLost = false;
+
+        initGLContext();
+    }
 
     /**
      * 渲染缓存区
      */
     this.renderBufferDirect = function (object) {
 
-        var program = setProgram(object);
+        var program = setProgram(null, null, object.material, object);
         program = object.material.program;
         var updateBuffers = false;
         updateBuffers = true;
@@ -826,6 +958,9 @@ PGL.WebGLRenderer = function (parameters) {
 
     // 渲染物体
     this.render = function (scene) {
+
+        // 检查是否丢失上下文
+        if (_isContextLost) return;
 
         // update scene graph 更新对象的位置矩阵
         if (scene.autoUpdate === true) scene.updateMatrixWorld();
@@ -937,13 +1072,20 @@ PGL.WebGLRenderer = function (parameters) {
 
     /**
      * 设置着色器程序
-     * @param object
+     * @param camera 相机
+     * @param fog 雾化
+     * @param material 材质
+     * @param object 对象
      */
-    function setProgram(object) {
+    function setProgram(camera, fog, material, object) {
 
         var materialProperties = properties.get(object.material);
 
-        initMaterial(object.material, object);
+        // 更新着色器程序
+        if (material.needsUpdate) {
+            initMaterial(material, object);
+            material.needsUpdate = false;
+        }
 
         var refreshMaterial = false;
 
@@ -984,85 +1126,6 @@ PGL.WebGLRenderer = function (parameters) {
     function refreshUniformsPoints(uniforms, material) {
         uniforms.diffuse.value = material.color;
         uniforms.size.value = material.size;
-    }
-
-    // 获取上下文
-    this.getContext = function () {
-        return _gl;
-    };
-
-    this.clearColor = function () {
-        _gl.clear(_gl.COLOR_BUFFER_BIT);
-    };
-
-    // 设置背景颜色
-    this.setClearColor = function () {
-        background.setClearColor.apply(background, arguments);
-    };
-
-    /**
-     * 根据参数清空颜色缓存区、深度缓存区、模版缓存区
-     * @param color
-     * @param depth
-     * @param stencil
-     */
-    this.clear = function (color, depth, stencil) {
-
-        var bits = 0;
-
-        if (color === undefined || color) bits |= _gl.COLOR_BUFFER_BIT;
-        if (depth === undefined || depth) bits |= _gl.DEPTH_BUFFER_BIT;
-        if (stencil === undefined || stencil) bits |= _gl.STENCIL_BUFFER_BIT;
-
-        _gl.clear(bits);
-
-    };
-
-    this.clearColor = function () {
-
-        this.clear(true, false, false);
-
-    };
-
-    this.clearDepth = function () {
-
-        this.clear(false, true, false);
-
-    };
-
-    this.clearStencil = function () {
-
-        this.clear(false, false, true);
-
-    };
-
-    /**
-     * 获取上下文
-     * @return {*|CanvasRenderingContext2D|WebGLRenderingContext}
-     * @private
-     */
-    function getWebGLContext() {
-        try {
-            var gl = _context || _canvas.getContext('webgl') || _canvas.getContext('experimental-webgl');
-            if (gl === null) {
-                if (_canvas.getContext('webgl') !== null) {
-                    throw new Error('Error creating WebGL context with your selected attributes.');
-                } else {
-                    throw new Error('Error creating WebGL context.');
-                }
-            }
-
-            // Some experimental-webgl implementations do not have getShaderPrecisionFormat
-            if (gl.getShaderPrecisionFormat === undefined) {
-                gl.getShaderPrecisionFormat = function () {
-                    return {'rangeMin': 1, 'rangeMax': 1, 'precision': 1};
-                };
-            }
-
-            return gl;
-        } catch (error) {
-            console.error('THREE.WebGLRenderer: ' + error.message);
-        }
     }
 };
 
@@ -1146,7 +1209,6 @@ PGL.WebGLState = function (gl) {
 
     function useProgram(program) {
         if (currentProgram !== program) {
-
             gl.useProgram(program);
 
             currentProgram = program;
@@ -1358,19 +1420,49 @@ PGL.WebGLProgram = function (renderer, extensions, code, material, shader, param
     return this;
 };
 
+function addLineNumbers(string) {
+
+    var lines = string.split('\n');
+
+    for (var i = 0; i < lines.length; i++) {
+
+        lines[i] = (i + 1) + ': ' + lines[i];
+
+    }
+
+    return lines.join('\n');
+
+}
+
 /**
  * 实例化一个着色器
  * @param gl 上下文
  * @param type 类型
  * @param string 字符串
+ * @param debug 标记是否打印调试信息
  * @return {*|WebGLShader}
  * @constructor
  */
-PGL.WebGLShader = function (gl, type, string) {
+PGL.WebGLShader = function (gl, type, string, debug) {
+
     var shader = gl.createShader(type);
 
     gl.shaderSource(shader, string);
     gl.compileShader(shader);
+
+    if (debug === true) {
+
+        if (gl.getShaderParameter(shader, gl.COMPILE_STATUS) === false) {
+            console.error('THREE.WebGLShader: Shader couldn\'t compile.');
+        }
+
+        if (gl.getShaderInfoLog(shader) !== '') {
+            console.warn('THREE.WebGLShader: gl.getShaderInfoLog()', type === gl.VERTEX_SHADER ? 'vertex' : 'fragment', gl.getShaderInfoLog(shader), addLineNumbers(string));
+        }
+    }
+
+    // --enable-privileged-webgl-extension
+    // console.log( type, gl.getExtension( 'WEBGL_debug_shaders' ).getTranslatedShaderSource( shader ) );
 
     return shader;
 };

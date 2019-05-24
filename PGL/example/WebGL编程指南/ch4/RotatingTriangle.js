@@ -91,7 +91,6 @@ window.onload = function (ev) {
         canvas: canvas
     });
     webGlRenderer.setClearColor(new PGL.Color(0, 0, 0), 1);
-    var gl = webGlRenderer.getContext();
 
     var scene = new PGL.Scene();
 
@@ -107,11 +106,27 @@ window.onload = function (ev) {
     var mesh = new PGL.Mesh(bufferGeometry, meshPhongMaterial);
     scene.add(mesh);
 
-    function tick(){
-        mesh.rotateZ(Math.PI / 4);
-        webGlRenderer.render(scene);
+    var ANGLE_STEP = 45;
 
+    var g_last = Date.now();
+
+    var currentAngle = 0.0;
+    function tick(){
         requestAnimationFrame(tick);
+
+        currentAngle = animate(currentAngle);
+        mesh.rotateZ(currentAngle * Math.PI / 180);
+
+        webGlRenderer.render(scene);
+    }
+
+    function animate(angle) {
+        var now = Date.now();
+        var elapsed = now - g_last;
+        g_last = now;
+
+        var newAngle = (ANGLE_STEP * elapsed) / 1000;
+        return newAngle %= 360;
     }
 
     tick();

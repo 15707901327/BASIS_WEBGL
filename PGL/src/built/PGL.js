@@ -1,5 +1,4 @@
 PGL.UniformsUtils = {
-
     merge: function (uniforms) {
 
         var merged = {};
@@ -13,7 +12,6 @@ PGL.UniformsUtils = {
         return merged;
 
     },
-
     clone: function (uniforms_src) {
 
         var uniforms_dst = {};
@@ -50,7 +48,6 @@ PGL.UniformsUtils = {
         return uniforms_dst;
 
     }
-
 };
 
 var points_vert =
@@ -68,15 +65,36 @@ var points_frag =
     "}";
 
 var meshphong_vert =
-    "attribute vec4 position;\n" +
+    "#if defined(USE_MAP)\n" +
+    "   varying vec2 vUv;\n" +
+    "#endif\n" +
     "void main(){\n" +
+    "   #if defined( USE_MAP )\n" +
+    "       vUv = uv;\n" +
+    "   #endif\n" +
     " vec4 mvPosition = modelViewMatrix * position; //设置坐标\n" +
     " gl_Position = mvPosition; //设置坐标\n" +
     "}";
 var meshphong_frag =
     "uniform vec3 diffuse;\n" + // 必须加上精度限定
+
+    "#if defined( USE_MAP )\n" +
+    "   varying vec2 vUv;\n" +
+    "#endif\n" +
+
+    "#ifdef USE_MAP\n" +
+    "   uniform sampler2D map;\n" +
+    "#endif\n" +
+
     "void main() {\n" +
-    " gl_FragColor = vec4(diffuse,1.0);\n" +
+    "   vec4 diffuseColor = vec4(diffuse,1.0);\n" +
+
+    "#ifdef USE_MAP\n" +
+    "   vec4 texelColor = texture2D( map, vUv );\n" +
+    "   diffuseColor = texelColor;\n" +
+    "#endif\n" +
+
+    "   gl_FragColor = diffuseColor;\n" +
     "}";
 var ShaderChunk = {
     points_frag: points_frag,
@@ -133,8 +151,11 @@ PGL.UniformsUtils = {
     }
 };
 PGL.UniformsLib = {
-    phone: {
-        diffuse: {value: new PGL.Color(0xeeeeee)}
+    common: {
+        diffuse: {value: new PGL.Color(0xeeeeee)},
+        opacity: {value: 1.0},
+
+        map: {value: null}
     },
     points: {
         size: {value: 1.0},
@@ -144,7 +165,7 @@ PGL.UniformsLib = {
 PGL.ShaderLib = {
     phong: {
         uniforms: PGL.UniformsUtils.merge([
-            PGL.UniformsLib.phone
+            PGL.UniformsLib.common
         ]),
 
         vertexShader: ShaderChunk.meshphong_vert,
@@ -636,6 +657,8 @@ PGL.MeshPhongMaterial = function (parameters) {
 
     this.color = new PGL.Color(0xffffff); // diffuse
 
+    this.map = null;
+
     this.setValues(parameters);
 };
 PGL.MeshPhongMaterial.prototype = Object.create(PGL.Material.prototype);
@@ -701,7 +724,10 @@ PGL.WebGLRenderer = function (parameters) {
 
     var _this = this,
         // 标记丢失上下文
-        _isContextLost = false;
+        _isContextLost = false,
+
+        // 使用贴图的通道
+        _usedTextureUnits = 0;
 
     var _gl;
     try {
@@ -743,10 +769,11 @@ PGL.WebGLRenderer = function (parameters) {
     }
 
     var extensions, capabilities, state;
-    var properties, attributes, geometries, objects;
+    var properties, textures, attributes, geometries, objects;
     var programCache, renderLists;
 
     var background, bufferRenderer;
+    var utils;
 
     function initGLContext() {
 
@@ -756,9 +783,12 @@ PGL.WebGLRenderer = function (parameters) {
         // 获取当前webgl的基础属性
         capabilities = new PGL.WebGLCapabilities(_gl, extensions, parameters);
 
+        utils = new PGL.WebGLUtils( _gl, extensions, capabilities );
+
         state = new PGL.WebGLState(_gl);
 
         properties = new PGL.WebGLProperties();
+        textures = new PGL.WebGLTextures(_gl, extensions, state, properties, capabilities, utils, null);
         attributes = new PGL.WebGLAttributes(_gl);
         geometries = new PGL.WebGLGeometries(_gl, attributes);
         objects = new PGL.WebGLObjects(geometries);
@@ -1036,7 +1066,7 @@ PGL.WebGLRenderer = function (parameters) {
         var materialProperties = properties.get(material);
 
         // 获取参数
-        var parameters = programCache.getParameters(object);
+        var parameters = programCache.getParameters(material, null, null, null, null, null, object);
 
         var program;
         var programChange = true;
@@ -1079,7 +1109,7 @@ PGL.WebGLRenderer = function (parameters) {
      */
     function setProgram(camera, fog, material, object) {
 
-        var materialProperties = properties.get(object.material);
+        var materialProperties = properties.get(material);
 
         // 更新着色器程序
         if (material.needsUpdate) {
@@ -1099,14 +1129,32 @@ PGL.WebGLRenderer = function (parameters) {
 
         if (refreshMaterial) {
             if (object.material.isMeshPhongMaterial) {
-                refreshUniformsCommon(m_uniforms, object.material);
+                refreshUniformsCommon(m_uniforms, material);
             } else if (object.material.isPointsMaterial) {
                 // 更新uniform相关变量
-                refreshUniformsPoints(m_uniforms, object.material);
+                refreshUniformsPoints(m_uniforms, material);
             }
 
             // 将uniforms变量传送给着色器
             PGL.WebGLUniforms.upload(_gl, materialProperties.uniformsList, m_uniforms, _this);
+
+            // if (material.map) {
+            //     var gl = _gl;
+            //
+            //     var texture = gl.createTexture();
+            //     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);//对纹理图像进行y轴反转
+            //     // 开启0号纹理单元
+            //     gl.activeTexture(gl.TEXTURE0);
+            //     // 向target绑定纹理对象
+            //     gl.bindTexture(gl.TEXTURE_2D, texture);
+            //
+            //     /**配置纹理参数 CLAMP_TO_EDGE  ：纹理外填充了最边缘纹理颜色 MIRRORED_REPEAT：重复贴图**/
+            //     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+            //
+            //     // 配置纹理图像
+            //     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, material.map.image);
+            //
+            // }
         }
 
         p_uniforms.setValue(_gl, 'modelViewMatrix', object.modelViewMatrix);
@@ -1121,12 +1169,533 @@ PGL.WebGLRenderer = function (parameters) {
         if (material.color) {
             uniforms.diffuse.value = material.color;
         }
+
+        if (material.map) {
+            uniforms.map.value = material.map;
+        }
     }
 
     function refreshUniformsPoints(uniforms, material) {
         uniforms.diffuse.value = material.color;
         uniforms.size.value = material.size;
     }
+
+    // Textures
+
+    // 分配纹理单元
+    function allocTextureUnit() {
+
+        var textureUnit = _usedTextureUnits;
+
+        if (textureUnit >= capabilities.maxTextures) {
+            console.warn('THREE.WebGLRenderer: Trying to use ' + textureUnit + ' texture units while this GPU supports only ' + capabilities.maxTextures);
+        }
+
+        _usedTextureUnits += 1;
+
+        return textureUnit;
+    }
+
+    this.allocTextureUnit = allocTextureUnit;
+
+    // this.setTexture2D = setTexture2D;
+    this.setTexture2D = (function () {
+
+        var warned = false;
+
+        // backwards compatibility: peel texture.texture
+        /**
+         * texture
+         * slot：纹理通道
+         */
+        return function setTexture2D(texture, slot) {
+            if (texture && texture.isWebGLRenderTarget) {
+                if (!warned) {
+                    console.warn("THREE.WebGLRenderer.setTexture2D: don't use render targets as textures. Use their .texture property instead.");
+                    warned = true;
+                }
+                texture = texture.texture;
+            }
+            textures.setTexture2D(texture, slot);
+        };
+    }());
+};
+
+/**
+ * 工具类
+ * @param gl 上下文
+ * @param extensions 获取扩展方法的对象
+ * @param capabilities
+ * @return {{convert: convert}}
+ * @constructor
+ */
+PGL.WebGLUtils = function (gl, extensions, capabilities) {
+
+    /**
+     * 根据three中的常量，返回webgl中对应的常量
+     * @param p
+     * @returns {GLenum|number|*|GLenum|number|*|number|GLenum}
+     */
+    function convert(p) {
+
+        var extension;
+
+        if (p === PGL.RepeatWrapping) return gl.REPEAT;
+        if (p === PGL.ClampToEdgeWrapping) return gl.CLAMP_TO_EDGE;
+        if (p === PGL.MirroredRepeatWrapping) return gl.MIRRORED_REPEAT;
+
+        if (p === PGL.NearestFilter) return gl.NEAREST;
+        if (p === PGL.NearestMipMapNearestFilter) return gl.NEAREST_MIPMAP_NEAREST;
+        if (p === PGL.NearestMipMapLinearFilter) return gl.NEAREST_MIPMAP_LINEAR;
+
+        if (p === PGL.LinearFilter) return gl.LINEAR;
+        if (p === PGL.LinearMipMapNearestFilter) return gl.LINEAR_MIPMAP_NEAREST;
+        if (p === PGL.LinearMipMapLinearFilter) return gl.LINEAR_MIPMAP_LINEAR;
+
+        if (p === PGL.UnsignedByteType) return gl.UNSIGNED_BYTE;
+        if (p === PGL.UnsignedShort4444Type) return gl.UNSIGNED_SHORT_4_4_4_4;
+        if (p === PGL.UnsignedShort5551Type) return gl.UNSIGNED_SHORT_5_5_5_1;
+        if (p === PGL.UnsignedShort565Type) return gl.UNSIGNED_SHORT_5_6_5;
+
+        if (p === PGL.ByteType) return gl.BYTE;
+        if (p === PGL.ShortType) return gl.SHORT;
+        if (p === PGL.UnsignedShortType) return gl.UNSIGNED_SHORT;
+        if (p === PGL.IntType) return gl.INT;
+        if (p === PGL.UnsignedIntType) return gl.UNSIGNED_INT;
+        if (p === PGL.FloatType) return gl.FLOAT;
+
+        if (p === PGL.HalfFloatType) {
+
+            if ( capabilities.isWebGL2 ) return gl.HALF_FLOAT;
+
+            extension = extensions.get('OES_texture_half_float');
+
+            if (extension !== null) return extension.HALF_FLOAT_OES;
+
+        }
+
+        if (p === PGL.AlphaFormat) return gl.ALPHA;
+        if (p === PGL.RGBFormat) return gl.RGB;
+        if (p === PGL.RGBAFormat) return gl.RGBA;
+        if (p === PGL.LuminanceFormat) return gl.LUMINANCE;
+        if (p === PGL.LuminanceAlphaFormat) return gl.LUMINANCE_ALPHA;
+        if (p === PGL.DepthFormat) return gl.DEPTH_COMPONENT;
+        if (p === PGL.DepthStencilFormat) return gl.DEPTH_STENCIL;
+        if ( p === PGL.RedFormat ) return gl.RED;
+
+        if (p === PGL.AddEquation) return gl.FUNC_ADD;
+        if (p === PGL.SubtractEquation) return gl.FUNC_SUBTRACT;
+        if (p === PGL.ReverseSubtractEquation) return gl.FUNC_REVERSE_SUBTRACT;
+
+        if (p === PGL.ZeroFactor) return gl.ZERO;
+        if (p === PGL.OneFactor) return gl.ONE;
+        if (p === PGL.SrcColorFactor) return gl.SRC_COLOR;
+        if (p === PGL.OneMinusSrcColorFactor) return gl.ONE_MINUS_SRC_COLOR;
+        if (p === PGL.SrcAlphaFactor) return gl.SRC_ALPHA;
+        if (p === PGL.OneMinusSrcAlphaFactor) return gl.ONE_MINUS_SRC_ALPHA;
+        if (p === PGL.DstAlphaFactor) return gl.DST_ALPHA;
+        if (p === PGL.OneMinusDstAlphaFactor) return gl.ONE_MINUS_DST_ALPHA;
+
+        if (p === PGL.DstColorFactor) return gl.DST_COLOR;
+        if (p === PGL.OneMinusDstColorFactor) return gl.ONE_MINUS_DST_COLOR;
+        if (p === PGL.SrcAlphaSaturateFactor) return gl.SRC_ALPHA_SATURATE;
+
+        if (p === PGL.RGB_S3TC_DXT1_Format || p === PGL.RGBA_S3TC_DXT1_Format ||
+            p === PGL.RGBA_S3TC_DXT3_Format || p === PGL.RGBA_S3TC_DXT5_Format) {
+
+            extension = extensions.get('WEBGL_compressed_texture_s3tc');
+
+            if (extension !== null) {
+
+                if (p === PGL.RGB_S3TC_DXT1_Format) return extension.COMPRESSED_RGB_S3TC_DXT1_EXT;
+                if (p === PGL.RGBA_S3TC_DXT1_Format) return extension.COMPRESSED_RGBA_S3TC_DXT1_EXT;
+                if (p === PGL.RGBA_S3TC_DXT3_Format) return extension.COMPRESSED_RGBA_S3TC_DXT3_EXT;
+                if (p === PGL.RGBA_S3TC_DXT5_Format) return extension.COMPRESSED_RGBA_S3TC_DXT5_EXT;
+
+            }
+
+        }
+
+        if (p === PGL.RGB_PVRTC_4BPPV1_Format || p === PGL.RGB_PVRTC_2BPPV1_Format ||
+            p === PGL.RGBA_PVRTC_4BPPV1_Format || p === PGL.RGBA_PVRTC_2BPPV1_Format) {
+
+            extension = extensions.get('WEBGL_compressed_texture_pvrtc');
+
+            if (extension !== null) {
+
+                if (p === PGL.RGB_PVRTC_4BPPV1_Format) return extension.COMPRESSED_RGB_PVRTC_4BPPV1_IMG;
+                if (p === PGL.RGB_PVRTC_2BPPV1_Format) return extension.COMPRESSED_RGB_PVRTC_2BPPV1_IMG;
+                if (p === PGL.RGBA_PVRTC_4BPPV1_Format) return extension.COMPRESSED_RGBA_PVRTC_4BPPV1_IMG;
+                if (p === PGL.RGBA_PVRTC_2BPPV1_Format) return extension.COMPRESSED_RGBA_PVRTC_2BPPV1_IMG;
+
+            }
+
+        }
+
+        if (p === PGL.RGB_ETC1_Format) {
+
+            extension = extensions.get('WEBGL_compressed_texture_etc1');
+
+            if (extension !== null) return extension.COMPRESSED_RGB_ETC1_WEBGL;
+
+        }
+
+        if (p === PGL.RGBA_ASTC_4x4_Format || p === PGL.RGBA_ASTC_5x4_Format || p === PGL.RGBA_ASTC_5x5_Format ||
+            p === PGL.RGBA_ASTC_6x5_Format || p === PGL.RGBA_ASTC_6x6_Format || p === PGL.RGBA_ASTC_8x5_Format ||
+            p === PGL.RGBA_ASTC_8x6_Format || p === PGL.RGBA_ASTC_8x8_Format || p === PGL.RGBA_ASTC_10x5_Format ||
+            p === PGL.RGBA_ASTC_10x6_Format || p === PGL.RGBA_ASTC_10x8_Format || p === PGL.RGBA_ASTC_10x10_Format ||
+            p === PGL.RGBA_ASTC_12x10_Format || p === PGL.RGBA_ASTC_12x12_Format) {
+
+            extension = extensions.get('WEBGL_compressed_texture_astc');
+
+            if (extension !== null) {
+
+                return p;
+
+            }
+
+        }
+
+        if (p === PGL.MinEquation || p === PGL.MaxEquation) {
+
+            if ( capabilities.isWebGL2 ) {
+
+                if ( p === PGL.MinEquation ) return gl.MIN;
+                if ( p === PGL.MaxEquation ) return gl.MAX;
+
+            }
+
+            extension = extensions.get('EXT_blend_minmax');
+
+            if (extension !== null) {
+
+                if (p === PGL.MinEquation) return extension.MIN_EXT;
+                if (p === PGL.MaxEquation) return extension.MAX_EXT;
+
+            }
+
+        }
+
+        if (p === PGL.UnsignedInt248Type) {
+
+            if ( capabilities.isWebGL2 ) return gl.UNSIGNED_INT_24_8;
+
+            extension = extensions.get('WEBGL_depth_texture');
+
+            if (extension !== null) return extension.UNSIGNED_INT_24_8_WEBGL;
+
+        }
+
+        return 0;
+
+    }
+
+    return {convert: convert};
+
+};
+
+/**
+ * 和贴图相关的方法属性
+ * @param _gl
+ * @param extensions
+ * @param state
+ * @param properties
+ * @param capabilities
+ * @param utils 辅助类
+ * @param info
+ * @constructor
+ */
+PGL.WebGLTextures = function (_gl, extensions, state, properties, capabilities, utils, info) {
+
+    var _canvas;
+    /**
+     * 限制图片的大小
+     * @param image
+     * @param maxSize
+     * @returns {HTMLElement|*}
+     */
+    function clampToMaxSize( image, maxSize ) {
+
+        if ( image.width > maxSize || image.height > maxSize ) {
+
+            if ( 'data' in image ) {
+
+                console.warn( 'THREE.WebGLRenderer: image in DataTexture is too big (' + image.width + 'x' + image.height + ').' );
+                return;
+
+            }
+
+            // Warning: Scaling through the canvas will only work with images that use
+            // premultiplied alpha.
+
+            var scale = maxSize / Math.max( image.width, image.height );
+
+            var canvas = document.createElementNS( 'http://www.w3.org/1999/xhtml', 'canvas' );
+            canvas.width = Math.floor( image.width * scale );
+            canvas.height = Math.floor( image.height * scale );
+
+            var context = canvas.getContext( '2d' );
+            context.drawImage( image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height );
+
+            console.warn( 'THREE.WebGLRenderer: image is too big (' + image.width + 'x' + image.height + '). Resized to ' + canvas.width + 'x' + canvas.height );
+
+            return canvas;
+
+        }
+
+        return image;
+
+    }
+
+    function isPowerOfTwo( image ) {
+
+        return PGL._Math.isPowerOfTwo( image.width ) && PGL._Math.isPowerOfTwo( image.height );
+
+    }
+
+    function setTexture2D(texture, slot) {
+
+        var textureProperties = properties.get(texture);
+
+        if (texture.version > 0 && textureProperties.__version !== texture.version) {
+
+            var image = texture.image;
+
+            if (image === undefined) {
+                console.warn('THREE.WebGLRenderer: Texture marked for update but image is undefined');
+            }
+            else if (image.complete === false) {
+                console.warn('THREE.WebGLRenderer: Texture marked for update but image is incomplete');
+            }
+            else {
+                uploadTexture(textureProperties, texture, slot);
+                return;
+            }
+        }
+
+        state.activeTexture(_gl.TEXTURE0 + slot);
+        state.bindTexture(_gl.TEXTURE_2D, textureProperties.__webglTexture);
+    }
+
+    function textureNeedsPowerOfTwo( texture ) {
+
+        if ( capabilities.isWebGL2 ) return false;
+
+        return ( texture.wrapS !== PGL.ClampToEdgeWrapping || texture.wrapT !== PGL.ClampToEdgeWrapping ) ||
+            ( texture.minFilter !== PGL.NearestFilter && texture.minFilter !== PGL.LinearFilter );
+
+    }
+
+    function makePowerOfTwo( image ) {
+
+        if ( image instanceof HTMLImageElement || image instanceof HTMLCanvasElement || image instanceof ImageBitmap ) {
+
+            if ( _canvas === undefined ) _canvas = document.createElementNS( 'http://www.w3.org/1999/xhtml', 'canvas' );
+
+            _canvas.width = PGL._Math.floorPowerOfTwo( image.width );
+            _canvas.height = PGL._Math.floorPowerOfTwo( image.height );
+
+            var context = _canvas.getContext( '2d' );
+            context.drawImage( image, 0, 0, _canvas.width, _canvas.height );
+
+            console.warn( 'THREE.WebGLRenderer: image is not power of two (' + image.width + 'x' + image.height + '). Resized to ' + _canvas.width + 'x' + _canvas.height );
+
+            return _canvas;
+
+        }
+
+        return image;
+
+    }
+
+    function getInternalFormat( glFormat, glType ) {
+
+        if ( ! capabilities.isWebGL2 ) return glFormat;
+
+        if ( glFormat === 6403 ) {
+
+            if ( glType === 5126 ) return 33326;
+            if ( glType === 5131 ) return 33325;
+            if ( glType === 5121 ) return 33321;
+
+        }
+
+        if ( glFormat === 6407 ) {
+
+            if ( glType === 5126 ) return 34837;
+            if ( glType === 5131 ) return 34843;
+            if ( glType === 5121 ) return 32849;
+
+        }
+
+        if ( glFormat === 6408 ) {
+
+            if ( glType === 5126 ) return 34836;
+            if ( glType === 5131 ) return 34842;
+            if ( glType === 5121 ) return 32856;
+
+        }
+
+        return glFormat;
+
+    }
+
+    // Fallback filters for non-power-of-2 textures
+    function filterFallback( f ) {
+
+        if ( f === PGL.NearestFilter || f === PGL.NearestMipMapNearestFilter || f === PGL.NearestMipMapLinearFilter ) {
+            return 9728;
+        }
+        return 9729;
+    }
+
+    /**
+     * 设置纹理参数
+     * @param textureType
+     * @param texture
+     * @param isPowerOfTwoImage
+     */
+    function setTextureParameters( textureType, texture, isPowerOfTwoImage ) {
+
+        var extension;
+
+        if ( isPowerOfTwoImage ) {
+
+            _gl.texParameteri( textureType, 10242, utils.convert( texture.wrapS ) );
+            _gl.texParameteri( textureType, 10243, utils.convert( texture.wrapT ) );
+
+            _gl.texParameteri( textureType, 10240, utils.convert( texture.magFilter ) );
+            _gl.texParameteri( textureType, 10241, utils.convert( texture.minFilter ) );
+
+        } else {
+
+            _gl.texParameteri( textureType, 10242, 33071 );
+            _gl.texParameteri( textureType, 10243, 33071 );
+
+            if ( texture.wrapS !== PGL.ClampToEdgeWrapping || texture.wrapT !== PGL.ClampToEdgeWrapping ) {
+
+                console.warn( 'THREE.WebGLRenderer: Texture is not power of two. Texture.wrapS and Texture.wrapT should be set to THREE.ClampToEdgeWrapping.' );
+
+            }
+
+            _gl.texParameteri( textureType, 10240, filterFallback( texture.magFilter ) );
+            _gl.texParameteri( textureType, 10241, filterFallback( texture.minFilter ) );
+
+            if ( texture.minFilter !== PGL.NearestFilter && texture.minFilter !== PGL.LinearFilter ) {
+
+                console.warn( 'THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter should be set to THREE.NearestFilter or THREE.LinearFilter.' );
+
+            }
+
+        }
+
+        extension = extensions.get( 'EXT_texture_filter_anisotropic' );
+
+        if ( extension ) {
+
+            if ( texture.type === PGL.FloatType && extensions.get( 'OES_texture_float_linear' ) === null ) return;
+            if ( texture.type === PGL.HalfFloatType && ( capabilities.isWebGL2 || extensions.get( 'OES_texture_half_float_linear' ) ) === null ) return;
+
+            if ( texture.anisotropy > 1 || properties.get( texture ).__currentAnisotropy ) {
+
+                _gl.texParameterf( textureType, extension.TEXTURE_MAX_ANISOTROPY_EXT, Math.min( texture.anisotropy, capabilities.getMaxAnisotropy() ) );
+                properties.get( texture ).__currentAnisotropy = texture.anisotropy;
+
+            }
+
+        }
+
+    }
+
+    /**
+     *
+     * @param textureProperties
+     * @param texture
+     * @param slot：纹理单元
+     */
+    function uploadTexture(textureProperties, texture, slot) {
+
+        var textureType; // 纹理类型
+
+        if (texture.isDataTexture3D) {
+            textureType = 32879;
+        } else {
+            textureType = 3553;// _gl.TEXTURE_2D
+        }
+
+        if (textureProperties.__webglInit === undefined) {
+            textureProperties.__webglInit = true;
+            // texture.addEventListener( 'dispose', onTextureDispose );
+            textureProperties.__webglTexture = _gl.createTexture();
+            // info.memory.textures ++;
+        }
+
+        state.activeTexture(33984 + slot);
+        // 向target绑定纹理对象
+        state.bindTexture(textureType, textureProperties.__webglTexture);
+
+        _gl.pixelStorei(37440, texture.flipY); //对纹理图像进行y轴反转
+        _gl.pixelStorei(37441, texture.premultiplyAlpha); // 将Alpha通道与其他颜色通道相乘
+        _gl.pixelStorei(3317, texture.unpackAlignment); // 从内存中解包像素数据。
+
+        var image = clampToMaxSize( texture.image, capabilities.maxTextureSize );
+
+        if ( textureNeedsPowerOfTwo( texture ) && isPowerOfTwo( image ) === false ) {
+            image = makePowerOfTwo( image );
+        }
+
+        var isPowerOfTwoImage = isPowerOfTwo( image ),
+            glFormat = utils.convert( texture.format ),
+            glType = utils.convert( texture.type ),
+            glInternalFormat = getInternalFormat( glFormat, glType );
+
+        setTextureParameters( textureType, texture, isPowerOfTwoImage );
+
+        var mipmap, mipmaps = texture.mipmaps;
+
+        if ( texture.isDepthTexture ) {}
+        else if ( texture.isDataTexture ) {}
+        else if ( texture.isCompressedTexture ) {}
+        else if ( texture.isDataTexture3D ) {}
+        else {
+
+            // regular Texture (image, video, canvas)
+
+            // use manually created mipmaps if available
+            // if there are no manual mipmaps
+            // set 0 level mipmap and then use GL to generate other mipmap levels
+
+            if ( mipmaps.length > 0 && isPowerOfTwoImage ) {
+
+                for ( var i = 0, il = mipmaps.length; i < il; i ++ ) {
+
+                    mipmap = mipmaps[ i ];
+                    state.texImage2D( 3553, i, glInternalFormat, glFormat, glType, mipmap );
+
+                }
+
+                texture.generateMipmaps = false;
+                textureProperties.__maxMipLevel = mipmaps.length - 1;
+
+            } else {
+                // 配置纹理图像
+                state.texImage2D( 3553, 0, glInternalFormat, glFormat, glType, image );
+                textureProperties.__maxMipLevel = 0;
+            }
+        }
+
+        // if ( textureNeedsGenerateMipmaps( texture, isPowerOfTwoImage ) ) {
+        //
+        //     generateMipmap( 3553, texture, image.width, image.height );
+        //
+        // }
+
+        textureProperties.__version = texture.version;
+
+        // if ( texture.onUpdate ) texture.onUpdate( texture );
+    }
+
+    this.setTexture2D = setTexture2D;
 };
 
 /**
@@ -1164,6 +1733,36 @@ PGL.WebGLState = function (gl) {
 
     var currentProgram = null; // 当前使用的着色器程序
 
+    var maxTextures = gl.getParameter(gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS); // 获取最大的纹理单元
+
+    var currentTextureSlot = null;// 当前激活的纹理单元
+    var currentBoundTextures = {}; // 当前绑定的纹理对象
+
+    /**
+     * 创建纹理贴图
+     * @param type
+     * @param target
+     * @param count
+     * @returns {WebGLTexture}
+     */
+    function createTexture(type, target, count) {
+
+        var data = new Uint8Array(4); // 4 is required to match default unpack alignment of 4.
+        var texture = gl.createTexture();
+
+        gl.bindTexture(type, texture);
+        gl.texParameteri(type, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+        gl.texParameteri(type, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+
+        for (var i = 0; i < count; i++) {
+            gl.texImage2D(target + i, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, data);
+        }
+        return texture;
+    }
+
+    var emptyTextures = {};
+    emptyTextures[gl.TEXTURE_2D] = createTexture(gl.TEXTURE_2D, gl.TEXTURE_2D, 1);
+
     colorBuffer.setClear(0, 0, 0, 1);
 
     // 初始化newAttributes为0
@@ -1171,6 +1770,20 @@ PGL.WebGLState = function (gl) {
         for (var i = 0, l = newAttributes.length; i < l; i++) {
             newAttributes[i] = 0;
         }
+    }
+
+    function texImage2D() {
+
+        try {
+
+            gl.texImage2D.apply( gl, arguments );
+
+        } catch ( error ) {
+
+            console.error( 'THREE.WebGLState:', error );
+
+        }
+
     }
 
     /**
@@ -1220,6 +1833,46 @@ PGL.WebGLState = function (gl) {
         return false;
     }
 
+    // texture
+
+    // 开启对应的纹理单元
+    function activeTexture(webglSlot) {
+
+        if (webglSlot === undefined) webglSlot = gl.TEXTURE0 + maxTextures - 1;
+
+        if (currentTextureSlot !== webglSlot) {
+            gl.activeTexture(webglSlot);
+            currentTextureSlot = webglSlot;
+        }
+    }
+
+    /**
+     * 向target绑定纹理对象
+     * @param webglType 绑定的纹理目标
+     * @param webglTexture 纹理贴图
+     */
+    function bindTexture(webglType, webglTexture) {
+
+        if (currentTextureSlot === null) {
+            activeTexture();
+        }
+
+        var boundTexture = currentBoundTextures[currentTextureSlot];
+
+        if (boundTexture === undefined) {
+            boundTexture = {type: undefined, texture: undefined};
+            currentBoundTextures[currentTextureSlot] = boundTexture;
+        }
+
+        if (boundTexture.type !== webglType || boundTexture.texture !== webglTexture) {
+
+            gl.bindTexture(webglType, webglTexture || emptyTextures[webglType]);
+
+            boundTexture.type = webglType;
+            boundTexture.texture = webglTexture;
+        }
+    }
+
     return {
         buffers: {
             color: colorBuffer
@@ -1230,7 +1883,11 @@ PGL.WebGLState = function (gl) {
         enableAttributeAndDivisor: enableAttributeAndDivisor,
         enable: enable,
 
-        useProgram: useProgram
+        useProgram: useProgram,
+
+        activeTexture: activeTexture,
+        bindTexture: bindTexture,
+        texImage2D:texImage2D
     }
 };
 /**
@@ -1260,7 +1917,18 @@ PGL.WebGLPrograms = function (renderer, extensions, capabilities, textures) {
         PointsMaterial: 'points'
     };
 
-    this.getParameters = function (object) {
+    /**
+     * 获取参数标记
+     * @param material 材质对象
+     * @param lights
+     * @param shadows
+     * @param fog
+     * @param nClipPlanes
+     * @param nClipIntersection
+     * @param object
+     * @return {{shaderID: *, precision, supportsVertexTextures, outputEncoding, map: boolean, mapEncoding, matcap: boolean, matcapEncoding, envMap: boolean, envMapMode: *, envMapEncoding, envMapCubeUV: boolean, lightMap: boolean, aoMap: boolean, emissiveMap: boolean, emissiveMapEncoding, bumpMap: boolean, normalMap: boolean, objectSpaceNormalMap: boolean, displacementMap: boolean, roughnessMap: boolean, metalnessMap: boolean, specularMap: boolean, alphaMap: boolean, gradientMap: boolean, combine, vertexColors, fog: boolean, useFog, fogExp: *|boolean, flatShading, sizeAttenuation, logarithmicDepthBuffer: *, skinning: boolean, maxBones: *, useVertexTexture, morphTargets, morphNormals, maxMorphTargets: *|number, maxMorphNormals: *|number, numDirLights: number, numPointLights, numSpotLights: number, numRectAreaLights: number, numHemiLights: number, numClippingPlanes: *, numClipIntersection: *, dithering, shadowMapEnabled: boolean|*, shadowMapType: *, toneMapping, physicallyCorrectLights: *|boolean, premultipliedAlpha, alphaTest, doubleSided: boolean, flipSided: boolean, depthPacking: boolean}}
+     */
+    this.getParameters = function (material, lights, shadows, fog, nClipPlanes, nClipIntersection, object) {
         var shaderID = shaderIDs[object.material.type];
 
         var precision = capabilities.precision;
@@ -1268,7 +1936,8 @@ PGL.WebGLPrograms = function (renderer, extensions, capabilities, textures) {
         var parameters = {
             shaderID: shaderID,
 
-            precision: precision
+            precision: precision,
+            map: !!material.map
         };
 
         return parameters;
@@ -1353,7 +2022,14 @@ PGL.WebGLProgram = function (renderer, extensions, code, material, shader, param
             'precision ' + parameters.precision + ' int;',
 
             '#define SHADER_NAME ' + shader.name,
+
+            parameters.map ? '#define USE_MAP' : '',
+
             'uniform mat4 modelViewMatrix;',
+
+            'attribute vec4 position;',
+            'attribute vec2 uv;',
+
             '\n'
 
         ].filter(filterEmptyLine).join('\n');
@@ -1364,6 +2040,9 @@ PGL.WebGLProgram = function (renderer, extensions, code, material, shader, param
             'precision ' + parameters.precision + ' int;',
 
             '#define SHADER_NAME ' + shader.name,
+
+            parameters.map ? '#define USE_MAP' : '',
+
             '\n'
 
         ].filter(filterEmptyLine).join('\n');

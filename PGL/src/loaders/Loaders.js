@@ -1,5 +1,45 @@
 var PGL = PGL || {};
 
+PGL.Cache = {
+
+	enabled: false,
+
+	files: {},
+
+	add: function ( key, file ) {
+
+		if ( this.enabled === false ) return;
+
+		// console.log( 'THREE.Cache', 'Adding key:', key );
+
+		this.files[ key ] = file;
+
+	},
+
+	get: function ( key ) {
+
+		if ( this.enabled === false ) return;
+
+		// console.log( 'THREE.Cache', 'Checking key:', key );
+
+		return this.files[ key ];
+
+	},
+
+	remove: function ( key ) {
+
+		delete this.files[ key ];
+
+	},
+
+	clear: function () {
+
+		this.files = {};
+
+	}
+
+};
+
 PGL.LoadingManager = function( onLoad, onProgress, onError ) {
 
 	var scope = this;
@@ -121,23 +161,23 @@ Object.assign( PGL.ImageLoader.prototype, {
 
 		var scope = this;
 
-		// var cached = Cache.get( url );
-		//
-		// if ( cached !== undefined ) {
-		//
-		// 	scope.manager.itemStart( url );
-		//
-		// 	setTimeout( function () {
-		//
-		// 		if ( onLoad ) onLoad( cached );
-		//
-		// 		scope.manager.itemEnd( url );
-		//
-		// 	}, 0 );
-		//
-		// 	return cached;
-		//
-		// }
+		var cached = PGL.Cache.get( url );
+
+		if ( cached !== undefined ) {
+
+			scope.manager.itemStart( url );
+
+			setTimeout( function () {
+
+				if ( onLoad ) onLoad( cached );
+
+				scope.manager.itemEnd( url );
+
+			}, 0 );
+
+			return cached;
+
+		}
 
 		var image = document.createElementNS( 'http://www.w3.org/1999/xhtml', 'img' );
 
@@ -146,7 +186,7 @@ Object.assign( PGL.ImageLoader.prototype, {
 			image.removeEventListener( 'load', onImageLoad, false );
 			image.removeEventListener( 'error', onImageError, false );
 
-			// Cache.add( url, this );
+			PGL.Cache.add( url, this );
 
 			if ( onLoad ) onLoad( this );
 
@@ -180,7 +220,6 @@ Object.assign( PGL.ImageLoader.prototype, {
 		image.src = url;
 
 		return image;
-
 	},
 
 	setCrossOrigin: function ( value ) {
@@ -199,7 +238,11 @@ Object.assign( PGL.ImageLoader.prototype, {
 
 } );
 
-
+/**
+ * 加载贴图
+ * @param manager
+ * @constructor
+ */
 PGL.TextureLoader = function( manager ) {
 	this.manager = ( manager !== undefined ) ? manager : PGL.DefaultLoadingManager;
 };

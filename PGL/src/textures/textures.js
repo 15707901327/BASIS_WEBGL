@@ -33,8 +33,9 @@ PGL.Texture = function( image, mapping, wrapS, wrapT, magFilter, minFilter, form
     this.matrix = new PGL.Matrix3();
 
     this.generateMipmaps = true;
-    this.premultiplyAlpha = false;
-    this.flipY = true;
+    this.premultiplyAlpha = false; // 将Alpha通道与其他颜色通道相乘
+    this.flipY = true; // 贴图进行y轴翻转
+    // 从内存中解包像素数据。
     this.unpackAlignment = 4;	// valid values: 1, 2, 4, 8 (see http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml)
 
     // Values of encoding !== THREE.LinearEncoding only supported on map, envMap and emissiveMap.

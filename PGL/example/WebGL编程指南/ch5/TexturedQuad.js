@@ -1,21 +1,61 @@
+// var VSHADER_SOURCE =
+//   'attribute vec4 a_Position;\n' +
+//   'attribute vec2 a_TexCoord;\n' +
+//   'varying vec2 v_TexCoord;\n' +
+//   'void main() {\n' +
+//   '  gl_Position = a_Position;\n' +
+//   '  v_TexCoord = a_TexCoord;\n' +
+//   '}\n';
+
 var VSHADER_SOURCE =
-  'attribute vec4 a_Position;\n' +
-  'attribute vec2 a_TexCoord;\n' +
-  'varying vec2 v_TexCoord;\n' +
+    'precision highp float;\n' +
+    'precision highp int;\n' +
+    '#define SHADER_NAME MeshPhongMaterial\n' +
+    '#define USE_MAP\n' +
+  'attribute vec4 position;\n' +
+  'attribute vec2 uv;\n' +
+    '#if defined(USE_MAP)\n' +
+    '   varying vec2 vUv;\n' +
+    '#endif\n' +
   'void main() {\n' +
-  '  gl_Position = a_Position;\n' +
-  '  v_TexCoord = a_TexCoord;\n' +
+    '  gl_Position = position;\n' +
+    '   #if defined( USE_MAP )\n' +
+    '       vUv = uv;\n' +
+    '   #endif\n' +
   '}\n';
 
 // Fragment shader program 片元着色器
+// var FSHADER_SOURCE =
+//   '#ifdef GL_ES\n' +
+//   'precision mediump float;\n' +
+//   '#endif\n' +
+//   'uniform sampler2D u_Sampler;\n' +
+//   'varying vec2 v_TexCoord;\n' +
+//   'void main() {\n' +
+//   '  gl_FragColor = texture2D(u_Sampler, v_TexCoord);\n' +
+//   '}\n';
+
+// Fragment shader program 片元着色器
 var FSHADER_SOURCE =
-  '#ifdef GL_ES\n' +
-  'precision mediump float;\n' +
-  '#endif\n' +
-  'uniform sampler2D u_Sampler;\n' +
-  'varying vec2 v_TexCoord;\n' +
+    'precision highp float;\n' +
+    'precision highp int;\n' +
+    '#define SHADER_NAME MeshPhongMaterial\n' +
+    '#ifdef USE_MAP\n' +
+    '   uniform sampler2D map;\n' +
+    '#endif\n' +
+    '#define USE_MAP\n' +
+    'uniform vec3 diffuse;\n' +
+  'uniform sampler2D map;\n' +
+    '#if defined( USE_MAP )\n' +
+    '   varying vec2 vUv;\n' +
+    '#endif\n' +
   'void main() {\n' +
-  '  gl_FragColor = texture2D(u_Sampler, v_TexCoord);\n' +
+    '   vec4 diffuseColor = vec4(0.0,1.0,1.0,1.0);\n' +
+    '   #ifdef USE_MAP\n' +
+    '       vec4 texelColor = texture2D( map, vUv );\n' +
+    '       diffuseColor = texelColor;\n' +
+    '   #endif\n' +
+  '     gl_FragColor = diffuseColor;\n' +
   '}\n';
 
 function main(){
@@ -50,16 +90,16 @@ function main(){
     gl.bufferData(gl.ARRAY_BUFFER, verticesTexCoords, gl.STATIC_DRAW);
 
     var FSIZE = verticesTexCoords.BYTES_PER_ELEMENT;
-    var a_Position = gl.getAttribLocation(progrom, "a_Position");
+    var a_Position = gl.getAttribLocation(progrom, "position");
     gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, FSIZE * 4, 0);
     gl.enableVertexAttribArray(a_Position);
 
-    var a_TexCoord = gl.getAttribLocation(progrom, "a_TexCoord");
+    var a_TexCoord = gl.getAttribLocation(progrom, "uv");
     gl.vertexAttribPointer(a_TexCoord, 2, gl.FLOAT, false, FSIZE * 4, FSIZE * 2);
     gl.enableVertexAttribArray(a_TexCoord);
 
     var texture = gl.createTexture();
-    var u_Sampler = gl.getUniformLocation(progrom, "u_Sampler");
+    var u_Sampler = gl.getUniformLocation(progrom, "map");
     var image = new Image();
     image.onload = function () {
 
@@ -70,7 +110,7 @@ function main(){
         gl.bindTexture(gl.TEXTURE_2D, texture);
 
         /**配置纹理参数 CLAMP_TO_EDGE  ：纹理外填充了最边缘纹理颜色 MIRRORED_REPEAT：重复贴图**/
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
         // 配置纹理图像
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
 
@@ -81,6 +121,7 @@ function main(){
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);//绘制矩形
     };
     image.src = '../resources/sky.jpg';
+    // image.src = '../resources/parasol.jpg';
 }
 
 window.onload = function (ev) {
@@ -113,12 +154,16 @@ window.onload = function (ev) {
     bufferGeometry.addAttribute('position', new PGL.Float32BufferAttribute(positions, 3));
     bufferGeometry.addAttribute('uv', new PGL.Float32BufferAttribute(uvs, 2));
 
-    var texture = new PGL.TextureLoader().load( 'textures/land_ocean_ice_cloud_2048.jpg' );
-    var meshPhongMaterial = new PGL.MeshPhongMaterial({
-        map:texture
+    var meshPhongMaterial = new PGL.MeshPhongMaterial();
+    var textureLoader = new PGL.TextureLoader();
+    textureLoader.load('../resources/parasol.jpg',function (texture) {
+        texture.minFilter = PGL.LinearFilter;
+        meshPhongMaterial.map = texture;
+        meshPhongMaterial.needsUpdate = true;
     });
 
     var mesh = new PGL.Mesh(bufferGeometry, meshPhongMaterial);
+    mesh.drawMode = PGL.TriangleStripDrawMode;
     scene.add(mesh);
 
     var ANGLE_STEP = 45;

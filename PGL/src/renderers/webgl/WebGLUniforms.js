@@ -1,73 +1,18 @@
 // Helper to pick the right setter for the singular case
-var mat4array = new Float32Array( 16 );
 
-/**
- * 得到数据的传输类型
- * @param type
- * @return {*}
- */
-function getSingularSetter(type) {
+var emptyTexture = new PGL.Texture();
 
-    switch (type) {
+var mat4array = new Float32Array(16);
+var mat3array = new Float32Array(9);
+var mat2array = new Float32Array(4);
 
-        case 0x1406:
-            return setValue1f; // FLOAT
-        case 0x8b50:
-            return setValue2fv; // _VEC2
-        case 0x8b51:
-            return setValue3fv; // _VEC3
-        case 0x8b52:
-            return setValue4fv; // _VEC4
+function arraysEqual(a, b) {
 
-        case 0x8b5a:
-            return setValue2fm; // _MAT2
-        case 0x8b5b:
-            return setValue3fm; // _MAT3
-        case 0x8b5c:
-            return setValue4fm; // _MAT4
+    if (a.length !== b.length) return false;
 
-        case 0x8b5e:
-        case 0x8d66:
-            return setValueT1; // SAMPLER_2D, SAMPLER_EXTERNAL_OES
-        case 0x8B5F:
-            return setValueT3D1; // SAMPLER_3D
-        case 0x8b60:
-            return setValueT6; // SAMPLER_CUBE
+    for (var i = 0, l = a.length; i < l; i++) {
 
-        case 0x1404:
-        case 0x8b56:
-            return setValue1i; // INT, BOOL
-        case 0x8b53:
-        case 0x8b57:
-            return setValue2iv; // _VEC2
-        case 0x8b54:
-        case 0x8b58:
-            return setValue3iv; // _VEC3
-        case 0x8b55:
-        case 0x8b59:
-            return setValue4iv; // _VEC4
-
-    }
-
-}
-
-function copyArray( a, b ) {
-
-    for ( var i = 0, l = b.length; i < l; i ++ ) {
-
-        a[ i ] = b[ i ];
-
-    }
-
-}
-
-function arraysEqual( a, b ) {
-
-    if ( a.length !== b.length ) return false;
-
-    for ( var i = 0, l = a.length; i < l; i ++ ) {
-
-        if ( a[ i ] !== b[ i ] ) return false;
+        if (a[i] !== b[i]) return false;
 
     }
 
@@ -75,28 +20,11 @@ function arraysEqual( a, b ) {
 
 }
 
-function setValue4fm( gl, v ) {
+function copyArray(a, b) {
 
-    var cache = this.cache;
-    var elements = v.elements;
+    for (var i = 0, l = b.length; i < l; i++) {
 
-    if ( elements === undefined ) {
-
-        if ( arraysEqual( cache, v ) ) return;
-
-        gl.uniformMatrix4fv( this.addr, false, v );
-
-        copyArray( cache, v );
-
-    } else {
-
-        if ( arraysEqual( cache, elements ) ) return;
-
-        mat4array.set( elements );
-
-        gl.uniformMatrix4fv( this.addr, false, mat4array );
-
-        copyArray( cache, elements );
+        a[i] = b[i];
 
     }
 
@@ -154,6 +82,102 @@ function setValue3fv(gl, v) {
         gl.uniform3fv(this.addr, v);
 
         copyArray(cache, v);
+
+    }
+
+}
+function setValue4fm(gl, v) {
+
+    var cache = this.cache;
+    var elements = v.elements;
+
+    if (elements === undefined) {
+
+        if (arraysEqual(cache, v)) return;
+
+        gl.uniformMatrix4fv(this.addr, false, v);
+
+        copyArray(cache, v);
+
+    } else {
+
+        if (arraysEqual(cache, elements)) return;
+
+        mat4array.set(elements);
+
+        gl.uniformMatrix4fv(this.addr, false, mat4array);
+
+        copyArray(cache, elements);
+
+    }
+
+}
+// Single texture (2D / Cube)
+
+function setValueT1( gl, v, renderer ) {
+
+    var cache = this.cache;
+    var unit = renderer.allocTextureUnit();
+
+    if ( cache[ 0 ] !== unit ) {
+
+        // 将纹理传递给取样器
+        gl.uniform1i( this.addr, unit );
+        cache[ 0 ] = unit;
+
+    }
+
+    renderer.setTexture2D( v || emptyTexture, unit );
+
+}
+
+/**
+ * 得到数据的传输类型
+ * @param type
+ * @return {*}
+ */
+function getSingularSetter(type) {
+
+    switch (type) {
+
+        case 0x1406:
+            return setValue1f; // FLOAT
+        case 0x8b50:
+            return setValue2fv; // _VEC2
+        case 0x8b51:
+            return setValue3fv; // _VEC3
+        case 0x8b52:
+            return setValue4fv; // _VEC4
+
+        case 0x8b5a:
+            return setValue2fm; // _MAT2
+        case 0x8b5b:
+            return setValue3fm; // _MAT3
+        case 0x8b5c:
+            return setValue4fm; // _MAT4
+
+        case 0x8b5e:
+        case 0x8d66:
+            return setValueT1; // SAMPLER_2D, SAMPLER_EXTERNAL_OES
+        case 0x8b5f:
+            return setValueT3D1; // SAMPLER_3D
+        case 0x8b60:
+            return setValueT6; // SAMPLER_CUBE
+        case 0x8DC1:
+            return setValueT2DArray1; // SAMPLER_2D_ARRAY
+
+        case 0x1404:
+        case 0x8b56:
+            return setValue1i; // INT, BOOL
+        case 0x8b53:
+        case 0x8b57:
+            return setValue2iv; // _VEC2
+        case 0x8b54:
+        case 0x8b58:
+            return setValue3iv; // _VEC3
+        case 0x8b55:
+        case 0x8b59:
+            return setValue4iv; // _VEC4
 
     }
 
@@ -455,11 +479,11 @@ PGL.WebGLUniforms = function (gl, program) {
  * @param name
  * @param value
  */
-PGL.WebGLUniforms.prototype.setValue = function ( gl, name, value , textures) {
+PGL.WebGLUniforms.prototype.setValue = function (gl, name, value, textures) {
 
-    var u = this.map[ name ];
+    var u = this.map[name];
 
-    if ( u !== undefined ) u.setValue( gl, value, textures );
+    if (u !== undefined) u.setValue(gl, value, textures);
 
 };
 

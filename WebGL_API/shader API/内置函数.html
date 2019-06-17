@@ -12,7 +12,6 @@
       <li><a href="#vec4">vec4 vec4()</a></li>
       <li><a href="#exp">指数函数</a></li>
       <li><a href="#dot">几何函数</a></li>
-      <li><a href="#clamp">通用函数</a></li>
       <li><a href="#acos">角度和三角函数</a></li>
       <li>
         <a href="#texture">纹理查询函数</a>
@@ -21,6 +20,11 @@
         </ul>
       </li>
       <li><a href="#typeConversion">类型转换函数</a></li>
+    </ul>
+    <h4><a href="#common">通用函数</a></h4>
+    <ul class="ul-1">
+      <li><a href="#mix">mix()</a></li>
+      <li><a href="#smoothstep">smoothstep()</a></li>
     </ul>
   </div>
   <div class="right">
@@ -85,7 +89,7 @@
         </table>
       </div>
     </section>
-    <section id="clamp" class="section1">
+    <section id="common" class="section1">
       <div class="title">通用函数</div>
       <div class="content">
         <table border="1">
@@ -150,21 +154,6 @@
             </td>
             <td>返回最大值，即如果x《y则返回y，否则返回x。注意对于矢量而言，这是一个逐分量的运算。</td>
           </tr>
-          <tr>
-            <td>
-              float mix(float x, float y,float a);<br>
-              vec2 mix(vec2 x, vec2 y,float a);<br>
-              vec3 mix(vec3 x, vec3 y,float a);<br>
-              vec4 mix(vec4 x, vec4 y,float a);<br>
-              vec2 mix(vec2 x, float y,vec2 a);<br>
-              vec3 mix(vec3 x, float y,vec3 a);<br>
-              vec4 mix(vec4 x, float y,vec4 a);<br>
-              vec2 mix(vec2 x, vec2 y,vec2 a);<br>
-              vec3 mix(vec3 x, vec3 y,vec3 a);<br>
-              vec4 mix(vec4 x, vec4 y,vec4 a);<br>
-            </td>
-            <td>返回x和y的线性混合，即x*(1-a)+y*a</td>
-          </tr>
         </table>
       </div>
       <section id="mix">
@@ -197,6 +186,57 @@
             </td>
           </tr>
         </table>
+      </section>
+      <section id="smoothstep">
+        <h4>smoothstep()</h4>
+        <p>给定三个值min，max和input，函数将返回0到1之间的数字，表示输入值与最小值和最大值的关系。</p>
+        <div class="content">
+          <strong>语法：</strong>
+          <table border="1">
+            <tr>
+              <th>语法</th>
+              <th>描述</th>
+            </tr>
+            <tr>
+              <td>
+                float smoothstep(float edge0, float edge1,float x);<br>
+                vec2 smoothstep(vec2 edge0, vec2 edge1,vec2 x);<br>
+                vec3 smoothstep(vec3 edge0, vec3 edge1,vec3 x);<br>
+                vec4 smoothstep(vec4 edge0, vec4 edge1,vec4 x);
+              </td>
+              <td>
+                经过Hermite插值的阶梯函数。<br/>
+                如果x <= edge0 则返回0.0，<br/>
+                如果x >= edg1 1.0,<br/>
+                否则按照如下方法插值出一个值并返回<br/>
+                genType t;<br/>
+                t = clamp((x - edge0)/(edg1 - edg0),0,1);<br/>
+                return t*t(3-2*t);<br/>
+                如果edge0 >= edge1 则返回未定义<br/>
+              </td>
+            </tr>
+          </table>
+          <strong>实例：</strong>
+          <div>
+            <p>假设最大值、最小值是0.3、0.6，输入值为0.4、0.8，输出值为0.35、1.0</p>
+            <div class="divLeft">
+              <p>smoothstep(0.3, 0.6, 0.4);</p>
+              <p>returns 0.35</p>
+              <br/>
+              <p>smoothstep(0.3, 0.6, 0.8);</p>
+              <p>returns 1.0</p>
+            </div>
+            <div>
+              <img src="img/basic_smoothstep.gif">
+            </div>
+            <strong>实例1</strong>
+            <ul class="ul-1-num">
+              <li><a href="../../WebGL编程指南/ch3/HelloQuad_smoothstep.html">平滑过渡</a></li>
+              <li><a href="../../WebGL编程指南/ch3/HelloQuad_smoothstep2.html">平滑过渡</a></li>
+              <li><a href="../../WebGL编程指南/ch3/HelloQuad_smoothstep3.html">平滑过渡</a></li>
+            </ul>
+          </div>
+        </div>
       </section>
     </section>
     <section id="acos">

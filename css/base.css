@@ -81,6 +81,10 @@ ul {
     min-height: 929px;
 }
 
+.divLeft{
+    float: left;
+    margin: 20px 20px 20px 0;
+}
 .section1 {
     margin-top: 20px;
     border-top: 1px dashed burlywood;

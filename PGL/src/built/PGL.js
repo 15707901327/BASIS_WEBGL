@@ -68,10 +68,21 @@ var meshphong_vert =
     "#if defined(USE_MAP)\n" +
     "   varying vec2 vUv;\n" +
     "#endif\n" +
+
+    "#ifdef USE_COLOR\n" +
+    "   attribute vec3 color;\n" +
+    "   varying vec3 vColor;\n" +
+    "#endif\n" +
+
     "void main(){\n" +
     "   #if defined( USE_MAP )\n" +
     "       vUv = uv;\n" +
     "   #endif\n" +
+
+    "   #ifdef USE_COLOR\n" +
+    "       vColor.xyz = color.xyz;\n" +
+    "   #endif\n" +
+
     " vec4 mvPosition = modelViewMatrix * position; //设置坐标\n" +
     " gl_Position = mvPosition; //设置坐标\n" +
     "}";
@@ -86,13 +97,21 @@ var meshphong_frag =
     "   uniform sampler2D map;\n" +
     "#endif\n" +
 
+    "#ifdef USE_COLOR\n" +
+    "   varying vec3 vColor;\n" +
+    "#endif\n" +
+
     "void main() {\n" +
     "   vec4 diffuseColor = vec4(diffuse,1.0);\n" +
 
-    "#ifdef USE_MAP\n" +
-    "   vec4 texelColor = texture2D( map, vUv );\n" +
-    "   diffuseColor = texelColor;\n" +
-    "#endif\n" +
+    "   #ifdef USE_MAP\n" +
+    "       vec4 texelColor = texture2D( map, vUv );\n" +
+    "       diffuseColor = texelColor;\n" +
+    "   #endif\n" +
+
+    "   #ifdef USE_COLOR\n" +
+    "       diffuseColor.rgb *= vColor;\n" +
+    "   #endif\n" +
 
     "   gl_FragColor = diffuseColor;\n" +
     "}";
@@ -564,6 +583,8 @@ PGL.Material = function () {
     this.type = 'Material';
 
     this.userData = {};
+
+    this.vertexColors = PGL.NoColors; // THREE.NoColors, THREE.VertexColors, THREE.FaceColors
 
     this.needsUpdate = true; // 设置是否需要修改材质
 };
@@ -1937,7 +1958,8 @@ PGL.WebGLPrograms = function (renderer, extensions, capabilities, textures) {
             shaderID: shaderID,
 
             precision: precision,
-            map: !!material.map
+            map: !!material.map,
+            vertexColors: material.vertexColors
         };
 
         return parameters;
@@ -2024,6 +2046,7 @@ PGL.WebGLProgram = function (renderer, extensions, code, material, shader, param
             '#define SHADER_NAME ' + shader.name,
 
             parameters.map ? '#define USE_MAP' : '',
+            parameters.vertexColors ? '#define USE_COLOR' : '',
 
             'uniform mat4 modelViewMatrix;',
 
@@ -2042,6 +2065,7 @@ PGL.WebGLProgram = function (renderer, extensions, code, material, shader, param
             '#define SHADER_NAME ' + shader.name,
 
             parameters.map ? '#define USE_MAP' : '',
+            parameters.vertexColors ? '#define USE_COLOR' : '',
 
             '\n'
 

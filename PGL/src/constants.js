@@ -2,6 +2,10 @@
 var PGL = {
     REVISION: 1, // 版本
 
+    NoColors: 0, // 不使用颜色
+    FaceColors: 1, // 面颜色
+    VertexColors: 2, // 顶点颜色
+
     TrianglesDrawMode: 0, // 绘制三角形
     TriangleStripDrawMode: 1, // 带状的三角形
     TriangleFanDrawMode: 2,// 扇形的图形

@@ -10,7 +10,6 @@
   <div class="left">
     <ul class="ul-1">
       <li><a href="#vec4">vec4 vec4()</a></li>
-      <li><a href="#exp">指数函数</a></li>
       <li><a href="#dot">几何函数</a></li>
       <li><a href="#acos">角度和三角函数</a></li>
       <li>
@@ -21,6 +20,7 @@
       </li>
       <li><a href="#typeConversion">类型转换函数</a></li>
     </ul>
+    <h4><a href="#exponential">指数函数</a></h4>
     <h4><a href="#common">通用函数</a></h4>
     <ul class="ul-1">
       <li><a href="#mix">mix()</a></li>
@@ -69,13 +69,22 @@
         </table>
       </div>
     </section>
-    <section id="exp">
-      <h4>指数函数</h4>
+    <section id="exponential" class="section1">
+      <div class="title">指数函数</div>
       <div class="content">
         <table border="1">
           <tr>
             <th>语法</th>
             <th>描述</th>
+          </tr>
+          <tr>
+            <td>
+              float pow(float x,float y);<br>
+              vec2 pow(vec2 x,vec2 y);<br>
+              vec3 pow(vec3 x,vec3 y);<br>
+              vec4 pow(vec4 x,vec4 y);<br>
+            </td>
+            <td>返回x的y次幂，即x^y，如果x < 0,则返回未定义值。如果x = 0而y < 0 ,则返回未定义值。注意对于矢量而言，这是一个逐分量的运算。</td>
           </tr>
           <tr>
             <td>

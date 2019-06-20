@@ -83,7 +83,7 @@ var meshphong_vert =
     "       vColor.xyz = color.xyz;\n" +
     "   #endif\n" +
 
-    " vec4 mvPosition = modelViewMatrix * position; //设置坐标\n" +
+    " vec4 mvPosition = projectionMatrix * modelViewMatrix * position; //设置坐标\n" +
     " gl_Position = mvPosition; //设置坐标\n" +
     "}";
 var meshphong_frag =
@@ -202,6 +202,214 @@ PGL.ShaderLib = {
     }
 };
 
+/**
+ * 由六个平面组成的锥体
+ * @param p0
+ * @param p1
+ * @param p2
+ * @param p3
+ * @param p4
+ * @param p5
+ * @constructor
+ */
+PGL.Frustum = function (p0, p1, p2, p3, p4, p5) {
+
+    this.planes = [
+
+        (p0 !== undefined) ? p0 : new PGL.Plane(),
+        (p1 !== undefined) ? p1 : new PGL.Plane(),
+        (p2 !== undefined) ? p2 : new PGL.Plane(),
+        (p3 !== undefined) ? p3 : new PGL.Plane(),
+        (p4 !== undefined) ? p4 : new PGL.Plane(),
+        (p5 !== undefined) ? p5 : new PGL.Plane()
+
+    ];
+
+};
+Object.assign(PGL.Frustum.prototype, {
+
+    set: function (p0, p1, p2, p3, p4, p5) {
+
+        var planes = this.planes;
+
+        planes[0].copy(p0);
+        planes[1].copy(p1);
+        planes[2].copy(p2);
+        planes[3].copy(p3);
+        planes[4].copy(p4);
+        planes[5].copy(p5);
+
+        return this;
+
+    },
+
+    clone: function () {
+
+        return new this.constructor().copy(this);
+
+    },
+
+    copy: function (frustum) {
+
+        var planes = this.planes;
+
+        for (var i = 0; i < 6; i++) {
+
+            planes[i].copy(frustum.planes[i]);
+
+        }
+
+        return this;
+
+    },
+
+    /**
+     * WebGLRenderer使用它来从Camera的projectionMatrix和matrixWorldInverse设置Frustum。
+     * @param m
+     * @return {setFromMatrix}
+     */
+    setFromMatrix: function (m) {
+
+        var planes = this.planes;
+        var me = m.elements;
+        var me0 = me[0], me1 = me[1], me2 = me[2], me3 = me[3];
+        var me4 = me[4], me5 = me[5], me6 = me[6], me7 = me[7];
+        var me8 = me[8], me9 = me[9], me10 = me[10], me11 = me[11];
+        var me12 = me[12], me13 = me[13], me14 = me[14], me15 = me[15];
+
+        planes[0].setComponents(me3 - me0, me7 - me4, me11 - me8, me15 - me12).normalize();
+        planes[1].setComponents(me3 + me0, me7 + me4, me11 + me8, me15 + me12).normalize();
+        planes[2].setComponents(me3 + me1, me7 + me5, me11 + me9, me15 + me13).normalize();
+        planes[3].setComponents(me3 - me1, me7 - me5, me11 - me9, me15 - me13).normalize();
+        planes[4].setComponents(me3 - me2, me7 - me6, me11 - me10, me15 - me14).normalize();
+        planes[5].setComponents(me3 + me2, me7 + me6, me11 + me10, me15 + me14).normalize();
+
+        return this;
+
+    },
+
+    /**
+     * 检查对象的边界球是否与Frustum相交。
+     * 请注意，对象必须具有Geometry或BufferGeometry，以便可以计算边界球。
+     */
+    intersectsObject: function () {
+
+        var sphere = new PGL.Sphere();
+
+        return function intersectsObject(object) {
+
+            var geometry = object.geometry;
+
+            if (geometry.boundingSphere === null)
+                geometry.computeBoundingSphere();
+
+            sphere.copy(geometry.boundingSphere)
+                .applyMatrix4(object.matrixWorld);
+
+            return this.intersectsSphere(sphere);
+
+        };
+
+    }(),
+
+    /**
+     * 检查精灵是否与Frustum相交
+     */
+    intersectsSprite: function () {
+
+        var sphere = new PGL.Sphere();
+
+        return function intersectsSprite(sprite) {
+
+            sphere.center.set(0, 0, 0);
+            sphere.radius = 0.7071067811865476;
+            sphere.applyMatrix4(sprite.matrixWorld);
+
+            return this.intersectsSphere(sphere);
+
+        };
+
+    }(),
+
+    /**
+     * 如果球体与此平截头体相交，则返回true。
+     * @param sphere
+     * @return {boolean}
+     */
+    intersectsSphere: function (sphere) {
+
+        var planes = this.planes;
+        var center = sphere.center;
+        var negRadius = -sphere.radius;
+
+        for (var i = 0; i < 6; i++) {
+
+            var distance = planes[i].distanceToPoint(center);
+
+            if (distance < negRadius) {
+
+                return false;
+
+            }
+
+        }
+
+        return true;
+
+    },
+
+    intersectsBox: function () {
+
+        var p = new Vector3();
+
+        return function intersectsBox(box) {
+
+            var planes = this.planes;
+
+            for (var i = 0; i < 6; i++) {
+
+                var plane = planes[i];
+
+                // corner at max distance
+
+                p.x = plane.normal.x > 0 ? box.max.x : box.min.x;
+                p.y = plane.normal.y > 0 ? box.max.y : box.min.y;
+                p.z = plane.normal.z > 0 ? box.max.z : box.min.z;
+
+                if (plane.distanceToPoint(p) < 0) {
+
+                    return false;
+
+                }
+
+            }
+
+            return true;
+
+        };
+
+    }(),
+
+    containsPoint: function (point) {
+
+        var planes = this.planes;
+
+        for (var i = 0; i < 6; i++) {
+
+            if (planes[i].distanceToPoint(point) < 0) {
+
+                return false;
+
+            }
+
+        }
+
+        return true;
+
+    }
+
+});
+
 var object3DId = 0;
 PGL.Object3D = function () {
 
@@ -209,6 +417,9 @@ PGL.Object3D = function () {
 
     this.parent = null;
     this.children = [];
+
+    // 上方向
+    this.up = PGL.Object3D.DefaultUp.clone();
 
     this.visible = true;
 
@@ -227,13 +438,18 @@ PGL.Object3D = function () {
             enumerable: true,
             value: quaternion
         },
-        modelViewMatrix: {
-            value: new PGL.Matrix4()
-        },
         scale: {
             configurable: true,
             enumerable: true,
             value: scale
+        },
+        // 模型视图矩阵
+        modelViewMatrix: {
+            value: new PGL.Matrix4()
+        },
+        // 法线矩阵
+        normalMatrix: {
+            value: new PGL.Matrix3()
         }
     });
 
@@ -242,6 +458,11 @@ PGL.Object3D = function () {
 
     this.matrixAutoUpdate = PGL.Object3D.DefaultMatrixAutoUpdate;
     this.matrixWorldNeedsUpdate = false;
+
+    this.layers = new PGL.Layers(); // 图层
+    this.visible = true; // 是否显示
+
+    this.frustumCulled = true; // 标记是否检查物体在可视范围之内，默认检查 true
 
     this.userData = {};
 };
@@ -494,10 +715,412 @@ PGL.Object3D.prototype = {
 
         }
 
-    }
+    },
+    /**
+     * 更新rotation、quaternion
+     * 接受的参数可以是一个THREE.Vector3类型，也可以是三个x\y\z类型
+     */
+    lookAt: function () {
+
+        // This method does not support objects having non-uniformly-scaled parent(s)
+
+        var q1 = new PGL.Quaternion();
+        var m1 = new PGL.Matrix4();
+        var target = new PGL.Vector3();
+        var position = new PGL.Vector3();
+
+        return function lookAt(x, y, z) {
+
+            if (x.isVector3) {
+
+                target.copy(x);
+
+            } else {
+
+                target.set(x, y, z);
+
+            }
+
+            var parent = this.parent;
+
+            this.updateWorldMatrix(true, false);
+
+            position.setFromMatrixPosition(this.matrixWorld);
+
+            if (this.isCamera || this.isLight) {
+
+                m1.lookAt(position, target, this.up);
+
+            } else {
+
+                m1.lookAt(target, position, this.up);
+
+            }
+
+            this.quaternion.setFromRotationMatrix(m1);
+
+            if (parent) {
+
+                m1.extractRotation(parent.matrixWorld);
+                q1.setFromRotationMatrix(m1);
+                this.quaternion.premultiply(q1.inverse());
+
+            }
+
+        };
+
+    }(),
+    updateWorldMatrix: function (updateParents, updateChildren) {
+
+        var parent = this.parent;
+
+        if (updateParents === true && parent !== null) {
+
+            parent.updateWorldMatrix(true, false);
+
+        }
+
+        if (this.matrixAutoUpdate) this.updateMatrix();
+
+        if (this.parent === null) {
+
+            this.matrixWorld.copy(this.matrix);
+
+        } else {
+
+            this.matrixWorld.multiplyMatrices(this.parent.matrixWorld, this.matrix);
+
+        }
+
+        // update children
+
+        if (updateChildren === true) {
+
+            var children = this.children;
+
+            for (var i = 0, l = children.length; i < l; i++) {
+
+                children[i].updateWorldMatrix(false, true);
+
+            }
+
+        }
+
+    },
 };
 PGL.Object3D.DefaultUp = new PGL.Vector3(0, 1, 0); // 默认上方向
 PGL.Object3D.DefaultMatrixAutoUpdate = true; // 默认更新值
+
+// 相机
+PGL.Camera = function () {
+
+    PGL.Object3D.call(this);
+
+    this.type = 'Camera';
+
+    this.matrixWorldInverse = new PGL.Matrix4(); // 相机位置矩阵的倒数矩阵
+    this.projectionMatrix = new PGL.Matrix4(); // 投影矩阵
+    this.projectionMatrixInverse = new PGL.Matrix4();
+
+};
+PGL.Camera.prototype = Object.assign(Object.create(PGL.Object3D.prototype), {
+
+    constructor: PGL.Camera,
+
+    isCamera: true,
+
+    copy: function (source, recursive) {
+
+        PGL.Object3D.prototype.copy.call(this, source, recursive);
+
+        this.matrixWorldInverse.copy(source.matrixWorldInverse);
+        this.projectionMatrix.copy(source.projectionMatrix);
+        this.projectionMatrixInverse.copy(source.projectionMatrixInverse);
+
+        return this;
+
+    },
+
+    getWorldDirection: function (target) {
+
+        if (target === undefined) {
+
+            console.warn('THREE.Camera: .getWorldDirection() target is now required');
+            target = new Vector3();
+
+        }
+
+        this.updateMatrixWorld(true);
+
+        var e = this.matrixWorld.elements;
+
+        return target.set(-e[8], -e[9], -e[10]).normalize();
+
+    },
+
+    /**
+     * 更新相机以及相机子类的本地和世界坐标矩阵
+     * 设置matrixWorld的倒数矩阵matrixWorldInverse
+     * @param force
+     */
+    updateMatrixWorld: function (force) {
+
+        PGL.Object3D.prototype.updateMatrixWorld.call(this, force);
+
+        this.matrixWorldInverse.getInverse(this.matrixWorld);
+
+    },
+
+    clone: function () {
+
+        return new this.constructor().copy(this);
+
+    }
+
+});
+
+/**
+ * 投影相机对象
+ * @param fov
+ * @param aspect
+ * @param near
+ * @param far
+ * @constructor
+ */
+PGL.PerspectiveCamera = function (fov, aspect, near, far) {
+
+    PGL.Camera.call(this);
+
+    this.type = 'PerspectiveCamera';
+
+    this.fov = fov !== undefined ? fov : 50;
+    this.zoom = 1;
+
+    this.near = near !== undefined ? near : 0.1;
+    this.far = far !== undefined ? far : 2000;
+    this.focus = 10;
+
+    this.aspect = aspect !== undefined ? aspect : 1;
+    this.view = null;
+
+    this.filmGauge = 35;	// width of the film (default in millimeters)
+    this.filmOffset = 0;	// horizontal film offset (same unit as gauge)
+
+    // 初始化投影矩阵
+    this.updateProjectionMatrix();
+
+};
+PGL.PerspectiveCamera.prototype = Object.assign(Object.create(PGL.Camera.prototype), {
+
+    constructor: PGL.PerspectiveCamera,
+
+    isPerspectiveCamera: true,
+
+    copy: function (source, recursive) {
+
+        PGL.Camera.prototype.copy.call(this, source, recursive);
+
+        this.fov = source.fov;
+        this.zoom = source.zoom;
+
+        this.near = source.near;
+        this.far = source.far;
+        this.focus = source.focus;
+
+        this.aspect = source.aspect;
+        this.view = source.view === null ? null : Object.assign({}, source.view);
+
+        this.filmGauge = source.filmGauge;
+        this.filmOffset = source.filmOffset;
+
+        return this;
+
+    },
+
+    /**
+     * Sets the FOV by focal length in respect to the current .filmGauge.
+     *
+     * The default film gauge is 35, so that the focal length can be specified for
+     * a 35mm (full frame) camera.
+     *
+     * Values for focal length and film gauge must have the same unit.
+     */
+    setFocalLength: function (focalLength) {
+
+        // see http://www.bobatkins.com/photography/technical/field_of_view.html
+        var vExtentSlope = 0.5 * this.getFilmHeight() / focalLength;
+
+        this.fov = _Math.RAD2DEG * 2 * Math.atan(vExtentSlope);
+        this.updateProjectionMatrix();
+
+    },
+
+    /**
+     * Calculates the focal length from the current .fov and .filmGauge.
+     */
+    getFocalLength: function () {
+
+        var vExtentSlope = Math.tan(_Math.DEG2RAD * 0.5 * this.fov);
+
+        return 0.5 * this.getFilmHeight() / vExtentSlope;
+
+    },
+
+    getEffectiveFOV: function () {
+
+        return _Math.RAD2DEG * 2 * Math.atan(
+            Math.tan(_Math.DEG2RAD * 0.5 * this.fov) / this.zoom);
+
+    },
+
+    getFilmWidth: function () {
+
+        // film not completely covered in portrait format (aspect < 1)
+        return this.filmGauge * Math.min(this.aspect, 1);
+
+    },
+
+    getFilmHeight: function () {
+
+        // film not completely covered in landscape format (aspect > 1)
+        return this.filmGauge / Math.max(this.aspect, 1);
+
+    },
+
+    /**
+     * Sets an offset in a larger frustum. This is useful for multi-window or
+     * multi-monitor/multi-machine setups.
+     *
+     * For example, if you have 3x2 monitors and each monitor is 1920x1080 and
+     * the monitors are in grid like this
+     *
+     *   +---+---+---+
+     *   | A | B | C |
+     *   +---+---+---+
+     *   | D | E | F |
+     *   +---+---+---+
+     *
+     * then for each monitor you would call it like this
+     *
+     *   var w = 1920;
+     *   var h = 1080;
+     *   var fullWidth = w * 3;
+     *   var fullHeight = h * 2;
+     *
+     *   --A--
+     *   camera.setViewOffset( fullWidth, fullHeight, w * 0, h * 0, w, h );
+     *   --B--
+     *   camera.setViewOffset( fullWidth, fullHeight, w * 1, h * 0, w, h );
+     *   --C--
+     *   camera.setViewOffset( fullWidth, fullHeight, w * 2, h * 0, w, h );
+     *   --D--
+     *   camera.setViewOffset( fullWidth, fullHeight, w * 0, h * 1, w, h );
+     *   --E--
+     *   camera.setViewOffset( fullWidth, fullHeight, w * 1, h * 1, w, h );
+     *   --F--
+     *   camera.setViewOffset( fullWidth, fullHeight, w * 2, h * 1, w, h );
+     *
+     *   Note there is no reason monitors have to be the same size or in a grid.
+     */
+    setViewOffset: function (fullWidth, fullHeight, x, y, width, height) {
+
+        this.aspect = fullWidth / fullHeight;
+
+        if (this.view === null) {
+
+            this.view = {
+                enabled: true,
+                fullWidth: 1,
+                fullHeight: 1,
+                offsetX: 0,
+                offsetY: 0,
+                width: 1,
+                height: 1
+            };
+
+        }
+
+        this.view.enabled = true;
+        this.view.fullWidth = fullWidth;
+        this.view.fullHeight = fullHeight;
+        this.view.offsetX = x;
+        this.view.offsetY = y;
+        this.view.width = width;
+        this.view.height = height;
+
+        this.updateProjectionMatrix();
+
+    },
+
+    clearViewOffset: function () {
+
+        if (this.view !== null) {
+
+            this.view.enabled = false;
+
+        }
+
+        this.updateProjectionMatrix();
+
+    },
+
+    /**
+     * 根据给定值计算top，height，width，left等值，并调用方法设置投影矩阵
+     */
+    updateProjectionMatrix: function () {
+
+        var near = this.near,
+            top = near * Math.tan(
+                PGL._Math.DEG2RAD * 0.5 * this.fov) / this.zoom,
+            height = 2 * top,
+            width = this.aspect * height,
+            left = -0.5 * width,
+            view = this.view;
+
+        if (this.view !== null && this.view.enabled) {
+
+            var fullWidth = view.fullWidth,
+                fullHeight = view.fullHeight;
+
+            left += view.offsetX * width / fullWidth;
+            top -= view.offsetY * height / fullHeight;
+            width *= view.width / fullWidth;
+            height *= view.height / fullHeight;
+
+        }
+
+        var skew = this.filmOffset;
+        if (skew !== 0) left += near * skew / this.getFilmWidth();
+
+        this.projectionMatrix.makePerspective(left, left + width, top, top - height, near, this.far);
+
+        this.projectionMatrixInverse.getInverse(this.projectionMatrix);
+
+    },
+
+    toJSON: function (meta) {
+
+        var data = Object3D.prototype.toJSON.call(this, meta);
+
+        data.object.fov = this.fov;
+        data.object.zoom = this.zoom;
+
+        data.object.near = this.near;
+        data.object.far = this.far;
+        data.object.focus = this.focus;
+
+        data.object.aspect = this.aspect;
+
+        if (this.view !== null) data.object.view = Object.assign({}, this.view);
+
+        data.object.filmGauge = this.filmGauge;
+        data.object.filmOffset = this.filmOffset;
+
+        return data;
+
+    }
+
+});
 
 // 场景
 PGL.Scene = function () {
@@ -551,6 +1174,10 @@ PGL.BufferGeometry = function () {
     Object.defineProperty(this, 'id', {value: bufferGeometryId += 2});
 
     this.attributes = {}; // 保存属性信息
+    this.morphAttributes = {};
+
+    this.boundingBox = null; // 包围盒子
+    this.boundingSphere = null; // 包围球
 };
 Object.assign(PGL.BufferGeometry.prototype, {
 
@@ -567,7 +1194,92 @@ Object.assign(PGL.BufferGeometry.prototype, {
     addAttribute: function (name, attribute) {
         this.attributes[name] = attribute;
         return this;
-    }
+    },
+
+    /**
+     * 计算模型的最小包围球的大小
+     */
+    computeBoundingSphere: function () {
+
+        var box = new PGL.Box3();
+        var boxMorphTargets = new PGL.Box3();
+        var vector = new PGL.Vector3();
+
+        return function computeBoundingSphere() {
+
+            if (this.boundingSphere === null) {
+                this.boundingSphere = new PGL.Sphere();
+            }
+
+            var position = this.attributes.position;
+            var morphAttributesPosition = this.morphAttributes.position;
+
+            if (position) {
+
+                // first, find the center of the bounding sphere
+
+                var center = this.boundingSphere.center;
+
+                box.setFromBufferAttribute(position);
+
+                // process morph attributes if present
+                if (morphAttributesPosition) {
+
+                    for (var i = 0, il = morphAttributesPosition.length; i < il; i++) {
+
+                        var morphAttribute = morphAttributesPosition[i];
+                        boxMorphTargets.setFromBufferAttribute(morphAttribute);
+
+                        box.expandByPoint(boxMorphTargets.min);
+                        box.expandByPoint(boxMorphTargets.max);
+
+                    }
+
+                }
+
+                box.getCenter(center);
+
+                // second, try to find a boundingSphere with a radius smaller than the
+                // boundingSphere of the boundingBox: sqrt(3) smaller in the best case
+                // 获取最大半径的平方
+                var maxRadiusSq = 0;
+
+                for (var i = 0, il = position.count; i < il; i++) {
+                    vector.fromBufferAttribute(position, i);
+                    maxRadiusSq = Math.max(maxRadiusSq, center.distanceToSquared(vector));
+                }
+
+                // process morph attributes if present
+
+                if (morphAttributesPosition) {
+
+                    for (var i = 0, il = morphAttributesPosition.length; i < il; i++) {
+
+                        var morphAttribute = morphAttributesPosition[i];
+
+                        for (var j = 0, jl = morphAttribute.count; j < jl; j++) {
+
+                            vector.fromBufferAttribute(morphAttribute, j);
+
+                            maxRadiusSq = Math.max(maxRadiusSq, center.distanceToSquared(vector));
+
+                        }
+
+                    }
+
+                }
+
+                this.boundingSphere.radius = Math.sqrt(maxRadiusSq);
+
+                if (isNaN(this.boundingSphere.radius)) {
+                    console.error('THREE.BufferGeometry.computeBoundingSphere(): Computed radius is NaN. The "position" attribute is likely to have NaN values.', this);
+                }
+
+            }
+
+        };
+
+    }()
 });
 
 var geometryId = 0; // Geometry uses even numbers as Id
@@ -582,9 +1294,11 @@ PGL.Material = function () {
     this.name = '';
     this.type = 'Material';
 
-    this.userData = {};
-
     this.vertexColors = PGL.NoColors; // THREE.NoColors, THREE.VertexColors, THREE.FaceColors
+
+    this.visible = true;
+
+    this.userData = {};
 
     this.needsUpdate = true; // 设置是否需要修改材质
 };
@@ -704,9 +1418,310 @@ PGL.BufferAttribute = function (array, itemSize, normalized) {
 
     this.version = 0; // 版本
 };
+Object.defineProperty(PGL.BufferAttribute.prototype, 'needsUpdate', {
+    set: function (value) {
+        if (value === true) this.version++;
+    }
+});
+Object.assign(PGL.BufferAttribute.prototype, {
+
+    isBufferAttribute: true,
+
+    onUploadCallback: function () {
+    },
+
+    setArray: function (array) {
+
+        if (Array.isArray(array)) {
+
+            throw new TypeError('THREE.BufferAttribute: array should be a Typed Array.');
+
+        }
+
+        this.count = array !== undefined ? array.length / this.itemSize : 0;
+        this.array = array;
+
+        return this;
+
+    },
+
+    setDynamic: function (value) {
+
+        this.dynamic = value;
+
+        return this;
+
+    },
+
+    copy: function (source) {
+
+        this.name = source.name;
+        this.array = new source.array.constructor(source.array);
+        this.itemSize = source.itemSize;
+        this.count = source.count;
+        this.normalized = source.normalized;
+
+        this.dynamic = source.dynamic;
+
+        return this;
+
+    },
+
+    copyAt: function (index1, attribute, index2) {
+
+        index1 *= this.itemSize;
+        index2 *= attribute.itemSize;
+
+        for (var i = 0, l = this.itemSize; i < l; i++) {
+
+            this.array[index1 + i] = attribute.array[index2 + i];
+
+        }
+
+        return this;
+
+    },
+
+    copyArray: function (array) {
+
+        this.array.set(array);
+
+        return this;
+
+    },
+
+    copyColorsArray: function (colors) {
+
+        var array = this.array, offset = 0;
+
+        for (var i = 0, l = colors.length; i < l; i++) {
+
+            var color = colors[i];
+
+            if (color === undefined) {
+
+                console.warn('THREE.BufferAttribute.copyColorsArray(): color is undefined', i);
+                color = new Color();
+
+            }
+
+            array[offset++] = color.r;
+            array[offset++] = color.g;
+            array[offset++] = color.b;
+
+        }
+
+        return this;
+
+    },
+
+    copyVector2sArray: function (vectors) {
+
+        var array = this.array, offset = 0;
+
+        for (var i = 0, l = vectors.length; i < l; i++) {
+
+            var vector = vectors[i];
+
+            if (vector === undefined) {
+
+                console.warn('THREE.BufferAttribute.copyVector2sArray(): vector is undefined', i);
+                vector = new Vector2();
+
+            }
+
+            array[offset++] = vector.x;
+            array[offset++] = vector.y;
+
+        }
+
+        return this;
+
+    },
+
+    copyVector3sArray: function (vectors) {
+
+        var array = this.array, offset = 0;
+
+        for (var i = 0, l = vectors.length; i < l; i++) {
+
+            var vector = vectors[i];
+
+            if (vector === undefined) {
+
+                console.warn('THREE.BufferAttribute.copyVector3sArray(): vector is undefined', i);
+                vector = new Vector3();
+
+            }
+
+            array[offset++] = vector.x;
+            array[offset++] = vector.y;
+            array[offset++] = vector.z;
+
+        }
+
+        return this;
+
+    },
+
+    copyVector4sArray: function (vectors) {
+
+        var array = this.array, offset = 0;
+
+        for (var i = 0, l = vectors.length; i < l; i++) {
+
+            var vector = vectors[i];
+
+            if (vector === undefined) {
+
+                console.warn('THREE.BufferAttribute.copyVector4sArray(): vector is undefined', i);
+                vector = new Vector4();
+
+            }
+
+            array[offset++] = vector.x;
+            array[offset++] = vector.y;
+            array[offset++] = vector.z;
+            array[offset++] = vector.w;
+
+        }
+
+        return this;
+
+    },
+
+    set: function (value, offset) {
+
+        if (offset === undefined) offset = 0;
+
+        this.array.set(value, offset);
+
+        return this;
+
+    },
+
+    getX: function (index) {
+        return this.array[index * this.itemSize];
+    },
+
+    setX: function (index, x) {
+
+        this.array[index * this.itemSize] = x;
+
+        return this;
+
+    },
+
+    getY: function (index) {
+
+        return this.array[index * this.itemSize + 1];
+
+    },
+
+    setY: function (index, y) {
+
+        this.array[index * this.itemSize + 1] = y;
+
+        return this;
+
+    },
+
+    getZ: function (index) {
+
+        return this.array[index * this.itemSize + 2];
+
+    },
+
+    setZ: function (index, z) {
+
+        this.array[index * this.itemSize + 2] = z;
+
+        return this;
+
+    },
+
+    getW: function (index) {
+
+        return this.array[index * this.itemSize + 3];
+
+    },
+
+    setW: function (index, w) {
+
+        this.array[index * this.itemSize + 3] = w;
+
+        return this;
+
+    },
+
+    setXY: function (index, x, y) {
+
+        index *= this.itemSize;
+
+        this.array[index + 0] = x;
+        this.array[index + 1] = y;
+
+        return this;
+
+    },
+
+    setXYZ: function (index, x, y, z) {
+
+        index *= this.itemSize;
+
+        this.array[index + 0] = x;
+        this.array[index + 1] = y;
+        this.array[index + 2] = z;
+
+        return this;
+
+    },
+
+    setXYZW: function (index, x, y, z, w) {
+
+        index *= this.itemSize;
+
+        this.array[index + 0] = x;
+        this.array[index + 1] = y;
+        this.array[index + 2] = z;
+        this.array[index + 3] = w;
+
+        return this;
+
+    },
+
+    onUpload: function (callback) {
+
+        this.onUploadCallback = callback;
+
+        return this;
+
+    },
+
+    clone: function () {
+
+        return new this.constructor(this.array, this.itemSize).copy(this);
+
+    },
+
+    toJSON: function () {
+
+        return {
+            itemSize: this.itemSize,
+            type: this.array.constructor.name,
+            array: Array.prototype.slice.call(this.array),
+            normalized: this.normalized
+        };
+
+    }
+
+});
+
 PGL.Float32BufferAttribute = function (array, itemSize, normalized) {
     PGL.BufferAttribute.call(this, new Float32Array(array), itemSize, normalized);
 };
+PGL.Float32BufferAttribute.prototype = Object.create(PGL.BufferAttribute.prototype);
+PGL.Float32BufferAttribute.prototype.constructor = PGL.Float32BufferAttribute;
 
 /**
  * WebGL渲染器
@@ -733,6 +1748,9 @@ PGL.WebGLRenderer = function (parameters) {
         _preserveDrawingBuffer = parameters.preserveDrawingBuffer !== undefined ? parameters.preserveDrawingBuffer : false,
         _powerPreference = parameters.powerPreference !== undefined ? parameters.powerPreference : 'default';
 
+    var currentRenderState = null; // 当前渲染状态
+    var currentRenderList = null;  // 当前渲染列表
+
     // public properties
     this.domElement = _canvas;
     this.context = null;
@@ -743,12 +1761,25 @@ PGL.WebGLRenderer = function (parameters) {
     this.autoClearDepth = true;
     this.autoClearStencil = true;
 
+    // scene graph
+    this.sortObjects = true;
+
     var _this = this,
         // 标记丢失上下文
         _isContextLost = false,
 
+        _currentCamera = null, // 当前渲染相机
+
         // 使用贴图的通道
-        _usedTextureUnits = 0;
+        _usedTextureUnits = 0,
+
+        // frustum
+        _frustum = new PGL.Frustum(),
+
+        // camera matrices cache
+        _projScreenMatrix = new PGL.Matrix4(),
+
+        _vector3 = new PGL.Vector3(); //
 
     var _gl;
     try {
@@ -791,7 +1822,7 @@ PGL.WebGLRenderer = function (parameters) {
 
     var extensions, capabilities, state;
     var properties, textures, attributes, geometries, objects;
-    var programCache, renderLists;
+    var programCache, renderLists, renderStates;
 
     var background, bufferRenderer;
     var utils;
@@ -804,7 +1835,7 @@ PGL.WebGLRenderer = function (parameters) {
         // 获取当前webgl的基础属性
         capabilities = new PGL.WebGLCapabilities(_gl, extensions, parameters);
 
-        utils = new PGL.WebGLUtils( _gl, extensions, capabilities );
+        utils = new PGL.WebGLUtils(_gl, extensions, capabilities);
 
         state = new PGL.WebGLState(_gl);
 
@@ -815,7 +1846,8 @@ PGL.WebGLRenderer = function (parameters) {
         objects = new PGL.WebGLObjects(geometries);
 
         programCache = new PGL.WebGLPrograms(_this, extensions, capabilities);
-        renderLists = PGL.WebGLRenderList();
+        renderLists = new PGL.WebGLRenderLists();
+        renderStates = new PGL.WebGLRenderStates();
 
         background = new PGL.WebGLBackground(_this, state);
 
@@ -907,9 +1939,9 @@ PGL.WebGLRenderer = function (parameters) {
     /**
      * 渲染缓存区
      */
-    this.renderBufferDirect = function (object) {
+    this.renderBufferDirect = function (camera, fog, geometry, material, object, group) {
 
-        var program = setProgram(null, null, object.material, object);
+        var program = setProgram(camera, null, object.material, object);
         program = object.material.program;
         var updateBuffers = false;
         updateBuffers = true;
@@ -1007,8 +2039,18 @@ PGL.WebGLRenderer = function (parameters) {
         }
     }
 
-    // 渲染物体
-    this.render = function (scene) {
+    /**
+     * 循环渲染物体
+     * @param scene 场景
+     * @param camera 相机
+     */
+    this.render = function (scene, camera) {
+
+        // 检查相机
+        if (!(camera && camera.isCamera)) {
+            console.error('THREE.WebGLRenderer.render: camera is not an instance of THREE.Camera.');
+            return;
+        }
 
         // 检查是否丢失上下文
         if (_isContextLost) return;
@@ -1016,52 +2058,101 @@ PGL.WebGLRenderer = function (parameters) {
         // update scene graph 更新对象的位置矩阵
         if (scene.autoUpdate === true) scene.updateMatrixWorld();
 
-        projectObject(scene);
+        // 更新相机矩阵和视锥
+        if (camera.parent === null) camera.updateMatrixWorld();
 
-        var opaqueObjects = renderLists.opaque;
+        // 获取当前渲染状态
+        currentRenderState = renderStates.get(scene, camera);
+        currentRenderState.init();
+
+        // 投影矩阵 * 视图矩阵
+        _projScreenMatrix.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
+        // 设置视锥体
+        _frustum.setFromMatrix(_projScreenMatrix);
+
+        // 初始化渲染列表
+        currentRenderList = renderLists.get(scene, camera);
+        currentRenderList.init();
+
+        projectObject(scene, camera, 0, _this.sortObjects);
+
+        var opaqueObjects = currentRenderList.opaque;
 
         // 渲染背景
         background.render(scene);
 
-        if (opaqueObjects.length) renderObjects(opaqueObjects, scene);
+        if (scene.overrideMaterial) {
+        }
+        else {
+            // opaque pass (front-to-back order)
+            if (opaqueObjects.length) renderObjects(opaqueObjects, scene, camera);
+        }
 
     };
 
     /**
      * 拆分渲染对象，解析几何体、以及几何体中的attribute变量
-     * @param object PGL.Scene
+     * @param object
+     * @param camera
+     * @param groupOrder
+     * @param sortObjects
      */
-    function projectObject(object) {
+    function projectObject(object, camera, groupOrder, sortObjects) {
         if (object.visible === false) return;
 
-        var visible = true;
+        // 根据相机判断是否显示模型
+        var visible = object.layers.test(camera.layers);
 
         if (visible) {
             if (object.isPoints || object.isMesh) {
-                // 获取bufferGeometry 获取缓存区
-                var geometry = objects.update(object);
-                var material = object.material;
 
-                renderLists.opaque.push(object);
+                // 检查物体是否在平截头体内
+                if (!object.frustumCulled || _frustum.intersectsObject(object)) {
+
+                    if (sortObjects) {
+                        _vector3.setFromMatrixPosition(object.matrixWorld)
+                            .applyMatrix4(_projScreenMatrix);
+                    }
+
+                    // 获取bufferGeometry 获取缓存区
+                    var geometry = objects.update(object);
+                    var material = object.material;
+
+                    if (Array.isArray(material)) {
+                    } else if (material.visible) {
+                        currentRenderList.push(object, geometry, material, groupOrder, _vector3.z, null);
+                    }
+                }
             }
         }
 
         var children = object.children;
 
         for (var i = 0, l = children.length; i < l; i++) {
-            projectObject(children[i]);
+            projectObject(children[i], camera, groupOrder, sortObjects);
         }
     }
 
     /**
-     * 渲染多个物体
-     * @param renderList
-     * @param scene
+     * 渲染物体
+     * @param renderList 渲染列表
+     * @param scene 场景
+     * @param camera 相机
+     * @param overrideMaterial
      */
-    function renderObjects(renderList, scene) {
+    function renderObjects(renderList, scene, camera, overrideMaterial) {
         for (var i = 0; i < renderList.length; i++) {
             var renderItem = renderList[i];
-            renderObject(renderItem, scene);
+
+            var object = renderItem.object;
+            var geometry = renderItem.geometry;
+            var material = overrideMaterial === undefined ? renderItem.material : overrideMaterial;
+            var group = renderItem.group;
+
+            if (camera.isArrayCamera) {}
+            else {
+                renderObject(object, scene, camera, geometry, material, group);
+            }
         }
     }
 
@@ -1069,12 +2160,27 @@ PGL.WebGLRenderer = function (parameters) {
      * 渲染单个物体,计算模型视图矩阵
      * @param object
      * @param scene
+     * @param camera
+     * @param geometry
+     * @param material
+     * @param group
      */
-    function renderObject(object, scene) {
-        // 计算对象的模型视图矩阵
-        object.modelViewMatrix.multiplyMatrices(new PGL.Matrix4(), object.matrixWorld);
+    function renderObject(object, scene, camera, geometry, material, group) {
 
-        _this.renderBufferDirect(object);
+        // 获取渲染状态
+        currentRenderState = renderStates.get(scene, camera);
+
+        // 计算对象的模型视图矩阵
+        object.modelViewMatrix.multiplyMatrices(camera.matrixWorldInverse, object.matrixWorld);
+        // 获取对象的法线矩阵
+        object.normalMatrix.getNormalMatrix(object.modelViewMatrix);
+
+        if (object.isImmediateRenderObject) {}
+        else {
+            _this.renderBufferDirect(camera, scene.fog, geometry, material, object, group);
+        }
+
+        currentRenderState = renderStates.get(scene,camera);
     }
 
     /**
@@ -1138,6 +2244,7 @@ PGL.WebGLRenderer = function (parameters) {
             material.needsUpdate = false;
         }
 
+        var refreshProgram = false;
         var refreshMaterial = false;
 
         var program = materialProperties.program,
@@ -1145,7 +2252,47 @@ PGL.WebGLRenderer = function (parameters) {
             m_uniforms = materialProperties.shader.uniforms;
 
         if (state.useProgram(program.program)) {
+            refreshProgram = true;
             refreshMaterial = true;
+        }
+
+        // 设置相机的投影矩阵、视图矩阵
+        if (refreshProgram || _currentCamera !== camera) {
+
+            // 设置投影矩阵
+            p_uniforms.setValue(_gl, 'projectionMatrix', camera.projectionMatrix);
+
+            if (capabilities.logarithmicDepthBuffer) {
+                p_uniforms.setValue(_gl, 'logDepthBufFC', 2.0 / (Math.log(camera.far + 1.0) / Math.LN2));
+            }
+
+            if (_currentCamera !== camera) {
+
+                _currentCamera = camera;
+
+                // lighting uniforms depend on the camera so enforce an update
+                // now, in case this material supports lights - or later, when
+                // the next material that does gets activated:
+
+                refreshMaterial = true;		// set to true on material change
+                // refreshLights = true;		// remains set until update done
+            }
+
+            // load material specific uniforms
+            // (shader material also gets them for the sake of genericity)
+
+            if (material.isMeshPhongMaterial) {
+                var uCamPos = p_uniforms.map.cameraPosition;
+                if (uCamPos !== undefined) {
+                    uCamPos.setValue(_gl, _vector3.setFromMatrixPosition(camera.matrixWorld));
+                }
+            }
+
+            if (material.isMeshPhongMaterial) {
+
+                // 设置视图矩阵
+                p_uniforms.setValue(_gl, 'viewMatrix', camera.matrixWorldInverse);
+            }
         }
 
         if (refreshMaterial) {
@@ -1242,6 +2389,468 @@ PGL.WebGLRenderer = function (parameters) {
     }());
 };
 
+PGL.UniformsCache = function () {
+
+    var lights = {};
+
+    return {
+
+        get: function (light) {
+
+            if (lights[light.id] !== undefined) {
+
+                return lights[light.id];
+
+            }
+
+            var uniforms;
+
+            switch (light.type) {
+
+                case 'DirectionalLight':
+                    uniforms = {
+                        direction: new Vector3(),
+                        color: new Color(),
+
+                        shadow: false,
+                        shadowBias: 0,
+                        shadowRadius: 1,
+                        shadowMapSize: new Vector2()
+                    };
+                    break;
+
+                case 'SpotLight':
+                    uniforms = {
+                        position: new Vector3(),
+                        direction: new Vector3(),
+                        color: new Color(),
+                        distance: 0,
+                        coneCos: 0,
+                        penumbraCos: 0,
+                        decay: 0,
+
+                        shadow: false,
+                        shadowBias: 0,
+                        shadowRadius: 1,
+                        shadowMapSize: new Vector2()
+                    };
+                    break;
+
+                case 'PointLight':
+                    uniforms = {
+                        position: new Vector3(),
+                        color: new Color(),
+                        distance: 0,
+                        decay: 0,
+
+                        shadow: false,
+                        shadowBias: 0,
+                        shadowRadius: 1,
+                        shadowMapSize: new Vector2(),
+                        shadowCameraNear: 1,
+                        shadowCameraFar: 1000
+                    };
+                    break;
+
+                case 'HemisphereLight':
+                    uniforms = {
+                        direction: new Vector3(),
+                        skyColor: new Color(),
+                        groundColor: new Color()
+                    };
+                    break;
+
+                case 'RectAreaLight':
+                    uniforms = {
+                        color: new Color(),
+                        position: new Vector3(),
+                        halfWidth: new Vector3(),
+                        halfHeight: new Vector3()
+                        // TODO (abelnation): set RectAreaLight shadow uniforms
+                    };
+                    break;
+
+            }
+
+            lights[light.id] = uniforms;
+
+            return uniforms;
+
+        }
+
+    };
+};
+var count = 0;
+PGL.WebGLLights = function () {
+
+    var cache = new PGL.UniformsCache();
+
+    var state = {
+
+        id: count++,
+
+        hash: {
+            stateID: -1,
+            directionalLength: -1,
+            pointLength: -1,
+            spotLength: -1,
+            rectAreaLength: -1,
+            hemiLength: -1,
+            shadowsLength: -1
+        },
+
+        ambient: [0, 0, 0],
+        probe: [],
+        directional: [],
+        directionalShadowMap: [],
+        directionalShadowMatrix: [],
+        spot: [],
+        spotShadowMap: [],
+        spotShadowMatrix: [],
+        rectArea: [],
+        point: [],
+        pointShadowMap: [],
+        pointShadowMatrix: [],
+        hemi: []
+
+    };
+
+    for (var i = 0; i < 9; i++) state.probe.push(new PGL.Vector3());
+
+    var vector3 = new PGL.Vector3();
+    var matrix4 = new PGL.Matrix4();
+    var matrix42 = new PGL.Matrix4();
+
+    function setup(lights, shadows, camera) {
+
+        var r = 0, g = 0, b = 0;
+
+        for (var i = 0; i < 9; i++) state.probe[i].set(0, 0, 0);
+
+        var directionalLength = 0;
+        var pointLength = 0;
+        var spotLength = 0;
+        var rectAreaLength = 0;
+        var hemiLength = 0;
+
+        var viewMatrix = camera.matrixWorldInverse;
+
+        for (var i = 0, l = lights.length; i < l; i++) {
+
+            var light = lights[i];
+
+            var color = light.color;
+            var intensity = light.intensity;
+            var distance = light.distance;
+
+            var shadowMap = (light.shadow && light.shadow.map) ? light.shadow.map.texture : null;
+
+            if (light.isAmbientLight) {
+
+                r += color.r * intensity;
+                g += color.g * intensity;
+                b += color.b * intensity;
+
+            } else if (light.isLightProbe) {
+
+                for (var j = 0; j < 9; j++) {
+
+                    state.probe[j].addScaledVector(light.sh.coefficients[j], intensity);
+
+                }
+
+            } else if (light.isDirectionalLight) {
+
+                var uniforms = cache.get(light);
+
+                uniforms.color.copy(light.color).multiplyScalar(light.intensity);
+                uniforms.direction.setFromMatrixPosition(light.matrixWorld);
+                vector3.setFromMatrixPosition(light.target.matrixWorld);
+                uniforms.direction.sub(vector3);
+                uniforms.direction.transformDirection(viewMatrix);
+
+                uniforms.shadow = light.castShadow;
+
+                if (light.castShadow) {
+
+                    var shadow = light.shadow;
+
+                    uniforms.shadowBias = shadow.bias;
+                    uniforms.shadowRadius = shadow.radius;
+                    uniforms.shadowMapSize = shadow.mapSize;
+
+                }
+
+                state.directionalShadowMap[directionalLength] = shadowMap;
+                state.directionalShadowMatrix[directionalLength] = light.shadow.matrix;
+                state.directional[directionalLength] = uniforms;
+
+                directionalLength++;
+
+            } else if (light.isSpotLight) {
+
+                var uniforms = cache.get(light);
+
+                uniforms.position.setFromMatrixPosition(light.matrixWorld);
+                uniforms.position.applyMatrix4(viewMatrix);
+
+                uniforms.color.copy(color).multiplyScalar(intensity);
+                uniforms.distance = distance;
+
+                uniforms.direction.setFromMatrixPosition(light.matrixWorld);
+                vector3.setFromMatrixPosition(light.target.matrixWorld);
+                uniforms.direction.sub(vector3);
+                uniforms.direction.transformDirection(viewMatrix);
+
+                uniforms.coneCos = Math.cos(light.angle);
+                uniforms.penumbraCos = Math.cos(light.angle * (1 - light.penumbra));
+                uniforms.decay = light.decay;
+
+                uniforms.shadow = light.castShadow;
+
+                if (light.castShadow) {
+
+                    var shadow = light.shadow;
+
+                    uniforms.shadowBias = shadow.bias;
+                    uniforms.shadowRadius = shadow.radius;
+                    uniforms.shadowMapSize = shadow.mapSize;
+
+                }
+
+                state.spotShadowMap[spotLength] = shadowMap;
+                state.spotShadowMatrix[spotLength] = light.shadow.matrix;
+                state.spot[spotLength] = uniforms;
+
+                spotLength++;
+
+            } else if (light.isRectAreaLight) {
+
+                var uniforms = cache.get(light);
+
+                // (a) intensity is the total visible light emitted
+                //uniforms.color.copy( color ).multiplyScalar( intensity / ( light.width * light.height * Math.PI ) );
+
+                // (b) intensity is the brightness of the light
+                uniforms.color.copy(color).multiplyScalar(intensity);
+
+                uniforms.position.setFromMatrixPosition(light.matrixWorld);
+                uniforms.position.applyMatrix4(viewMatrix);
+
+                // extract local rotation of light to derive width/height half vectors
+                matrix42.identity();
+                matrix4.copy(light.matrixWorld);
+                matrix4.premultiply(viewMatrix);
+                matrix42.extractRotation(matrix4);
+
+                uniforms.halfWidth.set(light.width * 0.5, 0.0, 0.0);
+                uniforms.halfHeight.set(0.0, light.height * 0.5, 0.0);
+
+                uniforms.halfWidth.applyMatrix4(matrix42);
+                uniforms.halfHeight.applyMatrix4(matrix42);
+
+                // TODO (abelnation): RectAreaLight distance?
+                // uniforms.distance = distance;
+
+                state.rectArea[rectAreaLength] = uniforms;
+
+                rectAreaLength++;
+
+            } else if (light.isPointLight) {
+
+                var uniforms = cache.get(light);
+
+                uniforms.position.setFromMatrixPosition(light.matrixWorld);
+                uniforms.position.applyMatrix4(viewMatrix);
+
+                uniforms.color.copy(light.color).multiplyScalar(light.intensity);
+                uniforms.distance = light.distance;
+                uniforms.decay = light.decay;
+
+                uniforms.shadow = light.castShadow;
+
+                if (light.castShadow) {
+
+                    var shadow = light.shadow;
+
+                    uniforms.shadowBias = shadow.bias;
+                    uniforms.shadowRadius = shadow.radius;
+                    uniforms.shadowMapSize = shadow.mapSize;
+                    uniforms.shadowCameraNear = shadow.camera.near;
+                    uniforms.shadowCameraFar = shadow.camera.far;
+
+                }
+
+                state.pointShadowMap[pointLength] = shadowMap;
+                state.pointShadowMatrix[pointLength] = light.shadow.matrix;
+                state.point[pointLength] = uniforms;
+
+                pointLength++;
+
+            } else if (light.isHemisphereLight) {
+
+                var uniforms = cache.get(light);
+
+                uniforms.direction.setFromMatrixPosition(light.matrixWorld);
+                uniforms.direction.transformDirection(viewMatrix);
+                uniforms.direction.normalize();
+
+                uniforms.skyColor.copy(light.color).multiplyScalar(intensity);
+                uniforms.groundColor.copy(light.groundColor).multiplyScalar(intensity);
+
+                state.hemi[hemiLength] = uniforms;
+
+                hemiLength++;
+
+            }
+
+        }
+
+        state.ambient[0] = r;
+        state.ambient[1] = g;
+        state.ambient[2] = b;
+
+        state.directional.length = directionalLength;
+        state.spot.length = spotLength;
+        state.rectArea.length = rectAreaLength;
+        state.point.length = pointLength;
+        state.hemi.length = hemiLength;
+
+        state.hash.stateID = state.id;
+        state.hash.directionalLength = directionalLength;
+        state.hash.pointLength = pointLength;
+        state.hash.spotLength = spotLength;
+        state.hash.rectAreaLength = rectAreaLength;
+        state.hash.hemiLength = hemiLength;
+        state.hash.shadowsLength = shadows.length;
+
+    }
+
+    return {
+        setup: setup,
+        state: state
+    };
+
+};
+
+/**
+ * Webgl渲染状态
+ * @returns {{init: init, pushLight: pushLight, pushShadow: pushShadow, state: {shadowsArray: Array, lightsArray: Array, lights: {setup, state}}, setupLights: setupLights}}
+ * @constructor
+ */
+PGL.WebGLRenderState = function () {
+
+    var lights = new PGL.WebGLLights();
+
+    var lightsArray = [];
+    var shadowsArray = [];
+
+    function init() {
+
+        lightsArray.length = 0;
+        shadowsArray.length = 0;
+
+    }
+
+    function pushLight(light) {
+
+        lightsArray.push(light);
+
+    }
+
+    function pushShadow(shadowLight) {
+
+        shadowsArray.push(shadowLight);
+
+    }
+
+    function setupLights(camera) {
+
+        lights.setup(lightsArray, shadowsArray, camera);
+
+    }
+
+    var state = {
+        lightsArray: lightsArray,
+        shadowsArray: shadowsArray,
+
+        lights: lights
+    };
+
+    return {
+        init: init,
+        state: state,
+        setupLights: setupLights,
+
+        pushLight: pushLight,
+        pushShadow: pushShadow
+    };
+
+};
+
+/**
+ * WebGL渲染状态管理
+ * @returns {{get: (function(*, *): WebGLRenderState), dispose: dispose}}
+ * @constructor
+ */
+PGL.WebGLRenderStates = function WebGLRenderStates() {
+
+    var renderStates = {};
+
+    function onSceneDispose(event) {
+
+        var scene = event.target;
+
+        scene.removeEventListener('dispose', onSceneDispose);
+
+        delete renderStates[scene.id];
+
+    }
+
+    function get(scene, camera) {
+
+        var renderState;
+
+        if (renderStates[scene.id] === undefined) {
+
+            renderState = new PGL.WebGLRenderState();
+            renderStates[scene.id] = {};
+            renderStates[scene.id][camera.id] = renderState;
+
+            // scene.addEventListener( 'dispose', onSceneDispose );
+
+        } else {
+
+            if (renderStates[scene.id][camera.id] === undefined) {
+
+                renderState = new PGL.WebGLRenderState();
+                renderStates[scene.id][camera.id] = renderState;
+
+            } else {
+
+                renderState = renderStates[scene.id][camera.id];
+
+            }
+
+        }
+
+        return renderState;
+
+    }
+
+    function dispose() {
+
+        renderStates = {};
+
+    }
+
+    return {
+        get: get,
+        dispose: dispose
+    };
+
+};
+
 /**
  * 工具类
  * @param gl 上下文
@@ -1287,7 +2896,7 @@ PGL.WebGLUtils = function (gl, extensions, capabilities) {
 
         if (p === PGL.HalfFloatType) {
 
-            if ( capabilities.isWebGL2 ) return gl.HALF_FLOAT;
+            if (capabilities.isWebGL2) return gl.HALF_FLOAT;
 
             extension = extensions.get('OES_texture_half_float');
 
@@ -1302,7 +2911,7 @@ PGL.WebGLUtils = function (gl, extensions, capabilities) {
         if (p === PGL.LuminanceAlphaFormat) return gl.LUMINANCE_ALPHA;
         if (p === PGL.DepthFormat) return gl.DEPTH_COMPONENT;
         if (p === PGL.DepthStencilFormat) return gl.DEPTH_STENCIL;
-        if ( p === PGL.RedFormat ) return gl.RED;
+        if (p === PGL.RedFormat) return gl.RED;
 
         if (p === PGL.AddEquation) return gl.FUNC_ADD;
         if (p === PGL.SubtractEquation) return gl.FUNC_SUBTRACT;
@@ -1379,10 +2988,10 @@ PGL.WebGLUtils = function (gl, extensions, capabilities) {
 
         if (p === PGL.MinEquation || p === PGL.MaxEquation) {
 
-            if ( capabilities.isWebGL2 ) {
+            if (capabilities.isWebGL2) {
 
-                if ( p === PGL.MinEquation ) return gl.MIN;
-                if ( p === PGL.MaxEquation ) return gl.MAX;
+                if (p === PGL.MinEquation) return gl.MIN;
+                if (p === PGL.MaxEquation) return gl.MAX;
 
             }
 
@@ -1399,7 +3008,7 @@ PGL.WebGLUtils = function (gl, extensions, capabilities) {
 
         if (p === PGL.UnsignedInt248Type) {
 
-            if ( capabilities.isWebGL2 ) return gl.UNSIGNED_INT_24_8;
+            if (capabilities.isWebGL2) return gl.UNSIGNED_INT_24_8;
 
             extension = extensions.get('WEBGL_depth_texture');
 
@@ -1429,19 +3038,20 @@ PGL.WebGLUtils = function (gl, extensions, capabilities) {
 PGL.WebGLTextures = function (_gl, extensions, state, properties, capabilities, utils, info) {
 
     var _canvas;
+
     /**
      * 限制图片的大小
      * @param image
      * @param maxSize
      * @returns {HTMLElement|*}
      */
-    function clampToMaxSize( image, maxSize ) {
+    function clampToMaxSize(image, maxSize) {
 
-        if ( image.width > maxSize || image.height > maxSize ) {
+        if (image.width > maxSize || image.height > maxSize) {
 
-            if ( 'data' in image ) {
+            if ('data' in image) {
 
-                console.warn( 'THREE.WebGLRenderer: image in DataTexture is too big (' + image.width + 'x' + image.height + ').' );
+                console.warn('THREE.WebGLRenderer: image in DataTexture is too big (' + image.width + 'x' + image.height + ').');
                 return;
 
             }
@@ -1449,16 +3059,16 @@ PGL.WebGLTextures = function (_gl, extensions, state, properties, capabilities, 
             // Warning: Scaling through the canvas will only work with images that use
             // premultiplied alpha.
 
-            var scale = maxSize / Math.max( image.width, image.height );
+            var scale = maxSize / Math.max(image.width, image.height);
 
-            var canvas = document.createElementNS( 'http://www.w3.org/1999/xhtml', 'canvas' );
-            canvas.width = Math.floor( image.width * scale );
-            canvas.height = Math.floor( image.height * scale );
+            var canvas = document.createElementNS('http://www.w3.org/1999/xhtml', 'canvas');
+            canvas.width = Math.floor(image.width * scale);
+            canvas.height = Math.floor(image.height * scale);
 
-            var context = canvas.getContext( '2d' );
-            context.drawImage( image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height );
+            var context = canvas.getContext('2d');
+            context.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
 
-            console.warn( 'THREE.WebGLRenderer: image is too big (' + image.width + 'x' + image.height + '). Resized to ' + canvas.width + 'x' + canvas.height );
+            console.warn('THREE.WebGLRenderer: image is too big (' + image.width + 'x' + image.height + '). Resized to ' + canvas.width + 'x' + canvas.height);
 
             return canvas;
 
@@ -1468,9 +3078,9 @@ PGL.WebGLTextures = function (_gl, extensions, state, properties, capabilities, 
 
     }
 
-    function isPowerOfTwo( image ) {
+    function isPowerOfTwo(image) {
 
-        return PGL._Math.isPowerOfTwo( image.width ) && PGL._Math.isPowerOfTwo( image.height );
+        return PGL._Math.isPowerOfTwo(image.width) && PGL._Math.isPowerOfTwo(image.height);
 
     }
 
@@ -1484,11 +3094,9 @@ PGL.WebGLTextures = function (_gl, extensions, state, properties, capabilities, 
 
             if (image === undefined) {
                 console.warn('THREE.WebGLRenderer: Texture marked for update but image is undefined');
-            }
-            else if (image.complete === false) {
+            } else if (image.complete === false) {
                 console.warn('THREE.WebGLRenderer: Texture marked for update but image is incomplete');
-            }
-            else {
+            } else {
                 uploadTexture(textureProperties, texture, slot);
                 return;
             }
@@ -1498,28 +3106,28 @@ PGL.WebGLTextures = function (_gl, extensions, state, properties, capabilities, 
         state.bindTexture(_gl.TEXTURE_2D, textureProperties.__webglTexture);
     }
 
-    function textureNeedsPowerOfTwo( texture ) {
+    function textureNeedsPowerOfTwo(texture) {
 
-        if ( capabilities.isWebGL2 ) return false;
+        if (capabilities.isWebGL2) return false;
 
-        return ( texture.wrapS !== PGL.ClampToEdgeWrapping || texture.wrapT !== PGL.ClampToEdgeWrapping ) ||
-            ( texture.minFilter !== PGL.NearestFilter && texture.minFilter !== PGL.LinearFilter );
+        return (texture.wrapS !== PGL.ClampToEdgeWrapping || texture.wrapT !== PGL.ClampToEdgeWrapping) ||
+            (texture.minFilter !== PGL.NearestFilter && texture.minFilter !== PGL.LinearFilter);
 
     }
 
-    function makePowerOfTwo( image ) {
+    function makePowerOfTwo(image) {
 
-        if ( image instanceof HTMLImageElement || image instanceof HTMLCanvasElement || image instanceof ImageBitmap ) {
+        if (image instanceof HTMLImageElement || image instanceof HTMLCanvasElement || image instanceof ImageBitmap) {
 
-            if ( _canvas === undefined ) _canvas = document.createElementNS( 'http://www.w3.org/1999/xhtml', 'canvas' );
+            if (_canvas === undefined) _canvas = document.createElementNS('http://www.w3.org/1999/xhtml', 'canvas');
 
-            _canvas.width = PGL._Math.floorPowerOfTwo( image.width );
-            _canvas.height = PGL._Math.floorPowerOfTwo( image.height );
+            _canvas.width = PGL._Math.floorPowerOfTwo(image.width);
+            _canvas.height = PGL._Math.floorPowerOfTwo(image.height);
 
-            var context = _canvas.getContext( '2d' );
-            context.drawImage( image, 0, 0, _canvas.width, _canvas.height );
+            var context = _canvas.getContext('2d');
+            context.drawImage(image, 0, 0, _canvas.width, _canvas.height);
 
-            console.warn( 'THREE.WebGLRenderer: image is not power of two (' + image.width + 'x' + image.height + '). Resized to ' + _canvas.width + 'x' + _canvas.height );
+            console.warn('THREE.WebGLRenderer: image is not power of two (' + image.width + 'x' + image.height + '). Resized to ' + _canvas.width + 'x' + _canvas.height);
 
             return _canvas;
 
@@ -1529,31 +3137,31 @@ PGL.WebGLTextures = function (_gl, extensions, state, properties, capabilities, 
 
     }
 
-    function getInternalFormat( glFormat, glType ) {
+    function getInternalFormat(glFormat, glType) {
 
-        if ( ! capabilities.isWebGL2 ) return glFormat;
+        if (!capabilities.isWebGL2) return glFormat;
 
-        if ( glFormat === 6403 ) {
+        if (glFormat === 6403) {
 
-            if ( glType === 5126 ) return 33326;
-            if ( glType === 5131 ) return 33325;
-            if ( glType === 5121 ) return 33321;
-
-        }
-
-        if ( glFormat === 6407 ) {
-
-            if ( glType === 5126 ) return 34837;
-            if ( glType === 5131 ) return 34843;
-            if ( glType === 5121 ) return 32849;
+            if (glType === 5126) return 33326;
+            if (glType === 5131) return 33325;
+            if (glType === 5121) return 33321;
 
         }
 
-        if ( glFormat === 6408 ) {
+        if (glFormat === 6407) {
 
-            if ( glType === 5126 ) return 34836;
-            if ( glType === 5131 ) return 34842;
-            if ( glType === 5121 ) return 32856;
+            if (glType === 5126) return 34837;
+            if (glType === 5131) return 34843;
+            if (glType === 5121) return 32849;
+
+        }
+
+        if (glFormat === 6408) {
+
+            if (glType === 5126) return 34836;
+            if (glType === 5131) return 34842;
+            if (glType === 5121) return 32856;
 
         }
 
@@ -1562,9 +3170,9 @@ PGL.WebGLTextures = function (_gl, extensions, state, properties, capabilities, 
     }
 
     // Fallback filters for non-power-of-2 textures
-    function filterFallback( f ) {
+    function filterFallback(f) {
 
-        if ( f === PGL.NearestFilter || f === PGL.NearestMipMapNearestFilter || f === PGL.NearestMipMapLinearFilter ) {
+        if (f === PGL.NearestFilter || f === PGL.NearestMipMapNearestFilter || f === PGL.NearestMipMapLinearFilter) {
             return 9728;
         }
         return 9729;
@@ -1576,51 +3184,51 @@ PGL.WebGLTextures = function (_gl, extensions, state, properties, capabilities, 
      * @param texture
      * @param isPowerOfTwoImage
      */
-    function setTextureParameters( textureType, texture, isPowerOfTwoImage ) {
+    function setTextureParameters(textureType, texture, isPowerOfTwoImage) {
 
         var extension;
 
-        if ( isPowerOfTwoImage ) {
+        if (isPowerOfTwoImage) {
 
-            _gl.texParameteri( textureType, 10242, utils.convert( texture.wrapS ) );
-            _gl.texParameteri( textureType, 10243, utils.convert( texture.wrapT ) );
+            _gl.texParameteri(textureType, 10242, utils.convert(texture.wrapS));
+            _gl.texParameteri(textureType, 10243, utils.convert(texture.wrapT));
 
-            _gl.texParameteri( textureType, 10240, utils.convert( texture.magFilter ) );
-            _gl.texParameteri( textureType, 10241, utils.convert( texture.minFilter ) );
+            _gl.texParameteri(textureType, 10240, utils.convert(texture.magFilter));
+            _gl.texParameteri(textureType, 10241, utils.convert(texture.minFilter));
 
         } else {
 
-            _gl.texParameteri( textureType, 10242, 33071 );
-            _gl.texParameteri( textureType, 10243, 33071 );
+            _gl.texParameteri(textureType, 10242, 33071);
+            _gl.texParameteri(textureType, 10243, 33071);
 
-            if ( texture.wrapS !== PGL.ClampToEdgeWrapping || texture.wrapT !== PGL.ClampToEdgeWrapping ) {
+            if (texture.wrapS !== PGL.ClampToEdgeWrapping || texture.wrapT !== PGL.ClampToEdgeWrapping) {
 
-                console.warn( 'THREE.WebGLRenderer: Texture is not power of two. Texture.wrapS and Texture.wrapT should be set to THREE.ClampToEdgeWrapping.' );
+                console.warn('THREE.WebGLRenderer: Texture is not power of two. Texture.wrapS and Texture.wrapT should be set to THREE.ClampToEdgeWrapping.');
 
             }
 
-            _gl.texParameteri( textureType, 10240, filterFallback( texture.magFilter ) );
-            _gl.texParameteri( textureType, 10241, filterFallback( texture.minFilter ) );
+            _gl.texParameteri(textureType, 10240, filterFallback(texture.magFilter));
+            _gl.texParameteri(textureType, 10241, filterFallback(texture.minFilter));
 
-            if ( texture.minFilter !== PGL.NearestFilter && texture.minFilter !== PGL.LinearFilter ) {
+            if (texture.minFilter !== PGL.NearestFilter && texture.minFilter !== PGL.LinearFilter) {
 
-                console.warn( 'THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter should be set to THREE.NearestFilter or THREE.LinearFilter.' );
+                console.warn('THREE.WebGLRenderer: Texture is not power of two. Texture.minFilter should be set to THREE.NearestFilter or THREE.LinearFilter.');
 
             }
 
         }
 
-        extension = extensions.get( 'EXT_texture_filter_anisotropic' );
+        extension = extensions.get('EXT_texture_filter_anisotropic');
 
-        if ( extension ) {
+        if (extension) {
 
-            if ( texture.type === PGL.FloatType && extensions.get( 'OES_texture_float_linear' ) === null ) return;
-            if ( texture.type === PGL.HalfFloatType && ( capabilities.isWebGL2 || extensions.get( 'OES_texture_half_float_linear' ) ) === null ) return;
+            if (texture.type === PGL.FloatType && extensions.get('OES_texture_float_linear') === null) return;
+            if (texture.type === PGL.HalfFloatType && (capabilities.isWebGL2 || extensions.get('OES_texture_half_float_linear')) === null) return;
 
-            if ( texture.anisotropy > 1 || properties.get( texture ).__currentAnisotropy ) {
+            if (texture.anisotropy > 1 || properties.get(texture).__currentAnisotropy) {
 
-                _gl.texParameterf( textureType, extension.TEXTURE_MAX_ANISOTROPY_EXT, Math.min( texture.anisotropy, capabilities.getMaxAnisotropy() ) );
-                properties.get( texture ).__currentAnisotropy = texture.anisotropy;
+                _gl.texParameterf(textureType, extension.TEXTURE_MAX_ANISOTROPY_EXT, Math.min(texture.anisotropy, capabilities.getMaxAnisotropy()));
+                properties.get(texture).__currentAnisotropy = texture.anisotropy;
 
             }
 
@@ -1659,26 +3267,26 @@ PGL.WebGLTextures = function (_gl, extensions, state, properties, capabilities, 
         _gl.pixelStorei(37441, texture.premultiplyAlpha); // 将Alpha通道与其他颜色通道相乘
         _gl.pixelStorei(3317, texture.unpackAlignment); // 从内存中解包像素数据。
 
-        var image = clampToMaxSize( texture.image, capabilities.maxTextureSize );
+        var image = clampToMaxSize(texture.image, capabilities.maxTextureSize);
 
-        if ( textureNeedsPowerOfTwo( texture ) && isPowerOfTwo( image ) === false ) {
-            image = makePowerOfTwo( image );
+        if (textureNeedsPowerOfTwo(texture) && isPowerOfTwo(image) === false) {
+            image = makePowerOfTwo(image);
         }
 
-        var isPowerOfTwoImage = isPowerOfTwo( image ),
-            glFormat = utils.convert( texture.format ),
-            glType = utils.convert( texture.type ),
-            glInternalFormat = getInternalFormat( glFormat, glType );
+        var isPowerOfTwoImage = isPowerOfTwo(image),
+            glFormat = utils.convert(texture.format),
+            glType = utils.convert(texture.type),
+            glInternalFormat = getInternalFormat(glFormat, glType);
 
-        setTextureParameters( textureType, texture, isPowerOfTwoImage );
+        setTextureParameters(textureType, texture, isPowerOfTwoImage);
 
         var mipmap, mipmaps = texture.mipmaps;
 
-        if ( texture.isDepthTexture ) {}
-        else if ( texture.isDataTexture ) {}
-        else if ( texture.isCompressedTexture ) {}
-        else if ( texture.isDataTexture3D ) {}
-        else {
+        if (texture.isDepthTexture) {
+        } else if (texture.isDataTexture) {
+        } else if (texture.isCompressedTexture) {
+        } else if (texture.isDataTexture3D) {
+        } else {
 
             // regular Texture (image, video, canvas)
 
@@ -1686,12 +3294,12 @@ PGL.WebGLTextures = function (_gl, extensions, state, properties, capabilities, 
             // if there are no manual mipmaps
             // set 0 level mipmap and then use GL to generate other mipmap levels
 
-            if ( mipmaps.length > 0 && isPowerOfTwoImage ) {
+            if (mipmaps.length > 0 && isPowerOfTwoImage) {
 
-                for ( var i = 0, il = mipmaps.length; i < il; i ++ ) {
+                for (var i = 0, il = mipmaps.length; i < il; i++) {
 
-                    mipmap = mipmaps[ i ];
-                    state.texImage2D( 3553, i, glInternalFormat, glFormat, glType, mipmap );
+                    mipmap = mipmaps[i];
+                    state.texImage2D(3553, i, glInternalFormat, glFormat, glType, mipmap);
 
                 }
 
@@ -1700,7 +3308,7 @@ PGL.WebGLTextures = function (_gl, extensions, state, properties, capabilities, 
 
             } else {
                 // 配置纹理图像
-                state.texImage2D( 3553, 0, glInternalFormat, glFormat, glType, image );
+                state.texImage2D(3553, 0, glInternalFormat, glFormat, glType, image);
                 textureProperties.__maxMipLevel = 0;
             }
         }
@@ -1797,11 +3405,11 @@ PGL.WebGLState = function (gl) {
 
         try {
 
-            gl.texImage2D.apply( gl, arguments );
+            gl.texImage2D.apply(gl, arguments);
 
-        } catch ( error ) {
+        } catch (error) {
 
-            console.error( 'THREE.WebGLState:', error );
+            console.error('THREE.WebGLState:', error);
 
         }
 
@@ -1908,22 +3516,168 @@ PGL.WebGLState = function (gl) {
 
         activeTexture: activeTexture,
         bindTexture: bindTexture,
-        texImage2D:texImage2D
+        texImage2D: texImage2D
     }
 };
+
 /**
  * 渲染列表
- * @return {{opaque: Array, transparent: Array}}
+ * @returns {{init: init, opaque: Array, unshift: unshift, sort: sort, transparent: Array, push: push}}
  * @constructor
  */
 PGL.WebGLRenderList = function () {
+
+    var renderItems = [];
+    var renderItemsIndex = 0;
+
     var opaque = [];
     var transparent = [];
 
+    var defaultProgram = {id: -1};
+
+    function init() {
+
+        renderItemsIndex = 0;
+
+        opaque.length = 0;
+        transparent.length = 0;
+
+    }
+
+    function getNextRenderItem(object, geometry, material, groupOrder, z, group) {
+
+        var renderItem = renderItems[renderItemsIndex];
+
+        if (renderItem === undefined) {
+
+            renderItem = {
+                id: object.id,
+                object: object,
+                geometry: geometry,
+                material: material,
+                program: material.program || defaultProgram,
+                groupOrder: groupOrder,
+                renderOrder: object.renderOrder,
+                z: z,
+                group: group
+            };
+
+            renderItems[renderItemsIndex] = renderItem;
+
+        } else {
+
+            renderItem.id = object.id;
+            renderItem.object = object;
+            renderItem.geometry = geometry;
+            renderItem.material = material;
+            renderItem.program = material.program || defaultProgram;
+            renderItem.groupOrder = groupOrder;
+            renderItem.renderOrder = object.renderOrder;
+            renderItem.z = z;
+            renderItem.group = group;
+
+        }
+
+        renderItemsIndex++;
+
+        return renderItem;
+
+    }
+
+    function push(object, geometry, material, groupOrder, z, group) {
+
+        var renderItem = getNextRenderItem(object, geometry, material, groupOrder, z, group);
+
+        (material.transparent === true ? transparent : opaque).push(renderItem);
+
+    }
+
+    function unshift(object, geometry, material, groupOrder, z, group) {
+
+        var renderItem = getNextRenderItem(object, geometry, material, groupOrder, z, group);
+
+        (material.transparent === true ? transparent : opaque).unshift(renderItem);
+
+    }
+
+    function sort() {
+
+        if (opaque.length > 1) opaque.sort(painterSortStable);
+        if (transparent.length > 1) transparent.sort(reversePainterSortStable);
+
+    }
+
     return {
         opaque: opaque,
-        transparent: transparent
+        transparent: transparent,
+
+        init: init,
+        push: push,
+        unshift: unshift,
+
+        sort: sort
     };
+
+};
+
+/**
+ * 渲染列表管理
+ * @returns {{get: (function(*, *): {init: init, opaque: Array, unshift: unshift, sort: sort, transparent: Array, push: push}), dispose: dispose}}
+ * @constructor
+ */
+PGL.WebGLRenderLists = function () {
+
+    var lists = {};
+
+    function onSceneDispose(event) {
+
+        var scene = event.target;
+
+        scene.removeEventListener('dispose', onSceneDispose);
+
+        delete lists[scene.id];
+
+    }
+
+    function get(scene, camera) {
+
+        var cameras = lists[scene.id];
+        var list;
+        if (cameras === undefined) {
+
+            list = new PGL.WebGLRenderList();
+            lists[scene.id] = {};
+            lists[scene.id][camera.id] = list;
+
+            // scene.addEventListener( 'dispose', onSceneDispose );
+
+        } else {
+
+            list = cameras[camera.id];
+            if (list === undefined) {
+
+                list = new PGL.WebGLRenderList();
+                cameras[camera.id] = list;
+
+            }
+
+        }
+
+        return list;
+
+    }
+
+    function dispose() {
+
+        lists = {};
+
+    }
+
+    return {
+        get: get,
+        dispose: dispose
+    };
+
 };
 
 /**
@@ -2049,6 +3803,9 @@ PGL.WebGLProgram = function (renderer, extensions, code, material, shader, param
             parameters.vertexColors ? '#define USE_COLOR' : '',
 
             'uniform mat4 modelViewMatrix;',
+            'uniform mat4 projectionMatrix;',
+            'uniform mat4 viewMatrix;',
+            'uniform mat3 normalMatrix;',
 
             'attribute vec4 position;',
             'attribute vec2 uv;',

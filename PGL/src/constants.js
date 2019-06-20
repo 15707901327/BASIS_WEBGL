@@ -1,6 +1,7 @@
 // 定义常量
 var PGL = {
     REVISION: 1, // 版本
+    MOUSE: {LEFT: 0, MIDDLE: 1, RIGHT: 2},
 
     NoColors: 0, // 不使用颜色
     FaceColors: 1, // 面颜色

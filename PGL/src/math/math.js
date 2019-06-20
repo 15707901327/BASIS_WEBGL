@@ -648,6 +648,104 @@
     Object.assign(PGL.Vector3.prototype, {
         isVector3: true,
 
+        set: function (x, y, z) {
+
+            this.x = x;
+            this.y = y;
+            this.z = z;
+
+            return this;
+
+        },
+
+        setScalar: function (scalar) {
+
+            this.x = scalar;
+            this.y = scalar;
+            this.z = scalar;
+
+            return this;
+
+        },
+
+        setX: function (x) {
+
+            this.x = x;
+
+            return this;
+
+        },
+
+        setY: function (y) {
+
+            this.y = y;
+
+            return this;
+
+        },
+
+        setZ: function (z) {
+
+            this.z = z;
+
+            return this;
+
+        },
+        setComponent: function (index, value) {
+
+            switch (index) {
+
+                case 0:
+                    this.x = value;
+                    break;
+                case 1:
+                    this.y = value;
+                    break;
+                case 2:
+                    this.z = value;
+                    break;
+                default:
+                    throw new Error('index is out of range: ' + index);
+
+            }
+
+            return this;
+
+        },
+
+        getComponent: function (index) {
+
+            switch (index) {
+
+                case 0:
+                    return this.x;
+                case 1:
+                    return this.y;
+                case 2:
+                    return this.z;
+                default:
+                    throw new Error('index is out of range: ' + index);
+
+            }
+
+        },
+
+        clone: function () {
+
+            return new this.constructor(this.x, this.y, this.z);
+
+        },
+
+        copy: function (v) {
+
+            this.x = v.x;
+            this.y = v.y;
+            this.z = v.z;
+
+            return this;
+
+        },
+
         add: function (v, w) {
 
             if (w !== undefined) {
@@ -665,21 +763,85 @@
 
         },
 
-        clone: function () {
-            return new this.constructor(this.x, this.y, this.z);
-        },
+        addScalar: function (s) {
 
-        copy: function (v) {
-            this.x = v.x;
-            this.y = v.y;
-            this.z = v.z;
+            this.x += s;
+            this.y += s;
+            this.z += s;
+
             return this;
+
         },
 
         addVectors: function (a, b) {
             this.x = a.x + b.x;
             this.y = a.y + b.y;
             this.z = a.z + b.z;
+
+            return this;
+
+        },
+
+        addScaledVector: function (v, s) {
+
+            this.x += v.x * s;
+            this.y += v.y * s;
+            this.z += v.z * s;
+
+            return this;
+
+        },
+
+        sub: function (v, w) {
+
+            if (w !== undefined) {
+
+                console.warn('THREE.Vector3: .sub() now only accepts one argument. Use .subVectors( a, b ) instead.');
+                return this.subVectors(v, w);
+
+            }
+
+            this.x -= v.x;
+            this.y -= v.y;
+            this.z -= v.z;
+
+            return this;
+
+        },
+
+        subScalar: function (s) {
+
+            this.x -= s;
+            this.y -= s;
+            this.z -= s;
+
+            return this;
+
+        },
+
+        subVectors: function (a, b) {
+
+            this.x = a.x - b.x;
+            this.y = a.y - b.y;
+            this.z = a.z - b.z;
+
+            return this;
+
+        },
+
+        multiply: function (v, w) {
+
+            if (w !== undefined) {
+
+                console.warn('THREE.Vector3: .multiply() now only accepts one argument. Use .multiplyVectors( a, b ) instead.');
+                return this.multiplyVectors(v, w);
+
+            }
+
+            this.x *= v.x;
+            this.y *= v.y;
+            this.z *= v.z;
+
             return this;
         },
 
@@ -688,6 +850,41 @@
             this.x *= scalar;
             this.y *= scalar;
             this.z *= scalar;
+
+            return this;
+
+        },
+
+        multiplyVectors: function (a, b) {
+
+            this.x = a.x * b.x;
+            this.y = a.y * b.y;
+            this.z = a.z * b.z;
+
+            return this;
+
+        },
+
+        applyMatrix3: function (m) {
+
+            var x = this.x, y = this.y, z = this.z;
+            var e = m.elements;
+
+            this.x = e[0] * x + e[3] * y + e[6] * z;
+            this.y = e[1] * x + e[4] * y + e[7] * z;
+            this.z = e[2] * x + e[5] * y + e[8] * z;
+
+            return this;
+
+        },
+
+        setFromMatrixPosition: function (m) {
+
+            var e = m.elements;
+
+            this.x = e[12];
+            this.y = e[13];
+            this.z = e[14];
 
             return this;
 
@@ -705,6 +902,72 @@
             this.z = (e[2] * x + e[6] * y + e[10] * z + e[14]) * w;
 
             return this;
+
+        },
+
+        applyQuaternion: function (q) {
+
+            var x = this.x, y = this.y, z = this.z;
+            var qx = q.x, qy = q.y, qz = q.z, qw = q.w;
+
+            // calculate quat * vector
+
+            var ix = qw * x + qy * z - qz * y;
+            var iy = qw * y + qz * x - qx * z;
+            var iz = qw * z + qx * y - qy * x;
+            var iw = -qx * x - qy * y - qz * z;
+
+            // calculate result * inverse quat
+
+            this.x = ix * qw + iw * -qx + iy * -qz - iz * -qy;
+            this.y = iy * qw + iw * -qy + iz * -qx - ix * -qz;
+            this.z = iz * qw + iw * -qz + ix * -qy - iy * -qx;
+
+            return this;
+
+        },
+
+        project: function (camera) {
+
+            return this.applyMatrix4(camera.matrixWorldInverse).applyMatrix4(camera.projectionMatrix);
+
+        },
+
+        unproject: function ( camera ) {
+
+            return this.applyMatrix4( camera.projectionMatrixInverse ).applyMatrix4( camera.matrixWorld );
+
+        },
+
+        transformDirection: function (m) {
+
+            // input: THREE.Matrix4 affine matrix
+            // vector interpreted as a direction
+
+            var x = this.x, y = this.y, z = this.z;
+            var e = m.elements;
+
+            this.x = e[0] * x + e[4] * y + e[8] * z;
+            this.y = e[1] * x + e[5] * y + e[9] * z;
+            this.z = e[2] * x + e[6] * y + e[10] * z;
+
+            return this.normalize();
+
+        },
+
+        divide: function (v) {
+
+            this.x /= v.x;
+            this.y /= v.y;
+            this.z /= v.z;
+
+            return this;
+
+        },
+
+        divideScalar: function (scalar) {
+
+            return this.multiplyScalar(1 / scalar);
 
         },
 
@@ -735,8 +998,216 @@
 
         },
 
+        clamp: function (min, max) {
+
+            // assumes min < max, componentwise
+
+            this.x = Math.max(min.x, Math.min(max.x, this.x));
+            this.y = Math.max(min.y, Math.min(max.y, this.y));
+            this.z = Math.max(min.z, Math.min(max.z, this.z));
+
+            return this;
+
+        },
+
+        clampScalar: function ( minVal, maxVal ) {
+
+            this.x = Math.max( minVal, Math.min( maxVal, this.x ) );
+            this.y = Math.max( minVal, Math.min( maxVal, this.y ) );
+            this.z = Math.max( minVal, Math.min( maxVal, this.z ) );
+
+            return this;
+
+        },
+
+        clampLength: function (min, max) {
+
+            var length = this.length();
+
+            return this.divideScalar(length || 1).multiplyScalar(Math.max(min, Math.min(max, length)));
+
+        },
+
+        floor: function () {
+
+            this.x = Math.floor(this.x);
+            this.y = Math.floor(this.y);
+            this.z = Math.floor(this.z);
+
+            return this;
+
+        },
+
+        ceil: function () {
+
+            this.x = Math.ceil(this.x);
+            this.y = Math.ceil(this.y);
+            this.z = Math.ceil(this.z);
+
+            return this;
+
+        },
+
+        round: function () {
+
+            this.x = Math.round(this.x);
+            this.y = Math.round(this.y);
+            this.z = Math.round(this.z);
+
+            return this;
+
+        },
+
+        roundToZero: function () {
+
+            this.x = (this.x < 0) ? Math.ceil(this.x) : Math.floor(this.x);
+            this.y = (this.y < 0) ? Math.ceil(this.y) : Math.floor(this.y);
+            this.z = (this.z < 0) ? Math.ceil(this.z) : Math.floor(this.z);
+
+            return this;
+
+        },
+
+        negate: function () {
+
+            this.x = -this.x;
+            this.y = -this.y;
+            this.z = -this.z;
+
+            return this;
+
+        },
+
         dot: function (v) {
             return this.x * v.x + this.y * v.y + this.z * v.z;
+
+        },
+
+        // TODO lengthSquared?
+
+        lengthSq: function () {
+
+            return this.x * this.x + this.y * this.y + this.z * this.z;
+
+        },
+
+        length: function () {
+
+            return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
+
+        },
+
+        manhattanLength: function () {
+
+            return Math.abs(this.x) + Math.abs(this.y) + Math.abs(this.z);
+
+        },
+
+        normalize: function () {
+
+            return this.divideScalar(this.length() || 1);
+
+        },
+
+        setLength: function (length) {
+
+            return this.normalize().multiplyScalar(length);
+
+        },
+
+        lerp: function (v, alpha) {
+
+            this.x += (v.x - this.x) * alpha;
+            this.y += (v.y - this.y) * alpha;
+            this.z += (v.z - this.z) * alpha;
+
+            return this;
+
+        },
+
+        lerpVectors: function (v1, v2, alpha) {
+
+            return this.subVectors(v2, v1).multiplyScalar(alpha).add(v1);
+
+        },
+
+        cross: function (v, w) {
+
+            if (w !== undefined) {
+
+                console.warn('THREE.Vector3: .cross() now only accepts one argument. Use .crossVectors( a, b ) instead.');
+                return this.crossVectors(v, w);
+
+            }
+
+            return this.crossVectors(this, v);
+
+        },
+
+        crossVectors: function (a, b) {
+
+            var ax = a.x, ay = a.y, az = a.z;
+            var bx = b.x, by = b.y, bz = b.z;
+
+            this.x = ay * bz - az * by;
+            this.y = az * bx - ax * bz;
+            this.z = ax * by - ay * bx;
+
+            return this;
+
+        },
+
+        projectOnVector: function (vector) {
+
+            var scalar = vector.dot(this) / vector.lengthSq();
+
+            return this.copy(vector).multiplyScalar(scalar);
+
+        },
+
+        projectOnPlane: function () {
+
+            var v1 = new Vector3();
+
+            return function projectOnPlane(planeNormal) {
+
+                v1.copy(this).projectOnVector(planeNormal);
+
+                return this.sub(v1);
+
+            };
+
+        }(),
+
+        reflect: function () {
+
+            // reflect incident vector off plane orthogonal to normal
+            // normal is assumed to have unit length
+
+            var v1 = new Vector3();
+
+            return function reflect(normal) {
+
+                return this.sub(v1.copy(normal).multiplyScalar(2 * this.dot(normal)));
+
+            };
+
+        }(),
+
+        angleTo: function (v) {
+
+            var theta = this.dot(v) / (Math.sqrt(this.lengthSq() * v.lengthSq()));
+
+            // clamp, to handle numerical problems
+
+            return Math.acos(_Math.clamp(theta, -1, 1));
+
+        },
+
+        distanceTo: function (v) {
+
+            return Math.sqrt(this.distanceToSquared(v));
+
         },
 
         /**
@@ -747,25 +1218,123 @@
         distanceToSquared: function (v) {
             var dx = this.x - v.x, dy = this.y - v.y, dz = this.z - v.z;
             return dx * dx + dy * dy + dz * dz;
+
         },
 
-        applyQuaternion: function (q) {
+        manhattanDistanceTo: function (v) {
 
-            var x = this.x, y = this.y, z = this.z;
-            var qx = q.x, qy = q.y, qz = q.z, qw = q.w;
+            return Math.abs(this.x - v.x) + Math.abs(this.y - v.y) + Math.abs(this.z - v.z);
 
-            // calculate quat * vector
+        },
 
-            var ix = qw * x + qy * z - qz * y;
-            var iy = qw * y + qz * x - qx * z;
-            var iz = qw * z + qx * y - qy * x;
-            var iw = -qx * x - qy * y - qz * z;
+        setFromSpherical: function (s) {
 
-            // calculate result * inverse quat
+            return this.setFromSphericalCoords(s.radius, s.phi, s.theta);
 
-            this.x = ix * qw + iw * -qx + iy * -qz - iz * -qy;
-            this.y = iy * qw + iw * -qy + iz * -qx - ix * -qz;
-            this.z = iz * qw + iw * -qz + ix * -qy - iy * -qx;
+        },
+
+        setFromSphericalCoords: function (radius, phi, theta) {
+
+            var sinPhiRadius = Math.sin(phi) * radius;
+
+            this.x = sinPhiRadius * Math.sin(theta);
+            this.y = Math.cos(phi) * radius;
+            this.z = sinPhiRadius * Math.cos(theta);
+
+            return this;
+
+        },
+
+        setFromCylindrical: function (c) {
+
+            return this.setFromCylindricalCoords(c.radius, c.theta, c.y);
+
+        },
+
+        setFromCylindricalCoords: function (radius, theta, y) {
+
+            this.x = radius * Math.sin(theta);
+            this.y = y;
+            this.z = radius * Math.cos(theta);
+
+            return this;
+
+        },
+
+        setFromMatrixPosition: function (m) {
+
+            var e = m.elements;
+
+            this.x = e[12];
+            this.y = e[13];
+            this.z = e[14];
+
+            return this;
+
+        },
+
+        setFromMatrixScale: function (m) {
+
+            var sx = this.setFromMatrixColumn(m, 0).length();
+            var sy = this.setFromMatrixColumn(m, 1).length();
+            var sz = this.setFromMatrixColumn(m, 2).length();
+
+            this.x = sx;
+            this.y = sy;
+            this.z = sz;
+
+            return this;
+
+        },
+
+        setFromMatrixColumn: function (m, index) {
+
+            return this.fromArray(m.elements, index * 4);
+
+        },
+
+        equals: function (v) {
+
+            return ((v.x === this.x) && (v.y === this.y) && (v.z === this.z));
+
+        },
+
+        fromArray: function (array, offset) {
+
+            if (offset === undefined) offset = 0;
+
+            this.x = array[offset];
+            this.y = array[offset + 1];
+            this.z = array[offset + 2];
+
+            return this;
+
+        },
+
+        toArray: function (array, offset) {
+
+            if (array === undefined) array = [];
+            if (offset === undefined) offset = 0;
+
+            array[offset] = this.x;
+            array[offset + 1] = this.y;
+            array[offset + 2] = this.z;
+
+            return array;
+
+        },
+
+        fromBufferAttribute: function (attribute, index, offset) {
+
+            if (offset !== undefined) {
+
+                console.warn('THREE.Vector3: offset has been removed from .fromBufferAttribute().');
+
+            }
+
+            this.x = attribute.getX(index);
+            this.y = attribute.getY(index);
+            this.z = attribute.getZ(index);
 
             return this;
 
@@ -2369,6 +2938,12 @@
 
         },
 
+        /**
+         * 计算矩阵乘积，复制给当前矩阵
+         * @param a
+         * @param b
+         * @returns {Matrix4}
+         */
         multiplyMatrices: function (a, b) {
 
             var ae = a.elements;
@@ -3545,5 +4120,1101 @@
         },
 
         onChangeCallback: function () {}
+    });
+
+    /**
+     * 图层
+     * @constructor
+     */
+    PGL.Layers = function () {
+        this.mask = 1 | 0;
+    };
+    Object.assign( PGL.Layers.prototype, {
+
+        /**
+         * 设置图层数
+         * @param channel
+         */
+        set: function ( channel ) {
+            this.mask = 1 << channel | 0;
+        },
+
+        enable: function ( channel ) {
+
+            this.mask |= 1 << channel | 0;
+
+        },
+
+        toggle: function ( channel ) {
+
+            this.mask ^= 1 << channel | 0;
+
+        },
+
+        disable: function ( channel ) {
+
+            this.mask &= ~ ( 1 << channel | 0 );
+
+        },
+
+        /**
+         * 测试当前mask和layers.mask相与是否不等于0
+         * @param layers
+         * @returns {boolean}
+         */
+        test: function ( layers ) {
+            return ( this.mask & layers.mask ) !== 0;
+        }
+
+    } );
+
+    /**
+     *
+     * @param min
+     * @param max
+     * @constructor
+     */
+    PGL.Box3 = function (min, max) {
+        this.min = (min !== undefined) ? min : new PGL.Vector3(+Infinity, +Infinity, +Infinity);
+        this.max = (max !== undefined) ? max : new PGL.Vector3(-Infinity, -Infinity, -Infinity);
+    };
+    Object.assign(PGL.Box3.prototype, {
+
+        isBox3: true,
+
+        set: function (min, max) {
+
+            this.min.copy(min);
+            this.max.copy(max);
+
+            return this;
+
+        },
+
+        /**
+         * 设置值
+         * @param array 一维数组
+         * @return {setFromArray}
+         */
+        setFromArray: function (array) {
+
+            var minX = +Infinity;
+            var minY = +Infinity;
+            var minZ = +Infinity;
+
+            var maxX = -Infinity;
+            var maxY = -Infinity;
+            var maxZ = -Infinity;
+
+            for (var i = 0, l = array.length; i < l; i += 3) {
+
+                var x = array[i];
+                var y = array[i + 1];
+                var z = array[i + 2];
+
+                if (x < minX) minX = x;
+                if (y < minY) minY = y;
+                if (z < minZ) minZ = z;
+
+                if (x > maxX) maxX = x;
+                if (y > maxY) maxY = y;
+                if (z > maxZ) maxZ = z;
+
+            }
+
+            this.min.set(minX, minY, minZ);
+            this.max.set(maxX, maxY, maxZ);
+
+            return this;
+
+        },
+
+        /**
+         * 获取包围盒子的最大最小值
+         * @param attribute
+         * @return {setFromBufferAttribute}
+         */
+        setFromBufferAttribute: function (attribute) {
+
+            var minX = +Infinity;
+            var minY = +Infinity;
+            var minZ = +Infinity;
+
+            var maxX = -Infinity;
+            var maxY = -Infinity;
+            var maxZ = -Infinity;
+
+            for (var i = 0, l = attribute.count; i < l; i++) {
+
+                var x = attribute.getX(i);
+                var y = attribute.getY(i);
+                var z = attribute.getZ(i);
+
+                if (x < minX) minX = x;
+                if (y < minY) minY = y;
+                if (z < minZ) minZ = z;
+
+                if (x > maxX) maxX = x;
+                if (y > maxY) maxY = y;
+                if (z > maxZ) maxZ = z;
+
+            }
+
+            this.min.set(minX, minY, minZ);
+            this.max.set(maxX, maxY, maxZ);
+
+            return this;
+
+        },
+
+        setFromPoints: function (points) {
+
+            this.makeEmpty();
+
+            for (var i = 0, il = points.length; i < il; i++) {
+
+                this.expandByPoint(points[i]);
+
+            }
+
+            return this;
+
+        },
+
+        setFromCenterAndSize: function () {
+
+            var v1 = new Vector3();
+
+            return function setFromCenterAndSize(center, size) {
+
+                var halfSize = v1.copy(size).multiplyScalar(0.5);
+
+                this.min.copy(center).sub(halfSize);
+                this.max.copy(center).add(halfSize);
+
+                return this;
+
+            };
+
+        }(),
+
+        /**
+         * 设置值
+         * @param object
+         * @return {*}
+         */
+        setFromObject: function (object) {
+
+            this.makeEmpty();
+
+            return this.expandByObject(object);
+
+        },
+
+        clone: function () {
+
+            return new this.constructor().copy(this);
+
+        },
+
+        copy: function (box) {
+
+            this.min.copy(box.min);
+            this.max.copy(box.max);
+
+            return this;
+
+        },
+
+        makeEmpty: function () {
+
+            this.min.x = this.min.y = this.min.z = +Infinity;
+            this.max.x = this.max.y = this.max.z = -Infinity;
+
+            return this;
+
+        },
+
+        isEmpty: function () {
+
+            // this is a more robust check for empty than ( volume <= 0 ) because volume can get positive with two negative axes
+
+            return (this.max.x < this.min.x) || (this.max.y < this.min.y) || (this.max.z < this.min.z);
+
+        },
+
+        /**
+         * 获取包围盒子的中心点
+         * @param target
+         * @return {*}
+         */
+        getCenter: function (target) {
+
+            if (target === undefined) {
+
+                console.warn('THREE.Box3: .getCenter() target is now required');
+                target = new Vector3();
+
+            }
+
+            return this.isEmpty() ? target.set(0, 0, 0) : target.addVectors(this.min, this.max).multiplyScalar(0.5);
+
+        },
+
+        getSize: function (target) {
+
+            if (target === undefined) {
+
+                console.warn('THREE.Box3: .getSize() target is now required');
+                target = new Vector3();
+
+            }
+
+            return this.isEmpty() ? target.set(0, 0, 0) : target.subVectors(this.max, this.min);
+
+        },
+
+        expandByPoint: function (point) {
+
+            this.min.min(point);
+            this.max.max(point);
+
+            return this;
+
+        },
+
+        expandByVector: function (vector) {
+
+            this.min.sub(vector);
+            this.max.add(vector);
+
+            return this;
+
+        },
+
+        expandByScalar: function (scalar) {
+
+            this.min.addScalar(-scalar);
+            this.max.addScalar(scalar);
+
+            return this;
+
+        },
+
+        expandByObject: function () {
+
+            // 计算对象（包括其子对象）的世界轴对齐边界框，
+            // 考虑对象和子对象得世界变换
+
+            var scope, i, l;
+
+            var v1 = new Vector3();
+
+            function traverse(node) {
+
+                var geometry = node.geometry;
+
+                if (geometry !== undefined) {
+
+                    if (geometry.isGeometry) {
+
+                        var vertices = geometry.vertices;
+
+                        for (i = 0, l = vertices.length; i < l; i++) {
+
+                            v1.copy(vertices[i]);
+                            v1.applyMatrix4(node.matrixWorld);
+
+                            scope.expandByPoint(v1);
+
+                        }
+
+                    }
+                    else if (geometry.isBufferGeometry) {
+
+                        var attribute = geometry.attributes.position;
+
+                        if (attribute !== undefined) {
+
+                            for (i = 0, l = attribute.count; i < l; i++) {
+
+                                v1.fromBufferAttribute(attribute, i).applyMatrix4(node.matrixWorld);
+
+                                scope.expandByPoint(v1);
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+            return function expandByObject(object) {
+
+                scope = this;
+
+                object.updateMatrixWorld(true);
+
+                object.traverse(traverse);
+
+                return this;
+
+            };
+
+        }(),
+
+        containsPoint: function (point) {
+
+            return point.x < this.min.x || point.x > this.max.x ||
+            point.y < this.min.y || point.y > this.max.y ||
+            point.z < this.min.z || point.z > this.max.z ? false : true;
+
+        },
+
+        containsBox: function (box) {
+
+            return this.min.x <= box.min.x && box.max.x <= this.max.x &&
+                this.min.y <= box.min.y && box.max.y <= this.max.y &&
+                this.min.z <= box.min.z && box.max.z <= this.max.z;
+
+        },
+
+        getParameter: function (point, target) {
+
+            // This can potentially have a divide by zero if the box
+            // has a size dimension of 0.
+
+            if (target === undefined) {
+
+                console.warn('THREE.Box3: .getParameter() target is now required');
+                target = new Vector3();
+
+            }
+
+            return target.set(
+                (point.x - this.min.x) / (this.max.x - this.min.x),
+                (point.y - this.min.y) / (this.max.y - this.min.y),
+                (point.z - this.min.z) / (this.max.z - this.min.z)
+            );
+
+        },
+
+        intersectsBox: function (box) {
+
+            // using 6 splitting planes to rule out intersections.
+            return box.max.x < this.min.x || box.min.x > this.max.x ||
+            box.max.y < this.min.y || box.min.y > this.max.y ||
+            box.max.z < this.min.z || box.min.z > this.max.z ? false : true;
+
+        },
+
+        intersectsSphere: (function () {
+
+            var closestPoint = new Vector3();
+
+            return function intersectsSphere(sphere) {
+
+                // Find the point on the AABB closest to the sphere center.
+                this.clampPoint(sphere.center, closestPoint);
+
+                // If that point is inside the sphere, the AABB and sphere intersect.
+                return closestPoint.distanceToSquared(sphere.center) <= (sphere.radius * sphere.radius);
+
+            };
+
+        })(),
+
+        intersectsPlane: function (plane) {
+
+            // We compute the minimum and maximum dot product values. If those values
+            // are on the same side (back or front) of the plane, then there is no intersection.
+
+            var min, max;
+
+            if (plane.normal.x > 0) {
+
+                min = plane.normal.x * this.min.x;
+                max = plane.normal.x * this.max.x;
+
+            } else {
+
+                min = plane.normal.x * this.max.x;
+                max = plane.normal.x * this.min.x;
+
+            }
+
+            if (plane.normal.y > 0) {
+
+                min += plane.normal.y * this.min.y;
+                max += plane.normal.y * this.max.y;
+
+            } else {
+
+                min += plane.normal.y * this.max.y;
+                max += plane.normal.y * this.min.y;
+
+            }
+
+            if (plane.normal.z > 0) {
+
+                min += plane.normal.z * this.min.z;
+                max += plane.normal.z * this.max.z;
+
+            } else {
+
+                min += plane.normal.z * this.max.z;
+                max += plane.normal.z * this.min.z;
+
+            }
+
+            return (min <= -plane.constant && max >= -plane.constant);
+
+        },
+
+        intersectsTriangle: (function () {
+
+            // triangle centered vertices
+            var v0 = new Vector3();
+            var v1 = new Vector3();
+            var v2 = new Vector3();
+
+            // triangle edge vectors
+            var f0 = new Vector3();
+            var f1 = new Vector3();
+            var f2 = new Vector3();
+
+            var testAxis = new Vector3();
+
+            var center = new Vector3();
+            var extents = new Vector3();
+
+            var triangleNormal = new Vector3();
+
+            function satForAxes(axes) {
+
+                var i, j;
+
+                for (i = 0, j = axes.length - 3; i <= j; i += 3) {
+
+                    testAxis.fromArray(axes, i);
+                    // project the aabb onto the seperating axis
+                    var r = extents.x * Math.abs(testAxis.x) + extents.y * Math.abs(testAxis.y) + extents.z * Math.abs(testAxis.z);
+                    // project all 3 vertices of the triangle onto the seperating axis
+                    var p0 = v0.dot(testAxis);
+                    var p1 = v1.dot(testAxis);
+                    var p2 = v2.dot(testAxis);
+                    // actual test, basically see if either of the most extreme of the triangle points intersects r
+                    if (Math.max(-Math.max(p0, p1, p2), Math.min(p0, p1, p2)) > r) {
+
+                        // points of the projected triangle are outside the projected half-length of the aabb
+                        // the axis is seperating and we can exit
+                        return false;
+
+                    }
+
+                }
+
+                return true;
+
+            }
+
+            return function intersectsTriangle(triangle) {
+
+                if (this.isEmpty()) {
+
+                    return false;
+
+                }
+
+                // compute box center and extents
+                this.getCenter(center);
+                extents.subVectors(this.max, center);
+
+                // translate triangle to aabb origin
+                v0.subVectors(triangle.a, center);
+                v1.subVectors(triangle.b, center);
+                v2.subVectors(triangle.c, center);
+
+                // compute edge vectors for triangle
+                f0.subVectors(v1, v0);
+                f1.subVectors(v2, v1);
+                f2.subVectors(v0, v2);
+
+                // test against axes that are given by cross product combinations of the edges of the triangle and the edges of the aabb
+                // make an axis testing of each of the 3 sides of the aabb against each of the 3 sides of the triangle = 9 axis of separation
+                // axis_ij = u_i x f_j (u0, u1, u2 = face normals of aabb = x,y,z axes vectors since aabb is axis aligned)
+                var axes = [
+                    0, -f0.z, f0.y, 0, -f1.z, f1.y, 0, -f2.z, f2.y,
+                    f0.z, 0, -f0.x, f1.z, 0, -f1.x, f2.z, 0, -f2.x,
+                    -f0.y, f0.x, 0, -f1.y, f1.x, 0, -f2.y, f2.x, 0
+                ];
+                if (!satForAxes(axes)) {
+
+                    return false;
+
+                }
+
+                // test 3 face normals from the aabb
+                axes = [1, 0, 0, 0, 1, 0, 0, 0, 1];
+                if (!satForAxes(axes)) {
+
+                    return false;
+
+                }
+
+                // finally testing the face normal of the triangle
+                // use already existing triangle edge vectors here
+                triangleNormal.crossVectors(f0, f1);
+                axes = [triangleNormal.x, triangleNormal.y, triangleNormal.z];
+                return satForAxes(axes);
+
+            };
+
+        })(),
+
+        clampPoint: function (point, target) {
+
+            if (target === undefined) {
+
+                console.warn('THREE.Box3: .clampPoint() target is now required');
+                target = new Vector3();
+
+            }
+
+            return target.copy(point).clamp(this.min, this.max);
+
+        },
+
+        distanceToPoint: function () {
+
+            var v1 = new Vector3();
+
+            return function distanceToPoint(point) {
+
+                var clampedPoint = v1.copy(point).clamp(this.min, this.max);
+                return clampedPoint.sub(point).length();
+
+            };
+
+        }(),
+
+        getBoundingSphere: function () {
+
+            var v1 = new Vector3();
+
+            return function getBoundingSphere(target) {
+
+                if (target === undefined) {
+
+                    console.warn('THREE.Box3: .getBoundingSphere() target is now required');
+                    target = new Sphere();
+
+                }
+
+                this.getCenter(target.center);
+
+                target.radius = this.getSize(v1).length() * 0.5;
+
+                return target;
+
+            };
+
+        }(),
+
+        intersect: function (box) {
+
+            this.min.max(box.min);
+            this.max.min(box.max);
+
+            // ensure that if there is no overlap, the result is fully empty, not slightly empty with non-inf/+inf values that will cause subsequence intersects to erroneously return valid values.
+            if (this.isEmpty()) this.makeEmpty();
+
+            return this;
+
+        },
+
+        union: function (box) {
+
+            this.min.min(box.min);
+            this.max.max(box.max);
+
+            return this;
+
+        },
+
+        applyMatrix4: function () {
+
+            var points = [
+                new Vector3(),
+                new Vector3(),
+                new Vector3(),
+                new Vector3(),
+                new Vector3(),
+                new Vector3(),
+                new Vector3(),
+                new Vector3()
+            ];
+
+            return function applyMatrix4(matrix) {
+
+                // transform of empty box is an empty box.
+                if (this.isEmpty()) return this;
+
+                // NOTE: I am using a binary pattern to specify all 2^3 combinations below
+                points[0].set(this.min.x, this.min.y, this.min.z).applyMatrix4(matrix); // 000
+                points[1].set(this.min.x, this.min.y, this.max.z).applyMatrix4(matrix); // 001
+                points[2].set(this.min.x, this.max.y, this.min.z).applyMatrix4(matrix); // 010
+                points[3].set(this.min.x, this.max.y, this.max.z).applyMatrix4(matrix); // 011
+                points[4].set(this.max.x, this.min.y, this.min.z).applyMatrix4(matrix); // 100
+                points[5].set(this.max.x, this.min.y, this.max.z).applyMatrix4(matrix); // 101
+                points[6].set(this.max.x, this.max.y, this.min.z).applyMatrix4(matrix); // 110
+                points[7].set(this.max.x, this.max.y, this.max.z).applyMatrix4(matrix); // 111
+
+                this.setFromPoints(points);
+
+                return this;
+
+            };
+
+        }(),
+
+        translate: function (offset) {
+
+            this.min.add(offset);
+            this.max.add(offset);
+
+            return this;
+
+        },
+
+        equals: function (box) {
+
+            return box.min.equals(this.min) && box.max.equals(this.max);
+
+        }
+
+    });
+
+    /**
+     * 包围球
+     * @param center
+     * @param radius
+     * @constructor
+     */
+    PGL.Sphere =  function (center, radius) {
+        this.center = (center !== undefined) ? center : new PGL.Vector3();
+        this.radius = (radius !== undefined) ? radius : 0;
+    };
+    Object.assign(PGL.Sphere.prototype, {
+
+        set: function (center, radius) {
+
+            this.center.copy(center);
+            this.radius = radius;
+
+            return this;
+
+        },
+
+        /**
+         * 设置圆心和半径
+         */
+        setFromPoints: function () {
+
+            var box = new PGL.Box3();
+
+            return function setFromPoints(points, optionalCenter) {
+
+                var center = this.center;
+
+                if (optionalCenter !== undefined) {
+
+                    center.copy(optionalCenter);
+
+                } else {
+
+                    box.setFromPoints(points).getCenter(center);
+
+                }
+
+                var maxRadiusSq = 0;
+
+                for (var i = 0, il = points.length; i < il; i++) {
+
+                    maxRadiusSq = Math.max(maxRadiusSq, center.distanceToSquared(points[i]));
+
+                }
+
+                this.radius = Math.sqrt(maxRadiusSq);
+
+                return this;
+
+            };
+
+        }(),
+
+        clone: function () {
+
+            return new this.constructor().copy(this);
+
+        },
+
+        copy: function (sphere) {
+
+            this.center.copy(sphere.center);
+            this.radius = sphere.radius;
+
+            return this;
+
+        },
+
+        empty: function () {
+
+            return (this.radius <= 0);
+
+        },
+
+        containsPoint: function (point) {
+
+            return (point.distanceToSquared(this.center) <= (this.radius * this.radius));
+
+        },
+
+        distanceToPoint: function (point) {
+
+            return (point.distanceTo(this.center) - this.radius);
+
+        },
+
+        intersectsSphere: function (sphere) {
+
+            var radiusSum = this.radius + sphere.radius;
+
+            return sphere.center.distanceToSquared(this.center) <= (radiusSum * radiusSum);
+
+        },
+
+        intersectsBox: function (box) {
+
+            return box.intersectsSphere(this);
+
+        },
+
+        intersectsPlane: function (plane) {
+
+            return Math.abs(plane.distanceToPoint(this.center)) <= this.radius;
+
+        },
+
+        clampPoint: function (point, target) {
+
+            var deltaLengthSq = this.center.distanceToSquared(point);
+
+            if (target === undefined) {
+
+                console.warn('THREE.Sphere: .clampPoint() target is now required');
+                target = new Vector3();
+
+            }
+
+            target.copy(point);
+
+            if (deltaLengthSq > (this.radius * this.radius)) {
+
+                target.sub(this.center).normalize();
+                target.multiplyScalar(this.radius).add(this.center);
+
+            }
+
+            return target;
+
+        },
+
+        getBoundingBox: function (target) {
+
+            if (target === undefined) {
+
+                console.warn('THREE.Sphere: .getBoundingBox() target is now required');
+                target = new Box3();
+
+            }
+
+            target.set(this.center, this.center);
+            target.expandByScalar(this.radius);
+
+            return target;
+
+        },
+
+        applyMatrix4: function (matrix) {
+
+            this.center.applyMatrix4(matrix);
+            this.radius = this.radius * matrix.getMaxScaleOnAxis();
+
+            return this;
+
+        },
+
+        translate: function (offset) {
+
+            this.center.add(offset);
+
+            return this;
+
+        },
+
+        equals: function (sphere) {
+
+            return sphere.center.equals(this.center) && (sphere.radius === this.radius);
+
+        }
+
+    });
+
+    /**
+     *
+     * @param normal
+     * @param constant
+     * @constructor
+     */
+    PGL.Plane = function (normal, constant) {
+        // normal is assumed to be normalized
+        this.normal = (normal !== undefined) ? normal : new PGL.Vector3(1, 0, 0);
+        this.constant = (constant !== undefined) ? constant : 0;
+    };
+    Object.assign(PGL.Plane.prototype, {
+
+        set: function (normal, constant) {
+
+            this.normal.copy(normal);
+            this.constant = constant;
+
+            return this;
+
+        },
+
+        /**
+         * 设置定义平面的各个组件。
+         * @param x
+         * @param y
+         * @param z
+         * @param w
+         * @return {setComponents}
+         */
+        setComponents: function (x, y, z, w) {
+            this.normal.set(x, y, z);
+            this.constant = w;
+
+            return this;
+        },
+
+        setFromNormalAndCoplanarPoint: function (normal, point) {
+
+            this.normal.copy(normal);
+            this.constant = -point.dot(this.normal);
+
+            return this;
+
+        },
+
+        setFromCoplanarPoints: function () {
+
+            var v1 = new Vector3();
+            var v2 = new Vector3();
+
+            return function setFromCoplanarPoints(a, b, c) {
+
+                var normal = v1.subVectors(c, b).cross(v2.subVectors(a, b)).normalize();
+
+                // Q: should an error be thrown if normal is zero (e.g. degenerate plane)?
+
+                this.setFromNormalAndCoplanarPoint(normal, a);
+
+                return this;
+
+            };
+
+        }(),
+
+        clone: function () {
+
+            return new this.constructor().copy(this);
+
+        },
+
+        copy: function (plane) {
+
+            this.normal.copy(plane.normal);
+            this.constant = plane.constant;
+
+            return this;
+
+        },
+
+        normalize: function () {
+
+            // Note: will lead to a divide by zero if the plane is invalid.
+
+            var inverseNormalLength = 1.0 / this.normal.length();
+            this.normal.multiplyScalar(inverseNormalLength);
+            this.constant *= inverseNormalLength;
+
+            return this;
+
+        },
+
+        negate: function () {
+
+            this.constant *= -1;
+            this.normal.negate();
+
+            return this;
+
+        },
+
+        distanceToPoint: function (point) {
+
+            return this.normal.dot(point) + this.constant;
+
+        },
+
+        distanceToSphere: function (sphere) {
+
+            return this.distanceToPoint(sphere.center) - sphere.radius;
+
+        },
+
+        projectPoint: function (point, target) {
+
+            if (target === undefined) {
+
+                console.warn('THREE.Plane: .projectPoint() target is now required');
+                target = new Vector3();
+
+            }
+
+            return target.copy(this.normal).multiplyScalar(-this.distanceToPoint(point)).add(point);
+
+        },
+
+        intersectLine: function () {
+
+            var v1 = new Vector3();
+
+            return function intersectLine(line, target) {
+
+                if (target === undefined) {
+
+                    console.warn('THREE.Plane: .intersectLine() target is now required');
+                    target = new Vector3();
+
+                }
+
+                var direction = line.delta(v1);
+
+                var denominator = this.normal.dot(direction);
+
+                if (denominator === 0) {
+
+                    // line is coplanar, return origin
+                    if (this.distanceToPoint(line.start) === 0) {
+
+                        return target.copy(line.start);
+
+                    }
+
+                    // Unsure if this is the correct method to handle this case.
+                    return undefined;
+
+                }
+
+                var t = -(line.start.dot(this.normal) + this.constant) / denominator;
+
+                if (t < 0 || t > 1) {
+
+                    return undefined;
+
+                }
+
+                return target.copy(direction).multiplyScalar(t).add(line.start);
+
+            };
+
+        }(),
+
+        intersectsLine: function (line) {
+
+            // Note: this tests if a line intersects the plane, not whether it (or its end-points) are coplanar with it.
+
+            var startSign = this.distanceToPoint(line.start);
+            var endSign = this.distanceToPoint(line.end);
+
+            return (startSign < 0 && endSign > 0) || (endSign < 0 && startSign > 0);
+
+        },
+
+        intersectsBox: function (box) {
+
+            return box.intersectsPlane(this);
+
+        },
+
+        intersectsSphere: function (sphere) {
+
+            return sphere.intersectsPlane(this);
+
+        },
+
+        coplanarPoint: function (target) {
+
+            if (target === undefined) {
+
+                console.warn('THREE.Plane: .coplanarPoint() target is now required');
+                target = new Vector3();
+
+            }
+
+            return target.copy(this.normal).multiplyScalar(-this.constant);
+
+        },
+
+        applyMatrix4: function () {
+
+            var v1 = new PGL.Vector3();
+            var m1 = new PGL.Matrix3();
+
+            return function applyMatrix4(matrix, optionalNormalMatrix) {
+
+                var normalMatrix = optionalNormalMatrix || m1.getNormalMatrix(matrix);
+
+                var referencePoint = this.coplanarPoint(v1).applyMatrix4(matrix);
+
+                var normal = this.normal.applyMatrix3(normalMatrix).normalize();
+
+                this.constant = -referencePoint.dot(normal);
+
+                return this;
+
+            };
+
+        }(),
+
+        translate: function (offset) {
+
+            this.constant -= offset.dot(this.normal);
+
+            return this;
+
+        },
+
+        equals: function (plane) {
+
+            return plane.normal.equals(this.normal) && (plane.constant === this.constant);
+
+        }
+
     });
 })(PGL);

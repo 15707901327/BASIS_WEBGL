@@ -1,409 +1,460 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>主页</title>
-  <link rel="stylesheet" href="css/base.css">
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <link rel="stylesheet" href="css/base.css">
 </head>
 <body>
 <div class="l-r-wrapper">
-  <div class="left">
-    <h4><a href="#base">基本概念</a></h4>
-    <ul class="ul-1">
-      <li><a href="#WebGL">WebGL程序</a></li>
-      <li><a href="#buffer">缓存区对象</a></li>
-      <li><a href="#WebGL_System">着色器</a></li>
-      <li><a href="#visualSpace">相机的可视空间</a></li>
-      <li><a href="WebGL_API/WebGL可以绘制的基本图形.html" target="_blank">WebGL绘制的基本图形</a></li>
-      <li><a href="WebGL_API/canvas标签.html" target="_blank">canvas标签</a></li>
-      <li><a href="#type_array">类型化数组</a></li>
-    </ul>
-    <h4><a href="#WebGL_Event">WebGL相关事件</a></h4>
-    <ul class="ul-1">
-      <li><a href="#ContextLost">上下文丢失事件</a></li>
-    </ul>
-    <h4><a href="#inner">WebGL内置功能</a></h4>
-    <ul class="ul-1">
-      <li><a href="#depth_test">隐藏面消除</a></li>
-      <li><a href="#blendFunc">混合功能</a></li>
-      <li><a href="#ploygonOffset">多边形偏移机制</a></li>
-      <li><a href="#polygonCulling">多边形剔除</a></li>
-    </ul>
-    <h4><a href="WebGL_API/GraphicsDOC/index.html" target="_blank">图形学（Graphics）</a></h4>
-    <h4><a href="canvas%202D%20API/ctx.html" target="_blank">canvas 2D API</a></h4>
-    <h4><a href="WebGL_API/javaScript%20API/gl.html" target="_blank">WebGL API</a></h4>
-    <h4><a href="#WebGL-example">WebGL实例</a></h4>
-    <ul class="ul-1">
-      <li><a href="#example_1">WebGL编程指南</a></li>
-      <li><a href="#example_2">WebGL水箱效果</a></li>
-      <li><a href="PGL/index.html" target="_blank">PGL实例</a></li>
-      <li><a href="交互式计算机图形学第七版/index.html" target="_blank">交互式计算机图形学第七版</a></li>
-    </ul>
-  </div>
-  <div class="right">
-    <section id="base" class="section1">
-      <h4 class="title">WebGL中的基本概念</h4>
-      <section>
-        <h4>基本概念</h4>
-        <div class="content">
-          <strong>绘图</strong>
-          <p>WebGl在颜色缓冲区中进行绘图，在开启隐藏面消除功能时，还会用到深度缓冲区。总之，绘图的结果图像是存储在颜色缓冲区中的。</p>
-          <strong>图元光栅化:</strong>
-          <p>发生在顶点着色器和片元着色器之间的从图形到片元的转化过程。</p>
-          <strong>顶点（vertex)</strong>
-          <p>指二维或三维空间中的一个点，比如二维或三维图形的端点或交点。</p>
-          <strong>片元（Fragment）：</strong>
-          <p>片元就是显示在屏幕上的一个像素（严格意义上来说，片元包括这个像素的位置、颜色和其他信息）。</p>
-          <strong>图形装配过程：</strong>
-          <p>将孤立的顶点坐标装配成几何图形。</p>
-          <strong>光栅化过程：</strong>
-          <p>将装配好的几何图形转化为片元。一旦光栅化过程结束后，程序就开始逐片元调用片元着色器。</p>
-        </div>
-      </section>
-      <section id="WebGL">
-        <h4>WebGL程序</h4>
-        <p>WebGL程序包括运行在浏览器中的JavaScript和运行在WebGL系统中的<a href="#WebGL_System">着色器程序</a>这两个部分。 </p>
-        <div class="content">
-          <strong>将信息从JavaScript程序中传递给顶点着色器，由两种方式可以做到：</strong>
-          <ul class="ul-1">
-            <li><a href="WebGL_API/shader API/存储限定字.html#attribute" target="_blank">attribute变量</a></li>
-            <li><a href="WebGL_API/shader API/存储限定字.html#uniform" target="_blank">uniform变量</a></li>
-          </ul>
-        </div>
-      </section>
-      <section id="buffer">
-        <h4>缓存区对象</h4>
-        <p>缓存区对象是WebGL系统中的一块内存区域，我们可以一次性地向缓存区对象中填充大量的顶点数据，然后将这些数据保存在其中，供顶点使用。</p>
-        <div class="content">
-          <strong>使用缓冲区对象向着色器中传入多个数据步骤：</strong>
-          <ul class="ul-1-num">
-            <li>创建缓冲区对象（<a href="WebGL_API/javaScript API/gl.html#createBuffer" target="_blank">gl.createBuffer()</a>）</li>
-            <li>绑定缓冲区对象（<a href="WebGL_API/javaScript API/gl.html#bindBuffer" target="_blank">gl.bindBuffer()</a>）</li>
-            <li>将数据写入缓冲区对象（<a href="WebGL_API/javaScript API/gl.html#bufferData" target="_blank">gl.bufferData()</a>）</li>
-            <li>将缓冲区对象分配给一个attribute变量（<a href="WebGL_API/javaScript API/gl.html#vertexAttribPointer" target="_blank">gl.vertexAttribPointer()</a>）</li>
-            <li>开启attribute变量（<a href="WebGL_API/javaScript API/gl.html#enableVertexAttribArray" target="_blank">gl.enableVertexAttribArray()</a>）</li>
-          </ul>
-          <strong>实例</strong>
-          <ul class="ul-1-num">
-            <li><a href="WebGL编程指南/ch3/MultiPoints.html" target="_blank">显示多个顶点</a></li>
-          </ul>
-        </div>
-      </section>
-      <section id="WebGL_System">
-        <h4>着色器</h4>
-        <p>WebGL需要两种着色器，即顶点着色器（Vertex shader）和片元着色器（Fragment shader）。着色器运行在WebGL系统中。</p>
-        <div class="content">
-          <strong>顶点着色器（Vertex shader）</strong>
-          <p>顶点着色器用用来描述顶点特性（如位置、颜色等）的程序。</p>
-          <strong>片元着色器（Fragment shader）。</strong>
-          <p>使其显示在屏幕上。进行逐片元处理过程如光照的程序。</p>
-          <strong>WebGL中的着色器详细说明：</strong>
-          <p><a href="WebGL_API/shader%20API/index.html" target="_blank">shader（GLSL ES）</a></p>
-        </div>
-      </section>
-      <section id="visualSpace">
-        <h4>相机的可视空间</h4>
-        <div class="content">
-          <strong>两类常用的可视空间：</strong>
-          <ul class="ul-1-num">
-            <li>长方形可视空间，也称盒状空间，由正射投影（orthographic projection）产生。</li>
-            <li>四棱锥/金字塔可视空间，由透视投影(perspective projection)产生</li>
-          </ul>
-        </div>
-      </section>
-      <section id="type_array">
-        <h4>类型化数组</h4>
-        <p>WebGL通常需要同时处理大量相同类型的数据，为了优化性能，WebGL为每种基本数据类型引入了一种特殊的数组（类型化数组）。</p>
-        <div class="content">
-          <strong>WebGL使用的各种类型化数组：</strong>
-          <table border="1">
-            <tr>
-              <th colspan="3">
-                WebGL使用的各种类型化数组
-              </th>
-            </tr>
-            <tr>
-              <th>类型数组</th>
-              <th>每个元素所占据的字节数</th>
-              <th>描述（C语言中的数据类型）</th>
-            </tr>
-            <tr>
-              <td>Int8Array</td>
-              <td>1</td>
-              <td>8位整型数（signed char）</td>
-            </tr>
-            <tr>
-              <td>UInt8Array</td>
-              <td>1</td>
-              <td>8位无符号整型数（unsigned char）</td>
-            </tr>
-            <tr>
-              <td>Int16Array</td>
-              <td>2</td>
-              <td>16位整型数（signed short）</td>
-            </tr>
-            <tr>
-              <td>UInt16Array</td>
-              <td>2</td>
-              <td>16位无符号整型数（unsigned short）</td>
-            </tr>
-            <tr>
-              <td>Int32Array</td>
-              <td>4</td>
-              <td>32位整型数（signed int）</td>
-            </tr>
-            <tr>
-              <td>UInt32Array</td>
-              <td>4</td>
-              <td>32位无符号整型数（unsigned int）</td>
-            </tr>
-            <tr>
-              <td>Float32Array</td>
-              <td>4</td>
-              <td>单精度32位浮点数（float）</td>
-            </tr>
-            <tr>
-              <td>Float64Array</td>
-              <td>8</td>
-              <td>双精度64位浮点数（double）</td>
-            </tr>
-          </table>
-          <strong>类型化数组的方法、属性和常量：</strong>
-          <table border="1">
-            <tr>
-              <th colspan="3">类型化数组的方法、属性和常量</th>
-            </tr>
-            <tr>
-              <th>方法、属性和常量</th>
-              <th>描述</th>
-              <th>实例</th>
-            </tr>
-            <tr>
-              <td>get(index)</td>
-              <td>获取第index个元素值</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>set(index,value)</td>
-              <td>设置第index个元素的值value</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>set(array,offset)</td>
-              <td>从第offset个元素开始将数组array中的值填充进去</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>length</td>
-              <td>数组的长度</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>BYTES_PER_ELEMENT</td>
-              <td>数组中每个元素所占据的字节数</td>
-              <td>
-                <ul>
-                  <li><a href="../WebGL编程指南/ch5/MultiAttributeSize_interleaved.html">使用一个类型化数组来存储顶点的位置和顶点的大小</a></li>
-                </ul>
-              </td>
-            </tr>
-          </table>
-          <strong>类型化数组的创建</strong>
-          <p>类型化数组可以通过new运算符调用构造函数并传入数据而被创造出来。也可以指定数组元素的个数来创建一个空的类型化的数组。</p>
-          <strong>注意：</strong>
-          <ul class="ul-1">
-            <li>
-              类型化数组不能使用[]运算符（这样创建的是一个普通的数组）
-            </li>
-          </ul>
-        </div>
-      </section>
-    </section>
-    <section id="WebGL_Event" class="section1">
-      <h4 class="title">WebGL相关事件</h4>
-      <section id="ContextLost">
-        <h4>上下文丢失事件</h4>
-        <div class="content">
-          <strong>说明</strong>
-          <table border="1">
-            <tr>
-              <th colspan="2">上下文丢失事件</th>
-            </tr>
-            <tr>
-              <th>事件</th>
-              <th>描述</th>
-            </tr>
-            <tr>
-              <td>webglcontextlost</td>
-              <td>当WebGl上下文丢失时触发</td>
-            </tr>
-            <tr>
-              <td>webglcontextrestored</td>
-              <td>当浏览器完成WebGL系统的重置后触发</td>
-            </tr>
-          </table>
-          <strong>使用</strong>
-          <p>只能使用addEventListener来注册事件</p>
-          <strong>实例</strong>
-          <ul class="ul-1-num">
-            <li><a href="WebGL编程指南/ch10/RotatingTriangle_contextLost.html" target="_blank">上下文丢失</a></li>
-          </ul>
-        </div>
-      </section>
-    </section>
-    <section id="JavaScript" class="section1">
-      <div class="title">javaScript相关函数概念</div>
-      <section>
-        <h4>着色器对象（shader object）</h4>
-        <p>着色器对象管理一个顶点着色器或一个片元着色器。每一个着色器都有一个着色器对象。</p>
-      </section>
-      <section>
-        <h4>程序对象（program object）</h4>
-        <p>管理着色器对象的容器。WebGL中，一个程序对象必须包含一个顶点着色器和一个片元着色器。</p>
-        <p><img src="img/9_10.png"></p>
-      </section>
-      <section>
-        <h4>帧缓冲对象（framebuffer object）</h4>
-        <p>可以用来代替颜色缓冲区或深度缓冲区。绘制在帧缓冲区中的对象并不会直接显示在canvas上，你可以先对帧缓冲区中的内容进行一些处理再显示，或则直接用其中的内容作为纹理图像.
-          在帧缓冲区中进行绘制的过程又称为离屏绘制（offscreen drawing）。绘制操作不是直接发生在帧缓冲区中的，而是发生在帧缓冲区所关联（attachment）的对象上。</p>
-        <div class="content">
-          <strong>一个帧缓冲区有三个关联对象：</strong>
-          <ul class="ul-1">
-            <li>颜色关联对象（color attachment）,对应颜色缓冲区</li>
-            <li>深度关联对象（depth attachment）,对应深度缓冲区</li>
-            <li>模板关联对象（stencil attachment）,对应模板缓冲区</li>
-          </ul>
-          <strong>每个关联对象的类型:</strong>
-          <ul class="ul-1">
-            <li>纹理对象</li>
-            <li>渲染缓冲区对象（renderbuffer object）</li>
-          </ul>
-        </div>
-      </section>
-      <section>
-        <h4>渲染缓冲区对象（renderbuffer object）</h4>
-        <p>表示一种更佳通用的绘图区域，可以向其中写入多种数据。</p>
-      </section>
-    </section>
-    <section id="inner" class="section1">
-      <div class="title">WebGL内置功能</div>
-      <section id="blendFunc">
-        <h4>混合功能</h4>
-        <p>实现半透明效果。</p>
-        <div class="content">
-          <strong>启动功能</strong>
-          <ul class="ul-1-num">
-            <li>
-              开启混合功能<br>
-              <a href="WebGL%20API/javaScript%20API/gl.html#enable">gl.enable(gl.BLEND)</a>
-            </li>
-            <li>
-              指定混合函数<br>
-              <a href="WebGL%20API/javaScript%20API/gl.html#blendFunc">gl.blendFunc(gl.SRC_ALPHA,
-                gl.ONE_MINUS_SRC_ALPHA)</a>
-            </li>
-          </ul>
-          <strong>实例</strong>
-          <ul class="ul-1-num">
-            <li><a href="WebGL编程指南/ch10/LookAtBlendedTriangles.html" target="_blank">α混合</a></li>
-          </ul>
-          <strong>透明与不透明物体共存:</strong>
-          <ul class="ul-1-num">
-            <li>
-              开启隐藏面消除功能<br>
-              <a href="WebGL%20API/javaScript%20API/gl.html#enable">gl.enable(DEPTH_TEST)</a>
-            </li>
-            <li>
-              绘制所有不透明的物体<br>
-            </li>
-            <li>
-              锁定用于进行隐藏面消除的深度缓存区的写入操着，使之只读。<br>
-              <a href="WebGL%20API/javaScript%20API/gl.html#depthMask">gl.depthMask(false)</a>
-            </li>
-            <li>绘制所有半透明的物体（α小于1.0），注意他们应当按照深度排序，然后从后向前绘制</li>
-            <li>
-              释放深度缓存区，使之可读可写。<br>
-              <a href="WebGL%20API/javaScript%20API/gl.html#depthMask">gl.depthMask(false)</a>
-            </li>
-          </ul>
-        </div>
-      </section>
-      <section id="depth_test">
-        <h4>隐藏面消除</h4>
-        <p>可以消除那些被遮挡的表面，绘制时，就不需要顾及各个物体在缓存区中的顺序。</p>
-        <div class="content">
-          <strong>启动功能</strong>
-          <ul class="ul-1-num">
-            <li>
-              开启隐藏面消除功能<br>
-              <a href="WebGL%20API/javaScript%20API/gl.html#enable">gl.enable(DEPTH_TEST)</a>
-            </li>
-            <li>
-              在绘制之前，清除深度缓存区<br>
-              <a href="WebGL%20API/javaScript%20API/gl.html#clear">gl.clear(gl.DEPTH_BUFFER_BIT)</a>
-            </li>
-          </ul>
-          <strong>实例</strong>
-          <ul class="ul-1-num">
-            <li><a href="WebGL编程指南/ch07/DepthBuffer.html" target="_blank">隐藏面消除</a></li>
-          </ul>
-          <strong>问题:</strong>
-          <ul class="ul-1-num">
-            <li>
-              深度冲突：
-              <p>在使用隐藏面消除时，当几何图形或物体的两个表面极为接近时，就会发生深度冲突的问题.</p>
-              <p>WebGL提供了一种<a href="#ploygonOffset">多边形偏移</a>的机制来解决这个问题。</p>
-            </li>
-          </ul>
-        </div>
-      </section>
-      <section id="ploygonOffset">
-        <h4>多边形偏移</h4>
-        <p>在使用隐藏面消除时，解决深度缓存的问题</p>
-        <div class="content">
-          <strong>启动功能</strong>
-          <ul class="ul-1-num">
-            <li>
-              启动多边形偏移<br>
-              <a href="WebGL%20API/javaScript%20API/gl.html#enable">gl.enable(gl.POLYGON_OFFSET_FILL)</a>
-            </li>
-            <li>
-              在绘制之前，指定用来计算偏移量的参数<br>
-              <a href="WebGL%20API/javaScript%20API/gl.html#polygonOffset">gl.polygonOffset(1.0,1.0)</a>
-            </li>
-          </ul>
-          <strong>实例</strong>
-          <ul class="ul-1-num">
-            <li><a href="WebGL编程指南/ch07/Zfighting.html" target="_blank">深度缓存</a></li>
-          </ul>
-        </div>
-      </section>
-      <section id="polygonCulling">
-        <h4>多边形剔除</h4>
-        <p>多边形剔除可以用来减少渲染的面</p>
-      </section>
-    </section>
-    <section id="WebGL-example" class="section1">
-      <div class="title">WebGL相关实例</div>
-      <section id="example_1">
-        <h4>WebGL编程指南</h4>
-        <div class="content">
-          <ul>
-            <li><a href="WebGL编程指南/index.html" target="_blank">WebGL编程指南实例</a></li>
-            <li><a href="WebGL编程指南/lib/cuon-matrix说明.html" target="_blank">矩阵库说明（cuon-matrix.js）</a></li>
-          </ul>
-        </div>
-      </section>
-      <section id="example_2">
-        <h4>水箱效果</h4>
-        <div class="content">
-          <ul>
-            <li><a href="example/webgl-water/index.html" target="_blank">水箱效果</a></li>
-          </ul>
-        </div>
-      </section>
-    </section>
-  </div>
+    <div class="left">
+        <h4><a href="#basicConcept">基本概念</a></h4>
+        <ul class="ul-1">
+            <li><a href="#pipeline">渲染管线</a></li>
+            <li><a href="#WebGL">WebGL程序</a></li>
+            <li><a href="#buffer">缓存区对象</a></li>
+            <li><a href="#WebGL_System">着色器</a></li>
+            <li><a href="#camera">相机</a></li>
+            <li><a href="WebGL_API/WebGL可以绘制的基本图形.html" target="_blank">WebGL绘制的基本图形</a></li>
+            <li><a href="WebGL_API/canvas标签.html" target="_blank">canvas标签</a></li>
+            <li><a href="#type_array">类型化数组</a></li>
+        </ul>
+        <h4><a href="#WebGL_Event">WebGL相关事件</a></h4>
+        <ul class="ul-1">
+            <li><a href="#ContextLost">上下文丢失事件</a></li>
+        </ul>
+        <h4><a href="#inner">WebGL内置功能</a></h4>
+        <ul class="ul-1">
+            <li><a href="#depth_test">隐藏面消除</a></li>
+            <li><a href="#blendFunc">混合功能</a></li>
+            <li><a href="#ploygonOffset">多边形偏移机制</a></li>
+            <li><a href="#polygonCulling">多边形剔除</a></li>
+        </ul>
+        <h4><a href="WebGL_API/GraphicsDOC/index.html" target="_blank">图形学（Graphics）</a></h4>
+        <h4><a href="canvas%202D%20API/ctx.html" target="_blank">canvas 2D API</a></h4>
+        <h4><a href="WebGL_API/javaScript%20API/gl.html" target="_blank">WebGL API</a></h4>
+        <h4><a href="#WebGL-example">WebGL实例</a></h4>
+        <ul class="ul-1">
+            <li><a href="#example_1">WebGL编程指南</a></li>
+            <li><a href="#example_2">WebGL水箱效果</a></li>
+            <li><a href="PGL/index.html" target="_blank">PGL实例</a></li>
+            <li><a href="交互式计算机图形学第七版/index.html" target="_blank">交互式计算机图形学第七版</a></li>
+        </ul>
+    </div>
+    <div class="right">
+        <section id="basicConcept" class="section1">
+            <h4 class="title">WebGL中的基本概念</h4>
+            <section id="pipeline">
+                <h4>渲染管线</h4>
+                <div class="content">
+                    <div><img src="img/pipeline.png"/></div>
+                    <p>渲染管线指的是WebGL程序的执行过程，如上图所示，主要分为 4 个步骤：</p>
+                    <ul class="ul-1-num">
+                        <li>顶点着色器的处理，主要是一组矩阵变换操作，用来把3D模型（顶点和原型）投影到viewport上，输出是一个个的多边形，比如三角形。</li>
+                        <li>光栅化，也就是把三角形连接区域按一定的粒度逐行转化成片元（fragement），类似于2D空间中，可以把这些片元看做是3D空间的一个像素点。</li>
+                        <li>片元着色器的处理，为每个片元添加颜色或者纹理。只要给出纹理或者颜色，以及纹理坐标(uv)，管线就会根据纹理坐标进行插值运算，将纹理或者图片着色在相应的片元上。</li>
+                        <li>把3D空间的片元合并输出为2D像素数组并显示在屏幕上。</li>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h4>基本概念</h4>
+                <div class="content">
+                    <strong>绘图</strong>
+                    <p>WebGl在颜色缓冲区中进行绘图，在开启隐藏面消除功能时，还会用到深度缓冲区。总之，绘图的结果图像是存储在颜色缓冲区中的。</p>
+                    <strong>图元光栅化:</strong>
+                    <p>发生在顶点着色器和片元着色器之间的从图形到片元的转化过程。</p>
+                    <strong>顶点（vertex)</strong>
+                    <p>指二维或三维空间中的一个点，比如二维或三维图形的端点或交点。</p>
+                    <strong>片元（Fragment）：</strong>
+                    <p>片元就是显示在屏幕上的一个像素（严格意义上来说，片元包括这个像素的位置、颜色和其他信息）。</p>
+                    <strong>图形装配过程：</strong>
+                    <p>将孤立的顶点坐标装配成几何图形。</p>
+                    <strong>光栅化过程：</strong>
+                    <p>将装配好的几何图形转化为片元。一旦光栅化过程结束后，程序就开始逐片元调用片元着色器。</p>
+                </div>
+            </section>
+            <section id="WebGL">
+                <h4>WebGL程序</h4>
+                <p>WebGL程序包括运行在浏览器中的JavaScript和运行在WebGL系统中的<a href="#WebGL_System">着色器程序</a>这两个部分。 </p>
+                <div class="content">
+                    <strong>将信息从JavaScript程序中传递给顶点着色器，由两种方式可以做到：</strong>
+                    <ul class="ul-1">
+                        <li><a href="WebGL_API/shader API/存储限定字.html#attribute" target="_blank">attribute变量</a></li>
+                        <li><a href="WebGL_API/shader API/存储限定字.html#uniform" target="_blank">uniform变量</a></li>
+                    </ul>
+                </div>
+            </section>
+            <section id="buffer">
+                <h4>缓存区对象</h4>
+                <p>缓存区对象是WebGL系统中的一块内存区域，我们可以一次性地向缓存区对象中填充大量的顶点数据，然后将这些数据保存在其中，供顶点使用。</p>
+                <div class="content">
+                    <strong>使用缓冲区对象向着色器中传入多个数据步骤：</strong>
+                    <ul class="ul-1-num">
+                        <li>创建缓冲区对象（<a href="WebGL_API/javaScript API/gl.html#createBuffer" target="_blank">gl.createBuffer()</a>）
+                        </li>
+                        <li>绑定缓冲区对象（<a href="WebGL_API/javaScript API/gl.html#bindBuffer" target="_blank">gl.bindBuffer()</a>）
+                        </li>
+                        <li>将数据写入缓冲区对象（<a href="WebGL_API/javaScript API/gl.html#bufferData" target="_blank">gl.bufferData()</a>）
+                        </li>
+                        <li>将缓冲区对象分配给一个attribute变量（<a href="WebGL_API/javaScript API/gl.html#vertexAttribPointer"
+                                                      target="_blank">gl.vertexAttribPointer()</a>）
+                        </li>
+                        <li>开启attribute变量（<a href="WebGL_API/javaScript API/gl.html#enableVertexAttribArray"
+                                             target="_blank">gl.enableVertexAttribArray()</a>）
+                        </li>
+                    </ul>
+                    <strong>实例</strong>
+                    <ul class="ul-1-num">
+                        <li><a href="WebGL编程指南/ch3/MultiPoints.html" target="_blank">显示多个顶点</a></li>
+                    </ul>
+                </div>
+            </section>
+            <section id="WebGL_System">
+                <h4>着色器</h4>
+                <p>WebGL需要两种着色器，即顶点着色器（Vertex shader）和片元着色器（Fragment shader）。着色器运行在WebGL系统中。</p>
+                <div class="content">
+                    <strong>顶点着色器（Vertex shader）</strong>
+                    <p>顶点着色器用用来描述顶点特性（如位置、颜色等）的程序。</p>
+                    <strong>片元着色器（Fragment shader）。</strong>
+                    <p>使其显示在屏幕上。进行逐片元处理过程如光照的程序。</p>
+                    <strong>WebGL中的着色器详细说明：</strong>
+                    <p><a href="WebGL_API/shader%20API/index.html" target="_blank">shader（GLSL ES）</a></p>
+                </div>
+            </section>
+            <section id="camera">
+                <h4>相机</h4>
+                <div class="content">
+                    <h4>三维投影算法</h4>
+
+                    <p>三维空间中的物体，投射在相机视平面的转换算法。</p>
+                    <p><strong>相机看到的景象和以下因素有关：</strong></p>
+                    <ul class="ul-3-num">
+                        <li>相机的投影类型（正射投影、透视投影）：投影矩阵（ProjectMatrix）</li>
+                        <li>相机的位置和方向：视图矩阵 ( CameraMatrixWorldInverse 或 ViewMatrix )</li>
+                        <li>物体的位置和形变（旋转/缩放/平移）：物体位置矩阵( ObjectWorldMatrix )</li>
+                    </ul>
+                    <p>三维投影算法就是将上诉因素抽象为数学算法，用来计算三维物体在相机视平面上的位置。实际应用中我们是通过矩阵计算来实现的。简而言之，我们将相机的位置方向, 相机的类型, 物体的位置和形变能转换为 矩阵 , 将这些矩阵进行一系列计算后, 最终得到 三维投影矩阵.</p>
+
+                    <p><strong>三维投影矩阵计算公式：</strong></p>
+                    <p>uMatrix = ProjectMatrix * CameraMatrixWorldInverse * ObjectMatrixWorld</p>
+
+                    <p><strong>相机的视图矩阵:</strong></p>
+                    <p>视图矩阵的含义是，固定其他因素，我们改变了相机的位置和角度后，它眼中的世界也会发生变化，这种变化就是视图矩阵。</p>
+                    <p>相机在三维空间中的位置是 camera.matrixWorld ，而它的视图矩阵是相机位置矩阵的逆矩阵 CameraMatrixWorldInverse ，它也符合了我们的生活经验：</p>
+                    <ul class="ul-3-num">
+                        <li>固定相机，人向左移动</li>
+                        <li>固定人，向右移动相机</li>
+                    </ul>
+
+                    <h4>相机的可视空间：</h4>
+                    <ul class="ul-1-num">
+                        <li>长方形可视空间，也称盒状空间，由正射投影（orthographic projection）产生。</li>
+                        <li>四棱锥/金字塔可视空间，由透视投影(perspective projection)产生</li>
+                    </ul>
+
+                    <h4>获取屏幕二维坐标:</h4>
+                    <p>const [x, y] = ProjectionMatrix * CameraWorldMatrixInverse * [x, y, z]</p>
+
+                    <h4>屏幕坐标转化为三维坐标:</h4>
+                    <p>const [x, y, z] = CameraWorldMatrix * ProjectionMatrixInverse * [x, y, z]</p>
+                    <p>不过屏幕坐标转化为三维坐标不是这么简单，因为屏幕上的二维坐标在三维空间中其实对应的是一条射线，其可以对应了无限个三维坐标点.</p>
+                </div>
+            </section>
+            <section id="type_array">
+                <h4>类型化数组</h4>
+                <p>WebGL通常需要同时处理大量相同类型的数据，为了优化性能，WebGL为每种基本数据类型引入了一种特殊的数组（类型化数组）。</p>
+                <div class="content">
+                    <strong>WebGL使用的各种类型化数组：</strong>
+                    <table border="1">
+                        <tr>
+                            <th colspan="3">
+                                WebGL使用的各种类型化数组
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>类型数组</th>
+                            <th>每个元素所占据的字节数</th>
+                            <th>描述（C语言中的数据类型）</th>
+                        </tr>
+                        <tr>
+                            <td>Int8Array</td>
+                            <td>1</td>
+                            <td>8位整型数（signed char）</td>
+                        </tr>
+                        <tr>
+                            <td>UInt8Array</td>
+                            <td>1</td>
+                            <td>8位无符号整型数（unsigned char）</td>
+                        </tr>
+                        <tr>
+                            <td>Int16Array</td>
+                            <td>2</td>
+                            <td>16位整型数（signed short）</td>
+                        </tr>
+                        <tr>
+                            <td>UInt16Array</td>
+                            <td>2</td>
+                            <td>16位无符号整型数（unsigned short）</td>
+                        </tr>
+                        <tr>
+                            <td>Int32Array</td>
+                            <td>4</td>
+                            <td>32位整型数（signed int）</td>
+                        </tr>
+                        <tr>
+                            <td>UInt32Array</td>
+                            <td>4</td>
+                            <td>32位无符号整型数（unsigned int）</td>
+                        </tr>
+                        <tr>
+                            <td>Float32Array</td>
+                            <td>4</td>
+                            <td>单精度32位浮点数（float）</td>
+                        </tr>
+                        <tr>
+                            <td>Float64Array</td>
+                            <td>8</td>
+                            <td>双精度64位浮点数（double）</td>
+                        </tr>
+                    </table>
+                    <strong>类型化数组的方法、属性和常量：</strong>
+                    <table border="1">
+                        <tr>
+                            <th colspan="3">类型化数组的方法、属性和常量</th>
+                        </tr>
+                        <tr>
+                            <th>方法、属性和常量</th>
+                            <th>描述</th>
+                            <th>实例</th>
+                        </tr>
+                        <tr>
+                            <td>get(index)</td>
+                            <td>获取第index个元素值</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>set(index,value)</td>
+                            <td>设置第index个元素的值value</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>set(array,offset)</td>
+                            <td>从第offset个元素开始将数组array中的值填充进去</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>length</td>
+                            <td>数组的长度</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>BYTES_PER_ELEMENT</td>
+                            <td>数组中每个元素所占据的字节数</td>
+                            <td>
+                                <ul>
+                                    <li><a href="../WebGL编程指南/ch5/MultiAttributeSize_interleaved.html">使用一个类型化数组来存储顶点的位置和顶点的大小</a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                    <strong>类型化数组的创建</strong>
+                    <p>类型化数组可以通过new运算符调用构造函数并传入数据而被创造出来。也可以指定数组元素的个数来创建一个空的类型化的数组。</p>
+                    <strong>注意：</strong>
+                    <ul class="ul-1">
+                        <li>
+                            类型化数组不能使用[]运算符（这样创建的是一个普通的数组）
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </section>
+        <section id="WebGL_Event" class="section1">
+            <h4 class="title">WebGL相关事件</h4>
+            <section id="ContextLost">
+                <h4>上下文丢失事件</h4>
+                <div class="content">
+                    <strong>说明</strong>
+                    <table border="1">
+                        <tr>
+                            <th colspan="2">上下文丢失事件</th>
+                        </tr>
+                        <tr>
+                            <th>事件</th>
+                            <th>描述</th>
+                        </tr>
+                        <tr>
+                            <td>webglcontextlost</td>
+                            <td>当WebGl上下文丢失时触发</td>
+                        </tr>
+                        <tr>
+                            <td>webglcontextrestored</td>
+                            <td>当浏览器完成WebGL系统的重置后触发</td>
+                        </tr>
+                    </table>
+                    <strong>使用</strong>
+                    <p>只能使用addEventListener来注册事件</p>
+                    <strong>实例</strong>
+                    <ul class="ul-1-num">
+                        <li><a href="WebGL编程指南/ch10/RotatingTriangle_contextLost.html" target="_blank">上下文丢失</a></li>
+                    </ul>
+                </div>
+            </section>
+        </section>
+        <section id="JavaScript" class="section1">
+            <div class="title">javaScript相关函数概念</div>
+            <section>
+                <h4>着色器对象（shader object）</h4>
+                <p>着色器对象管理一个顶点着色器或一个片元着色器。每一个着色器都有一个着色器对象。</p>
+            </section>
+            <section>
+                <h4>程序对象（program object）</h4>
+                <p>管理着色器对象的容器。WebGL中，一个程序对象必须包含一个顶点着色器和一个片元着色器。</p>
+                <p><img src="img/9_10.png"></p>
+            </section>
+            <section>
+                <h4>帧缓冲对象（framebuffer object）</h4>
+                <p>可以用来代替颜色缓冲区或深度缓冲区。绘制在帧缓冲区中的对象并不会直接显示在canvas上，你可以先对帧缓冲区中的内容进行一些处理再显示，或则直接用其中的内容作为纹理图像.
+                    在帧缓冲区中进行绘制的过程又称为离屏绘制（offscreen drawing）。绘制操作不是直接发生在帧缓冲区中的，而是发生在帧缓冲区所关联（attachment）的对象上。</p>
+                <div class="content">
+                    <strong>一个帧缓冲区有三个关联对象：</strong>
+                    <ul class="ul-1">
+                        <li>颜色关联对象（color attachment）,对应颜色缓冲区</li>
+                        <li>深度关联对象（depth attachment）,对应深度缓冲区</li>
+                        <li>模板关联对象（stencil attachment）,对应模板缓冲区</li>
+                    </ul>
+                    <strong>每个关联对象的类型:</strong>
+                    <ul class="ul-1">
+                        <li>纹理对象</li>
+                        <li>渲染缓冲区对象（renderbuffer object）</li>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h4>渲染缓冲区对象（renderbuffer object）</h4>
+                <p>表示一种更佳通用的绘图区域，可以向其中写入多种数据。</p>
+            </section>
+        </section>
+        <section id="inner" class="section1">
+            <div class="title">WebGL内置功能</div>
+            <section id="blendFunc">
+                <h4>混合功能</h4>
+                <p>实现半透明效果。</p>
+                <div class="content">
+                    <strong>启动功能</strong>
+                    <ul class="ul-1-num">
+                        <li>
+                            开启混合功能<br>
+                            <a href="WebGL%20API/javaScript%20API/gl.html#enable">gl.enable(gl.BLEND)</a>
+                        </li>
+                        <li>
+                            指定混合函数<br>
+                            <a href="WebGL%20API/javaScript%20API/gl.html#blendFunc">gl.blendFunc(gl.SRC_ALPHA,
+                                gl.ONE_MINUS_SRC_ALPHA)</a>
+                        </li>
+                    </ul>
+                    <strong>实例</strong>
+                    <ul class="ul-1-num">
+                        <li><a href="WebGL编程指南/ch10/LookAtBlendedTriangles.html" target="_blank">α混合</a></li>
+                    </ul>
+                    <strong>透明与不透明物体共存:</strong>
+                    <ul class="ul-1-num">
+                        <li>
+                            开启隐藏面消除功能<br>
+                            <a href="WebGL%20API/javaScript%20API/gl.html#enable">gl.enable(DEPTH_TEST)</a>
+                        </li>
+                        <li>
+                            绘制所有不透明的物体<br>
+                        </li>
+                        <li>
+                            锁定用于进行隐藏面消除的深度缓存区的写入操着，使之只读。<br>
+                            <a href="WebGL%20API/javaScript%20API/gl.html#depthMask">gl.depthMask(false)</a>
+                        </li>
+                        <li>绘制所有半透明的物体（α小于1.0），注意他们应当按照深度排序，然后从后向前绘制</li>
+                        <li>
+                            释放深度缓存区，使之可读可写。<br>
+                            <a href="WebGL%20API/javaScript%20API/gl.html#depthMask">gl.depthMask(false)</a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section id="depth_test">
+                <h4>隐藏面消除</h4>
+                <p>可以消除那些被遮挡的表面，绘制时，就不需要顾及各个物体在缓存区中的顺序。</p>
+                <div class="content">
+                    <strong>启动功能</strong>
+                    <ul class="ul-1-num">
+                        <li>
+                            开启隐藏面消除功能<br>
+                            <a href="WebGL%20API/javaScript%20API/gl.html#enable">gl.enable(DEPTH_TEST)</a>
+                        </li>
+                        <li>
+                            在绘制之前，清除深度缓存区<br>
+                            <a href="WebGL%20API/javaScript%20API/gl.html#clear">gl.clear(gl.DEPTH_BUFFER_BIT)</a>
+                        </li>
+                    </ul>
+                    <strong>实例</strong>
+                    <ul class="ul-1-num">
+                        <li><a href="WebGL编程指南/ch07/DepthBuffer.html" target="_blank">隐藏面消除</a></li>
+                    </ul>
+                    <strong>问题:</strong>
+                    <ul class="ul-1-num">
+                        <li>
+                            深度冲突：
+                            <p>在使用隐藏面消除时，当几何图形或物体的两个表面极为接近时，就会发生深度冲突的问题.</p>
+                            <p>WebGL提供了一种<a href="#ploygonOffset">多边形偏移</a>的机制来解决这个问题。</p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section id="ploygonOffset">
+                <h4>多边形偏移</h4>
+                <p>在使用隐藏面消除时，解决深度缓存的问题</p>
+                <div class="content">
+                    <strong>启动功能</strong>
+                    <ul class="ul-1-num">
+                        <li>
+                            启动多边形偏移<br>
+                            <a href="WebGL%20API/javaScript%20API/gl.html#enable">gl.enable(gl.POLYGON_OFFSET_FILL)</a>
+                        </li>
+                        <li>
+                            在绘制之前，指定用来计算偏移量的参数<br>
+                            <a href="WebGL%20API/javaScript%20API/gl.html#polygonOffset">gl.polygonOffset(1.0,1.0)</a>
+                        </li>
+                    </ul>
+                    <strong>实例</strong>
+                    <ul class="ul-1-num">
+                        <li><a href="WebGL编程指南/ch07/Zfighting.html" target="_blank">深度缓存</a></li>
+                    </ul>
+                </div>
+            </section>
+            <section id="polygonCulling">
+                <h4>多边形剔除</h4>
+                <p>多边形剔除可以用来减少渲染的面</p>
+            </section>
+        </section>
+        <section id="WebGL-example" class="section1">
+            <div class="title">WebGL相关实例</div>
+            <section id="example_1">
+                <h4>WebGL编程指南</h4>
+                <div class="content">
+                    <ul>
+                        <li><a href="WebGL编程指南/index.html" target="_blank">WebGL编程指南实例</a></li>
+                        <li><a href="WebGL编程指南/lib/cuon-matrix说明.html" target="_blank">矩阵库说明（cuon-matrix.js）</a></li>
+                    </ul>
+                </div>
+            </section>
+            <section id="example_2">
+                <h4>水箱效果</h4>
+                <div class="content">
+                    <ul>
+                        <li><a href="example/webgl-water/index.html" target="_blank">水箱效果</a></li>
+                    </ul>
+                </div>
+            </section>
+        </section>
+    </div>
 </div>
 </body>
 </html>

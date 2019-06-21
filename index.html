@@ -12,12 +12,16 @@
         <ul class="ul-1">
             <li><a href="#pipeline">渲染管线</a></li>
             <li><a href="#WebGL">WebGL程序</a></li>
-            <li><a href="#buffer">缓存区对象</a></li>
             <li><a href="#WebGL_System">着色器</a></li>
             <li><a href="#camera">相机</a></li>
             <li><a href="WebGL_API/WebGL可以绘制的基本图形.html" target="_blank">WebGL绘制的基本图形</a></li>
             <li><a href="WebGL_API/canvas标签.html" target="_blank">canvas标签</a></li>
             <li><a href="#type_array">类型化数组</a></li>
+        </ul>
+        <h4><a href="#buffer">缓冲区</a></h4>
+        <ul class="ul-1">
+            <li><a href="#bufferObject">缓冲区对象</a></li>
+            <li><a href="#depthBuffer">深度缓冲区</a></li>
         </ul>
         <h4><a href="#WebGL_Event">WebGL相关事件</a></h4>
         <ul class="ul-1">
@@ -26,8 +30,8 @@
         <h4><a href="#inner">WebGL内置功能</a></h4>
         <ul class="ul-1">
             <li><a href="#depth_test">隐藏面消除</a></li>
+            <li><a href="#ploygonOffset">多边形偏移</a></li>
             <li><a href="#blendFunc">混合功能</a></li>
-            <li><a href="#ploygonOffset">多边形偏移机制</a></li>
             <li><a href="#polygonCulling">多边形剔除</a></li>
         </ul>
         <h4><a href="WebGL_API/GraphicsDOC/index.html" target="_blank">图形学（Graphics）</a></h4>
@@ -44,19 +48,6 @@
     <div class="right">
         <section id="basicConcept" class="section1">
             <h4 class="title">WebGL中的基本概念</h4>
-            <section id="pipeline">
-                <h4>渲染管线</h4>
-                <div class="content">
-                    <div><img src="img/pipeline.png"/></div>
-                    <p>渲染管线指的是WebGL程序的执行过程，如上图所示，主要分为 4 个步骤：</p>
-                    <ul class="ul-1-num">
-                        <li>顶点着色器的处理，主要是一组矩阵变换操作，用来把3D模型（顶点和原型）投影到viewport上，输出是一个个的多边形，比如三角形。</li>
-                        <li>光栅化，也就是把三角形连接区域按一定的粒度逐行转化成片元（fragement），类似于2D空间中，可以把这些片元看做是3D空间的一个像素点。</li>
-                        <li>片元着色器的处理，为每个片元添加颜色或者纹理。只要给出纹理或者颜色，以及纹理坐标(uv)，管线就会根据纹理坐标进行插值运算，将纹理或者图片着色在相应的片元上。</li>
-                        <li>把3D空间的片元合并输出为2D像素数组并显示在屏幕上。</li>
-                    </ul>
-                </div>
-            </section>
             <section>
                 <h4>基本概念</h4>
                 <div class="content">
@@ -72,6 +63,24 @@
                     <p>将孤立的顶点坐标装配成几何图形。</p>
                     <strong>光栅化过程：</strong>
                     <p>将装配好的几何图形转化为片元。一旦光栅化过程结束后，程序就开始逐片元调用片元着色器。</p>
+                    <strong>深度检测（DEPTH_TEST）：</strong>
+                    <p>通过检测物体（的每个像素的）的深度来决定是否将其画出来。</p>
+                    <strong>深度冲突：</strong>
+                    <p>产生深度冲突的原因是：在使用隐藏面消除时，当几何图形或物体的两个表面极为接近时，<a href="#depthBuffer">深度缓冲区</a>有限的精度已经不能区分出那个在前，那个在后,就会发生深度冲突的问题.</p>
+                    <p>WebGL提供一种<a href="#ploygonOffset">多边形偏移的机制来解决这个问题。</a></p>
+                </div>
+            </section>
+            <section id="pipeline">
+                <h4>渲染管线</h4>
+                <div class="content">
+                    <div><img src="img/pipeline.png"/></div>
+                    <p>渲染管线指的是WebGL程序的执行过程，如上图所示，主要分为 4 个步骤：</p>
+                    <ul class="ul-1-num">
+                        <li>顶点着色器的处理，主要是一组矩阵变换操作，用来把3D模型（顶点和原型）投影到viewport上，输出是一个个的多边形，比如三角形。</li>
+                        <li>光栅化，也就是把三角形连接区域按一定的粒度逐行转化成片元（fragement），类似于2D空间中，可以把这些片元看做是3D空间的一个像素点。</li>
+                        <li>片元着色器的处理，为每个片元添加颜色或者纹理。只要给出纹理或者颜色，以及纹理坐标(uv)，管线就会根据纹理坐标进行插值运算，将纹理或者图片着色在相应的片元上。</li>
+                        <li>把3D空间的片元合并输出为2D像素数组并显示在屏幕上。</li>
+                    </ul>
                 </div>
             </section>
             <section id="WebGL">
@@ -82,31 +91,6 @@
                     <ul class="ul-1">
                         <li><a href="WebGL_API/shader API/存储限定字.html#attribute" target="_blank">attribute变量</a></li>
                         <li><a href="WebGL_API/shader API/存储限定字.html#uniform" target="_blank">uniform变量</a></li>
-                    </ul>
-                </div>
-            </section>
-            <section id="buffer">
-                <h4>缓存区对象</h4>
-                <p>缓存区对象是WebGL系统中的一块内存区域，我们可以一次性地向缓存区对象中填充大量的顶点数据，然后将这些数据保存在其中，供顶点使用。</p>
-                <div class="content">
-                    <strong>使用缓冲区对象向着色器中传入多个数据步骤：</strong>
-                    <ul class="ul-1-num">
-                        <li>创建缓冲区对象（<a href="WebGL_API/javaScript API/gl.html#createBuffer" target="_blank">gl.createBuffer()</a>）
-                        </li>
-                        <li>绑定缓冲区对象（<a href="WebGL_API/javaScript API/gl.html#bindBuffer" target="_blank">gl.bindBuffer()</a>）
-                        </li>
-                        <li>将数据写入缓冲区对象（<a href="WebGL_API/javaScript API/gl.html#bufferData" target="_blank">gl.bufferData()</a>）
-                        </li>
-                        <li>将缓冲区对象分配给一个attribute变量（<a href="WebGL_API/javaScript API/gl.html#vertexAttribPointer"
-                                                      target="_blank">gl.vertexAttribPointer()</a>）
-                        </li>
-                        <li>开启attribute变量（<a href="WebGL_API/javaScript API/gl.html#enableVertexAttribArray"
-                                             target="_blank">gl.enableVertexAttribArray()</a>）
-                        </li>
-                    </ul>
-                    <strong>实例</strong>
-                    <ul class="ul-1-num">
-                        <li><a href="WebGL编程指南/ch3/MultiPoints.html" target="_blank">显示多个顶点</a></li>
                     </ul>
                 </div>
             </section>
@@ -270,6 +254,38 @@
                 </div>
             </section>
         </section>
+        <section id="buffer" class="section1">
+            <h4 class="title">缓冲区</h4>
+            <section id="bufferObject">
+                <h4>缓冲区对象</h4>
+                <p>缓冲区对象是WebGL系统中的一块内存区域，我们可以一次性地向缓存区对象中填充大量的顶点数据，然后将这些数据保存在其中，供顶点使用。</p>
+                <div class="content">
+                    <strong>使用缓冲区对象向着色器中传入多个数据步骤：</strong>
+                    <ul class="ul-1-num">
+                        <li>创建缓冲区对象（<a href="WebGL_API/javaScript API/gl.html#createBuffer" target="_blank">gl.createBuffer()</a>）
+                        </li>
+                        <li>绑定缓冲区对象（<a href="WebGL_API/javaScript API/gl.html#bindBuffer" target="_blank">gl.bindBuffer()</a>）
+                        </li>
+                        <li>将数据写入缓冲区对象（<a href="WebGL_API/javaScript API/gl.html#bufferData" target="_blank">gl.bufferData()</a>）
+                        </li>
+                        <li>将缓冲区对象分配给一个attribute变量（<a href="WebGL_API/javaScript API/gl.html#vertexAttribPointer"
+                                                      target="_blank">gl.vertexAttribPointer()</a>）
+                        </li>
+                        <li>开启attribute变量（<a href="WebGL_API/javaScript API/gl.html#enableVertexAttribArray"
+                                             target="_blank">gl.enableVertexAttribArray()</a>）
+                        </li>
+                    </ul>
+                    <strong>实例</strong>
+                    <ul class="ul-1-num">
+                        <li><a href="WebGL编程指南/ch3/MultiPoints.html" target="_blank">显示多个顶点</a></li>
+                    </ul>
+                </div>
+            </section>
+            <section id="depthBuffer">
+                <h4>深度缓存区</h4>
+                <p>深度缓存区是一个中间对象，其作用就是帮助WebGL进行隐藏面消除。如果隐藏面消除，就必须知道每个几何图形的深度信息，而深度缓冲区就是用来存储深度信息的（Z缓冲区）。</p>
+            </section>
+        </section>
         <section id="WebGL_Event" class="section1">
             <h4 class="title">WebGL相关事件</h4>
             <section id="ContextLost">
@@ -383,15 +399,15 @@
                 <h4>隐藏面消除</h4>
                 <p>可以消除那些被遮挡的表面，绘制时，就不需要顾及各个物体在缓存区中的顺序。</p>
                 <div class="content">
-                    <strong>启动功能</strong>
+                    <strong>开启流程：</strong>
                     <ul class="ul-1-num">
                         <li>
                             开启隐藏面消除功能<br>
-                            <a href="WebGL%20API/javaScript%20API/gl.html#enable">gl.enable(DEPTH_TEST)</a>
+                            <a href="WebGL_API/javaScript%20API/gl.html#enable" target="_blank">gl.enable(DEPTH_TEST)</a>
                         </li>
                         <li>
                             在绘制之前，清除深度缓存区<br>
-                            <a href="WebGL%20API/javaScript%20API/gl.html#clear">gl.clear(gl.DEPTH_BUFFER_BIT)</a>
+                            <a href="WebGL_API/javaScript%20API/gl.html#clear" target="_blank">gl.clear(gl.DEPTH_BUFFER_BIT)</a>
                         </li>
                     </ul>
                     <strong>实例</strong>
@@ -400,11 +416,7 @@
                     </ul>
                     <strong>问题:</strong>
                     <ul class="ul-1-num">
-                        <li>
-                            深度冲突：
-                            <p>在使用隐藏面消除时，当几何图形或物体的两个表面极为接近时，就会发生深度冲突的问题.</p>
-                            <p>WebGL提供了一种<a href="#ploygonOffset">多边形偏移</a>的机制来解决这个问题。</p>
-                        </li>
+                        <li><a href="#basicConcept">深度冲突</a></li>
                     </ul>
                 </div>
             </section>
@@ -416,11 +428,11 @@
                     <ul class="ul-1-num">
                         <li>
                             启动多边形偏移<br>
-                            <a href="WebGL%20API/javaScript%20API/gl.html#enable">gl.enable(gl.POLYGON_OFFSET_FILL)</a>
+                            <a href="WebGL_API/javaScript%20API/gl.html#enable">gl.enable(gl.POLYGON_OFFSET_FILL)</a>
                         </li>
                         <li>
                             在绘制之前，指定用来计算偏移量的参数<br>
-                            <a href="WebGL%20API/javaScript%20API/gl.html#polygonOffset">gl.polygonOffset(1.0,1.0)</a>
+                            <a href="WebGL_API/javaScript%20API/gl.html#polygonOffset">gl.polygonOffset(1.0,1.0)</a>
                         </li>
                     </ul>
                     <strong>实例</strong>

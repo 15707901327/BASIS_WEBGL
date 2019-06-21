@@ -1837,7 +1837,7 @@ PGL.WebGLRenderer = function (parameters) {
 
         utils = new PGL.WebGLUtils(_gl, extensions, capabilities);
 
-        state = new PGL.WebGLState(_gl);
+        state = new PGL.WebGLState(_gl, extensions, utils, capabilities);
 
         properties = new PGL.WebGLProperties();
         textures = new PGL.WebGLTextures(_gl, extensions, state, properties, capabilities, utils, null);
@@ -2052,6 +2052,14 @@ PGL.WebGLRenderer = function (parameters) {
             return;
         }
 
+        var forceClear;
+
+        // 判断是否强制刷新缓冲区
+        if (arguments[3] !== undefined) {
+            console.warn('PGL.WebGLRenderer.render(): the forceClear argument has been removed. Use .clear() instead.');
+            forceClear = arguments[3];
+        }
+
         // 检查是否丢失上下文
         if (_isContextLost) return;
 
@@ -2079,7 +2087,7 @@ PGL.WebGLRenderer = function (parameters) {
         var opaqueObjects = currentRenderList.opaque;
 
         // 渲染背景
-        background.render(scene);
+        background.render(currentRenderList, scene, camera, forceClear);
 
         if (scene.overrideMaterial) {
         }
@@ -2087,6 +2095,10 @@ PGL.WebGLRenderer = function (parameters) {
             // opaque pass (front-to-back order)
             if (opaqueObjects.length) renderObjects(opaqueObjects, scene, camera);
         }
+
+        // Ensure depth buffer writing is enabled so it can be cleared on next render
+
+        state.buffers.depth.setTest(true);
 
     };
 
@@ -3351,7 +3363,145 @@ PGL.WebGLState = function (gl) {
         }
     }
 
+    function DepthBuffer() {
+
+        var locked = false; // 锁定或释放深度缓存区的写入操作
+
+        var currentDepthMask = null; // 锁定或释放深度缓存区的写入操作
+        var currentDepthFunc = null; // 比较函数值
+        var currentDepthClear = null;
+
+        return {
+
+            /**
+             * 隐藏面消除 true 启动 false 关闭
+             * @param depthTest
+             */
+            setTest: function (depthTest) {
+                if (depthTest) {
+                    enable(gl.DEPTH_TEST);
+                } else {
+                    disable(gl.DEPTH_TEST);
+                }
+            },
+
+            /**
+             * @param depthMask 指定是锁定深度缓存区的写入操作（false），还是释放（true）
+             */
+            setMask: function (depthMask) {
+
+                if (currentDepthMask !== depthMask && !locked) {
+
+                    gl.depthMask(depthMask);
+                    currentDepthMask = depthMask;
+
+                }
+
+            },
+
+            /**
+             * 将传入像素深度与当前深度缓冲区值进行比较的函数
+             * @param depthFunc
+             */
+            setFunc: function (depthFunc) {
+
+                if (currentDepthFunc !== depthFunc) {
+
+                    if (depthFunc) {
+
+                        switch (depthFunc) {
+
+                            case NeverDepth:
+
+                                gl.depthFunc(gl.NEVER);
+                                break;
+
+                            case AlwaysDepth:
+
+                                gl.depthFunc(gl.ALWAYS);
+                                break;
+
+                            case LessDepth:
+
+                                gl.depthFunc(gl.LESS);
+                                break;
+
+                            case LessEqualDepth:
+
+                                gl.depthFunc(gl.LEQUAL);
+                                break;
+
+                            case EqualDepth:
+
+                                gl.depthFunc(gl.EQUAL);
+                                break;
+
+                            case GreaterEqualDepth:
+
+                                gl.depthFunc(gl.GEQUAL);
+                                break;
+
+                            case GreaterDepth:
+
+                                gl.depthFunc(gl.GREATER);
+                                break;
+
+                            case NotEqualDepth:
+
+                                gl.depthFunc(gl.NOTEQUAL);
+                                break;
+
+                            default:
+
+                                gl.depthFunc(gl.LEQUAL);
+
+                        }
+
+                    } else {
+
+                        gl.depthFunc(gl.LEQUAL);
+
+                    }
+
+                    currentDepthFunc = depthFunc;
+
+                }
+
+            },
+
+            setLocked: function (lock) {
+
+                locked = lock;
+
+            },
+
+            setClear: function (depth) {
+
+                if (currentDepthClear !== depth) {
+
+                    gl.clearDepth(depth);
+                    currentDepthClear = depth;
+
+                }
+
+            },
+
+            reset: function () {
+
+                locked = false;
+
+                currentDepthMask = null;
+                currentDepthFunc = null;
+                currentDepthClear = null;
+
+            }
+
+        };
+
+    }
+
     var colorBuffer = new ColorBuffer();
+    var depthBuffer = new DepthBuffer();
 
     var maxVertexAttributes = gl.getParameter(gl.MAX_VERTEX_ATTRIBS);
     var newAttributes = new Uint8Array(maxVertexAttributes);
@@ -3392,7 +3542,12 @@ PGL.WebGLState = function (gl) {
     var emptyTextures = {};
     emptyTextures[gl.TEXTURE_2D] = createTexture(gl.TEXTURE_2D, gl.TEXTURE_2D, 1);
 
+    // 指定绘图区域的颜色
     colorBuffer.setClear(0, 0, 0, 1);
+    // 指定绘图区域的深度
+    depthBuffer.setClear(1);
+
+    enable(gl.DEPTH_TEST); // 开启隐藏面消除
 
     // 初始化newAttributes为0
     function initAttributes() {
@@ -3446,6 +3601,17 @@ PGL.WebGLState = function (gl) {
         if (enabledCapabilities[id] !== true) {
             gl.enable(id);
             enabledCapabilities[id] = true;
+        }
+    }
+
+    /**
+     * 关闭功能
+     * @param id
+     */
+    function disable(id) {
+        if (enabledCapabilities[id] !== false) {
+            gl.disable(id);
+            enabledCapabilities[id] = false;
         }
     }
 
@@ -3504,7 +3670,8 @@ PGL.WebGLState = function (gl) {
 
     return {
         buffers: {
-            color: colorBuffer
+            color: colorBuffer,
+            depth: depthBuffer
         },
 
         initAttributes: initAttributes,

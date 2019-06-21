@@ -1296,6 +1296,13 @@ PGL.Material = function () {
 
     this.vertexColors = PGL.NoColors; // THREE.NoColors, THREE.VertexColors, THREE.FaceColors
 
+    this.depthTest = true; // 设置是否启动隐藏面消除
+
+    // 设置多边形偏移
+    this.polygonOffset = false;
+    this.polygonOffsetFactor = 0;
+    this.polygonOffsetUnits = 0;
+
     this.visible = true;
 
     this.userData = {};
@@ -1941,6 +1948,12 @@ PGL.WebGLRenderer = function (parameters) {
      */
     this.renderBufferDirect = function (camera, fog, geometry, material, object, group) {
 
+        // 控制缠绕方向 true 反转缠绕方向
+        var frontFaceCW = (object.isMesh && object.matrixWorld.determinant() < 0);
+
+        // 根据材质设置绘制图形的方式（剔除、缠绕方向、混合、偏移）
+        state.setMaterial(material, frontFaceCW);
+
         var program = setProgram(camera, null, object.material, object);
         program = object.material.program;
         var updateBuffers = false;
@@ -2090,8 +2103,7 @@ PGL.WebGLRenderer = function (parameters) {
         background.render(currentRenderList, scene, camera, forceClear);
 
         if (scene.overrideMaterial) {
-        }
-        else {
+        } else {
             // opaque pass (front-to-back order)
             if (opaqueObjects.length) renderObjects(opaqueObjects, scene, camera);
         }
@@ -2099,6 +2111,8 @@ PGL.WebGLRenderer = function (parameters) {
         // Ensure depth buffer writing is enabled so it can be cleared on next render
 
         state.buffers.depth.setTest(true);
+
+        state.setPolygonOffset(false);
 
     };
 
@@ -2161,8 +2175,8 @@ PGL.WebGLRenderer = function (parameters) {
             var material = overrideMaterial === undefined ? renderItem.material : overrideMaterial;
             var group = renderItem.group;
 
-            if (camera.isArrayCamera) {}
-            else {
+            if (camera.isArrayCamera) {
+            } else {
                 renderObject(object, scene, camera, geometry, material, group);
             }
         }
@@ -2187,12 +2201,12 @@ PGL.WebGLRenderer = function (parameters) {
         // 获取对象的法线矩阵
         object.normalMatrix.getNormalMatrix(object.modelViewMatrix);
 
-        if (object.isImmediateRenderObject) {}
-        else {
+        if (object.isImmediateRenderObject) {
+        } else {
             _this.renderBufferDirect(camera, scene.fog, geometry, material, object, group);
         }
 
-        currentRenderState = renderStates.get(scene,camera);
+        currentRenderState = renderStates.get(scene, camera);
     }
 
     /**
@@ -3512,6 +3526,10 @@ PGL.WebGLState = function (gl) {
 
     var currentProgram = null; // 当前使用的着色器程序
 
+    // 多边形偏移参数
+    var currentPolygonOffsetFactor = null;
+    var currentPolygonOffsetUnits = null;
+
     var maxTextures = gl.getParameter(gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS); // 获取最大的纹理单元
 
     var currentTextureSlot = null;// 当前激活的纹理单元
@@ -3628,6 +3646,41 @@ PGL.WebGLState = function (gl) {
         return false;
     }
 
+    /**
+     * 根据材质设置绘制图形的方式（剔除、缠绕方向、混合、偏移）
+     * @param material 材质
+     * @param frontFaceCW 控制缠绕方向 true 反转缠绕方向
+     */
+    function setMaterial(material, frontFaceCW) {
+
+        depthBuffer.setTest(material.depthTest);
+
+        setPolygonOffset(material.polygonOffset, material.polygonOffsetFactor, material.polygonOffsetUnits);
+    }
+
+    /**
+     * 设置多边形偏移
+     * @param polygonOffset true 启动 false 关闭
+     * @param factor
+     * @param units
+     */
+    function setPolygonOffset(polygonOffset, factor, units) {
+
+        if (polygonOffset) {
+            enable(gl.POLYGON_OFFSET_FILL);
+
+            if (currentPolygonOffsetFactor !== factor || currentPolygonOffsetUnits !== units) {
+
+                gl.polygonOffset(factor, units);
+
+                currentPolygonOffsetFactor = factor;
+                currentPolygonOffsetUnits = units;
+            }
+        } else {
+            disable(gl.POLYGON_OFFSET_FILL);
+        }
+    }
+
     // texture
 
     // 开启对应的纹理单元
@@ -3680,6 +3733,10 @@ PGL.WebGLState = function (gl) {
         enable: enable,
 
         useProgram: useProgram,
+
+        setMaterial: setMaterial,
+
+        setPolygonOffset: setPolygonOffset,
 
         activeTexture: activeTexture,
         bindTexture: bindTexture,

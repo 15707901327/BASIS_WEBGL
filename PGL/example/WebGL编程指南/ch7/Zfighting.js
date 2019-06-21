@@ -123,3 +123,93 @@ function initVertexBuffers(gl) {
 
   return n;
 }
+
+window.onload = function (ev) {
+  // main();
+
+  // 获取<canvas>元素
+  var canvas = document.getElementById('webgl');
+
+  var webGlRenderer = new PGL.WebGLRenderer({
+    canvas: canvas
+  });
+  webGlRenderer.setClearColor(new PGL.Color(0, 0, 0), 1);
+
+  var camera = new PGL.PerspectiveCamera(45, 400 / 400, 0.1, 30000);
+  camera.position.set(0, 0, 5);
+
+  var scene = new PGL.Scene();
+
+  var bufferGeometry = new PGL.BufferGeometry();
+  var positions = new Float32Array([
+    0.0, 2.5, -5.0,
+    -2.5, -2.5, -5.0,
+    2.5, -2.5, -5.0,
+  ]);
+  var color = new Float32Array([
+    0.0, 1.0, 0.0, // 蓝色
+    0.0, 1.0, 0.0,
+    1.0, 0.0, 0.0,
+  ]);
+  bufferGeometry.addAttribute('position', new PGL.Float32BufferAttribute(positions, 3));
+  bufferGeometry.addAttribute('color', new PGL.Float32BufferAttribute(color, 3));
+
+  var meshPhongMaterial = new PGL.MeshPhongMaterial();
+  meshPhongMaterial.vertexColors = PGL.VertexColors;
+  meshPhongMaterial.polygonOffset = true;
+  meshPhongMaterial.polygonOffsetFactor = 1.0;
+  meshPhongMaterial.polygonOffsetUnits = 1.0;
+
+  var mesh = new PGL.Mesh(bufferGeometry, meshPhongMaterial);
+  mesh.translateX(0.75);
+  scene.add(mesh);
+
+  var bufferGeometry2 = new PGL.BufferGeometry();
+  var positions2 = new Float32Array([
+    0.0, 3.0, -5.0,
+    -3.0, -3.0, -5.0,
+    3.0, -3.0, -5.0
+  ]);
+  var color2 = new Float32Array([
+    1.0, 0.0, 0.0,//  黄色
+    1.0, 1.0, 0.0,
+    1.0, 1.0, 0.0
+  ]);
+  bufferGeometry2.addAttribute('position', new PGL.Float32BufferAttribute(positions2, 3));
+  bufferGeometry2.addAttribute('color', new PGL.Float32BufferAttribute(color2, 3));
+
+  var meshPhongMaterial2 = new PGL.MeshPhongMaterial();
+  meshPhongMaterial2.vertexColors = PGL.VertexColors;
+
+  var mesh2 = new PGL.Mesh(bufferGeometry2, meshPhongMaterial2);
+  mesh2.translateX(0.75);
+  scene.add(mesh2);
+
+
+  var ANGLE_STEP = 45;
+
+  var g_last = Date.now();
+
+  var currentAngle = 0.0;
+
+  function tick() {
+    requestAnimationFrame(tick);
+
+    currentAngle = animate(currentAngle);
+    mesh.rotateY(currentAngle * Math.PI / 180);
+    mesh2.rotateY(currentAngle * Math.PI / 180);
+    webGlRenderer.render(scene, camera);
+    // camera.position.x += 0.01;
+  }
+
+  function animate(angle) {
+    var now = Date.now();
+    var elapsed = now - g_last;
+    g_last = now;
+
+    var newAngle = (ANGLE_STEP * elapsed) / 1000;
+    return newAngle %= 360;
+  }
+
+  tick();
+};

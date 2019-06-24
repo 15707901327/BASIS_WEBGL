@@ -203,6 +203,48 @@ PGL.ShaderLib = {
 };
 
 /**
+ * 获取数组中最小值
+ * @param array
+ * @returns {number|*}
+ */
+PGL.arrayMin = function (array) {
+
+    if (array.length === 0) return Infinity;
+
+    var min = array[0];
+
+    for (var i = 1, l = array.length; i < l; ++i) {
+
+        if (array[i] < min) min = array[i];
+
+    }
+
+    return min;
+
+};
+
+/**
+ * 获取数组中最大值
+ * @param array
+ * @returns {number|*}
+ */
+PGL.arrayMax = function (array) {
+
+    if (array.length === 0) return -Infinity;
+
+    var max = array[0];
+
+    for (var i = 1, l = array.length; i < l; ++i) {
+
+        if (array[i] > max) max = array[i];
+
+    }
+
+    return max;
+
+};
+
+/**
  * 由六个平面组成的锥体
  * @param p0
  * @param p1
@@ -1186,6 +1228,19 @@ Object.assign(PGL.BufferGeometry.prototype, {
     isBufferGeometry: true,
 
     /**
+     * 设置顶点索引
+     * @param index 索引值
+     */
+    setIndex: function (index) {
+
+        if (Array.isArray(index)) {
+            this.index = new (PGL.arrayMax(index) > 65535 ? PGL.Uint32BufferAttribute : PGL.Uint16BufferAttribute)(index, 1);
+        } else {
+            this.index = index;
+        }
+    },
+
+    /**
      * 把属性添加到this.attributes中
      * @param name
      * @param attribute
@@ -1730,6 +1785,18 @@ PGL.Float32BufferAttribute = function (array, itemSize, normalized) {
 PGL.Float32BufferAttribute.prototype = Object.create(PGL.BufferAttribute.prototype);
 PGL.Float32BufferAttribute.prototype.constructor = PGL.Float32BufferAttribute;
 
+PGL.Uint32BufferAttribute = function (array, itemSize, normalized) {
+    PGL.BufferAttribute.call(this, new Uint32Array(array), itemSize, normalized);
+};
+PGL.Uint32BufferAttribute.prototype = Object.create(PGL.BufferAttribute.prototype);
+PGL.Uint32BufferAttribute.prototype.constructor = PGL.Uint32BufferAttribute;
+
+PGL.Uint16BufferAttribute = function (array, itemSize, normalized) {
+    PGL.BufferAttribute.call(this, new Uint16Array(array), itemSize, normalized);
+};
+PGL.Uint16BufferAttribute.prototype = Object.create(PGL.BufferAttribute.prototype);
+PGL.Uint16BufferAttribute.prototype.constructor = PGL.Uint16BufferAttribute;
+
 /**
  * WebGL渲染器
  * 1. 获取绘画的上下文
@@ -1827,11 +1894,11 @@ PGL.WebGLRenderer = function (parameters) {
         throw error;
     }
 
-    var extensions, capabilities, state;
+    var extensions, capabilities, state, info;
     var properties, textures, attributes, geometries, objects;
     var programCache, renderLists, renderStates;
 
-    var background, bufferRenderer;
+    var background, bufferRenderer, indexedBufferRenderer;
     var utils;
 
     function initGLContext() {
@@ -1846,11 +1913,12 @@ PGL.WebGLRenderer = function (parameters) {
 
         state = new PGL.WebGLState(_gl, extensions, utils, capabilities);
 
+        info = new PGL.WebGLInfo(_gl);
         properties = new PGL.WebGLProperties();
-        textures = new PGL.WebGLTextures(_gl, extensions, state, properties, capabilities, utils, null);
+        textures = new PGL.WebGLTextures(_gl, extensions, state, properties, capabilities, utils, info);
         attributes = new PGL.WebGLAttributes(_gl);
-        geometries = new PGL.WebGLGeometries(_gl, attributes);
-        objects = new PGL.WebGLObjects(geometries);
+        geometries = new PGL.WebGLGeometries(_gl, attributes, info);
+        objects = new PGL.WebGLObjects(geometries, info);
 
         programCache = new PGL.WebGLPrograms(_this, extensions, capabilities);
         renderLists = new PGL.WebGLRenderLists();
@@ -1858,7 +1926,8 @@ PGL.WebGLRenderer = function (parameters) {
 
         background = new PGL.WebGLBackground(_this, state);
 
-        bufferRenderer = new PGL.WebGLBufferRenderer(_gl);
+        indexedBufferRenderer = new PGL.WebGLIndexedBufferRenderer(_gl, extensions, info, capabilities);
+        bufferRenderer = new PGL.WebGLBufferRenderer(_gl, extensions, info, capabilities);
 
         _this.context = _gl;
         _this.capabilities = capabilities;
@@ -1866,6 +1935,7 @@ PGL.WebGLRenderer = function (parameters) {
         _this.properties = properties;
         _this.renderLists = renderLists;
         _this.state = state;
+        _this.info = info;
     }
 
     initGLContext();
@@ -1959,20 +2029,38 @@ PGL.WebGLRenderer = function (parameters) {
         var updateBuffers = false;
         updateBuffers = true;
 
+        var index = geometry.index;
+        var position = geometry.attributes !== undefined ? geometry.attributes.position : undefined;
+
+        var attribute;
         var renderer = bufferRenderer;
 
-        var position = object.geometry.attributes !== undefined ? object.geometry.attributes.position : undefined;
+        if (index !== null) {
+
+            attribute = attributes.get(index);
+
+            renderer = indexedBufferRenderer;
+            renderer.setIndex(attribute);
+        }
 
         // 着色器关联顶点属性
         if (updateBuffers) {
             // 设置顶点相关信息
             setupVertexAttributes(object.material, program, object.geometry);
+
+            if (index !== null) {
+                _gl.bindBuffer(_gl.ELEMENT_ARRAY_BUFFER, attribute.buffer);
+            }
         }
 
         var dataCount = Infinity;
-        if (position !== undefined) {
+        if ( index !== null ) {
+            dataCount = index.count;
+        }
+        else if (position !== undefined) {
             dataCount = position.count;
-        } else {
+        }
+        else {
             dataCount = 1;
         }
 
@@ -1988,7 +2076,8 @@ PGL.WebGLRenderer = function (parameters) {
                     renderer.setMode(_gl.TRIANGLE_FAN);
                     break;
             }
-        } else if (object.isPoints) {
+        }
+        else if (object.isPoints) {
             renderer.setMode(_gl.POINTS);
         }
 
@@ -2413,6 +2502,83 @@ PGL.WebGLRenderer = function (parameters) {
             textures.setTexture2D(texture, slot);
         };
     }());
+};
+
+PGL.WebGLInfo = function (gl) {
+
+    var memory = {
+        geometries: 0,
+        textures: 0
+    };
+
+    var render = {
+        frame: 0,
+        calls: 0,
+        triangles: 0,
+        points: 0,
+        lines: 0
+    };
+
+    function update(count, mode, instanceCount) {
+
+        instanceCount = instanceCount || 1;
+
+        render.calls++;
+
+        switch (mode) {
+
+            case gl.TRIANGLES:
+                render.triangles += instanceCount * (count / 3);
+                break;
+
+            case gl.TRIANGLE_STRIP:
+            case gl.TRIANGLE_FAN:
+                render.triangles += instanceCount * (count - 2);
+                break;
+
+            case gl.LINES:
+                render.lines += instanceCount * (count / 2);
+                break;
+
+            case gl.LINE_STRIP:
+                render.lines += instanceCount * (count - 1);
+                break;
+
+            case gl.LINE_LOOP:
+                render.lines += instanceCount * count;
+                break;
+
+            case gl.POINTS:
+                render.points += instanceCount * count;
+                break;
+
+            default:
+                console.error('THREE.WebGLInfo: Unknown draw mode:', mode);
+                break;
+
+        }
+
+    }
+
+    function reset() {
+
+        render.frame++;
+        render.calls = 0;
+        render.triangles = 0;
+        render.points = 0;
+        render.lines = 0;
+
+    }
+
+    return {
+        memory: memory,
+        render: render,
+        programs: null,
+        autoReset: true,
+        reset: reset,
+        update: update
+    };
+
 };
 
 PGL.UniformsCache = function () {
@@ -4152,7 +4318,7 @@ PGL.WebGLShader = function (gl, type, string, debug) {
 };
 
 /**
- * 绘制图形
+ * 绘制图形gl.drawArrays
  * @param gl
  * @constructor
  */
@@ -4169,6 +4335,84 @@ PGL.WebGLBufferRenderer = function (gl) {
 
     this.setMode = setMode;
     this.render = render;
+};
+
+/**
+ * 绘制图形gl.drawElements
+ * @param gl
+ * @param extensions
+ * @param info
+ * @param capabilities
+ * @constructor
+ */
+PGL.WebGLIndexedBufferRenderer = function (gl, extensions, info, capabilities) {
+
+    var mode; // 绘制图形的方式
+
+    /**
+     * 设置绘制图形的方式
+     * @param value
+     */
+    function setMode(value) {
+
+        mode = value;
+
+    }
+
+    var type, bytesPerElement;
+
+    function setIndex(value) {
+        type = value.type;
+        bytesPerElement = value.bytesPerElement;
+    }
+
+    /**
+     * 绘制图形，更新info信息
+     * @param start 从哪个顶点开始绘制
+     * @param count 指定绘制需要用到多少顶点
+     */
+    function render(start, count) {
+
+        gl.drawElements(mode, count, type, start * bytesPerElement);
+
+        info.update(count, mode);
+
+    }
+
+    function renderInstances(geometry, start, count) {
+
+        var extension;
+
+        if (capabilities.isWebGL2) {
+
+            extension = gl;
+
+        } else {
+
+            var extension = extensions.get('ANGLE_instanced_arrays');
+
+            if (extension === null) {
+
+                console.error('THREE.WebGLIndexedBufferRenderer: using THREE.InstancedBufferGeometry but hardware does not support extension ANGLE_instanced_arrays.');
+                return;
+
+            }
+
+        }
+
+        extension[capabilities.isWebGL2 ? 'drawElementsInstanced' : 'drawElementsInstancedANGLE'](mode, count, type, start * bytesPerElement, geometry.maxInstancedCount);
+
+        info.update(count, mode, geometry.maxInstancedCount);
+
+    }
+
+    //
+
+    this.setMode = setMode;
+    this.setIndex = setIndex;
+    this.render = render;
+    this.renderInstances = renderInstances;
+
 };
 
 /**
@@ -4369,9 +4613,17 @@ PGL.WebGLGeometries = function (gl, attributes) {
         return buffergeometry;
     }
 
+    /**
+     * 更新几何体
+     * @param geometry
+     */
     function update(geometry) {
         var index = geometry.index;
         var geometryAttributes = geometry.attributes;
+
+        if ( index !== null ) {
+            attributes.update( index, gl.ELEMENT_ARRAY_BUFFER );
+        }
 
         for (var name in geometryAttributes) {
             attributes.update(geometryAttributes[name], gl.ARRAY_BUFFER);
@@ -4387,26 +4639,25 @@ PGL.WebGLGeometries = function (gl, attributes) {
 /**
  * 管理几何体对象
  * @param geometries
+ * @param info
  * @return {{update: update}}
  * @constructor
  */
-PGL.WebGLObjects = function (geometries) {
+PGL.WebGLObjects = function (geometries, info) {
     var updateList = {};
 
     function update(object) {
-        var frame = 0;
+        var frame = info.render.frame;
 
         var geometry = object.geometry;
         var buffergeometry = geometries.get(object, geometry);
 
-        if (buffergeometry) {
-            if (updateList[buffergeometry.id] !== frame) {
-                geometries.update(buffergeometry);
+        // Update once per frame
 
-                updateList[buffergeometry.id] = frame;
-            }
+        if ( updateList[ buffergeometry.id ] !== frame ) {
+            geometries.update( buffergeometry );
+            updateList[ buffergeometry.id ] = frame;
         }
-
 
         return buffergeometry;
     }

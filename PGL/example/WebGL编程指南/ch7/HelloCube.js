@@ -149,7 +149,8 @@ window.onload = function (ev) {
   webGlRenderer.setClearColor(new PGL.Color(0, 0, 0), 1);
 
   var camera = new PGL.PerspectiveCamera(45, 400 / 400, 0.1, 30000);
-  camera.position.set(0, 0, 5);
+  camera.position.set(0, 5, 5);
+  camera.lookAt(0,0,0);
 
   var scene = new PGL.Scene();
 

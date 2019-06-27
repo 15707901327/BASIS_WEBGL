@@ -50,6 +50,131 @@ PGL.UniformsUtils = {
     }
 };
 
+var common =
+    "#define RECIPROCAL_PI 0.31830988618\n" + // 1/PI
+    "#define saturate(a) clamp( a, 0.0, 1.0 )\n" + // 限制a的值在0-1之间
+
+    // 入射光
+    "struct IncidentLight {\n" +
+    "   vec3 color;\n" +
+    "   vec3 direction;\n" +
+    "   bool visible;\n" +
+    "}\n;" +
+
+    "struct ReflectedLight {\n" +
+    "   vec3 directDiffuse;\n" +
+    "   vec3 directSpecular;\n" +
+    "   vec3 indirectDiffuse;\n" +
+    "   vec3 indirectSpecular;\n" +
+    "};\n" +
+
+    "struct GeometricContext {\n" +
+    "   vec3 position;\n" +
+    "   vec3 normal;\n" +
+    "   vec3 viewDir;\n" +
+    "};\n";
+var lights_pars_begin =
+    "uniform vec3 ambientLightColor;\n" +
+    "vec3 getAmbientLightIrradiance(const in vec3 ambientLightColor){\n" +
+    "   vec3 irradiance = ambientLightColor;\n" +
+    "   return irradiance;\n" +
+    "}\n" +
+
+    // 平行光
+    "#if 1 > 0\n" +
+    "   struct DirectionalLight {\n" +
+    "       vec3 direction;\n" +
+    "       vec3 color;\n" +
+    "       int shadow;\n" +
+    "       float shadowBias;\n" +
+    "       float shadowRadius;\n" +
+    "       vec2 shadowMapSize;\n" +
+    "   };\n" +
+    "   uniform DirectionalLight directionalLights[ NUM_DIR_LIGHTS ];\n" +
+
+    "   void getDirectionalDirectLightIrradiance(const in DirectionalLight directionalLight,const in GeometricContext geometry,out IncidentLight directLight) {\n" +
+    "       directLight.color = directionalLight.color;\n" +
+    "       directLight.direction = directionalLight.direction;\n" +
+    "       directLight.visible = true;\n" +
+    "   }\n" +
+    "#endif\n";
+
+// 定义光照模型
+var bsdfs =
+    "vec3 BRDF_Diffuse_Lambert( const in vec3 diffuseColor ) {\n" +
+    "   return RECIPROCAL_PI * diffuseColor;\n" +
+    "}\n";
+
+var lights_phong_pars_fragment =
+    "#ifndef FLAT_SHADED\n" +
+    "   varying vec3 vNormal;\n" +
+    "#endif\n" +
+
+    "struct BlinnPhongMaterial {\n" +
+    "   vec3 diffuseColor;\n" +
+    "   vec3 specularColor;\n" +
+    "   float specularShininess;\n" +
+    "   float specularStrength;\n" +
+    "};\n" + // 必须加上精度限定
+
+    /**
+     * directLight：入射光颜色
+     * geometry：几何体
+     * material：材质
+     * reflectedLight：反射光
+     */
+    "void RE_Direct_BlinnPhong(const in IncidentLight directLight, const in GeometricContext geometry, const in BlinnPhongMaterial material, inout ReflectedLight reflectedLight){\n" +
+    "   #ifdef TOON\n" +
+    "       vec3 irradiance = getGradientIrradiance( geometry.normal, directLight.direction ) * directLight.color;\n" +
+    "   #else\n" +
+    "       float dotNL = saturate( dot( geometry.normal, directLight.direction ) );\n" + // cos
+    "       vec3 irradiance = dotNL * directLight.color;\n" +
+    "   #endif\n" +
+    "   reflectedLight.directDiffuse += irradiance * BRDF_Diffuse_Lambert( material.diffuseColor );\n" +
+    // "   reflectedLight.directSpecular += irradiance * BRDF_Specular_BlinnPhong( directLight, geometry, material.specularColor, material.specularShininess ) * material.specularStrength;\n" +
+    "}\n" +
+
+    /**
+     * RE_IndirectDiffuse_BlinnPhong
+     * irradiance:光源颜色
+     * geometry：几何体
+     * material：材质
+     * reflectedLight：反射光
+     */
+    "void RE_IndirectDiffuse_BlinnPhong( const in vec3 irradiance, const in GeometricContext geometry, const in BlinnPhongMaterial material, inout ReflectedLight reflectedLight ) {\n" +
+    "   reflectedLight.indirectDiffuse += irradiance * BRDF_Diffuse_Lambert( material.diffuseColor );\n" +
+    "}\n" +
+
+    "#define RE_Direct RE_Direct_BlinnPhong\n" +
+    "#define RE_IndirectDiffuse RE_IndirectDiffuse_BlinnPhong\n";
+
+var lights_fragment_begin =
+    "GeometricContext geometry;\n" +
+    "geometry.normal = normal;\n" +
+
+    "IncidentLight directLight;\n" + // 实例化入射光
+    // 计算平行光
+    "#if ( 1 > 0 ) && defined( RE_Direct )\n" +
+    "   DirectionalLight directionalLight;\n" +
+    // "   #pragma unroll_loop\n" +
+    "   for ( int i = 0; i < NUM_DIR_LIGHTS; i ++ ) {\n" +
+    "       directionalLight = directionalLights[ i ];\n" +
+    "       getDirectionalDirectLightIrradiance( directionalLight, geometry, directLight );\n" +
+    "       RE_Direct( directLight, geometry, material, reflectedLight );\n" +
+    "   }\n" +
+    "#endif\n";
+
+var normal_fragment_begin =
+    "#ifdef FLAT_SHADED\n" +
+    "#else\n" +
+    "   vec3 normal = normalize( vNormal );\n" +
+    "#endif\n";
+
+var beginnormal_vertex =
+    "vec3 objectNormal = vec3( normal );\n";
+var defaultnormal_vertex =
+    "vec3 transformedNormal = normalMatrix * objectNormal;\n";
+
 var points_vert =
     "attribute vec4 position;\n" +
     "uniform float size;\n" +
@@ -65,6 +190,12 @@ var points_frag =
     "}";
 
 var meshphong_vert =
+    "#define PHONG\n" +
+
+    "#ifndef FLAT_SHADED\n" +
+    "   varying vec3 vNormal;\n" +
+    "#endif\n" +
+
     "#if defined(USE_MAP)\n" +
     "   varying vec2 vUv;\n" +
     "#endif\n" +
@@ -75,8 +206,16 @@ var meshphong_vert =
     "#endif\n" +
 
     "void main(){\n" +
+
     "   #if defined( USE_MAP )\n" +
     "       vUv = uv;\n" +
+    "   #endif\n" +
+
+    beginnormal_vertex +
+    defaultnormal_vertex +
+
+    "   #ifndef FLAT_SHADED \n" + // Normal computed with derivatives when FLAT_SHADED
+    "       vNormal = normalize( transformedNormal );\n" +
     "   #endif\n" +
 
     "   #ifdef USE_COLOR\n" +
@@ -87,7 +226,14 @@ var meshphong_vert =
     " gl_Position = mvPosition; //设置坐标\n" +
     "}";
 var meshphong_frag =
-    "uniform vec3 diffuse;\n" + // 必须加上精度限定
+    "uniform vec3 diffuse;\n" +
+
+    common + // 包含着色器公共模块(包含常用的数学工具函数以及一些常量定义什么的)
+
+    bsdfs + // 定义光照模型
+
+    lights_pars_begin + // 定义光照结构体，相关函数
+    lights_phong_pars_fragment + // 定义BlinnPhongMaterial结构体 宏定义函数：RE_Direct RE_IndirectDiffuse
 
     "#if defined( USE_MAP )\n" +
     "   varying vec2 vUv;\n" +
@@ -103,6 +249,7 @@ var meshphong_frag =
 
     "void main() {\n" +
     "   vec4 diffuseColor = vec4(diffuse,1.0);\n" +
+    "   ReflectedLight reflectedLight = ReflectedLight( vec3( 0.0 ), vec3( 0.0 ), vec3( 0.0 ), vec3( 0.0 ) );\n" +
 
     "   #ifdef USE_MAP\n" +
     "       vec4 texelColor = texture2D( map, vUv );\n" +
@@ -113,7 +260,26 @@ var meshphong_frag =
     "       diffuseColor.rgb *= vColor;\n" +
     "   #endif\n" +
 
-    "   gl_FragColor = diffuseColor;\n" +
+    "   BlinnPhongMaterial material;\n" +
+    "   material.diffuseColor = diffuseColor.rgb;\n" +
+
+    normal_fragment_begin +
+
+    lights_fragment_begin +
+
+    // 计算环境光照
+    "   #if defined( RE_IndirectDiffuse )\n" +
+    "        vec3 irradiance = getAmbientLightIrradiance( ambientLightColor );\n" +
+    "    #endif\n" +
+
+    // 环境光照 * 基本颜色
+    "   #if defined( RE_IndirectDiffuse )\n" +
+    "        RE_IndirectDiffuse( irradiance, geometry, material, reflectedLight );\n" +
+    "    #endif\n" +
+
+    "   vec3 outgoingLight = reflectedLight.indirectDiffuse + reflectedLight.indirectDiffuse;\n" +
+
+    "   gl_FragColor = vec4(outgoingLight,diffuseColor.a);\n" +
     "}";
 var ShaderChunk = {
     points_frag: points_frag,
@@ -179,12 +345,28 @@ PGL.UniformsLib = {
     points: {
         size: {value: 1.0},
         diffuse: {value: new PGL.Color(0xeeeeee)}
+    },
+    lights: {
+        ambientLightColor: {value: []},
+        directionalLights: {
+            value: [], properties: {
+                direction: {},
+                color: {},
+
+                shadow: {},
+                shadowBias: {},
+                shadowRadius: {},
+                shadowMapSize: {}
+            }
+        }
     }
-};
+}
+;
 PGL.ShaderLib = {
     phong: {
         uniforms: PGL.UniformsUtils.merge([
-            PGL.UniformsLib.common
+            PGL.UniformsLib.common,
+            PGL.UniformsLib.lights
         ]),
 
         vertexShader: ShaderChunk.meshphong_vert,
@@ -853,6 +1035,109 @@ PGL.Object3D.prototype = {
 PGL.Object3D.DefaultUp = new PGL.Vector3(0, 1, 0); // 默认上方向
 PGL.Object3D.DefaultMatrixAutoUpdate = true; // 默认更新值
 
+// 光照
+PGL.Light = function (color, intensity) {
+
+    PGL.Object3D.call(this);
+
+    this.type = 'Light';
+
+    this.color = new PGL.Color(color);
+    this.intensity = intensity !== undefined ? intensity : 1;
+
+    this.receiveShadow = undefined;
+
+};
+PGL.Light.prototype = Object.assign(Object.create(PGL.Object3D.prototype), {
+
+    constructor: PGL.Light,
+
+    isLight: true,
+
+    copy: function (source) {
+
+        PGL.Object3D.prototype.copy.call(this, source);
+
+        this.color.copy(source.color);
+        this.intensity = source.intensity;
+
+        return this;
+
+    },
+
+    toJSON: function (meta) {
+
+        var data = PGL.Object3D.prototype.toJSON.call(this, meta);
+
+        data.object.color = this.color.getHex();
+        data.object.intensity = this.intensity;
+
+        if (this.groundColor !== undefined) data.object.groundColor = this.groundColor.getHex();
+
+        if (this.distance !== undefined) data.object.distance = this.distance;
+        if (this.angle !== undefined) data.object.angle = this.angle;
+        if (this.decay !== undefined) data.object.decay = this.decay;
+        if (this.penumbra !== undefined) data.object.penumbra = this.penumbra;
+
+        if (this.shadow !== undefined) data.object.shadow = this.shadow.toJSON();
+
+        return data;
+
+    }
+
+});
+
+PGL.AmbientLight = function (color, intensity) {
+
+    PGL.Light.call(this, color, intensity);
+
+    this.type = 'AmbientLight';
+
+    this.castShadow = undefined;
+
+};
+PGL.AmbientLight.prototype = Object.assign(Object.create(PGL.Light.prototype), {
+
+    constructor: PGL.AmbientLight,
+
+    isAmbientLight: true
+
+});
+
+PGL.DirectionalLight = function (color, intensity) {
+
+    PGL.Light.call(this, color, intensity);
+
+    this.type = 'DirectionalLight';
+
+    this.position.copy(PGL.Object3D.DefaultUp);
+    this.updateMatrix();
+
+    this.target = new PGL.Object3D();
+
+    // this.shadow = new PGL.DirectionalLightShadow();
+
+};
+PGL.DirectionalLight.prototype = Object.assign(Object.create(PGL.Light.prototype), {
+
+    constructor: PGL.DirectionalLight,
+
+    isDirectionalLight: true,
+
+    copy: function (source) {
+
+        PGL.Light.prototype.copy.call(this, source);
+
+        this.target = source.target.clone();
+
+        this.shadow = source.shadow.clone();
+
+        return this;
+
+    }
+
+});
+
 // 相机
 PGL.Camera = function () {
 
@@ -1348,6 +1633,8 @@ PGL.Material = function () {
 
     this.name = '';
     this.type = 'Material';
+
+    this.lights = true; // 对灯光敏感
 
     this.vertexColors = PGL.NoColors; // THREE.NoColors, THREE.VertexColors, THREE.FaceColors
 
@@ -2054,13 +2341,11 @@ PGL.WebGLRenderer = function (parameters) {
         }
 
         var dataCount = Infinity;
-        if ( index !== null ) {
+        if (index !== null) {
             dataCount = index.count;
-        }
-        else if (position !== undefined) {
+        } else if (position !== undefined) {
             dataCount = position.count;
-        }
-        else {
+        } else {
             dataCount = 1;
         }
 
@@ -2076,8 +2361,7 @@ PGL.WebGLRenderer = function (parameters) {
                     renderer.setMode(_gl.TRIANGLE_FAN);
                     break;
             }
-        }
-        else if (object.isPoints) {
+        } else if (object.isPoints) {
             renderer.setMode(_gl.POINTS);
         }
 
@@ -2188,6 +2472,11 @@ PGL.WebGLRenderer = function (parameters) {
 
         var opaqueObjects = currentRenderList.opaque;
 
+        // 设置灯光
+        currentRenderState.setupLights(camera);
+
+        if (this.info.autoReset) this.info.reset();
+
         // 渲染背景
         background.render(currentRenderList, scene, camera, forceClear);
 
@@ -2219,6 +2508,12 @@ PGL.WebGLRenderer = function (parameters) {
         var visible = object.layers.test(camera.layers);
 
         if (visible) {
+            if (object.isLight) {
+                currentRenderState.pushLight(object);
+                if (object.castShadow) {
+                    currentRenderState.pushShadow(object);
+                }
+            }
             if (object.isPoints || object.isMesh) {
 
                 // 检查物体是否在平截头体内
@@ -2307,12 +2602,19 @@ PGL.WebGLRenderer = function (parameters) {
 
         var materialProperties = properties.get(material);
 
+        // 获取管理灯光
+        var lights = currentRenderState.state.lights;
+
+        var lightsHash = materialProperties.lightsHash;
+        var lightsStateHash = lights.state.hash;
+
         // 获取参数
-        var parameters = programCache.getParameters(material, null, null, null, null, null, object);
+        var parameters = programCache.getParameters(material, lights.state, null, null, null, null, object);
 
         var program;
         var programChange = true;
 
+        // 获取shader变量、顶点着色器、片元着色器，创建着色器程序
         if (programChange) {
             if (parameters.shaderID) {
                 var shader = PGL.ShaderLib[parameters.shaderID];
@@ -2330,13 +2632,24 @@ PGL.WebGLRenderer = function (parameters) {
                 };
             }
 
-            program = programCache.acquireProgram(material, materialProperties.shader, parameters);
+            // 获得着色器程序
+            program = programCache.acquireProgram(material, materialProperties.shader, parameters, null);
 
             materialProperties.program = program;
             material.program = program;
         }
 
+        // shader变量
         var uniforms = materialProperties.shader.uniforms;
+
+        // 添加灯光属性
+        if (material.lights) {
+            // wire up the material to this renderer's lighting state
+
+            uniforms.ambientLightColor.value = lights.state.ambient; // 环境光颜色值
+            uniforms.directionalLights.value = lights.state.directional; // Array平行光参数
+        }
+
         var progUniforms = materialProperties.program.getUniforms();
         var uniformsList = PGL.WebGLUniforms.seqWithValue(progUniforms.seq, uniforms);
         materialProperties.uniformsList = uniformsList;
@@ -2352,6 +2665,10 @@ PGL.WebGLRenderer = function (parameters) {
     function setProgram(camera, fog, material, object) {
 
         var materialProperties = properties.get(material);
+        var lights = currentRenderState.state.lights; // 获取灯光数据
+
+        var lightsHash = materialProperties.lightsHash;
+        var lightsStateHash = lights.state.hash;
 
         // 更新着色器程序
         if (material.needsUpdate) {
@@ -2601,13 +2918,13 @@ PGL.UniformsCache = function () {
 
                 case 'DirectionalLight':
                     uniforms = {
-                        direction: new Vector3(),
-                        color: new Color(),
+                        direction: new PGL.Vector3(),
+                        color: new PGL.Color(),
 
                         shadow: false,
                         shadowBias: 0,
                         shadowRadius: 1,
-                        shadowMapSize: new Vector2()
+                        shadowMapSize: new PGL.Vector2()
                     };
                     break;
 
@@ -2773,8 +3090,8 @@ PGL.WebGLLights = function () {
 
                 }
 
-                state.directionalShadowMap[directionalLength] = shadowMap;
-                state.directionalShadowMatrix[directionalLength] = light.shadow.matrix;
+                // state.directionalShadowMap[directionalLength] = shadowMap;
+                // state.directionalShadowMatrix[directionalLength] = light.shadow.matrix;
                 state.directional[directionalLength] = uniforms;
 
                 directionalLength++;
@@ -2934,8 +3251,8 @@ PGL.WebGLRenderState = function () {
 
     var lights = new PGL.WebGLLights();
 
-    var lightsArray = [];
-    var shadowsArray = [];
+    var lightsArray = []; // 场景灯光
+    var shadowsArray = []; // 贴图灯光
 
     function init() {
 
@@ -2945,21 +3262,15 @@ PGL.WebGLRenderState = function () {
     }
 
     function pushLight(light) {
-
         lightsArray.push(light);
-
     }
 
     function pushShadow(shadowLight) {
-
         shadowsArray.push(shadowLight);
-
     }
 
     function setupLights(camera) {
-
         lights.setup(lightsArray, shadowsArray, camera);
-
     }
 
     var state = {
@@ -4085,12 +4396,12 @@ PGL.WebGLPrograms = function (renderer, extensions, capabilities, textures) {
     /**
      * 获取参数标记
      * @param material 材质对象
-     * @param lights
+     * @param lights 光照的状态
      * @param shadows
      * @param fog
      * @param nClipPlanes
      * @param nClipIntersection
-     * @param object
+     * @param object 对象
      * @return {{shaderID: *, precision, supportsVertexTextures, outputEncoding, map: boolean, mapEncoding, matcap: boolean, matcapEncoding, envMap: boolean, envMapMode: *, envMapEncoding, envMapCubeUV: boolean, lightMap: boolean, aoMap: boolean, emissiveMap: boolean, emissiveMapEncoding, bumpMap: boolean, normalMap: boolean, objectSpaceNormalMap: boolean, displacementMap: boolean, roughnessMap: boolean, metalnessMap: boolean, specularMap: boolean, alphaMap: boolean, gradientMap: boolean, combine, vertexColors, fog: boolean, useFog, fogExp: *|boolean, flatShading, sizeAttenuation, logarithmicDepthBuffer: *, skinning: boolean, maxBones: *, useVertexTexture, morphTargets, morphNormals, maxMorphTargets: *|number, maxMorphNormals: *|number, numDirLights: number, numPointLights, numSpotLights: number, numRectAreaLights: number, numHemiLights: number, numClippingPlanes: *, numClipIntersection: *, dithering, shadowMapEnabled: boolean|*, shadowMapType: *, toneMapping, physicallyCorrectLights: *|boolean, premultipliedAlpha, alphaTest, doubleSided: boolean, flipSided: boolean, depthPacking: boolean}}
      */
     this.getParameters = function (material, lights, shadows, fog, nClipPlanes, nClipIntersection, object) {
@@ -4103,19 +4414,30 @@ PGL.WebGLPrograms = function (renderer, extensions, capabilities, textures) {
 
             precision: precision,
             map: !!material.map,
-            vertexColors: material.vertexColors
+            vertexColors: material.vertexColors,
+
+            numDirLights: lights.directional.length // 光照的数量
         };
 
         return parameters;
     };
 
-    this.acquireProgram = function (material, shader, parameters) {
+    /**
+     * 获得着色器程序
+     * @param material 材质
+     * @param shader materialProperties.shader
+     * @param parameters 参数
+     * @param code 参数码(判断着色器是否改变)
+     * @return {*}
+     */
+    this.acquireProgram = function (material, shader, parameters, code) {
 
         var program;
 
-        program = new PGL.WebGLProgram(renderer, null, null, material, shader, parameters);
-
-        programs.push(program);
+        if (program === undefined) {
+            program = new PGL.WebGLProgram(renderer, extensions, code, material, shader, parameters, capabilities, textures);
+            programs.push(program);
+        }
 
         return program;
     };
@@ -4155,14 +4477,29 @@ function filterEmptyLine(string) {
 }
 
 /**
+ * 替换灯的数量
+ * @param string
+ * @param parameters
+ * @return {string}
+ */
+function replaceLightNums(string, parameters) {
+
+    return string
+        .replace(/NUM_DIR_LIGHTS/g, parameters.numDirLights) // 替换平行光的数量
+        .replace(/NUM_SPOT_LIGHTS/g, parameters.numSpotLights)
+        .replace(/NUM_RECT_AREA_LIGHTS/g, parameters.numRectAreaLights)
+        .replace(/NUM_POINT_LIGHTS/g, parameters.numPointLights)
+        .replace(/NUM_HEMI_LIGHTS/g, parameters.numHemiLights);
+
+}
+
+/**
  * 着色器程序
- * @param renderer
- * @param shader
- * @param renderer
+ * @param renderer 渲染器
+ * @param shader 着色器参数
  * @param extensions
- * @param code
- * @param material
- * @param shader
+ * @param code 参数码
+ * @param material 材质
  * @param parameters
  * @param capabilities
  * @param textures
@@ -4198,6 +4535,7 @@ PGL.WebGLProgram = function (renderer, extensions, code, material, shader, param
             'uniform mat3 normalMatrix;',
 
             'attribute vec4 position;',
+            'attribute vec3 normal;',
             'attribute vec2 uv;',
 
             '\n'
@@ -4219,6 +4557,9 @@ PGL.WebGLProgram = function (renderer, extensions, code, material, shader, param
         ].filter(filterEmptyLine).join('\n');
 
     }
+
+    // 替换代表灯的数字
+    fragmentShader = replaceLightNums(fragmentShader, parameters);
 
     var vertexGlsl = prefixVertex + vertexShader;
     var fragmentGlsl = prefixFragment + fragmentShader;
@@ -4621,8 +4962,8 @@ PGL.WebGLGeometries = function (gl, attributes) {
         var index = geometry.index;
         var geometryAttributes = geometry.attributes;
 
-        if ( index !== null ) {
-            attributes.update( index, gl.ELEMENT_ARRAY_BUFFER );
+        if (index !== null) {
+            attributes.update(index, gl.ELEMENT_ARRAY_BUFFER);
         }
 
         for (var name in geometryAttributes) {
@@ -4654,9 +4995,9 @@ PGL.WebGLObjects = function (geometries, info) {
 
         // Update once per frame
 
-        if ( updateList[ buffergeometry.id ] !== frame ) {
-            geometries.update( buffergeometry );
-            updateList[ buffergeometry.id ] = frame;
+        if (updateList[buffergeometry.id] !== frame) {
+            geometries.update(buffergeometry);
+            updateList[buffergeometry.id] = frame;
         }
 
         return buffergeometry;

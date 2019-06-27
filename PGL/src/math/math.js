@@ -2038,6 +2038,16 @@
             };
         }(),
 
+        multiplyScalar: function ( s ) {
+
+            this.r *= s;
+            this.g *= s;
+            this.b *= s;
+
+            return this;
+
+        },
+
         setStyle: function (style) {
 
             function handleAlpha(string) {

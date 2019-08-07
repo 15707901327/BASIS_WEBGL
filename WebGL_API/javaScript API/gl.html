@@ -1,1910 +1,1930 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>WebGL上下文</title>
-  <link rel="stylesheet" href="../../css/base.css">
+    <meta charset="UTF-8">
+    <title>WebGL上下文</title>
+    <link rel="stylesheet" href="../../css/base.css">
 </head>
 <body>
 <div class="l-r-wrapper">
-  <div class="left">
-    <h4>声明函数</h4>
-    <ul class="ul-1">
-      <li><a href="#matrixMode">gl.matrixMode()</a></li>
-    </ul>
-    <h4><a href="#draw">绘制方法</a></h4>
-    <ul class="ul-1">
-      <li><a href="#drawArrays">gl.drawArrays()</a></li>
-      <li><a href="#drawElements">gl.drawElements()</a></li>
-      <li><a href="#colorMask">gl.colorMask()</a></li>
-    </ul>
-    <h4><a href="#buffer">缓冲区方法</a></h4>
-    <ul class="ul-1">
-      <li><a href="#clear">gl.clear()</a></li>
-      <li><a href="#clearColor">gl.clearColor()</a></li>
-      <li><a href="#clearDepth">gl.clearDepth()</a></li>
-      <li><a href="#clearStencil">gl.clearStencil()</a></li>
-      <li><a href="#createBuffer" title="gl.createBuffer()">gl.createBuffer()</a></li>
-      <li><a href="#deleteBuffer" title="gl.deleteBuffer()">gl.deleteBuffer()</a></li>
-      <li><a href="#bindBuffer" title="gl.bindBuffer()">gl.bindBuffer()</a></li>
-      <li><a href="#bufferData" title="gl.bufferData()">gl.bufferData()</a></li>
-      <li><a href="#enableVertexAttribArray" title="gl.enableVertexAttribArray()">gl.enableVertexAttribArray()</a></li>
-      <li><a href="#disableVertexAttribArray" title="gl.disableVertexAttribArray()">gl.disableVertexAttribArray()</a>
-    </ul>
-    <h4><a href="#variable">变量相关方法</a></h4>
-    <ul class="ul-1">
-      <li><h4>attribute变量相关方法</h4></li>
-      <li><a href="#getAttribLocation">gl.getAttribLocation()</a></li>
-      <li><a href="#vertexAttrib[1234]f">gl.vertexAttrib[1234]f()</a></li>
-      <li><a href="#vertexAttribPointer">gl.vertexAttribPointer()</a></li>
-      <li><a href="#getActiveAttrib">gl.getActiveAttrib()</a></li>
-      <li><a href="#WebGLActiveInfo">WebGLActiveInfo</a></li>
-      <li><h4>与uniform变量相关方法</h4></li>
-      <li><a href="#getUniformLocation" title="gl.getUniformLocation()">gl.getUniformLocation()</a></li>
-      <li><a href="#uniform" title="gl.uniform()">gl.uniform()</a></li>
-      <li><a href="#uniformMatrix4fv" title="gl.uniformMatrix4fv()">gl.uniformMatrix4fv()</a></li>
-      <li><a href="#getActiveUniform" title="gl.getActiveUniform()">gl.getActiveUniform()</a></li>
-    </ul>
-    <h4>与加载纹理相关的方法</h4>
-    <ul class="ul-1">
-      <li><a href="#createTexture" title="gl.createTexture()">gl.createTexture()</a></li>
-      <li><a href="#deleteTexture" title="gl.deleteTexture()">gl.deleteTexture()</a></li>
-      <li><a href="#pixelStorei" title="gl.pixelStorei()">gl.pixelStorei()</a></li>
-      <li><a href="#activeTexture" title="gl.activeTexture()">gl.activeTexture()</a></li>
-      <li><a href="#bindTexture" title="gl.bindTexture()">gl.bindTexture()</a></li>
-      <li><a href="#texParameteri" title="gl.texParameteri()">gl.texParameteri()</a></li>
-      <li><a href="#texImage2D" title="gl.texImage2D()">gl.texImage2D()</a></li>
-    </ul>
-    <h4>与像素点相关的方法</h4>
-    <ul class="ul-1">
-      <li><a href="#readPixels">readPixels()</a></li>
-    </ul>
-    <h4><a href="#baseShaderProgram">着色器和着色器程序对象</a></h4>
-    <ul class="ul-1">
-      <li><a href="#createShader" title="gl.createShader()">gl.createShader()</a></li>
-      <li><a href="#deleteShader" title="gl.deleteShader()">gl.deleteShader()</a></li>
-      <li><a href="#shaderSource" title="gl.shaderSource()">gl.shaderSource()</a></li>
-      <li><a href="#compileShader" title="gl.compileShader()">gl.compileShader()</a></li>
-      <li><a href="#getShaderParameter" title="gl.getShaderParameter()">gl.getShaderParameter()</a></li>
-      <li><a href="#getShaderInfoLog" title="gl.getShaderInfoLog()">gl.getShaderInfoLog()</a></li>
-      <li><a href="#getShaderPrecisionFormat">gl.getShaderPrecisionFormat()</a></li>
-      <li><a href="#createProgram" title="gl.createProgram()">gl.createProgram()</a></li>
-      <li><a href="#deleteProgram" title="gl.deleteProgram()">gl.deleteProgram()</a></li>
-      <li><a href="#attachShader" title="gl.attachShader()">gl.attachShader()</a></li>
-      <li><a href="#detachShader" title="gl.detachShader()">gl.detachShader()</a></li>
-      <li><a href="#linkProgram" title="gl.linkProgram()">gl.linkProgram()</a></li>
-      <li><a href="#getProgramParameter" title="gl.getProgramParameter()">gl.getProgramParameter()</a></li>
-      <li><a href="#getProgramInfoLog" title="gl.getProgramInfoLog()">gl.getProgramInfoLog()</a></li>
-      <li><a href="#useProgram" title="gl.useProgram()">gl.useProgram()</a></li>
-    </ul>
-    <h4><a href="#enableInnerFun">Webgl内置功能</a></h4>
-    <ul class="ul-1">
-      <li><a href="#enable" title="gl.enable()">gl.enable()</a></li>
-      <li><a href="#disable" title="gl.disable()">gl.disable()</a></li>
-      <li><a href="#polygonOffset" title="gl.polygonOffset()">gl.polygonOffset()</a></li>
-      <li><a href="#cullFace" title="gl.cullFace()">gl.cullFace()</a></li>
-      <li><a href="#frontFace" title="gl.frontFace()">gl.frontFace()</a></li>
-    </ul>
-    <h4><a href="#depth">深度方法</a></h4>
-    <ul class="ul-1">
-      <li><a href="#depthMask" title="gl.depthMask()">gl.depthMask()</a></li>
-      <li><a href="#depthFunc" title="gl.depthFunc()">gl.depthFunc()</a></li>
-    </ul>
-    <h4><a href="#blending">混合方法</a></h4>
-    <ul class="ul-1">
-      <li><a href="#blendFunc" title="gl.blendFunc()">gl.blendFunc()</a></li>
-      <li><a href="#blendColor" title="gl.blendColor()">gl.blendColor()</a></li>
-      <li><a href="#blendEquation" title="gl.blendEquation()">gl.blendEquation()</a></li>
-      <li><a href="#blendEquationSeparate" title="gl.blendEquationSeparate()">gl.blendEquationSeparate()</a></li>
-      <li><a href="#blendFuncSeparate" title="gl.blendFuncSeparate()">gl.blendFuncSeparate()</a></li>
-    </ul>
-    <h4>帧缓存区对象</h4>
-    <ul class="ul-1">
-      <li><a href="#createFramebuffer">createFramebuffer()</a></li>
-      <li><a href="#deleteFramebuffer">deleteFramebuffer()</a></li>
-      <li><a href="#bindFramebuffer">bindFramebuffer()</a></li>
-      <li><a href="#framebufferTexture2D">framebufferTexture2D()</a></li>
-      <li><a href="#framebufferRenderbuffer">framebufferRenderbuffer()</a></li>
-      <li><a href="#checkFramebufferStatus">checkFramebufferStatus()</a></li>
-    </ul>
-    <h4>绘图区域设置</h4>
-    <ul class="ul-1">
-      <li><a href="#scissor">scissor()</a></li>
-      <li><a href="#viewport">viewport()</a></li>
-    </ul>
-    <h4>渲染缓存区对象</h4>
-    <ul class="ul-1">
-      <li><a href="#createRenderbuffer">createRenderbuffer()</a></li>
-      <li><a href="#deleteRenderbuffer">deleteRenderbuffer()</a></li>
-      <li><a href="#bindRenderbuffer">bindRenderbuffer()</a></li>
-      <li><a href="#renderbufferStorage">renderbufferStorage()</a></li>
-    </ul>
-    <h4><a href="#globalMethod">全局方法</a></h4>
-    <ul class="ul-1">
-      <li><a href="#getExtension">getExtension()</a></li>
-      <li><a href="#getParameter">getParameter()</a></li>
-    </ul>
-  </div>
-  <div class="right">
-    <!--声明函数-->
-    <section id="matrixMode">
-      <h4>gl.matrixMode(target)</h4>
-      <p>用来指定哪个矩阵是当前的矩阵，而它的参数代表要操作的目标。</p>
-      <div class="content">
-        <strong>参数：</strong>
-        <p>target:
-        <ul>
-          <li>GL_PROJECTION:对投影矩阵操作，要对投影相关进行操作,接下来的语句可以是跟透视相关的函数，比如glFrustum()或gluPerspective()</li>
-          <li>GL_MODELVIEW:对模型视景矩阵操作，对模型视景的操作,接下来的语句描绘一个以模型为基础的适应，这样来设置参数，接下来用到的就是像gluLookAt()这样的函数；</li>
-          <li>GL_TEXTURE:对纹理矩阵进行随后的操作，就是对纹理相关进行操作</li>
-        </ul>
-        </p>
-      </div>
-    </section>
-    <!--绘制图形的基本方法-->
-    <section id="draw" class="section1">
-      <h4 class="title">绘制图形的基本方法</h4>
-      <section id="drawArrays">
-        <h4>gl.drawArrays(mode, first, count);</h4>
-        <p>执行顶点着色器，按照mode参数指定的方式绘制图形</p>
-        <div class="content">
-          <strong>参数：</strong>
-          <ul class="ul-1">
-            <li>
-              mode：指定绘制的方式，可以接收一下常量符号：gl_POINTS,gl_LINES,gl_LINE_STRIP,
-              gl_LINE_LOOP,gl_TRIANGLES,gl_TRIANGLE_STRIP,gl_TRIANGLE_FAN.
-              <p>参考:<a href="../WebGL可以绘制的基本图形.html">WebGL可以绘制的基本图形</a></p>
-            </li>
-            <li>first:指定从那个顶点开始绘制</li>
-            <li>count：指定绘制需要用到多少个顶点（整形数）</li>
-          </ul>
-          <strong>返回值：</strong>
-          <p>无</p>
-          <strong>错误：</strong>
-          <ul>
-            <li>INVALID_ENUM：传入的mode参数不是前述参数之一</li>
-            <li>INVALID_VALUE：参数first或count是负数</li>
-          </ul>
-        </div>
-      </section>
-      <section id="drawElements">
-        <h4>gl.drawElements(mode,count,type,offset)</h4>
-        <p>执行着色器，按照mode参数指定的方式，根据绑定到gl.ELEMENT_ARRAY_BUFFER的缓存区中的顶点索引值绘制图形。</p>
-        <div class="content">
-          <strong>参数：</strong>
-          <ul class="ul-1">
-            <li>
-              mode：指定绘制的方式，可以接收一下常量符号：gl_POINTS,gl_LINES,gl_LINE_STRIP,
-              gl_LINE_LOOP,gl_TRIANGLES,gl_TRIANGLE_STRIP,gl_TRIANGLE_FAN.
-              <p>参考:<a href=""></a></p>
-            </li>
-            <li>count：指定绘制需要用到多少个顶点（整形数）</li>
-            <li>type:指定索引值数据类型：gl.UNSIGNED或gl.UNSIGNED_SHORT</li>
-            <li>offset:指定索引数组中开始绘制的位置，以字节为单位</li>
-          </ul>
-          <strong>返回值：</strong>
-          <p>无</p>
-          <strong>错误：</strong>
-          <ul>
-            <li>INVALID_ENUM：传入的mode参数不是前述参数之一</li>
-            <li>INVALID_VALUE：参数offset或count是负数</li>
-          </ul>
-        </div>
-      </section>
-      <section id="colorMask">
-        <h4>gl.colorMask(red, green, blue, alpha)</h4>
-        <p>设置在绘制或呈现WebGLFramebuffer时启用或禁用哪些颜色组件</p>
-        <div class="content">
-          <strong>参数：</strong>
-          <ul class="ul-1">
-            <li>red：指定是否可以将红色分量写入帧缓冲区。 默认值：true</li>
-            <li>green：指定是否可以将绿色分量写入帧缓冲区。 默认值：true</li>
-            <li>blue：指定是否可以将蓝色分量写入帧缓冲区。 默认值：true</li>
-            <li>alpha：指定是否可以将透明度分量写入帧缓冲区。 默认值：true</li>
-          </ul>
-          <strong>返回值：</strong>
-          <p>无</p>
-        </div>
-      </section>
-    </section>
-    <!--缓冲区相关方法-->
-    <section id="buffer" class="section1">
-      <h4 class="title">缓冲区相关方法</h4>
-      <section id="clear">
-        <h4>gl.clear(buffer);</h4>
-        <p>将指定缓存区设定为预定的值。如果清空是颜色缓存区，那么将使用gl.clearColor()指定的值（作为预定值）</p>
-        <div class="content">
-          <strong>参数：</strong>
-          <ul class="ul-1">
-            <li>
-              buffer：指定待清空的缓存区，位操作符OR(|)可用来指定多个缓存区<br>
-              gl.COLOR_BUFFER_BIT：指定颜色缓存区<br>
-              gl.DEPTH_BUFFER_BIT：指定深度缓存区<br>
-              gl.STENCIL_BUFFER_BIT：指定模版缓存区<br>
-            </li>
-          </ul>
-          <strong>返回值：</strong>
-          <p>无</p>
-          <strong>错误：</strong>
-          <ul>
-            <li>INVALID_VALUE：缓存区不是以上三种类型</li>
-          </ul>
-        </div>
-      </section>
-      <section id="clearColor">
-        <h4>gl.clearColor(red,green,blue,alpha);</h4>
-        <p>指定绘图区域的背景色，默认值（0.0，0.0，0.0，0.0）</p>
-        <div class="content">
-          <strong>参数：</strong>
-          <ul class="ul-1">
-            <li>red：指定红色值（从0.0到1.0）</li>
-            <li>green：指定绿色值（从0.0到1.0）</li>
-            <li>blue：指定蓝色值（从0.0到1.0）</li>
-            <li>alpha：指定透明度值（从0.0到1.0,如果任何值小于0.0大于1.0，那么就会分别截断为0.0或1.0</li>
-          </ul>
-          <strong>返回值：</strong>
-          <p>无</p>
-          <strong>说明：</strong>
-          <ul class="ul-1">
-            <li>一旦指定背景颜色之后，背景颜色就会被驻存在WebGL系统（WebGL System）中，在下一次调用方法之前不会改变（只需要要设置一次）。</li>
-          </ul>
-        </div>
-      </section>
-      <section id="clearDepth">
-        <h4>gl.clearDepth(depth);</h4>
-        <p>指定绘图区域的深度，默认值 1.0</p>
-        <div class="content">
-          <strong>参数：</strong>
-          <ul class="ul-1">
-            <li>depth：深度</li>
-          </ul>
-          <strong>返回值：</strong>
-          <p>无</p>
-          <strong>说明：</strong>
-        </div>
-      </section>
-      <section id="clearStencil">
-        <h4>gl.clearStencil(s);</h4>
-        <p>默认值 0</p>
-        <div class="content">
-          <strong>参数：</strong>
-          <ul class="ul-1">
-            <li>s：</li>
-          </ul>
-          <strong>返回值：</strong>
-          <p>无</p>
-          <strong>说明：</strong>
-        </div>
-      </section>
-      <section id="createBuffer">
-        <h4>gl.createBuffer();</h4>
-        <p>创建缓存区对象</p>
-        <div class="content">
-          <strong>返回值：</strong>
-          <ul class="ul-2">
-            <li>非null：新创建的缓存区对象</li>
-            <li>null：创建缓存区对象失败</li>
-          </ul>
-          <strong>实例：</strong>
-          <ul class="ul-2">
-            <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
-          </ul>
-        </div>
-      </section>
-      <section id="deleteBuffer">
-        <h4>gl.deleteBuffer(buffer);</h4>
-        <p>删除参数buffer表示的缓存区对象</p>
-        <div class="content">
-          <strong>参数：</strong>
-          <ul>
-            <li>buffer：待删除的缓存区对象</li>
-          </ul>
-          <strong>返回值：</strong>
-          <p>无</p>
-          <strong>实例：</strong>
-          <ul>
-            <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
-          </ul>
-        </div>
-      </section>
-      <section id="bindBuffer">
-        <h4>gl.bindBuffer(target, buffer);</h4>
-        <p>允许使用buffer表示的缓存区对象并将其绑定到target表示的目标上</p>
-        <div class="content">
-          <strong>参数：</strong>
-          <ul class="ul-2">
-            <li>
-              target:
-              <p>gl.ARRAY_BUFFER：表示缓存区对象中包含了顶点的数据</p>
-              <p>gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值"OpenGL ES着色器语言[GLSL ES]"</p>
-            </li>
-            <li>buffer:指定之前由gl.createBuffer()返回的待绑定的缓存区对象，如果指定为空，则禁用对target的绑定</li>
-          </ul>
-          <strong>返回值：</strong>
-          <p>无</p>
-          <strong>错误：</strong>
-          <ul class="ul-2">
-            <li>INVALID_ENUM target不是上诉值之一，这时将保持原有的绑定情况不变</li>
-          </ul>
-          <strong>实例：</strong>
-          <ul class="ul-2">
-            <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
-          </ul>
-        </div>
-      </section>
-      <section id="bufferData">
-        <h4>gl.bufferData(target, srcData,usage);</h4>
-        <p>开辟存储空间，向绑定在target上的缓存区对象中写入数据data</p>
-        <div class="content">
-          <strong>重载函数</strong>
-          <ul class="ul-2">
-            <li>void gl.bufferData(target, size, usage); </li>
-            <li>void gl.bufferData(target, ArrayBuffer? srcData, usage);</li>
-            <li>void gl.bufferData(target, ArrayBufferView srcData, usage);</li>
-            <li><strong>WebGL2:</strong></li>
-            <li>void gl.bufferData(target, ArrayBufferView srcData, usage, srcOffset, length);</li>
-          </ul>
-          <strong>参数：</strong>
-          <ul class="ul-2">
-            <li>
-              target:
-              <p>gl.ARRAY_BUFFER：表示缓存区对象中包含了顶点的数据</p>
-              <p>gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值"OpenGL ES着色器语言[GLSL ES]"</p>
-            </li>
-            <li>size:设定Buffer对象的数据存储区大小</li>
-            <li>srcData:一个ArrayBuffer，SharedArrayBuffer 或者 ArrayBufferView 类型的数组对象，将被复制到Buffer的数据存储区。 如果为null，数据存储区仍会被创建，但是不会进行初始化和定义。</li>
-            <li>
-              usage:表示程序将如何使用存储在缓存区对象中的数据。该参数将帮助webgl优化操作，但是就算你传入了错误的值，也不会终止程序（仅仅是降低程序的效率）
-              <p>gl.STATIC_DRAW:只会向缓存区对象中写入一次数据，但需要绘制很多次</p>
-              <p>gl.STREAM_DRAW:只会向缓存区对象中写入一次数据，然后绘制若干次</p>
-              <p>gl.DYNAMIC_DRAW:会向缓存区对象中写入多次数据，并绘制很多次</p>
-            </li>
-            <li>srcOffset:指定读取缓冲时的初始元素索引偏移量。</li>
-            <li>length:默认为0</li>
-          </ul>
-          <strong>返回值：</strong>
-          <p>无</p>
-          <strong>错误：</strong>
-          <ul class="ul-2">
-            <li>INVALID_ENUM target不是上诉值之一，这时将保持原有的绑定情况不变</li>
-          </ul>
-          <strong>实例：</strong>
-          <ul class="ul-2">
-            <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
-          </ul>
-        </div>
-      </section>
-      <section id="bufferSubData">
-        <h4>void gl.bufferSubData(target, offset, ArrayBuffer srcData);</h4>
-        <div class="content">
-          <strong>webGL1:</strong>
-          <p>void gl.bufferSubData(target, offset, ArrayBufferView srcData);</p>
-          <p>void gl.bufferSubData(target, offset, ArrayBuffer srcData);</p>
-          <strong>webGL2:</strong>
-          <p>void gl.bufferSubData(target, dstByteOffset, ArrayBufferView srcData, srcOffset, length);</p>
-          <p>更新缓冲区对象的数据存储的子集。</p>
-        </div>
-        <div class="content">
-          <strong>参数：</strong>
-          <ul class="ul-2">
-            <li>
-              target
-              <p>gl.ARRAY_BUFFER：包含顶点属性的缓存区，例如顶点坐标、纹理坐标数据或顶点颜色数据。</p>
-              <p>gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值"OpenGL ES着色器语言[GLSL ES]"</p>
-              <p><strong>webgl2添加：</strong></p>
-              <ul class="ul-2">
-                <li>gl.COPY_READ_BUFFER:用于从一个缓冲区对象复制到另一个</li>
-                <li>gl.COPY_WRITE_BUFFER:用于从一个缓冲区对象复制到另一个</li>
-                <li>gl.TRANSFORM_FEEDBACK_BUFFER:缓冲区用于变换反馈操作</li>
-                <li>gl.UNIFORM_BUFFER:缓冲区用于存储统一块</li>
-                <li>gl.PIXEL_PACK_BUFFER:用于像素传输操作的缓冲区</li>
-                <li>gl.PIXEL_UNPACK_BUFFER:用于像素传输操作的缓冲区</li>
-              </ul>
-            </li>
-            <li>dstByteOffset:GLintptr指定数据替换将开始的字节偏移量。</li>
-            <li>srcData:ArrayBuffer，SharedArrayBuffer或将复制到数据存储中的ArrayBufferView类型数组类型之一。</li>
-            <li>srcOffset:一个GLuint，指定元素索引偏移量从哪里开始读取缓冲区。</li>
-            <li>length:GLuint默认为0。</li>
-          </ul>
-          <strong>返回值：</strong>
-          <p>无</p>
-          <strong>错误：</strong>
-          <ul class="ul-2">
-            <li>A gl.INVALID_VALUE error is thrown if the data would be written past the end of the buffer or if data is null.</li>
-            <li>A gl.INVALID_ENUM error is thrown if target is not one of the allowed enums.</li>
-          </ul>
-        </div>
-      </section>
-      <section id="enableVertexAttribArray">
-        <h4>gl.enableVertexAttribArray(location)</h4>
-        <p>
-          开启location指定的attribute变量
-        </p>
-        <div class="content">
-          <strong>参数：</strong>
-          <ul>
-            <li>location：指定待分配attribute变量的存储位置</li>
-          </ul>
-          <strong>返回值：</strong>
-          <p>无</p>
-          <strong>错误：</strong>
-          <ul>
-            <li>INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）</li>
-          </ul>
-          <strong>实例：</strong>
-          <ul>
-            <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
-          </ul>
-        </div>
-      </section>
-      <section id="disableVertexAttribArray">
-        <h4>gl.disableVertexAttribArray(location)</h4>
-        <p>
-          关闭location指定的attribute变量
-        </p>
-        <div class="content">
-          <strong>参数：</strong>
-          <ul>
-            <li>location：指定attribute变量的存储位置</li>
-          </ul>
-          <strong>返回值：</strong>
-          <p>无</p>
-          <strong>错误：</strong>
-          <ul>
-            <li>INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）</li>
-          </ul>
-          <strong>实例：</strong>
-          <ul>
-            <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
-          </ul>
-        </div>
-      </section>
-    </section>
-    <!-- 变量相关方法 -->
-    <section class="section1" id="variable">
-      <div class="title">变量相关方法</div>
-      <section id="getAttribLocation">
-        <h4>gl.getAttribLocation(gl.program, name);</h4>
-        <p>获取由name参数指定的attribute变量的存储位置</p>
-        <div class="content">
-          <strong>参数：</strong>
-          <ul class="ul-1">
-            <li>gl.program：指定包含顶点着色器和片元着色器的着色器程序对象。</li>
-            <li>name：指定想要获取其存储地址的attribute变量的名称</li>
-            <li>name：指定想要获取其存储地址的attribute变量的名称</li>
-          </ul>
-          <strong>返回值：</strong>
-          <ul class="ul-1">
-            <li>大于等于0：attribute变量的存储地址</li>
-            <li>-1：指定的attribute变量不存在，或者其命名具有gl_或webgl_前缀</li>
-          </ul>
-          <strong>错误：</strong>
-          <ul class="ul-1">
-            <li>INVALID_OPERATION:程序对象未能成功连接</li>
-            <li>-1：指定的attribute变量不存在，或者其命名具有gl_或webgl_前缀</li>
-          </ul>
-        </div>
-      </section>
-      <section id="vertexAttrib[1234]f">
-        <h4>gl.vertexAttrib[1234]f(location, v0, v1, v2, v3);</h4>
-        <p>
-          将数据（v0，v1，v2,v3）传给由location参数指定的attribute变量，如果没有传递后面的
-          v1, v2, v3，使用默认值0.0、0.0、1.0
-        </p>
-        <div class="content">
-          <strong>参数：</strong>
-          <ul>
-            <li>location：指定将要修改的attribute变量的存储位置</li>
-            <li>v0：指定填充attribute变量第一个分量的值</li>
-            <li>v1：指定填充attribute变量第二个分量的值</li>
-            <li>v2：指定填充attribute变量第三个分量的值</li>
-            <li>v3：指定填充attribute变量第四个个分量的值</li>
-          </ul>
-          <strong>返回值：</strong>
-          <p>无</p>
-          <strong>错误：</strong>
-          <ul>
-            <li>INVALID_OPERATION:程序对象未能成功连接（没有当前program对象）</li>
-            <li>INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）</li>
-          </ul>
-          <strong>矢量方法：</strong>
-          <ul>
-            <li>gl.vertexAttrib1fv(location,Float32Array);</li>
-            <li>gl.vertexAttrib4fv(location,Float32Array);</li>
-            <li>
-              <strong>实例：</strong>
-              <p>var position = new Float32Array([0.0,0.0,0.0,1.0]);</p>
-              <p>gl.vertexAttrib4fv(a_Position, position);</p>
-            </li>
-          </ul>
-        </div>
-      </section>
-      <section id="vertexAttribPointer">
-        <h4>gl.vertexAttribPointer(location, size, type, normalized, stride, offset);</h4>
-        <p>将绑定到gl.ARRAY_BUFFER上的缓存区对象分配给由location指定的attribute变量</p>
-        <div class="content">
-          <strong>参数：</strong>
-          <ul class="ul-2">
-            <li>location：指定待分配attribute变量的存储位置</li>
-            <li>size：指定缓存区中每个顶点的分量个数（1到4）。若size比attribute变量需要的分量数少，
-              缺失分量将按照与vertexAttrib[1234]f（）相同的规则补全。
-            </li>
-            <li>
-              type:用以下类型之一来指定格式
-              <ul class="ul-2">
-                <li>gl.UNSIGNED_BYTE:无符号字节，Unit8Array</li>
-                <li>gl.SHORT:短整型，Int16Array</li>
-                <li>gl.UNSIGNED_SHORT:无符号短整型，Unit16Array</li>
-                <li>gl.INT:无符号整型，Int16Array</li>
-                <li>gl.UNSIGNED_INT:无符号整型，Unit16Array</li>
-                <li>gl.FLOAT:浮点型，Float32Array</li>
-              </ul>
-            </li>
-            <li>normalize：传入true或false，表明是否将非浮点型的数据归一化到[0,1]或[-1,1]区间</li>
-            <li>stride：指定相邻两个顶点的字节数，默认为0</li>
-            <li>offset：指定缓存区对象中的偏移量（以字节为单位），即attribute变量从缓存区中的何处开始储存，
-              如果是起始位置开始的，offset设置为0
-            </li>
-          </ul>
-          <strong>返回值：</strong>
-          <p>无</p>
-          <strong>错误：</strong>
-          <ul>
-            <li>INVALID_OPERATION:程序对象未能成功连接（没有当前program对象）</li>
-            <li>INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）,或则stride或offset是负值</li>
-          </ul>
-          <strong>实例：</strong>
-          <ul>
-            <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
-          </ul>
-        </div>
-      </section>
-      <section id="WebGLActiveInfo">
-        <h4>WebGLActiveInfo</h4>
-        <p>代表了调用 <a href="#getActiveAttrib">WebGLRenderingContext.getActiveAttrib()</a>
-          和<a href="#getActiveUniform">WebGLRenderingContext.getActiveUniform()</a> 这两个方法后传回的信息。</p>
-        <div class="ul-1">
-          <strong>返回值：</strong>
-          <ul class="ul-1">
-            <li>info.name:请求变量的只读名称。</li>
-            <li>info.size:请求变量的只读尺寸。</li>
-            <li>info.type:请求变量的只读类型。</li>
-          </ul>
-        </div>
-      </section>
-      <section id="getActiveAttrib">
-        <h4>gl.getActiveAttrib(program,index)</h4>
-        <p>WebGL API的WebGLRenderingContext.getActiveAttrib（）方法返回包含顶点属性的大小，类型和名称的WebGLActiveInfo对象。
-          它通常在查询未知的制服时用于调试或创建通用库。</p>
-        <div class="ul-1">
-          <strong>参数：</strong>
-          <ul class="ul-1">
-            <li>program:包含顶点属性的WebGL程序。</li>
-            <li>index:一个GLuint，指定要获取的顶点属性的索引。 该值是<a href="#getProgramParameter">gl.getProgramParameter（program，gl.ACTIVE_ATTRIBUTES）</a>返回的索引0到N-1。
-            </li>
-          </ul>
-          <strong>返回值：</strong>
-          <p>A WebGLActiveInfo object.</p>
-          <strong>实例：</strong>
-          <p>var info = gl.getActiveAttrib( program, i );</p>
-          <p>var name = info.name;</p>
-        </div>
-      </section>
-      <!--与uniform变量相关方法-->
-      <section id="getUniformLocation">
-        <h4>gl.getUniformLocation(program, name);</h4>
-        <p>获取指定名称的uniform变量的存储位置</p>
-        <div class="content">
-          <strong>参数：</strong>
-          <ul>
-            <li>program：指定包含顶点着色器和片元着色器的着色器程序对象。</li>
-            <li>name：指定想要获取其存储位置的uniform变量名称</li>
-          </ul>
-          <strong>返回值：</strong>
-          <ul>
-            <li>non-unll:指定uniform变量的位置</li>
-            <li>null：指定的uniform变量不存在，或者其命名具有gl_或webgl_前缀</li>
-          </ul>
-          <strong>错误：</strong>
-          <ul>
-            <li>INVALID_OPERATION:程序对象未能成功连接</li>
-            <li>INVALID_VALUE：name参数的长度大于attribute变量名的最大长度（默认256字节）</li>
-          </ul>
-        </div>
-      </section>
-      <section id="uniform">
-        <h4>gl.uniform[1234]f(location, v0, v1, v2, v3);</h4>
-        <p>将数据（v0，v1，v2,v3）传给由location参数指定的uniform变量</p>
-        <div class="content">
-          <strong>参数：</strong>
-          <ul>
-            <li>location：指定将要修改的uniform变量的存储位置</li>
-            <li>v0：指定填充uniform变量第一个分量的值</li>
-            <li>v1：指定填充uniform变量第二个分量的值</li>
-            <li>v2：指定填充uniform变量第三个分量的值</li>
-            <li>v3：指定填充uniform变量第四个个分量的值</li>
-          </ul>
-          <strong>返回值：</strong>
-          <p>无</p>
-          <strong>错误：</strong>
-          <ul>
-            <li>INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置</li>
-          </ul>
-        </div>
-      </section>
-      <section id="uniformMatrix4fv">
-        <h4>gl.uniformMatrix4fv(location, transpose, array)</h4>
-        <p>将array表示的4X4矩阵分配给由location指定的uniform存储的变量</p>
-        <div class="content">
-          <strong>参数：</strong>
-          <ul class="ul-2">
-            <li>location：uniform变量的存储位置</li>
-            <li>transpose：在WebGL中必须指定为false。该参数表示是否转置矩阵。转置操作将交换矩阵的行和列，
-              WebGL实现没有提供矩阵转置的方法，所以该参数必须设为false
-            </li>
-            <li>array：待传输的类型化数组，4X4矩阵按列主序存储在其中</li>
-          </ul>
-          <strong>返回值：</strong>
-          <p>无</p>
-          <strong>错误：</strong>
-          <ul class="ul-2">
-            <li>INVALID_OPERATION:不存在当前程序对象</li>
-            <li>INVALID_VALUE:transpose不为false，或者数组的长度小于16</li>
-          </ul>
-          <strong>列子</strong>
-          <ul>
-            <li><a href="../../WebGL编程指南/ch3/RotatedTriangle_Matrix.html">用矩阵旋转三角形</a></li>
-          </ul>
-        </div>
-      </section>
-      <section id="getActiveUniform">
-        <h4>gl.getActiveUniform(program,index)</h4>
-        <p>WebGL API的WebGLRenderingContext.getActiveUniform（）方法返回包含统一属性的大小，类型和名称的WebGLActiveInfo对象。
-          它通常在查询未知的制服时用于调试或创建通用库。</p>
-        <div class="ul-1">
-          <strong>参数：</strong>
-          <ul class="ul-1">
-            <li>program:一个WebGL程序，指定WebGL着色器程序，从中获取统一变量的信息。</li>
-            <li>index:一个GLuint，指定要获取的顶点属性的索引。 该值是<a href="#getProgramParameter">gl.getProgramParameter（program，gl.ACTIVE_ATTRIBUTES）</a>返回的索引0到N-1。
-            </li>
-          </ul>
-          <strong>返回值：</strong>
-          <p>A WebGLActiveInfo object describing the uniform.</p>
-          <strong>The type attribute of the return value will be one of the following:</strong>
-          <ul class="ul-1">
-            <li>gl.FLOAT</li>
-            <li>gl.FLOAT_VEC2</li>
-            <li> gl.FLOAT_VEC3</li>
-            <li> gl.FLOAT_VEC4</li>
-            <li> gl.INT</li>
-            <li> gl.INT_VEC2</li>
-            <li> gl.INT_VEC3</li>
-            <li> gl.INT_VEC4</li>
-            <li> gl.BOOL</li>
-            <li> gl.BOOL_VEC2</li>
-            <li>gl.BOOL_VEC3</li>
-            <li> gl.BOOL_VEC4</li>
-            <li>gl.FLOAT_MAT2</li>
-            <li>gl.FLOAT_MAT3</li>
-            <li>gl.FLOAT_MAT4</li>
-            <li>gl.SAMPLER_2D</li>
-            <li>gl.SAMPLER_CUBE</li>
-          </ul>
-          <strong>When using a WebGL 2 context, the following values are possible additionally:</strong>
-          <ul class="ul-1">
-            <li>gl.UNSIGNED_INT</li>
-            <li>gl.UNSIGNED_INT_VEC2</li>
-            <li>gl.UNSIGNED_INT_VEC3</li>
-            <li>gl.UNSIGNED_INT_VEC4</li>
-            <li>gl.FLOAT_MAT2x3</li>
-            <li>gl.FLOAT_MAT2x4</li>
-            <li>gl.FLOAT_MAT3x2</li>
-            <li>gl.FLOAT_MAT3x4</li>
-            <li>gl.FLOAT_MAT4x2</li>
-            <li>gl.FLOAT_MAT4x3</li>
-            <li>gl.SAMPLER_2D</li>
-            <li>gl.SAMPLER_3D</li>
-            <li> gl.SAMPLER_CUBE</li>
-            <li>gl.SAMPLER_2D_SHADOW</li>
-            <li>gl.SAMPLER_2D_ARRAY</li>
-            <li>gl.SAMPLER_2D_ARRAY_SHADOW</li>
-            <li>gl.SAMPLER_CUBE_SHADOW</li>
-            <li>gl.INT_SAMPLER_2D</li>
-            <li>gl.INT_SAMPLER_3D</li>
-            <li>gl.INT_SAMPLER_CUBE</li>
-            <li>gl.INT_SAMPLER_2D_ARRAY</li>
-            <li>gl.UNSIGNED_INT_SAMPLER_2D</li>
-            <li>gl.UNSIGNED_INT_SAMPLER_3D</li>
-            <li>gl.UNSIGNED_INT_SAMPLER_CUBE</li>
-            <li>gl.UNSIGNED_INT_SAMPLER_2D_ARRAY</li>
-          </ul>
-          <strong>实例：</strong>
-          <p>var info = gl.getActiveAttrib( program, i );</p>
-          <p>var name = info.name;</p>
-        </div>
-      </section>
-    </section>
-    <!--与加载纹理相关的方法-->
-    <section id="createTexture">
-      <h4>gl.createTexture()</h4>
-      <p>创建纹理对象以存储纹理图像</p>
-      <div class="content">
-        <strong>参数</strong>
-        <p>无</p>
-        <strong>返回值</strong>
-        <ul>
-          <li>non-null:新创建的纹理对象</li>
-          <li>null:创建纹理对象失败</li>
-        </ul>
-        <strong>错误</strong>
-        <p>无</p>
-      </div>
-    </section>
-    <section id="deleteTexture">
-      <h4>gl.deleteTexture(texture)</h4>
-      <p>使用texture删除纹理对象</p>
-      <div class="content">
-        <strong>参数</strong>
-        <p>texture：待删除的纹理对象</p>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <p>无</p>
-      </div>
-    </section>
-    <section id="pixelStorei">
-      <h4>gl.pixelStorei(pname,param)</h4>
-      <p>使用pname和param指定的方式处理加载得到的图像</p>
-      <div class="content">
-        <strong>参数</strong>
-        <ul>
-          <li>
-            panme : 可以是以下二者之一
-            <p>gl.UNPACK_FLIP_Y_WEBGL:对图像进行Y轴反转。默认为false。</p>
-            <p>gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL:将图像RGB颜色值的每一个分量乘以A。默认值为false。</p>
-          </li>
-          <li>param:指定非0（true）或0（false）。必须为整数。</li>
-        </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <p>INVALID_ENUM：pname不是合法的值</p>
-      </div>
-    </section>
-    <section id="activeTexture">
-      <h4>gl.activeTexture(texUnit)</h4>
-      <p>激活texUnit指定的纹理单元</p>
-      <div class="content">
-        <strong>参数</strong>
+    <div class="left">
+        <h4>声明函数</h4>
         <ul class="ul-1">
-          <li>
-            texUnit：指定准备激活的纹理单元：gl.TEXTURE0、gl.TEXTURE1、gl.TEXTURE2、
-            gl.TEXTURE03、gl.TEXTURE4、gl.TEXTURE5、gl.TEXTURE6、gl.TEXTURE7。
-            最后的数字表示纹理单元的编号。
-          </li>
+            <li><a href="#matrixMode">gl.matrixMode()</a></li>
         </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <p>INVALID_ENUM：texUnit不是合法的值</p>
-      </div>
-    </section>
-    <section id="bindTexture">
-      <h4>gl.bindTexture(target,texture)</h4>
-      <p>
-        开启texture指定的纹理对象，并将其绑定到target上。此外，如果已经通过gl.activeTexture()激活
-        了某个纹理单元，则纹理对象也会绑定到这个纹理单元上。
-      </p>
-      <div class="content">
-        <strong>参数</strong>
+        <h4><a href="#draw">绘制方法</a></h4>
         <ul class="ul-1">
-          <li>target：gl.TEXTURE_2D或者gl.TEXTURE_CUBE_MAP</li>
-          <li>texture：表示绑定的纹理单元</li>
+            <li><a href="#drawArrays">gl.drawArrays()</a></li>
+            <li><a href="#drawElements">gl.drawElements()</a></li>
+            <li><a href="#colorMask">gl.colorMask()</a></li>
         </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <p>INVALID_ENUM：target不是合法的值</p>
-      </div>
-    </section>
-    <section id="texParameteri">
-      <h4>gl.texParameteri(target,pname，param)</h4>
-      <p>将param的值赋给绑定到目标的纹理对象的pname参数上。</p>
-      <div class="content">
-        <strong>参数</strong>
-        <ul>
-          <li>target：gl.TEXTURE_2D或者gl.TEXTURE_CUBE_MAP</li>
-          <li>
-            pname：纹理参数
-            <table border="1">
-              <tr>
-                <th colspan="3">纹理参数及它们的默认值</th>
-              </tr>
-              <tr>
-                <th>纹理参数</th>
-                <th>描述</th>
-                <th>默认值</th>
-              </tr>
-              <tr>
-                <td>gl.TEXTURE_MAG_FILTER</td>
-                <td>纹理的放大</td>
-                <td>gl.LINEAR</td>
-              </tr>
-              <tr>
-                <td>gl.TEXTURE_MIN_FILTER</td>
-                <td>纹理的缩小</td>
-                <td>gl.NEAREST_MIPMAP_LINEAR</td>
-              </tr>
-              <tr>
-                <td>gl.TEXTURE_WRAP_S</td>
-                <td>纹理水平填充</td>
-                <td>gl.REPEAT</td>
-              </tr>
-              <tr>
-                <td>gl.TEXTURE_WRAP_T</td>
-                <td>纹理垂直填充</td>
-                <td>gl.REPEAT</td>
-              </tr>
-            </table>
-          </li>
-          <li>param：纹理参数值
-            <table border="1">
-              <tr>
-                <th colspan="2">可以赋值给gl.TEXTURE_MAG_FILTER和gl.TEXTURE_MIN_FILTER的非金字塔纹理类型常量</th>
-              </tr>
-              <tr>
-                <th>值</th>
-                <th>描述</th>
-              </tr>
-              <tr>
-                <td>gl.NEAREST</td>
-                <td>使用原纹理上距离映射后像素（新像素）中心最近的那个颜色值，作为新像素的值（使用曼哈顿距离）</td>
-              </tr>
-              <tr>
-                <td>gl.LINEAR</td>
-                <td>使用距离新像素中心最近的四个像素的颜色值的加权平均，作为新像素的值（与gl.NEAREST相比，该方法图像质量更好，但会有较大的开销）</td>
-              </tr>
-              <tr>
-                <th colspan="2">可以赋值给gl.TEXTURE_WRAP_S和gl.TEXTURE_WRAP_T的常量</th>
-              </tr>
-              <tr>
-                <td>值</td>
-                <td>描述</td>
-              </tr>
-              <tr>
-                <td>gl.REPEAT</td>
-                <td>平铺式的重复纹理</td>
-              </tr>
-              <tr>
-                <td>gl.MIRRORED_REPEAT</td>
-                <td>镜像对称式的重复纹理</td>
-              </tr>
-              <tr>
-                <td>gl.CLAMP_TO_EDGE</td>
-                <td>使用纹理图像边缘值</td>
-              </tr>
-            </table>
-          </li>
-        </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <p>INVALID_ENUM：target不是合法的值</p>
-        <p>INVALID_OPERATION：当前目标上没有绑定纹理对象</p>
-      </div>
-    </section>
-    <section id="texImage2D">
-      <h4>
-        gl.texImage2D(target, level, internalformat, format, type, pixels: ImageBitmap | ImageData | HTMLVideoElement |
-        HTMLImageElement | HTMLCanvasElement): void;<br>
-        gl.texImage2D(target, level, internalformat, width, height, border, format, type, pixels: ArrayBufferView |
-        null): void;
-      </h4>
-      <p>将image指定的图像分配给绑定的目标上的纹理对象。</p>
-      <div class="content">
-        <strong>参数</strong>
-        <ul>
-          <li>target: gl.TEXTURE_2D 或 gl.TEXTURE_CUBE_MAP</li>
-          <li>level: 传入0（实际上该参数是为金字塔纹理准备的）</li>
-          <li>
-            internalformat: 图像的内部格式
-            <table border="1">
-              <tr>
-                <th colspan="2">纹素数据的格式</th>
-              </tr>
-              <tr>
-                <th>格式</th>
-                <th>描述</th>
-              </tr>
-              <tr>
-                <td>gl.RGB</td>
-                <td>红、绿、蓝</td>
-              </tr>
-              <tr>
-                <td>gl.RGBA</td>
-                <td>红、绿、蓝、透明度</td>
-              </tr>
-              <tr>
-                <td>gl.ALPHA</td>
-                <td>（0.0,0.0,0.0,透明度）</td>
-              </tr>
-              <tr>
-                <td>gl.LUMINANCE</td>
-                <td>L、L、L、1L：流明（表示我们感知到的物体表面的亮度。通常使用物体表面红、绿、蓝颜色分量值的加权平均来计算流明）</td>
-              </tr>
-              <tr>
-                <td>gl.LUMINANCE_ALPHA</td>
-                <td>L、L、L、透明度</td>
-              </tr>
-            </table>
-          </li>
-          <li>width : 纹理的宽度</li>
-          <li>height : 纹理的高度</li>
-          <li>border :</li>
-          <li>
-            format: 纹理数据的格式，必须使用与internalformat相同的值
-            <table border="1">
-              <tr>
-                <th colspan="2">纹理图片格式说明</th>
-              </tr>
-              <tr>
-                <th>格式</th>
-                <th>像素表示方法</th>
-              </tr>
-              <tr>
-                <td>JPG格式</td>
-                <td>RGB</td>
-              </tr>
-              <tr>
-                <td>PNG格式</td>
-                <td>RGBA</td>
-              </tr>
-              <tr>
-                <td>BMP格式</td>
-                <td>RGB</td>
-              </tr>
-            </table>
-          </li>
-          <li>type: 纹理数据类型
-            <table border="1">
-              <tr>
-                <th colspan="2">纹理数据的数据格式</th>
-              </tr>
-              <tr>
-                <th>格式</th>
-                <th>描述</th>
-              </tr>
-              <tr>
-                <td>gl.UNSIGNED_BYTE</td>
-                <td>无符号整型，每个颜色分量占据1字节</td>
-              </tr>
-              <tr>
-                <td>gl.UNSIGNED_SHORT_5_6_5</td>
-                <td>RGB:每个分量分别占用5、6、5比特</td>
-              </tr>
-              <tr>
-                <td>gl.UNSIGNED_SHORT_4_4_4_4</td>
-                <td>RGB:每个分量分别占用4、4、4、4比特</td>
-              </tr>
-              <tr>
-                <td>gl.UNSIGNED_SHORT_5_5_5_1</td>
-                <td>RGB:RGB每个分量分别占用5、5、5比特，A分量占据1比特</td>
-              </tr>
-            </table>
-          </li>
-          <li>image: 包含纹理图像的Image对象</li>
-        </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <ul>
-          <li>INVALID_ENUM:target不是合法的</li>
-          <li>INVALID_OPERATION:当前目标上没有绑定纹理对象</li>
-        </ul>
-      </div>
-    </section>
-    <!--与像素点相关的方法-->
-    <section id="readPixels">
-      <h4>readPixels(x,y,width,height,format,type,pixels)</h4>
-      <p>从颜色缓存区中读取由x,y,width,height参数确定的矩形块中的所有像素值，并保存在pixels指定的数组中。</p>
-      <div class="content">
-        <strong>参数</strong>
+        <h4><a href="#buffer">缓冲区方法</a></h4>
         <ul class="ul-1">
-          <li>x,y: 指定颜色缓存区中矩形块左上角的坐标，同时也是读取的第一个像素的坐标</li>
-          <li>width,height: 指定矩形块的宽度和高度，以像素为单位</li>
-          <li>format：指定像素的颜色格式，必须为gl.RGB</li>
-          <li>type : 指定像素的数据格式，必须为gl.UNSIGNED_BYTE</li>
-          <li>pixels : 指定用来接收像素值数据的Uint8Array类型化数组</li>
-        </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <ul class="ul-1">
-          <li>INVALID_VALUE:pixels为null，或则，width或height为负值</li>
-          <li>INVALID_ENUM:format、type值无效</li>
-          <li>INVALID_OPERATION:pixels的长度不够存储所有像素值数据</li>
-        </ul>
-      </div>
-    </section>
-    <!--着色器和着色器程序对象-->
-    <section id="baseShaderProgram" class="section1">
-      <div class="title">着色器和着色器程序对象</div>
-      <section>
-        <h4>概述</h4>
-        <div class="content">
-          <strong>着色器对象</strong>
-          <p>着色器对象管理一个顶点着色器或一个片元着色器，每一个着色器都有一个着色器对象。</p>
-          <strong>程序对象</strong>
-          <p>程序对象是管理着色器对象的容器。Webgl中，一个程序对象必须包含一个顶点着色器和一个片元着色器。</p>
-          <strong>创建和初始化着色器对象7个步骤:</strong>
-          <ul class="ul-1-num">
-            <li>创建着色器对象(<a href="#createShader" title="gl.createShader()">gl.createShader()</a>)</li>
-            <li>向着色器对象中填充着色器程序的源代码(<a href="#shaderSource" title="gl.shaderSource()">gl.shaderSource()</a>)</li>
-            <li>编译着色器(<a href="#compileShader" title="gl.compileShader()">gl.compileShader()</a>)</li>
-            <li>创建程序对象(<a href="#createProgram" title="gl.createProgram()">gl.createProgram()</a>)</li>
-            <li>为程序对象分配着色器(<a href="#attachShader" title="gl.attachShader()">gl.attachShader()</a>)</li>
-            <li>链接程序对象(<a href="#linkProgram" title="gl.linkProgram()">gl.linkProgram()</a>)</li>
-            <li>使用程序对象(<a href="#" title="gl.useProgram()">gl.useProgram()</a>)</li>
-          </ul>
-        </div>
-      </section>
-      <!--着色器对象-->
-      <section id="createShader">
-        <h4>gl.createShader(type)</h4>
-        <p>创建由type指定的着色器对象</p>
-        <div class="content">
-          <strong>参数</strong>
-          <ul class="ul-1">
-            <li>type : 指定创建着色器的类型，gl.VERTEX_SHADER表示顶点着色器，gl.FRAGMENT_SHADER表示片元着色器</li>
-          </ul>
-          <strong>返回值</strong>
-          <ul class="ul-1">
-            <li>non-null:新创建的着色器对象</li>
-            <li>null:创建失败</li>
-          </ul>
-          <strong>错误</strong>
-          <ul class="ul-1">
-            <li>INVALID_ENUM: type参数既不是gl.VERTEX_SHADER，也不是gl.FRAGMENT_SHADER</li>
-          </ul>
-        </div>
-      </section>
-      <section id="deleteShader">
-        <h4>gl.deleteShader(shader)</h4>
-        <p>删除shader指定的着色器</p>
-        <div class="content">
-          <strong>参数</strong>
-          <ul class="ul-1">
-            <li>shader : 待删除的着色器对象</li>
-          </ul>
-          <strong>返回值</strong>
-          <p>无</p>
-          <strong>错误</strong>
-          <p>无</p>
-          <strong>注意：</strong>
-          <p>
-            如果着色器程序对象还在使用（也就是说已经使用gl.attachShader()函数使之附加在了程序对象上），那么gl.deleteShader（）并不会立刻删除着色器，而是要等到程序对象不在使用该着色器后，才将其删除。</p>
-        </div>
-      </section>
-      <section id="shaderSource">
-        <h4>gl.shaderSource(shader,source)</h4>
-        <p>将source指定的字符串形式的代码传入shader指定的着色器。如果之前已经向shader传入过代码了，旧的代码将会被替换掉。</p>
-        <div class="content">
-          <strong>参数</strong>
-          <ul class="ul-1">
-            <li>shader : 指定需要传入代码的着色器对象</li>
-            <li>source : 指定字符串形式的代码</li>
-          </ul>
-          <strong>返回值</strong>
-          <p>无</p>
-          <strong>错误</strong>
-          <p>无</p>
-        </div>
-      </section>
-      <section id="compileShader">
-        <h4>gl.compileShader(shader)</h4>
-        <p>编译shader指定的着色器中的源代码</p>
-        <div class="content">
-          <strong>参数</strong>
-          <ul class="ul-1">
-            <li>shader : 待编译的着色器</li>
-          </ul>
-          <strong>返回值</strong>
-          <p>无</p>
-          <strong>错误</strong>
-          <p>无</p>
-          <strong>注意</strong>
-          <p>如果通过gl.shaderSource(),用新的代码替换到旧的代码，WebGL系统中的用旧的编译出的可执行部分不会被替换掉，需要手动第重新进行编译。</p>
-        </div>
-      </section>
-      <section id="getShaderParameter">
-        <h4>gl.getShaderParameter(shader，pname)</h4>
-        <p>获取shader指定的着色器中，pname指定的参数信息</p>
-        <div class="content">
-          <strong>参数</strong>
-          <ul class="ul-1">
-            <li>shader : 指定待获取参数着色器</li>
-            <li>pname : 指定待获取参数的类型，可以是gl.SHADER_TYPE、gl.DELETE_STATUS或则gl.COMPILE_STATUS</li>
-          </ul>
-          <strong>返回值</strong>
-          <ul class="ul-1">
-            <li>根据pname的不同，返回不同的值</li>
-            <li>gl.SHADER_TYPE：返回是顶点的着色器（gl.VERTEX_SHADER）还是片元着色器（gl.FRAGMENT_SHADER）</li>
-            <li>gl.DELETE_STATUS：返回是着色器是否被删除成功（true或false）</li>
-            <li>gl.COMPILE_STATUS：返回是着色器是否被编译成功（true或false）</li>
-          </ul>
-          <strong>错误</strong>
-          <ul class="ul-1">
-            <li>INVALID_ENUM: pname的值无效</li>
-          </ul>
-        </div>
-      </section>
-      <section id="getShaderInfoLog">
-        <h4>gl.getShaderInfoLog(shader)</h4>
-        <p>获取shader指定的着色器的信息日志。</p>
-        <div class="content">
-          <strong>参数</strong>
-          <ul class="ul-1">
-            <li>shader : 指定待获取信息日志的着色器</li>
-          </ul>
-          <strong>返回值</strong>
-          <ul class="ul-1">
-            <li>non-null: 包含日志信息的字符串</li>
-            <li>null: 没有编译错误</li>
-          </ul>
-          <strong>错误</strong>
-          <p>无</p>
-        </div>
-      </section>
-      <section id="getShaderPrecisionFormat">
-        <h4>gl.getShaderPrecisionFormat()</h4>
-        <p>获取着色器的精度值</p>
-        <div class="content">
-          <strong>example</strong>
-          <ul class="ul-1">
-            <li>gl.getShaderPrecisionFormat(gl.VERTEX_SHADER, gl.MEDIUM_FLOAT).precision; // 23</li>
-            <li>gl.getShaderPrecisionFormat(gl.FRAGMENT_SHADER, gl.LOW_INT).precision; // 0</li>
-          </ul>
-          <strong>返回值</strong>
-          <ul class="ul-1">
-            <li>可以表示的精度位数，对于整数，此值始终为0</li>
-          </ul>
-        </div>
-      </section>
-      <!--程序对象-->
-      <section id="createProgram">
-        <h4>gl.createProgram()</h4>
-        <p>创建程序对象,程序对象包含了顶点着色器和片元着色器</p>
-        <div class="content">
-          <strong>参数</strong>
-          <p>无</p>
-          <strong>返回值</strong>
-          <ul class="ul-1">
-            <li>non-null:新创建的程序对象</li>
-            <li>null:创建失败</li>
-          </ul>
-          <strong>错误</strong>
-          <p>无</p>
-        </div>
-      </section>
-      <section id="deleteProgram">
-        <h4>gl.deleteProgram(program)</h4>
-        <p>删除program指定的程序对象，如果该程序对象正在被使用，则不立即删除，而是等它不在被使用后在删除</p>
-        <div class="content">
-          <strong>参数</strong>
-          <ul>
-            <li>program : 指定待删除的程序对象</li>
-          </ul>
-          <strong>返回值</strong>
-          <p>无</p>
-          <strong>错误</strong>
-          <p>无</p>
-        </div>
-      </section>
-      <section id="attachShader">
-        <h4>gl.attachShader(program,shader)</h4>
-        <p>将shader指定的着色器对象分配给program指定的程序对象</p>
-        <div class="content">
-          <strong>参数</strong>
-          <ul class="ul-1">
-            <li>program : 指定程序对象</li>
-            <li>shader : 指定着色器对象</li>
-          </ul>
-          <strong>返回值</strong>
-          <p>无</p>
-          <strong>错误</strong>
-          <ul class="ul-1">
-            <li>INVALID_OPERATION:shader没有被分配给program</li>
-          </ul>
-          <strong>注意</strong>
-          <p>着色器在赋给程序对象之前，并不一定要为其指定代码或进行编译（也就是说把空的着色器赋给程序对象也可以）。</p>
-        </div>
-      </section>
-      <section id="detachShader">
-        <h4>gl.detachShader(program,shader)</h4>
-        <p>取消shader指定的着色器对象对program指定的程序对象的分配。</p>
-        <div class="content">
-          <strong>参数</strong>
-          <ul class="ul-1">
-            <li>program : 指定程序对象</li>
-            <li>shader : 指定着色器对象</li>
-          </ul>
-          <strong>返回值</strong>
-          <p>无</p>
-          <strong>错误</strong>
-          <ul class="ul-1">
-            <li>INVALID_OPERATION:shader没有被分配给program</li>
-          </ul>
-        </div>
-      </section>
-      <section id="linkProgram">
-        <h4>gl.linkProgram(program)</h4>
-        <p>链接program指定的着色器对象中的着色器</p>
-        <div class="content">
-          <strong>参数</strong>
-          <ul class="ul-1">
-            <li>program : 指定程序对象</li>
-          </ul>
-          <strong>返回值</strong>
-          <p>无</p>
-          <strong>错误</strong>
-          <p>无</p>
-        </div>
-      </section>
-      <section id="getProgramParameter">
-        <h4>gl.getProgramParameter(program，pname)</h4>
-        <p>获取program指定的程序对象中，pname指定的参数信息。返回的值随着panme的不同而不同</p>
-        <div class="content">
-          <strong>参数</strong>
-          <ul class="ul-1">
-            <li>program : 指定程序对象</li>
-            <li>pname :
-              指定待获取参数的类型，可以是gl.DELETE_STATUS、gl.LINK_STATUS、gl.VALIDATE_STATUS、gl.ATTACHED_SHADERS、gl.ACTIVE_ATTRIBUTES或gl.ACTIVE_UNIFORMS
+            <li><a href="#clear">gl.clear()</a></li>
+            <li><a href="#clearColor">gl.clearColor()</a></li>
+            <li><a href="#clearDepth">gl.clearDepth()</a></li>
+            <li><a href="#clearStencil">gl.clearStencil()</a></li>
+            <li><a href="#createBuffer" title="gl.createBuffer()">gl.createBuffer()</a></li>
+            <li><a href="#deleteBuffer" title="gl.deleteBuffer()">gl.deleteBuffer()</a></li>
+            <li><a href="#bindBuffer" title="gl.bindBuffer()">gl.bindBuffer()</a></li>
+            <li><a href="#bufferData" title="gl.bufferData()">gl.bufferData()</a></li>
+            <li><a href="#enableVertexAttribArray" title="gl.enableVertexAttribArray()">gl.enableVertexAttribArray()</a>
             </li>
-          </ul>
-          <strong>返回值</strong>
-          <ul class="ul-1">
-            <li>根据pname的不同，返回不同的值</li>
-            <li>gl.DELETE_STATUS：返回是程序是否已被删除（true或false）</li>
-            <li>gl.LINK_STATUS：返回是程序是否已连接成功（true或false）</li>
-            <li>gl.VALIDATE_STATUS：返回是程序是否已通过验证（true或false）</li>
-            <li>gl.ATTACHED_SHADERS：已被分配给着色器的数量</li>
-            <li>gl.ACTIVE_ATTRIBUTES：顶点着色器中attribute变量的数量</li>
-            <li>gl.ACTIVE_UNIFORMS：程序中uniform变量的数量</li>
-          </ul>
-          <strong>错误</strong>
-          <ul class="ul-1">
-            <li>INVALID_ENUM: pname的值无效</li>
-          </ul>
-        </div>
-      </section>
-      <section id="getProgramInfoLog">
-        <h4>gl.getProgramInfoLog(program)</h4>
-        <p>获取program指定的程序对象的信息日志。</p>
-        <div class="content">
-          <strong>参数</strong>
-          <ul class="ul-1">
-            <li>program : 指定待获取信息日志的程序对象。</li>
-          </ul>
-          <strong>返回值</strong>
-          <ul class="ul-1">
-            <li>non-null: 包含日志信息的字符串</li>
-            <li>null: 没有编译错误</li>
-          </ul>
-          <strong>错误</strong>
-          <p>无</p>
-        </div>
-      </section>
-      <section id="useProgram">
-        <h4>gl.useProgram(program)</h4>
-        <p>告知WebGL系统绘制时使用program指定的程序对象。</p>
-        <div class="content">
-          <strong>参数</strong>
-          <ul class="ul-1">
-            <li>program : 指定待使用的程序对象。</li>
-          </ul>
-          <strong>返回值</strong>
-          <p>无</p>
-          <strong>错误</strong>
-          <p>无</p>
-        </div>
-      </section>
-    </section>
-    <!--开启相关功能-->
-    <section id="enableInnerFun" class="section1">
-      <div class="title">Webgl内置功能</div>
-      <section id="enable">
-        <h4>gl.enable(cap)</h4>
-        <p>开启cap表示的功能（capability）</p>
-        <div class="content">
-          <strong>参数：</strong>
-          <ul class="ul-1">
-            <li>
-              cap:指定开启的功能，有可能是以下的几个
-              <p>gl.DEPTH_TEST:消除隐藏面</p>
-              <p>gl.BLEND:混合</p>
-              <p>gl.POLYGON_OFFSET_FILL:多边形位移</p>
-              <p>gl.CULL_FACE:开启剔除效果</p>
-            </li>
-          </ul>
-          <strong>返回值</strong>
-          <p>无</p>
-          <strong>错误</strong>
-          <p>INVALID_ENUM:cap的值无效</p>
-        </div>
-      </section>
-      <section id="disable">
-        <h4>gl.disable(cap)</h4>
-        <p>关闭cap表示的功能（capability）</p>
-        <div class="content">
-          <strong>参数：</strong>
-          <ul class="ul-1">
-            <li>
-              cap:指定开启的功能，有可能是以下的几个
-              <p>gl.DEPTH_TEST:消除隐藏面</p>
-              <p>gl.BLEND:混合</p>
-              <p>gl.POLYGON_OFFSET_FILL:多边形位移</p>
-              <p>gl.CULL_FACE:关闭剔除效果</p>
-            </li>
-          </ul>
-          <strong>返回值</strong>
-          <p>无</p>
-          <strong>错误</strong>
-          <p>INVALID_ENUM:cap的值无效</p>
-        </div>
-      </section>
-      <section id="polygonOffset">
-        <h4>gl.polygonOffset(factor,units)</h4>
-        <p>指定加到每个顶点绘制后z值上的偏移量，偏移量按照公式m*factor+r*units计算，其中m表示顶点所在表面相对于观察者的视线的角度，而r表示硬件能够区分两个z值之差的最小值。</p>
-        <div class="content">
-          <strong>返回值</strong>
-          <p>无</p>
-          <strong>错误</strong>
-          <p>无</p>
-        </div>
-      </section>
-      <section id="cullFace">
-        <h4>gl.cullFace(mode)</h4>
-        <p>指定前面或后面的多边形是否剔除。默认情况下禁用多边形剔除。</p>
-        <div class="content">
-          <strong>参数</strong>
-          <ul>
-            <li>gl.FRONT</li>
-            <li>gl.BACK</li>
-            <li>gl.FRONT_AND_BACK</li>
-          </ul>
-          <strong>返回值</strong>
-          <p>无</p>
-          <strong>错误</strong>
-          <p>无</p>
-          <strong>实例</strong>
-          <ul>
-            <li>
-              <p>开启</p>
-              <p>gl.enable(gl.CULL_FACE);</p>
-              <p>gl.cullFace(gl.FRONT_AND_BACK);</p>
-            </li>
-            <li>
-              <p>获取当前模式</p>
-              <p>gl.getParameter(gl.CULL_FACE_MODE) === gl.FRONT_AND_BACK;</p>
-            </li>
-          </ul>
-        </div>
-      </section>
-      <section id="frontFace">
-        <h4>gl.frontFace(mode)</h4>
-        <p>通过设置缠绕方向来指定多边形是正面还是背面。默认 gl.CW</p>
-        <div class="content">
-          <strong>参数</strong>
-          <ul>
-            <li>gl.CW：顺时针缠绕</li>
-            <li>gl.CCW：逆时针缠绕</li>
-          </ul>
-          <strong>返回值</strong>
-          <p>无</p>
-          <strong>错误</strong>
-          <p>无</p>
-        </div>
-      </section>
-    </section>
-    <!-- 深度方法 -->
-    <section id="depth" class="section1">
-      <h4 class="title">深度方法</h4>
-      <section id="depthMask">
-        <h4>gl.depthMask(mask)</h4>
-        <p>锁定或释放深度缓存区的写入操作。</p>
-        <div class="content">
-          <strong>参数</strong>
-          <p>mask：指定是锁定深度缓存区的写入操作（false），还是释放（true）。</p>
-          <strong>返回值</strong>
-          <p>无</p>
-          <strong>错误</strong>
-          <p>无</p>
-        </div>
-      </section>
-      <section id="depthFunc">
-        <h4>gl.depthFunc(func)</h4>
-        <p>指定了一个将传入像素深度与当前深度缓冲区值进行比较的函数</p>
-        <div class="content">
-          <strong>参数</strong>
-          <ul class="ul-1">
-            <li>func：于设置绘制像素的条件。默认值为gl.LESS，可能值：
-              <ul class="ul-1">
-                <li>gl.NEVER: 不通过</li>
-                <li>gl.LESS: 如果传入值小于深度缓冲区值则传递</li>
-                <li>gl.EQUAL: 如果传入值等于深度缓冲区值则传递</li>
-                <li>gl.LEQUAL: 如果传入值小于或等于深度缓冲区值，则传递</li>
-                <li>gl.GREATER: 如果传入值大于深度缓冲区值则传递</li>
-                <li>gl.NOTEQUAL: 如果传入值不等于深度缓冲区值则传递</li>
-                <li>gl.GEQUAL: 如果传入值大于或等于深度缓冲区值则传递</li>
-                <li>gl.ALWAYS: 通过</li>
-              </ul>
-            </li>
-          </ul>
-          <strong>返回值</strong>
-          <p>无</p>
-          <strong>错误</strong>
-          <p>无</p>
-        </div>
-      </section>
-    </section>
-    <!-- 混合方法 -->
-    <section id="blending" class="section1">
-      <h4 class="title">混合方法</h4>
-      <section id="blendFunc">
-        <h4>gl.blendFunc(src_factor, dst_factor)</h4>
-        <p>通过参数src_factor和dst_factor指定进行混合操作的函数，混合后的颜色如下计算：</p>
-        <p>混合后的颜色 = 源颜色 * src_factor + 目标颜色 * dst_factor</p>
-        <div class="content">
-          <strong>参数</strong>
-          <ul class="ul-1">
-            <li>src_factor：指定源颜色在混合后颜色中的权重因子，如表10.2所示</li>
-            <li>dst_factor：指定目标颜色在混合后颜色中的权重因子，如表10.2所示</li>
-          </ul>
-          <strong>返回值</strong>
-          <p>无</p>
-          <strong>错误</strong>
-          <p>INVALID_ENUM:src_factor, dst_factor的值不在表10.2中</p>
-          <strong>表10.2</strong>
-          <table border="1">
-            <tr>
-              <th colspan="4">可以指定给src_factor, dst_factor的常量</th>
-            </tr>
-            <tr>
-              <th>常量</th>
-              <th>R分量的系数</th>
-              <th>G分量的系数</th>
-              <th>B分量的系数</th>
-            </tr>
-            <tr>
-              <td>gl.ZERO</td>
-              <td>0.0</td>
-              <td>0.0</td>
-              <td>0.0</td>
-            </tr>
-            <tr>
-              <td>gl.ONE</td>
-              <td>1.0</td>
-              <td>1.0</td>
-              <td>1.0</td>
-            </tr>
-            <tr>
-              <td>gl.SRC_COLOR</td>
-              <td>Rs</td>
-              <td>Gs</td>
-              <td>Bs</td>
-            </tr>
-            <tr>
-              <td>gl.ONE_MINUS_SRC_COLOR</td>
-              <td>(1-Rs)</td>
-              <td>(1-Gs)</td>
-              <td>(1-Bs)</td>
-            </tr>
-            <tr>
-              <td>gl.DST_COLOR</td>
-              <td>Rd</td>
-              <td>Gd</td>
-              <td>Bd</td>
-            </tr>
-            <tr>
-              <td>gl.ONE_MINUS_DST_COLOR</td>
-              <td>(1-Rd)</td>
-              <td>(1-Gd)</td>
-              <td>(1-Bd)</td>
-            </tr>
-            <tr>
-              <td>gl.SRC_ALPHA</td>
-              <td>As</td>
-              <td>As</td>
-              <td>As</td>
-            </tr>
-            <tr>
-              <td>gl.ONE_MINUS_SRC_ALPHA</td>
-              <td>(1-As)</td>
-              <td>(1-As)</td>
-              <td>(1-As)</td>
-            </tr>
-            <tr>
-              <td>gl.DST_ALPHA</td>
-              <td>Ad</td>
-              <td>Ad</td>
-              <td>Ad</td>
-            </tr>
-            <tr>
-              <td>gl.ONE_MINUS_DST_ALPHA</td>
-              <td>(1-Ad)</td>
-              <td>(1-Ad)</td>
-              <td>(1-Ad)</td>
-            </tr>
-            <tr>
-              <td>gl.SRC_ALPHA_SATURATE</td>
-              <td>min(As,Ad)</td>
-              <td>min(As,Ad)</td>
-              <td>min(As,Ad)</td>
-            </tr>
-          </table>
-        </div>
-      </section>
-      <section id="blendColor">
-        <h4>gl.blendColor(red, green, blue, alpha)</h4>
-        <p>使当前颜色作为混合操作的常量颜色</p>
-        <div class="content">
-          <strong>参数</strong>
-          <ul class="ul-1">
-            <li>red：指定颜色值的源混合因子</li>
-            <li>green：颜色在的目标混合因子</li>
-            <li>blue：Alpha值的源混合因子</li>
-            <li>alpha：Alpha值的目标混合因子</li>
-          </ul>
-          <strong>返回值</strong>
-          <p>无</p>
-        </div>
-      </section>
-      <section id="blendEquation">
-        <h4>gl.blendEquation(mode)</h4>
-        <p>指定帧缓存区与源颜色混合的方式</p>
-        <div class="content">
-          <strong>参数</strong>
-          <ul class="ul-1">
-            <li>mode：混合模式参数</li>
-          </ul>
-          <strong>返回值</strong>
-          <p>无</p>
-        </div>
-      </section>
-      <section id="blendEquationSeparate">
-        <h4>gl.blendEquationSeparate(modeRGB,modeAlpha)</h4>
-        <p>允许RGB和Alpha使用不同的混合方式</p>
-        <div class="content">
-          <strong>参数</strong>
-          <ul class="ul-1">
-            <li>modeRGB：混合模式参数</li>
-            <li>modeAlpha：混合模式参数</li>
-          </ul>
-          <strong>返回值</strong>
-          <p>无</p>
-          <strong>实例</strong>
-          <p>gl.blendEquationSeparate(gl.FUNC_ADD, gl.FUNC_ADD);</p>
-          <strong>混合模式参数</strong>
-          <table border="1">
-            <tr>
-              <th colspan="4">混合模式参数</th>
-            </tr>
-            <tr>
-              <th>混合模式参数</th>
-              <th></th>
-            </tr>
-            <tr>
-              <td>gl.FUNC_ADD</td>
-            </tr>
-            <tr>
-              <td>gl.FUNC_SUBTRACT</td>
-            </tr>
-            <tr>
-              <td>gl.FUNC_REVERSE_SUBTRACT</td>
-            </tr>
-            <tr>
-              <td>gl.MIN</td>
-            </tr>
-            <tr>
-              <td>gl.MAX</td>
-            </tr>
-            <tr>
-              <td>gl.LOGIC_OP</td>
-            </tr>
-          </table>
-        </div>
-      </section>
-      <section id="blendFuncSeparate">
-        <h4>gl.blendFuncSeparate(srcRGB, destRGB, srcAlpha, destAlpha)</h4>
-        <p>分别指定源和目标的颜色（RGB）分量和A（alpha）分量</p>
-        <div class="content">
-          <strong>参数</strong>
-          <ul class="ul-1">
-            <li>srcRGB：指定颜色值的源混合因子,如表10.2所示</li>
-            <li>destRGB：颜色在的目标混合因子,如表10.2所示</li>
-            <li>srcAlpha：Alpha值的源混合因子,如表10.2所示</li>
-            <li>destAlpha：Alpha值的目标混合因子,如表10.2所示</li>
-          </ul>
-          <strong>返回值</strong>
-          <p>无</p>
-        </div>
-      </section>
-    </section>
-    <!--帧缓存区对象-->
-    <section id="createFramebuffer">
-      <h4>createFramebuffer()</h4>
-      <p>创建帧缓存区对象。</p>
-      <div class="content">
-        <strong>参数</strong>
-        <p>无</p>
-        <strong>返回值</strong>
-        <ul class="ul-1">
-          <li>non-null: 新创建的帧缓存区对象</li>
-          <li>null: 创建帧缓存区对象失败</li>
+            <li><a href="#disableVertexAttribArray"
+                   title="gl.disableVertexAttribArray()">gl.disableVertexAttribArray()</a>
         </ul>
-        <strong>错误</strong>
-        <p>无</p>
-      </div>
-    </section>
-    <section id="deleteFramebuffer">
-      <h4>deleteFramebuffer(framebuffer)</h4>
-      <p>删除帧缓存区对象。</p>
-      <div class="content">
-        <strong>参数</strong>
-        <p>framebuffer：指定被删除的帧缓存对象</p>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <p>无</p>
-      </div>
-    </section>
-    <section id="bindFramebuffer">
-      <h4>bindFramebuffer(target,framebuffer)</h4>
-      <p>将framebuffer指定的帧缓冲区对象绑定到target目标上。如果framebuffer为null，那么已经绑定到target目标上的帧缓冲区对象那个将被解除绑定。</p>
-      <div class="content">
-        <strong>参数</strong>
+        <h4><a href="#variable">变量相关方法</a></h4>
         <ul class="ul-1">
-          <li>target:必须是gl.FRAMEBUFFER</li>
-          <li>framebuffer：指定被绑定的帧缓存对象</li>
+            <li><h4>attribute变量相关方法</h4></li>
+            <li><a href="#getAttribLocation">gl.getAttribLocation()</a></li>
+            <li><a href="#vertexAttrib[1234]f">gl.vertexAttrib[1234]f()</a></li>
+            <li><a href="#vertexAttribPointer">gl.vertexAttribPointer()</a></li>
+            <li><a href="#getActiveAttrib">gl.getActiveAttrib()</a></li>
+            <li><a href="#WebGLActiveInfo">WebGLActiveInfo</a></li>
+            <li><h4>与uniform变量相关方法</h4></li>
+            <li><a href="#getUniformLocation" title="gl.getUniformLocation()">gl.getUniformLocation()</a></li>
+            <li><a href="#uniform" title="gl.uniform()">gl.uniform()</a></li>
+            <li><a href="#uniformMatrix4fv" title="gl.uniformMatrix4fv()">gl.uniformMatrix4fv()</a></li>
+            <li><a href="#getActiveUniform" title="gl.getActiveUniform()">gl.getActiveUniform()</a></li>
         </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <p>INVALID_ENUM:target不是gl.FRAMEBUFFER</p>
-      </div>
-    </section>
-    <section id="framebufferTexture2D">
-      <h4>framebufferTexture2D(target,attachment,textarget,texture,level)</h4>
-      <p>将texture指定的纹理对象关联到绑定在target目标上的帧缓冲区。</p>
-      <div class="content">
-        <strong>参数</strong>
+        <h4><a href="#texture">纹理方法</a></h4>
         <ul class="ul-1">
-          <li>target:必须是gl.FRAMEBUFFER</li>
-          <li>
-            attachment：指定关联的类型
-            <p>gl.COLOR_ATTACHMENTO:表示texture是颜色关联对象</p>
-            <p>gl.DEPTH_ATTACHMENT:表示texture是深度关联对象</p>
-          </li>
-          <li>textarget:gl.TEXTURE_2D\gl.TEXTURE_CUBE</li>
-          <li>texture:指定关联的纹理对象</li>
-          <li>指定为0（在使用MIPMAP纹理时指定纹理的层级）</li>
+            <li><a href="#createTexture" title="gl.createTexture()">gl.createTexture()</a></li>
+            <li><a href="#deleteTexture" title="gl.deleteTexture()">gl.deleteTexture()</a></li>
+            <li><a href="#pixelStorei" title="gl.pixelStorei()">gl.pixelStorei()</a></li>
+            <li><a href="#activeTexture" title="gl.activeTexture()">gl.activeTexture()</a></li>
+            <li><a href="#bindTexture" title="gl.bindTexture()">gl.bindTexture()</a></li>
+            <li><a href="#texParameteri" title="gl.texParameteri()">gl.texParameteri()</a></li>
+            <li><a href="#texImage2D" title="gl.texImage2D()">gl.texImage2D()</a></li>
         </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
+        <h4>与像素点相关的方法</h4>
         <ul class="ul-1">
-          <li>INVALID_ENUM:target不是gl.FRAMEBUFFER，或者attachment,textarget的值无效</li>
-          <li>INVALID_VALUE:level的值无效</li>
-          <li>INVALID_:OPERATION：target上没有绑定帧缓冲区</li>
+            <li><a href="#readPixels">readPixels()</a></li>
         </ul>
-      </div>
-    </section>
-    <section id="framebufferRenderbuffer">
-      <h4>framebufferRenderbuffer(target,attachment,renderbuffertarget,renderbuffer)</h4>
-      <p>将renderbuffer指定的渲染缓冲区对象关联到绑定在target上的帧缓冲对象关联到绑定在target上的帧缓冲区对象。</p>
-      <div class="content">
-        <strong>参数</strong>
+        <h4><a href="#baseShaderProgram">着色器和着色器程序对象</a></h4>
         <ul class="ul-1">
-          <li>target:必须是gl.FRAMEBUFFER</li>
-          <li>
-            attachment：指定关联的类型
-            <p>gl.COLOR_ATTACHMENTO:表示renderbuffer是颜色关联对象</p>
-            <p>gl.DEPTH_ATTACHMENT:表示renderbuffer是深度关联对象</p>
-            <p>gl._ATTACHMENT:表示renderbuffer是STENCIL模板关联对象</p>
-          </li>
-          <li>renderbuffertarget:必须是gl.RENDERBUFFER</li>
-          <li>renderbuffer:指定被关联的渲染缓冲区对象</li>
+            <li><a href="#createShader" title="gl.createShader()">gl.createShader()</a></li>
+            <li><a href="#deleteShader" title="gl.deleteShader()">gl.deleteShader()</a></li>
+            <li><a href="#shaderSource" title="gl.shaderSource()">gl.shaderSource()</a></li>
+            <li><a href="#compileShader" title="gl.compileShader()">gl.compileShader()</a></li>
+            <li><a href="#getShaderParameter" title="gl.getShaderParameter()">gl.getShaderParameter()</a></li>
+            <li><a href="#getShaderInfoLog" title="gl.getShaderInfoLog()">gl.getShaderInfoLog()</a></li>
+            <li><a href="#getShaderPrecisionFormat">gl.getShaderPrecisionFormat()</a></li>
+            <li><a href="#createProgram" title="gl.createProgram()">gl.createProgram()</a></li>
+            <li><a href="#deleteProgram" title="gl.deleteProgram()">gl.deleteProgram()</a></li>
+            <li><a href="#attachShader" title="gl.attachShader()">gl.attachShader()</a></li>
+            <li><a href="#detachShader" title="gl.detachShader()">gl.detachShader()</a></li>
+            <li><a href="#linkProgram" title="gl.linkProgram()">gl.linkProgram()</a></li>
+            <li><a href="#getProgramParameter" title="gl.getProgramParameter()">gl.getProgramParameter()</a></li>
+            <li><a href="#getProgramInfoLog" title="gl.getProgramInfoLog()">gl.getProgramInfoLog()</a></li>
+            <li><a href="#useProgram" title="gl.useProgram()">gl.useProgram()</a></li>
         </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
+        <h4><a href="#enableInnerFun">Webgl内置功能</a></h4>
         <ul class="ul-1">
-          <li>INVALID_ENUM:target不是gl.FRAMEBUFFER，或者renderbuffertarget不是gl.RENDERBUFFER，或则attachment的值无效。</li>
+            <li><a href="#enable" title="gl.enable()">gl.enable()</a></li>
+            <li><a href="#disable" title="gl.disable()">gl.disable()</a></li>
+            <li><a href="#polygonOffset" title="gl.polygonOffset()">gl.polygonOffset()</a></li>
+            <li><a href="#cullFace" title="gl.cullFace()">gl.cullFace()</a></li>
+            <li><a href="#frontFace" title="gl.frontFace()">gl.frontFace()</a></li>
         </ul>
-      </div>
-    </section>
-    <section id="checkFramebufferStatus">
-      <h4>checkFramebufferStatus(target)</h4>
-      <p>检查绑定在target上的帧缓冲区对象的配置状态</p>
-      <div class="content">
-        <strong>参数</strong>
+        <h4><a href="#depth">深度方法</a></h4>
         <ul class="ul-1">
-          <li>target:必须是gl.FRAMEBUFFER</li>
+            <li><a href="#depthMask" title="gl.depthMask()">gl.depthMask()</a></li>
+            <li><a href="#depthFunc" title="gl.depthFunc()">gl.depthFunc()</a></li>
         </ul>
-        <strong>返回值</strong>
+        <h4><a href="#blending">混合方法</a></h4>
         <ul class="ul-1">
-          <li>0:target不是gl.FRAMEBUFFER</li>
-          <li>gl.FRAMEBUFFER_COMPLETE:帧缓冲对象已正确配置</li>
-          <li>gl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:某一个关联对象为空，或者关联对象不合法</li>
-          <li>gl.FRAMEBUFFER_INCOMPLETE_DIMENSIONS:颜色关联对象和深度关联对象和深度关联对象的尺寸不一致</li>
-          <li>gl.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:帧缓冲区尚未关联任何一个关联对象</li>
+            <li><a href="#blendFunc" title="gl.blendFunc()">gl.blendFunc()</a></li>
+            <li><a href="#blendColor" title="gl.blendColor()">gl.blendColor()</a></li>
+            <li><a href="#blendEquation" title="gl.blendEquation()">gl.blendEquation()</a></li>
+            <li><a href="#blendEquationSeparate" title="gl.blendEquationSeparate()">gl.blendEquationSeparate()</a></li>
+            <li><a href="#blendFuncSeparate" title="gl.blendFuncSeparate()">gl.blendFuncSeparate()</a></li>
         </ul>
-        <strong>错误</strong>
+        <h4><a href="#Framebuffer">帧缓存区对象</a></h4>
         <ul class="ul-1">
-          <li>INVALID_ENUM:target不是gl.FRAMEBUFFER</li>
+            <li><a href="#createFramebuffer">createFramebuffer()</a></li>
+            <li><a href="#deleteFramebuffer">deleteFramebuffer()</a></li>
+            <li><a href="#bindFramebuffer">bindFramebuffer()</a></li>
+            <li><a href="#framebufferTexture2D">framebufferTexture2D()</a></li>
+            <li><a href="#framebufferRenderbuffer">framebufferRenderbuffer()</a></li>
+            <li><a href="#checkFramebufferStatus">checkFramebufferStatus()</a></li>
         </ul>
-      </div>
-    </section>
-    <section id="scissor">
-      <h4>gl.scissor(x,y,width,height)</h4>
-      <p>剪裁测试用于限制绘制区域。我们可以指定一个矩形的剪裁窗口，当启用剪裁测试后，只有在这个窗口之内的像素才能被绘制，其它像素则会被丢弃。换句话说，无论怎么绘制，剪裁窗口以外的像素将不会被修改。</p>
-      <div class="content">
-        <strong>参数</strong>
+        <h4>绘图区域设置</h4>
         <ul class="ul-1">
-          <li>x,y:指定绘图区域的左上角，以像素为单位</li>
-          <li>width,height:指定绘图区域的宽度和高度</li>
+            <li><a href="#scissor">scissor()</a></li>
+            <li><a href="#viewport">viewport()</a></li>
         </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <p>无</p>
-      </div>
-    </section>
-    <section id="viewport">
-      <h4>viewport(x,y,width,height)</h4>
-      <p>设置gl.drawArrays()和gl.drawElements()函数的绘图区域。在canvas上绘图时，x和y就是canvas中的坐标</p>
-      <div class="content">
-        <strong>参数</strong>
+        <h4><a href="#renderBuffer">渲染缓存区对象</a></h4>
         <ul class="ul-1">
-          <li>x,y:指定绘图区域的左上角，以像素为单位</li>
-          <li>width,height:指定绘图区域的宽度和高度</li>
+            <li><a href="#createRenderbuffer">createRenderbuffer()</a></li>
+            <li><a href="#deleteRenderbuffer">deleteRenderbuffer()</a></li>
+            <li><a href="#bindRenderbuffer">bindRenderbuffer()</a></li>
+            <li><a href="#renderbufferStorage">renderbufferStorage()</a></li>
         </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <p>无</p>
-      </div>
-    </section>
-    <!--渲染缓冲区对象-->
-    <section id="createRenderbuffer">
-      <h4>gl.createRenderbuffer()</h4>
-      <p>创建渲染缓冲区对象。</p>
-      <div class="content">
-        <strong>参数</strong>
-        <p>无</p>
-        <strong>返回值</strong>
+        <h4><a href="#globalMethod">全局方法</a></h4>
         <ul class="ul-1">
-          <li>non-null: 新创建的渲染缓冲区对象</li>
-          <li>null: 创建渲染缓冲区对象失败</li>
+            <li><a href="#getExtension">getExtension()</a></li>
+            <li><a href="#getParameter">getParameter()</a></li>
         </ul>
-        <strong>错误</strong>
-        <p>无</p>
-      </div>
-    </section>
-    <section id="deleteRenderbuffer">
-      <h4>deleteRenderbuffer(renderbuffer)</h4>
-      <p>删除渲染缓冲区对象。</p>
-      <div class="content">
-        <strong>参数</strong>
-        <p>renderbuffer：指定被删除的渲染缓冲对象</p>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <p>无</p>
-      </div>
-    </section>
-    <section id="bindRenderbuffer">
-      <h4>bindRenderbuffer(targer,renderbuffer)</h4>
-      <p>将renderbuffer指定的渲染缓冲区对象绑定到target目标上。如果renderbuffer为null，则将已经绑定在target目标上的渲染缓冲区对象解除绑定.</p>
-      <div class="content">
-        <strong>参数</strong>
-        <ul class="ul-1">
-          <li>target:必须为gl.RENDERBUFFER</li>
-          <li>renderbuffer:指定被绑定的渲染缓冲区</li>
-        </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <p>INVALID_ENUM:target不是gl.RENDERBUFFER</p>
-      </div>
-    </section>
-    <section id="renderbufferStorage">
-      <h4>renderbufferStorage(targer,internalformat,width,height)</h4>
-      <p>创建并初始化渲染缓冲区的数据</p>
-      <div class="content">
-        <strong>参数</strong>
-        <ul class="ul-1">
-          <li>target:必须为gl.RENDERBUFFER</li>
-          <li>
-            internalformat:指定渲染缓冲区中的数据格式
-            <table border="1">
-              <tr>
-                <th colspan="2">渲染缓冲区中的数据格式</th>
-              </tr>
-              <tr>
-                <td>gl.DEPTH_COMPONENT16</td>
-                <td>表示渲染缓冲区将替代深度缓冲区</td>
-              </tr>
-              <tr>
-                <td>gl.STENCIL_INDEX8</td>
-                <td>表示渲染缓冲区将替代STENCIL_INDEX8模板缓冲区</td>
-              </tr>
-              <tr>
-                <td>gl.RGBA4</td>
-                <td>表示渲染缓冲区将替代颜色缓冲区</td>
-              </tr>
-              <tr>
-                <td>gl.RGB_A1</td>
-                <td>RGBA这4个分量各个占据4个比特符</td>
-              </tr>
-              <tr>
-                <td>gl.RGB565</td>
-                <td>RGB各占据5个比特，A占据5个比特，gl.RGB565表示RGB分别占据5\6\5个比特</td>
-              </tr>
-              <tr>
-                <td>width,height</td>
-                <td>指定渲染缓冲区的宽度和高度，以像素为单位</td>
-              </tr>
-            </table>
-          </li>
-          <li>width,height:指定缓冲区对象的宽度和高度</li>
-        </ul>
-        <strong>返回值</strong>
-        <p>无</p>
-        <strong>错误</strong>
-        <p>INVALID_ENUM:target不是gl.RENDERBUFFER</p>
-        <p>INVALID_:targetOPERATION没有绑定渲染缓冲区</p>
-      </div>
-    </section>
-    <!-- 全局方法 -->
-    <section id="globalMethod" class="section1">
-      <h4 class="title">全局方法</h4>
-      <section id="getExtension">
-        <h4>gl.getExtension(name)</h4>
-        <p>启用WebGL扩展</p>
-        <div class="ul-1">
-          <strong>参数：</strong>
-          <ul class="ul-1">
-            <li>name:WebGL扩展功能的名称</li>
-          </ul>
-          <strong>返回值：</strong>
-          <ul class="ul-1">
-            <li>WebGL扩展对象</li>
-            <li>null:如果name的值不能正确匹配</li>
-          </ul>
-          <strong>扩展</strong>
-          <p><a href="javaScript/WebGL_extensions.html" target="_blank">扩展项</a></p>
-        </div>
-      </section>
-      <section id="getParameter">
-        <h4>gl.getParameter(pname)</h4>
-        <p>返回传递参数名称的值</p>
-        <div class="ul-1">
-          <strong>参数：</strong>
-          <ul class="ul-1">
-            <li>pname:指定要返回的参数值</li>
-            <li>
-              <ul class="ul-1">
-                <li>gl.MAX_TEXTURE_SIZE:获取纹理的最大尺寸</li>
-                <li>gl.COLOR_WRITEMASK:获取当前每个颜色分量是否可以写入帧缓冲区</li>
-                <li>gl.MAX_VERTEX_ATTRIBS:获取最多的顶点attribute变量</li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </section>
-    </section>
-  </div>
+    </div>
+    <div class="right">
+        <!--声明函数-->
+        <section id="matrixMode">
+            <h4>gl.matrixMode(target)</h4>
+            <p>用来指定哪个矩阵是当前的矩阵，而它的参数代表要操作的目标。</p>
+            <div class="content">
+                <strong>参数：</strong>
+                <p>target:
+                <ul>
+                    <li>GL_PROJECTION:对投影矩阵操作，要对投影相关进行操作,接下来的语句可以是跟透视相关的函数，比如glFrustum()或gluPerspective()</li>
+                    <li>GL_MODELVIEW:对模型视景矩阵操作，对模型视景的操作,接下来的语句描绘一个以模型为基础的适应，这样来设置参数，接下来用到的就是像gluLookAt()这样的函数；</li>
+                    <li>GL_TEXTURE:对纹理矩阵进行随后的操作，就是对纹理相关进行操作</li>
+                </ul>
+                </p>
+            </div>
+        </section>
+        <!--绘制图形的基本方法-->
+        <section id="draw" class="section1">
+            <h4 class="title">绘制图形的基本方法</h4>
+            <section id="drawArrays">
+                <h4>gl.drawArrays(mode, first, count);</h4>
+                <p>执行顶点着色器，按照mode参数指定的方式绘制图形</p>
+                <div class="content">
+                    <strong>参数：</strong>
+                    <ul class="ul-1">
+                        <li>
+                            mode：指定绘制的方式，可以接收一下常量符号：gl_POINTS,gl_LINES,gl_LINE_STRIP,
+                            gl_LINE_LOOP,gl_TRIANGLES,gl_TRIANGLE_STRIP,gl_TRIANGLE_FAN.
+                            <p>参考:<a href="../WebGL可以绘制的基本图形.html">WebGL可以绘制的基本图形</a></p>
+                        </li>
+                        <li>first:指定从那个顶点开始绘制</li>
+                        <li>count：指定绘制需要用到多少个顶点（整形数）</li>
+                    </ul>
+                    <strong>返回值：</strong>
+                    <p>无</p>
+                    <strong>错误：</strong>
+                    <ul>
+                        <li>INVALID_ENUM：传入的mode参数不是前述参数之一</li>
+                        <li>INVALID_VALUE：参数first或count是负数</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="drawElements">
+                <h4>gl.drawElements(mode,count,type,offset)</h4>
+                <p>执行着色器，按照mode参数指定的方式，根据绑定到gl.ELEMENT_ARRAY_BUFFER的缓存区中的顶点索引值绘制图形。</p>
+                <div class="content">
+                    <strong>参数：</strong>
+                    <ul class="ul-1">
+                        <li>
+                            mode：指定绘制的方式，可以接收一下常量符号：gl_POINTS,gl_LINES,gl_LINE_STRIP,
+                            gl_LINE_LOOP,gl_TRIANGLES,gl_TRIANGLE_STRIP,gl_TRIANGLE_FAN.
+                            <p>参考:<a href=""></a></p>
+                        </li>
+                        <li>count：指定绘制需要用到多少个顶点（整形数）</li>
+                        <li>type:指定索引值数据类型：gl.UNSIGNED或gl.UNSIGNED_SHORT</li>
+                        <li>offset:指定索引数组中开始绘制的位置，以字节为单位</li>
+                    </ul>
+                    <strong>返回值：</strong>
+                    <p>无</p>
+                    <strong>错误：</strong>
+                    <ul>
+                        <li>INVALID_ENUM：传入的mode参数不是前述参数之一</li>
+                        <li>INVALID_VALUE：参数offset或count是负数</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="colorMask">
+                <h4>gl.colorMask(red, green, blue, alpha)</h4>
+                <p>设置在绘制或呈现WebGLFramebuffer时启用或禁用哪些颜色组件</p>
+                <div class="content">
+                    <strong>参数：</strong>
+                    <ul class="ul-1">
+                        <li>red：指定是否可以将红色分量写入帧缓冲区。 默认值：true</li>
+                        <li>green：指定是否可以将绿色分量写入帧缓冲区。 默认值：true</li>
+                        <li>blue：指定是否可以将蓝色分量写入帧缓冲区。 默认值：true</li>
+                        <li>alpha：指定是否可以将透明度分量写入帧缓冲区。 默认值：true</li>
+                    </ul>
+                    <strong>返回值：</strong>
+                    <p>无</p>
+                </div>
+            </section>
+        </section>
+        <!--缓冲区相关方法-->
+        <section id="buffer" class="section1">
+            <h4 class="title">缓冲区相关方法</h4>
+            <section id="clear">
+                <h4>gl.clear(buffer);</h4>
+                <p>将指定缓存区设定为预定的值。如果清空是颜色缓存区，那么将使用gl.clearColor()指定的值（作为预定值）</p>
+                <div class="content">
+                    <strong>参数：</strong>
+                    <ul class="ul-1">
+                        <li>
+                            buffer：指定待清空的缓存区，位操作符OR(|)可用来指定多个缓存区<br>
+                            gl.COLOR_BUFFER_BIT：指定颜色缓存区<br>
+                            gl.DEPTH_BUFFER_BIT：指定深度缓存区<br>
+                            gl.STENCIL_BUFFER_BIT：指定模版缓存区<br>
+                        </li>
+                    </ul>
+                    <strong>返回值：</strong>
+                    <p>无</p>
+                    <strong>错误：</strong>
+                    <ul>
+                        <li>INVALID_VALUE：缓存区不是以上三种类型</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="clearColor">
+                <h4>gl.clearColor(red,green,blue,alpha);</h4>
+                <p>指定绘图区域的背景色，默认值（0.0，0.0，0.0，0.0）</p>
+                <div class="content">
+                    <strong>参数：</strong>
+                    <ul class="ul-1">
+                        <li>red：指定红色值（从0.0到1.0）</li>
+                        <li>green：指定绿色值（从0.0到1.0）</li>
+                        <li>blue：指定蓝色值（从0.0到1.0）</li>
+                        <li>alpha：指定透明度值（从0.0到1.0,如果任何值小于0.0大于1.0，那么就会分别截断为0.0或1.0</li>
+                    </ul>
+                    <strong>返回值：</strong>
+                    <p>无</p>
+                    <strong>说明：</strong>
+                    <ul class="ul-1">
+                        <li>一旦指定背景颜色之后，背景颜色就会被驻存在WebGL系统（WebGL System）中，在下一次调用方法之前不会改变（只需要要设置一次）。</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="clearDepth">
+                <h4>gl.clearDepth(depth);</h4>
+                <p>指定绘图区域的深度，默认值 1.0</p>
+                <div class="content">
+                    <strong>参数：</strong>
+                    <ul class="ul-1">
+                        <li>depth：深度</li>
+                    </ul>
+                    <strong>返回值：</strong>
+                    <p>无</p>
+                    <strong>说明：</strong>
+                </div>
+            </section>
+            <section id="clearStencil">
+                <h4>gl.clearStencil(s);</h4>
+                <p>默认值 0</p>
+                <div class="content">
+                    <strong>参数：</strong>
+                    <ul class="ul-1">
+                        <li>s：</li>
+                    </ul>
+                    <strong>返回值：</strong>
+                    <p>无</p>
+                    <strong>说明：</strong>
+                </div>
+            </section>
+            <section id="createBuffer">
+                <h4>gl.createBuffer();</h4>
+                <p>创建缓存区对象</p>
+                <div class="content">
+                    <strong>返回值：</strong>
+                    <ul class="ul-2">
+                        <li>非null：新创建的缓存区对象</li>
+                        <li>null：创建缓存区对象失败</li>
+                    </ul>
+                    <strong>实例：</strong>
+                    <ul class="ul-2">
+                        <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+                    </ul>
+                </div>
+            </section>
+            <section id="deleteBuffer">
+                <h4>gl.deleteBuffer(buffer);</h4>
+                <p>删除参数buffer表示的缓存区对象</p>
+                <div class="content">
+                    <strong>参数：</strong>
+                    <ul>
+                        <li>buffer：待删除的缓存区对象</li>
+                    </ul>
+                    <strong>返回值：</strong>
+                    <p>无</p>
+                    <strong>实例：</strong>
+                    <ul>
+                        <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+                    </ul>
+                </div>
+            </section>
+            <section id="bindBuffer">
+                <h4>gl.bindBuffer(target, buffer);</h4>
+                <p>允许使用buffer表示的缓存区对象并将其绑定到target表示的目标上</p>
+                <div class="content">
+                    <strong>参数：</strong>
+                    <ul class="ul-2">
+                        <li>
+                            target:
+                            <p>gl.ARRAY_BUFFER：表示缓存区对象中包含了顶点的数据</p>
+                            <p>gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值"OpenGL ES着色器语言[GLSL ES]"</p>
+                        </li>
+                        <li>buffer:指定之前由gl.createBuffer()返回的待绑定的缓存区对象，如果指定为空，则禁用对target的绑定</li>
+                    </ul>
+                    <strong>返回值：</strong>
+                    <p>无</p>
+                    <strong>错误：</strong>
+                    <ul class="ul-2">
+                        <li>INVALID_ENUM target不是上诉值之一，这时将保持原有的绑定情况不变</li>
+                    </ul>
+                    <strong>实例：</strong>
+                    <ul class="ul-2">
+                        <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+                    </ul>
+                </div>
+            </section>
+            <section id="bufferData">
+                <h4>gl.bufferData(target, srcData,usage);</h4>
+                <p>开辟存储空间，向绑定在target上的缓存区对象中写入数据data</p>
+                <div class="content">
+                    <strong>重载函数</strong>
+                    <ul class="ul-2">
+                        <li>void gl.bufferData(target, size, usage);</li>
+                        <li>void gl.bufferData(target, ArrayBuffer? srcData, usage);</li>
+                        <li>void gl.bufferData(target, ArrayBufferView srcData, usage);</li>
+                        <li><strong>WebGL2:</strong></li>
+                        <li>void gl.bufferData(target, ArrayBufferView srcData, usage, srcOffset, length);</li>
+                    </ul>
+                    <strong>参数：</strong>
+                    <ul class="ul-2">
+                        <li>
+                            target:
+                            <p>gl.ARRAY_BUFFER：表示缓存区对象中包含了顶点的数据</p>
+                            <p>gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值"OpenGL ES着色器语言[GLSL ES]"</p>
+                        </li>
+                        <li>size:设定Buffer对象的数据存储区大小</li>
+                        <li>srcData:一个ArrayBuffer，SharedArrayBuffer 或者 ArrayBufferView 类型的数组对象，将被复制到Buffer的数据存储区。
+                            如果为null，数据存储区仍会被创建，但是不会进行初始化和定义。
+                        </li>
+                        <li>
+                            usage:表示程序将如何使用存储在缓存区对象中的数据。该参数将帮助webgl优化操作，但是就算你传入了错误的值，也不会终止程序（仅仅是降低程序的效率）
+                            <p>gl.STATIC_DRAW:只会向缓存区对象中写入一次数据，但需要绘制很多次</p>
+                            <p>gl.STREAM_DRAW:只会向缓存区对象中写入一次数据，然后绘制若干次</p>
+                            <p>gl.DYNAMIC_DRAW:会向缓存区对象中写入多次数据，并绘制很多次</p>
+                        </li>
+                        <li>srcOffset:指定读取缓冲时的初始元素索引偏移量。</li>
+                        <li>length:默认为0</li>
+                    </ul>
+                    <strong>返回值：</strong>
+                    <p>无</p>
+                    <strong>错误：</strong>
+                    <ul class="ul-2">
+                        <li>INVALID_ENUM target不是上诉值之一，这时将保持原有的绑定情况不变</li>
+                    </ul>
+                    <strong>实例：</strong>
+                    <ul class="ul-2">
+                        <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+                    </ul>
+                </div>
+            </section>
+            <section id="bufferSubData">
+                <h4>void gl.bufferSubData(target, offset, ArrayBuffer srcData);</h4>
+                <div class="content">
+                    <strong>webGL1:</strong>
+                    <p>void gl.bufferSubData(target, offset, ArrayBufferView srcData);</p>
+                    <p>void gl.bufferSubData(target, offset, ArrayBuffer srcData);</p>
+                    <strong>webGL2:</strong>
+                    <p>void gl.bufferSubData(target, dstByteOffset, ArrayBufferView srcData, srcOffset, length);</p>
+                    <p>更新缓冲区对象的数据存储的子集。</p>
+                </div>
+                <div class="content">
+                    <strong>参数：</strong>
+                    <ul class="ul-2">
+                        <li>
+                            target
+                            <p>gl.ARRAY_BUFFER：包含顶点属性的缓存区，例如顶点坐标、纹理坐标数据或顶点颜色数据。</p>
+                            <p>gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值"OpenGL ES着色器语言[GLSL ES]"</p>
+                            <p><strong>webgl2添加：</strong></p>
+                            <ul class="ul-2">
+                                <li>gl.COPY_READ_BUFFER:用于从一个缓冲区对象复制到另一个</li>
+                                <li>gl.COPY_WRITE_BUFFER:用于从一个缓冲区对象复制到另一个</li>
+                                <li>gl.TRANSFORM_FEEDBACK_BUFFER:缓冲区用于变换反馈操作</li>
+                                <li>gl.UNIFORM_BUFFER:缓冲区用于存储统一块</li>
+                                <li>gl.PIXEL_PACK_BUFFER:用于像素传输操作的缓冲区</li>
+                                <li>gl.PIXEL_UNPACK_BUFFER:用于像素传输操作的缓冲区</li>
+                            </ul>
+                        </li>
+                        <li>dstByteOffset:GLintptr指定数据替换将开始的字节偏移量。</li>
+                        <li>srcData:ArrayBuffer，SharedArrayBuffer或将复制到数据存储中的ArrayBufferView类型数组类型之一。</li>
+                        <li>srcOffset:一个GLuint，指定元素索引偏移量从哪里开始读取缓冲区。</li>
+                        <li>length:GLuint默认为0。</li>
+                    </ul>
+                    <strong>返回值：</strong>
+                    <p>无</p>
+                    <strong>错误：</strong>
+                    <ul class="ul-2">
+                        <li>A gl.INVALID_VALUE error is thrown if the data would be written past the end of the buffer
+                            or if data is null.
+                        </li>
+                        <li>A gl.INVALID_ENUM error is thrown if target is not one of the allowed enums.</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="enableVertexAttribArray">
+                <h4>gl.enableVertexAttribArray(location)</h4>
+                <p>
+                    开启location指定的attribute变量
+                </p>
+                <div class="content">
+                    <strong>参数：</strong>
+                    <ul>
+                        <li>location：指定待分配attribute变量的存储位置</li>
+                    </ul>
+                    <strong>返回值：</strong>
+                    <p>无</p>
+                    <strong>错误：</strong>
+                    <ul>
+                        <li>INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）</li>
+                    </ul>
+                    <strong>实例：</strong>
+                    <ul>
+                        <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+                    </ul>
+                </div>
+            </section>
+            <section id="disableVertexAttribArray">
+                <h4>gl.disableVertexAttribArray(location)</h4>
+                <p>
+                    关闭location指定的attribute变量
+                </p>
+                <div class="content">
+                    <strong>参数：</strong>
+                    <ul>
+                        <li>location：指定attribute变量的存储位置</li>
+                    </ul>
+                    <strong>返回值：</strong>
+                    <p>无</p>
+                    <strong>错误：</strong>
+                    <ul>
+                        <li>INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）</li>
+                    </ul>
+                    <strong>实例：</strong>
+                    <ul>
+                        <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+                    </ul>
+                </div>
+            </section>
+        </section>
+        <!-- 变量相关方法 -->
+        <section class="section1" id="variable">
+            <div class="title">变量相关方法</div>
+            <section id="getAttribLocation">
+                <h4>gl.getAttribLocation(gl.program, name);</h4>
+                <p>获取由name参数指定的attribute变量的存储位置</p>
+                <div class="content">
+                    <strong>参数：</strong>
+                    <ul class="ul-1">
+                        <li>gl.program：指定包含顶点着色器和片元着色器的着色器程序对象。</li>
+                        <li>name：指定想要获取其存储地址的attribute变量的名称</li>
+                        <li>name：指定想要获取其存储地址的attribute变量的名称</li>
+                    </ul>
+                    <strong>返回值：</strong>
+                    <ul class="ul-1">
+                        <li>大于等于0：attribute变量的存储地址</li>
+                        <li>-1：指定的attribute变量不存在，或者其命名具有gl_或webgl_前缀</li>
+                    </ul>
+                    <strong>错误：</strong>
+                    <ul class="ul-1">
+                        <li>INVALID_OPERATION:程序对象未能成功连接</li>
+                        <li>-1：指定的attribute变量不存在，或者其命名具有gl_或webgl_前缀</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="vertexAttrib[1234]f">
+                <h4>gl.vertexAttrib[1234]f(location, v0, v1, v2, v3);</h4>
+                <p>
+                    将数据（v0，v1，v2,v3）传给由location参数指定的attribute变量，如果没有传递后面的
+                    v1, v2, v3，使用默认值0.0、0.0、1.0
+                </p>
+                <div class="content">
+                    <strong>参数：</strong>
+                    <ul>
+                        <li>location：指定将要修改的attribute变量的存储位置</li>
+                        <li>v0：指定填充attribute变量第一个分量的值</li>
+                        <li>v1：指定填充attribute变量第二个分量的值</li>
+                        <li>v2：指定填充attribute变量第三个分量的值</li>
+                        <li>v3：指定填充attribute变量第四个个分量的值</li>
+                    </ul>
+                    <strong>返回值：</strong>
+                    <p>无</p>
+                    <strong>错误：</strong>
+                    <ul>
+                        <li>INVALID_OPERATION:程序对象未能成功连接（没有当前program对象）</li>
+                        <li>INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）</li>
+                    </ul>
+                    <strong>矢量方法：</strong>
+                    <ul>
+                        <li>gl.vertexAttrib1fv(location,Float32Array);</li>
+                        <li>gl.vertexAttrib4fv(location,Float32Array);</li>
+                        <li>
+                            <strong>实例：</strong>
+                            <p>var position = new Float32Array([0.0,0.0,0.0,1.0]);</p>
+                            <p>gl.vertexAttrib4fv(a_Position, position);</p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section id="vertexAttribPointer">
+                <h4>gl.vertexAttribPointer(location, size, type, normalized, stride, offset);</h4>
+                <p>将绑定到gl.ARRAY_BUFFER上的缓存区对象分配给由location指定的attribute变量</p>
+                <div class="content">
+                    <strong>参数：</strong>
+                    <ul class="ul-2">
+                        <li>location：指定待分配attribute变量的存储位置</li>
+                        <li>size：指定缓存区中每个顶点的分量个数（1到4）。若size比attribute变量需要的分量数少，
+                            缺失分量将按照与vertexAttrib[1234]f（）相同的规则补全。
+                        </li>
+                        <li>
+                            type:用以下类型之一来指定格式
+                            <ul class="ul-2">
+                                <li>gl.UNSIGNED_BYTE:无符号字节，Unit8Array</li>
+                                <li>gl.SHORT:短整型，Int16Array</li>
+                                <li>gl.UNSIGNED_SHORT:无符号短整型，Unit16Array</li>
+                                <li>gl.INT:无符号整型，Int16Array</li>
+                                <li>gl.UNSIGNED_INT:无符号整型，Unit16Array</li>
+                                <li>gl.FLOAT:浮点型，Float32Array</li>
+                            </ul>
+                        </li>
+                        <li>normalize：传入true或false，表明是否将非浮点型的数据归一化到[0,1]或[-1,1]区间</li>
+                        <li>stride：指定相邻两个顶点的字节数，默认为0</li>
+                        <li>offset：指定缓存区对象中的偏移量（以字节为单位），即attribute变量从缓存区中的何处开始储存，
+                            如果是起始位置开始的，offset设置为0
+                        </li>
+                    </ul>
+                    <strong>返回值：</strong>
+                    <p>无</p>
+                    <strong>错误：</strong>
+                    <ul>
+                        <li>INVALID_OPERATION:程序对象未能成功连接（没有当前program对象）</li>
+                        <li>INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）,或则stride或offset是负值</li>
+                    </ul>
+                    <strong>实例：</strong>
+                    <ul>
+                        <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
+                    </ul>
+                </div>
+            </section>
+            <section id="WebGLActiveInfo">
+                <h4>WebGLActiveInfo</h4>
+                <p>代表了调用 <a href="#getActiveAttrib">WebGLRenderingContext.getActiveAttrib()</a>
+                    和<a href="#getActiveUniform">WebGLRenderingContext.getActiveUniform()</a> 这两个方法后传回的信息。</p>
+                <div class="ul-1">
+                    <strong>返回值：</strong>
+                    <ul class="ul-1">
+                        <li>info.name:请求变量的只读名称。</li>
+                        <li>info.size:请求变量的只读尺寸。</li>
+                        <li>info.type:请求变量的只读类型。</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="getActiveAttrib">
+                <h4>gl.getActiveAttrib(program,index)</h4>
+                <p>WebGL API的WebGLRenderingContext.getActiveAttrib（）方法返回包含顶点属性的大小，类型和名称的WebGLActiveInfo对象。
+                    它通常在查询未知的制服时用于调试或创建通用库。</p>
+                <div class="ul-1">
+                    <strong>参数：</strong>
+                    <ul class="ul-1">
+                        <li>program:包含顶点属性的WebGL程序。</li>
+                        <li>index:一个GLuint，指定要获取的顶点属性的索引。 该值是<a href="#getProgramParameter">gl.getProgramParameter（program，gl.ACTIVE_ATTRIBUTES）</a>返回的索引0到N-1。
+                        </li>
+                    </ul>
+                    <strong>返回值：</strong>
+                    <p>A WebGLActiveInfo object.</p>
+                    <strong>实例：</strong>
+                    <p>var info = gl.getActiveAttrib( program, i );</p>
+                    <p>var name = info.name;</p>
+                </div>
+            </section>
+            <!--与uniform变量相关方法-->
+            <section id="getUniformLocation">
+                <h4>gl.getUniformLocation(program, name);</h4>
+                <p>获取指定名称的uniform变量的存储位置</p>
+                <div class="content">
+                    <strong>参数：</strong>
+                    <ul>
+                        <li>program：指定包含顶点着色器和片元着色器的着色器程序对象。</li>
+                        <li>name：指定想要获取其存储位置的uniform变量名称</li>
+                    </ul>
+                    <strong>返回值：</strong>
+                    <ul>
+                        <li>non-unll:指定uniform变量的位置</li>
+                        <li>null：指定的uniform变量不存在，或者其命名具有gl_或webgl_前缀</li>
+                    </ul>
+                    <strong>错误：</strong>
+                    <ul>
+                        <li>INVALID_OPERATION:程序对象未能成功连接</li>
+                        <li>INVALID_VALUE：name参数的长度大于attribute变量名的最大长度（默认256字节）</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="uniform">
+                <h4>gl.uniform[1234]f(location, v0, v1, v2, v3);</h4>
+                <p>将数据（v0，v1，v2,v3）传给由location参数指定的uniform变量</p>
+                <div class="content">
+                    <strong>参数：</strong>
+                    <ul>
+                        <li>location：指定将要修改的uniform变量的存储位置</li>
+                        <li>v0：指定填充uniform变量第一个分量的值</li>
+                        <li>v1：指定填充uniform变量第二个分量的值</li>
+                        <li>v2：指定填充uniform变量第三个分量的值</li>
+                        <li>v3：指定填充uniform变量第四个个分量的值</li>
+                    </ul>
+                    <strong>返回值：</strong>
+                    <p>无</p>
+                    <strong>错误：</strong>
+                    <ul>
+                        <li>INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="uniformMatrix4fv">
+                <h4>gl.uniformMatrix4fv(location, transpose, array)</h4>
+                <p>将array表示的4X4矩阵分配给由location指定的uniform存储的变量</p>
+                <div class="content">
+                    <strong>参数：</strong>
+                    <ul class="ul-2">
+                        <li>location：uniform变量的存储位置</li>
+                        <li>transpose：在WebGL中必须指定为false。该参数表示是否转置矩阵。转置操作将交换矩阵的行和列，
+                            WebGL实现没有提供矩阵转置的方法，所以该参数必须设为false
+                        </li>
+                        <li>array：待传输的类型化数组，4X4矩阵按列主序存储在其中</li>
+                    </ul>
+                    <strong>返回值：</strong>
+                    <p>无</p>
+                    <strong>错误：</strong>
+                    <ul class="ul-2">
+                        <li>INVALID_OPERATION:不存在当前程序对象</li>
+                        <li>INVALID_VALUE:transpose不为false，或者数组的长度小于16</li>
+                    </ul>
+                    <strong>列子</strong>
+                    <ul>
+                        <li><a href="../../WebGL编程指南/ch3/RotatedTriangle_Matrix.html">用矩阵旋转三角形</a></li>
+                    </ul>
+                </div>
+            </section>
+            <section id="getActiveUniform">
+                <h4>gl.getActiveUniform(program,index)</h4>
+                <p>WebGL API的WebGLRenderingContext.getActiveUniform（）方法返回包含统一属性的大小，类型和名称的WebGLActiveInfo对象。
+                    它通常在查询未知的制服时用于调试或创建通用库。</p>
+                <div class="ul-1">
+                    <strong>参数：</strong>
+                    <ul class="ul-1">
+                        <li>program:一个WebGL程序，指定WebGL着色器程序，从中获取统一变量的信息。</li>
+                        <li>index:一个GLuint，指定要获取的顶点属性的索引。 该值是<a href="#getProgramParameter">gl.getProgramParameter（program，gl.ACTIVE_ATTRIBUTES）</a>返回的索引0到N-1。
+                        </li>
+                    </ul>
+                    <strong>返回值：</strong>
+                    <p>A WebGLActiveInfo object describing the uniform.</p>
+                    <strong>The type attribute of the return value will be one of the following:</strong>
+                    <ul class="ul-1">
+                        <li>gl.FLOAT</li>
+                        <li>gl.FLOAT_VEC2</li>
+                        <li> gl.FLOAT_VEC3</li>
+                        <li> gl.FLOAT_VEC4</li>
+                        <li> gl.INT</li>
+                        <li> gl.INT_VEC2</li>
+                        <li> gl.INT_VEC3</li>
+                        <li> gl.INT_VEC4</li>
+                        <li> gl.BOOL</li>
+                        <li> gl.BOOL_VEC2</li>
+                        <li>gl.BOOL_VEC3</li>
+                        <li> gl.BOOL_VEC4</li>
+                        <li>gl.FLOAT_MAT2</li>
+                        <li>gl.FLOAT_MAT3</li>
+                        <li>gl.FLOAT_MAT4</li>
+                        <li>gl.SAMPLER_2D</li>
+                        <li>gl.SAMPLER_CUBE</li>
+                    </ul>
+                    <strong>When using a WebGL 2 context, the following values are possible additionally:</strong>
+                    <ul class="ul-1">
+                        <li>gl.UNSIGNED_INT</li>
+                        <li>gl.UNSIGNED_INT_VEC2</li>
+                        <li>gl.UNSIGNED_INT_VEC3</li>
+                        <li>gl.UNSIGNED_INT_VEC4</li>
+                        <li>gl.FLOAT_MAT2x3</li>
+                        <li>gl.FLOAT_MAT2x4</li>
+                        <li>gl.FLOAT_MAT3x2</li>
+                        <li>gl.FLOAT_MAT3x4</li>
+                        <li>gl.FLOAT_MAT4x2</li>
+                        <li>gl.FLOAT_MAT4x3</li>
+                        <li>gl.SAMPLER_2D</li>
+                        <li>gl.SAMPLER_3D</li>
+                        <li> gl.SAMPLER_CUBE</li>
+                        <li>gl.SAMPLER_2D_SHADOW</li>
+                        <li>gl.SAMPLER_2D_ARRAY</li>
+                        <li>gl.SAMPLER_2D_ARRAY_SHADOW</li>
+                        <li>gl.SAMPLER_CUBE_SHADOW</li>
+                        <li>gl.INT_SAMPLER_2D</li>
+                        <li>gl.INT_SAMPLER_3D</li>
+                        <li>gl.INT_SAMPLER_CUBE</li>
+                        <li>gl.INT_SAMPLER_2D_ARRAY</li>
+                        <li>gl.UNSIGNED_INT_SAMPLER_2D</li>
+                        <li>gl.UNSIGNED_INT_SAMPLER_3D</li>
+                        <li>gl.UNSIGNED_INT_SAMPLER_CUBE</li>
+                        <li>gl.UNSIGNED_INT_SAMPLER_2D_ARRAY</li>
+                    </ul>
+                    <strong>实例：</strong>
+                    <p>var info = gl.getActiveAttrib( program, i );</p>
+                    <p>var name = info.name;</p>
+                </div>
+            </section>
+        </section>
+        <!--与加载纹理相关的方法-->
+        <section class="section1" id="texture">
+            <div class="title">纹理方法</div>
+            <section id="createTexture">
+                <h4>gl.createTexture()</h4>
+                <p>创建纹理对象以存储纹理图像</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <p>无</p>
+                    <strong>返回值</strong>
+                    <ul>
+                        <li>non-null:新创建的纹理对象</li>
+                        <li>null:创建纹理对象失败</li>
+                    </ul>
+                    <strong>错误</strong>
+                    <p>无</p>
+                </div>
+            </section>
+            <section id="deleteTexture">
+                <h4>gl.deleteTexture(texture)</h4>
+                <p>使用texture删除纹理对象</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <p>texture：待删除的纹理对象</p>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>无</p>
+                </div>
+            </section>
+            <section id="pixelStorei">
+                <h4>gl.pixelStorei(pname,param)</h4>
+                <p>使用pname和param指定的方式处理加载得到的图像</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul>
+                        <li>
+                            panme : 可以是以下二者之一
+                            <p>gl.UNPACK_FLIP_Y_WEBGL:对图像进行Y轴反转。默认为false。</p>
+                            <p>gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL:将图像RGB颜色值的每一个分量乘以A。默认值为false。</p>
+                        </li>
+                        <li>param:指定非0（true）或0（false）。必须为整数。</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>INVALID_ENUM：pname不是合法的值</p>
+                </div>
+            </section>
+            <section id="activeTexture">
+                <h4>gl.activeTexture(texUnit)</h4>
+                <p>激活texUnit指定的纹理单元</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>
+                            texUnit：指定准备激活的纹理单元：gl.TEXTURE0、gl.TEXTURE1、gl.TEXTURE2、
+                            gl.TEXTURE03、gl.TEXTURE4、gl.TEXTURE5、gl.TEXTURE6、gl.TEXTURE7。
+                            最后的数字表示纹理单元的编号。
+                        </li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>INVALID_ENUM：texUnit不是合法的值</p>
+                </div>
+            </section>
+            <section id="bindTexture">
+                <h4>gl.bindTexture(target,texture)</h4>
+                <p>
+                    开启texture指定的纹理对象，并将其绑定到target上。此外，如果已经通过gl.activeTexture()激活
+                    了某个纹理单元，则纹理对象也会绑定到这个纹理单元上。
+                </p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>target：gl.TEXTURE_2D或者gl.TEXTURE_CUBE_MAP</li>
+                        <li>texture：表示绑定的纹理单元</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>INVALID_ENUM：target不是合法的值</p>
+                </div>
+            </section>
+            <section id="texParameteri">
+                <h4>gl.texParameteri(target,pname，param)</h4>
+                <p>将param的值赋给绑定到目标的纹理对象的pname参数上。</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul>
+                        <li>target：gl.TEXTURE_2D或者gl.TEXTURE_CUBE_MAP</li>
+                        <li>
+                            pname：纹理参数
+                            <table border="1">
+                                <tr>
+                                    <th colspan="3">纹理参数及它们的默认值</th>
+                                </tr>
+                                <tr>
+                                    <th>纹理参数</th>
+                                    <th>描述</th>
+                                    <th>默认值</th>
+                                </tr>
+                                <tr>
+                                    <td>gl.TEXTURE_MAG_FILTER</td>
+                                    <td>纹理的放大</td>
+                                    <td>gl.LINEAR</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.TEXTURE_MIN_FILTER</td>
+                                    <td>纹理的缩小</td>
+                                    <td>gl.NEAREST_MIPMAP_LINEAR</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.TEXTURE_WRAP_S</td>
+                                    <td>纹理水平填充</td>
+                                    <td>gl.REPEAT</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.TEXTURE_WRAP_T</td>
+                                    <td>纹理垂直填充</td>
+                                    <td>gl.REPEAT</td>
+                                </tr>
+                            </table>
+                        </li>
+                        <li>param：纹理参数值
+                            <table border="1">
+                                <tr>
+                                    <th colspan="2">可以赋值给gl.TEXTURE_MAG_FILTER和gl.TEXTURE_MIN_FILTER的非金字塔纹理类型常量</th>
+                                </tr>
+                                <tr>
+                                    <th>值</th>
+                                    <th>描述</th>
+                                </tr>
+                                <tr>
+                                    <td>gl.NEAREST</td>
+                                    <td>使用原纹理上距离映射后像素（新像素）中心最近的那个颜色值，作为新像素的值（使用曼哈顿距离）</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.LINEAR</td>
+                                    <td>使用距离新像素中心最近的四个像素的颜色值的加权平均，作为新像素的值（与gl.NEAREST相比，该方法图像质量更好，但会有较大的开销）</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">可以赋值给gl.TEXTURE_WRAP_S和gl.TEXTURE_WRAP_T的常量</th>
+                                </tr>
+                                <tr>
+                                    <td>值</td>
+                                    <td>描述</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.REPEAT</td>
+                                    <td>平铺式的重复纹理</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.MIRRORED_REPEAT</td>
+                                    <td>镜像对称式的重复纹理</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.CLAMP_TO_EDGE</td>
+                                    <td>使用纹理图像边缘值</td>
+                                </tr>
+                            </table>
+                        </li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>INVALID_ENUM：target不是合法的值</p>
+                    <p>INVALID_OPERATION：当前目标上没有绑定纹理对象</p>
+                </div>
+            </section>
+            <section id="texImage2D">
+                <h4>
+                    gl.texImage2D(target, level, internalformat, format, type, pixels: ImageBitmap | ImageData |
+                    HTMLVideoElement |
+                    HTMLImageElement | HTMLCanvasElement): void;<br>
+                    gl.texImage2D(target, level, internalformat, width, height, border, format, type, pixels:
+                    ArrayBufferView |
+                    null): void;
+                </h4>
+                <p>将image指定的图像分配给绑定的目标上的纹理对象。</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul>
+                        <li>target: gl.TEXTURE_2D 或 gl.TEXTURE_CUBE_MAP</li>
+                        <li>level: 传入0（实际上该参数是为金字塔纹理准备的）</li>
+                        <li>
+                            internalformat: 图像的内部格式
+                            <table border="1">
+                                <tr>
+                                    <th colspan="2">纹素数据的格式</th>
+                                </tr>
+                                <tr>
+                                    <th>格式</th>
+                                    <th>描述</th>
+                                </tr>
+                                <tr>
+                                    <td>gl.RGB</td>
+                                    <td>红、绿、蓝</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.RGBA</td>
+                                    <td>红、绿、蓝、透明度</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.ALPHA</td>
+                                    <td>（0.0,0.0,0.0,透明度）</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.LUMINANCE</td>
+                                    <td>L、L、L、1L：流明（表示我们感知到的物体表面的亮度。通常使用物体表面红、绿、蓝颜色分量值的加权平均来计算流明）</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.LUMINANCE_ALPHA</td>
+                                    <td>L、L、L、透明度</td>
+                                </tr>
+                            </table>
+                        </li>
+                        <li>width : 纹理的宽度</li>
+                        <li>height : 纹理的高度</li>
+                        <li>border :</li>
+                        <li>
+                            format: 纹理数据的格式，必须使用与internalformat相同的值
+                            <table border="1">
+                                <tr>
+                                    <th colspan="2">纹理图片格式说明</th>
+                                </tr>
+                                <tr>
+                                    <th>格式</th>
+                                    <th>像素表示方法</th>
+                                </tr>
+                                <tr>
+                                    <td>JPG格式</td>
+                                    <td>RGB</td>
+                                </tr>
+                                <tr>
+                                    <td>PNG格式</td>
+                                    <td>RGBA</td>
+                                </tr>
+                                <tr>
+                                    <td>BMP格式</td>
+                                    <td>RGB</td>
+                                </tr>
+                            </table>
+                        </li>
+                        <li>type: 纹理数据类型
+                            <table border="1">
+                                <tr>
+                                    <th colspan="2">纹理数据的数据格式</th>
+                                </tr>
+                                <tr>
+                                    <th>格式</th>
+                                    <th>描述</th>
+                                </tr>
+                                <tr>
+                                    <td>gl.UNSIGNED_BYTE</td>
+                                    <td>无符号整型，每个颜色分量占据1字节</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.UNSIGNED_SHORT_5_6_5</td>
+                                    <td>RGB:每个分量分别占用5、6、5比特</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.UNSIGNED_SHORT_4_4_4_4</td>
+                                    <td>RGB:每个分量分别占用4、4、4、4比特</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.UNSIGNED_SHORT_5_5_5_1</td>
+                                    <td>RGB:RGB每个分量分别占用5、5、5比特，A分量占据1比特</td>
+                                </tr>
+                            </table>
+                        </li>
+                        <li>image: 包含纹理图像的Image对象</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <ul>
+                        <li>INVALID_ENUM:target不是合法的</li>
+                        <li>INVALID_OPERATION:当前目标上没有绑定纹理对象</li>
+                    </ul>
+                </div>
+            </section>
+        </section>
+        <!--与像素点相关的方法-->
+        <section id="readPixels">
+            <h4>readPixels(x,y,width,height,format,type,pixels)</h4>
+            <p>从颜色缓存区中读取由x,y,width,height参数确定的矩形块中的所有像素值，并保存在pixels指定的数组中。</p>
+            <div class="content">
+                <strong>参数</strong>
+                <ul class="ul-1">
+                    <li>x,y: 指定颜色缓存区中矩形块左上角的坐标，同时也是读取的第一个像素的坐标</li>
+                    <li>width,height: 指定矩形块的宽度和高度，以像素为单位</li>
+                    <li>format：指定像素的颜色格式，必须为gl.RGB</li>
+                    <li>type : 指定像素的数据格式，必须为gl.UNSIGNED_BYTE</li>
+                    <li>pixels : 指定用来接收像素值数据的Uint8Array类型化数组</li>
+                </ul>
+                <strong>返回值</strong>
+                <p>无</p>
+                <strong>错误</strong>
+                <ul class="ul-1">
+                    <li>INVALID_VALUE:pixels为null，或则，width或height为负值</li>
+                    <li>INVALID_ENUM:format、type值无效</li>
+                    <li>INVALID_OPERATION:pixels的长度不够存储所有像素值数据</li>
+                </ul>
+            </div>
+        </section>
+        <!--着色器和着色器程序对象-->
+        <section id="baseShaderProgram" class="section1">
+            <div class="title">着色器和着色器程序对象</div>
+            <section>
+                <h4>概述</h4>
+                <div class="content">
+                    <strong>着色器对象</strong>
+                    <p>着色器对象管理一个顶点着色器或一个片元着色器，每一个着色器都有一个着色器对象。</p>
+                    <strong>程序对象</strong>
+                    <p>程序对象是管理着色器对象的容器。Webgl中，一个程序对象必须包含一个顶点着色器和一个片元着色器。</p>
+                    <strong>创建和初始化着色器对象7个步骤:</strong>
+                    <ul class="ul-1-num">
+                        <li>创建着色器对象(<a href="#createShader" title="gl.createShader()">gl.createShader()</a>)</li>
+                        <li>向着色器对象中填充着色器程序的源代码(<a href="#shaderSource" title="gl.shaderSource()">gl.shaderSource()</a>)
+                        </li>
+                        <li>编译着色器(<a href="#compileShader" title="gl.compileShader()">gl.compileShader()</a>)</li>
+                        <li>创建程序对象(<a href="#createProgram" title="gl.createProgram()">gl.createProgram()</a>)</li>
+                        <li>为程序对象分配着色器(<a href="#attachShader" title="gl.attachShader()">gl.attachShader()</a>)</li>
+                        <li>链接程序对象(<a href="#linkProgram" title="gl.linkProgram()">gl.linkProgram()</a>)</li>
+                        <li>使用程序对象(<a href="#" title="gl.useProgram()">gl.useProgram()</a>)</li>
+                    </ul>
+                </div>
+            </section>
+            <!--着色器对象-->
+            <section id="createShader">
+                <h4>gl.createShader(type)</h4>
+                <p>创建由type指定的着色器对象</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>type : 指定创建着色器的类型，gl.VERTEX_SHADER表示顶点着色器，gl.FRAGMENT_SHADER表示片元着色器</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <ul class="ul-1">
+                        <li>non-null:新创建的着色器对象</li>
+                        <li>null:创建失败</li>
+                    </ul>
+                    <strong>错误</strong>
+                    <ul class="ul-1">
+                        <li>INVALID_ENUM: type参数既不是gl.VERTEX_SHADER，也不是gl.FRAGMENT_SHADER</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="deleteShader">
+                <h4>gl.deleteShader(shader)</h4>
+                <p>删除shader指定的着色器</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>shader : 待删除的着色器对象</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>无</p>
+                    <strong>注意：</strong>
+                    <p>
+                        如果着色器程序对象还在使用（也就是说已经使用gl.attachShader()函数使之附加在了程序对象上），那么gl.deleteShader（）并不会立刻删除着色器，而是要等到程序对象不在使用该着色器后，才将其删除。</p>
+                </div>
+            </section>
+            <section id="shaderSource">
+                <h4>gl.shaderSource(shader,source)</h4>
+                <p>将source指定的字符串形式的代码传入shader指定的着色器。如果之前已经向shader传入过代码了，旧的代码将会被替换掉。</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>shader : 指定需要传入代码的着色器对象</li>
+                        <li>source : 指定字符串形式的代码</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>无</p>
+                </div>
+            </section>
+            <section id="compileShader">
+                <h4>gl.compileShader(shader)</h4>
+                <p>编译shader指定的着色器中的源代码</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>shader : 待编译的着色器</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>无</p>
+                    <strong>注意</strong>
+                    <p>如果通过gl.shaderSource(),用新的代码替换到旧的代码，WebGL系统中的用旧的编译出的可执行部分不会被替换掉，需要手动第重新进行编译。</p>
+                </div>
+            </section>
+            <section id="getShaderParameter">
+                <h4>gl.getShaderParameter(shader，pname)</h4>
+                <p>获取shader指定的着色器中，pname指定的参数信息</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>shader : 指定待获取参数着色器</li>
+                        <li>pname : 指定待获取参数的类型，可以是gl.SHADER_TYPE、gl.DELETE_STATUS或则gl.COMPILE_STATUS</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <ul class="ul-1">
+                        <li>根据pname的不同，返回不同的值</li>
+                        <li>gl.SHADER_TYPE：返回是顶点的着色器（gl.VERTEX_SHADER）还是片元着色器（gl.FRAGMENT_SHADER）</li>
+                        <li>gl.DELETE_STATUS：返回是着色器是否被删除成功（true或false）</li>
+                        <li>gl.COMPILE_STATUS：返回是着色器是否被编译成功（true或false）</li>
+                    </ul>
+                    <strong>错误</strong>
+                    <ul class="ul-1">
+                        <li>INVALID_ENUM: pname的值无效</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="getShaderInfoLog">
+                <h4>gl.getShaderInfoLog(shader)</h4>
+                <p>获取shader指定的着色器的信息日志。</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>shader : 指定待获取信息日志的着色器</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <ul class="ul-1">
+                        <li>non-null: 包含日志信息的字符串</li>
+                        <li>null: 没有编译错误</li>
+                    </ul>
+                    <strong>错误</strong>
+                    <p>无</p>
+                </div>
+            </section>
+            <section id="getShaderPrecisionFormat">
+                <h4>gl.getShaderPrecisionFormat()</h4>
+                <p>获取着色器的精度值</p>
+                <div class="content">
+                    <strong>example</strong>
+                    <ul class="ul-1">
+                        <li>gl.getShaderPrecisionFormat(gl.VERTEX_SHADER, gl.MEDIUM_FLOAT).precision; // 23</li>
+                        <li>gl.getShaderPrecisionFormat(gl.FRAGMENT_SHADER, gl.LOW_INT).precision; // 0</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <ul class="ul-1">
+                        <li>可以表示的精度位数，对于整数，此值始终为0</li>
+                    </ul>
+                </div>
+            </section>
+            <!--程序对象-->
+            <section id="createProgram">
+                <h4>gl.createProgram()</h4>
+                <p>创建程序对象,程序对象包含了顶点着色器和片元着色器</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <p>无</p>
+                    <strong>返回值</strong>
+                    <ul class="ul-1">
+                        <li>non-null:新创建的程序对象</li>
+                        <li>null:创建失败</li>
+                    </ul>
+                    <strong>错误</strong>
+                    <p>无</p>
+                </div>
+            </section>
+            <section id="deleteProgram">
+                <h4>gl.deleteProgram(program)</h4>
+                <p>删除program指定的程序对象，如果该程序对象正在被使用，则不立即删除，而是等它不在被使用后在删除</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul>
+                        <li>program : 指定待删除的程序对象</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>无</p>
+                </div>
+            </section>
+            <section id="attachShader">
+                <h4>gl.attachShader(program,shader)</h4>
+                <p>将shader指定的着色器对象分配给program指定的程序对象</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>program : 指定程序对象</li>
+                        <li>shader : 指定着色器对象</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <ul class="ul-1">
+                        <li>INVALID_OPERATION:shader没有被分配给program</li>
+                    </ul>
+                    <strong>注意</strong>
+                    <p>着色器在赋给程序对象之前，并不一定要为其指定代码或进行编译（也就是说把空的着色器赋给程序对象也可以）。</p>
+                </div>
+            </section>
+            <section id="detachShader">
+                <h4>gl.detachShader(program,shader)</h4>
+                <p>取消shader指定的着色器对象对program指定的程序对象的分配。</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>program : 指定程序对象</li>
+                        <li>shader : 指定着色器对象</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <ul class="ul-1">
+                        <li>INVALID_OPERATION:shader没有被分配给program</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="linkProgram">
+                <h4>gl.linkProgram(program)</h4>
+                <p>链接program指定的着色器对象中的着色器</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>program : 指定程序对象</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>无</p>
+                </div>
+            </section>
+            <section id="getProgramParameter">
+                <h4>gl.getProgramParameter(program，pname)</h4>
+                <p>获取program指定的程序对象中，pname指定的参数信息。返回的值随着panme的不同而不同</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>program : 指定程序对象</li>
+                        <li>pname :
+                            指定待获取参数的类型，可以是gl.DELETE_STATUS、gl.LINK_STATUS、gl.VALIDATE_STATUS、gl.ATTACHED_SHADERS、gl.ACTIVE_ATTRIBUTES或gl.ACTIVE_UNIFORMS
+                        </li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <ul class="ul-1">
+                        <li>根据pname的不同，返回不同的值</li>
+                        <li>gl.DELETE_STATUS：返回是程序是否已被删除（true或false）</li>
+                        <li>gl.LINK_STATUS：返回是程序是否已连接成功（true或false）</li>
+                        <li>gl.VALIDATE_STATUS：返回是程序是否已通过验证（true或false）</li>
+                        <li>gl.ATTACHED_SHADERS：已被分配给着色器的数量</li>
+                        <li>gl.ACTIVE_ATTRIBUTES：顶点着色器中attribute变量的数量</li>
+                        <li>gl.ACTIVE_UNIFORMS：程序中uniform变量的数量</li>
+                    </ul>
+                    <strong>错误</strong>
+                    <ul class="ul-1">
+                        <li>INVALID_ENUM: pname的值无效</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="getProgramInfoLog">
+                <h4>gl.getProgramInfoLog(program)</h4>
+                <p>获取program指定的程序对象的信息日志。</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>program : 指定待获取信息日志的程序对象。</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <ul class="ul-1">
+                        <li>non-null: 包含日志信息的字符串</li>
+                        <li>null: 没有编译错误</li>
+                    </ul>
+                    <strong>错误</strong>
+                    <p>无</p>
+                </div>
+            </section>
+            <section id="useProgram">
+                <h4>gl.useProgram(program)</h4>
+                <p>告知WebGL系统绘制时使用program指定的程序对象。</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>program : 指定待使用的程序对象。</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>无</p>
+                </div>
+            </section>
+        </section>
+        <!--开启相关功能-->
+        <section id="enableInnerFun" class="section1">
+            <div class="title">Webgl内置功能</div>
+            <section id="enable">
+                <h4>gl.enable(cap)</h4>
+                <p>开启cap表示的功能（capability）</p>
+                <div class="content">
+                    <strong>参数：</strong>
+                    <ul class="ul-1">
+                        <li>
+                            cap:指定开启的功能，有可能是以下的几个
+                            <p>gl.DEPTH_TEST:消除隐藏面</p>
+                            <p>gl.BLEND:混合</p>
+                            <p>gl.POLYGON_OFFSET_FILL:多边形位移</p>
+                            <p>gl.CULL_FACE:开启剔除效果</p>
+                        </li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>INVALID_ENUM:cap的值无效</p>
+                </div>
+            </section>
+            <section id="disable">
+                <h4>gl.disable(cap)</h4>
+                <p>关闭cap表示的功能（capability）</p>
+                <div class="content">
+                    <strong>参数：</strong>
+                    <ul class="ul-1">
+                        <li>
+                            cap:指定开启的功能，有可能是以下的几个
+                            <p>gl.DEPTH_TEST:消除隐藏面</p>
+                            <p>gl.BLEND:混合</p>
+                            <p>gl.POLYGON_OFFSET_FILL:多边形位移</p>
+                            <p>gl.CULL_FACE:关闭剔除效果</p>
+                        </li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>INVALID_ENUM:cap的值无效</p>
+                </div>
+            </section>
+            <section id="polygonOffset">
+                <h4>gl.polygonOffset(factor,units)</h4>
+                <p>指定加到每个顶点绘制后z值上的偏移量，偏移量按照公式m*factor+r*units计算，其中m表示顶点所在表面相对于观察者的视线的角度，而r表示硬件能够区分两个z值之差的最小值。</p>
+                <div class="content">
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>无</p>
+                </div>
+            </section>
+            <section id="cullFace">
+                <h4>gl.cullFace(mode)</h4>
+                <p>指定前面或后面的多边形是否剔除。默认情况下禁用多边形剔除。</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul>
+                        <li>gl.FRONT</li>
+                        <li>gl.BACK</li>
+                        <li>gl.FRONT_AND_BACK</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>无</p>
+                    <strong>实例</strong>
+                    <ul>
+                        <li>
+                            <p>开启</p>
+                            <p>gl.enable(gl.CULL_FACE);</p>
+                            <p>gl.cullFace(gl.FRONT_AND_BACK);</p>
+                        </li>
+                        <li>
+                            <p>获取当前模式</p>
+                            <p>gl.getParameter(gl.CULL_FACE_MODE) === gl.FRONT_AND_BACK;</p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section id="frontFace">
+                <h4>gl.frontFace(mode)</h4>
+                <p>通过设置缠绕方向来指定多边形是正面还是背面。默认 gl.CW</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul>
+                        <li>gl.CW：顺时针缠绕</li>
+                        <li>gl.CCW：逆时针缠绕</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>无</p>
+                </div>
+            </section>
+        </section>
+        <!-- 深度方法 -->
+        <section id="depth" class="section1">
+            <h4 class="title">深度方法</h4>
+            <section id="depthMask">
+                <h4>gl.depthMask(mask)</h4>
+                <p>锁定或释放深度缓存区的写入操作。</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <p>mask：指定是锁定深度缓存区的写入操作（false），还是释放（true）。</p>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>无</p>
+                </div>
+            </section>
+            <section id="depthFunc">
+                <h4>gl.depthFunc(func)</h4>
+                <p>指定了一个将传入像素深度与当前深度缓冲区值进行比较的函数</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>func：于设置绘制像素的条件。默认值为gl.LESS，可能值：
+                            <ul class="ul-1">
+                                <li>gl.NEVER: 不通过</li>
+                                <li>gl.LESS: 如果传入值小于深度缓冲区值则传递</li>
+                                <li>gl.EQUAL: 如果传入值等于深度缓冲区值则传递</li>
+                                <li>gl.LEQUAL: 如果传入值小于或等于深度缓冲区值，则传递</li>
+                                <li>gl.GREATER: 如果传入值大于深度缓冲区值则传递</li>
+                                <li>gl.NOTEQUAL: 如果传入值不等于深度缓冲区值则传递</li>
+                                <li>gl.GEQUAL: 如果传入值大于或等于深度缓冲区值则传递</li>
+                                <li>gl.ALWAYS: 通过</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>无</p>
+                </div>
+            </section>
+        </section>
+        <!-- 混合方法 -->
+        <section id="blending" class="section1">
+            <h4 class="title">混合方法</h4>
+            <section id="blendFunc">
+                <h4>gl.blendFunc(src_factor, dst_factor)</h4>
+                <p>通过参数src_factor和dst_factor指定进行混合操作的函数，混合后的颜色如下计算：</p>
+                <p>混合后的颜色 = 源颜色 * src_factor + 目标颜色 * dst_factor</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>src_factor：指定源颜色在混合后颜色中的权重因子，如表10.2所示</li>
+                        <li>dst_factor：指定目标颜色在混合后颜色中的权重因子，如表10.2所示</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>INVALID_ENUM:src_factor, dst_factor的值不在表10.2中</p>
+                    <strong>表10.2</strong>
+                    <table border="1">
+                        <tr>
+                            <th colspan="4">可以指定给src_factor, dst_factor的常量</th>
+                        </tr>
+                        <tr>
+                            <th>常量</th>
+                            <th>R分量的系数</th>
+                            <th>G分量的系数</th>
+                            <th>B分量的系数</th>
+                        </tr>
+                        <tr>
+                            <td>gl.ZERO</td>
+                            <td>0.0</td>
+                            <td>0.0</td>
+                            <td>0.0</td>
+                        </tr>
+                        <tr>
+                            <td>gl.ONE</td>
+                            <td>1.0</td>
+                            <td>1.0</td>
+                            <td>1.0</td>
+                        </tr>
+                        <tr>
+                            <td>gl.SRC_COLOR</td>
+                            <td>Rs</td>
+                            <td>Gs</td>
+                            <td>Bs</td>
+                        </tr>
+                        <tr>
+                            <td>gl.ONE_MINUS_SRC_COLOR</td>
+                            <td>(1-Rs)</td>
+                            <td>(1-Gs)</td>
+                            <td>(1-Bs)</td>
+                        </tr>
+                        <tr>
+                            <td>gl.DST_COLOR</td>
+                            <td>Rd</td>
+                            <td>Gd</td>
+                            <td>Bd</td>
+                        </tr>
+                        <tr>
+                            <td>gl.ONE_MINUS_DST_COLOR</td>
+                            <td>(1-Rd)</td>
+                            <td>(1-Gd)</td>
+                            <td>(1-Bd)</td>
+                        </tr>
+                        <tr>
+                            <td>gl.SRC_ALPHA</td>
+                            <td>As</td>
+                            <td>As</td>
+                            <td>As</td>
+                        </tr>
+                        <tr>
+                            <td>gl.ONE_MINUS_SRC_ALPHA</td>
+                            <td>(1-As)</td>
+                            <td>(1-As)</td>
+                            <td>(1-As)</td>
+                        </tr>
+                        <tr>
+                            <td>gl.DST_ALPHA</td>
+                            <td>Ad</td>
+                            <td>Ad</td>
+                            <td>Ad</td>
+                        </tr>
+                        <tr>
+                            <td>gl.ONE_MINUS_DST_ALPHA</td>
+                            <td>(1-Ad)</td>
+                            <td>(1-Ad)</td>
+                            <td>(1-Ad)</td>
+                        </tr>
+                        <tr>
+                            <td>gl.SRC_ALPHA_SATURATE</td>
+                            <td>min(As,Ad)</td>
+                            <td>min(As,Ad)</td>
+                            <td>min(As,Ad)</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+            <section id="blendColor">
+                <h4>gl.blendColor(red, green, blue, alpha)</h4>
+                <p>使当前颜色作为混合操作的常量颜色</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>red：指定颜色值的源混合因子</li>
+                        <li>green：颜色在的目标混合因子</li>
+                        <li>blue：Alpha值的源混合因子</li>
+                        <li>alpha：Alpha值的目标混合因子</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                </div>
+            </section>
+            <section id="blendEquation">
+                <h4>gl.blendEquation(mode)</h4>
+                <p>指定帧缓存区与源颜色混合的方式</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>mode：混合模式参数</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                </div>
+            </section>
+            <section id="blendEquationSeparate">
+                <h4>gl.blendEquationSeparate(modeRGB,modeAlpha)</h4>
+                <p>允许RGB和Alpha使用不同的混合方式</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>modeRGB：混合模式参数</li>
+                        <li>modeAlpha：混合模式参数</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>实例</strong>
+                    <p>gl.blendEquationSeparate(gl.FUNC_ADD, gl.FUNC_ADD);</p>
+                    <strong>混合模式参数</strong>
+                    <table border="1">
+                        <tr>
+                            <th colspan="4">混合模式参数</th>
+                        </tr>
+                        <tr>
+                            <th>混合模式参数</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>gl.FUNC_ADD</td>
+                        </tr>
+                        <tr>
+                            <td>gl.FUNC_SUBTRACT</td>
+                        </tr>
+                        <tr>
+                            <td>gl.FUNC_REVERSE_SUBTRACT</td>
+                        </tr>
+                        <tr>
+                            <td>gl.MIN</td>
+                        </tr>
+                        <tr>
+                            <td>gl.MAX</td>
+                        </tr>
+                        <tr>
+                            <td>gl.LOGIC_OP</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+            <section id="blendFuncSeparate">
+                <h4>gl.blendFuncSeparate(srcRGB, destRGB, srcAlpha, destAlpha)</h4>
+                <p>分别指定源和目标的颜色（RGB）分量和A（alpha）分量</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>srcRGB：指定颜色值的源混合因子,如表10.2所示</li>
+                        <li>destRGB：颜色在的目标混合因子,如表10.2所示</li>
+                        <li>srcAlpha：Alpha值的源混合因子,如表10.2所示</li>
+                        <li>destAlpha：Alpha值的目标混合因子,如表10.2所示</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                </div>
+            </section>
+        </section>
+        <!--帧缓存区对象-->
+        <section id="Framebuffer" class="section1">
+            <div class="title">帧缓存区对象</div>
+            <section id="createFramebuffer">
+                <h4>createFramebuffer()</h4>
+                <p>创建帧缓存区对象。</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <p>无</p>
+                    <strong>返回值</strong>
+                    <ul class="ul-1">
+                        <li>non-null: 新创建的帧缓存区对象</li>
+                        <li>null: 创建帧缓存区对象失败</li>
+                    </ul>
+                    <strong>错误</strong>
+                    <p>无</p>
+                </div>
+            </section>
+            <section id="deleteFramebuffer">
+                <h4>deleteFramebuffer(framebuffer)</h4>
+                <p>删除帧缓存区对象。</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <p>framebuffer：指定被删除的帧缓存对象</p>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>无</p>
+                </div>
+            </section>
+            <section id="bindFramebuffer">
+                <h4>bindFramebuffer(target,framebuffer)</h4>
+                <p>将framebuffer指定的帧缓冲区对象绑定到target目标上。如果framebuffer为null，那么已经绑定到target目标上的帧缓冲区对象那个将被解除绑定。</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>target:必须是gl.FRAMEBUFFER</li>
+                        <li>framebuffer：指定被绑定的帧缓存对象</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>INVALID_ENUM:target不是gl.FRAMEBUFFER</p>
+                </div>
+            </section>
+            <section id="framebufferTexture2D">
+                <h4>framebufferTexture2D(target,attachment,textarget,texture,level)</h4>
+                <p>将texture指定的纹理对象关联到绑定在target目标上的帧缓冲区。</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>target:必须是gl.FRAMEBUFFER</li>
+                        <li>
+                            attachment：指定关联的类型
+                            <p>gl.COLOR_ATTACHMENTO:表示texture是颜色关联对象</p>
+                            <p>gl.DEPTH_ATTACHMENT:表示texture是深度关联对象</p>
+                        </li>
+                        <li>textarget:gl.TEXTURE_2D\gl.TEXTURE_CUBE</li>
+                        <li>texture:指定关联的纹理对象</li>
+                        <li>指定为0（在使用MIPMAP纹理时指定纹理的层级）</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <ul class="ul-1">
+                        <li>INVALID_ENUM:target不是gl.FRAMEBUFFER，或者attachment,textarget的值无效</li>
+                        <li>INVALID_VALUE:level的值无效</li>
+                        <li>INVALID_:OPERATION：target上没有绑定帧缓冲区</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="framebufferRenderbuffer">
+                <h4>framebufferRenderbuffer(target,attachment,renderbuffertarget,renderbuffer)</h4>
+                <p>将renderbuffer指定的渲染缓冲区对象关联到绑定在target上的帧缓冲对象关联到绑定在target上的帧缓冲区对象。</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>target:必须是gl.FRAMEBUFFER</li>
+                        <li>
+                            attachment：指定关联的类型
+                            <p>gl.COLOR_ATTACHMENTO:表示renderbuffer是颜色关联对象</p>
+                            <p>gl.DEPTH_ATTACHMENT:表示renderbuffer是深度关联对象</p>
+                            <p>gl._ATTACHMENT:表示renderbuffer是STENCIL模板关联对象</p>
+                        </li>
+                        <li>renderbuffertarget:必须是gl.RENDERBUFFER</li>
+                        <li>renderbuffer:指定被关联的渲染缓冲区对象</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <ul class="ul-1">
+                        <li>
+                            INVALID_ENUM:target不是gl.FRAMEBUFFER，或者renderbuffertarget不是gl.RENDERBUFFER，或则attachment的值无效。
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section id="checkFramebufferStatus">
+                <h4>checkFramebufferStatus(target)</h4>
+                <p>检查绑定在target上的帧缓冲区对象的配置状态</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>target:必须是gl.FRAMEBUFFER</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <ul class="ul-1">
+                        <li>0:target不是gl.FRAMEBUFFER</li>
+                        <li>gl.FRAMEBUFFER_COMPLETE:帧缓冲对象已正确配置</li>
+                        <li>gl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:某一个关联对象为空，或者关联对象不合法</li>
+                        <li>gl.FRAMEBUFFER_INCOMPLETE_DIMENSIONS:颜色关联对象和深度关联对象和深度关联对象的尺寸不一致</li>
+                        <li>gl.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:帧缓冲区尚未关联任何一个关联对象</li>
+                    </ul>
+                    <strong>错误</strong>
+                    <ul class="ul-1">
+                        <li>INVALID_ENUM:target不是gl.FRAMEBUFFER</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="scissor">
+                <h4>gl.scissor(x,y,width,height)</h4>
+                <p>剪裁测试用于限制绘制区域。我们可以指定一个矩形的剪裁窗口，当启用剪裁测试后，只有在这个窗口之内的像素才能被绘制，其它像素则会被丢弃。换句话说，无论怎么绘制，剪裁窗口以外的像素将不会被修改。</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>x,y:指定绘图区域的左上角，以像素为单位</li>
+                        <li>width,height:指定绘图区域的宽度和高度</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>无</p>
+                </div>
+            </section>
+            <section id="viewport">
+                <h4>viewport(x,y,width,height)</h4>
+                <p>设置gl.drawArrays()和gl.drawElements()函数的绘图区域。在canvas上绘图时，x和y就是canvas中的坐标</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>x,y:指定绘图区域的左上角，以像素为单位</li>
+                        <li>width,height:指定绘图区域的宽度和高度</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>无</p>
+                </div>
+            </section>
+        </section>
+        <!--渲染缓冲区对象-->
+        <section id="renderBuffer" class="section1">
+            <div class="title">渲染缓冲区对象</div>
+            <section id="createRenderbuffer">
+                <h4>gl.createRenderbuffer()</h4>
+                <p>创建渲染缓冲区对象。</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <p>无</p>
+                    <strong>返回值</strong>
+                    <ul class="ul-1">
+                        <li>non-null: 新创建的渲染缓冲区对象</li>
+                        <li>null: 创建渲染缓冲区对象失败</li>
+                    </ul>
+                    <strong>错误</strong>
+                    <p>无</p>
+                </div>
+            </section>
+            <section id="deleteRenderbuffer">
+                <h4>deleteRenderbuffer(renderbuffer)</h4>
+                <p>删除渲染缓冲区对象。</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <p>renderbuffer：指定被删除的渲染缓冲对象</p>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>无</p>
+                </div>
+            </section>
+            <section id="bindRenderbuffer">
+                <h4>bindRenderbuffer(targer,renderbuffer)</h4>
+                <p>将renderbuffer指定的渲染缓冲区对象绑定到target目标上。如果renderbuffer为null，则将已经绑定在target目标上的渲染缓冲区对象解除绑定.</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>target:必须为gl.RENDERBUFFER</li>
+                        <li>renderbuffer:指定被绑定的渲染缓冲区</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>INVALID_ENUM:target不是gl.RENDERBUFFER</p>
+                </div>
+            </section>
+            <section id="renderbufferStorage">
+                <h4>renderbufferStorage(targer,internalformat,width,height)</h4>
+                <p>创建并初始化渲染缓冲区的数据</p>
+                <div class="content">
+                    <strong>参数</strong>
+                    <ul class="ul-1">
+                        <li>target:必须为gl.RENDERBUFFER</li>
+                        <li>
+                            internalformat:指定渲染缓冲区中的数据格式
+                            <table border="1">
+                                <tr>
+                                    <th colspan="2">渲染缓冲区中的数据格式</th>
+                                </tr>
+                                <tr>
+                                    <td>gl.DEPTH_COMPONENT16</td>
+                                    <td>表示渲染缓冲区将替代深度缓冲区</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.STENCIL_INDEX8</td>
+                                    <td>表示渲染缓冲区将替代STENCIL_INDEX8模板缓冲区</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.RGBA4</td>
+                                    <td>表示渲染缓冲区将替代颜色缓冲区</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.RGB_A1</td>
+                                    <td>RGBA这4个分量各个占据4个比特符</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.RGB565</td>
+                                    <td>RGB各占据5个比特，A占据5个比特，gl.RGB565表示RGB分别占据5\6\5个比特</td>
+                                </tr>
+                                <tr>
+                                    <td>width,height</td>
+                                    <td>指定渲染缓冲区的宽度和高度，以像素为单位</td>
+                                </tr>
+                            </table>
+                        </li>
+                        <li>width,height:指定缓冲区对象的宽度和高度</li>
+                    </ul>
+                    <strong>返回值</strong>
+                    <p>无</p>
+                    <strong>错误</strong>
+                    <p>INVALID_ENUM:target不是gl.RENDERBUFFER</p>
+                    <p>INVALID_:targetOPERATION没有绑定渲染缓冲区</p>
+                </div>
+            </section>
+        </section>
+        <!-- 全局方法 -->
+        <section id="globalMethod" class="section1">
+            <h4 class="title">全局方法</h4>
+            <section id="getExtension">
+                <h4>gl.getExtension(name)</h4>
+                <p>启用WebGL扩展</p>
+                <div class="ul-1">
+                    <strong>参数：</strong>
+                    <ul class="ul-1">
+                        <li>name:WebGL扩展功能的名称</li>
+                    </ul>
+                    <strong>返回值：</strong>
+                    <ul class="ul-1">
+                        <li>WebGL扩展对象</li>
+                        <li>null:如果name的值不能正确匹配</li>
+                    </ul>
+                    <strong>扩展</strong>
+                    <p><a href="javaScript/WebGL_extensions.html" target="_blank">扩展项</a></p>
+                </div>
+            </section>
+            <section id="getParameter">
+                <h4>gl.getParameter(pname)</h4>
+                <p>返回传递参数名称的值</p>
+                <div class="ul-1">
+                    <strong>参数：</strong>
+                    <ul class="ul-1">
+                        <li>pname:指定要返回的参数值</li>
+                        <li>
+                            <ul class="ul-1">
+                                <li>gl.MAX_TEXTURE_SIZE:获取纹理的最大尺寸</li>
+                                <li>gl.COLOR_WRITEMASK:获取当前每个颜色分量是否可以写入帧缓冲区</li>
+                                <li>gl.MAX_VERTEX_ATTRIBS:获取最多的顶点attribute变量</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </section>
+    </div>
 </div>
 </body>
 </html>

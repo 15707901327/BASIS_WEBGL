@@ -22,6 +22,7 @@
         <ul class="ul-1">
             <li><a href="#bufferObject">缓冲区对象</a></li>
             <li><a href="#depthBuffer">深度缓冲区</a></li>
+            <li><a href="#framebuffer">帧缓冲区对象</a></li>
         </ul>
         <h4><a href="#WebGL_Event">WebGL相关事件</a></h4>
         <ul class="ul-1">
@@ -38,6 +39,7 @@
         <h4><a href="WebGL_API/GraphicsDOC/index.html" target="_blank">图形学（Graphics）</a></h4>
         <h4><a href="canvas%202D%20API/ctx.html" target="_blank">canvas 2D API</a></h4>
         <h4><a href="WebGL_API/javaScript%20API/gl.html" target="_blank">WebGL API</a></h4>
+        <h4><a href="WebGL_API/javaScript%20API/WebGL_extensions.html" target="_blank">WebGL扩展注册表</a></h4>
         <h4><a href="#WebGL-example">WebGL实例</a></h4>
         <ul class="ul-1">
             <li><a href="#example_1">WebGL编程指南</a></li>
@@ -67,7 +69,8 @@
                     <strong>深度检测（DEPTH_TEST）：</strong>
                     <p>通过检测物体（的每个像素的）的深度来决定是否将其画出来。</p>
                     <strong>深度冲突：</strong>
-                    <p>产生深度冲突的原因是：在使用隐藏面消除时，当几何图形或物体的两个表面极为接近时，<a href="#depthBuffer">深度缓冲区</a>有限的精度已经不能区分出那个在前，那个在后,就会发生深度冲突的问题.</p>
+                    <p>产生深度冲突的原因是：在使用隐藏面消除时，当几何图形或物体的两个表面极为接近时，<a href="#depthBuffer">深度缓冲区</a>有限的精度已经不能区分出那个在前，那个在后,就会发生深度冲突的问题.
+                    </p>
                     <p>WebGL提供一种<a href="#ploygonOffset">多边形偏移的机制来解决这个问题。</a></p>
                 </div>
             </section>
@@ -119,7 +122,8 @@
                         <li>相机的位置和方向：视图矩阵 ( CameraMatrixWorldInverse 或 ViewMatrix )</li>
                         <li>物体的位置和形变（旋转/缩放/平移）：物体位置矩阵( ObjectWorldMatrix )</li>
                     </ul>
-                    <p>三维投影算法就是将上诉因素抽象为数学算法，用来计算三维物体在相机视平面上的位置。实际应用中我们是通过矩阵计算来实现的。简而言之，我们将相机的位置方向, 相机的类型, 物体的位置和形变能转换为 矩阵 , 将这些矩阵进行一系列计算后, 最终得到 三维投影矩阵.</p>
+                    <p>三维投影算法就是将上诉因素抽象为数学算法，用来计算三维物体在相机视平面上的位置。实际应用中我们是通过矩阵计算来实现的。简而言之，我们将相机的位置方向, 相机的类型, 物体的位置和形变能转换为
+                        矩阵 , 将这些矩阵进行一系列计算后, 最终得到 三维投影矩阵.</p>
 
                     <p><strong>三维投影矩阵计算公式：</strong></p>
                     <p>uMatrix = ProjectMatrix * CameraMatrixWorldInverse * ObjectMatrixWorld</p>
@@ -260,6 +264,7 @@
             <section id="bufferObject">
                 <h4>缓冲区对象</h4>
                 <p>缓冲区对象是WebGL系统中的一块内存区域，我们可以一次性地向缓存区对象中填充大量的顶点数据，然后将这些数据保存在其中，供顶点使用。</p>
+                <p>默认情况下，WebGL在颜色缓冲区中进行绘图，在开启隐藏面消除功能时，还会用到深度缓冲区。总之，绘制的结果图像是存储在颜色缓冲区中的。</p>
                 <div class="content">
                     <strong>使用缓冲区对象向着色器中传入多个数据步骤：</strong>
                     <ul class="ul-1-num">
@@ -285,6 +290,28 @@
             <section id="depthBuffer">
                 <h4>深度缓存区</h4>
                 <p>深度缓存区是一个中间对象，其作用就是帮助WebGL进行隐藏面消除。如果隐藏面消除，就必须知道每个几何图形的深度信息，而深度缓冲区就是用来存储深度信息的（Z缓冲区）。</p>
+            </section>
+            <section id="framebuffer">
+                <h4>帧缓冲区对象</h4>
+                <p>帧缓冲区对象可以用来代替颜色缓冲区或深度缓冲区。绘制在帧缓冲中的对象并不会直接显示在canvas上，可以先对帧缓冲区的内容进行一些处理，或者直接用其中的内容作为纹理图像。</p>
+                <p>在帧缓冲区中进行绘制的过程又称为离屏绘制。</p>
+                <div class="content">
+                    <h4>帧缓冲区结构</h4>
+                    <p>提供了颜色缓冲区和深度缓冲区的替代品，绘制操作不是直接发生在帧缓冲区中的，而是发生在帧缓冲区所关联的对象上：</p>
+                    <p>颜色关联对象、深度关联对象、模板关联对象</p>
+                    <p>每一个关联对象可以是两种类型：纹理对象或渲染缓冲区对象。</p>
+                    <h4>帧缓冲区使用步骤</h4>
+                    <ul class="ul-1-num">
+                        <li>创建帧缓冲区对象<a href="WebGL_API/javaScript%20API/gl.html#createFramebuffer" target="_blank">（gl.createFramebuffer()）</a></li>
+                        <li>创建纹理对象并设置其尺寸和参数<a href="WebGL_API/javaScript%20API/gl.html#texture" target="_blank">（gl.createTexture()...）</a></li>
+                        <li>创建渲染缓冲区<a href="WebGL_API/javaScript%20API/gl.html#renderBuffer" target="_blank">（gl.createRenderBuffer）</a></li>
+                        <li>绑定渲染缓冲区并设置其尺寸<a href="WebGL_API/javaScript%20API/gl.html#renderBuffer" target="_blank">（gl.bindRenderBuffer）</a></li>
+                        <li>将帧缓冲区的颜色关联对象指定为一个纹理对象<a href="WebGL_API/javaScript%20API/gl.html#framebufferTexture2D" target="_blank">（gl.framebufferTexture2D）</a></li>
+                        <li>将帧缓冲区的深度关联对象指定为一个渲染缓冲区对象<a href="WebGL_API/javaScript%20API/gl.html#framebufferRenderbuffer" target="_blank">（gl.framebufferRenderbuffer）</a></li>
+                        <li>检查帧缓冲区是否正确配置<a href="WebGL_API/javaScript%20API/gl.html#checkFramebufferStatus" target="_blank">（gl.checkFramebufferStatus）</a></li>
+                        <li>在帧缓冲区中进行绘制<a href="WebGL_API/javaScript%20API/gl.html#checkFramebufferStatus" target="_blank">（gl.checkFramebufferStatus）</a></li>
+                    </ul>
+                </div>
             </section>
         </section>
         <section id="WebGL_Event" class="section1">
@@ -404,7 +431,8 @@
                     <ul class="ul-1-num">
                         <li>
                             开启隐藏面消除功能<br>
-                            <a href="WebGL_API/javaScript%20API/gl.html#enable" target="_blank">gl.enable(DEPTH_TEST)</a>
+                            <a href="WebGL_API/javaScript%20API/gl.html#enable"
+                               target="_blank">gl.enable(DEPTH_TEST)</a>
                         </li>
                         <li>
                             在绘制之前，清除深度缓存区<br>

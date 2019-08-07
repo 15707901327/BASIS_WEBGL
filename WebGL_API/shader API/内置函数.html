@@ -10,7 +10,6 @@
   <div class="left">
     <ul class="ul-1">
       <li><a href="#vec4">vec4 vec4()</a></li>
-      <li><a href="#dot">几何函数</a></li>
       <li><a href="#acos">角度和三角函数</a></li>
       <li>
         <a href="#texture">纹理查询函数</a>
@@ -20,6 +19,7 @@
       </li>
       <li><a href="#typeConversion">类型转换函数</a></li>
     </ul>
+    <h4><a href="#geometric">几何函数</a></h4>
     <h4><a href="#exponential">指数函数</a></h4>
     <h4><a href="#common">通用函数</a></h4>
     <ul class="ul-1">
@@ -38,8 +38,8 @@
         <p>由v0，v1，v2，v3组成的vec4对象</p>
       </div>
     </section>
-    <section id="dot">
-      <h4>几何函数</h4>
+    <section id="geometric" class="section1">
+      <div class="title">几何函数</div>
       <div class="content">
         <table border="1">
           <tr>
@@ -65,6 +65,15 @@
               result[1] = x[2]*y[0]-y[2]*x[0];<br>
               result[2] = x[0]*y[1]-y[0]*x[1];<br>
             </td>
+          </tr>
+          <tr>
+            <td>
+              float normalize(float x);<br>
+              vec2 normalize(vec2 x);<br>
+              vec3 normalize(vec3 x);<br>
+              vec4 normalize(vec4 x);<br>
+            </td>
+            <td>对x进行归一化，保持矢量方向不变但长度为1，即x/length(x).</td>
           </tr>
         </table>
       </div>

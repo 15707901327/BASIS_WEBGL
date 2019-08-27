@@ -48,6 +48,15 @@
           </tr>
           <tr>
             <td>
+              float length(float x);<br>
+              float length(vec2 x);<br>
+              float length(vec3 x);<br>
+              float length(vec4 x);<br>
+            </td>
+            <td>返回矢量x的长度</td>
+          </tr>
+          <tr>
+            <td>
               float dot(float x, float y);<br>
               float dot(vec2 x, vec2 y);<br>
               float dot(vec3 x, vec3 y);<br>
@@ -344,7 +353,7 @@
         <strong>返回值：</strong>
         <p>
           纹理坐标处像素的颜色值，其格式由gl.texImage2D()的internalformat参数决定。
-          下表显示来不同参数下的返回值。如果由于某些原因导致纹理图像不可使用，那就返回（0.0,0.0,0.0,1.0）
+          下表显示来不同参数下的返回值。如果由于某些原因导致纹理图像不可使用，那就返回（0.0,0.0,0.0,1.0） </p>
         <table border="1">
           <tr>
             <th>internalformat</th>
@@ -371,7 +380,7 @@
             <td>(L,L,L,A)</td>
           </tr>
         </table>
-        </p>
+
         <strong>实例</strong>
         <ul class="ul-1">
           <li><a href="../../WebGL编程指南/ch5/TexturedQuad.html">显示纹理贴图</a></li>

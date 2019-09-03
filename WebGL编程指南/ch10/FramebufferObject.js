@@ -368,7 +368,7 @@ function drawTexturedPlane(gl, program, o, angle, texture, viewProjMatrix) {
   drawTexturedObject(gl, program, o, texture);
 }
 
-function drawTexturedObject(gl, program, o, texture) {
+function  drawTexturedObject(gl, program, o, texture) {
   // Assign the buffer objects and enable the assignment
   initAttributeVariable(gl, program.a_Position, o.vertexBuffer);    // Vertex coordinates
   initAttributeVariable(gl, program.a_TexCoord, o.texCoordBuffer);  // Texture coordinates

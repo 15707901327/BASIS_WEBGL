@@ -23,6 +23,7 @@
     <ul class="ul-1">
       <li><a href="#bufferObject">缓冲区对象</a></li>
       <li><a href="#depthBuffer">深度缓冲区</a></li>
+      <li><a href="#renderbufferObject">渲染缓冲区对象</a></li>
       <li><a href="#framebuffer">帧缓冲区对象</a></li>
     </ul>
     <h4><a href="#WebGL_Event">WebGL相关事件</a></h4>
@@ -353,16 +354,24 @@
         <h4>深度缓存区</h4>
         <p>深度缓存区是一个中间对象，其作用就是帮助WebGL进行隐藏面消除。如果隐藏面消除，就必须知道每个几何图形的深度信息，而深度缓冲区就是用来存储深度信息的（Z缓冲区）。</p>
       </section>
+      <section id="renderbufferObject">
+        <h4>渲染缓冲区对象</h4>
+        <p>渲染缓冲区对象表示一种更加通用的绘图区域，可以向其中写入多种类型的数据。</p>
+      </section>
       <section id="framebuffer">
         <h4>帧缓冲区对象</h4>
-        <p>帧缓冲区对象可以用来代替颜色缓冲区或深度缓冲区。绘制在帧缓冲中的对象并不会直接显示在canvas上，可以先对帧缓冲区的内容进行一些处理，或者直接用其中的内容作为纹理图像。</p>
+        <p>帧缓冲区对象可以用来代替<strong>颜色缓冲区</strong>或<a href="#depthBuffer">深度缓冲区</a>。绘制操作不是直接发生在帧缓冲区中的，而是发生在帧缓冲区所关联的对象上。</p>
+        <p>绘制在帧缓冲中的对象并不会直接显示在canvas上，可以先对帧缓冲区的内容进行一些处理，或者直接用其中的内容作为纹理图像。</p>
         <p>在帧缓冲区中进行绘制的过程又称为离屏绘制。</p>
         <div class="content">
-          <h4>帧缓冲区结构</h4>
-          <p>提供了颜色缓冲区和深度缓冲区的替代品，绘制操作不是直接发生在帧缓冲区中的，而是发生在帧缓冲区所关联的对象上：</p>
-          <p>颜色关联对象、深度关联对象、模板关联对象</p>
-          <p>每一个关联对象可以是两种类型：纹理对象或渲染缓冲区对象。</p>
-          <h4>帧缓冲区使用步骤</h4>
+          <h4>帧缓冲区所关联的对象：</h4>
+          <ul class="ul-1-num">
+            <li>颜色关联对象(代替颜色缓冲区)</li>
+            <li>深度关联对象(代替深度缓冲区)</li>
+            <li>模板关联对象(代替模板缓冲区)</li>
+          </ul>
+          <p><strong>关联对象类型：</strong>每一个关联对象可以是两种类型：纹理对象 或 <a href="#renderbufferObject">渲染缓冲区对象</a>。</p>
+          <h4>帧缓冲区使用步骤:</h4>
           <ul class="ul-1-num">
             <li>创建帧缓冲区对象<a href="WebGL_API/javaScript%20API/gl.html#createFramebuffer" target="_blank">（gl.createFramebuffer()）</a>
             </li>
@@ -380,6 +389,10 @@
             </li>
             <li>在帧缓冲区中进行绘制<a href="WebGL_API/javaScript%20API/gl.html#checkFramebufferStatus" target="_blank">（gl.checkFramebufferStatus）</a>
             </li>
+          </ul>
+          <h4>实例</h4>
+          <ul class="ul-1-num">
+            <li><a href="WebGL编程指南/ch10/FramebufferObject.html" target="_blank">帧缓冲对象实例</a></li>
           </ul>
         </div>
       </section>

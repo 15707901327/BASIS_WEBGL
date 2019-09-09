@@ -13,7 +13,6 @@
       <li><a href="#homogeneousCoordinates">齐次坐标</a></li>
       <li><a href="#LinearTransformation">线性变换</a></li>
       <li><a href="#Quaternion">四元数</a></li>
-      <li><a href="#CoordinateSystemConversion">坐标系转换</a></li>
     </ul>
     <h4><a href="#rotation">旋转(Rotation)</a></h4>
     <ul class="ul-1">
@@ -28,6 +27,11 @@
       <li><a href="#scale_matrix">缩放矩阵</a></li>
     </ul>
     <a href="#library">矩阵变换库</a><br>
+    <h4><a href="#CoordinateSystem">坐标系</a></h4>
+    <ul>
+      <li class="ul-1"><a href="#Three-dimensionalCoordinateSystem">三维坐标系</a></li>
+      <li class="ul-1"><a href="#SphericalCoordinateSystem">球面坐标系</a></li>
+    </ul>
   </div>
   <div class="right">
     <section  class="section1" id="concept">
@@ -78,21 +82,6 @@
             <li><a href="https://15707901327.github.io/ThreeSourceCodeAnalysis/example/instance_buffergeometry/webgl_buffergeometry_instancing2.html" target="_blank">实例webgl_buffergeometry_instancing2</a></li>
             <li><a href="https://15707901327.github.io/ThreeSourceCodeAnalysis/example/instance_buffergeometry/webgl_buffergeometry_instancing_dynamic.html" target="_blank">实例webgl_buffergeometry_instancing_dynamic</a></li>
           </ul>
-        </div>
-      </section>
-      <section id="CoordinateSystemConversion">
-        <h4>坐标系转换</h4>
-        <div class="content">
-          <strong>矩阵法：</strong>
-          <ul class="ul-2-num">
-            <li>获取原坐标系到目标坐标系的矩阵m</li>
-            <li>计算矩阵m的逆转置矩阵T</li>
-            <li>原坐标系中的点在目标坐标系中的对应点 v1 = T * v2</li>
-          </ul>
-          <strong>实例</strong>
-          <p>var matrix = new THREE.Matrix4();</p>
-          <p>matrix.set(0, 1, 0, 0,0, 0, 1, 0,1, 0, 0, 0,0, 0, 0, 1);</p>
-          <p>矩阵matrix可以把c中的坐标系转换到three中</p>
         </div>
       </section>
     </section>
@@ -196,6 +185,39 @@
       <ul>
         <li><a href="../../WebGL编程指南/lib/cuon-matrix说明.html">WebGL编程指南书中提供的矩阵变换库</a></li>
       </ul>
+    </section>
+    <section id="CoordinateSystem" class="section1">
+      <div class="title">坐标系</div>
+      <div id="Three-dimensionalCoordinateSystem">
+        <h4>三维坐标系</h4>
+        <p>三维笛卡儿坐标系是在二维笛卡儿坐标系的基础上根据右手定则增加第三维坐标（即Z轴）而形成的。</p>
+        <div class="content">
+          <strong>矩阵法坐标系转换：</strong>
+          <ul class="ul-2-num">
+            <li>获取原坐标系到目标坐标系的矩阵m</li>
+            <li>计算矩阵m的逆转置矩阵T</li>
+            <li>原坐标系中的点在目标坐标系中的对应点 v1 = T * v2</li>
+          </ul>
+          <strong>实例:</strong>
+          <p>var matrix = new THREE.Matrix4();</p>
+          <p>matrix.set(0, 1, 0, 0,0, 0, 1, 0,1, 0, 0, 0,0, 0, 0, 1);</p>
+          <p>矩阵matrix可以把c中的坐标系转换到three中</p>
+        </div>
+      </div>
+      <div id="SphericalCoordinateSystem">
+        <h4>球面坐标系</h4>
+        <div class="content">
+          <strong>定义:</strong>
+          <p>设P是R^3中一点，在球面坐标系中的三个坐标变量是(r,θ, φ):<p>
+          <p>r: 原点到点P的距离。</p>
+          <p>倾角(或极角) θ：是天顶方向和线段OP之间的夹角。</p>
+          <p>方位(或方位角) φ：是从方位参考方向到参照平面上线段OP的正交投影的有符号角度。</p>
+          <div><img src="map1.png"/></div>
+          <strong>特点：</strong>
+          <p>球面坐标系相同的同一点，具有无限多个等效坐标,，你可以在不改变角度的情况下, 增加或减去任意数量倍的，从而不改变角点。</p>
+          <p>在许多情况下，允许负径向距离也很方便,，该惯例是(−r,θ,φ)等效于(r,θ+ 180 °,φ)为任意r，θ和φ。此外，(r,−θ,φ)等效于(r,θ,φ+ 180 °)。</p>
+        </div>
+      </div>
     </section>
   </div>
 </div>

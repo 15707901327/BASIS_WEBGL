@@ -289,7 +289,7 @@ function initFramebufferObject(gl) {
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
   framebuffer.texture = texture; // Store the texture object
 
-  // 创建渲染缓存区对象
+  // 创建渲染缓存区对象并设置其熟悉和参数
   depthBuffer = gl.createRenderbuffer(); // Create a renderbuffer object
   if (!depthBuffer) {
     console.log('Failed to create renderbuffer object');
@@ -299,7 +299,7 @@ function initFramebufferObject(gl) {
   gl.bindRenderbuffer(gl.RENDERBUFFER, depthBuffer); // Bind the object to target
   gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, OFFSCREEN_WIDTH, OFFSCREEN_HEIGHT);
 
-  // 将帧缓存区的颜色关联对象指定为一个纹理对象
+  // 将纹理和渲染缓冲区对象关联到帧缓冲区对象上
   gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
   gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0);
   gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, depthBuffer);

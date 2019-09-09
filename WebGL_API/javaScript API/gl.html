@@ -792,14 +792,15 @@
       </section>
       <section id="pixelStorei">
         <h4>gl.pixelStorei(pname,param)</h4>
-        <p>使用pname和param指定的方式处理加载得到的图像</p>
+        <p>使用pname和param指定的方式处理加载得到的图像。</p>
         <div class="content">
-          <strong>参数</strong>
-          <ul>
+          <strong>参数:</strong>
+          <ul class="ul-1">
             <li>
-              panme : 可以是以下二者之一
+              panme：
               <p>gl.UNPACK_FLIP_Y_WEBGL:对图像进行Y轴反转。默认为false。</p>
               <p>gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL:将图像RGB颜色值的每一个分量乘以A。默认值为false。</p>
+              <p>gl.UNPACK_ALIGNMENT:从内存中解压缩像素数据。</p>
             </li>
             <li>param:指定非0（true）或0（false）。必须为整数。</li>
           </ul>
@@ -1368,11 +1369,12 @@
           <strong>参数：</strong>
           <ul class="ul-1">
             <li>
-              cap:指定开启的功能，有可能是以下的几个
+              cap:指定开启的功能
               <p>gl.DEPTH_TEST:消除隐藏面</p>
               <p>gl.BLEND:混合</p>
               <p>gl.POLYGON_OFFSET_FILL:多边形位移</p>
               <p>gl.CULL_FACE:开启剔除效果</p>
+              <p>gl.SCISSOR_TEST:开启裁剪功能</p>
             </li>
           </ul>
           <strong>返回值</strong>

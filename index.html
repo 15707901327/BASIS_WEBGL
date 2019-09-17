@@ -19,6 +19,10 @@
       <li><a href="#type_array">类型化数组</a></li>
     </ul>
     <h4><a href="#texture">纹理说明</a></h4>
+    <h4><a href="#blending">blending</a></h4>
+    <ul class="ul-1">
+      <li><a href="#blendFunc">混合功能</a></li>
+    </ul>
     <h4><a href="#buffer">缓冲区</a></h4>
     <ul class="ul-1">
       <li><a href="#bufferObject">缓冲区对象</a></li>
@@ -40,8 +44,8 @@
     <h4><a href="#light">光照</a></h4>
     <h4><a href="WebGL_API/GraphicsDOC/index.html" target="_blank">图形学（Graphics）</a></h4>
     <h4><a href="canvas%202D%20API/ctx.html" target="_blank">canvas 2D API</a></h4>
-    <h4><a href="WebGL_API/javaScript%20API/gl.html" target="_blank">WebGL API</a></h4>
-    <h4><a href="WebGL_API/javaScript%20API/WebGL_extensions.html" target="_blank">WebGL扩展注册表</a></h4>
+    <h4><a href="WebGL_API/js_API/gl.html" target="_blank">WebGL API</a></h4>
+    <h4><a href="WebGL_API/js_API/WebGL_extensions.html" target="_blank">WebGL扩展注册表</a></h4>
     <h4><a href="#WebGL-example">WebGL实例</a></h4>
     <ul class="ul-1">
       <li><a href="#example_1">WebGL编程指南</a></li>
@@ -322,6 +326,84 @@
         </div>
       </section>
     </section>
+    <section id="blending" class="section1">
+      <div class="title">blending</div>
+      <p>blending是一种颜色和另一种颜色相结合，以获取第三种颜色的行为。我们看到现实世界中一直存在混合：光线穿过玻璃、光线从表面反射、光源叠加到背景上、耀斑、夜晚周围点亮的灯。</p>
+      <p>OpenGL提供了多种不同的混合模式来模拟这些效果。在OpenGL中,混合发生在渲染过程的后期阶段:一旦片源着色器计算出片源的最终输出颜色，并把颜色写入到<a href="#framebuffer">帧缓冲区</a>中，就会发生混合。
+        通常情况下，片源仅仅覆盖之前的所有内容，但是如果打开混合，片源将与之前的片源混合。</p>
+      <p>默认情况下，OpenGL中混合方程设置，<a href="WebGL_API/js_API/gl.html#blendEquation">gl.BlendEquation()</a>设置为默认值GL_FUNC_ADD：
+      </p>
+      <p>output = (source factor * source fragment) + (destination factor * destination fragment)</p>
+      <section>
+        <h4>Additive blending</h4>
+        <p>将不同颜色添加到一起并添加结果时所做的混合类型。这就是我们的视觉与光一起工作的方式，这就是我们如何在我们的显示器上感知数百万种不同的颜色 - 它们实际上只是将三种不同的原色混合在一起。</p>
+        <p>这种类型的混合在3D渲染中具有许多用途，例如在粒子效果中，其似乎发出光或覆盖物，例如围绕光的电晕，或围绕光剑的发光效果。</p>
+        <p>可以通过调用<a href="WebGL_API/js_API/gl.html#blendFunc"> gl.BlendFunc(GL_ONE，GL_ONE) </a>来指定加法混合。 这导致混合方程output =
+          (1 * source fragment) + (1 * destination fragment)，其折叠成output = source fragment + destination fragment.</p>
+      </section>
+      <section>
+        <h4>Multiplicative blending</h4>
+        <p>表示光在通过滤色器时的行为方式，或者从被点亮的物体反射并进入我们的眼睛时的行为。红色物体对我们来说是红色的，因为当白光照射到物体上时，蓝色和绿色光被吸收。 只有红光反射回我们的眼睛。
+          在左边的例子中，我们可以看到一个表面反射一些红色和一些绿色，但很少蓝色。</p>
+        <p>当多纹理不可用时，乘法混合用于在游戏中实现光照贴图。 纹理与光照贴图相乘，以填充亮起和阴影区域。</p>
+        <p>可以通过调用<a href="WebGL_API/js_API/gl.html#blendFunc">gl.BlendFunc(GL_DST_COLOR，GL_ZERO)</a>来指定乘法混合。
+          这导致混合方程output = (destination fragment * source fragment) + (0 * destination fragment)，其折叠成output = source
+          fragment * destination fragment.</p>
+      </section>
+      <section>
+        <h4>Interpolative blending</h4>
+        <p>结合了Additive blending和Multiplicative blending，以提供插值效果。
+          与自身的加法和调制不同，这种混合模式也可以依赖于绘制顺序，因此在某些情况下，如果先绘制最远的半透明对象，然后再绘制较近的半透明对象，结果才会正确。
+          即使排序也不是完美的，因为三角形可能重叠并相交，但产生的伪像可能是可接受的。</p>
+        <p>插值通常用于将相邻表面混合在一起，以及做有色玻璃或淡入/淡出等效果。 左侧的图像显示了使用插值混合在一起的两个纹理。</p>
+        <p>通过调用<a href="WebGL_API/js_API/gl.html#blendFunc">gl.BlendFunc（GL_SRC_ALPHA，GL_ONE_MINUS_SRC_ALPHA）</a>指定插值。
+          这导致混合方程output = (source alpha * source fragment) + ((1 – source alpha) * destination fragment).</p>
+      </section>
+      <section>
+        <h4>资料地址</h4>
+        <p>http://www.learnopengles.com/android-lesson-five-an-introduction-to-blending/</p>
+      </section>
+      <section id="blendFunc">
+        <h4>混合功能</h4>
+        <p>实现半透明效果。</p>
+        <div class="content">
+          <strong>启动功能</strong>
+          <ul class="ul-1-num">
+            <li>
+              开启混合功能<br>
+              <a href="WebGL%20API/javaScript%20API/gl.html#enable">gl.enable(gl.BLEND)</a>
+            </li>
+            <li>
+              指定混合函数<br>
+              <a href="WebGL%20API/javaScript%20API/gl.html#blendFunc">gl.blendFunc(gl.SRC_ALPHA,
+                gl.ONE_MINUS_SRC_ALPHA)</a>
+            </li>
+          </ul>
+          <strong>实例</strong>
+          <ul class="ul-1-num">
+            <li><a href="WebGL编程指南/ch10/LookAtBlendedTriangles.html" target="_blank">α混合</a></li>
+          </ul>
+          <strong>透明与不透明物体共存:</strong>
+          <ul class="ul-1-num">
+            <li>
+              开启隐藏面消除功能<br>
+              <a href="WebGL%20API/javaScript%20API/gl.html#enable">gl.enable(DEPTH_TEST)</a>
+            </li>
+            <li>
+              绘制所有不透明的物体<br>
+            </li>
+            <li>
+              锁定用于进行隐藏面消除的深度缓存区的写入操着，使之只读。<br>
+              <a href="WebGL%20API/javaScript%20API/gl.html#depthMask">gl.depthMask(false)</a>
+            </li>
+            <li>绘制所有半透明的物体（α小于1.0），注意他们应当按照深度排序，然后从后向前绘制</li>
+            <li>
+              释放深度缓存区，使之可读可写。<br>
+              <a href="WebGL%20API/javaScript%20API/gl.html#depthMask">gl.depthMask(false)</a>
+            </li>
+          </ul>
+        </div>
+      </section>
     </section>
     <section id="buffer" class="section1">
       <h4 class="title">缓冲区</h4>
@@ -466,47 +548,6 @@
     </section>
     <section id="inner" class="section1">
       <div class="title">WebGL内置功能</div>
-      <section id="blendFunc">
-        <h4>混合功能</h4>
-        <p>实现半透明效果。</p>
-        <div class="content">
-          <strong>启动功能</strong>
-          <ul class="ul-1-num">
-            <li>
-              开启混合功能<br>
-              <a href="WebGL%20API/javaScript%20API/gl.html#enable">gl.enable(gl.BLEND)</a>
-            </li>
-            <li>
-              指定混合函数<br>
-              <a href="WebGL%20API/javaScript%20API/gl.html#blendFunc">gl.blendFunc(gl.SRC_ALPHA,
-                gl.ONE_MINUS_SRC_ALPHA)</a>
-            </li>
-          </ul>
-          <strong>实例</strong>
-          <ul class="ul-1-num">
-            <li><a href="WebGL编程指南/ch10/LookAtBlendedTriangles.html" target="_blank">α混合</a></li>
-          </ul>
-          <strong>透明与不透明物体共存:</strong>
-          <ul class="ul-1-num">
-            <li>
-              开启隐藏面消除功能<br>
-              <a href="WebGL%20API/javaScript%20API/gl.html#enable">gl.enable(DEPTH_TEST)</a>
-            </li>
-            <li>
-              绘制所有不透明的物体<br>
-            </li>
-            <li>
-              锁定用于进行隐藏面消除的深度缓存区的写入操着，使之只读。<br>
-              <a href="WebGL%20API/javaScript%20API/gl.html#depthMask">gl.depthMask(false)</a>
-            </li>
-            <li>绘制所有半透明的物体（α小于1.0），注意他们应当按照深度排序，然后从后向前绘制</li>
-            <li>
-              释放深度缓存区，使之可读可写。<br>
-              <a href="WebGL%20API/javaScript%20API/gl.html#depthMask">gl.depthMask(false)</a>
-            </li>
-          </ul>
-        </div>
-      </section>
       <section id="depth_test">
         <h4>隐藏面消除</h4>
         <p>可以消除那些被遮挡的表面，绘制时，就不需要顾及各个物体在缓存区中的顺序。</p>
@@ -595,6 +636,15 @@
         <h4>《Foundations of Game Engine Development》</h4>
         <div class="content">
           <a href="http://foundationsofgameenginedev.com/" target="_blank">连接地址</a>
+        </div>
+      </section>
+    </section>
+    <section class="section1">
+      <div class="title">加载格式</div>
+      <section>
+        <h4>gltf</h4>
+        <div class="content">
+          <a href="https://github.com/khronosgroup/gltf#gltf-tools" target="_blank">gltf格式转换格式地址</a>
         </div>
       </section>
     </section>

@@ -1502,10 +1502,11 @@
     <section id="blending" class="section1">
       <h4 class="title">混合</h4>
       <section>
+        <h4 id="blending_equation">混合方程</h4>
         <div class="content">
           <table border="1">
             <tr>
-              <th colspan="2" id="blending_mode">混合模式</th>
+              <th colspan="2">混合方程</th>
             </tr>
             <tr>
               <th>mode</th>
@@ -1537,52 +1538,12 @@
           </table>
         </div>
       </section>
-      <section id="blendEquation">
-        <h4>gl.blendEquation(mode)</h4>
-        <p>用于将RGB混合方程和alpha混合方程设置为单个方程。</p>
+      <section>
+        <h4 id="blending_equation_param">混合方程参数</h4>
         <div class="content">
-          <strong>参数</strong>
-          <ul class="ul-1">
-            <li>mode：<a href="#blending_mode">混合模式</a></li>
-          </ul>
-          <strong>返回值</strong>
-          <p>无</p>
-        </div>
-      </section>
-      <section id="blendEquationSeparate">
-        <h4>gl.blendEquationSeparate(modeRGB,modeAlpha)</h4>
-        <p>用于分别设置RGB混合方程和alpha混合方程</p>
-        <div class="content">
-          <strong>参数</strong>
-          <ul class="ul-1">
-            <li>modeRGB：<a href="#blending_mode">混合模式</a></li>
-            <li>modeAlpha：<a href="#blending_mode">混合模式</a></li>
-          </ul>
-          <strong>返回值</strong>
-          <p>无</p>
-          <strong>实例</strong>
-          <p>gl.blendEquationSeparate(gl.FUNC_ADD, gl.FUNC_ADD);</p>
-        </div>
-      </section>
-      <section id="blendFunc">
-        <h4>gl.blendFunc(src_factor, dst_factor)</h4>
-        <p>定义了用于混合像素算术的函数。</p>
-        <p>通过参数src_factor和dst_factor指定进行混合操作的函数，混合后的颜色如下计算：</p>
-        <p>混合后的颜色 = 源颜色 * src_factor + 目标颜色 * dst_factor</p>
-        <div class="content">
-          <strong>参数</strong>
-          <ul class="ul-1">
-            <li>src_factor：指定源颜色在混合后颜色中的权重因子，如表10.2所示</li>
-            <li>dst_factor：指定目标颜色在混合后颜色中的权重因子，如表10.2所示</li>
-          </ul>
-          <strong>返回值</strong>
-          <p>无</p>
-          <strong>错误</strong>
-          <p>INVALID_ENUM:src_factor, dst_factor的值不在表10.2中</p>
-          <strong>表10.2</strong>
           <table border="1">
             <tr>
-              <th colspan="4">可以指定给src_factor, dst_factor的常量</th>
+              <th colspan="4">混合方程参数列表</th>
             </tr>
             <tr>
               <th>常量</th>
@@ -1657,6 +1618,54 @@
               <td>min(As,Ad)</td>
             </tr>
           </table>
+          <strong>注意：</strong>
+          <ul class="ul-1-num">
+            <li>(Rs,Gs,Bs,As)和(Rd,Gd,Bd,Ad)表示源颜色和目标颜色的各个分量。</li>
+          </ul>
+        </div>
+      </section>
+      <section id="blendEquation">
+        <h4>gl.blendEquation(mode)</h4>
+        <p>用于将RGB混合方程和alpha混合方程设置为单个方程。</p>
+        <div class="content">
+          <strong>参数</strong>
+          <ul class="ul-1">
+            <li>mode：<a href="#blending_equation">混合方程</a></li>
+          </ul>
+          <strong>返回值</strong>
+          <p>无</p>
+        </div>
+      </section>
+      <section id="blendEquationSeparate">
+        <h4>gl.blendEquationSeparate(modeRGB,modeAlpha)</h4>
+        <p>用于分别设置RGB混合方程和alpha混合方程</p>
+        <div class="content">
+          <strong>参数</strong>
+          <ul class="ul-1">
+            <li>modeRGB：<a href="#blending_equation">混合方程</a></li>
+            <li>modeAlpha：<a href="#blending_equation">混合方程</a></li>
+          </ul>
+          <strong>返回值</strong>
+          <p>无</p>
+          <strong>实例</strong>
+          <p>gl.blendEquationSeparate(gl.FUNC_ADD, gl.FUNC_ADD);</p>
+        </div>
+      </section>
+      <section id="blendFunc">
+        <h4>gl.blendFunc(src_factor, dst_factor)</h4>
+        <p>定义了用于混合像素算术的函数。</p>
+        <p>通过参数src_factor和dst_factor指定进行混合操作的函数，混合后的颜色如下计算：</p>
+        <p>混合后的颜色 = 源颜色 * src_factor + 目标颜色 * dst_factor</p>
+        <div class="content">
+          <strong>参数</strong>
+          <ul class="ul-1">
+            <li>src_factor：指定源颜色在混合后颜色中的<a href="#blending_equation_param">权重因子</a>.</li>
+            <li>dst_factor：指定目标颜色在混合后颜色中的<a href="#blending_equation_param">权重因子</a>。</li>
+          </ul>
+          <strong>返回值</strong>
+          <p>无</p>
+          <strong>错误</strong>
+          <p>INVALID_ENUM:src_factor, dst_factor的值不正确。</p>
         </div>
       </section>
       <section id="blendFuncSeparate">
@@ -1665,10 +1674,10 @@
         <div class="content">
           <strong>参数</strong>
           <ul class="ul-1">
-            <li>srcRGB：指定颜色值的源混合因子,如表10.2所示</li>
-            <li>destRGB：颜色在的目标混合因子,如表10.2所示</li>
-            <li>srcAlpha：Alpha值的源混合因子,如表10.2所示</li>
-            <li>destAlpha：Alpha值的目标混合因子,如表10.2所示</li>
+            <li>srcRGB：指定颜色值的源<a href="#blending_equation_param">混合因子</a></li>
+            <li>destRGB：颜色在的目标<a href="#blending_equation_param">混合因子</a></li>
+            <li>srcAlpha：Alpha值的源<a href="#blending_equation_param">混合因子</a></li>
+            <li>destAlpha：Alpha值的目标<a href="#blending_equation_param">混合因子</a></li>
           </ul>
           <strong>返回值</strong>
           <p>无</p>

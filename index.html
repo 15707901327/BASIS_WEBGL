@@ -331,9 +331,13 @@
       <p>blending是一种颜色和另一种颜色相结合，以获取第三种颜色的行为。我们看到现实世界中一直存在混合：光线穿过玻璃、光线从表面反射、光源叠加到背景上、耀斑、夜晚周围点亮的灯。</p>
       <p>OpenGL提供了多种不同的混合模式来模拟这些效果。在OpenGL中,混合发生在渲染过程的后期阶段:一旦片源着色器计算出片源的最终输出颜色，并把颜色写入到<a href="#framebuffer">帧缓冲区</a>中，就会发生混合。
         通常情况下，片源仅仅覆盖之前的所有内容，但是如果打开混合，片源将与之前的片源混合。</p>
-      <p>默认情况下，OpenGL中混合方程设置，<a href="WebGL_API/js_API/gl.html#blendEquation">gl.BlendEquation()</a>设置为默认值GL_FUNC_ADD：
+      <p>OpenGL通过混合方程来控制混合效果，因此我们可以通过控制混合方程以及混合方程参数来控制混合效果。</p>
+      <p>使用<a href="WebGL_API/js_API/gl.html#blendEquation" target="_blank">gl.BlendEquation()</a>、<a href="WebGL_API/js_API/gl.html#blendEquationSeparate" target="_blank">gl.blendEquationSeparate()</a>方法来设置混合方程。
+        默认情况下，OpenGL中混合方程默认设置为GL_FUNC_ADD(<a href="WebGL_API/js_API/gl.html#blending_equation" target="_blank">混合方程详细说明</a>)。</p>
+      <p>使用<a href="WebGL_API/js_API/gl.html#blendFunc" target="_blank">gl.blendFunc(src_factor, dst_factor)</a>方法来设置混合方程参数
+        (<a href="WebGL_API/js_API/gl.html#blending_equation_param" target="_blank">混合方程参数说明</a>)。
       </p>
-      <p>output = (source factor * source fragment) + (destination factor * destination fragment)</p>
+      <p>常用的混合方程参数设置：Additive blending、Multiplicative blending、Interpolative blending</p>
       <section>
         <h4>Additive blending</h4>
         <p>将不同颜色添加到一起并添加结果时所做的混合类型。这就是我们的视觉与光一起工作的方式，这就是我们如何在我们的显示器上感知数百万种不同的颜色 - 它们实际上只是将三种不同的原色混合在一起。</p>

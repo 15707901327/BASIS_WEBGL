@@ -47,7 +47,7 @@
       <li><a href="#uniformMatrix4fv" title="gl.uniformMatrix4fv()">gl.uniformMatrix4fv()</a></li>
       <li><a href="#getActiveUniform" title="gl.getActiveUniform()">gl.getActiveUniform()</a></li>
     </ul>
-    <h4><a href="#texture">纹理方法</a></h4>
+    <h4><a href="#texture">Texture</a></h4>
     <ul class="ul-1">
       <li><a href="#createTexture" title="gl.createTexture()">gl.createTexture()</a></li>
       <li><a href="#deleteTexture" title="gl.deleteTexture()">gl.deleteTexture()</a></li>
@@ -732,7 +732,7 @@
     </section>
     <!--与加载纹理相关的方法-->
     <section class="section1" id="texture">
-      <div class="title">纹理相关方法</div>
+      <div class="title">Texture</div>
       <section>
         <table border="1">
           <tr>
@@ -751,7 +751,7 @@
             <td>立方体纹理</td>
           </tr>
           <tr>
-            <td colspan="2">WebGl2新增</td>
+            <td colspan="2">WebGl2</td>
           </tr>
           <tr>
             <td>gl.TEXTURE_3D</td>
@@ -940,57 +940,113 @@
         </div>
       </section>
       <section id="texImage2D">
-        <h4>
-          gl.texImage2D(target, level, internalformat, format, type, pixels: ImageBitmap | ImageData |
-          HTMLVideoElement |
-          HTMLImageElement | HTMLCanvasElement): void;<br>
-          gl.texImage2D(target, level, internalformat, width, height, border, format, type, pixels:
-          ArrayBufferView |
-          null): void;
-        </h4>
+        <h4>gl.texImage2D(target, level, internalformat, format, type, image)</h4>
+        <p>void gl.texImage2D(target, level, internalformat, width, height, border, format, type, ArrayBufferView?
+          pixels);</p>
+        <p>void gl.texImage2D(target, level, internalformat, format, type, ImageData? pixels);</p>
+        <p>void gl.texImage2D(target, level, internalformat, format, type, HTMLImageElement? pixels);</p>
+        <p>void gl.texImage2D(target, level, internalformat, format, type, HTMLCanvasElement? pixels);</p>
+        <p>void gl.texImage2D(target, level, internalformat, format, type, HTMLVideoElement? pixels);</p>
+        <p>void gl.texImage2D(target, level, internalformat, format, type, ImageBitmap? pixels);</p>
+        <p><strong>webgl2</strong></p>
+        <p>void gl.texImage2D(target, level, internalformat, width, height, border, format, type, GLintptr offset);</p>
+        <p>void gl.texImage2D(target, level, internalformat, width, height, border, format, type, HTMLCanvasElement
+          source);</p>
+        <p>void gl.texImage2D(target, level, internalformat, width, height, border, format, type, HTMLImageElement
+          source);</p>
+        <p>void gl.texImage2D(target, level, internalformat, width, height, border, format, type, HTMLVideoElement
+          source);</p>
+        <p>void gl.texImage2D(target, level, internalformat, width, height, border, format, type, ImageBitmap
+          source);</p>
+        <p>void gl.texImage2D(target, level, internalformat, width, height, border, format, type, ImageData source);</p>
+        <p>void gl.texImage2D(target, level, internalformat, width, height, border, format, type, ArrayBufferView
+          srcData, srcOffset);</p>
         <p>将image指定的图像分配给绑定的目标上的纹理对象。</p>
         <div class="content">
-          <strong>参数</strong>
-          <ul>
-            <li>target: gl.TEXTURE_2D 或 gl.TEXTURE_CUBE_MAP</li>
-            <li>level: 传入0（实际上该参数是为金字塔纹理准备的）</li>
-            <li>
-              internalformat: 图像的内部格式
+          <strong>参数:</strong>
+          <ul class="ul-1">
+            <li>target：激活纹理绑定点
+              <ul class="ul-1">
+                <li>gl.TEXTURE_2D:二维纹理</li>
+                <li>gl.TEXTURE_CUBE_MAP_POSITIVE_X: Positive X face for a cube-mapped texture.</li>
+                <li>gl.TEXTURE_CUBE_MAP_NEGATIVE_X: Negative X face for a cube-mapped texture.</li>
+                <li>gl.TEXTURE_CUBE_MAP_POSITIVE_Y: Positive Y face for a cube-mapped texture.</li>
+                <li>gl.TEXTURE_CUBE_MAP_NEGATIVE_Y: Negative Y face for a cube-mapped texture.</li>
+                <li>gl.TEXTURE_CUBE_MAP_POSITIVE_Z: Positive Z face for a cube-mapped texture.</li>
+                <li>gl.TEXTURE_CUBE_MAP_NEGATIVE_Z: Negative Z face for a cube-mapped texture</li>
+              </ul>
+            </li>
+            <li>level: 级别0是基本图像级别，级别n是第n个mipmap缩减级别。</li>
+            <li>internalformat: 图像的内部格式
               <table border="1">
                 <tr>
-                  <th colspan="2">纹素数据的格式</th>
+                  <th colspan="3">纹素数据的格式</th>
                 </tr>
                 <tr>
-                  <th>格式</th>
+                  <th>Format</th>
+                  <th>Type</th>
                   <th>描述</th>
                 </tr>
                 <tr>
                   <td>gl.RGB</td>
+                  <td>UNSIGNED_BYTE</td>
+                  <td>红、绿、蓝</td>
+                </tr>
+                <tr>
+                  <td>gl.RGB</td>
+                  <td>UNSIGNED_SHORT_5_6_5</td>
                   <td>红、绿、蓝</td>
                 </tr>
                 <tr>
                   <td>gl.RGBA</td>
+                  <td>UNSIGNED_BYTE</td>
+                  <td>红、绿、蓝、透明度</td>
+                </tr>
+                <tr>
+                  <td>gl.RGBA</td>
+                  <td>UNSIGNED_SHORT_4_4_4_4</td>
+                  <td>红、绿、蓝、透明度</td>
+                </tr>
+                <tr>
+                  <td>gl.RGBA</td>
+                  <td>UNSIGNED_SHORT_5_5_5_1</td>
                   <td>红、绿、蓝、透明度</td>
                 </tr>
                 <tr>
                   <td>gl.ALPHA</td>
+                  <td>UNSIGNED_BYTE</td>
                   <td>（0.0,0.0,0.0,透明度）</td>
                 </tr>
                 <tr>
                   <td>gl.LUMINANCE</td>
+                  <td>UNSIGNED_BYTE</td>
                   <td>L、L、L、1L：流明（表示我们感知到的物体表面的亮度。通常使用物体表面红、绿、蓝颜色分量值的加权平均来计算流明）</td>
                 </tr>
                 <tr>
                   <td>gl.LUMINANCE_ALPHA</td>
+                  <td>UNSIGNED_BYTE</td>
                   <td>L、L、L、透明度</td>
+                </tr>
+              </table>
+              <br>
+              <table border="1">
+                <tr>
+                  <th colspan="3">WebGL2中用于采用ArrayBufferView或GLintptr偏移量的texImage2D版本的其他可能值</th>
+                </tr>
+                <tr>
+                  <th>Sized Format</th>
+                  <th>Base Format</th>
+                </tr>
+                <tr>
+                  <td>gl.RGB16F</td>
+                  <td>gl.RGB</td>
                 </tr>
               </table>
             </li>
             <li>width : 纹理的宽度</li>
             <li>height : 纹理的高度</li>
-            <li>border :</li>
-            <li>
-              format: 纹理数据的格式，必须使用与internalformat相同的值
+            <li>border :A GLint specifying the width of the border. Must be 0.</li>
+            <li>format: 纹理数据的格式，在WebGL1中必须使用与internalformat相同的值。在WebGL 2中...
               <table border="1">
                 <tr>
                   <th colspan="2">纹理图片格式说明</th>
@@ -1038,6 +1094,13 @@
                   <td>gl.UNSIGNED_SHORT_5_5_5_1</td>
                   <td>RGB:RGB每个分量分别占用5、5、5比特，A分量占据1比特</td>
                 </tr>
+                <tr>
+                  <th colspan="2">OES_texture_float</th>
+                </tr>
+                <tr>
+                  <td>gl.FLOAT</td>
+                  <td>When using the OES_texture_float extension</td>
+                </tr>
               </table>
             </li>
             <li>image: 包含纹理图像的Image对象</li>
@@ -1045,7 +1108,7 @@
           <strong>返回值</strong>
           <p>无</p>
           <strong>错误</strong>
-          <ul>
+          <ul class="ul-1">
             <li>INVALID_ENUM:target不是合法的</li>
             <li>INVALID_OPERATION:当前目标上没有绑定纹理对象</li>
           </ul>
@@ -1750,11 +1813,20 @@
         <div class="content">
           <strong>参数</strong>
           <ul class="ul-1">
-            <li>target:必须是gl.FRAMEBUFFER</li>
+            <li>target:
+              <ul class="ul-1">
+                <li>gl.FRAMEBUFFER:用于渲染图像的颜色，alpha，深度和模板缓冲区的集合缓冲区数据存储。</li>
+              </ul>
+            </li>
             <li>
               attachment：指定关联的类型
-              <p>gl.COLOR_ATTACHMENT0:表示texture是颜色关联对象</p>
-              <p>gl.DEPTH_ATTACHMENT:表示texture是深度关联对象</p>
+              <ul class="ul-1">
+                <li>gl.COLOR_ATTACHMENT0:表示texture是颜色关联对象</li>
+                <li>gl.DEPTH_ATTACHMENT:表示texture是深度关联对象</li>
+                <li>gl.STENCIL_ATTACHMENT:表示texture是模板关联对象</li>
+                <li><strong>WebGL2:</strong></li>
+                <li>gl.COLOR_ATTACHMENT1:附加了两个颜色缓冲的帧缓冲对象。</li>
+              </ul>
             </li>
             <li>textarget:gl.TEXTURE_2D\gl.TEXTURE_CUBE</li>
             <li>texture:指定关联的纹理对象</li>

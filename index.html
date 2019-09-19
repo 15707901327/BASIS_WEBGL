@@ -18,11 +18,16 @@
       <li><a href="WebGL_API/canvas标签.html" target="_blank">canvas标签</a></li>
       <li><a href="#type_array">类型化数组</a></li>
     </ul>
-    <h4><a href="#texture">纹理说明</a></h4>
+    <h4><a href="#texture">texture</a></h4>
     <h4><a href="#blending">blending</a></h4>
     <ul class="ul-1">
       <li><a href="#blendFunc">混合功能</a></li>
     </ul>
+    <h4><a href="#toneMapping">Tone Mapping</a></h4>
+    <ul class="ul-1">
+      <li><a href="#hdr">HDR</a></li>
+    </ul>
+    <h4><a href="#bloom">bloom</a></h4>
     <h4><a href="#buffer">缓冲区</a></h4>
     <ul class="ul-1">
       <li><a href="#bufferObject">缓冲区对象</a></li>
@@ -267,7 +272,7 @@
       </section>
     </section>
     <section id="texture" class="section1">
-      <h4 class="title">纹理说明</h4>
+      <h4 class="title">texture</h4>
       <section>
         <h4>基本概念</h4>
         <p>纹理是数据的简单矩阵排列——比如。颜色数据、亮度数据或者颜色和alpha（透明度）数据。</p>
@@ -275,11 +280,15 @@
           <strong>纹理单元：</strong>
           <p>纹理数组中的每个独立的数值通常称为一个纹理单元.</p>
           <strong>纹理映射：</strong>
-          <p>一种将纹理图像应用于物体表面的技术（就是把图像贴到构成物体表面的多边形上去），就像该图像是一种贴画纸或玻璃纸附着于物体的表面上。</p>
+          <p>一种将<strong>纹理图像</strong>应用于物体表面的技术（就是把图像贴到构成物体表面的多边形上去），就像该图像是
+            一种贴画纸或玻璃纸附着于物体的表面上。此时，这张图像又可以称为<strong>纹理图像（texture image）</strong>或
+            <strong>纹理（texture）</strong>。</p>
+          <strong>纹理坐标：</strong>
+          <p></p>
           <strong>MipMap：</strong>
-          <p>Mipmap由Lance Williams 在1983的一篇文章“Pyramidal parametrics”中提出。Wiki中有非常具体的介绍(
-            http://en.wikipedia.org/wiki/Mipmap ) .
-            比方一张256X256的图，在长和宽方向每次降低一倍，生成：128X128,64X64,32X32,16X16,8X8,4X4,2X2,1X1。八张图，组成MipMap,例如以下图示。</p>
+          <p>Mipmap由Lance Williams 在1983的一篇文章“Pyramidal
+            parametrics”中提出。Wiki中有非常具体的介绍(http://en.wikipedia.org/wiki/Mipmap
+            )。比方一张256X256的图，在长和宽方向每次降低一倍，生成：128X128, 64X64, 32X32, 16X16, 8X8, 4X4, 2X2, 1X1 八张图，组成MipMap。</p>
           <p>
             Mipmap早已被硬件支持，硬件会自己主动为创建的Texture生成mipmap的各级。在D3D的API：CreateTexture中有一个參数levels，就是用于指定生成mipmap到哪个级别，当不指定时就一直生成到1X1。</p>
           <strong>各向同性:</strong>
@@ -332,8 +341,10 @@
       <p>OpenGL提供了多种不同的混合模式来模拟这些效果。在OpenGL中,混合发生在渲染过程的后期阶段:一旦片源着色器计算出片源的最终输出颜色，并把颜色写入到<a href="#framebuffer">帧缓冲区</a>中，就会发生混合。
         通常情况下，片源仅仅覆盖之前的所有内容，但是如果打开混合，片源将与之前的片源混合。</p>
       <p>OpenGL通过混合方程来控制混合效果，因此我们可以通过控制混合方程以及混合方程参数来控制混合效果。</p>
-      <p>使用<a href="WebGL_API/js_API/gl.html#blendEquation" target="_blank">gl.BlendEquation()</a>、<a href="WebGL_API/js_API/gl.html#blendEquationSeparate" target="_blank">gl.blendEquationSeparate()</a>方法来设置混合方程。
-        默认情况下，OpenGL中混合方程默认设置为GL_FUNC_ADD(<a href="WebGL_API/js_API/gl.html#blending_equation" target="_blank">混合方程详细说明</a>)。</p>
+      <p>使用<a href="WebGL_API/js_API/gl.html#blendEquation" target="_blank">gl.BlendEquation()</a>、<a
+          href="WebGL_API/js_API/gl.html#blendEquationSeparate" target="_blank">gl.blendEquationSeparate()</a>方法来设置混合方程。
+        默认情况下，OpenGL中混合方程默认设置为GL_FUNC_ADD(<a href="WebGL_API/js_API/gl.html#blending_equation"
+                                             target="_blank">混合方程详细说明</a>)。</p>
       <p>使用<a href="WebGL_API/js_API/gl.html#blendFunc" target="_blank">gl.blendFunc(src_factor, dst_factor)</a>方法来设置混合方程参数
         (<a href="WebGL_API/js_API/gl.html#blending_equation_param" target="_blank">混合方程参数说明</a>)。
       </p>
@@ -405,6 +416,83 @@
               释放深度缓存区，使之可读可写。<br>
               <a href="WebGL%20API/javaScript%20API/gl.html#depthMask">gl.depthMask(false)</a>
             </li>
+          </ul>
+        </div>
+      </section>
+    </section>
+    <section id="toneMapping" class="section1">
+      <div class="title">Tone Mapping</div>
+      <p>色调映射(Tone Mapping)是一个损失很小的转换浮点颜色值至我们所需的<a href="#ldr">LDR</a>[0.0, 1.0]范围内的过程，
+        通常会伴有特定的风格的色平衡(Stylistic Color Balance)。</p>
+      <section>
+        <h4>Reinhard色调映射算法</h4>
+        <p>Reinhard色调映射是最简单的色调映射算法，它涉及到分散整个<a href="#hdr">HDR</a>颜色值到<a href="#ldr">LDR</a>
+          颜色值上，所有的值都有对应。Reinhard色调映射算法平均地将所有亮度值分散到LDR上。将Reinhard色调映射应用到之前的片段着色器上，并且加上一个Gamma校正过滤：</p>
+        <pre>
+          void main(){
+            const float gamma = 2.2;
+            vec3 hdrColor = texture(hdrBuffer, TexCoords).rgb;
+            // Reinhard色调映射
+            vec3 mapped = hdrColor / (hdrColor + vec3(1.0));
+            // Gamma校正
+            mapped = pow(mapped, vec3(1.0 / gamma));
+            color = vec4(mapped, 1.0);
+          }</pre>
+        <p>有了Reinhard色调映射的应用，我们不再会在场景明亮的地方损失细节。当然，这个算法是倾向明亮的区域的，暗的区域会不那么精细也不那么有区分度。</p>
+      </section>
+      <section>
+        <h4>曝光色调映射算法</h4>
+        <p>另一个色调映射应用是曝光(Exposure)参数的使用。<a href="#hdr">HDR</a>图片包含在不同曝光等级的细节。如果我们有一个场景要展现日夜交替，我们当然会在白天使用低曝光，在夜间使用高曝光，就像人眼调节方式一样。有了这个曝光参数，我们可以去设置可以同时在白天和夜晚不同光照条件工作的光照参数，我们只需要调整曝光参数就行了。
+        </p>
+        <pre>
+          uniform float exposure;
+          void main(){
+              const float gamma = 2.2;
+              vec3 hdrColor = texture(hdrBuffer, TexCoords).rgb;
+              // 曝光色调映射
+              vec3 mapped = vec3(1.0) - exp(-hdrColor * exposure);
+              // Gamma校正
+              mapped = pow(mapped, vec3(1.0 / gamma));
+              color = vec4(mapped, 1.0);
+          }</pre>
+      </section>
+      <section id="ldr">
+        <h4>LDR</h4>
+        <p>LDR（低动态范围）所有的颜色值都被限制在了[0,1]范围。</p>
+        <div class="content"></div>
+      </section>
+      <section id="hdr">
+        <h4>HDR</h4>
+        <p>HDR (High Dynamic Range，高动态范围)，在摄影领域，指的是可以提供更多的动态范围和图像细节的一种技术手段。
+          简单讲就是将不同曝光拍摄出的最佳细节的<a href="#ldr">LDR</a>图像合成后，就叫HDR，它能同时反映出场景最暗和最亮
+          部分的细节。为什么需要多张图片？因为目前的单反相机的宽容度还是有限的，一张照片不能反映出高动态场景的所
+          有细节。一张图片拍摄就必须要在暗光和高光之间做出取舍，只能亮部暗部两者取其一。但是通过HDR合成多张图片，
+          却能达到我们想要的效果。</p>
+        <p>在WebGL中，HDR具体指的是让我们能用超过1.0的数据表示颜色值。到目前为止，我们用的都是<a href="#ldr">LDR</a>。
+          在现实当中，太阳，灯光这类光源它们的颜色值肯定是远远超出1.0的范围的。</p>
+        <div class="content"></div>
+      </section>
+    </section>
+    <section id="bloom" class="section1">
+      <div class="title">Bloom（泛光）</div>
+      <p>Bloom 泛光 (或者眩光)，是用来模拟光源那种发光或发热的技术。区分明亮光源的方式是使它们发出光芒，光源的光芒向四周发散，
+        这样观察者就会产生光源或亮区的确是强光区。Bloom使我们感觉到一个明亮的物体真的有种明亮的感觉。而Bloom和
+        <a href="#hdr">HDR</a>的结合使用能非常完美地展示光源效果。</p>
+      <section>
+        <h4>Bloom处理过程</h4>
+        <div class="content">
+          <ul class="ul-1-num">
+            <li>
+              <strong>提取亮色</strong>
+              <p>首先我们要从渲染出来的场景中提取两张图片。可以渲染场景两次，每次使用一个不同的不同的着色器渲染到不同的帧缓冲中，但可以使用一个叫做MRT（Multiple Render
+                Targets多渲染目标）的小技巧，有了它我们能够在一个单独渲染处理中提取两个图片。在片元着色器的输出前，我们指定一个布局location标识符，这样我们便可控制一个片元着色器写入到哪个颜色缓冲：</p>
+              <p>layout (location = 0) out vec4 FragColor;</p>
+              <p>layout (location = 1) out vec4 BrightColor;</p>
+              <p>使用多个片元着色器输出的必要条件是，有多个颜色缓冲附加到了当前绑定的帧缓冲对象上。直到现在，我们一直使用着 gl.COLOR_ATTACHMENT0，但通过使用
+                gl.COLOR_ATTACHMENT1，可以得到一个附加了两个颜色缓冲的帧缓冲对象。</p>
+            </li>
+            <li><strong>高斯模糊</strong></li>
+            <li><strong>纹理混合</strong></li>
           </ul>
         </div>
       </section>
@@ -481,6 +569,21 @@
           <ul class="ul-1-num">
             <li><a href="WebGL编程指南/ch10/FramebufferObject.html" target="_blank">帧缓冲对象实例</a></li>
           </ul>
+        </div>
+      </section>
+      <section id="float_framebuffer">
+        <h4>浮点帧缓冲</h4>
+        <p>当帧缓冲使用标准化的定点格式(像gl.RGB)为其颜色缓冲的内部格式，WebGL会在将这些值存入帧缓冲前自动将其约束到0.0
+          到1.0之间。这一操作对大部分帧缓冲格式都是成立的，除了专门用来存放被拓展范围值的浮点格式。</p>
+        <p>WebGL扩大颜色值范围的方法就是：把颜色的格式设置成16位浮点数或者32位浮点数，即把帧缓冲的颜色缓冲的内部格式设
+          定成 gl.RGB16F, gl.RGBA16F, gl.RGB32F 或者 gl.RGBA32F，这些帧缓冲被叫做浮点帧缓冲(Floating Point Framebuffer)，
+          浮点帧缓冲可以存储超过0.0到1.0范围的浮点值，所以非常适合<a href="#hdr">HDR</a>渲染。</p>
+        <div class="content">
+          <strong>创建浮点帧缓冲:</strong>
+          <p>gl.bindTexture(gl.TEXTURE_2D, colorBuffer);</p>
+          <p>gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB16F, SCR_WIDTH, SCR_HEIGHT, 0, gl.RGB, gl.FLOAT, NULL);</p>
+          <p>帧缓冲默认一个颜色分量只占用8位(bits)。当使用一个使用32位每颜色分量时(使用gl.RGB32F 或者 gl.RGBA32F)，我们
+            需要四倍的内存来存储这些颜色。所以除非你需要一个非常高的精确度，32位不是必须的，使用 gl.RGB16F就足够了。</p>
         </div>
       </section>
     </section>

@@ -1890,6 +1890,26 @@
           </ul>
         </div>
       </section>
+      <section id="drawBuffers">
+        <h4>gl.drawBuffers(buffers)</h4>
+        <p>定义了将片源颜色写入的绘制缓冲区。 如果没有绑定帧缓冲区，则绘制缓冲区设置是当前绑定的帧缓冲区或绘图缓冲区的状态的一部分。</p>
+        <div class="content">
+          <strong>参数</strong>
+          <ul class="ul-1">
+            <li>buffers:一个GLenum数组，指定要写入片源颜色的缓冲区。
+              <ul class="ul-1">
+                <li>gl.NONE: Fragment shader output is not written into any color buffer.</li>
+                <li>gl.BACK: Fragment shader output is written into the back color buffer.</li>
+                <li>gl.COLOR_ATTACHMENT{0-15}: Fragment shader output is written in the nth color attachment of the current framebuffer.</li>
+              </ul>
+            </li>
+          </ul>
+          <strong>实例</strong>
+          <pre>
+    gl.drawBuffers([gl.NONE, gl.COLOR_ATTACHMENT1]);
+          </pre>
+        </div>
+      </section>
       <section id="scissor">
         <h4>gl.scissor(x,y,width,height)</h4>
         <p>剪裁测试用于限制绘制区域。我们可以指定一个矩形的剪裁窗口，当启用剪裁测试后，只有在这个窗口之内的像素才能被绘制，其它像素则会被丢弃。换句话说，无论怎么绘制，剪裁窗口以外的像素将不会被修改。</p>

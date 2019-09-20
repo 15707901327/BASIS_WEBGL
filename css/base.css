@@ -42,6 +42,9 @@ ul {
 .ul-2 {
     margin-left: 2em;
 }
+.ul-3 {
+    margin-left: 4em;
+}
 
 .ul-1-num {
     margin-left: 20px;
@@ -113,4 +116,7 @@ section .content {
 .bg-1 {
     background-repeat: no-repeat;
     background-size: 100% 100%;
+}
+.clear{
+    clear: both;
 }

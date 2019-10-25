@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>分形布朗运动（Fractal Brownian Motion）</title>
+</head>
+<script type="module">
+  import {Shaders} from "../jsm/PUnits.js";
+
+  var VSHADER_SOURCE =
+    'attribute vec4 a_Position;\n' +
+    'attribute vec2 a_TexCoord;\n' +
+    'varying vec2 v_TexCoord;\n' +
+    'void main() {\n' +
+    '  gl_Position = a_Position;\n' +
+    '  v_TexCoord = a_TexCoord;\n' +
+    '}\n';
+
+  // Fragment shader program 片元着色器
+  var FSHADER_SOURCE =
+    '#ifdef GL_ES\n' +
+    ' precision mediump float;\n' +
+    '#endif\n' +
+    '#define SCALE 1.0;\n' +
+    'uniform sampler2D u_Sampler;\n' +
+    'varying vec2 v_TexCoord;\n' +
+    '// 输入网格顶点位置，输出随机向量\n' +
+    'vec2 random(vec2 p){\n' +
+    ' return  -1.0 + 2.0 * fract(sin(vec2(dot(p, vec2(127.1,311.7)),dot(p, vec2(269.5,183.3)))) * 43758.5453);\n' +
+    '}\n' +
+    'float noise(vec2 p) {\n' +
+    '  p *= SCALE;\n' +
+    '  vec2 i = floor(p); // 获取当前网格索引i\n' +
+    '  vec2 f = fract(p); // 获取当前片元在网格内的相对位置\n' +
+    '  // 计算梯度贡献值\n' +
+    '  float a = dot(random(i),f); // 梯度向量与距离向量点积运算\n' +
+    '  float b = dot(random(i + vec2(1., 0.)),f - vec2(1., 0.));\n' +
+    '  float c = dot(random(i + vec2(0., 1.)),f - vec2(0., 1.));\n' +
+    '  float d = dot(random(i + vec2(1., 1.)),f - vec2(1., 1.));\n' +
+    '  // 平滑插值\n' +
+    '  vec2 u = smoothstep(0.,1.,f);\n' +
+    '  // 叠加四个梯度贡献值\n' +
+    '  return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);\n' +
+    '}\n' +
+    '// fragment shader片元着色器\n' +
+    '#define OCTAVE_NUM 10\n' +
+    '// 叠加5次的分形噪声\n' +
+    'float fbm_noise(vec2 p){\n' +
+    '  float f = 0.0;\n' +
+    '  float a = 1.0;\n' +
+    '  for (int i = 0; i < OCTAVE_NUM; i++){\n' +
+    '    f += a * noise(p);\n' +
+    '    p = 2.0 * p;\n' +
+    '    a /= 2.0;\n' +
+    '  }\n' +
+    '  return f;\n' +
+    '}\n' +
+    'void main() {\n' +
+    '  vec4 color = texture2D(u_Sampler, v_TexCoord);\n' +
+    '  // 通过噪声函数计算片元坐标对应噪声值\n' +
+    '  float n = fbm_noise(v_TexCoord);\n' +
+    '  gl_FragColor = vec4(n, n, n, 1.0);\n' +
+    '}\n';
+
+  /** 设置顶点信息（顶点坐标、纹理坐标）**/
+  function initVertexBuffers(gl) {
+    var verticesTexCoords = new Float32Array([
+      // 顶点坐标，纹理坐标
+      -1.0, 1.0, 0.0, 1.0,
+      -1.0, -1.0, 0.0, 0.0,
+      1.0, 1.0, 1.0, 1.0,
+      1.0, -1.0, 1.0, 0.0
+    ]);
+    var n = 4; // 顶点数目
+
+    // 创建缓存区对象
+    var vertexTexCoordBuffer = gl.createBuffer();
+    if (!vertexTexCoordBuffer) {
+      console.log('Failed to create the buffer object');
+      return -1;
+    }
+
+    // 将顶点坐标和纹理坐标写入缓存区对象
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexTexCoordBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, verticesTexCoords, gl.STATIC_DRAW);
+
+    var FSIZE = verticesTexCoords.BYTES_PER_ELEMENT;
+
+    var a_Position = gl.getAttribLocation(gl.program, 'a_Position');
+    if (a_Position < 0) {
+      console.log('Failed to get the storage location of a_Position');
+      return -1;
+    }
+    gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, FSIZE * 4, 0);
+    gl.enableVertexAttribArray(a_Position);
+
+    // 将纹理坐标分派给a_TexCoord，并开启它
+    var a_TexCoord = gl.getAttribLocation(gl.program, 'a_TexCoord');
+    if (a_TexCoord < 0) {
+      console.log('Failed to get the storage location of a_TexCoord');
+      return -1;
+    }
+    gl.vertexAttribPointer(a_TexCoord, 2, gl.FLOAT, false, FSIZE * 4, FSIZE * 2);
+    gl.enableVertexAttribArray(a_TexCoord);
+
+    return n;
+  }
+
+  /**
+   * 配置和加载纹理
+   * @param gl 上下文
+   * @param n 顶点的数目
+   * @returns {boolean}
+   */
+  function initTextures(gl, n) {
+    var texture = gl.createTexture();// 创建纹理对象
+    if (!texture) {
+      console.log('Failed to create the texture object');
+      return false;
+    }
+
+    var u_Sampler = gl.getUniformLocation(gl.program, 'u_Sampler'); // 获取存储位置
+    if (!u_Sampler) {
+      console.log('Failed to get the storage location of u_Sampler');
+      return false;
+    }
+
+    var image = new Image(); // 创建image对象
+    if (!image) {
+      console.log('Failed to create the image object');
+      return false;
+    }
+
+    /** 注册事件响应函数,在图像加载完成后调用,最后一个参数是纹理单元编号 **/
+    image.onload = function() {
+      loadTexture(gl, n, texture, u_Sampler, image);
+    };
+    /** 浏览器开始加载图像 **/
+    image.src = 'sky.jpg';
+
+    return true;
+  }
+
+  /** 下载贴图 **/
+  function loadTexture(gl, n, texture, u_Sampler, image) {
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);//对纹理图像进行y轴反转
+    // 开启0号纹理单元
+    gl.activeTexture(gl.TEXTURE0);
+    // 向target绑定纹理对象
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+
+    /**配置纹理参数 CLAMP_TO_EDGE  ：纹理外填充了最边缘纹理颜色 MIRRORED_REPEAT：重复贴图**/
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    // 配置纹理图像
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+
+    // 将纹理单元编号传递给取样器
+    gl.uniform1i(u_Sampler, 0);
+
+    gl.clear(gl.COLOR_BUFFER_BIT);   // Clear <canvas>
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, n);//绘制矩形
+  }
+
+  window.onload = function(ev) {
+
+    var canvas = document.getElementById('webgl');
+    var gl = canvas.getContext("webgl");
+
+    var shaders = new Shaders();
+    shaders.initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE);
+
+    // 设置顶点信息
+    var n = initVertexBuffers(gl);
+    if (n < 0) {
+      console.log('Failed to set the vertex information');
+      return;
+    }
+
+    // 设置<canvas>背景色
+    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+
+    // 配置纹理
+    if (!initTextures(gl, n)) {
+      console.log('Failed to intialize the texture.');
+      return;
+    }
+  };
+</script>
+<body>
+<canvas id="webgl" width="400" height="400"></canvas>
+</body>
+</html>

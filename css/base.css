@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-size: 16px;
 }
 
 html,body{
@@ -71,12 +72,6 @@ ul {
     color: #e7e9f1;
     font-size: 24px;
     border-radius: 28px;
-}
-
-.wrapper {
-    margin: 0 auto;
-    width: 80%;
-    min-width: 800px;
 }
 
 .l-r-wrapper {

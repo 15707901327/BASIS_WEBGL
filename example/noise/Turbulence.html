@@ -29,7 +29,6 @@
     '   return  fract(sin(vec2(dot(st, vec2(127.1,311.7)),dot(st, vec2(269.5,183.3)))) * 43758.5453);\n' +
     ' }\n' +
     'float noise(vec2 p) {\n' +
-    ' p *= SCALE;\n' +
     ' vec2 i = floor(p); // 获取当前网格索引i\n' +
     ' vec2 f = fract(p); // 获取当前片元在网格内的相对位置\n' +
     ' float F1 = 1.;\n' +
@@ -48,6 +47,7 @@
     '#define OCTAVE_NUM 2\n' +
     'float fbm_abs_noise(vec2 p){\n' +
     ' float f = 0.0;\n' +
+    ' p *= SCALE;\n' +
     ' float a = 1.0;\n' +
     ' for (int i = 0; i < OCTAVE_NUM; i++){\n' +
     '   f += a * abs(noise(p)); // 对噪声函数取绝对值\n' +

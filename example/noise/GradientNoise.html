@@ -21,7 +21,7 @@
     '#ifdef GL_ES\n' +
     ' precision mediump float;\n' +
     '#endif\n' +
-    '#define SCALE 20.0;\n' +
+    '#define SCALE 8.0;\n' +
     'uniform sampler2D u_Sampler;\n' +
     'varying vec2 v_TexCoord;\n' +
     '// 输入网格顶点位置，输出随机向量\n' +
@@ -46,7 +46,8 @@
     '  vec4 color = texture2D(u_Sampler, v_TexCoord);\n' +
     '  // 通过噪声函数计算片元坐标对应噪声值\n' +
     '  float n = noise(v_TexCoord);\n' +
-    '  gl_FragColor = color + vec4(n, n, n, 1.0);\n' +
+    // '  gl_FragColor = color + vec4(n, n, n, 1.0);\n' +
+    '  gl_FragColor = vec4(n, n, n, 1.0);\n' +
     '}\n';
 
   /** 设置顶点信息（顶点坐标、纹理坐标）**/

@@ -24,7 +24,7 @@
         <li><a href="#GradientNoise">梯度噪声(Gradient Noise)</a></li>
         <li><a href="#CelluarNoise">细胞噪声(Celluar Noise)</a></li>
       </ul>
-      <img src="img/baseNoise.png" class="img1">
+      <div><img src="img/baseNoise.png" class="img1" style="max-width: 500px;"></div>
       <p>上图是各类噪声函数在片元着色器中的运行效果，代码如下：</p>
       <pre><code>
           // noise fragment shader
@@ -58,7 +58,7 @@
         </li>
         <li>
           <div>网格随机梯度生成:梯度向量生成，这一步是根据第一步生成的网格的顶点来产生随机向量，四个顶点就有四个梯度向量；</div>
-          <img src="img/noise1.webp">
+          <div><img src="img/noise1.webp" style="max-width: 500px"></div>
           <p>我们需要将每个网格对应的随机向量记录下来，确保不同片元在相同网格中获取的随机向量是一致的。</p>
           <pre><code>
           // 输入网格顶点位置，输出随机向量
@@ -77,7 +77,7 @@
         </li>
         <li>
           梯度贡献值计算:这一步是通过计算四个梯度向量对当前片元点P的影响，主要先求出点P到四个顶点的距离向量，然后和对应的梯度向量进行点积。
-          <img src="img/baseNoise1.png" class="img1">
+          <div><img src="img/baseNoise1.png" class="img1" style="max-width: 600px"></div>
           <p>如图，网格内的片元点P的四个顶点距离向量为a1, a2, a3, a4，此时将距离向量与梯度向量g1, g2, g3, g4进行点积运算：c[i] = a[i] · g[i]；</p>
         </li>
         <li>平滑插值:这一步我们对四个贡献值进行线性叠加，使用smoothstep()方法，平滑网格边界，最终得到当前片元的噪声值。具体代码如下：

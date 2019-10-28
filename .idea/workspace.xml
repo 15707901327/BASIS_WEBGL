@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/WebGL_API/Noise.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebGL_API/css/base.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebGL_API/img/baseNoise.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WebGL_API/img/noise1.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/jsm/PUnits.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/noise/CelluarNoise.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/noise/FractalBrownianMotion.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/noise/GradientNoise.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/noise/Turbulence.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/noise/sky.JPG" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader API/内置函数.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/shader API/内置函数.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/base.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL_API/Noise.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/Noise.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,7 +12,53 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/example/noise/Turbulence.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="140">
+              <caret line="50" column="25" lean-forward="true" selection-start-line="50" selection-start-column="25" selection-end-line="50" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/WebGL_API/Noise.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="289" column="12" selection-start-line="289" selection-start-column="12" selection-end-line="289" selection-end-column="12" />
+              <folding>
+                <element signature="n#section#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#p#0;n#section#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#code#0;n#pre#0;n#section#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#ul#0;n#section#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#li#0;n#ul#0;n#section#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#code#0;n#pre#0;n#li#0;n#ul#0;n#section#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#code#0;n#pre#0;n#li#1;n#ul#0;n#section#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#3;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#style#0;n#img#0;n#div#1;n#section#3;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#section#4;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#ul#0;n#section#4;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#5;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#code#0;n#pre#0;n#section#5;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#6;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#code#0;n#pre#0;n#section#6;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#ul#0;n#section#6;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#7;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#code#0;n#pre#0;n#section#7;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#ul#0;n#section#7;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#8;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#code#0;n#pre#0;n#section#8;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#div#1;n#section#9;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#div#2;n#section#9;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -133,9 +167,9 @@
         <option value="$PROJECT_DIR$/WebGL_API/css/base.css" />
         <option value="$PROJECT_DIR$/example/noise/CelluarNoise.html" />
         <option value="$PROJECT_DIR$/example/noise/GradientNoise.html" />
-        <option value="$PROJECT_DIR$/WebGL_API/Noise.html" />
         <option value="$PROJECT_DIR$/example/noise/Turbulence.html" />
         <option value="$PROJECT_DIR$/example/noise/FractalBrownianMotion.html" />
+        <option value="$PROJECT_DIR$/WebGL_API/Noise.html" />
       </list>
     </option>
   </component>
@@ -168,29 +202,6 @@
               <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
               <item name="example" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-              <item name="noise" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
-              <item name="WebGL_API" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
-              <item name="WebGL_API" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
-              <item name="WebGL_API" type="462c0819:PsiDirectoryNode" />
-              <item name="shader API" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -201,7 +212,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/example/noise" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../webgl-noise-examples-master" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -213,16 +224,16 @@
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/../ThreeSourceCodeAnalysis/src/renderers/webgl/WebGLUniforms.js" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\workHome\BASIS_WEBGL\WebGL_API" />
-      <recent name="D:\workHome\BASIS_WEBGL\PGL\src\built" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\workHome\BASIS_WEBGL\example\noise" />
       <recent name="D:\workHome\BASIS_WEBGL\WebGL_API\GraphicsDOC" />
       <recent name="D:\workHome\BASIS_WEBGL\img" />
       <recent name="D:\workHome\BASIS_WEBGL\WebGL_API\shader API\img" />
       <recent name="D:\workHome\BASIS_WEBGL\PGL\example\WebGL编程指南\ch8" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\workHome\BASIS_WEBGL\WebGL_API" />
+      <recent name="D:\workHome\BASIS_WEBGL\PGL\src\built" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -316,7 +327,8 @@
       <workItem from="1571725796162" duration="4644000" />
       <workItem from="1571793179191" duration="1509000" />
       <workItem from="1571905695379" duration="6830000" />
-      <workItem from="1571970145637" duration="18760000" />
+      <workItem from="1571970145637" duration="18813000" />
+      <workItem from="1572225032926" duration="3389000" />
     </task>
     <task id="LOCAL-00001" summary="1.绘制三角形实现">
       <created>1557569131944</created>
@@ -486,11 +498,18 @@
       <option name="project" value="LOCAL" />
       <updated>1571794677029</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="1.图形噪声">
+      <created>1571997844054</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1571997844054</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="440733000" />
+    <option name="totallyTimeSpent" value="444175000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -502,7 +521,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21130952" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -546,7 +566,8 @@
     <MESSAGE value="1.blending" />
     <MESSAGE value="1.ToneMapping" />
     <MESSAGE value="1.shadertoy说明添加" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.shadertoy说明添加" />
+    <MESSAGE value="1.图形噪声" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.图形噪声" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/WebGL_API/WebGL可以绘制的基本图形.html">
@@ -1109,10 +1130,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/example/noise/GradientNoise.js" />
+    <entry file="file://$PROJECT_DIR$/example/noise/CelluarNoise.js" />
+    <entry file="file://$PROJECT_DIR$/WebGL_API/css/base.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="46" column="16" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="16" />
+          <folding>
+            <element signature="e#4#32#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/noise/CelluarNoise.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="30" column="16" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/noise/GradientNoise.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-756">
+          <caret line="6" column="21" lean-forward="true" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/noise/FractalBrownianMotion.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="45" column="26" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/noise/Turbulence.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="50" column="25" lean-forward="true" selection-start-line="50" selection-start-column="25" selection-end-line="50" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="276" column="40" selection-start-line="276" selection-start-column="40" selection-end-line="276" selection-end-column="40" />
+        <state relative-caret-position="287">
+          <caret line="276" column="35" selection-start-line="276" selection-start-column="35" selection-end-line="276" selection-end-column="35" />
           <folding>
             <element signature="n#ul#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#ul#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
@@ -1176,40 +1237,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/example/noise/GradientNoise.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/noise/CelluarNoise.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WebGL_API/css/base.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="46" column="16" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="16" />
-          <folding>
-            <element signature="e#4#32#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/noise/CelluarNoise.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="30" column="16" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/noise/GradientNoise.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-756">
-          <caret line="6" column="21" lean-forward="true" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WebGL_API/Noise.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="236" column="19" selection-start-line="236" selection-start-column="19" selection-end-line="236" selection-end-column="19" />
+        <state relative-caret-position="189">
+          <caret line="289" column="12" selection-start-line="289" selection-start-column="12" selection-end-line="289" selection-end-column="12" />
           <folding>
             <element signature="n#section#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
@@ -1222,37 +1253,21 @@
             <element signature="n#code#0;n#pre#0;n#li#1;n#ul#0;n#section#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#3;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#style#0;n#img#0;n#div#1;n#section#3;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#div#1;n#section#3;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#ul#0;n#div#1;n#div#1;n#section#3;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#li#0;n#ul#0;n#div#1;n#div#1;n#section#3;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#li#1;n#ul#0;n#div#1;n#div#1;n#section#3;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#code#0;n#pre#0;n#li#2;n#ul#0;n#div#1;n#div#1;n#section#3;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#4;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#ul#0;n#section#4;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#5;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#style#0;n#img#0;n#section#5;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#code#0;n#pre#0;n#section#5;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#6;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#code#0;n#pre#0;n#section#6;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#ul#0;n#section#6;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#7;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#code#0;n#pre#0;n#section#7;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#ul#0;n#section#7;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#ul#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#8;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#code#0;n#pre#0;n#section#8;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#1;n#section#9;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#2;n#section#9;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/noise/Turbulence.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="61" column="43" selection-start-line="61" selection-start-column="43" selection-end-line="61" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/noise/FractalBrownianMotion.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="45" column="26" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
         </state>
       </provider>
     </entry>

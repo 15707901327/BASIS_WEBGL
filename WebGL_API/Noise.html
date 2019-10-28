@@ -113,7 +113,8 @@
           <p>细胞噪声算法主要通过距离场的形式实现的，以单个特征点为中心的径向渐变，多个特征点共同作用而成。主要分为三步：</p>
           <ul class="ul-2-num">
             <li>
-              网格生成:将平面划分为m×n个网格，这一步和梯度噪声的第一步一样；</li>
+              网格生成:将平面划分为m×n个网格，这一步和梯度噪声的第一步一样；
+            </li>
             <li>
               <div>特征点生成:为每个网格分配一个特征点v[i,j]，这个特征点的位置在网格内随机。</div>
               <pre><code>
@@ -154,7 +155,8 @@
               <p>最后一步，将F1映射为当前像素点的颜色值，可以是gl_FragColor = vec4(vec3(pow(noise(uv), 2.)), 1.0);。</p>
               <p>不仅如此，我们还可以取特征点v到点p第二近的距离F2，通过F2 - F1，得到类似泰森多变形的纹理，如上图最右侧。</p>
             </li>
-          </ul></div>
+          </ul>
+        </div>
       </div>
       <strong>算法实例</strong>
       <ul class="ul-2">
@@ -240,12 +242,53 @@
         <li><a href="../example/noise/Turbulence.html" target="_blank">实例1</a></li>
       </ul>
     </section>
-    <strong>噪声贴图应用：</strong>
-    <ul class="ul-2-num">
-      <li>Color Mapping</li>
-      <li>Height Mapping</li>
-      <li>Normal Mapping</li>
-    </ul>
+    <section id="DynamicTexture">
+      <div class="title">动态纹理（Dynamic texture）</div>
+      <p>在2d基础上加上时间t维度，形成动态的噪声。</p>
+      <div><img src="img/noise7.webp"></div>
+      <p>如下为实现3d noise的代码结构：</p>
+      <pre><code>
+      // noise fragment shader
+      #define SPEED 20.
+      varying vec2 uv;
+      uniform float u_time;
+      float noise(vec3 p) {
+        // TODO
+      }
+      void main() {
+          float n = noise(uv, u_time *  SPEED);  // 传入片元坐标与时间
+          gl_FragColor = vec4(n, n, n, 1.0);
+      }
+      </code></pre>
+      <p>利用时间，我们可以生成实现动态纹理，模拟如火焰、云朵的变换:</p>
+      <div><img src="img/noise8.webp"></div>
+    </section>
+    <section id="TextureApplication">
+      <div class="title">噪声贴图应用（Texture application）</div>
+      <p>利用噪声算法，我们可以构造物体表面的纹理颜色和材质细节，在3d开发中，一般采用贴图方式应用在3D Object上的Material材质上。</p>
+      <strong>贴图方式:</strong>
+      <ul class="ul-2-num">
+        <li><a href="#ColorMapping">Color Mapping</a></li>
+        <li><a href="#HeightMapping">Height Mapping</a></li>
+        <li><a href="#NormalMapping">Normal Mapping</a></li>
+      </ul>
+      <div id="ColorMapping">
+        <strong>Color Mapping</strong>
+        <p>彩色贴图是最常用的是方式，即直接将噪声值映射为片元颜色值，作为材质的Texture图案:</p>
+        <div><img src="img/noise9.webp" width="400px"></div>
+      </div>
+      <div id="HeightMapping">
+        <strong>Height Mapping</strong>
+        <p>Height Mapping高度贴图，生成地形高度。高度贴图的每个像素映射到平面点的高度值，通过图形噪声生成的Height Map可模拟连绵起伏的山脉:</p>
+        <div><img src="img/noise10.webp" width="600px"></div>
+      </div>
+      <div id="NormalMapping">
+        <strong>Normal Mapping</strong>
+        <p>除了通过heightMap生成地形，还可以通过法线贴图改变光照效果，实现材质表面的凹凸细节:</p>
+        <div><img src="img/noise11.webp" width="600px"></div>
+        <p>这里的噪声值被映射为法线贴图的color值</p>
+      </div>
+    </section>
   </div>
 
 </div>

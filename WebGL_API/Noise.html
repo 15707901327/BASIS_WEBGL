@@ -161,6 +161,7 @@
       <strong>算法实例</strong>
       <ul class="ul-2">
         <li><a href="../example/noise/CelluarNoise.html" target="_blank">实例1</a></li>
+        <li><a href="../example/noise/worlery_noise.html" target="_blank">worlery_noise</a></li>
       </ul>
     </section>
     <section>
@@ -185,13 +186,14 @@
       float fbm_noise(vec2 p)
       {
           float f = 0.0;
+          // 生成网格
           p = p * 4.0;
           float a = 1.;
           for (int i = 0; i < OCTAVE_NUM; i++)
           {
               f += a * noise(p);
-              p = 4.0 * p;
-              a /= 4.;
+              p = 2.0 * p;
+              a /= 2.0;
           }
           return f;
       }
@@ -239,13 +241,12 @@
       </code></pre>
       <strong>算法实例</strong>
       <ul class="ul-2">
-        <li><a href="../example/noise/Turbulence.html" target="_blank">实例1</a></li>
+        <li><a href="../example/noise/DomainWrapping.html" target="_blank">实例1</a></li>
       </ul>
     </section>
     <section id="DynamicTexture">
       <div class="title">动态纹理（Dynamic texture）</div>
       <p>在2d基础上加上时间t维度，形成动态的噪声。</p>
-      <div><img src="img/noise7.webp"></div>
       <p>如下为实现3d noise的代码结构：</p>
       <pre><code>
       // noise fragment shader
@@ -261,7 +262,11 @@
       }
       </code></pre>
       <p>利用时间，我们可以生成实现动态纹理，模拟如火焰、云朵的变换:</p>
-      <div><img src="img/noise8.webp"></div>
+      <strong>算法实例</strong>
+      <ul class="ul-2">
+        <li><a href="../example/noise/fire.html" target="_blank">火焰实例</a></li>
+        <li><a href="../example/noise/demo.html" target="_blank">动态噪声</a></li>
+      </ul>
     </section>
     <section id="TextureApplication">
       <div class="title">噪声贴图应用（Texture application）</div>

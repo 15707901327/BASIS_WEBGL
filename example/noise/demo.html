@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Domain Wrapping</title>
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../css/base.css">
+</head>
+<script type="module">
+  import {Shaders} from "../jsm/PUnits.js";
+
+  var VSHADER_SOURCE =
+    'attribute vec4 a_Position;\n' +
+    'attribute vec2 a_TexCoord;\n' +
+    'varying vec2 v_TexCoord;\n' +
+    'void main() {\n' +
+    '  gl_Position = a_Position;\n' +
+    '  v_TexCoord = a_TexCoord;\n' +
+    '}\n';
+
+  // Fragment shader program 片元着色器
+  var FSHADER_SOURCE =
+    '#ifdef GL_ES\n' +
+    ' precision mediump float;\n' +
+    '#endif\n' +
+    'uniform sampler2D u_Sampler;\n' +
+    'uniform float u_time;\n' +
+    'varying vec2 v_TexCoord;\n' +
+
+    'float random_value(vec3 st) {\n' +
+    '    float h = dot(st, vec3(127.1, 311.7, 69.5));\n' +
+    '    return -1. + 2. * fract(sin(h) * 43758.5453123);\n' +
+    '}\n' +
+    'float noise_value (in vec3 st) {\n' +
+    '    vec3 i = floor(st);\n' +
+    '    vec3 s = fract(st);\n' +
+    '\n' +
+    '    // Four corners in 3D of a tile\n' +
+    '    float a = random_value(i);\n' +
+    '    float b = random_value(i + vec3(1, 0, 0));\n' +
+    '    float c = random_value(i + vec3(0, 1, 0));\n' +
+    '    float d = random_value(i + vec3(0, 0, 1));\n' +
+    '    float e = random_value(i + vec3(1, 1, 0));\n' +
+    '    float f = random_value(i + vec3(1, 0, 1));\n' +
+    '    float g = random_value(i + vec3(0, 1, 1));\n' +
+    '    float h = random_value(i + vec3(1, 1, 1));\n' +
+    '\n' +
+    '    // Smooth Interpolation\n' +
+    '\n' +
+    '    // Cubic Hermine Curve.  Same as SmoothStep()\n' +
+    '    // vec3 u = s*s*(3.0-2.0*s);\n' +
+    '    vec3 u = smoothstep(0., 1., s);\n' +
+    '\n' +
+    '    // Mix 8 coorners percentages\n' +
+    '    return mix(mix(mix(a, b, u.x),\n' +
+    '    mix(c, e, u.x), u.y),\n' +
+    '    mix(mix(d, f, u.x),\n' +
+    '    mix(g, h, u.x), u.y), u.z);\n' +
+    '}\n' +
+    'vec3 random_perlin(vec3 st){\n' +
+    '    st = vec3(\n' +
+    '    dot(st, vec3(127.1, 311.7, 69.5)),\n' +
+    '    dot(st, vec3(269.5, 183.3, 132.7)),\n' +
+    '    dot(st, vec3(247.3, 108.5, 96.5))\n' +
+    '    );\n' +
+    '    return -1.0 + 2.0*fract(sin(st)*43758.5453123);\n' +
+    '}\n' +
+    'float noise_perlin (vec3 st) {\n' +
+    '    vec3 i = floor(st);\n' +
+    '    vec3 s = fract(st);\n' +
+    '\n' +
+    '    // Four corners in 3D of a tile\n' +
+    '    float a = dot(random_perlin(i), s);\n' +
+    '    float b = dot(random_perlin(i + vec3(1, 0, 0)), s - vec3(1, 0, 0));\n' +
+    '    float c = dot(random_perlin(i + vec3(0, 1, 0)), s - vec3(0, 1, 0));\n' +
+    '    float d = dot(random_perlin(i + vec3(0, 0, 1)), s - vec3(0, 0, 1));\n' +
+    '    float e = dot(random_perlin(i + vec3(1, 1, 0)), s - vec3(1, 1, 0));\n' +
+    '    float f = dot(random_perlin(i + vec3(1, 0, 1)), s - vec3(1, 0, 1));\n' +
+    '    float g = dot(random_perlin(i + vec3(0, 1, 1)), s - vec3(0, 1, 1));\n' +
+    '    float h = dot(random_perlin(i + vec3(1, 1, 1)), s - vec3(1, 1, 1));\n' +
+    '\n' +
+    '    // Smooth Interpolation\n' +
+    '\n' +
+    '    // Cubic Hermine Curve.  Same as SmoothStep()\n' +
+    '    // vec2 u = f*f*(3.0-2.0*f);\n' +
+    '    vec3 u = smoothstep(0., 1., s);\n' +
+    '\n' +
+    '    // Mix 8 coorners percentages\n' +
+    '    return mix(mix(mix(a, b, u.x),\n' +
+    '    mix(c, e, u.x), u.y),\n' +
+    '    mix(mix(d, f, u.x),\n' +
+    '    mix(g, h, u.x), u.y), u.z);\n' +
+    '}\n' +
+    'float noise(vec3 p) {\n' +
+    '    return noise_perlin(p);\n' +
+    '}\n' +
+    'float noise_fbm(vec3 p)\n' +
+    '{\n' +
+    '    float f = 0.0;\n' +
+    '    p = p * 4.0;\n' +
+    '    float a = 2.;\n' +
+    '    for (int i = 0; i < 6; i++) {\n' +
+    '        f += a * noise(p);\n' +
+    '        p = 2.0 * p;\n' +
+    '        a /= 2.;\n' +
+    '    }\n' +
+    '    // f = sin(f + p.x/1000.0);\n' +
+    '\n' +
+    '    return f * .5 + .5;\n' +
+    '}\n' +
+    'float noise_fbm_abs(vec3 p)\n' +
+    '{\n' +
+    '    float f = 0.0;\n' +
+    '    p = p * 4.0;\n' +
+    '    float a = 1.;\n' +
+    '    for (int i = 0; i < 6; i++) {\n' +
+    '        f += a * abs(noise(p));\n' +
+    '        p = 2.0 * p;\n' +
+    '        a *= .5;\n' +
+    '    }\n' +
+    '\n' +
+    '    // f = sin(f + p.x/16.0);\n' +
+    '\n' +
+    '    return f;\n' +
+    '}\n' +
+
+    'void main() {\n' +
+    ' vec3 color1 = texture2D(u_Sampler, v_TexCoord).rgb;\n' +
+    'vec2 st = v_TexCoord;\n' +
+    'float n = 0.;\n' +
+    '    vec3 color = vec3(0.);\n' +
+    '    if (st.x < .5 && st.y > .5) {\n' +
+    '        n = noise(vec3(st, u_time/10.0)*16.)* .5 + .5;\n' +
+    '        color = vec3(n);\n' +
+    '    } else if (st.x < .5 && st.y < .5) {\n' +
+    '        n = noise_fbm_abs(vec3(st, u_time/10.0));\n' +
+    '        color = vec3(n);\n' +
+    '    } else if (st.x > .5 && st.y > .5) {\n' +
+    '        n = noise_fbm(vec3(st, u_time/10.0));\n' +
+    '        color = vec3(n);\n' +
+    '    } else if (st.x >.5 && st.y < .5) {\n' +
+    '        n = noise_fbm_abs(vec3(st, u_time/10.0));\n' +
+    '        color = vec3(1.-n);\n' +
+    '    }\n' +
+    '\n' +
+    '    gl_FragColor = vec4(color, 1.0);\n' +
+    '}\n';
+
+  /** 设置顶点信息（顶点坐标、纹理坐标）**/
+  function initVertexBuffers(gl) {
+    var verticesTexCoords = new Float32Array([
+      // 顶点坐标，纹理坐标
+      -1.0, 1.0, 0.0, 1.0,
+      -1.0, -1.0, 0.0, 0.0,
+      1.0, 1.0, 1.0, 1.0,
+      1.0, -1.0, 1.0, 0.0
+    ]);
+    var n = 4; // 顶点数目
+
+    // 创建缓存区对象
+    var vertexTexCoordBuffer = gl.createBuffer();
+    if (!vertexTexCoordBuffer) {
+      console.log('Failed to create the buffer object');
+      return -1;
+    }
+
+    // 将顶点坐标和纹理坐标写入缓存区对象
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexTexCoordBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, verticesTexCoords, gl.STATIC_DRAW);
+
+    var FSIZE = verticesTexCoords.BYTES_PER_ELEMENT;
+
+    var a_Position = gl.getAttribLocation(gl.program, 'a_Position');
+    if (a_Position < 0) {
+      console.log('Failed to get the storage location of a_Position');
+      return -1;
+    }
+    gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, FSIZE * 4, 0);
+    gl.enableVertexAttribArray(a_Position);
+
+    // 将纹理坐标分派给a_TexCoord，并开启它
+    var a_TexCoord = gl.getAttribLocation(gl.program, 'a_TexCoord');
+    if (a_TexCoord < 0) {
+      console.log('Failed to get the storage location of a_TexCoord');
+      return -1;
+    }
+    gl.vertexAttribPointer(a_TexCoord, 2, gl.FLOAT, false, FSIZE * 4, FSIZE * 2);
+    gl.enableVertexAttribArray(a_TexCoord);
+
+    return n;
+  }
+
+  /**
+   * 配置和加载纹理
+   * @param gl 上下文
+   * @param n 顶点的数目
+   * @returns {boolean}
+   */
+  function initTextures(gl, n) {
+    var texture = gl.createTexture();// 创建纹理对象
+    if (!texture) {
+      console.log('Failed to create the texture object');
+      return false;
+    }
+
+    var u_Sampler = gl.getUniformLocation(gl.program, 'u_Sampler'); // 获取存储位置
+    if (!u_Sampler) {
+      console.log('Failed to get the storage location of u_Sampler');
+      return false;
+    }
+
+    var image = new Image(); // 创建image对象
+    if (!image) {
+      console.log('Failed to create the image object');
+      return false;
+    }
+
+    /** 注册事件响应函数,在图像加载完成后调用,最后一个参数是纹理单元编号 **/
+    image.onload = function() {
+      loadTexture(gl, n, texture, u_Sampler, image);
+    };
+    /** 浏览器开始加载图像 **/
+    image.src = 'sky.jpg';
+
+    return true;
+  }
+
+  /** 下载贴图 **/
+  function loadTexture(gl, n, texture, u_Sampler, image) {
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);//对纹理图像进行y轴反转
+    // 开启0号纹理单元
+    gl.activeTexture(gl.TEXTURE0);
+    // 向target绑定纹理对象
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+
+    /**配置纹理参数 CLAMP_TO_EDGE  ：纹理外填充了最边缘纹理颜色 MIRRORED_REPEAT：重复贴图**/
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    // 配置纹理图像
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+
+    // 将纹理单元编号传递给取样器
+    gl.uniform1i(u_Sampler, 0);
+  }
+
+  window.onload = function(ev) {
+
+    var canvas = document.getElementById('webgl');
+    var gl = canvas.getContext("webgl");
+
+    var shaders = new Shaders();
+    shaders.initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE);
+
+    // 设置顶点信息
+    var n = initVertexBuffers(gl);
+    if (n < 0) {
+      console.log('Failed to set the vertex information');
+      return;
+    }
+
+    // 设置<canvas>背景色
+    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+
+    // 配置纹理
+    if (!initTextures(gl, n)) {
+      console.log('Failed to intialize the texture.');
+      return;
+    }
+
+    var u_time = gl.getUniformLocation(gl.program, 'u_time');
+
+    var time = 1.0;
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      time += 0.01;
+      gl.uniform1f(u_time, time);
+
+      gl.clear(gl.COLOR_BUFFER_BIT);   // Clear <canvas>
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, n);//绘制矩形
+    }
+
+    animate();
+  };
+</script>
+<body>
+<div id="container">
+  <canvas id="webgl"></canvas>
+</div>
+</body>
+</html>

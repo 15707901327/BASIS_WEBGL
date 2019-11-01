@@ -109,6 +109,10 @@ ul {
     padding: 5px 0;
 }
 
+section{
+    clear: both;
+}
+
 section .content {
     margin-left: 2em;
 }

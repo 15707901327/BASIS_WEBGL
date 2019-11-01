@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>自定义函数</title>
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../css/base.css">
+</head>
+<body>
+<div class="l-r-wrapper">
+  <div class="left">
+    <h4><a href="#usefulLittleFunctions">有用的小函数</a></h4>
+    <ul class="ul-1">
+      <li><a href="#almostIdentity">almostIdentity()</a></li>
+      <li><a href="#almostIdentity2">almostIdentity()</a></li>
+      <li><a href="#expImpulse">Exponential Impulse</a></li>
+      <li><a href="#quaImpulse">Polynomial Impulse</a></li>
+      <li><a href="#cubicPulse">Cubic Pulse</a></li>
+    </ul>
+  </div>
+  <div class="right">
+    <section id="usefulLittleFunctions" class="section1">
+      <div class="title">有用的小函数</div>
+      <section id="almostIdentity">
+        <h4>almostIdentity()</h4>
+        <div class="divRight"><img src="img/almostIdentity.png" width="200"></div>
+        <p>假设不想改变数值，除非这个数值是0或者接近0的值。在这种情况，想用一个比较小的值来替换它，然后可以进行值与阈
+          的平滑融合，而不必引入不连续的条件分支。设m为阈值（任何大于m的值保持不变），当输入为0时，获得n值。</p>
+        <div class="content">
+          <pre><code>
+        float almostIdentity( float x, float m, float n )
+        {
+            if( x>m ) return x;
+            const float a = 2.0*n - m
+            const float b = 2.0*m - 3.0*n;
+            const float t = x/m;
+            return (a*t + b)*t*t + n;
+        }
+          </code></pre>
+        </div>
+      </section>
+      <section id="almostIdentity2">
+        <h4>almostIdentity()</h4>
+        <div class="divRight"><img src="img/almostIdentity2.png" width="200"></div>
+        <p>另一种获取近距离标识的方法是通过偏移的平方值的平方根来代替上面的三次方多项式。根据硬件的不同，这种方法可能比
+        上面的三次方慢一点，并且当它有0介导或者非0的二阶导时，会导致一些问题。</p>
+        <div class="content">
+          <pre><code>
+        float almostIdentity( float x, float n )
+        {
+            return sqrt(x*x+n);
+        }
+          </code></pre>
+        </div>
+      </section>
+      <section id="expImpulse">
+        <h4>Exponential Impulse</h4>
+        <div class="divRight"><img src="img/exponentialImpulse.png" width="300"></div>
+        <p>非常适合触发行为、制作动画、音乐的舒缓，以及用于快速增长然后缓慢下降的任何事物。使用k控制功能的拉伸。最大为1，恰好x = 1 / k。</p>
+        <div class="content">
+          <pre><code>
+        float expImpulse( float k, float x )
+        {
+            const float h = k*x;
+            return h*exp(1.0-h);
+        }
+          </code></pre>
+        </div>
+      </section>
+      <section id="quaImpulse">
+        <h4>Polynomial Impulse</h4>
+        <div class="divRight"><img src="img/quaImpulse.png" width="300"></div>
+        <p>另一个脉冲函数不使用指数而是使用多项式。使用k控制函数衰减，例如一个二次的被使用，它的峰值在x = sqrt(1/k).</p>
+        <div class="content">
+          <pre><code>
+        float quaImpulse( float k, float x )
+        {
+            return 2.0*sqrt(k)*x/(1.0+k*x*x);
+        }
+          </code></pre>
+          <p>您可以轻松地将其推广到其他幂以得到不同的衰减形状，其中n是多项式的次数：</p>
+          <pre><code>
+        float polyImpulse( float k, float n, float x )
+        {
+            return (n/(n-1.0))*pow((n-1.0)*k,1.0/n) * x/(1.0+k*pow(x,n));
+        }
+          </code></pre>
+          <p>这些广义脉冲在x = [k（n-1）]-1 / n时达到峰值</p>
+        </div>
+      </section>
+      <section id="cubicPulse">
+        <h4>Cubic Pulse</h4>
+        <div class="divRight"><img src="img/CubicPulse.png" width="300"></div>
+        <p>理所当然的你会发现你经常使用smoothstep(c-w,c,x)-smoothstep(c,c+w,x)来进行计算，也许你会尝试解析它的信号特点。
+          cubicPulse()方法，将会是你最好的朋友，你也可以廉价的用它来代替高斯模糊。</p>
+        <div class="content">
+          <pre><code>
+        float cubicPulse( float c, float w, float x )
+        {
+            x = fabs(x - c);
+            if( x>w ) return 0.0;
+            x /= w;
+            return 1.0 - x*x*(3.0-2.0*x);
+        }
+          </code></pre>
+        </div>
+      </section>
+    </section>
+  </div>
+</div>
+</body>
+</html>

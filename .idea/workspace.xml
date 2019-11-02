@@ -2,31 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/WebGL_API/shader_API/customFunction.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader API/BRDF.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/shader_API/BRDF.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader API/img/Blinn_BRDF.png" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/shader_API/img/Blinn_BRDF.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader API/img/Blinn_BRDF2.png" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/shader_API/img/Blinn_BRDF2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader API/img/basic_smoothstep.gif" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/shader_API/img/basic_smoothstep.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader API/img/dhr.png" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/shader_API/img/dhr.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader API/img/fnr.png" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/shader_API/img/fnr.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader API/img/fnr2.png" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/shader_API/img/fnr2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader API/img/fnr3.png" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/shader_API/img/fnr3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader API/img/fnr4.png" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/shader_API/img/fnr4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader API/img/jbbm.png" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/shader_API/img/jbbm.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader API/img/lambertian_BRDF.png" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/shader_API/img/lambertian_BRDF.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader API/img/phong_BRDF.png" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/shader_API/img/phong_BRDF.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader API/img/phong_BRDF2.png" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/shader_API/img/phong_BRDF2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader API/img/radiance.png" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/shader_API/img/radiance.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader API/img/radiant.png" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/shader_API/img/radiant.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader API/img/solid.png" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/shader_API/img/solid.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader API/img/vpm.png" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/shader_API/img/vpm.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader API/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/shader_API/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader API/内置函数.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/shader_API/内置函数.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader API/存储限定字.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/shader_API/存储限定字.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader API/精度限定字.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/shader_API/精度限定字.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/base.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/customFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/WebGL_API/shader_API/customFunction.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,26 +16,25 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/WebGL_API/shader_API/customFunction.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="104" column="23" selection-start-line="104" selection-start-column="23" selection-end-line="104" selection-end-column="23" />
+            <state relative-caret-position="169">
+              <caret line="150" column="26" lean-forward="true" selection-start-line="150" selection-start-column="26" selection-end-line="150" selection-end-column="26" />
               <folding>
+                <element signature="n#head#0;n#html#0;n#!!top" />
                 <element signature="n#section#0;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#p#0;n#section#0;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#0;n#section#0;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#section#1;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#section#2;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#section#3;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#div#1;n#section#3;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#4;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#5;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#p#0;n#section#5;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#code#0;n#pre#0;n#div#1;n#section#5;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#section#5;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#code#0;n#pre#1;n#div#1;n#section#5;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#6;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#8;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/base.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="112" column="16" selection-start-line="112" selection-start-column="16" selection-end-line="112" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -223,7 +199,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/WebGL_API/shader_API" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -347,7 +323,8 @@
       <workItem from="1572313581156" duration="16082000" />
       <workItem from="1572398030491" duration="658000" />
       <workItem from="1572483479425" duration="1256000" />
-      <workItem from="1572595634694" duration="5439000" />
+      <workItem from="1572595634694" duration="5551000" />
+      <workItem from="1572659913496" duration="2322000" />
     </task>
     <task id="LOCAL-00001" summary="1.绘制三角形实现">
       <created>1557569131944</created>
@@ -559,11 +536,18 @@
       <option name="project" value="LOCAL" />
       <updated>1572331954773</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="1.自定义函数">
+      <created>1572603321305</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1572603321305</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="473677000" />
+    <option name="totallyTimeSpent" value="476111000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -576,7 +560,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17633928" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -621,7 +604,8 @@
     <MESSAGE value="1.ToneMapping" />
     <MESSAGE value="1.shadertoy说明添加" />
     <MESSAGE value="1.图形噪声" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.图形噪声" />
+    <MESSAGE value="1.自定义函数" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.自定义函数" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/WebGL编程指南/ch2/HelloCanvas.html">
@@ -1269,16 +1253,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/WebGL_API/shader_API/customFunction.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="104" column="23" selection-start-line="104" selection-start-column="23" selection-end-line="104" selection-end-column="23" />
+        <state relative-caret-position="169">
+          <caret line="150" column="26" lean-forward="true" selection-start-line="150" selection-start-column="26" selection-end-line="150" selection-end-column="26" />
           <folding>
+            <element signature="n#head#0;n#html#0;n#!!top" />
             <element signature="n#section#0;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#p#0;n#section#0;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#0;n#section#0;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#1;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#2;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#3;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#1;n#section#3;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#4;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#5;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#p#0;n#section#5;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#code#0;n#pre#0;n#div#1;n#section#5;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#section#5;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#code#0;n#pre#1;n#div#1;n#section#5;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#6;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#8;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>

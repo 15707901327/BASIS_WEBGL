@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>图形学</title>
   <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../css/base.css">
 </head>
 <body>
 <div class="l-r-wrapper">
@@ -34,7 +35,7 @@
     </ul>
   </div>
   <div class="right">
-    <section  class="section1" id="concept">
+    <section class="section1" id="concept">
       <div class="title">概念</div>
       <section id="homogeneousCoordinates">
         <h4>齐次坐标</h4>
@@ -55,12 +56,14 @@
           </ul>
           <strong>拆解：</strong>
           <p>对于任何一个线性变换矩阵，我们可以把它拆解（decompose）为TRS或TSR三个矩阵的乘积的形式。</p>
-          <div style="height: 400px; width: 600px; background-image: url('../../img/LinearTrans_01.webp')" class="bg-1"></div>
+          <div style="height: 400px; width: 600px; background-image: url('../../img/LinearTrans_01.webp')"
+               class="bg-1"></div>
           <ul class="ul-2-num">
             <li>首先提取最后一列，得到位移</li>
             <li>剩余的矩阵是R和S相乘的矩阵</li>
           </ul>
-          <div style="height: 350px; width: 800px; background-image: url('../../img/LinearTrans_02.webp')" class="bg-1"></div>
+          <div style="height: 350px; width: 800px; background-image: url('../../img/LinearTrans_02.webp')"
+               class="bg-1"></div>
           <p>从图中可以看出，SR矩阵，第一行的平方和开根就是Sx，第二行的平方和开根就是Sy，第三行的平方和开根就是Sz。第一行除以Sx，第二行除以Sy，第三行除以Sz，即可得到旋转矩阵。</p>
           <strong>四维变换的逆变换：</strong>
           <ul class="ul-2">
@@ -76,11 +79,16 @@
         <div class="content">
           <strong>在GLSL中通过四元数旋转顶点</strong>
           <p><a href="Quaternion.html" target="_blank">四元数旋转顶点原理</a></p>
-          <p>算法：position += 2.0 * cross( quaternion.xyz, cross( quaternion.xyz, position ) + quaternion.w * position );</p>
+          <p>算法：position += 2.0 * cross( quaternion.xyz, cross( quaternion.xyz, position ) + quaternion.w * position
+            );</p>
           <p>实例：</p>
           <ul class="ul-2">
-            <li><a href="https://15707901327.github.io/ThreeSourceCodeAnalysis/example/instance_buffergeometry/webgl_buffergeometry_instancing2.html" target="_blank">实例webgl_buffergeometry_instancing2</a></li>
-            <li><a href="https://15707901327.github.io/ThreeSourceCodeAnalysis/example/instance_buffergeometry/webgl_buffergeometry_instancing_dynamic.html" target="_blank">实例webgl_buffergeometry_instancing_dynamic</a></li>
+            <li><a
+                href="https://15707901327.github.io/ThreeSourceCodeAnalysis/example/instance_buffergeometry/webgl_buffergeometry_instancing2.html"
+                target="_blank">实例webgl_buffergeometry_instancing2</a></li>
+            <li><a
+                href="https://15707901327.github.io/ThreeSourceCodeAnalysis/example/instance_buffergeometry/webgl_buffergeometry_instancing_dynamic.html"
+                target="_blank">实例webgl_buffergeometry_instancing_dynamic</a></li>
           </ul>
         </div>
       </section>
@@ -90,12 +98,15 @@
       <section>
         <div class="content">
           <p>对于一个三维坐标（x, y, z），让其绕x, y, z轴旋转θ角的方法是在其左边乘上一个旋转矩阵。绕x轴，绕y轴，绕z轴的旋转矩阵分别是：</p>
-          <div style="height: 300px; width: 300px; background-image: url('../../img/rotation_01.webp')" class="bg-1"></div>
+          <div style="height: 300px; width: 300px; background-image: url('../../img/rotation_01.webp')"
+               class="bg-1"></div>
           <p>如果我们想更加通用一点，即点（x, y, z）绕轴（u, v, w）旋转θ的矩阵是什么？
             如果u, v, w三者的平方和为1，即该向量是个单位向量，那么矩阵如下：</p>
-          <div style="height: 250px; width: 1000px; background-image: url('../../img/rotation_02.webp')" class="bg-1"></div>
+          <div style="height: 250px; width: 1000px; background-image: url('../../img/rotation_02.webp')"
+               class="bg-1"></div>
           <strong>四维旋转(绕x轴转θ)</strong>
-          <div style="height: 250px; width: 1000px; background-image: url('../../img/rotation_03.webp')" class="bg-1"></div>
+          <div style="height: 250px; width: 1000px; background-image: url('../../img/rotation_03.webp')"
+               class="bg-1"></div>
           <p>从上图中可以看到，四维旋转矩阵，是在我们上面刚说的三维绕轴旋转矩阵的基础上，在最后一行和最后一列补上一个（0，0，0，1）。</p>
         </div>
       </section>
@@ -172,7 +183,8 @@
       <section id="scale_matrix">
         <h4>四维缩放矩阵</h4>
         <div class="content">
-          <div style="height: 250px; width: 900px; background-image: url('../../img/rotation_04.webp')" class="bg-1"></div>
+          <div style="height: 250px; width: 900px; background-image: url('../../img/rotation_04.webp')"
+               class="bg-1"></div>
           <strong>实例</strong>
           <ul>
             <li><a href="../../WebGL编程指南/ch3/RotatedTriangle_Matrix.html">缩放三角形(使用矩阵)</a></li>
@@ -208,7 +220,8 @@
         <h4>球面坐标系</h4>
         <div class="content">
           <strong>定义:</strong>
-          <p>设P是R^3中一点，在球面坐标系中的三个坐标变量是(r,θ, φ):<p>
+          <p>设P是R^3中一点，在球面坐标系中的三个坐标变量是(r,θ, φ):
+          <p>
           <p>r: 原点到点P的距离。</p>
           <p>倾角(或极角) θ：是天顶方向和线段OP之间的夹角。</p>
           <p>方位(或方位角) φ：是从方位参考方向到参照平面上线段OP的正交投影的有符号角度。</p>
@@ -216,6 +229,19 @@
           <strong>特点：</strong>
           <p>球面坐标系相同的同一点，具有无限多个等效坐标,，你可以在不改变角度的情况下, 增加或减去任意数量倍的，从而不改变角点。</p>
           <p>在许多情况下，允许负径向距离也很方便,，该惯例是(−r,θ,φ)等效于(r,θ+ 180 °,φ)为任意r，θ和φ。此外，(r,−θ,φ)等效于(r,θ,φ+ 180 °)。</p>
+          <strong>坐标转换:</strong>
+          <p>球坐标系(r,θ,φ)与直角坐标系(x,y,z)的转换关系:</p>
+          <pre><code>
+            x = rsinθcosφ.
+            y = rsinθsinφ.
+            z = rcosθ.
+          </code></pre>
+          <p>直角坐标系(x,y,z)与球坐标系(r,θ,φ)的转换关系为:</p>
+          <pre><code>
+            r = sqrt(x^2 + y^2 + z^2)
+            θ = arccos(z/r)
+            φ = arctan(y/x)
+          </code></pre>
         </div>
       </div>
     </section>

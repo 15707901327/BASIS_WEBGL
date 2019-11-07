@@ -2,67 +2,62 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DOC/OpenGL/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/OpenGL/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/GraphicsDOC/Quaternion.html" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/GraphicsDOC/Quaternion.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/GraphicsDOC/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/GraphicsDOC/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/GraphicsDOC/map1.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/GraphicsDOC/map1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/JavaScript相关方法.html" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/JavaScript相关方法.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/Noise.html" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/Noise.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/Shadertoy.html" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/Shadertoy.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/WebGL-Event/webglcontextcreationerror.html" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/WebGL-Event/webglcontextcreationerror.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/WebGL可以绘制的基本图形.html" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/WebGL可以绘制的基本图形.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/canvas标签.html" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/canvas标签.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/css/base.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/img/baseNoise.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/img/baseNoise.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/img/baseNoise1.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/img/baseNoise1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/img/noise1.webp" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/img/noise1.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/img/noise10.webp" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/img/noise10.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/img/noise11.webp" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/img/noise11.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/img/noise2.webp" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/img/noise2.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/img/noise3.webp" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/img/noise3.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/img/noise4.webp" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/img/noise4.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/img/noise5.webp" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/img/noise5.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/img/noise6.webp" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/img/noise6.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/img/noise7.webp" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/img/noise7.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/img/noise8.webp" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/img/noise8.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/img/noise9.webp" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/img/noise9.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/js_API/WebGL_extensions.html" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/js_API/WebGL_extensions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/js_API/gl.html" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/js_API/gl.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/BRDF.html" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/BRDF.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/customFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/customFunction.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/Blinn_BRDF.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/Blinn_BRDF.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/Blinn_BRDF2.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/Blinn_BRDF2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/CubicPulse.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/CubicPulse.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/almostIdentity.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/almostIdentity.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/almostIdentity2.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/almostIdentity2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/basic_smoothstep.gif" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/basic_smoothstep.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/dhr.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/dhr.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/expStep.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/expStep.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/exponentialImpulse.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/exponentialImpulse.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/fnr.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/fnr.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/fnr2.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/fnr2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/fnr3.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/fnr3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/fnr4.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/fnr4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/gain.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/gain.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/gain1.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/gain1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/jbbm.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/jbbm.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/lambertian_BRDF.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/lambertian_BRDF.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/parabola.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/parabola.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/pcurve.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/pcurve.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/phong_BRDF.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/phong_BRDF.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/phong_BRDF2.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/phong_BRDF2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/quaImpulse.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/quaImpulse.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/radiance.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/radiance.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/radiant.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/radiant.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/sinc.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/sinc.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/solid.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/solid.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/img/vpm.png" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/img/vpm.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/内置函数.html" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/内置函数.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/存储限定字.html" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/存储限定字.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WebGL_API/shader_API/精度限定字.html" beforeDir="false" afterPath="$PROJECT_DIR$/DOC/WebGL/shader_API/精度限定字.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/css/base.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/GraphicsDOC/Quaternion.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/GraphicsDOC/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/GraphicsDOC/map1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/JavaScript相关方法.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/Noise.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/Shadertoy.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/WebGL-Event/webglcontextcreationerror.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/WebGL可以绘制的基本图形.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/canvas标签.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/img/baseNoise.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/img/baseNoise1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/img/noise1.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/img/noise10.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/img/noise11.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/img/noise2.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/img/noise3.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/img/noise4.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/img/noise5.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/img/noise6.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/img/noise7.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/img/noise8.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/img/noise9.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/js_API/WebGL_extensions.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/js_API/gl.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/BRDF.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/customFunction.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/Blinn_BRDF.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/Blinn_BRDF2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/CubicPulse.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/almostIdentity.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/almostIdentity2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/basic_smoothstep.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/dhr.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/expStep.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/exponentialImpulse.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/fnr.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/fnr2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/fnr3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/gain.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/gain1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/jbbm.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/lambertian_BRDF.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/pcurve.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/phong_BRDF.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/phong_BRDF2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/quaImpulse.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/radiance.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/radiant.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/sinc.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/solid.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/img/vpm.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/内置函数.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/存储限定字.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl/shader_API/精度限定字.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -71,91 +66,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DOC/OpenGL/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="33" column="37" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
-              <folding>
-                <element signature="n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="54" column="26" selection-start-line="54" selection-start-column="26" selection-end-line="54" selection-end-column="26" />
-              <folding>
-                <element signature="n#ul#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#ul#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#ul#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#ul#3;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#ul#4;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#ul#5;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#ul#6;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#0;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#0;n#section#0;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#1;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#0;n#section#1;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#2;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#4;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#5;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#0;n#section#5;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#ul#0;n#div#0;n#section#5;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#6;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#0;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#0;n#section#0;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#1;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#p#1;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#0;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#1;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#2;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#3;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#4;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#0;n#section#4;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#p#0;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#0;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#p#0;n#section#0;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#p#1;n#section#0;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#pre#0;n#section#0;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#ul#0;n#section#0;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#2;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#3;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#pre#0;n#section#3;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#4;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#pre#0;n#section#4;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#4;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#p#0;n#section#4;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#0;n#section#4;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#li#0;n#ul#0;n#div#0;n#section#0;n#section#4;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#li#1;n#ul#0;n#div#0;n#section#0;n#section#4;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#p#2;n#li#1;n#ul#0;n#div#0;n#section#0;n#section#4;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#pre#0;n#li#1;n#ul#0;n#div#0;n#section#0;n#section#4;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#5;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#6;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#7;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#8;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#0;n#section#8;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#9;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#10;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#11;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#0;n#section#11;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#1;n#section#11;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#12;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -298,13 +209,7 @@
             <path>
               <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
               <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
-              <item name="DOC" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
-              <item name="DOC" type="462c0819:PsiDirectoryNode" />
-              <item name="WebGL" type="462c0819:PsiDirectoryNode" />
+              <item name="doc" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -315,7 +220,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/DOC" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -447,7 +352,7 @@
       <workItem from="1572744990130" duration="2866000" />
       <workItem from="1572831657259" duration="1297000" />
       <workItem from="1572924521527" duration="2265000" />
-      <workItem from="1573089764221" duration="6083000" />
+      <workItem from="1573089764221" duration="6316000" />
     </task>
     <task id="LOCAL-00001" summary="1.绘制三角形实现">
       <created>1557569131944</created>
@@ -701,11 +606,18 @@
       <option name="project" value="LOCAL" />
       <updated>1572932999555</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="1.OpenGL概述">
+      <created>1573099000062</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1573099000062</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="490468000" />
+    <option name="totallyTimeSpent" value="490701000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -859,7 +771,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DOC/WebGL/JavaScript相关方法.html">
+    <entry file="file://$PROJECT_DIR$/doc/webgl/JavaScript相关方法.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
           <caret line="5" column="48" selection-start-line="5" selection-start-column="48" selection-end-line="5" selection-end-column="48" />
@@ -1162,7 +1074,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DOC/WebGL/Noise.html">
+    <entry file="file://$PROJECT_DIR$/doc/webgl/Noise.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
           <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
@@ -1208,7 +1120,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DOC/WebGL/shader_API/内置函数.html">
+    <entry file="file://$PROJECT_DIR$/doc/webgl/shader_API/内置函数.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="419">
           <caret line="194" column="23" lean-forward="true" selection-start-line="194" selection-start-column="23" selection-end-line="194" selection-end-column="23" />
@@ -1267,7 +1179,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DOC/WebGL/shader_API/customFunction.html">
+    <entry file="file://$PROJECT_DIR$/doc/webgl/shader_API/customFunction.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="812">
           <caret line="150" column="26" selection-start-line="150" selection-start-column="26" selection-end-line="150" selection-end-column="26" />
@@ -1292,7 +1204,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DOC/WebGL/canvas标签.html">
+    <entry file="file://$PROJECT_DIR$/doc/webgl/canvas标签.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="448">
           <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
@@ -1317,7 +1229,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DOC/WebGL/shader_API/index.html">
+    <entry file="file://$PROJECT_DIR$/doc/webgl/shader_API/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="42" column="8" lean-forward="true" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
@@ -1334,7 +1246,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DOC/WebGL/GraphicsDOC/index.html">
+    <entry file="file://$PROJECT_DIR$/doc/webgl/GraphicsDOC/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="113">
           <caret line="30" column="48" lean-forward="true" selection-start-line="30" selection-start-column="48" selection-end-line="30" selection-end-column="48" />
@@ -1367,7 +1279,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DOC/css/base.css">
+    <entry file="file://$PROJECT_DIR$/doc/css/base.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/DOC/WebGL/css/base.css">
@@ -1380,19 +1292,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DOC/OpenGL/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="33" column="37" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
-          <folding>
-            <element signature="n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
+        <state relative-caret-position="560">
           <caret line="54" column="26" selection-start-line="54" selection-start-column="26" selection-end-line="54" selection-end-column="26" />
           <folding>
             <element signature="n#ul#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
@@ -1455,6 +1357,16 @@
             <element signature="n#section#0;n#section#11;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#1;n#section#11;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#12;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/opengl/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="33" column="37" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>

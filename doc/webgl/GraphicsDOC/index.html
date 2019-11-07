@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>图形学</title>
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../css/base.css">
+</head>
+<body>
+<div class="l-r-wrapper">
+  <div class="left">
+    <h4><a href="#concept">概念</a></h4>
+    <ul class="ul-1">
+      <li><a href="#homogeneousCoordinates">齐次坐标</a></li>
+      <li><a href="#LinearTransformation">线性变换</a></li>
+      <li><a href="#Quaternion">四元数</a></li>
+    </ul>
+    <h4><a href="#rotation">旋转(Rotation)</a></h4>
+    <ul class="ul-1">
+      <li><a href="#rotation_matrix">旋转矩阵推导</a></li>
+    </ul>
+    <h4><a href="#translation">位移(translation)</a></h4>
+    <ul class="ul-1">
+      <li><a href="#translation_matrix">四维平移矩阵</a></li>
+    </ul>
+    <h4><a href="#scale">缩放（scale)</a></h4>
+    <ul class="ul-1">
+      <li><a href="#scale_matrix">缩放矩阵</a></li>
+    </ul>
+    <a href="#library">矩阵变换库</a><br>
+    <h4><a href="#CoordinateSystem">坐标系</a></h4>
+    <ul>
+      <li class="ul-1"><a href="#Three-dimensionalCoordinateSystem">三维坐标系</a></li>
+      <li class="ul-1"><a href="#SphericalCoordinateSystem">球面坐标系</a></li>
+    </ul>
+  </div>
+  <div class="right">
+    <section class="section1" id="concept">
+      <div class="title">概念</div>
+      <section id="homogeneousCoordinates">
+        <h4>齐次坐标</h4>
+        <p>由四个分量组成的矢量（x,y,z,w）。</p>
+      </section>
+      <section id="LinearTransformation">
+        <h4>线性变换</h4>
+        <p>线性变换（Linear Transformation / Xforms）是渲染和游戏引擎等图形学工具进行坐标变换的方式，是可逆的。 线性变换的等式如下： </p>
+        <div class="content">
+          <p>V2 = M*V1</p>
+          <strong>说明：</strong>
+          <ul class="ul-2">
+            <li>V是齐次（homogeneous）四维向量（x,y,z,w），竖着写的</li>
+            <li>M是齐次4×4矩阵</li>
+            <li>当w=1时，四维坐标会变成三维坐标</li>
+            <li>对于三维坐标（x, y, z），将其转换为四维坐标，可以直接加个1，即变成（x, y, z, 1）</li>
+            <li>对于四维坐标（x, y, z, w），都除以w即可转换为三维坐标，即（x/w, y/w, z/w）</li>
+          </ul>
+          <strong>拆解：</strong>
+          <p>对于任何一个线性变换矩阵，我们可以把它拆解（decompose）为TRS或TSR三个矩阵的乘积的形式。</p>
+          <div style="height: 400px; width: 600px; background-image: url('../../img/LinearTrans_01.webp')"
+               class="bg-1"></div>
+          <ul class="ul-2-num">
+            <li>首先提取最后一列，得到位移</li>
+            <li>剩余的矩阵是R和S相乘的矩阵</li>
+          </ul>
+          <div style="height: 350px; width: 800px; background-image: url('../../img/LinearTrans_02.webp')"
+               class="bg-1"></div>
+          <p>从图中可以看出，SR矩阵，第一行的平方和开根就是Sx，第二行的平方和开根就是Sy，第三行的平方和开根就是Sz。第一行除以Sx，第二行除以Sy，第三行除以Sz，即可得到旋转矩阵。</p>
+          <strong>四维变换的逆变换：</strong>
+          <ul class="ul-2">
+            <li>位移:T的逆矩阵是-T，即向反方向移动.</li>
+            <li>旋转: R的逆矩阵是R的转置矩阵，即以对角线翻转矩阵。 怎么理解呢？比如R是绕X轴旋转θ，那么逆操作就是绕X轴旋转-θ，带入-θ就会发现它变成了转置矩阵。</li>
+            <li>缩放:S的逆矩阵是1/S，即把对角线上的三个元素都变成倒数，即反向缩放。</li>
+            <li>线性变换Xforms: TSR的逆矩阵 = R的逆×S的逆×T的逆</li>
+          </ul>
+        </div>
+      </section>
+      <section id="Quaternion">
+        <h4>四元数</h4>
+        <div class="content">
+          <strong>在GLSL中通过四元数旋转顶点</strong>
+          <p><a href="Quaternion.html" target="_blank">四元数旋转顶点原理</a></p>
+          <p>算法：position += 2.0 * cross( quaternion.xyz, cross( quaternion.xyz, position ) + quaternion.w * position
+            );</p>
+          <p>实例：</p>
+          <ul class="ul-2">
+            <li><a
+                href="https://15707901327.github.io/ThreeSourceCodeAnalysis/example/instance_buffergeometry/webgl_buffergeometry_instancing2.html"
+                target="_blank">实例webgl_buffergeometry_instancing2</a></li>
+            <li><a
+                href="https://15707901327.github.io/ThreeSourceCodeAnalysis/example/instance_buffergeometry/webgl_buffergeometry_instancing_dynamic.html"
+                target="_blank">实例webgl_buffergeometry_instancing_dynamic</a></li>
+          </ul>
+        </div>
+      </section>
+    </section>
+    <section id="rotation" class="section1">
+      <div class="title">旋转(Rotation)</div>
+      <section>
+        <div class="content">
+          <p>对于一个三维坐标（x, y, z），让其绕x, y, z轴旋转θ角的方法是在其左边乘上一个旋转矩阵。绕x轴，绕y轴，绕z轴的旋转矩阵分别是：</p>
+          <div style="height: 300px; width: 300px; background-image: url('../../img/rotation_01.webp')"
+               class="bg-1"></div>
+          <p>如果我们想更加通用一点，即点（x, y, z）绕轴（u, v, w）旋转θ的矩阵是什么？
+            如果u, v, w三者的平方和为1，即该向量是个单位向量，那么矩阵如下：</p>
+          <div style="height: 250px; width: 1000px; background-image: url('../../img/rotation_02.webp')"
+               class="bg-1"></div>
+          <strong>四维旋转(绕x轴转θ)</strong>
+          <div style="height: 250px; width: 1000px; background-image: url('../../img/rotation_03.webp')"
+               class="bg-1"></div>
+          <p>从上图中可以看到，四维旋转矩阵，是在我们上面刚说的三维绕轴旋转矩阵的基础上，在最后一行和最后一列补上一个（0，0，0，1）。</p>
+        </div>
+      </section>
+      <section id="rotation_matrix">
+        <h4>旋转矩阵的推导</h4>
+        <div class="content">
+          <strong>矩阵的乘法</strong>
+          <p>将矩阵（中间）和矢量（右边）相乘，就获得一个新的矢量（左边）。</p>
+          <p>注意矩阵的乘法不符合交换律，也就是说AXB和BXA是不相等的。</p>
+          <p>只有在矩阵的列数与矢量的行数相等时，才可以将两者相乘。</p>
+          <div style="height: 200px; width: 300px; background-image: url('../../img/3X3矩阵.png')" class="bg-1"></div>
+          <p>上图中x',y',z'的计算：</p>
+          <p>x' = ax + by + cz</p>
+          <p>y' = dx + ey + fz</p>
+          <p>z' = gx + hy + iz</p>
+          <h4>点变换</h4>
+          <div style="height: 200px; width: 200px; background-image: url('../../img/3.22.png')" class="bg-1"></div>
+          <pre>
+        r是从原点到点p的距离，而∂是x轴旋转到点p的角度，用这两个点来计算点p的坐标。
+          x = r cos∂
+          y = r sin∂
+        类似的，可以使用r、∂、𝞫来表示点p'的坐标
+          x' = r cos(∂+𝞫)
+          y' = r sin(∂+𝞫)
+        利用三角函数两角和公式：
+          sin(a±b) = sina cosb ∓ cosa sinb
+          cos(a±b) = cosa cosb ∓ sina sinb
+        可得：
+          x' = r(cos∂ cos𝞫 - sin∂ sin𝞫)
+          y' = r(sin∂ cos𝞫 + cos∂ sin𝞫)
+        最后，消除r、∂，可得
+          x' = x cos𝞫 - y sin𝞫
+          y' = x sin𝞫 + y cos𝞫
+        </pre>
+          <strong>旋转矩阵</strong>
+          <p>由上面矩阵乘法和点变换可得旋转矩阵：</p>
+          <div style="height: 200px; width: 400px; background-image: url('../../img/3.7.png')" class="bg-1"></div>
+          <strong>四阶旋转矩阵</strong>
+          <div style="height: 200px; width: 400px; background-image: url('../../img/四阶旋转矩阵.png')" class="bg-1"></div>
+          <strong>实例</strong>
+          <ul>
+            <li><a href="../../WebGL编程指南/ch3/RotatedTriangle.html">旋转三角形</a></li>
+            <li><a href="../../WebGL编程指南/ch3/RotatedTriangle_Matrix.html">旋转三角形(使用矩阵)</a></li>
+          </ul>
+        </div>
+      </section>
+    </section>
+    <section id="translation" class="section1">
+      <div class="title">位移(translation)</div>
+      <section>
+        <p>对于一个三维坐标（x, y, z），我们想让它往x轴正方向移动1个单位，往y轴正方向移动1个单位，往z轴正方向移动1个单位，则可以让它加上一个向量（1, 1, 1）。</p>
+      </section>
+      <section id="translation_matrix">
+        <h4>四维平移矩阵</h4>
+        <div class="content">
+          <div style="height: 200px; width: 800px; background-image: url('../../img/3.10.webp')" class="bg-1"></div>
+          <p>从上图中可以看到，四维位移矩阵，是在一个四维单位矩阵（就是对角线都是1，其他都是0的矩阵）的最后一列，放入你想要位移的向量（tx, ty, tz）</p>
+          <strong>实例</strong>
+          <ul>
+            <li><a href="../../WebGL编程指南/ch3/TranslatedTriangle.html">平移三角形</a></li>
+            <li><a href="../../WebGL编程指南/ch3/RotatedTriangle_Matrix.html">平移三角形(使用矩阵)</a></li>
+          </ul>
+        </div>
+      </section>
+    </section>
+    <section id="scale" class="section1">
+      <div class="title">缩放（scale)</div>
+      <section>
+        <div class="content">
+          <p>对于一个三维坐标（x, y, z），我们想让它扩大2倍，则可以让它变成（2x, 2y, 2z）。写成矩阵乘法的话，V2 = M*V1，M如下图：</p>
+          <div style="height: 200px; width: 400px; background-image: url('../../img/03.png')" class="bg-1"></div>
+        </div>
+      </section>
+      <section id="scale_matrix">
+        <h4>四维缩放矩阵</h4>
+        <div class="content">
+          <div style="height: 250px; width: 900px; background-image: url('../../img/rotation_04.webp')"
+               class="bg-1"></div>
+          <strong>实例</strong>
+          <ul>
+            <li><a href="../../WebGL编程指南/ch3/RotatedTriangle_Matrix.html">缩放三角形(使用矩阵)</a></li>
+          </ul>
+        </div>
+      </section>
+    </section>
+    <section id="library">
+      <h4>矩阵变换库</h4>
+      <ul>
+        <li><a href="../../WebGL编程指南/lib/cuon-matrix说明.html">WebGL编程指南书中提供的矩阵变换库</a></li>
+      </ul>
+    </section>
+    <section id="CoordinateSystem" class="section1">
+      <div class="title">坐标系</div>
+      <div id="Three-dimensionalCoordinateSystem">
+        <h4>三维坐标系</h4>
+        <p>三维笛卡儿坐标系是在二维笛卡儿坐标系的基础上根据右手定则增加第三维坐标（即Z轴）而形成的。</p>
+        <div class="content">
+          <strong>矩阵法坐标系转换：</strong>
+          <ul class="ul-2-num">
+            <li>获取原坐标系到目标坐标系的矩阵m</li>
+            <li>计算矩阵m的逆转置矩阵T</li>
+            <li>原坐标系中的点在目标坐标系中的对应点 v1 = T * v2</li>
+          </ul>
+          <strong>实例:</strong>
+          <p>var matrix = new THREE.Matrix4();</p>
+          <p>matrix.set(0, 1, 0, 0,0, 0, 1, 0,1, 0, 0, 0,0, 0, 0, 1);</p>
+          <p>矩阵matrix可以把c中的坐标系转换到three中</p>
+        </div>
+      </div>
+      <div id="SphericalCoordinateSystem">
+        <h4>球面坐标系</h4>
+        <div class="content">
+          <strong>定义:</strong>
+          <p>设P是R^3中一点，在球面坐标系中的三个坐标变量是(r,θ, φ):
+          <p>
+          <p>r: 原点到点P的距离。</p>
+          <p>倾角(或极角) θ：是天顶方向和线段OP之间的夹角。</p>
+          <p>方位(或方位角) φ：是从方位参考方向到参照平面上线段OP的正交投影的有符号角度。</p>
+          <div><img src="map1.png"/></div>
+          <strong>特点：</strong>
+          <p>球面坐标系相同的同一点，具有无限多个等效坐标,，你可以在不改变角度的情况下, 增加或减去任意数量倍的，从而不改变角点。</p>
+          <p>在许多情况下，允许负径向距离也很方便,，该惯例是(−r,θ,φ)等效于(r,θ+ 180 °,φ)为任意r，θ和φ。此外，(r,−θ,φ)等效于(r,θ,φ+ 180 °)。</p>
+          <strong>坐标转换:</strong>
+          <p>球坐标系(r,θ,φ)与直角坐标系(x,y,z)的转换关系:</p>
+          <pre><code>
+            x = rsinθcosφ.
+            y = rsinθsinφ.
+            z = rcosθ.
+          </code></pre>
+          <p>直角坐标系(x,y,z)与球坐标系(r,θ,φ)的转换关系为:</p>
+          <pre><code>
+            r = sqrt(x^2 + y^2 + z^2)
+            θ = arccos(z/r)
+            φ = arctan(y/x)
+          </code></pre>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+</body>
+</html>

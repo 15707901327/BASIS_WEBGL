@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OpenGL简介</title>
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../css/base.css">
+</head>
+<body>
+<div class="l-r-wrapper">
+  <div class="left">
+    <h4><a href="#Overview">OpenGL概述</a></h4>
+  </div>
+  <div class="right">
+    <section id="Overview" class="section1">
+      <h4 class="title">OpenGL概述</h4>
+      <section>
+        <strong>定义：</strong>
+        <p>OpenGL是一种应用程序编程接口，它是一种可以对图形硬件设备特性进行访问的软件库。</p>
+      </section>
+      <section>
+        <h4>基本术语</h4>
+        <div class="content">
+          <strong>渲染：</strong>
+          <p>计算机从模型创建到最终图像生成的过程。</p>
+          <strong>模型（场景对象）:</strong>
+          <p>通过几何图元来构建的，模型的顶点与图元存在着各种对应关系。</p>
+          <strong>着色器：</strong>
+          <p>图形硬件所执行的一类特殊的函数，可以理解为专门为图形处理单元（GPU）编译的一种小型程序。</p>
+          <strong>顶点着色器</strong>
+          <p>处理顶点数据</p>
+          <strong id="fragment_shader">片元着色器</strong>
+          <p>处理光栅化的片元数据。</p>
+          <strong>像素（pixel）:</strong>
+          <p>显示器最小的可见单元，计算机将所有的像素保存到帧缓存中。</p>
+          <strong>缓存对象（buffer object）</strong>
+          <p>OpenGL服务端维护的一块内存区域，OpenGL需要将所有的数据都保存到缓存对象中。</p>
+          <strong>帧缓冲:</strong>
+          <p>由图形硬件设备管理的一块独立内存区域，可以映射到最终的显示设备上。</p>
+          <strong id="rasterizer">光栅化单元（rasterizer）</strong>
+          <p>负责对所有的剪切区域（clipping region）内的图元生成片元数据，然后对每个生成的片元都执行一个片元着色器。</p>
+          <strong id="rasterize">光栅化</strong>
+          <p>将输入图元的数字描述转换为与屏幕位置对应的像素片元。</p>
+        </div>
+      </section>
+      <section>
+        <h4>渲染管线：</h4>
+        <p>一系列数据处理过程，将应用程序的数据转换到最终渲染图像。</p>
+        <div class="content">
+          <div class="divRight"><img src="img/pipeline.png" width="500"></div>
+          <strong>基本流程</strong>
+          <ul class="ul-2-num">
+            <li>接收用户提供的几何数据（顶点和几何图元），用于构建形状。</li>
+            <li>将数据输入到一系列着色器中进行处理，包括顶点着色、细分着色（本身包含两个着色器）以及最后的几何着色。用来
+              判断图元数据的位置、颜色以及其他渲染属性。</li>
+            <li>将数据送入<a href="#rasterizer">光柵化单元(rasterizer)</a>，进行<a href="#rasterize">光柵化</a>，生成片元数据。</li>
+            <li>针对光柵化过程产生的每个片元，执行<a href="#fragment_shader">片元着色器</a>，从而决定这个片元最终颜色和位置。</li>
+            <li>还需要对每个片元执行一些额外的操作，例如判断片元对应的对象是否可见、或者将片元的颜色与当前屏幕
+              位置的颜色进行融合。</li>
+          </ul>
+        </div>
+      </section>
+    </section>
+  </div>
+</div>
+</body>
+</html>

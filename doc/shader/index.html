@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>着色器介绍</title>
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../css/base.css">
+</head>
+<body>
+<div class="l-r-wrapper">
+  <div class="left">
+    <h4><a href="#shader">着色器</a></h4>
+    <h4><a href="#storageQualifier">存储限定符</a></h4>
+    <ul class="ul-1">
+      <li><a href="#const">const</a></li>
+      <li><a href="#attribute">attribute</a></li>
+      <li><a href="#uniform">uniform</a></li>
+      <li><a href="#varying">varying</a></li>
+      <li><a href="#difference">限定符区别</a></li>
+    </ul>
+    <h4><a href="#precisionQualifier">精度限定符</a></h4>
+    <h4><a href="#parameterQualifier">参数限定符</a></h4>
+  </div>
+  <div class="right">
+    <section id="shader" class="section1">
+      <h4 class="title">着色器</h4>
+      <section>
+        <strong>定义：</strong>
+        <p>图形硬件所执行的一类特殊的函数，可以理解为专门为图形处理单元（GPU）编译的一种小型程序。</p>
+        <strong id="GLSE">GLSE：</strong>
+        <p>一种专门为图形开发设计的编程语言.</p>
+      </section>
+    </section>
+    <section id="storageQualifier" class="section1">
+      <h4 class="title">存储限定符</h4>
+      <section id="const">
+        <h4>const 变量</h4>
+        <div class="content">
+          <p>声明常量</p>
+          <strong>声明变量</strong>
+          <p>变量的声明格式：存储限定符->类型->变量名</p>
+          <p>const vec4 red = vec4(1.0, 0.0, 0.0 1.0);</p>
+        </div>
+      </section>
+      <section id="attribute">
+        <h4>attribute</h4>
+        <div class="content">
+          <strong>声明变量</strong>
+          <p>关键词attribute被称为存储限定符,它表示接下来的变量是一个attribute变量，被用来从外部向顶点着色器内传输数据，被用来表示逐顶点的信息。</p>
+          <p>变量的声明格式：存储限定符->类型->变量名</p>
+          <p>attribute vec4 a_Position;</p>
+          <strong>说明:</strong>
+          <ul class="ul-1-num">
+            <li>只能出现在顶点着色器中。</li>
+            <li>只能被声明为全局变量。</li>
+            <li>只能指定float类型的attribute变量。</li>
+          </ul>
+          <strong>实例一：在顶点着色器中声明变量，并使用</strong>
+          <pre>
+        // 顶点着色器程序
+        var VSHADER_SOURCE =
+          'attribute vec4 a_Position;\n' +
+          'void main() {\n' +
+          '  gl_Position = a_Position;\n' + //设置坐标
+          '  gl_PointSize = 10.0;\n' + //设置尺寸
+          '}\n';
+    </pre>
+        </div>
+      </section>
+      <section id="uniform">
+        <h4>uniform</h4>
+        <div class="content">
+          <strong>声明变量</strong>
+          <p>变量的声明格式：存储限定符->类型->变量名</p>
+          <p>uniform vec4 u_FragColor</p>
+          <strong>说明：</strong>
+          <ul class="ul-1-num">
+            <li>uniform 变量可以用在顶点着色器和片元着色器中，且必须是全局变量。</li>
+            <li>uniform 变量是只读的，它可以是除了数组或结构体之外的任意类型。</li>
+            <li>如果顶点着色器和片元着色器中声明了同名的uniform 变量，那么它就会被这两种着色器共享。</li>
+            <li>uniform 变量传输的是那些对于所有顶点都相同（或与顶点无关的数据）</li>
+          </ul>
+          <strong>实例一：在片元着色器中声明变量并使用</strong>
+          <pre>
+        // 片元着色器
+        var FSHADER_SOURCE =
+        'uniform vec4 u_FragColor;\n' +
+        'void main() {\n' +
+        '  gl_FragColor = u_FragColor;\n' +
+        '}\n';
+    </pre>
+          <strong>实例</strong>
+          <ul>
+            <li><a href="../../../WebGL编程指南/ch2/ClickedPoints.html">点击画点</a></li>
+          </ul>
+        </div>
+      </section>
+      <section id="varying">
+        <h4>varying 变量</h4>
+        <div class="content">
+          <strong>声明</strong>
+          <p>varying 变量的任务是从顶点着色器向片元着色器传输数据，我们必须在两种着色器中声明同名，同类型的变量。顶点着色器中赋给varying变量的值并不是直接传递给了片元着色器的varying变量，这其中发生了<a
+              href="../WebGL程序.html#section_4">光栅化</a>的过程。</p>
+          <p>变量的声明格式：存储限定符->类型->变量名</p>
+          <p>varying vec4 v_Color</p>
+          <strong>说明</strong>
+          <ul>
+            <li>varying 变量必须是全局变量</li>
+          </ul>
+        </div>
+      </section>
+      <section id="difference">
+        <h4>uniform、varying、attribute区别</h4>
+        <div class="content">
+          <p>uniform 表示一次渲染过程中保存不变的，GPU的工作模式是多管道的，相当于一个像素点对应着一个管道，
+            当然并不是说有这么多管道，只是表示他是一一对应并且一起处理；那么把整个屏幕处理时uniform是持不变的</p>
+          <p>attribute 表示是实时在改变的，比如通常我们用了存放顶点，和颜色</p>
+          <p>varying 用来着色器之间的通讯,也就是顶点着色器和片段着色去之间的桥梁；比如你要传一个顶点颜色，你需要在两个着色
+            器里声明一个变量，然后你把颜色传入到顶点着色器中，并在main()函数里赋值，这才能把赋值给你声明的varying vec4 color</p>
+        </div>
+      </section>
+    </section>
+    <section id="precisionQualifier" class="section1">
+      <h4 class="title">精度限定符</h4>
+      <section id="precision">
+        <h4>精度限定词</h4>
+        <div class="content">
+          <p>精度限定词用来指定变量的范围（最大值和最小值）和精度。</p>
+          <strong>默认值</strong>
+          <div>
+            <p>#ifdef GL_ES</p>
+            <p>precision mediump float</p>
+            <p>#endif</p>
+          </div>
+          <strong>精度限定字</strong>
+          <table border="1">
+            <tr>
+              <th colspan="4">精度限定字</th>
+            </tr>
+            <tr>
+              <th>精度限定字</th>
+              <th>描述</th>
+              <th colspan="2">默认数值范围和精度</th>
+            </tr>
+            <tr>
+              <td colspan="2"></td>
+              <td>Float</td>
+              <td>int</td>
+            </tr>
+            <tr>
+              <td>highp</td>
+              <td>高精度，顶点着色器的最低精度</td>
+              <td>（-2^62,2^26）精度2^-16</td>
+              <td>(-2^16,2^16)</td>
+            </tr>
+            <tr>
+              <td>mediump</td>
+              <td>中精度，介于高精度与低精度之间，片元着色器的最低精度</td>
+              <td>（-2^14,2^14）精度2^-10</td>
+              <td>(-2^10,2^10)</td>
+            </tr>
+            <tr>
+              <td>lowp</td>
+              <td>低精度，低于中精度，可以表示所有颜色</td>
+              <td>（-2,2）精度2^8</td>
+              <td>(-2^8,2^8)</td>
+            </tr>
+          </table>
+          <p>在某些Webgl环境中，片元着色器可能不支持highp精度</p>
+          <strong>数据类型的默认精度</strong>
+          <table border="1">
+            <tr>
+              <th colspan="3">数据类型的默认精度</th>
+            </tr>
+            <tr>
+              <td rowspan="4">顶点着色器</td>
+              <td>int</td>
+              <td>highp</td>
+            </tr>
+            <tr>
+              <td>float</td>
+              <td>highp</td>
+            </tr>
+            <tr>
+              <td>sampler2D</td>
+              <td>lowp</td>
+            </tr>
+            <tr>
+              <td>samplerCube</td>
+              <td>lowp</td>
+            </tr>
+            <tr>
+              <td rowspan="4">片元着色器</td>
+              <td>int</td>
+              <td>mediump</td>
+            </tr>
+            <tr>
+              <td>float</td>
+              <td>无</td>
+            </tr>
+            <tr>
+              <td>sampler2D</td>
+              <td>lowp</td>
+            </tr>
+            <tr>
+              <td>samplerCube</td>
+              <td>lowp</td>
+            </tr>
+          </table>
+          <strong>实例一：使用精度限定词限定中等精度</strong>
+          <pre>
+// 顶点着色器程序
+var VSHADER_SOURCE =
+  'precision mediump float;\n' + // 声明默认精度
+  'attribute vec4 a_Position;\n' +
+  'void main() {\n' +
+  '  gl_Position = a_Position;\n' + //设置坐标
+  '  gl_PointSize = 10.0;\n' + //设置尺寸
+  '}\n';
+</pre>
+        </div>
+      </section>
+    </section>
+    <section id="parameterQualifier" class="section1">
+      <h4 class="title">参数限定符</h4>
+      <p>GLSL 提供了一种特殊的限定符用来定义某个变量的值是否可以被函数修改.</p>
+      <section>
+        <table border="1">
+          <tr>
+            <th>限定符</th>
+            <th>描述</th>
+          </tr>
+          <tr>
+            <td>in</td>
+            <td>默认使用的缺省限定符，指明参数传递的是值，并且函数不会修改传入的值（C 语言中值传递）</td>
+          </tr>
+          <tr>
+            <td>inout</td>
+            <td>指明参数传入的是引用，如果在函数中对参数的值进行了修改，当函数结束后参数的值也会修改（C 语言中引用传递）</td>
+          </tr>
+          <tr>
+            <td>out</td>
+            <td>参数的值不会传入函数，但是在函数内部修改其值，函数结束后其值会被修改</td>
+          </tr>
+        </table>
+      </section>
+    </section>
+  </div>
+</div>
+</body>
+</html>

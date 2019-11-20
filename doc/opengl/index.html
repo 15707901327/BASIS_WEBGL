@@ -10,13 +10,19 @@
 <div class="l-r-wrapper">
   <div class="left">
     <h4><a href="#Overview">OpenGL概述</a></h4>
+    <h4><a href="#OPGL_shader">OpenGL着色器</a></h4>
   </div>
   <div class="right">
     <section id="Overview" class="section1">
       <h4 class="title">OpenGL概述</h4>
       <section>
-        <strong>定义：</strong>
-        <p>OpenGL是一种应用程序编程接口，它是一种可以对图形硬件设备特性进行访问的软件库。</p>
+        <strong>概述：</strong>
+        <div class="content">
+          <strong>定义：</strong>
+          <p>OpenGL是一种应用程序编程接口，它是一种可以对图形硬件设备特性进行访问的软件库。</p>
+          <strong>OpenGL发展图示：</strong>
+          <div><img src="img/relation.png" width="800"></div>
+        </div>
       </section>
       <section>
         <h4>基本术语</h4>
@@ -25,8 +31,6 @@
           <p>计算机从模型创建到最终图像生成的过程。</p>
           <strong>模型（场景对象）:</strong>
           <p>通过几何图元来构建的，模型的顶点与图元存在着各种对应关系。</p>
-          <strong>着色器：</strong>
-          <p>图形硬件所执行的一类特殊的函数，可以理解为专门为图形处理单元（GPU）编译的一种小型程序。</p>
           <strong>顶点着色器</strong>
           <p>处理顶点数据</p>
           <strong id="fragment_shader">片元着色器</strong>
@@ -52,13 +56,24 @@
           <ul class="ul-2-num">
             <li>接收用户提供的几何数据（顶点和几何图元），用于构建形状。</li>
             <li>将数据输入到一系列着色器中进行处理，包括顶点着色、细分着色（本身包含两个着色器）以及最后的几何着色。用来
-              判断图元数据的位置、颜色以及其他渲染属性。</li>
+              判断图元数据的位置、颜色以及其他渲染属性。
+            </li>
             <li>将数据送入<a href="#rasterizer">光柵化单元(rasterizer)</a>，进行<a href="#rasterize">光柵化</a>，生成片元数据。</li>
             <li>针对光柵化过程产生的每个片元，执行<a href="#fragment_shader">片元着色器</a>，从而决定这个片元最终颜色和位置。</li>
             <li>还需要对每个片元执行一些额外的操作，例如判断片元对应的对象是否可见、或者将片元的颜色与当前屏幕
-              位置的颜色进行融合。</li>
+              位置的颜色进行融合。
+            </li>
           </ul>
         </div>
+      </section>
+    </section>
+    <section id="OPGL_shader" class="section1">
+      <h4 class="title">OpenGL着色器</h4>
+      <section>
+        <strong>OpenGL着色器概述：</strong>
+        <p>现代OpenGL渲染管线严重依赖着色器来处理传入的数据，无论是OpenGL还是其他图形API的<a href="../shader/index.html"
+                                                             target="_blank">着色器</a>，通常都是通过一种特殊的
+          编程语言去编写的，对于OpenGL来说，我们会使用<a href="../shader/index.html#GLSE">GLSL(OpenGL Shading Language).</a></p>
       </section>
     </section>
   </div>

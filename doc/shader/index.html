@@ -9,7 +9,14 @@
 <body>
 <div class="l-r-wrapper">
   <div class="left">
-    <h4><a href="#shader">着色器</a></h4>
+    <h4><a href="#shader">着色器概述</a></h4>
+    <h4><a href="#grammar">着色器语法</a></h4>
+    <ul class="ul-1">
+      <li><a href="#annotate">注释说明</a></li>
+      <li><a href="#codingStandards">编码规范</a></li>
+      <li><a href="#baseDataType">基本数据类型</a></li>
+      <li><a href="#polymericType">聚合数据类型</a></li>
+    </ul>
     <h4><a href="#storageQualifier">存储限定符</a></h4>
     <ul class="ul-1">
       <li><a href="#const">const</a></li>
@@ -29,6 +36,94 @@
         <p>图形硬件所执行的一类特殊的函数，可以理解为专门为图形处理单元（GPU）编译的一种小型程序。</p>
         <strong id="GLSE">GLSE：</strong>
         <p>一种专门为图形开发设计的编程语言.</p>
+      </section>
+    </section>
+    <section id="grammar" class="section1">
+      <h4 class="title">着色器语法</h4>
+      <section id="annotate">
+        <h4>注释说明</h4>
+        <div class="content">
+          <ul class="ul-1">
+            <li>单行注释 //</li>
+            <li>多行注释 /**/</li>
+          </ul>
+        </div>
+      </section>
+      <section id="codingStandards">
+        <h4>编码规范</h4>
+        <div class="content">
+          <ul class="ul-1">
+            <li>程序是大小写敏感的</li>
+            <li>每个语句都应该以一个英文分号(;)结束</li>
+          </ul>
+        </div>
+      </section>
+      <section id="baseDataType">
+        <h4>基本数据类型</h4>
+        <div class="content">
+          <table border="1" style="border-collapse: collapse">
+            <tr>
+              <th>类型</th>
+              <th>描述</th>
+            </tr>
+            <tr>
+              <td>float</td>
+              <td>单精度浮点数</td>
+            </tr>
+            <tr>
+              <td>double</td>
+              <td>双精度浮点数</td>
+            </tr>
+            <tr>
+              <td>int</td>
+              <td>有符号32位整型数</td>
+            </tr>
+            <tr>
+              <td>uint</td>
+              <td>无符号32位整型数</td>
+            </tr>
+            <tr>
+              <td>bool</td>
+              <td>布尔值</td>
+            </tr>
+          </table>
+          <p>不同类型之间的变量赋值，需要使用<a href="BuiltInFunction.html#typeConversion" target="_blank">类型转换函数</a>进行类型转换</p>
+        </div>
+      </section>
+      <section id="polymericType">
+        <h4>聚合数据类型</h4>
+        <div class="content">
+          <table border="1">
+            <tr>
+              <th colspan="3">矢量和矩阵类型</th>
+            </tr>
+            <tr>
+              <th>类别</th>
+              <th>数据类型</th>
+              <th>描述</th>
+            </tr>
+            <tr>
+              <td>矢量</td>
+              <td>
+                <p>vec2、vec3、vec4</p>
+                <p>ivec2、ivec3、ivec4</p>
+                <p>bvec2、bvec3、bvec4</p>
+              </td>
+              <td>
+                <p>具有2、3、4个浮点数元素的矢量</p>
+                <p>具有2、3、4个整形数元素的矢量</p>
+                <p>具有2、3、4个布尔值元素的矢量</p>
+              </td>
+            </tr>
+            <tr>
+              <td>矩阵</td>
+              <td>mat2、mat3、mat4</td>
+              <td>
+                2*2、3*3、4*4的浮点元素的矩阵
+              </td>
+            </tr>
+          </table>
+        </div>
       </section>
     </section>
     <section id="storageQualifier" class="section1">
@@ -69,16 +164,21 @@
       </section>
       <section id="uniform">
         <h4>uniform</h4>
+        <p>uniform 是 GLSL 中的一种变量类型限定符，用于存储应用程序通过GLSL传递给着色器的只读值。uniform 可以用来存储着
+          色器需要的各种数据，如变换矩阵、光参数和颜色等。传递给着色器的在所有的顶点着色器和片元着色器中保持不变的的任何参数，基本上都应该通过 uniform 来存储。uniform 变量在全局区声明,</p>
         <div class="content">
           <strong>声明变量</strong>
           <p>变量的声明格式：存储限定符->类型->变量名</p>
           <p>uniform vec4 u_FragColor</p>
-          <strong>说明：</strong>
+          <strong>注意：</strong>
           <ul class="ul-1-num">
             <li>uniform 变量可以用在顶点着色器和片元着色器中，且必须是全局变量。</li>
             <li>uniform 变量是只读的，它可以是除了数组或结构体之外的任意类型。</li>
-            <li>如果顶点着色器和片元着色器中声明了同名的uniform 变量，那么它就会被这两种着色器共享。</li>
             <li>uniform 变量传输的是那些对于所有顶点都相同（或与顶点无关的数据）</li>
+            <li>顶点着色器和片元着色器共享了 uniform 变量的命名空间。对于连接于同一个着色程序对象的顶点和片元着色器，它们共用同一组 uniform 变量，因此，如果在顶点着色器和片元着色器中都声明了 uniform
+              变量，二者的声明必须一致。当应用程序通过 API 加载了 uniform 变量时，该变量的值在顶点和片元着色器中都能够获取到。
+            </li>
+            <li>uniform 变量通常是存储在硬件中的”常量区”，这一区域是专门分配用来存储常量的，但是由于这一区域尺寸非常有限，因此着色程序中可以使用的 uniform 的个数也是有限的。</li>
           </ul>
           <strong>实例一：在片元着色器中声明变量并使用</strong>
           <pre>
@@ -115,7 +215,7 @@
           <p>uniform 表示一次渲染过程中保存不变的，GPU的工作模式是多管道的，相当于一个像素点对应着一个管道，
             当然并不是说有这么多管道，只是表示他是一一对应并且一起处理；那么把整个屏幕处理时uniform是持不变的</p>
           <p>attribute 表示是实时在改变的，比如通常我们用了存放顶点，和颜色</p>
-          <p>varying 用来着色器之间的通讯,也就是顶点着色器和片段着色去之间的桥梁；比如你要传一个顶点颜色，你需要在两个着色
+          <p>varying 用来着色器之间的通讯,也就是顶点着色器和片元着色去之间的桥梁；比如你要传一个顶点颜色，你需要在两个着色
             器里声明一个变量，然后你把颜色传入到顶点着色器中，并在main()函数里赋值，这才能把赋值给你声明的varying vec4 color</p>
         </div>
       </section>

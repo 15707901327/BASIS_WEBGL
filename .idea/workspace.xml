@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/doc/opengl/img/pipeline.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/opengl/img/relation.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/shader/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/opengl/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/opengl/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/shader/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/shader/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl/shader_API/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl/shader_API/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl/shader_API/存储限定字.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl/shader_API/精度限定字.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/webgl/shader_API/内置函数.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/shader/BuiltInFunction.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -87,27 +83,31 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/doc/shader/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="240" column="13" selection-start-line="240" selection-start-column="13" selection-end-line="240" selection-end-column="13" />
+            <state relative-caret-position="556">
+              <caret line="93" column="18" selection-start-line="93" selection-start-column="18" selection-end-line="93" selection-end-column="18" />
               <folding>
                 <element signature="n#head#0;n#html#0;n#!!top" />
-                <element signature="n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#ul#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#0;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#0;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#1;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#section#1;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#section#2;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#3;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#4;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#0;n#section#4;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#div#0;n#section#2;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#table#0;n#div#0;n#section#2;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#tr#0;n#table#0;n#div#0;n#section#2;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#tr#1;n#table#0;n#div#0;n#section#2;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#tr#2;n#table#0;n#div#0;n#section#2;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#tr#2;n#table#0;n#div#0;n#section#2;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#tr#4;n#table#0;n#div#0;n#section#2;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#tr#3;n#table#0;n#div#0;n#section#2;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#section#0;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#th#0;n#table#0;n#section#0;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#table#0;n#section#0;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#tr#1;n#table#0;n#section#0;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#tr#2;n#table#0;n#section#0;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#tr#3;n#table#0;n#section#0;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
@@ -117,19 +117,29 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/doc/shader/BuiltInFunction.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="140">
+              <caret line="5" column="51" selection-start-line="5" selection-start-column="51" selection-end-line="5" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/doc/webgl/shader_API/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="23" column="21" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="21" />
+            <state relative-caret-position="276">
+              <caret line="18" column="46" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
               <folding>
-                <element signature="n#ul#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#ul#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#ul#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#ul#3;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#ul#4;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#ul#0;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#ul#1;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#0;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#div#0;n#section#0;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#3;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#section#0;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#section#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
@@ -153,7 +163,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>blending_mode</find>
       <find>texture</find>
       <find>FRAMEBUFFER</find>
       <find>initTexture</find>
@@ -183,6 +192,7 @@
       <find>shader（GLSL ES）</find>
       <find>ctx.html</find>
       <find>SphericalCoordinateSystem</find>
+      <find>片段</find>
     </findStrings>
     <replaceStrings>
       <replace>PGL.Vector3</replace>
@@ -201,7 +211,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/PGL/example/WebGL编程指南/ch7/HelloCube.js" />
         <option value="$PROJECT_DIR$/PGL/example/WebGL编程指南/ch8/LightedCube.html" />
         <option value="$PROJECT_DIR$/PGL/example/WebGL编程指南/ch8/LightedCube.js" />
         <option value="$PROJECT_DIR$/PGL/src/math/math.js" />
@@ -250,8 +259,9 @@
         <option value="$PROJECT_DIR$/doc/opengl/index.html" />
         <option value="$PROJECT_DIR$/doc/webgl/shader_API/存储限定字.html" />
         <option value="$PROJECT_DIR$/doc/webgl/shader_API/精度限定字.html" />
-        <option value="$PROJECT_DIR$/doc/webgl/shader_API/index.html" />
+        <option value="$PROJECT_DIR$/doc/shader/BuiltInFunction.html" />
         <option value="$PROJECT_DIR$/doc/shader/index.html" />
+        <option value="$PROJECT_DIR$/doc/webgl/shader_API/index.html" />
       </list>
     </option>
   </component>
@@ -284,7 +294,24 @@
             <path>
               <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
               <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
               <item name="doc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
+              <item name="doc" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
+              <item name="doc" type="462c0819:PsiDirectoryNode" />
+              <item name="shader" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
@@ -308,7 +335,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../cloud_factoring" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/doc/shader" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -320,19 +347,19 @@
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/../ThreeSourceCodeAnalysis/src/renderers/webgl/WebGLUniforms.js" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\workHome\BASIS_WEBGL\DOC\WebGL" />
-      <recent name="D:\workHome\BASIS_WEBGL\DOC\WebGL\shader_API" />
-      <recent name="D:\workHome\BASIS_WEBGL\DOC" />
-      <recent name="D:\workHome\BASIS_WEBGL\WebGL_API" />
-      <recent name="D:\workHome\BASIS_WEBGL\PGL\src\built" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\workHome\BASIS_WEBGL\doc\shader" />
       <recent name="D:\workHome\BASIS_WEBGL\DOC\css" />
       <recent name="D:\workHome\BASIS_WEBGL\DOC\OpenGL" />
       <recent name="D:\workHome\BASIS_WEBGL\WebGL_API\shader_API" />
       <recent name="D:\workHome\BASIS_WEBGL\example\noise" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\workHome\BASIS_WEBGL\DOC\WebGL" />
+      <recent name="D:\workHome\BASIS_WEBGL\DOC\WebGL\shader_API" />
+      <recent name="D:\workHome\BASIS_WEBGL\DOC" />
+      <recent name="D:\workHome\BASIS_WEBGL\WebGL_API" />
+      <recent name="D:\workHome\BASIS_WEBGL\PGL\src\built" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -446,7 +473,8 @@
       <workItem from="1573195278197" duration="792000" />
       <workItem from="1574126660619" duration="10201000" />
       <workItem from="1574161032819" duration="683000" />
-      <workItem from="1574211624189" duration="2636000" />
+      <workItem from="1574211624189" duration="3287000" />
+      <workItem from="1574240268863" duration="3643000" />
     </task>
     <task id="LOCAL-00001" summary="1.绘制三角形实现">
       <created>1557569131944</created>
@@ -728,11 +756,18 @@
       <option name="project" value="LOCAL" />
       <updated>1573197770985</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="1.着色器">
+      <created>1574215233184</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1574215233184</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="505384000" />
+    <option name="totallyTimeSpent" value="509678000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -745,8 +780,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2157738" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21130952" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -793,18 +829,10 @@
     <MESSAGE value="1.canvas 2D" />
     <MESSAGE value="1.球形坐标" />
     <MESSAGE value="1.OpenGL概述" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.OpenGL概述" />
+    <MESSAGE value="1.着色器" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.着色器" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/PGL/example/WebGL编程指南/ch5/TexturedQuad.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WebGL编程指南/ch3/MultiPoints.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
@@ -1202,58 +1230,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/doc/webgl/shader_API/内置函数.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="194" column="23" lean-forward="true" selection-start-line="194" selection-start-column="23" selection-end-line="194" selection-end-column="23" />
-          <folding>
-            <element signature="n#ul#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#li#2;n#ul#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#ul#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#tr#0;n#table#0;n#div#1;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#td#0;n#tr#1;n#table#0;n#div#1;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#tr#2;n#table#0;n#div#1;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#tr#3;n#table#0;n#div#1;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#1;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#tr#0;n#table#0;n#div#1;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#tr#1;n#table#0;n#div#1;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#td#0;n#tr#1;n#table#0;n#div#1;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#tr#2;n#table#0;n#div#1;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#tr#0;n#table#0;n#div#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#tr#1;n#table#0;n#div#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#td#0;n#tr#1;n#table#0;n#div#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#tr#2;n#table#0;n#div#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#td#0;n#tr#2;n#table#0;n#div#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#tr#3;n#table#0;n#div#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#tr#4;n#table#0;n#div#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#tr#5;n#table#0;n#div#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#table#0;n#div#0;n#section#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#tr#0;n#table#0;n#div#0;n#section#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#tr#1;n#table#0;n#div#0;n#section#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#0;n#div#0;n#div#0;n#section#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#1;n#div#0;n#div#0;n#section#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#ul#0;n#div#0;n#div#0;n#section#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#4;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#0;n#section#4;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#table#0;n#div#0;n#section#4;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#5;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#6;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#0;n#section#6;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#ul#0;n#div#0;n#section#6;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#table#0;n#div#0;n#section#6;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#tr#0;n#table#0;n#div#0;n#section#6;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#7;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#0;n#section#7;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#table#0;n#div#0;n#section#7;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/base.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
@@ -1483,51 +1459,117 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/doc/webgl/shader_API/index.html">
+    <entry file="file://$PROJECT_DIR$/doc/webgl/shader_API/内置函数.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="23" column="21" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="21" />
+        <state relative-caret-position="672">
+          <caret line="399" column="31" selection-start-line="399" selection-start-column="17" selection-end-line="399" selection-end-column="31" />
           <folding>
+            <element signature="n#ul#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#li#2;n#ul#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#ul#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#ul#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#ul#3;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#ul#4;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#ul#0;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#ul#1;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tr#0;n#table#0;n#div#1;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#td#0;n#tr#1;n#table#0;n#div#1;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tr#2;n#table#0;n#div#1;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tr#3;n#table#0;n#div#1;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#1;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tr#0;n#table#0;n#div#1;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tr#1;n#table#0;n#div#1;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#td#0;n#tr#1;n#table#0;n#div#1;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tr#2;n#table#0;n#div#1;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tr#0;n#table#0;n#div#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tr#1;n#table#0;n#div#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#td#0;n#tr#1;n#table#0;n#div#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tr#2;n#table#0;n#div#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#td#0;n#tr#2;n#table#0;n#div#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tr#3;n#table#0;n#div#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tr#4;n#table#0;n#div#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tr#5;n#table#0;n#div#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#0;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#2;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#3;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#table#0;n#div#0;n#section#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tr#0;n#table#0;n#div#0;n#section#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tr#1;n#table#0;n#div#0;n#section#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#div#0;n#div#0;n#section#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#1;n#div#0;n#div#0;n#section#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#ul#0;n#div#0;n#div#0;n#section#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#4;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#section#4;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#table#0;n#div#0;n#section#4;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#5;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#6;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#section#6;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#ul#0;n#div#0;n#section#6;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#table#0;n#div#0;n#section#6;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tr#0;n#table#0;n#div#0;n#section#6;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#7;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#section#7;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#table#0;n#div#0;n#section#7;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/shader/BuiltInFunction.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="5" column="51" selection-start-line="5" selection-start-column="51" selection-end-line="5" selection-end-column="51" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/doc/shader/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="240" column="13" selection-start-line="240" selection-start-column="13" selection-end-line="240" selection-end-column="13" />
+        <state relative-caret-position="556">
+          <caret line="93" column="18" selection-start-line="93" selection-start-column="18" selection-end-line="93" selection-end-column="18" />
           <folding>
             <element signature="n#head#0;n#html#0;n#!!top" />
-            <element signature="n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#ul#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#0;n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#0;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#1;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#1;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#2;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#3;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#4;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#0;n#section#4;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#section#2;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#table#0;n#div#0;n#section#2;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tr#0;n#table#0;n#div#0;n#section#2;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tr#1;n#table#0;n#div#0;n#section#2;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tr#2;n#table#0;n#div#0;n#section#2;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tr#2;n#table#0;n#div#0;n#section#2;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tr#4;n#table#0;n#div#0;n#section#2;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#tr#3;n#table#0;n#div#0;n#section#2;n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#0;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#th#0;n#table#0;n#section#0;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#table#0;n#section#0;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#tr#1;n#table#0;n#section#0;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#tr#2;n#table#0;n#section#0;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#tr#3;n#table#0;n#section#0;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/webgl/shader_API/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="18" column="46" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
+          <folding>
+            <element signature="n#ul#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#ul#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#ul#3;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#ul#4;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#0;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#section#0;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#3;n#section#2;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#0;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#1;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#2;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#3;n#section#3;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>

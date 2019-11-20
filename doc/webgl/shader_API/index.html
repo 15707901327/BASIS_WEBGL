@@ -17,8 +17,6 @@
     <h4><a href="#dataType">数据类型</a></h4>
     <ul class="ul-1">
       <li><a href="#numberType">数据值类型</a></li>
-      <li><a href="#baseType">基本数据类型</a></li>
-      <li><a href="#vectorMatrix">矢量和矩阵</a></li>
       <li><a href="#texture">专用于纹理的数据类型</a></li>
     </ul>
     <h4><a href="#fun">函数</a></h4>
@@ -43,16 +41,6 @@
       <h4 class="title">着色器概述</h4>
       <strong>GLSE ES概述</strong>
       <p>GLSE ES编程语言是在OpenGL着色器语言（GLSL）的基础上，删除和简化一部分功能后形成的。</p>
-      <strong>编码规范</strong>
-      <ul class="ul-1">
-        <li>程序是大小写敏感的</li>
-        <li>每个语句都应该以一个英文分号(;)结束</li>
-      </ul>
-      <strong>注释</strong>
-      <ul class="ul-1">
-        <li>单行注释 //</li>
-        <li>多行注释 /**/</li>
-      </ul>
     </section>
     <section id="variable" class="section1">
       <h4 class="title">着色器中的变量</h4>
@@ -150,65 +138,6 @@
             </tr>
           </table>
           <p>不支持字符串类型</p>
-        </div>
-      </section>
-      <section id="baseType">
-        <h4>基本数据类型</h4>
-        <div class="content">
-          <table border="1" style="border-collapse: collapse">
-            <tr>
-              <th>类型</th>
-              <th>描述</th>
-            </tr>
-            <tr>
-              <td>float</td>
-              <td>单精度浮点数</td>
-            </tr>
-            <tr>
-              <td>int</td>
-              <td>整型数</td>
-            </tr>
-            <tr>
-              <td>bool</td>
-              <td>布尔值</td>
-            </tr>
-          </table>
-          <p>不同类型之间的变量赋值，需要使用<a href="内置函数.html#typeConversion">类型转换函数</a>进行类型转换</p>
-        </div>
-      </section>
-      <section id="vectorMatrix">
-        <h4>矢量和矩阵</h4>
-        <div class="content">
-          <table border="1">
-            <tr>
-              <th colspan="3">矢量和矩阵类型</th>
-            </tr>
-            <tr>
-              <th>类别</th>
-              <th>数据类型</th>
-              <th>描述</th>
-            </tr>
-            <tr>
-              <td>矢量</td>
-              <td>
-                <p>vec2、vec3、vec4</p>
-                <p>ivec2、ivec3、ivec4</p>
-                <p>bvec2、bvec3、bvec4</p>
-              </td>
-              <td>
-                <p>具有2、3、4个浮点数元素的矢量</p>
-                <p>具有2、3、4个整形数元素的矢量</p>
-                <p>具有2、3、4个布尔值元素的矢量</p>
-              </td>
-            </tr>
-            <tr>
-              <td>矩阵</td>
-              <td>mat2、mat3、mat4</td>
-              <td>
-                2*2、3*3、4*4的浮点元素的矩阵
-              </td>
-            </tr>
-          </table>
         </div>
       </section>
       <section id="texture">

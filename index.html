@@ -8,7 +8,7 @@
 <body>
 <div class="l-r-wrapper">
   <div class="left">
-    <h4><a href="doc/opengl/index.html">OpenGL简介</a></h4>
+    <h4><a href="doc/opengl/index.html" target="_blank">OpenGL简介</a></h4>
     <h4><a href="#basicConcept">基本概念</a></h4>
     <ul class="ul-1">
       <li><a href="#pipeline">渲染管线</a></li>
@@ -80,8 +80,6 @@
           <p>将孤立的顶点坐标装配成几何图形。</p>
           <strong>光栅化过程：</strong>
           <p>将装配好的几何图形转化为片元。一旦光栅化过程结束后，程序就开始逐片元调用片元着色器。</p>
-          <strong>深度检测（DEPTH_TEST）：</strong>
-          <p>通过检测物体（的每个像素的）的深度来决定是否将其画出来。</p>
           <strong>深度冲突：</strong>
           <p>产生深度冲突的原因是：在使用隐藏面消除时，当几何图形或物体的两个表面极为接近时，<a href="#depthBuffer">深度缓冲区</a>有限的精度已经不能区分出那个在前，那个在后,就会发生深度冲突的问题.
           </p>

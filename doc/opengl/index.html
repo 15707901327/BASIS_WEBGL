@@ -11,6 +11,12 @@
   <div class="left">
     <h4><a href="#Overview">OpenGL概述</a></h4>
     <h4><a href="#OPGL_shader">OpenGL着色器</a></h4>
+    <h4><a href="#OPGL_buffer">缓存</a></h4>
+    <ul class="ul-1">
+      <li><a href="#colorBuffer">颜色缓存</a></li>
+      <li><a href="#depthBuffer">深度缓存</a></li>
+      <li><a href="#stencilBuffer">模板缓存</a></li>
+    </ul>
   </div>
   <div class="right">
     <section id="Overview" class="section1">
@@ -37,10 +43,6 @@
           <p>处理光栅化的片元数据。</p>
           <strong>像素（pixel）:</strong>
           <p>显示器最小的可见单元，计算机将所有的像素保存到帧缓存中。</p>
-          <strong>缓存对象（buffer object）</strong>
-          <p>OpenGL服务端维护的一块内存区域，OpenGL需要将所有的数据都保存到缓存对象中。</p>
-          <strong>帧缓冲:</strong>
-          <p>由图形硬件设备管理的一块独立内存区域，可以映射到最终的显示设备上。</p>
           <strong id="rasterizer">光栅化单元（rasterizer）</strong>
           <p>负责对所有的剪切区域（clipping region）内的图元生成片元数据，然后对每个生成的片元都执行一个片元着色器。</p>
           <strong id="rasterize">光栅化</strong>
@@ -74,6 +76,33 @@
         <p>现代OpenGL渲染管线严重依赖着色器来处理传入的数据，无论是OpenGL还是其他图形API的<a href="../shader/index.html"
                                                              target="_blank">着色器</a>，通常都是通过一种特殊的
           编程语言去编写的，对于OpenGL来说，我们会使用<a href="../shader/index.html#GLSE">GLSL(OpenGL Shading Language).</a></p>
+      </section>
+    </section>
+    <section id="OPGL_buffer" class="section1">
+      <h4 class="title">缓存</h4>
+      <section>
+        <h4>术语</h4>
+        <div class="content">
+          <strong>帧缓存：</strong>
+          <p>由图形硬件设备管理的一块独立内存区域，可以映射到最终的显示设备上。</p>
+          <strong>缓存对象（buffer object）：</strong>
+          <p>OpenGL服务端维护的一块内存区域，OpenGL需要将所有的数据都保存到缓存对象中。</p>
+          <strong id="DEPTH_TEST">深度检测（DEPTH_TEST）：</strong>
+          <p>通过检测物体（的每个像素的）的深度来决定是否将其画出来。</p>
+        </div>
+      </section>
+      <section id="colorBuffer">
+        <h4>颜色缓存</h4>
+        <p>颜色缓存是我们通常进行绘制的缓存对象。</p>
+      </section>
+      <section id="depthBuffer">
+        <h4>深度缓存(z缓存、z-buffer)</h4>
+        <p>深度缓存为每个像素保存一个深度值，可以用来判断三维空间物体的可见性。这里的深度是物体与观察者眼睛之间的距离，
+          可以通过<a href="#DEPTH_TEST">深度测试</a>来改变。</p>
+      </section>
+      <section id="stencilBuffer">
+        <h4>模板缓存</h4>
+        <p>可以使用模板缓存来限制屏幕特定区域的绘制。</p>
       </section>
     </section>
   </div>

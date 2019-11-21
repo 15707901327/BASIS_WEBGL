@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>BRDF.基于物理的着色技术</title>
-  <link rel="stylesheet" href="../../../css/base.css">
+  <link rel="stylesheet" href="../../css/base.css">
 </head>
 <body>
 <div class="l-r-wrapper">
@@ -49,7 +49,7 @@
             <p>r: 球的半径</p>
             <p>由此可知，立体角是与球的大小无关的。 </p>
           </div>
-          <img src="img/solid.png"/>
+          <img src="../webgl/shader_API/img/solid.png"/>
           <div>
             <strong>微分式代换</strong>
             <p class="formula">dω=sinθdθdψ</p>
@@ -78,7 +78,7 @@
           <strong>符号表示</strong>
           <p class="formula">E = dϕ / dA</p>
           <div>
-            <img src="img/radiant.png"/>
+            <img src="../webgl/shader_API/img/radiant.png"/>
             <p>现在需要考虑这个面积指的是哪个面积，如果光是垂直设向这个表面的，很显然，面积就是表面的面积，但是如果光是倾斜地射向表面的呢？如图所示，倾斜照射的情况下，相同的辐射通量的光到达的表面变大了，也就是说这个时候辐照度是变小了的，因此在光线倾斜的时候，应该只考虑表面垂直与光线的那一部分面积，即将表面投影到与光线垂直的地方，用式子来表示这一关系： </p>
             <p class="formula">E0 = dϕ / dA0 = dϕ / dAcosθ= E / cosθ</p>
             <p>E0 : 光线完全垂直照射到表面时的辐照度.</p>
@@ -120,41 +120,41 @@
       <p>BRDF的非微分形式为:</p>
       <p class="formula">f(l,v) = L0(v) / ELcosθi</p>
       <p>分子就是出射光在v方向上的辐射率，分母是入射光l在垂直于它的平面上的辐照度。 而我们着色要做的是求出射光的辐射率，因此我们的目标是利用已知的f(l,v)来计算L0(v)即</p>
-      <img src="img/radiance.png"/>
+      <img src="../webgl/shader_API/img/radiance.png"/>
       <p>其中k是光源的编号 。⨂符号表示各个分量相乘，因为BRDF和辐射率、辐照度都是三维向量，分别表示RGB的数据。 </p>
     </section>
     <section id="dhr" class="section1">
       <h4 class="title">半球定向反射率(directional-hemispherical reflectance)</h4>
-      <img src="img/dhr.png"/>
+      <img src="../webgl/shader_API/img/dhr.png"/>
     </section>
     <section id="fnr" class="section1">
       <h4 class="title">菲涅尔反射率</h4>
-      <img src="img/fnr.png"/>
-      <img src="img/fnr2.png"/>
-      <img src="img/fnr3.png"/>
-      <img src="img/fnr4.png"/>
+      <img src="../webgl/shader_API/img/fnr.png"/>
+      <img src="../webgl/shader_API/img/fnr2.png"/>
+      <img src="../webgl/shader_API/img/fnr3.png"/>
+      <img src="../webgl/shader_API/img/fnr4.png"/>
     </section>
     <section id="jbbm" class="section1">
       <h4 class="title">局部次表面散射</h4>
-      <img src="img/jbbm.png"/>
+      <img src="../webgl/shader_API/img/jbbm.png"/>
     </section>
     <section id="vpm" class="section1">
       <h4 class="title">微平面理论</h4>
-      <img src="img/vpm.png"/>
+      <img src="../webgl/shader_API/img/vpm.png"/>
     </section>
     <section id="lambertian_BRDF" class="section1">
       <h4 class="title">Lambertian的BRDF版本</h4>
-      <img src="img/lambertian_BRDF.png"/>
+      <img src="../webgl/shader_API/img/lambertian_BRDF.png"/>
     </section>
     <section id="phong_BRDF" class="section1">
       <h4 class="title">Phong的BRDF版本</h4>
-      <img src="img/phong_BRDF.png"/>
-      <img src="img/phong_BRDF2.png"/>
+      <img src="../webgl/shader_API/img/phong_BRDF.png"/>
+      <img src="../webgl/shader_API/img/phong_BRDF2.png"/>
     </section>
     <section id="Blinn_BRDF" class="section1">
       <h4 class="title">Blinn-Phong的BRDF版本</h4>
-      <img src="img/Blinn_BRDF.png"/>
-      <img src="img/Blinn_BRDF2.png"/>
+      <img src="../webgl/shader_API/img/Blinn_BRDF.png"/>
+      <img src="../webgl/shader_API/img/Blinn_BRDF2.png"/>
     </section>
   </div>
 </div>

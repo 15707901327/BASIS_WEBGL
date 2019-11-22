@@ -27,7 +27,6 @@
         <li><a href="#type_array">类型化数组</a></li>
         <li><a href="#noise">图形噪声</a></li>
       </ul>
-      <h4><a href="#camera">camera</a></h4>
       <h4><a href="#texture">texture</a></h4>
       <h4><a href="#blending">blending</a></h4>
       <ul class="ul-1">
@@ -57,7 +56,6 @@
         <li><a href="#polygonCulling">多边形剔除</a></li>
       </ul>
       <h4><a href="#light">光照</a></h4>
-      <h4><a href="doc/graphics/index.html" target="_blank">图形学（Graphics）</a></h4>
       <h4><a href="canvas2D_API/ctx.html" target="_blank">canvas 2D API</a></h4>
       <h4><a href="doc/webgl/js_API/gl.html" target="_blank">WebGL API</a></h4>
       <h4><a href="doc/webgl/js_API/WebGL_extensions.html" target="_blank">WebGL扩展注册表</a></h4>
@@ -305,48 +303,6 @@
             <strong>纹理过滤通常分为2种情况：</strong>
             <p>纹理被缩小:比方说一个8 x 8的纹理贴到一个平行于xy平面的正方形上，最后该正方形在屏幕上仅仅占4 x 4的象素矩阵，这样的情况下一个象素相应着多个纹理单元。</p>
             <p>纹理被放大:这样的情况刚好跟上面相反。假如我们放大该正方形，最后正方形在屏幕上占了一个16 x 16的象素矩阵，这样就变成一个纹理单元相应着多个象素。</p>
-          </div>
-        </section>
-      </section>
-      <section id="camera" class="section1">
-        <h4 class="title">相机</h4>
-        <section>
-          <div class="content">
-            <h4>三维投影算法</h4>
-
-            <p>三维空间中的物体，投射在相机视平面的转换算法。</p>
-            <p><strong>相机看到的景象和以下因素有关：</strong></p>
-            <ul class="ul-3-num">
-              <li>相机的投影类型（正射投影、透视投影）：投影矩阵（ProjectMatrix）</li>
-              <li>相机的位置和方向：视图矩阵 ( CameraMatrixWorldInverse 或 ViewMatrix )</li>
-              <li>物体的位置和形变（旋转/缩放/平移）：物体位置矩阵( ObjectWorldMatrix )</li>
-            </ul>
-            <p>三维投影算法就是将上诉因素抽象为数学算法，用来计算三维物体在相机视平面上的位置。实际应用中我们是通过矩阵计算来实现的。简而言之，我们将相机的位置方向, 相机的类型, 物体的位置和形变能转换为
-              矩阵 , 将这些矩阵进行一系列计算后, 最终得到 三维投影矩阵.</p>
-
-            <p><strong>三维投影矩阵计算公式：</strong></p>
-            <p>uMatrix = ProjectMatrix * CameraMatrixWorldInverse * ObjectMatrixWorld</p>
-
-            <p><strong>相机的视图矩阵:</strong></p>
-            <p>视图矩阵的含义是，固定其他因素，我们改变了相机的位置和角度后，它眼中的世界也会发生变化，这种变化就是视图矩阵。</p>
-            <p>相机在三维空间中的位置是 camera.matrixWorld ，而它的视图矩阵是相机位置矩阵的逆矩阵 CameraMatrixWorldInverse ，它也符合了我们的生活经验：</p>
-            <ul class="ul-3-num">
-              <li>固定相机，人向左移动</li>
-              <li>固定人，向右移动相机</li>
-            </ul>
-
-            <h4>相机的可视空间：</h4>
-            <ul class="ul-1-num">
-              <li>长方形可视空间，也称盒状空间，由正射投影（orthographic projection）产生。</li>
-              <li>四棱锥/金字塔可视空间，由透视投影(perspective projection)产生</li>
-            </ul>
-
-            <h4>获取屏幕二维坐标:</h4>
-            <p>const [x, y] = ProjectionMatrix * CameraWorldMatrixInverse * [x, y, z]</p>
-
-            <h4>屏幕坐标转化为三维坐标:</h4>
-            <p>const [x, y, z] = CameraWorldMatrix * ProjectionMatrixInverse * [x, y, z]</p>
-            <p>不过屏幕坐标转化为三维坐标不是这么简单，因为屏幕上的二维坐标在三维空间中其实对应的是一条射线，其可以对应了无限个三维坐标点.</p>
           </div>
         </section>
       </section>

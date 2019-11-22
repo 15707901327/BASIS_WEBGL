@@ -122,7 +122,7 @@ ul {
     height: 100%;
     width: 15%;
     float: left;
-    overflow: auto;
+    overflow-y: scroll;
 }
 
 .left::-webkit-scrollbar {
@@ -155,10 +155,12 @@ ul {
     float: left;
     margin: 20px 20px 20px 0;
 }
+
 .section1 {
     border: 1px solid burlywood;
     border-radius: 10px;
     margin: 15px;
+    background-color: #f0f0f0;
 }
 
 .section1 .title {

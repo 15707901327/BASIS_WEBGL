@@ -78,45 +78,77 @@ ul {
 .header{
     position: fixed;
     width: 100%;
-    height: 40px;
-    line-height: 40px;
+    height: 8%;
     background-color: #d7d7d7;
     border-bottom: 1px solid #cacaca;
 }
 
 .header ul{
+    position: relative;
     text-align: right;
     margin-right: 5%;
+    height: 80%;
+    top: 20%;
 }
 
 .header li{
     display: inline-block;
     width: 100px;
+    height: 100%;
     background: darkgrey;
     border-radius: 5px 5px 0 0;
     text-align: center;
 }
 
-.l-r-wrapper {
+.header li a{
+    display: block;
+    margin: 10%;
+}
+
+/*************内容*****************/
+.content{
     height: 100%;
     overflow: hidden;
-    min-width: 800px;
     background-color: #f0f0f0;
+}
+
+.l-r-wrapper {
+    height: 92%;
+    position: fixed;
+    bottom: 0;
 }
 
 .left {
     height: 100%;
-    width: 25%;
-    padding-top: 40px;
+    width: 15%;
     float: left;
     overflow: auto;
+}
+
+.left::-webkit-scrollbar {
+    width: 4px;
+}
+
+.left::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.2);
+}
+.left::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 0;
+    background: rgba(0,0,0,0.1);
+
 }
 
 .right {
     background-color: #fff;
     overflow: auto;
     height: 100%;
-    padding-top: 40px;
+}
+
+.right::-webkit-scrollbar {
+    width: 0;
 }
 
 .divLeft{
@@ -124,8 +156,9 @@ ul {
     margin: 20px 20px 20px 0;
 }
 .section1 {
-    margin-top: 20px;
-    border-top: 1px dashed burlywood;
+    border: 1px solid burlywood;
+    border-radius: 10px;
+    margin: 15px;
 }
 
 .section1 .title {

@@ -477,6 +477,19 @@
       <!-- 模板缓冲方法 -->
       <section id="stencil" class="section1">
         <div class="title">模板缓冲</div>
+        <section>
+          <h4>模板缓冲流程：</h4>
+          <div>
+            <ul class="ul-2-num">
+              <li>启用模板测试</li>
+              <li>设置模板参数</li>
+              <li>渲染物体，同时根据本次渲染出的物体更新模板缓冲的内容。注意，本次渲染会正常更新颜色缓冲区和深度缓冲区。</li>
+              <li>设定模板参数</li>
+              <li>渲染物体，这次根据模板缓冲内容丢弃特定片段</li>
+              <li>禁用模板测试</li>
+            </ul>
+          </div>
+        </section>
         <section id="clearStencil">
           <h4>gl.clearStencil(s);</h4>
           <p>默认值 0</p>
@@ -492,7 +505,7 @@
         </section>
         <section id="stencilOp">
           <h4>gl.stencilOp(fail, zfail, zpass);</h4>
-          <p>设置正面和背面模板测试操作。</p>
+          <p>设置正面和背面模板测试操作。设置怎样根据下一次渲染的结果来更新模板缓冲中的值。</p>
           <div class="content">
             <strong>参数：</strong>
             <ul class="ul-1">
@@ -502,6 +515,48 @@
             </ul>
             <strong>返回值：</strong>
             <p>无</p>
+            <strong>参数集合：</strong>
+            <table border="1">
+              <tr>
+                <th colspan="2">参数集合</th>
+              </tr>
+              <tr>
+                <th>参数类型</th>
+                <th>描述</th>
+              </tr>
+              <tr>
+                <td>KEEP</td>
+                <td>不改变，这也是默认值.</td>
+              </tr>
+              <tr>
+                <td>ZERO</td>
+                <td>回零</td>
+              </tr>
+              <tr>
+                <td>REPLACE</td>
+                <td>使用测试条件中的设定值来代替当前模板值，<a href="#stencilFunc">stencilFunc()</a>中的ref参数</td>
+              </tr>
+              <tr>
+                <td>INCR</td>
+                <td>增加1，但如果已经是最大值，则保持不变</td>
+              </tr>
+              <tr>
+                <td>INCR_WRAP</td>
+                <td>增加1，但如果已经是最大值，则从零重新开始</td>
+              </tr>
+              <tr>
+                <td>DECR</td>
+                <td>减少1，但如果已经是零，则保持不变</td>
+              </tr>
+              <tr>
+                <td>DECR_WRAP</td>
+                <td>减少1，但如果已经是零，则重新设置为最大值</td>
+              </tr>
+              <tr>
+                <td>INVERT</td>
+                <td>按位取反</td>
+              </tr>
+            </table>
           </div>
         </section>
         <section id="stencilFunc">

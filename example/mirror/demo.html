@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>mirror</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../../css/base.css">
+
+  <script type="text/javascript" src="js/util/Matrix.js"></script>
+  <script type="text/javascript" src="js/util/PGL.js"></script>
+  <script>
+    var ball;
+    // 纹理管理器
+    var texMap = {};
+    // 绕y轴旋转角度
+    var currentYAngle = 0;
+    // 绕x轴旋转角度
+    var currentXAngle = 0;
+    //旋转角度步长值
+    var incAngle = 0.5;
+    var timeLive = 0, TIME_SPAN = 0.05, G = 3;//周期存活时间与单位时间间隔、重力加速度
+    var startY = 30.0, vy = 0, currentY = 0;//球开始的Y坐标，初始速度，当前Y坐标
+    //上次触控点X,Y坐标
+    var lastClickX, lastClickY;
+    var ismoved = false;//是否移动标志位
+    //鼠标按下的监听
+    document.onmousedown = function(event) {
+      var x = event.clientX;
+      var y = event.clientY;
+      //如果鼠标在<canvas>内开始移动
+      var rect = (event.target || event.srcElement).getBoundingClientRect();
+      if (rect.left <= x && x < rect.right && rect.top <= y && y < rect.bottom) {
+        ismoved = true;
+        lastClickX = x;
+        lastClickY = y;
+      }
+    };
+    //鼠标抬起的监听
+    document.onmouseup = function(event) {
+      ismoved = false;
+    };
+    //鼠标移动时的监听
+    document.onmousemove = function(event) {
+      var x = event.clientX, y = event.clientY;
+      if (ismoved) {
+        currentYAngle = currentYAngle + (x - lastClickX) * incAngle;
+        currentXAngle = currentXAngle + (y - lastClickY) * incAngle;
+      }
+      lastClickX = x;
+      lastClickY = y;
+    };
+
+  </script>
+
+  <script type="module">
+    import WebGLRenderer from "../jsm/render/WebGLRenderer.js";
+    import LightManager from "./js/util/LightManager.js";
+    import MatrixState from "./js/util/MatrixState.js";
+    import FileLoader from "../jsm/loader/FileLoader.js";
+    import TextureLoader from "../jsm/loader/TextureLoader.js";
+    import ProgramManager from "../jsm/ProgramManager.js";
+    import OBJLoader from "../jsm/loader/OBJLoader.js";
+
+    window.onload = function() {
+      var rectdb;
+
+      var canvas = document.getElementById('bncanvas');
+      var webGLRenderer = new WebGLRenderer({canvas});
+      webGLRenderer.setViewport();
+      webGLRenderer.setClearColor();
+      var gl = webGLRenderer.getContext();
+
+      // 变换矩阵管理类对象
+      var ms = new MatrixState();
+      ms.setInitStack(); // 初始化变换矩阵
+      ms.setCamera(0, 15, 10, 0, 0, 0, 0, 1, 0); // 设置摄像机
+      ms.setProjectFrustum(-1.5, 1.5, -1, 1, 1, 100); // 设置投影参数
+
+      // 设置光源位置
+      var lightManager = new LightManager(40, 10, 20);
+      lightManager.setLightLocation(50, 100, 20);//40 10 20
+
+      // 打开深度检测
+      gl.enable(gl.DEPTH_TEST);
+      // 打开背面剪裁
+      gl.enable(gl.CULL_FACE);
+
+      // 加载球体
+      var objLoader = new OBJLoader();
+      // 加载着色器程序
+      var fileLoader = new FileLoader();
+      fileLoader.load("shader/shader.bns", function(text) {
+        var shaderStrA = text.split("<#BREAK_BN#>");
+        var programManage = new ProgramManager();
+        var program = programManage.createProgram(gl, shaderStrA[0], shaderStrA[1]);
+        gl.useProgram(program);
+
+        // 加载球
+        objLoader.load("obj/ballT.obj", function(bufferGeometry) {
+          ball = new ObjObject(gl, bufferGeometry.attributes.vertices, bufferGeometry.attributes.normals, bufferGeometry.attributes.uvs, program);
+        });
+
+        // 加载地板
+        objLoader.load("obj/db.obj", function(geometry) {
+          rectdb = new ObjObject(gl, geometry.attributes.vertices, geometry.attributes.normals, geometry.attributes.uvs, program);
+        });
+      });
+
+      // 加载纹理图
+      var textureLoader = new TextureLoader(gl);
+      texMap["ball"] = textureLoader.load("pic/basketball.png");
+      texMap["db"] = textureLoader.load("pic/mdb1.png");
+      textureLoader.load("pic/mdbtm1.png", function(texture) {
+        texMap["tm"] = texture;
+      });
+
+      // 绘制物体
+      function drawball() {
+        ms.pushMatrix();
+        ms.scale(0.3, 0.3, 0.3);
+        ms.translate(0, 0.8 + currentY, 0);
+        ball.drawSelf(ms, texMap["ball"], lightManager);
+        ms.popMatrix();
+      }
+
+      // 绘制镜像体
+      function drawmirror() {
+        ms.pushMatrix();
+        ms.scale(0.3, 0.3, 0.3);
+        ms.translate(0, -0.8 - currentY, 0);
+        ball.drawSelf(ms, texMap["ball"], lightManager);
+        ms.popMatrix();
+      }
+
+      setInterval(function() {
+        //此轮运动时间增加
+        timeLive += TIME_SPAN;
+        //根据此轮起始Y坐标、此轮运动时间、此轮起始速度计算当前位置
+        var tempCurrY = startY - 0.5 * G * timeLive * timeLive + vy * timeLive;
+        //若当前位置低于地面则碰到地面反弹
+        if (tempCurrY <= 0.0) {
+          //反弹后起始位置为0
+          startY = 0;
+          //反弹后起始速度
+          vy = -(vy - G * timeLive) * 0.995;
+          //反弹后此轮运动时间清0
+          timeLive = 0;
+          //若速度小于阈值则停止运动
+          if (vy < 0.35) {
+            currentY = 0;
+            //break;
+          }
+        } else {//若没有碰到地面则正常运动
+          currentY = tempCurrY;
+        }
+
+        if (!rectdb || !ball) {
+          // alert("加载未完成！");//提示信息
+          return;
+        }
+        //清除着色缓冲与深度缓冲
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+        //清除模板缓存
+        gl.clear(gl.STENCIL_BUFFER_BIT);
+        //关闭深度检测
+        gl.disable(gl.DEPTH_TEST);
+        //允许模板测试
+        gl.enable(gl.STENCIL_TEST);
+
+        //设置模板测试参数
+        gl.stencilFunc(gl.ALWAYS, 1, 1);
+        //设置模板测试后的操作
+        gl.stencilOp(gl.KEEP, gl.KEEP, gl.REPLACE);
+        ms.pushMatrix();
+        ms.scale(0.3, 0.3, 0.3);
+        //绘制反射面地板
+        rectdb.drawSelf(ms, texMap["db"], lightManager);
+        ms.popMatrix();
+
+        //设置模板测试参数
+        gl.stencilFunc(gl.EQUAL, 1, 1);
+        //设置模板测试后的操作
+        gl.stencilOp(gl.KEEP, gl.KEEP, gl.KEEP);
+        //绘制镜像体
+        drawmirror();
+        //禁用模板测试
+        gl.disable(gl.STENCIL_TEST);
+        //开启混合
+        gl.enable(gl.BLEND);
+        //设置混合因子
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+        ms.pushMatrix();
+        ms.scale(0.3, 0.3, 0.3);
+        //绘制半透明反射面地板
+        rectdb.drawSelf(ms, texMap["tm"], lightManager);
+        ms.popMatrix();
+        //开启深度检测
+        gl.enable(gl.DEPTH_TEST);
+        //关闭混合
+        gl.disable(gl.BLEND);
+
+        //绘制实际物体
+        drawball();
+      }, 30);// 定时调用drawFrame（）方法，每隔30s就调用一次
+    };
+  </script>
+
+</head>
+<body>
+<div id="container">
+  <canvas id="bncanvas" height="500" width="1080"></canvas>
+</div>
+</body>
+</html>

@@ -1,7 +1,11 @@
-function Shaders() {
+/**
+ * 创建着色器程序
+ * @constructor
+ */
+function ProgramManager() {
 }
 
-Object.assign(Shaders.prototype, {
+Object.assign(ProgramManager.prototype, {
   /**
    * 初始化shader
    * @param gl
@@ -96,4 +100,4 @@ Object.assign(Shaders.prototype, {
   }
 });
 
-export {Shaders};
+export default ProgramManager;

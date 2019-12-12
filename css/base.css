@@ -101,6 +101,11 @@ ul {
     border-radius: 5px 5px 0 0;
 }
 
+.header ul .li_heightLight{
+    background: #43d4cd;
+    box-shadow: 0 0 3px #206e9c;
+}
+
 .header ul :after{
     content: '';
     display: inline-block;

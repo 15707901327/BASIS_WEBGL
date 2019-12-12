@@ -24,38 +24,36 @@ function MatrixState() {
   }
 
   //执行平移变换
-  this.translate = function(x, y, z)//设置沿xyz轴移动
-  {
+  //设置沿xyz轴移动
+  this.translate = function(x, y, z) {
     translateM(this.currMatrix, 0, x, y, z);
   }
 
   //执行旋转变换
-  this.rotate = function(angle, x, y, z)//设置绕xyz轴移动
-  {
+  //设置绕xyz轴移动
+  this.rotate = function(angle, x, y, z) {
     rotateM(this.currMatrix, 0, angle, x, y, z);
   }
 
   //执行缩放变换
-  this.scale = function(x, y, z)//设置绕xyz轴移动
-  {
+  //设置绕xyz轴移动
+  this.scale = function(x, y, z) {
     scaleM(this.currMatrix, 0, x, y, z)
   }
 
   //设置摄像机
-  this.setCamera = function
-    (
-      cx,	//摄像机位置x
-      cy,   //摄像机位置y
-      cz,   //摄像机位置z
-      tx,   //摄像机目标点x
-      ty,   //摄像机目标点y
-      tz,   //摄像机目标点z
-      upx,  //摄像机UP向量X分量
-      upy,  //摄像机UP向量Y分量
-      upz   //摄像机UP向量Z分量
-    ) {
-    setLookAtM
-    (
+  this.setCamera = function(
+    cx,	//摄像机位置x
+    cy,   //摄像机位置y
+    cz,   //摄像机位置z
+    tx,   //摄像机目标点x
+    ty,   //摄像机目标点y
+    tz,   //摄像机目标点z
+    upx,  //摄像机UP向量X分量
+    upy,  //摄像机UP向量Y分量
+    upz   //摄像机UP向量Z分量
+  ) {
+    setLookAtM(
       this.mVMatrix, 0,
       cx, cy, cz,
       tx, ty, tz,
@@ -80,8 +78,7 @@ function MatrixState() {
   }
 
   //设置正交投影参数
-  this.setProjectOrtho = function
-    (
+  this.setProjectOrtho = function(
       left,		//near面的left
       right,    //near面的right
       bottom,   //near面的bottom

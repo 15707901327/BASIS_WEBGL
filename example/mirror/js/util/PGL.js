@@ -1,15 +1,14 @@
 /**
  * 加载的用于绘制的3D物体
  * @param gl GL上下文
- * @param vertexDataIn 顶点坐标数组
- * @param vertexNormalIn 顶点法向量数组
- * @param vertexTexCoorIn 顶点纹理坐标数组
+ * @param bufferGeometry 顶点坐标数组
  * @param programIn 着色器程序对象
  * @constructor
  */
-function ObjObject(gl, vertexDataIn, vertexNormalIn, vertexTexCoorIn, programIn) {
-  //接收顶点数据
-  this.vertexData = vertexDataIn;
+function ObjObject(gl, bufferGeometry, programIn) {
+
+    //接收顶点数据
+  this.vertexData = bufferGeometry.attributes.vertices;
   //得到顶点数量
   this.vcount = this.vertexData.length / 3;
   //创建顶点数据缓冲
@@ -19,7 +18,7 @@ function ObjObject(gl, vertexDataIn, vertexNormalIn, vertexTexCoorIn, programIn)
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertexData), gl.STATIC_DRAW);
 
   //接收顶点法向量数据
-  this.vertexNormal = vertexNormalIn;
+  this.vertexNormal = bufferGeometry.attributes.normals;
   //创建顶点法向量数据缓冲
   this.vertexNormalBuffer = gl.createBuffer();
   //将顶点法向量数据送入缓冲
@@ -27,7 +26,7 @@ function ObjObject(gl, vertexDataIn, vertexNormalIn, vertexTexCoorIn, programIn)
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertexNormal), gl.STATIC_DRAW);
 
   //接收顶点纹理坐标数据
-  this.vertexTexCoor = vertexTexCoorIn;
+  this.vertexTexCoor = bufferGeometry.attributes.uvs;
   //创建顶点纹理坐标缓冲
   this.vertexTexCoorBuffer = gl.createBuffer();
   //将顶点纹理坐标数据送入缓冲

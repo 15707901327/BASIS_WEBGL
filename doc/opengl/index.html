@@ -19,10 +19,19 @@
 <div class="content">
   <div class="l-r-wrapper">
     <div class="left">
-      <h4><a href="#Overview">OpenGL概述</a></h4>
-      <h4><a href="#OPGL_shader">OpenGL着色器</a></h4>
-      <h4><a href="#OPGL_buffer">缓冲区</a></h4>
+      <h4><a href="#Overview">概述</a></h4>
       <ul class="ul-1">
+        <li><a href="#pipeline">渲染管线</a></li>
+        <li><a href="#rasterization">光栅化</a></li>
+      </ul>
+      <h4><a href="#OPGL_shader">着色器</a></h4>
+      <ul class="ul-1">
+        <li><a href="#vertexShader">顶点着色器</a></li>
+        <li><a href="#fragmentShader">片元着色器</a></li>
+      </ul>
+      <h4><a href="#OPGL_buffer">缓存</a></h4>
+      <ul class="ul-1">
+        <li><a href="#frameBuffer">帧缓存</a></li>
         <li><a href="#colorBuffer">颜色缓存</a></li>
         <li><a href="#OPGL_depth">深度缓存</a></li>
         <li><a href="#OPGL_stencil">模板缓存</a></li>
@@ -41,55 +50,64 @@
           </div>
         </section>
         <section>
-          <h4>基本术语</h4>
+          <h4>基本术语:</h4>
           <div class="content">
             <strong>渲染：</strong>
             <p>计算机从模型创建到最终图像生成的过程。</p>
             <strong>模型（场景对象）:</strong>
             <p>通过几何图元来构建的，模型的顶点与图元存在着各种对应关系。</p>
-            <strong>顶点着色器</strong>
-            <p>处理顶点数据</p>
-            <strong id="fragment_shader">片元着色器</strong>
-            <p>处理光栅化的片元数据。</p>
             <strong>像素（pixel）:</strong>
             <p>显示器最小的可见单元，计算机将所有的像素保存到帧缓存中。</p>
-            <strong id="rasterizer">光栅化单元（rasterizer）</strong>
-            <p>负责对所有的剪切区域（clipping region）内的图元生成片元数据，然后对每个生成的片元都执行一个片元着色器。</p>
-            <strong id="rasterize">光栅化</strong>
-            <p>将输入图元的数字描述转换为与屏幕位置对应的像素片元。</p>
-          </div>
-        </section>
-        <section>
-          <h4>渲染管线：</h4>
-          <p>一系列数据处理过程，将应用程序的数据转换到最终渲染图像。</p>
-          <div class="content">
-            <div class="divRight"><img src="img/pipeline.png" width="500"></div>
-            <strong>基本流程</strong>
-            <ul class="ul-2-num">
-              <li>接收用户提供的几何数据（顶点和几何图元），用于构建形状。</li>
-              <li>将数据输入到一系列着色器中进行处理，包括顶点着色、细分着色（本身包含两个着色器）以及最后的几何着色。用来
-                判断图元数据的位置、颜色以及其他渲染属性。
-              </li>
-              <li>将数据送入<a href="#rasterizer">光柵化单元(rasterizer)</a>，进行<a href="#rasterize">光柵化</a>，生成片元数据。</li>
-              <li>针对光柵化过程产生的每个片元，执行<a href="#fragment_shader">片元着色器</a>，从而决定这个片元最终颜色和位置。</li>
-              <li>还需要对每个片元执行一些额外的操作，例如判断片元对应的对象是否可见、或者将片元的颜色与当前屏幕
-                位置的颜色进行融合。
-              </li>
-            </ul>
           </div>
         </section>
       </section>
+      <section id="pipeline" class="section1">
+        <h4 class="title">渲染管线</h4>
+        <p>一系列数据处理过程，将应用程序的数据转换到最终渲染图像。</p>
+        <div class="content">
+          <div class="divRight"><img src="img/pipeline.png" width="500"></div>
+          <strong>基本流程</strong>
+          <ul class="ul-2-num">
+            <li>接收用户提供的几何数据（顶点和几何图元），用于构建形状。</li>
+            <li>将数据输入到一系列着色器中进行处理，包括顶点着色、细分着色（本身包含两个着色器）以及最后的几何着色。用来
+              判断图元数据的位置、颜色以及其他渲染属性。
+            </li>
+            <li>将数据送入<a href="#rasterizer">光柵化单元(rasterizer)</a>，进行<a href="#rasterize">光柵化</a>，生成片元数据。</li>
+            <li>针对光柵化过程产生的每个片元，执行<a href="#fragment_shader">片元着色器</a>，从而决定这个片元最终颜色和位置。</li>
+            <li>还需要对每个片元执行一些额外的操作，例如判断片元对应的对象是否可见、或者将片元的颜色与当前屏幕
+              位置的颜色进行融合。
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section id="rasterization" class="section1">
+        <h4 class="title">光栅化</h4>
+        <p>图元光栅化发生在顶点着色器和片元着色器之间的从图形到片元的转化过程。将输入图元的数字描述转换为与屏幕位置对应的像素片元。
+          一旦光栅化过程结束后，程序就开始逐片元调用片元着色器。</p>
+        <div class="content">
+          <strong id="rasterizer">光栅化单元（rasterizer）:</strong>
+          <p>负责对所有的剪切区域（clipping region）内的图元生成片元数据，然后对每个生成的片元都执行一个片元着色器。</p>
+        </div>
+      </section>
       <section id="OPGL_shader" class="section1">
-        <h4 class="title">OpenGL着色器</h4>
-        <section>
-          <strong>OpenGL着色器概述：</strong>
-          <p>现代OpenGL渲染管线严重依赖着色器来处理传入的数据，无论是OpenGL还是其他图形API的<a href="../shader/index.html"
-                                                               target="_blank">着色器</a>，通常都是通过一种特殊的
-            编程语言去编写的，对于OpenGL来说，我们会使用<a href="../shader/index.html#GLSE">GLSL(OpenGL Shading Language).</a></p>
+        <h4 class="title">着色器</h4>
+        <p>现代OpenGL渲染管线严重依赖着色器来处理传入的数据，无论是OpenGL还是其他图形API的<a href="../shader/index.html" target="_blank">着色器</a>，
+          通常都是通过一种特殊的编程语言去编写的，对于OpenGL来说，我们会使用<a href="../shader/index.html#GLSE">GLSL(OpenGL Shading Language).</a></p>
+        <section id="vertexShader">
+          <h4>顶点着色器（Vertex shader）</h4>
+          <p>处理顶点数据</p>
+        </section>
+        <section id="fragmentShader">
+          <h4>片元着色器（Fragment shader）</h4>
+          <p>处理光栅化的片元数据。</p>
+          <div class="content">
+            <strong>片元（Fragment）：</strong>
+            <p>每个片元都包含与像素位置对应的坐标数据以及颜色和深度的存储值。</p>
+          </div>
         </section>
       </section>
       <section id="OPGL_buffer" class="section1">
-        <h4 class="title">缓冲区</h4>
+        <h4 class="title">缓存</h4>
         <section>
           <p>图形渲染管线中，基于单个像素的测试操作的顺序如下图:</p>
           <div class="content">
@@ -99,17 +117,50 @@
         <section>
           <h4>术语</h4>
           <div class="content">
-            <strong>帧缓存：</strong>
-            <p>由图形硬件设备管理的一块独立内存区域，可以映射到最终的显示设备上。</p>
-            <strong>缓存对象（buffer object）：</strong>
+            <strong id="bufferObject">缓存对象（buffer object）：</strong>
             <p>OpenGL服务端维护的一块内存区域，OpenGL需要将所有的数据都保存到缓存对象中。</p>
             <p></p>
           </div>
         </section>
-        <section id="colorBuffer">
-          <h4>颜色缓存</h4>
-          <p>颜色缓存是我们通常进行绘制的缓存对象。</p>
+      </section>
+      <section id="frameBuffer" class="section1">
+        <h4 class="title">帧缓存</h4>
+        <p>帧缓存（通常也就是屏幕）由矩形的像素数组组成的，每个像素都可以在图像对应的点上显示一小块方形的颜色值
+          （由图形硬件设备管理的一块独立内存区域，可以映射到最终的显示设备上）。</p>
+        <p>硬件系统的帧缓存包含所有的缓存内容，因此我们可以在应用程序中使用多个帧缓存。</p>
+        <div class="content">
+          <strong>OpenGL系统中通常包含以下几种类型缓存：</strong>
+          <ul class="ul-2-num">
+            <li>一个或多个可用的颜色缓存（color buffer）</li>
+            <li>深度缓存（depth buffer）</li>
+            <li>模板缓存（stencil buffer）</li>
+          </ul>
+          <p>所有这些缓存都集成到帧缓存中。</p>
+        </div>
+        <section>
+          <h4>帧缓存对象：</h4>
+          <p>通过帧缓存对象，我们可以创建自己的<strong>帧缓存</strong>,并且将他们绑定到<strong>渲染缓存（render buffer）</strong>
+          上，将数据拷贝的消耗最小化，同时对性能进行优化。</p>
+          <p>帧缓存对象对于离屏渲染技术、纹理贴图的更新以及缓存乒乓技术的实现非常有意义。</p>
+          <p>窗口系统所提供的帧缓存是唯一可以被图形服务器的显示系统所识别的帧缓存，也就是说，我们屏幕上看到的只能是这个缓冲。</p>
         </section>
+      </section>
+      <section id="colorBuffer" class="section1">
+        <h4 class="title">颜色缓存</h4>
+        <p>颜色缓存是我们通常进行绘制的<a href="#bufferObject">缓存对象</a>。一个像素可能会关联多个颜色缓存，也就是<strong>渲染缓存（renderbuffer）。</strong></p>
+        <p>颜色缓存中的像素，可能是采用每个像素存储的单一颜色值的形式，也可能从逻辑上被划分为多个子像素。因此启用了一种名为<strong>多重采样（multisampling）</strong>的反走样技术。</p>
+        <div class="content">
+          <strong>多重采样（multisampling）的反走样技术:</strong>
+          <p>是一种对几何图元的边缘进行平滑的技术--通常也称为反走样（antialiasing）。多重采样的工作方式是对每个像素的几何
+            图元进行多次采样，此时每个像素点不会只保存单个颜色值，而是记录多个样本值，他们类似于更小型的像素，可以用来存储
+            每个样本位置的颜色、深度和模板值。</p>
+          <strong>双重缓冲技术：</strong>
+          <p>双重缓冲技术实现需要将主颜色缓存划分为两个部分：直接在窗口显示的<strong>前置缓存(font buffer)</strong>
+            以及用在渲染新图像的<strong>后备缓存（back buffer）</strong>。当我们执行交换缓存的操着时，前、后缓存交换。</p>
+          <p>注意：只用默认帧缓存中的主颜色缓存可以使用双重缓冲的特性。</p>
+          <strong>立体显示:</strong>
+          <p>每个颜色缓存都会再划分出左颜色缓存和右颜色缓存以展现立体图像。</p>
+        </div>
       </section>
       <section id="OPGL_depth" class="section1">
         <h4 class="title">深度缓存(z缓存、z-buffer)</h4>

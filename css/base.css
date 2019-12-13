@@ -185,6 +185,7 @@ section {
 
 section .content {
     margin-left: 2em;
+    padding: 0;
 }
 
 .bg-1 {

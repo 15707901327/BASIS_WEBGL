@@ -22,20 +22,30 @@
       <h4><a href="#concept">概念</a></h4>
       <ul class="ul-1">
         <li><a href="#homogeneousCoordinates">齐次坐标</a></li>
-        <li><a href="#LinearTransformation">线性变换</a></li>
         <li><a href="#Quaternion">四元数</a></li>
       </ul>
-      <h4><a href="#rotation">旋转(Rotation)</a></h4>
+      <h4><a href="#Transform">变换分类</a></h4>
       <ul class="ul-1">
+        <li><a href="#LinearTransformation">线性变换</a></li>
+        <li><a href="#AffineTransformation">仿射变换</a></li>
+        <li><a href="#InverseTransform">可逆变换</a></li>
+        <li><a href="#">等角变换</a></li>
+        <li><a href="#">正交变换</a></li>
+        <li><a href="#">刚体变换</a></li>
+      </ul>
+      <h4><a href="#matrix">矩阵</a></h4>
+      <ul class="ul-1">
+        <li><a href="#matrix">矩阵</a></li>
+        <li><a href="#rotation">旋转(Rotation)</a></li>
         <li><a href="#rotation_matrix">旋转矩阵推导</a></li>
+        <li><a href="#scale">缩放（scale)</a></li>
+        <li><a href="#orthographicProjection_matrix">正交投影</a></li>
+        <li><a href="#mirror_matrix">镜像</a></li>
+        <li><a href="#shear_matrix">切变</a></li>
       </ul>
       <h4><a href="#translation">位移(translation)</a></h4>
       <ul class="ul-1">
         <li><a href="#translation_matrix">四维平移矩阵</a></li>
-      </ul>
-      <h4><a href="#scale">缩放（scale)</a></h4>
-      <ul class="ul-1">
-        <li><a href="#scale_matrix">缩放矩阵</a></li>
       </ul>
       <a href="#library">矩阵变换库</a><br>
       <h4><a href="#CoordinateSystem">坐标系</a></h4>
@@ -56,7 +66,6 @@
         <section>
           <h4>基本概念</h4>
           <div class="content">
-            <strong>仿射变换(affine transformation)</strong>
             <p>三维的笛卡尔坐标添加一个额外坐标转换为<a href="#homogeneousCoordinates">齐次坐标</a>。</p>
           </div>
         </section>
@@ -64,13 +73,42 @@
           <h4>齐次坐标</h4>
           <p>由四个分量组成的矢量（x,y,z,w）。</p>
         </section>
+        <section id="Quaternion">
+          <h4>四元数</h4>
+          <div class="content">
+            <strong>在GLSL中通过四元数旋转顶点</strong>
+            <p><a href="Quaternion.html" target="_blank">四元数旋转顶点原理</a></p>
+            <p>算法：position += 2.0 * cross( quaternion.xyz, cross( quaternion.xyz, position ) + quaternion.w * position
+              );</p>
+            <p>实例：</p>
+            <ul class="ul-2">
+              <li><a
+                  href="https://15707901327.github.io/ThreeSourceCodeAnalysis/example/instance_buffergeometry/webgl_buffergeometry_instancing2.html"
+                  target="_blank">实例webgl_buffergeometry_instancing2</a></li>
+              <li><a
+                  href="https://15707901327.github.io/ThreeSourceCodeAnalysis/example/instance_buffergeometry/webgl_buffergeometry_instancing_dynamic.html"
+                  target="_blank">实例webgl_buffergeometry_instancing_dynamic</a></li>
+            </ul>
+          </div>
+        </section>
+      </section>
+      <section class="section1" id="Transform">
+        <h4 class="title">变换分类</h4>
         <section id="LinearTransformation">
           <h4>线性变换</h4>
-          <p>线性变换（Linear Transformation / Xforms）是渲染和游戏引擎等图形学工具进行坐标变换的方式，是可逆的。 线性变换的等式如下： </p>
+          <p>一般来说，方阵能描述任意线性变换。</p>
           <div class="content">
-            <p>V2 = M*V1</p>
-            <strong>说明：</strong>
-            <ul class="ul-2">
+            <strong>常用线性变换：</strong>
+            <ul class="ul-2-num">
+              <li><a href="#">旋转</a></li>
+              <li><a href="#">缩放</a></li>
+              <li><a href="#">投影</a></li>
+              <li><a href="#">镜像</a></li>
+              <li><a href="#">仿射</a></li>
+            </ul>
+            <strong>列向量说明：</strong>
+            <p>线性变换（Linear Transformation / Xforms）是渲染和游戏引擎等图形学工具进行坐标变换的方式，是可逆的。 线性变换的等式如下： V2 = M*V1</p>
+            <ul class="ul-3-num">
               <li>V是齐次（homogeneous）四维向量（x,y,z,w），竖着写的</li>
               <li>M是齐次4×4矩阵</li>
               <li>当w=1时，四维坐标会变成三维坐标</li>
@@ -97,28 +135,49 @@
             </ul>
           </div>
         </section>
-        <section id="Quaternion">
-          <h4>四元数</h4>
+        <section id="AffineTransformation">
+          <h4>仿射变换(affine transformation)</h4>
+          <p>仿射变换是指线性变换后接着平移。因此仿射变换的集合是线性变换的超集，任何线性变换都是仿射变换，但不是所有的仿射变换都是线性变换。</p>
+        </section>
+        <section id="InverseTransform">
+          <h4>可逆变换</h4>
+          <p>因为任意变换都能表达为矩阵，多以求逆变换等价于求矩阵的逆。</p>
           <div class="content">
-            <strong>在GLSL中通过四元数旋转顶点</strong>
-            <p><a href="Quaternion.html" target="_blank">四元数旋转顶点原理</a></p>
-            <p>算法：position += 2.0 * cross( quaternion.xyz, cross( quaternion.xyz, position ) + quaternion.w * position
-              );</p>
-            <p>实例：</p>
-            <ul class="ul-2">
-              <li><a
-                  href="https://15707901327.github.io/ThreeSourceCodeAnalysis/example/instance_buffergeometry/webgl_buffergeometry_instancing2.html"
-                  target="_blank">实例webgl_buffergeometry_instancing2</a></li>
-              <li><a
-                  href="https://15707901327.github.io/ThreeSourceCodeAnalysis/example/instance_buffergeometry/webgl_buffergeometry_instancing_dynamic.html"
-                  target="_blank">实例webgl_buffergeometry_instancing_dynamic</a></li>
+            <strong>注意：</strong>
+            <ul class="ul-2-num">
+              <li>除了投影其他变换可撤销。</li>
+              <li>如果矩阵是奇异的，则变换不可逆。</li>
+              <li>可逆矩阵的行列式不为零.</li>
             </ul>
           </div>
         </section>
       </section>
-      <section id="rotation" class="section1">
-        <div class="title">旋转(Rotation)</div>
+      <section class="section1" id="matrix">
+        <h4 class="title">矩阵</h4>
         <section>
+          <h4>矩阵</h4>
+          <p>描述两个坐标系统间的关系，通过一种运算而将一个坐标系中的向量转换到另一个坐标系中。</p>
+          <div class="content">
+            <strong>方阵:</strong>
+            <p>行数和列数相同的矩阵称为方阵。</p>
+            <strong>对角矩阵:</strong>
+            <p>如果所有非对角线元素都为0，那么称这种矩阵为对角矩阵。</p>
+            <strong>单位矩阵:</strong>
+            <p>是一种特殊的对角矩阵。</p>
+            <strong>转置矩阵:</strong>
+            <p>沿着矩阵的对角线翻折。</p>
+            <strong>矩阵的性质</strong>
+            <ul class="ul-2-num">
+              <li>矩阵乘法不满足交换律，即AB != BA</li>
+              <li>矩阵乘法满足结合律，即（AB）C = A(BC)</li>
+              <li>满足与标量活向量的结合律，即(kA)B = k(AB)= A(kB)、(vA)B = v(AB)</li>
+              <li>矩阵积的转置相当于先转置矩阵然后以相反的顺序乘：(AB)^T = B^TA^T</li>
+              <li>矩阵-向量乘法满足对向量加法的分配律，（v+w）M = vM + wM</li>
+            </ul>
+          </div>
+        </section>
+        <section id="rotation">
+          <h4>旋转(Rotation)</h4>
           <div class="content">
             <p>对于一个三维坐标（x, y, z），让其绕x, y, z轴旋转θ角的方法是在其左边乘上一个旋转矩阵。绕x轴，绕y轴，绕z轴的旋转矩阵分别是：</p>
             <div style="height: 300px; width: 300px; background-image: url('../../img/rotation_01.webp')"
@@ -176,6 +235,30 @@
             </ul>
           </div>
         </section>
+        <section id="scale">
+          <h4>缩放（scale)</h4>
+          <div class="content">
+            <p>对于一个三维坐标（x, y, z），我们想让它扩大2倍，则可以让它变成（2x, 2y, 2z）。写成矩阵乘法的话，V2 = M*V1，M如下图：</p>
+            <div style="height: 200px; width: 400px; background-image: url('../../img/03.png')" class="bg-1"></div>
+            <strong>四维缩放矩阵</strong>
+            <div style="height: 250px; width: 900px; background-image: url('../../img/rotation_04.webp')"
+                 class="bg-1"></div>
+            <strong>实例</strong>
+            <ul>
+              <li><a href="../../WebGL编程指南/ch3/RotatedTriangle_Matrix.html">缩放三角形(使用矩阵)</a></li>
+            </ul>
+          </div>
+        </section>
+        <section id="orthographicProjection_matrix">
+          <h3>正交投影(orthographic projection)</h3>
+          <p>投影线垂直于投影面的投影属于正交投影，也称平行投影。</p>
+        </section>
+        <section id="mirror_matrix">
+          <h3>镜像</h3>
+        </section>
+        <section id="shear_matrix">
+          <h3>切变</h3>
+        </section>
       </section>
       <section id="translation" class="section1">
         <div class="title">位移(translation)</div>
@@ -191,26 +274,6 @@
             <ul>
               <li><a href="../../WebGL编程指南/ch3/TranslatedTriangle.html">平移三角形</a></li>
               <li><a href="../../WebGL编程指南/ch3/RotatedTriangle_Matrix.html">平移三角形(使用矩阵)</a></li>
-            </ul>
-          </div>
-        </section>
-      </section>
-      <section id="scale" class="section1">
-        <div class="title">缩放（scale)</div>
-        <section>
-          <div class="content">
-            <p>对于一个三维坐标（x, y, z），我们想让它扩大2倍，则可以让它变成（2x, 2y, 2z）。写成矩阵乘法的话，V2 = M*V1，M如下图：</p>
-            <div style="height: 200px; width: 400px; background-image: url('../../img/03.png')" class="bg-1"></div>
-          </div>
-        </section>
-        <section id="scale_matrix">
-          <h4>四维缩放矩阵</h4>
-          <div class="content">
-            <div style="height: 250px; width: 900px; background-image: url('../../img/rotation_04.webp')"
-                 class="bg-1"></div>
-            <strong>实例</strong>
-            <ul>
-              <li><a href="../../WebGL编程指南/ch3/RotatedTriangle_Matrix.html">缩放三角形(使用矩阵)</a></li>
             </ul>
           </div>
         </section>

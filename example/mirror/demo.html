@@ -25,7 +25,12 @@
       var rectdb;
 
       var canvas = document.getElementById('bncanvas');
-      var webGLRenderer = new WebGLRenderer({canvas});
+      var webGLRenderer = new WebGLRenderer({
+        canvas,
+        stencil: true,
+        depth: true,
+        antialias: true
+      });
       webGLRenderer.setViewport();
       webGLRenderer.setClearColor();
       var gl = webGLRenderer.getContext();
@@ -137,8 +142,8 @@
         vy = 0,  // 初始速度
         currentY = 0; // 当前Y坐标
       function animal() {
-        if(ismoved){
-          ms.rotate(currentYAngle,0,1,0);
+        if (ismoved) {
+          ms.rotate(currentYAngle, 0, 1, 0);
         }
 
         requestAnimationFrame(animal);

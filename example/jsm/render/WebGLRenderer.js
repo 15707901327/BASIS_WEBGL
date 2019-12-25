@@ -1,13 +1,25 @@
 /**
  * 渲染器
  * @param options
- *  canvas:画布
+ *  canvas:画布,
+ *  stencil:模板缓存
+ *  alpha:透明
+ *  depth:深度
+ *  antialias：抗锯齿
  * @constructor
  */
+import {WebGLUntil} from "../WebGLUntil.js";
+
 let WebGLRenderer = function(options) {
 
   options = options || {};
   var _canvas = options.canvas;
+  var _stencil = options.stencil !== undefined ? options.stencil : false;
+  var _alpha = options.alpha !== undefined ? options.alpha : false;
+  var _depth = options.depth !== undefined ? options.depth : false;
+  var _antialias = options.antialias !== undefined ? options.antialias : false;
+
+  var webGLUntil = new WebGLUntil();
 
   var _gl = getContext(_canvas);
 
@@ -15,20 +27,19 @@ let WebGLRenderer = function(options) {
    * 获取上下文
    * @param canvas 画布
    * @returns {*}
+   * @param canvas
+   * @returns {CanvasRenderingContext2D|WebGLRenderingContext}
    */
   function getContext(canvas) {
-    var names = ["webgl", "experimental-webgl", "webkit-3d", "moz-webgl"];
-    var context = null;
-    for (var ii = 0; ii < names.length; ++ii) {
-      try{
-        context = canvas.getContext(names[ii], {stencil: true});//{stencil: true}
-      }catch(e){
-      }
-      if (context) {
-        break;
-      }
-    }
-    return context;
+    // 获取上下文参数
+    var params = {
+      alpha: _alpha,
+      depth: _depth,
+      stencil: _stencil,
+      antialias: _antialias
+    };
+
+    return webGLUntil.getWebGLContext(canvas, params);
   }
 
   /**

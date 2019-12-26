@@ -26,8 +26,11 @@
       </ul>
       <h4><a href="#draw">绘制方法</a></h4>
       <ul class="ul-1">
+        <li><a href="#scissor">gl.scissor()</a></li>
+        <li><a href="#viewport">gl.viewport()</a></li>
         <li><a href="#drawArrays">gl.drawArrays()</a></li>
         <li><a href="#drawElements">gl.drawElements()</a></li>
+        <li><a href="#drawBuffers">gl.drawBuffers()</a></li>
       </ul>
       <h4><a href="#buffer">缓冲区方法</a></h4>
       <ul class="ul-1">
@@ -119,26 +122,21 @@
         <li><a href="#blendEquationSeparate" title="gl.blendEquationSeparate()">gl.blendEquationSeparate()</a></li>
         <li><a href="#blendFuncSeparate" title="gl.blendFuncSeparate()">gl.blendFuncSeparate()</a></li>
       </ul>
-      <h4><a href="#Framebuffer">帧缓存区对象</a></h4>
-      <ul class="ul-1">
-        <li><a href="#createFramebuffer">createFramebuffer()</a></li>
-        <li><a href="#deleteFramebuffer">deleteFramebuffer()</a></li>
-        <li><a href="#bindFramebuffer">bindFramebuffer()</a></li>
-        <li><a href="#framebufferTexture2D">framebufferTexture2D()</a></li>
-        <li><a href="#framebufferRenderbuffer">framebufferRenderbuffer()</a></li>
-        <li><a href="#checkFramebufferStatus">checkFramebufferStatus()</a></li>
-      </ul>
-      <h4>绘图区域设置</h4>
-      <ul class="ul-1">
-        <li><a href="#scissor">scissor()</a></li>
-        <li><a href="#viewport">viewport()</a></li>
-      </ul>
       <h4><a href="#renderBuffer">渲染缓存区对象</a></h4>
       <ul class="ul-1">
-        <li><a href="#createRenderbuffer">createRenderbuffer()</a></li>
-        <li><a href="#deleteRenderbuffer">deleteRenderbuffer()</a></li>
-        <li><a href="#bindRenderbuffer">bindRenderbuffer()</a></li>
-        <li><a href="#renderbufferStorage">renderbufferStorage()</a></li>
+        <li><a href="#createRenderbuffer">gl.createRenderbuffer()</a></li>
+        <li><a href="#deleteRenderbuffer">gl.deleteRenderbuffer()</a></li>
+        <li><a href="#bindRenderbuffer">gl.bindRenderbuffer()</a></li>
+        <li><a href="#renderbufferStorage">gl.renderbufferStorage()</a></li>
+      </ul>
+      <h4><a href="#Framebuffer">帧缓冲区对象</a></h4>
+      <ul class="ul-1">
+        <li><a href="#createFramebuffer">gl.createFramebuffer()</a></li>
+        <li><a href="#deleteFramebuffer">gl.deleteFramebuffer()</a></li>
+        <li><a href="#bindFramebuffer">gl.bindFramebuffer()</a></li>
+        <li><a href="#framebufferTexture2D">gl.framebufferTexture2D()</a></li>
+        <li><a href="#framebufferRenderbuffer">gl.framebufferRenderbuffer()</a></li>
+        <li><a href="#checkFramebufferStatus">gl.checkFramebufferStatus()</a></li>
       </ul>
       <h4><a href="#globalMethod">全局方法</a></h4>
       <ul class="ul-1">
@@ -165,6 +163,36 @@
       <!--绘制图形的基本方法-->
       <section id="draw" class="section1">
         <h4 class="title">绘制图形的基本方法</h4>
+        <section id="scissor">
+          <h4>gl.scissor(x,y,width,height)</h4>
+          <p>剪裁测试用于限制绘制区域。我们可以指定一个矩形的剪裁窗口，当启用剪裁测试后，只有在这个窗口之内的像素才能被绘制，其它像素则会被丢弃。换句话说，无论怎么绘制，剪裁窗口以外的像素将不会被修改。</p>
+          <div class="content">
+            <strong>参数</strong>
+            <ul class="ul-1">
+              <li>x,y:指定绘图区域的左上角，以像素为单位</li>
+              <li>width,height:指定绘图区域的宽度和高度</li>
+            </ul>
+            <strong>返回值</strong>
+            <p>无</p>
+            <strong>错误</strong>
+            <p>无</p>
+          </div>
+        </section>
+        <section id="viewport">
+          <h4>viewport(x,y,width,height)</h4>
+          <p>设置gl.drawArrays()和gl.drawElements()函数的绘图区域。在canvas上绘图时，x和y就是canvas中的坐标</p>
+          <div class="content">
+            <strong>参数</strong>
+            <ul class="ul-1">
+              <li>x,y:指定绘图区域的左上角，以像素为单位</li>
+              <li>width,height:指定绘图区域的宽度和高度</li>
+            </ul>
+            <strong>返回值</strong>
+            <p>无</p>
+            <strong>错误</strong>
+            <p>无</p>
+          </div>
+        </section>
         <section id="drawArrays">
           <h4>gl.drawArrays(mode, first, count);</h4>
           <p>执行顶点着色器，按照mode参数指定的方式绘制图形</p>
@@ -210,6 +238,28 @@
               <li>INVALID_ENUM：传入的mode参数不是前述参数之一</li>
               <li>INVALID_VALUE：参数offset或count是负数</li>
             </ul>
+          </div>
+        </section>
+        <section id="drawBuffers">
+          <h4>gl.drawBuffers(buffers)</h4>
+          <p>定义了将片源颜色写入的绘制缓冲区。 如果没有绑定帧缓冲区，则绘制缓冲区设置是当前绑定的帧缓冲区或绘图缓冲区的状态的一部分。</p>
+          <div class="content">
+            <strong>参数</strong>
+            <ul class="ul-1">
+              <li>buffers:一个GLenum数组，指定要写入片源颜色的缓冲区。
+                <ul class="ul-1">
+                  <li>gl.NONE: Fragment shader output is not written into any color buffer.</li>
+                  <li>gl.BACK: Fragment shader output is written into the back color buffer.</li>
+                  <li>gl.COLOR_ATTACHMENT{0-15}: Fragment shader output is written in the nth color attachment of the
+                    current framebuffer.
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <strong>实例</strong>
+            <pre>
+    gl.drawBuffers([gl.NONE, gl.COLOR_ATTACHMENT1]);
+          </pre>
           </div>
         </section>
       </section>
@@ -1876,187 +1926,6 @@
           </div>
         </section>
       </section>
-      <!--帧缓存区对象-->
-      <section id="Framebuffer" class="section1">
-        <div class="title">帧缓存区对象</div>
-        <section id="createFramebuffer">
-          <h4>createFramebuffer()</h4>
-          <p>创建帧缓存区对象。</p>
-          <div class="content">
-            <strong>参数</strong>
-            <p>无</p>
-            <strong>返回值</strong>
-            <ul class="ul-1">
-              <li>non-null: 新创建的帧缓存区对象</li>
-              <li>null: 创建帧缓存区对象失败</li>
-            </ul>
-            <strong>错误</strong>
-            <p>无</p>
-          </div>
-        </section>
-        <section id="deleteFramebuffer">
-          <h4>deleteFramebuffer(framebuffer)</h4>
-          <p>删除帧缓存区对象。</p>
-          <div class="content">
-            <strong>参数</strong>
-            <p>framebuffer：指定被删除的帧缓存对象</p>
-            <strong>返回值</strong>
-            <p>无</p>
-            <strong>错误</strong>
-            <p>无</p>
-          </div>
-        </section>
-        <section id="bindFramebuffer">
-          <h4>bindFramebuffer(target,framebuffer)</h4>
-          <p>将framebuffer指定的帧缓冲区对象绑定到target目标上。如果framebuffer为null，那么已经绑定到target目标上的帧缓冲区对象那个将被解除绑定。</p>
-          <div class="content">
-            <strong>参数</strong>
-            <ul class="ul-1">
-              <li>target:必须是gl.FRAMEBUFFER</li>
-              <li>framebuffer：指定被绑定的帧缓存对象</li>
-            </ul>
-            <strong>返回值</strong>
-            <p>无</p>
-            <strong>错误</strong>
-            <p>INVALID_ENUM:target不是gl.FRAMEBUFFER</p>
-          </div>
-        </section>
-        <section id="framebufferTexture2D">
-          <h4>framebufferTexture2D(target,attachment,textarget,texture,level)</h4>
-          <p>将texture指定的纹理对象关联到绑定在target目标上的帧缓冲区。</p>
-          <div class="content">
-            <strong>参数</strong>
-            <ul class="ul-1">
-              <li>target:
-                <ul class="ul-1">
-                  <li>gl.FRAMEBUFFER:用于渲染图像的颜色，alpha，深度和模板缓冲区的集合缓冲区数据存储。</li>
-                </ul>
-              </li>
-              <li>
-                attachment：指定关联的类型
-                <ul class="ul-1">
-                  <li>gl.COLOR_ATTACHMENT0:表示texture是颜色关联对象</li>
-                  <li>gl.DEPTH_ATTACHMENT:表示texture是深度关联对象</li>
-                  <li>gl.STENCIL_ATTACHMENT:表示texture是模板关联对象</li>
-                  <li><strong>WebGL2:</strong></li>
-                  <li>gl.COLOR_ATTACHMENT1:附加了两个颜色缓冲的帧缓冲对象。</li>
-                </ul>
-              </li>
-              <li>textarget:gl.TEXTURE_2D\gl.TEXTURE_CUBE</li>
-              <li>texture:指定关联的纹理对象</li>
-              <li>指定为0（在使用MIPMAP纹理时指定纹理的层级）</li>
-            </ul>
-            <strong>返回值</strong>
-            <p>无</p>
-            <strong>错误</strong>
-            <ul class="ul-1">
-              <li>INVALID_ENUM:target不是gl.FRAMEBUFFER，或者attachment,textarget的值无效</li>
-              <li>INVALID_VALUE:level的值无效</li>
-              <li>INVALID_:OPERATION：target上没有绑定帧缓冲区</li>
-            </ul>
-          </div>
-        </section>
-        <section id="framebufferRenderbuffer">
-          <h4>framebufferRenderbuffer(target,attachment,renderbuffertarget,renderbuffer)</h4>
-          <p>将renderbuffer指定的渲染缓冲区对象关联到绑定在target上的帧缓冲对象关联到绑定在target上的帧缓冲区对象。</p>
-          <div class="content">
-            <strong>参数</strong>
-            <ul class="ul-1">
-              <li>target:必须是gl.FRAMEBUFFER</li>
-              <li>
-                attachment：指定关联的类型
-                <p>gl.COLOR_ATTACHMENTO:表示renderbuffer是颜色关联对象</p>
-                <p>gl.DEPTH_ATTACHMENT:表示renderbuffer是深度关联对象</p>
-                <p>gl._ATTACHMENT:表示renderbuffer是STENCIL模板关联对象</p>
-              </li>
-              <li>renderbuffertarget:必须是gl.RENDERBUFFER</li>
-              <li>renderbuffer:指定被关联的渲染缓冲区对象</li>
-            </ul>
-            <strong>返回值</strong>
-            <p>无</p>
-            <strong>错误</strong>
-            <ul class="ul-1">
-              <li>
-                INVALID_ENUM:target不是gl.FRAMEBUFFER，或者renderbuffertarget不是gl.RENDERBUFFER，或则attachment的值无效。
-              </li>
-            </ul>
-          </div>
-        </section>
-        <section id="checkFramebufferStatus">
-          <h4>checkFramebufferStatus(target)</h4>
-          <p>检查绑定在target上的帧缓冲区对象的配置状态</p>
-          <div class="content">
-            <strong>参数</strong>
-            <ul class="ul-1">
-              <li>target:必须是gl.FRAMEBUFFER</li>
-            </ul>
-            <strong>返回值</strong>
-            <ul class="ul-1">
-              <li>0:target不是gl.FRAMEBUFFER</li>
-              <li>gl.FRAMEBUFFER_COMPLETE:帧缓冲对象已正确配置</li>
-              <li>gl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:某一个关联对象为空，或者关联对象不合法</li>
-              <li>gl.FRAMEBUFFER_INCOMPLETE_DIMENSIONS:颜色关联对象和深度关联对象和深度关联对象的尺寸不一致</li>
-              <li>gl.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:帧缓冲区尚未关联任何一个关联对象</li>
-            </ul>
-            <strong>错误</strong>
-            <ul class="ul-1">
-              <li>INVALID_ENUM:target不是gl.FRAMEBUFFER</li>
-            </ul>
-          </div>
-        </section>
-        <section id="drawBuffers">
-          <h4>gl.drawBuffers(buffers)</h4>
-          <p>定义了将片源颜色写入的绘制缓冲区。 如果没有绑定帧缓冲区，则绘制缓冲区设置是当前绑定的帧缓冲区或绘图缓冲区的状态的一部分。</p>
-          <div class="content">
-            <strong>参数</strong>
-            <ul class="ul-1">
-              <li>buffers:一个GLenum数组，指定要写入片源颜色的缓冲区。
-                <ul class="ul-1">
-                  <li>gl.NONE: Fragment shader output is not written into any color buffer.</li>
-                  <li>gl.BACK: Fragment shader output is written into the back color buffer.</li>
-                  <li>gl.COLOR_ATTACHMENT{0-15}: Fragment shader output is written in the nth color attachment of the
-                    current framebuffer.
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <strong>实例</strong>
-            <pre>
-    gl.drawBuffers([gl.NONE, gl.COLOR_ATTACHMENT1]);
-          </pre>
-          </div>
-        </section>
-        <section id="scissor">
-          <h4>gl.scissor(x,y,width,height)</h4>
-          <p>剪裁测试用于限制绘制区域。我们可以指定一个矩形的剪裁窗口，当启用剪裁测试后，只有在这个窗口之内的像素才能被绘制，其它像素则会被丢弃。换句话说，无论怎么绘制，剪裁窗口以外的像素将不会被修改。</p>
-          <div class="content">
-            <strong>参数</strong>
-            <ul class="ul-1">
-              <li>x,y:指定绘图区域的左上角，以像素为单位</li>
-              <li>width,height:指定绘图区域的宽度和高度</li>
-            </ul>
-            <strong>返回值</strong>
-            <p>无</p>
-            <strong>错误</strong>
-            <p>无</p>
-          </div>
-        </section>
-        <section id="viewport">
-          <h4>viewport(x,y,width,height)</h4>
-          <p>设置gl.drawArrays()和gl.drawElements()函数的绘图区域。在canvas上绘图时，x和y就是canvas中的坐标</p>
-          <div class="content">
-            <strong>参数</strong>
-            <ul class="ul-1">
-              <li>x,y:指定绘图区域的左上角，以像素为单位</li>
-              <li>width,height:指定绘图区域的宽度和高度</li>
-            </ul>
-            <strong>返回值</strong>
-            <p>无</p>
-            <strong>错误</strong>
-            <p>无</p>
-          </div>
-        </section>
-      </section>
       <!--渲染缓冲区对象-->
       <section id="renderBuffer" class="section1">
         <div class="title">渲染缓冲区对象</div>
@@ -2076,7 +1945,7 @@
           </div>
         </section>
         <section id="deleteRenderbuffer">
-          <h4>deleteRenderbuffer(renderbuffer)</h4>
+          <h4>gl.deleteRenderbuffer(renderbuffer)</h4>
           <p>删除渲染缓冲区对象。</p>
           <div class="content">
             <strong>参数</strong>
@@ -2088,7 +1957,7 @@
           </div>
         </section>
         <section id="bindRenderbuffer">
-          <h4>bindRenderbuffer(targer,renderbuffer)</h4>
+          <h4>gl.bindRenderbuffer(targer,renderbuffer)</h4>
           <p>将renderbuffer指定的渲染缓冲区对象绑定到target目标上。如果renderbuffer为null，则将已经绑定在target目标上的渲染缓冲区对象解除绑定.</p>
           <div class="content">
             <strong>参数</strong>
@@ -2103,7 +1972,7 @@
           </div>
         </section>
         <section id="renderbufferStorage">
-          <h4>renderbufferStorage(targer,internalformat,width,height)</h4>
+          <h4>gl.renderbufferStorage(targer,internalformat,width,height)</h4>
           <p>创建并初始化渲染缓冲区的数据</p>
           <div class="content">
             <strong>参数</strong>
@@ -2148,6 +2017,135 @@
             <strong>错误</strong>
             <p>INVALID_ENUM:target不是gl.RENDERBUFFER</p>
             <p>INVALID_:targetOPERATION没有绑定渲染缓冲区</p>
+          </div>
+        </section>
+      </section>
+      <!-- 帧缓冲区对象 -->
+      <section id="Framebuffer" class="section1">
+        <div class="title">帧缓冲区对象</div>
+        <section id="createFramebuffer">
+          <h4>gl.createFramebuffer()</h4>
+          <p>创建帧缓存区对象。</p>
+          <div class="content">
+            <strong>参数</strong>
+            <p>无</p>
+            <strong>返回值</strong>
+            <ul class="ul-1">
+              <li>non-null: 新创建的帧缓存区对象</li>
+              <li>null: 创建帧缓存区对象失败</li>
+            </ul>
+            <strong>错误</strong>
+            <p>无</p>
+          </div>
+        </section>
+        <section id="deleteFramebuffer">
+          <h4>gl.deleteFramebuffer(framebuffer)</h4>
+          <p>删除帧缓存区对象。</p>
+          <div class="content">
+            <strong>参数</strong>
+            <p>framebuffer：指定被删除的帧缓存对象</p>
+            <strong>返回值</strong>
+            <p>无</p>
+            <strong>错误</strong>
+            <p>无</p>
+          </div>
+        </section>
+        <section id="bindFramebuffer">
+          <h4>gl.bindFramebuffer(target,framebuffer)</h4>
+          <p>将framebuffer指定的帧缓冲区对象绑定到target目标上。如果framebuffer为null，那么已经绑定到target目标上的帧缓冲区对象那个将被解除绑定。</p>
+          <div class="content">
+            <strong>参数</strong>
+            <ul class="ul-1">
+              <li>target:必须是gl.FRAMEBUFFER</li>
+              <li>framebuffer：指定被绑定的帧缓存对象</li>
+            </ul>
+            <strong>返回值</strong>
+            <p>无</p>
+            <strong>错误</strong>
+            <p>INVALID_ENUM:target不是gl.FRAMEBUFFER</p>
+          </div>
+        </section>
+        <section id="framebufferTexture2D">
+          <h4>gl.framebufferTexture2D(target,attachment,textarget,texture,level)</h4>
+          <p>将texture指定的纹理对象关联到绑定在target目标上的帧缓冲区。</p>
+          <div class="content">
+            <strong>参数</strong>
+            <ul class="ul-1">
+              <li>target:
+                <ul class="ul-1">
+                  <li>gl.FRAMEBUFFER:用于渲染图像的颜色，alpha，深度和模板缓冲区的集合缓冲区数据存储。</li>
+                </ul>
+              </li>
+              <li>
+                attachment：指定关联的类型
+                <ul class="ul-1">
+                  <li>gl.COLOR_ATTACHMENT0:表示texture是颜色关联对象</li>
+                  <li>gl.DEPTH_ATTACHMENT:表示texture是深度关联对象</li>
+                  <li>gl.STENCIL_ATTACHMENT:表示texture是模板关联对象</li>
+                  <li><strong>WebGL2:</strong></li>
+                  <li>gl.COLOR_ATTACHMENT1:附加了两个颜色缓冲的帧缓冲对象。</li>
+                </ul>
+              </li>
+              <li>textarget:gl.TEXTURE_2D\gl.TEXTURE_CUBE</li>
+              <li>texture:指定关联的纹理对象</li>
+              <li>指定为0（在使用MIPMAP纹理时指定纹理的层级）</li>
+            </ul>
+            <strong>返回值</strong>
+            <p>无</p>
+            <strong>错误</strong>
+            <ul class="ul-1">
+              <li>INVALID_ENUM:target不是gl.FRAMEBUFFER，或者attachment,textarget的值无效</li>
+              <li>INVALID_VALUE:level的值无效</li>
+              <li>INVALID_:OPERATION：target上没有绑定帧缓冲区</li>
+            </ul>
+          </div>
+        </section>
+        <section id="framebufferRenderbuffer">
+          <h4>gl.framebufferRenderbuffer(target,attachment,renderbuffertarget,renderbuffer)</h4>
+          <p>将renderbuffer指定的渲染缓冲区对象关联到绑定在target上的帧缓冲对象关联到绑定在target上的帧缓冲区对象。</p>
+          <div class="content">
+            <strong>参数</strong>
+            <ul class="ul-1">
+              <li>target:必须是gl.FRAMEBUFFER</li>
+              <li>
+                attachment：指定关联的类型
+                <p>gl.COLOR_ATTACHMENTO:表示renderbuffer是颜色关联对象</p>
+                <p>gl.DEPTH_ATTACHMENT:表示renderbuffer是深度关联对象</p>
+                <p>gl._ATTACHMENT:表示renderbuffer是STENCIL模板关联对象</p>
+              </li>
+              <li>renderbuffertarget:必须是gl.RENDERBUFFER</li>
+              <li>renderbuffer:指定被关联的渲染缓冲区对象</li>
+            </ul>
+            <strong>返回值</strong>
+            <p>无</p>
+            <strong>错误</strong>
+            <ul class="ul-1">
+              <li>
+                INVALID_ENUM:target不是gl.FRAMEBUFFER，或者renderbuffertarget不是gl.RENDERBUFFER，或则attachment的值无效。
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section id="checkFramebufferStatus">
+          <h4>gl.checkFramebufferStatus(target)</h4>
+          <p>检查绑定在target上的帧缓冲区对象的配置状态</p>
+          <div class="content">
+            <strong>参数</strong>
+            <ul class="ul-1">
+              <li>target:必须是gl.FRAMEBUFFER</li>
+            </ul>
+            <strong>返回值</strong>
+            <ul class="ul-1">
+              <li>0:target不是gl.FRAMEBUFFER</li>
+              <li>gl.FRAMEBUFFER_COMPLETE:帧缓冲对象已正确配置</li>
+              <li>gl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:某一个关联对象为空，或者关联对象不合法</li>
+              <li>gl.FRAMEBUFFER_INCOMPLETE_DIMENSIONS:颜色关联对象和深度关联对象和深度关联对象的尺寸不一致</li>
+              <li>gl.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:帧缓冲区尚未关联任何一个关联对象</li>
+            </ul>
+            <strong>错误</strong>
+            <ul class="ul-1">
+              <li>INVALID_ENUM:target不是gl.FRAMEBUFFER</li>
+            </ul>
           </div>
         </section>
       </section>

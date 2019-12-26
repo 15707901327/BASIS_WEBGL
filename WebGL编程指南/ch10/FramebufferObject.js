@@ -77,11 +77,11 @@ function main() {
   // Enable depth test
   gl.enable(gl.DEPTH_TEST);   //  gl.enable(gl.CULL_FACE);
 
-  var viewProjMatrix = new Matrix4();   // Prepare view projection matrix for color buffer
+  var viewProjMatrix = new Matrix4();   // 为颜色缓冲区所准备
   viewProjMatrix.setPerspective(30, canvas.width/canvas.height, 1.0, 100.0);
   viewProjMatrix.lookAt(0.0, 0.0, 7.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
-  var viewProjMatrixFBO = new Matrix4();   // Prepare view projection matrix for FBO
+  var viewProjMatrixFBO = new Matrix4();   // 为帧缓冲区所准备
   viewProjMatrixFBO.setPerspective(30.0, OFFSCREEN_WIDTH/OFFSCREEN_HEIGHT, 1.0, 100.0);
   viewProjMatrixFBO.lookAt(0.0, 2.0, 7.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
@@ -133,9 +133,9 @@ function initVertexBuffersForCube(gl) {
     12,13,14,  12,14,15,    // left
     16,17,18,  16,18,19,    // down
     20,21,22,  20,22,23     // back
-  ])
+  ]);
 
-  var o = new Object();  // Create the "Object" object to return multiple objects.
+  var o = {};  // Create the "Object" object to return multiple objects.
 
   // Write vertex information to buffer object
   o.vertexBuffer = initArrayBufferForLaterUse(gl, vertices, 3, gl.FLOAT);
@@ -289,7 +289,7 @@ function initFramebufferObject(gl) {
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
   framebuffer.texture = texture; // Store the texture object
 
-  // 创建渲染缓存区对象并设置其熟悉和参数
+  // 创建渲染缓存区对象并设置其尺寸和参数
   depthBuffer = gl.createRenderbuffer(); // Create a renderbuffer object
   if (!depthBuffer) {
     console.log('Failed to create renderbuffer object');

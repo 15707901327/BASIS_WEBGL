@@ -144,6 +144,28 @@
 
       pointers.push(new pointerPrototype());
 
+      var programManager = new ProgramManager();
+      var baseVertexShader = programManager.loadShader(gl, gl.VERTEX_SHADER, VERTEX_SHADER);
+      var clearShader = programManager.loadShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_CLEAR_SHADER);
+      var displayShader = programManager.loadShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_DISPLAY_SHADER);
+      var splatShader = programManager.loadShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_SPLAT_SHADER);
+      var advectionManualFilteringShader = programManager.loadShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_ADVECTION_MANUAL_FILTERING_SHADER);
+      var advectionShader = programManager.loadShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_ADVECTION_SHADER);
+      var divergenceShader = programManager.loadShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_DIVERGENCE_SHADER);
+      var curlShader = programManager.loadShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_CURL_SHADER);
+      var vorticityShader = programManager.loadShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_VORTICITY_SHADER);
+      var pressureShader = programManager.loadShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_PRESSURE_SHADER);
+      var gradientSubtractShader = programManager.loadShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_GRADIENT_SUBTRACT_SHADER);
+
+      var textureWidth = void 0;
+      var textureHeight = void 0;
+      var density = void 0;
+      var velocity = void 0;
+      var divergence = void 0;
+      var curl = void 0;
+      var pressure = void 0;
+      initFramebuffers();
+
       function GLProgram(vertexShader, fragmentShader) {
 
         this.uniforms = {};
@@ -167,29 +189,6 @@
           gl.useProgram(this.program);
         }
       });
-
-      var programManager = new ProgramManager();
-      var baseVertexShader = programManager.loadShader(gl, gl.VERTEX_SHADER, VERTEX_SHADER);
-      var clearShader = programManager.loadShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_CLEAR_SHADER);
-      var displayShader = programManager.loadShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_DISPLAY_SHADER);
-      var splatShader = programManager.loadShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_SPLAT_SHADER);
-      var advectionManualFilteringShader = programManager.loadShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_ADVECTION_MANUAL_FILTERING_SHADER);
-      var advectionShader = programManager.loadShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_ADVECTION_SHADER);
-      var divergenceShader = programManager.loadShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_DIVERGENCE_SHADER);
-      var curlShader = programManager.loadShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_CURL_SHADER);
-      var vorticityShader = programManager.loadShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_VORTICITY_SHADER);
-      var pressureShader = programManager.loadShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_PRESSURE_SHADER);
-      var gradientSubtractShader = programManager.loadShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_GRADIENT_SUBTRACT_SHADER);
-
-      var textureWidth = void 0;
-      var textureHeight = void 0;
-      var density = void 0;
-      var velocity = void 0;
-      var divergence = void 0;
-      var curl = void 0;
-      var pressure = void 0;
-      initFramebuffers();
-
       var clearProgram = new GLProgram(baseVertexShader, clearShader);
       var displayProgram = new GLProgram(baseVertexShader, displayShader);
       var splatProgram = new GLProgram(baseVertexShader, splatShader);

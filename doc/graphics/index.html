@@ -36,13 +36,14 @@
       </ul>
       <h4><a href="#matrix">矩阵</a></h4>
       <ul class="ul-1">
-        <li><a href="#matrix">矩阵</a></li>
+        <li><a href="#matrix">Matrix</a></li>
         <li><a href="#rotation">旋转(Rotation)</a></li>
         <li><a href="#rotation_matrix">旋转矩阵推导</a></li>
         <li><a href="#scale">缩放（scale)</a></li>
         <li><a href="#orthographicProjection_matrix">正交投影</a></li>
         <li><a href="#mirror_matrix">镜像</a></li>
         <li><a href="#shear_matrix">切变</a></li>
+        <li><a href="#viewMatrix">viewMatrix</a></li>
       </ul>
       <h4><a href="#translation">位移(translation)</a></h4>
       <ul class="ul-1">
@@ -154,7 +155,7 @@
         </section>
       </section>
       <section class="section1" id="matrix">
-        <h4 class="title">矩阵</h4>
+        <h4 class="title">Matrix</h4>
         <section>
           <h4>矩阵</h4>
           <p>描述两个坐标系统间的关系，通过一种运算而将一个坐标系中的向量转换到另一个坐标系中。</p>
@@ -260,6 +261,27 @@
         <section id="shear_matrix">
           <h3>切变</h3>
         </section>
+        <section id="viewMatrix">
+          <h4>viewMatrix</h4>
+          <p>观察者的位置和方向会变化，看上去就好像整个世界的位置和方向发生变化了一样，所以我们将世界里的所有模型看作一个大模型，
+            在所有模型矩阵的左侧再乘以一个表示整个世界变换的模型矩阵，就可以了。这个表示整个世界变换的矩阵又称为「视图矩阵」。</p>
+          <p>简单来说，固定其他因素，我们改变了相机的位置和角度后，它眼中的世界也会发生变化，这种变化就是视图矩阵。</p>
+          <p>观察者视为一个模型，那么视图矩阵就是观察者的模型矩阵的逆矩阵。具体来说：</p>
+          <p>相机在三维空间中的位置是 camera.matrixWorld ，而它的视图矩阵是相机位置矩阵的逆矩阵 CameraMatrixWorldInverse ，它也符合了我们的生活经验：</p>
+          <ul class="ul-3-num">
+            <li>固定相机，人向左移动</li>
+            <li>固定人，向右移动相机</li>
+          </ul>
+          <div class="content">
+            <strong>视图坐标：</strong>
+            <p>空间中的点相对于观察者的位置。</p>
+            <p>如果观察者置于原点处，面向Z轴负半轴，那么点的世界坐标就是其视图坐标。</p>
+            <strong>模型视图矩阵:</strong>
+            <p>视图矩阵乘以模型矩阵得到的矩阵。</p>
+            <p>模型视图矩阵的作用是：乘以一个点坐标，获得一个新的点坐标，获得的点坐标表示点在世界里变换，观察者也变换后，
+              点相对于观察者的位置。</p>
+          </div>
+        </section>
       </section>
       <section id="translation" class="section1">
         <div class="title">位移(translation)</div>
@@ -334,18 +356,6 @@
       </section>
       <section id="camera" class="section1">
         <div class="title">camera</div>
-        <section>
-          <h4>基本概念</h4>
-          <div class="content">
-            <strong id="viewMatrix">视图矩阵:</strong>
-            <p>视图矩阵的含义是，固定其他因素，我们改变了相机的位置和角度后，它眼中的世界也会发生变化，这种变化就是视图矩阵。</p>
-            <p>相机在三维空间中的位置是 camera.matrixWorld ，而它的视图矩阵是相机位置矩阵的逆矩阵 CameraMatrixWorldInverse ，它也符合了我们的生活经验：</p>
-            <ul class="ul-3-num">
-              <li>固定相机，人向左移动</li>
-              <li>固定人，向右移动相机</li>
-            </ul>
-          </div>
-        </section>
         <section id="projection">
           <h3>投影算法</h3>
           <p>三维空间中的物体，投射在相机视平面的转换算法。</p>

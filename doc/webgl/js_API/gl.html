@@ -83,6 +83,7 @@
         <li><a href="#bindTexture" title="gl.bindTexture()">gl.bindTexture()</a></li>
         <li><a href="#texParameteri" title="gl.texParameteri()">gl.texParameteri()</a></li>
         <li><a href="#texImage2D" title="gl.texImage2D()">gl.texImage2D()</a></li>
+        <li><a href="#copyTexImage2D" title="gl.copyTexImage2D()">gl.copyTexImage2D()</a></li>
       </ul>
       <h4>与像素点相关的方法</h4>
       <ul class="ul-1">
@@ -908,7 +909,7 @@
           </div>
         </section>
       </section>
-      <!--与加载纹理相关的方法-->
+      <!-- 纹理图像 -->
       <section class="section1" id="texture">
         <div class="title">Texture</div>
         <section>
@@ -1292,6 +1293,100 @@
               <li>INVALID_ENUM:target不是合法的</li>
               <li>INVALID_OPERATION:当前目标上没有绑定纹理对象</li>
             </ul>
+          </div>
+        </section>
+        <section id="copyTexImage2D">
+          <h4>gl.copyTexImage2D(target, level, internalformat, x, y, width, height, border</h4>
+          <p>将像素从当前的帧缓冲区中复制到2D纹理图像中。</p>
+          <div class="content">
+            <strong>参数:</strong>
+            <ul class="ul-1">
+              <li>target：指定激活纹理绑定点
+                <ul class="ul-1">
+                  <li>gl.TEXTURE_2D:二维纹理</li>
+                  <li>gl.TEXTURE_CUBE_MAP_POSITIVE_X: Positive X face for a cube-mapped texture.</li>
+                  <li>gl.TEXTURE_CUBE_MAP_NEGATIVE_X: Negative X face for a cube-mapped texture.</li>
+                  <li>gl.TEXTURE_CUBE_MAP_POSITIVE_Y: Positive Y face for a cube-mapped texture.</li>
+                  <li>gl.TEXTURE_CUBE_MAP_NEGATIVE_Y: Negative Y face for a cube-mapped texture.</li>
+                  <li>gl.TEXTURE_CUBE_MAP_POSITIVE_Z: Positive Z face for a cube-mapped texture.</li>
+                  <li>gl.TEXTURE_CUBE_MAP_NEGATIVE_Z: Negative Z face for a cube-mapped texture</li>
+                </ul>
+              </li>
+              <li>level: 级别0是基本图像级别，级别n是第n个mipmap缩减级别。</li>
+              <li>internalformat: 图像的内部格式
+                <table border="1">
+                  <tr>
+                    <th colspan="3">纹素数据的格式</th>
+                  </tr>
+                  <tr>
+                    <th>Format</th>
+                    <th>Type</th>
+                    <th>描述</th>
+                  </tr>
+                  <tr>
+                    <td>gl.RGB</td>
+                    <td>UNSIGNED_BYTE</td>
+                    <td>红、绿、蓝</td>
+                  </tr>
+                  <tr>
+                    <td>gl.RGB</td>
+                    <td>UNSIGNED_SHORT_5_6_5</td>
+                    <td>红、绿、蓝</td>
+                  </tr>
+                  <tr>
+                    <td>gl.RGBA</td>
+                    <td>UNSIGNED_BYTE</td>
+                    <td>红、绿、蓝、透明度</td>
+                  </tr>
+                  <tr>
+                    <td>gl.RGBA</td>
+                    <td>UNSIGNED_SHORT_4_4_4_4</td>
+                    <td>红、绿、蓝、透明度</td>
+                  </tr>
+                  <tr>
+                    <td>gl.RGBA</td>
+                    <td>UNSIGNED_SHORT_5_5_5_1</td>
+                    <td>红、绿、蓝、透明度</td>
+                  </tr>
+                  <tr>
+                    <td>gl.ALPHA</td>
+                    <td>UNSIGNED_BYTE</td>
+                    <td>（0.0,0.0,0.0,透明度）</td>
+                  </tr>
+                  <tr>
+                    <td>gl.LUMINANCE</td>
+                    <td>UNSIGNED_BYTE</td>
+                    <td>L、L、L、1L：流明（表示我们感知到的物体表面的亮度。通常使用物体表面红、绿、蓝颜色分量值的加权平均来计算流明）</td>
+                  </tr>
+                  <tr>
+                    <td>gl.LUMINANCE_ALPHA</td>
+                    <td>UNSIGNED_BYTE</td>
+                    <td>L、L、L、透明度</td>
+                  </tr>
+                </table>
+                <br>
+                <table border="1">
+                  <tr>
+                    <th colspan="3">WebGL2中用于采用ArrayBufferView或GLintptr偏移量的texImage2D版本的其他可能值</th>
+                  </tr>
+                  <tr>
+                    <th>Sized Format</th>
+                    <th>Base Format</th>
+                  </tr>
+                  <tr>
+                    <td>gl.RGB16F</td>
+                    <td>gl.RGB</td>
+                  </tr>
+                </table>
+              </li>
+              <li>x : 左下角开始复制的x坐标</li>
+              <li>y : 左下角开始复制的y坐标</li>
+              <li>width : 纹理的宽度</li>
+              <li>height : 纹理的高度</li>
+              <li>border :A GLint specifying the width of the border. Must be 0.</li>
+            </ul>
+            <strong>返回值</strong>
+            <p>无</p>
           </div>
         </section>
       </section>

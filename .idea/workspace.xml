@@ -25,10 +25,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/doc/graphics/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="268" column="48" selection-start-line="268" selection-start-column="48" selection-end-line="268" selection-end-column="48" />
+            <state relative-caret-position="304">
+              <caret line="288" column="17" selection-start-line="288" selection-start-column="17" selection-end-line="288" selection-end-column="17" />
               <folding>
-                <element signature="n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#ul#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#ul#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#ul#3;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
@@ -51,7 +51,9 @@
                 <element signature="n#section#4;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#section#5;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#section#6;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#7;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#ul#0;n#section#7;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#div#0;n#section#7;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#section#3;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#section#4;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#section#5;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
@@ -187,6 +189,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -194,22 +197,10 @@
               <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
               <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
-              <item name="doc" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
-              <item name="doc" type="462c0819:PsiDirectoryNode" />
-              <item name="graphics" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -431,14 +422,8 @@
       <workItem from="1578466754365" duration="515000" />
       <workItem from="1579332583679" duration="19000" />
       <workItem from="1583806733620" duration="1226000" />
-      <workItem from="1583809101600" duration="2586000" />
-    </task>
-    <task id="LOCAL-00015" summary="1.添加纹理说明">
-      <created>1567160068484</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1567160068484</updated>
+      <workItem from="1583809101600" duration="2786000" />
+      <workItem from="1583896937609" duration="1317000" />
     </task>
     <task id="LOCAL-00016" summary="1.添加纹理说明">
       <created>1567408139375</created>
@@ -776,11 +761,18 @@
       <option name="project" value="LOCAL" />
       <updated>1583807946791</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="1.视图矩阵">
+      <created>1583812270675</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1583812270675</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="670098000" />
+    <option name="totallyTimeSpent" value="671615000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -819,7 +811,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.shadertoy说明添加" />
     <MESSAGE value="1.图形噪声" />
     <MESSAGE value="1.自定义函数" />
     <MESSAGE value="1.canvas 2D" />
@@ -844,7 +835,8 @@
     <MESSAGE value="1.更新帧缓冲对象方法说明" />
     <MESSAGE value="1.上下文只读属性" />
     <MESSAGE value="1.从帧缓冲中复制像素到2D纹理中" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.从帧缓冲中复制像素到2D纹理中" />
+    <MESSAGE value="1.视图矩阵" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.视图矩阵" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/example/mirror/js/util/ObjObject.js" />
@@ -1480,10 +1472,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/doc/graphics/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="268" column="48" selection-start-line="268" selection-start-column="48" selection-end-line="268" selection-end-column="48" />
+        <state relative-caret-position="304">
+          <caret line="288" column="17" selection-start-line="288" selection-start-column="17" selection-end-line="288" selection-end-column="17" />
           <folding>
-            <element signature="n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#ul#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
             <element signature="n#ul#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
             <element signature="n#ul#3;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
@@ -1506,7 +1498,9 @@
             <element signature="n#section#4;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#5;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#6;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#7;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
             <element signature="n#ul#0;n#section#7;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#section#7;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#3;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#4;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#5;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />

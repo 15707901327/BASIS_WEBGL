@@ -2,8 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/example/solidwireframe/SolidWireframe.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/solidwireframe/js/SolidWireframe.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/solidwireframe/js/shaders.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/solidwireframe/js/shaders2.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/solidwireframe/js/shaders3.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/solidwireframe/js/utils.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/solidwireframe/libs/gl-matrix.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/graphics/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/graphics/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/shader/BuiltInFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/shader/BuiltInFunction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/webgl/shader_API/img/basic_smoothstep.gif" beforeDir="false" afterPath="$PROJECT_DIR$/doc/shader/img/basic_smoothstep.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/left.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/left.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,50 +23,21 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/example/index.html">
+        <entry file="file://$PROJECT_DIR$/example/solidwireframe/SolidWireframe.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="7" column="44" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
+            <state relative-caret-position="304">
+              <caret line="12" column="9" lean-forward="true" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/doc/graphics/index.html">
+        <entry file="file://$PROJECT_DIR$/example/left.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="288" column="17" selection-start-line="288" selection-start-column="17" selection-end-line="288" selection-end-column="17" />
+            <state relative-caret-position="392">
+              <caret line="16" column="84" selection-start-line="16" selection-start-column="84" selection-end-line="16" selection-end-column="84" />
               <folding>
-                <element signature="n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#ul#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#ul#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#ul#3;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#ul#4;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#ul#5;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#1;n#section#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#2;n#section#0;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#1;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#0;n#section#1;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#0;n#section#0;n#section#1;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#ul#0;n#div#0;n#section#0;n#section#1;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#1;n#section#1;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#2;n#section#1;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#0;n#section#2;n#section#1;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#0;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#1;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#2;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#3;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#4;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#5;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#6;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#7;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#ul#0;n#section#7;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#0;n#section#7;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#3;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#4;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#5;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#6;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#ul#0;n#li#0;n#ul#0;n#body#0;n#html#0;n#!!top" />
               </folding>
             </state>
           </provider>
@@ -77,7 +57,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>BufferGeometry</find>
       <find>shaderProgArray</find>
       <find>ball</find>
       <find>texMap</find>
@@ -107,6 +86,7 @@
       <find>framebuffer</find>
       <find>drawBuffers</find>
       <find>GLProgram</find>
+      <find>basic_smoothstep</find>
     </findStrings>
     <replaceStrings>
       <replace>PGL.Vector3</replace>
@@ -134,7 +114,6 @@
         <option value="$PROJECT_DIR$/DOC/OpenGL/index.html" />
         <option value="$PROJECT_DIR$/doc/webgl/shader_API/存储限定字.html" />
         <option value="$PROJECT_DIR$/doc/webgl/shader_API/精度限定字.html" />
-        <option value="$PROJECT_DIR$/doc/shader/BuiltInFunction.html" />
         <option value="$PROJECT_DIR$/doc/webgl/shader_API/index.html" />
         <option value="$PROJECT_DIR$/example/jsm/render/WebGLRender.js" />
         <option value="$PROJECT_DIR$/example/mirror/js/util/LightManager.js" />
@@ -149,7 +128,6 @@
         <option value="$PROJECT_DIR$/example/jsm/loader/OBJLoader.js" />
         <option value="$PROJECT_DIR$/example/mirror/js/util/PGL.js" />
         <option value="$PROJECT_DIR$/example/mirror/js/util/MatrixState.js" />
-        <option value="$PROJECT_DIR$/example/left.html" />
         <option value="$PROJECT_DIR$/example/index.html" />
         <option value="$PROJECT_DIR$/css/base.css" />
         <option value="$PROJECT_DIR$/example/fluid/demo.js" />
@@ -176,6 +154,8 @@
         <option value="$PROJECT_DIR$/example/fluid/demo.html" />
         <option value="$PROJECT_DIR$/doc/webgl/js_API/gl.html" />
         <option value="$PROJECT_DIR$/doc/graphics/index.html" />
+        <option value="$PROJECT_DIR$/doc/shader/BuiltInFunction.html" />
+        <option value="$PROJECT_DIR$/example/left.html" />
       </list>
     </option>
   </component>
@@ -189,7 +169,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -197,17 +176,29 @@
               <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
               <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+              <item name="solidwireframe" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/example/solidwireframe-master" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -219,19 +210,19 @@
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/../ThreeSourceCodeAnalysis/src/renderers/webgl/WebGLUniforms.js" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\workHome\BASIS_WEBGL\example\solidwireframe-master" />
+      <recent name="D:\workHome\BASIS_WEBGL\example" />
+      <recent name="D:\workHome\BASIS_WEBGL\example\fluid\shader" />
+      <recent name="D:\workHome\BASIS_WEBGL\example\mirror" />
+      <recent name="D:\workHome\BASIS_WEBGL\doc\shader" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\workHome\BASIS_WEBGL\doc\shader\img" />
       <recent name="D:\workHome\BASIS_WEBGL\img" />
       <recent name="D:\workHome\BASIS_WEBGL\example\jsm\core" />
       <recent name="D:\workHome\BASIS_WEBGL\doc" />
       <recent name="D:\workHome\BASIS_WEBGL\doc\graphics\img" />
-      <recent name="D:\workHome\BASIS_WEBGL\doc\graphics" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\workHome\BASIS_WEBGL\example\fluid\shader" />
-      <recent name="D:\workHome\BASIS_WEBGL\example" />
-      <recent name="D:\workHome\BASIS_WEBGL\example\mirror" />
-      <recent name="D:\workHome\BASIS_WEBGL\doc\shader" />
-      <recent name="D:\workHome\BASIS_WEBGL\DOC\css" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -423,21 +414,9 @@
       <workItem from="1579332583679" duration="19000" />
       <workItem from="1583806733620" duration="1226000" />
       <workItem from="1583809101600" duration="2786000" />
-      <workItem from="1583896937609" duration="1317000" />
-    </task>
-    <task id="LOCAL-00016" summary="1.添加纹理说明">
-      <created>1567408139375</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1567408139375</updated>
-    </task>
-    <task id="LOCAL-00017" summary="1.帧缓冲区对象">
-      <created>1567476549322</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1567476549322</updated>
+      <workItem from="1583896937609" duration="3917000" />
+      <workItem from="1583975011617" duration="1070000" />
+      <workItem from="1583979399838" duration="2040000" />
     </task>
     <task id="LOCAL-00018" summary="1.图形学球形坐标系">
       <created>1568015938631</created>
@@ -768,11 +747,25 @@
       <option name="project" value="LOCAL" />
       <updated>1583812270675</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="1.法线矩阵">
+      <created>1583906371334</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1583906371335</updated>
+    </task>
+    <task id="LOCAL-00066" summary="1.矩阵的行列式">
+      <created>1583910915112</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1583910915112</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="671615000" />
+    <option name="totallyTimeSpent" value="677325000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -787,7 +780,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15848215" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19345239" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -800,7 +793,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49868214" weight="0.32786885" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49973643" weight="0.32786885" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50131786" side_tool="true" weight="0.23240589" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50131786" side_tool="true" weight="0.3786885" />
       <window_info anchor="bottom" id="Messages" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -811,8 +804,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.图形噪声" />
-    <MESSAGE value="1.自定义函数" />
     <MESSAGE value="1.canvas 2D" />
     <MESSAGE value="1.球形坐标" />
     <MESSAGE value="1.OpenGL概述" />
@@ -836,33 +827,11 @@
     <MESSAGE value="1.上下文只读属性" />
     <MESSAGE value="1.从帧缓冲中复制像素到2D纹理中" />
     <MESSAGE value="1.视图矩阵" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.视图矩阵" />
+    <MESSAGE value="1.法线矩阵" />
+    <MESSAGE value="1.矩阵的行列式" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.矩阵的行列式" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/example/mirror/js/util/ObjObject.js" />
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/loaders/Loaders.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#565#1722#0" />
-            <element signature="e#1779#1828#0" />
-            <element signature="e#1867#1951#0" />
-            <element signature="e#1996#3684#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/textures/textures.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#155#1872#0" />
-            <element signature="e#1999#7229#0" />
-            <element signature="e#7295#7385#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/THREE-PGL/src/built/PGL.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="212">
@@ -927,9 +896,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/example/mirror/js/util/Matrix.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/example/mirror/img2.png" />
     <entry file="file://$PROJECT_DIR$/example/mirror/img1.png" />
     <entry file="file://$PROJECT_DIR$/example/right.html">
@@ -988,38 +954,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/example/fluid/demo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="482" column="24" lean-forward="true" selection-end-line="490" selection-end-column="3" />
-          <folding>
-            <element signature="e#30#618#0" />
-            <element signature="e#671#784#0" />
-            <element signature="e#843#1020#0" />
-            <element signature="e#1200#2729#0" />
-            <element signature="e#2793#3182#0" />
-            <element signature="e#3254#4004#0" />
-            <element signature="e#4034#4183#0" />
-            <element signature="e#4254#5107#0" />
-            <element signature="e#5150#5369#0" />
-            <element signature="e#13404#14294#0" />
-            <element signature="e#14365#15106#0" />
-            <element signature="e#15183#15536#0" />
-            <element signature="e#15561#16112#0" />
-            <element signature="e#16223#19594#0" />
-            <element signature="e#19632#20266#0" />
-            <element signature="e#20300#20625#0" />
-            <element signature="e#20651#20846#0" />
-            <element signature="e#20898#21109#0" />
-            <element signature="e#21163#21515#0" />
-            <element signature="e#21575#21692#0" />
-            <element signature="e#21747#22168#0" />
-            <element signature="e#22219#22250#0" />
-            <element signature="e#22303#22520#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/example/jsm/render/WebGLRenderer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
@@ -1039,20 +973,6 @@
             <element signature="e#417#436#0" />
             <element signature="e#463#2519#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/mirror/js/util/PGL.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1654">
-          <caret line="7" column="50" lean-forward="true" selection-start-line="7" selection-start-column="50" selection-end-line="7" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/mirror/demo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="57" column="35" selection-start-line="57" selection-start-column="22" selection-end-line="57" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -1222,13 +1142,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/example/left.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="9" column="5" lean-forward="true" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/example/top.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="448">
@@ -1374,27 +1287,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/example/fluid/demo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="203" column="46" selection-start-line="203" selection-start-column="27" selection-end-line="203" selection-end-column="46" />
-          <folding>
-            <element signature="e#216#268#0" expanded="true" />
-            <element signature="e#1463#1688#0" />
-            <element signature="e#1892#3554#0" />
-            <element signature="e#2748#3004#0" />
-            <element signature="e#3010#3265#0" />
-            <element signature="e#3282#3545#0" />
-            <element signature="e#3624#4106#0" />
-            <element signature="e#4184#5024#0" />
-            <element signature="e#5060#5263#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc/webgl/shader_API/index.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/doc/webgl/js_API/gl.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="251">
@@ -1463,17 +1355,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/example/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="7" column="44" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/doc/graphics/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="288" column="17" selection-start-line="288" selection-start-column="17" selection-end-line="288" selection-end-column="17" />
+        <state relative-caret-position="262">
+          <caret line="188" column="18" lean-forward="true" selection-start-line="188" selection-start-column="18" selection-end-line="188" selection-end-column="18" />
           <folding>
             <element signature="n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#ul#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
@@ -1491,7 +1376,7 @@
             <element signature="n#section#1;n#section#1;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#2;n#section#1;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#0;n#section#2;n#section#1;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#0;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#ul#0;n#div#0;n#section#0;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#1;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#2;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#3;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
@@ -1501,10 +1386,109 @@
             <element signature="n#section#7;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
             <element signature="n#ul#0;n#section#7;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#0;n#section#7;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#8;n#section#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#3;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#4;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#5;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#6;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/webgl/shader_API/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="130" column="16" lean-forward="true" selection-start-line="130" selection-start-column="16" selection-end-line="130" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/shader/BuiltInFunction.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1052">
+          <caret line="313" column="16" lean-forward="true" selection-start-line="313" selection-start-column="16" selection-end-line="313" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/mirror/js/util/PGL.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="7" column="50" selection-start-line="7" selection-start-column="50" selection-end-line="7" selection-end-column="50" />
+          <folding>
+            <element signature="n#!!doc;n#ObjObject#0" />
+            <element signature="n#!!block;n#ObjObject#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/constants.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/mirror/js/util/Matrix.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="77" selection-start-column="32" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/fluid/demo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="25" column="34" lean-forward="true" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
+          <folding>
+            <element signature="e#30#618#0" />
+            <element signature="e#671#784#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/fluid/demo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2800">
+          <caret line="196" column="68" lean-forward="true" selection-start-line="196" selection-start-column="68" selection-end-line="196" selection-end-column="68" />
+          <folding>
+            <element signature="e#216#268#0" expanded="true" />
+            <element signature="e#1463#1688#0" />
+            <element signature="e#1892#3554#0" />
+            <element signature="e#2748#3004#0" />
+            <element signature="e#3010#3265#0" />
+            <element signature="e#3282#3545#0" />
+            <element signature="e#3624#4106#0" />
+            <element signature="e#4184#5024#0" />
+            <element signature="e#5060#5263#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/mirror/demo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="8" column="50" selection-start-line="8" selection-start-column="50" selection-end-line="8" selection-end-column="50" />
+          <folding>
+            <element signature="n#script#2;n#head#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="12" column="11" lean-forward="true" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/solidwireframe/SolidWireframe.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="12" column="9" lean-forward="true" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/left.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="16" column="84" selection-start-line="16" selection-start-column="84" selection-end-line="16" selection-end-column="84" />
+          <folding>
+            <element signature="n#ul#0;n#li#0;n#ul#0;n#body#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>

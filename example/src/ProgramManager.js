@@ -97,7 +97,47 @@ Object.assign(ProgramManager.prototype, {
     }
 
     return shader;
-  }
+  },
+
+  /**
+   * 获取变量地址
+   * @param gl 上下文
+   * @param program 着色器
+   * @param name 变量名称
+   * @returns {WebGLUniformLocation}
+   */
+  getVariableLocation: function(gl, program, name) {
+
+    var location;
+
+    if (name.startsWith('a')) { // attribute 变量
+      location = gl.getAttribLocation(program, name);
+      if (location < 0) {
+        throw "Get attribute variable " + name + "'s location fail";
+      }
+    } else {// uniform 变量
+      location = gl.getUniformLocation(program, name);
+      if (location == null) {
+        throw "Failed get unifrom variable " + name + "'s location"
+      }
+    }
+
+    return location;
+  },
+
+  /**
+   * 获取属性地址
+   * @param gl 上下文
+   * @param program 着色器程序
+   * @param variableNames 属性名称
+   */
+  getProgramVariableLocations: function(gl, program, variableNames) {
+    var len = variableNames.length;
+    for (var i = 0; i < len; i++) {
+      var variableName = variableNames[i];
+      program[variableName] = this.getVariableLocation(gl, program, variableName);
+    }
+  },
 });
 
 export default ProgramManager;

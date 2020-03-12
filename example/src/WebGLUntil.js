@@ -1,9 +1,10 @@
 /**
  * webgl辅助方法
+ * @param _enableWebGL2 是否启用webgl2
  * @returns {{isWebGL2: boolean, getWebGLContext: (function(*, *=): (CanvasRenderingContext2D|WebGLRenderingContext|CanvasRenderingContext2D|WebGLRenderingContext))}}
  * @constructor
  */
-let WebGLUntil = function() {
+let WebGLUntil = function(_enableWebGL2) {
 
   var isWebGL2 = false;
 
@@ -14,8 +15,10 @@ let WebGLUntil = function() {
    * @returns {{gl: (*|CanvasRenderingContext2D|WebGLRenderingContext), isWebGL2: boolean}}
    */
   function getWebGLContext(canvas, params) {
-    var context = canvas.getContext('webgl2', params);
-    isWebGL2 = !!context;
+    if(_enableWebGL2){
+      var context = canvas.getContext('webgl2', params);
+      isWebGL2 = !!context;
+    }
 
     if (!isWebGL2) {
       // 获取webgl关键字

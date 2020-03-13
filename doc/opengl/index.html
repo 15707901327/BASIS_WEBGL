@@ -43,13 +43,60 @@
     <div class="right">
       <section id="Overview" class="section1">
         <h4 class="title">OpenGL概述</h4>
+        <p>OpenGL是一种应用程序编程接口，它是一种可以对图形硬件设备特性进行访问的软件库。</p>
+        <p>无论是OpenGL还是其他图形API的着色器，通常都是通过一种特殊的语言去编写的。对于OpenGL我们会使用OpenGL Shader
+          Language(GLSL)。</p>
         <section>
-          <strong>概述：</strong>
           <div class="content">
-            <strong>定义：</strong>
-            <p>OpenGL是一种应用程序编程接口，它是一种可以对图形硬件设备特性进行访问的软件库。</p>
-            <strong>OpenGL发展图示：</strong>
+            <strong>OpenGL版本图示：</strong>
             <div><img src="img/relation.png" width="800"></div>
+            <h4>GLSL版本:</h4>
+            <table border="1">
+              <tr>
+                <th>OpenGL版本</th>
+                <th>GLSL版本</th>
+              </tr>
+              <tr>
+                <td>2.0</td>
+                <td>110</td>
+              </tr>
+              <tr>
+                <td>2.1</td>
+                <td>120</td>
+              </tr>
+              <tr>
+                <td>3.0</td>
+                <td>130</td>
+              </tr>
+              <tr>
+                <td>3.1</td>
+                <td>140</td>
+              </tr>
+              <tr>
+                <td>3.2</td>
+                <td>150</td>
+              </tr>
+              <tr>
+                <td>3.3</td>
+                <td>330</td>
+              </tr>
+              <tr>
+                <td>4.0</td>
+                <td>400</td>
+              </tr>
+              <tr>
+                <td>4.1</td>
+                <td>410</td>
+              </tr>
+              <tr>
+                <td>4.2</td>
+                <td>420</td>
+              </tr>
+              <tr>
+                <td>4.3</td>
+                <td>430</td>
+              </tr>
+            </table>
           </div>
         </section>
         <section>
@@ -143,7 +190,7 @@
         <section>
           <h4>帧缓存对象：</h4>
           <p>通过帧缓存对象，我们可以创建自己的<strong>帧缓存</strong>,并且将他们绑定到<strong>渲染缓存（render buffer）</strong>
-          上，将数据拷贝的消耗最小化，同时对性能进行优化。</p>
+            上，将数据拷贝的消耗最小化，同时对性能进行优化。</p>
           <p>帧缓存对象对于离屏渲染技术、纹理贴图的更新以及缓存乒乓技术的实现非常有意义。</p>
           <p>窗口系统所提供的帧缓存是唯一可以被图形服务器的显示系统所识别的帧缓存，也就是说，我们屏幕上看到的只能是这个缓冲。</p>
         </section>

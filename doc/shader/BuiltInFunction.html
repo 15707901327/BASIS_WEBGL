@@ -27,6 +27,13 @@
       <li><a href="#mix">mix()</a></li>
       <li><a href="#smoothstep">smoothstep()</a></li>
     </ul>
+    <h4><a href="#vector">矢量函数</a></h4>
+    <ul class="ul-1">
+      <li><a href="#lessThan">lessThan()</a></li>
+      <li><a href="#any">any()</a></li>
+      <li><a href="#all">all()</a></li>
+      <li><a href="#not">not()</a></li>
+    </ul>
   </div>
   <div class="right">
     <section id="vec4">
@@ -445,6 +452,82 @@
           </tr>
         </table>
       </div>
+    </section>
+    <section id="vector" class="section1">
+      <div class="title">矢量函数</div>
+      <section id="lessThan">
+        <h4>lessThan()</h4>
+        <table border="1">
+          <tr>
+            <th>语法</th>
+            <th>描述</th>
+          </tr>
+          <tr>
+            <td>bvec2 lessThan(vec2 x,vec2 y)</td>
+            <td rowspan="6">逐分量比较x < y 是否成立</td>
+          </tr>
+          <tr>
+            <td>bvec3 lessThan(vec3 x,vec3 y)</td>
+          </tr>
+          <tr>
+            <td>bvec4 lessThan(vec4 x,vec4 y)</td>
+          </tr>
+          <tr>
+            <td>bvec2 lessThan(ivec2 x,ivec2 y)</td>
+          </tr>
+          <tr>
+            <td>bvec3 lessThan(ivec3 x,ivec3 y)</td>
+          </tr>
+          <tr>
+            <td>bvec4 lessThan(ivec4 x,ivec4 y)</td>
+          </tr>
+        </table>
+      </section>
+      <section id="any">
+        <h4>any()</h4>
+        <table border="1">
+          <tr>
+            <th>语法</th>
+            <th>描述</th>
+          </tr>
+          <tr>
+            <td>bool any(bvec2 x)</td>
+            <td rowspan="3">矢量的任意分量为true，则返回true</td>
+          </tr>
+          <tr><td>bool any(bvec3 x)</td></tr>
+          <tr><td>bool any(bvec4 x)</td></tr>
+        </table>
+      </section>
+      <section id="all">
+        <h4>all()</h4>
+        <table border="1">
+          <tr>
+            <th>语法</th>
+            <th>描述</th>
+          </tr>
+          <tr>
+            <td>bool all(bvec2 x)</td>
+            <td rowspan="3">矢量的所有分量为true，则返回true</td>
+          </tr>
+          <tr><td>bool all(bvec3 x)</td></tr>
+          <tr><td>bool all(bvec4 x)</td></tr>
+        </table>
+      </section>
+      <section id="not">
+        <h4>not()</h4>
+        <table border="1">
+          <tr>
+            <th>语法</th>
+            <th>描述</th>
+          </tr>
+          <tr>
+            <td>bool not(bvec2 x)</td>
+            <td rowspan="3">矢量逐分量的逻辑补运算。</td>
+          </tr>
+          <tr><td>bool not(bvec3 x)</td></tr>
+          <tr><td>bool not(bvec4 x)</td></tr>
+        </table>
+      </section>
     </section>
   </div>
 </div>

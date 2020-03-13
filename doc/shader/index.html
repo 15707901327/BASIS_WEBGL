@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>着色器介绍</title>
+  <title>GLSL ES</title>
   <link rel="stylesheet" href="../../css/base.css">
   <link rel="stylesheet" href="../css/base.css">
 </head>
@@ -13,7 +13,7 @@
     <li><a href="../webgl/index.html">webgl概述</a></li>
     <li><a href="../opengl/index.html">OpenGL概述</a></li>
     <li><a href="../graphics/index.html">图形学</a></li>
-    <li class="li_heightLight"><a href="../shader/index.html">着色器</a></li>
+    <li class="li_heightLight"><a href="../shader/index.html">GLSL ES</a></li>
     <li><a href="../webgl/js_API/gl.html">WebGL API</a></li>
     <li><a href="../../example/index.html" target="_parent">WebGL实例</a></li>
   </ul>
@@ -48,6 +48,16 @@
       <ul class="ul-1">
         <li><a href="BRDF.html" target="_blank">BRDF*基于物理的着色器技术</a></li>
       </ul>
+      <h4><a href="#variable">着色器中的变量</a></h4>
+      <ul class="ul-1">
+        <li><a href="#fragmentBuiltVariable">片元着色器中的内置变量</a></li>
+        <li><a href="#vertexBuiltVariable">顶点着色器中的内置变量</a></li>
+      </ul>
+      <h4><a href="#dataType">数据类型</a></h4>
+      <ul class="ul-1">
+        <li><a href="#numberType">数据值类型</a></li>
+        <li><a href="#texture">专用于纹理的数据类型</a></li>
+      </ul>
     </div>
     <div class="right">
       <section id="shader" class="section1">
@@ -55,8 +65,26 @@
         <section>
           <strong>定义：</strong>
           <p>图形硬件所执行的一类特殊的函数，可以理解为专门为图形处理单元（GPU）编译的一种小型程序。</p>
-          <strong id="GLSE">GLSE：</strong>
-          <p>一种专门为图形开发设计的编程语言.</p>
+          <strong>GLSL ES：</strong>
+          <p>GLSL ES编程语言是在OpenGL着色器语言（GLSL）的基础上，删除和简化一部分功能后形成的。是专门用来编写着色器的编
+            程语言。</p>
+          <div class="content">
+            <strong>GLSL ES版本:</strong>
+            <table border="1">
+              <tr>
+                <th>OpenGL ES 版本</th>
+                <th>GLSL ES 版本</th>
+              </tr>
+              <tr>
+                <th>2.0</th>
+                <th>100</th>
+              </tr>
+              <tr>
+                <th>3.0</th>
+                <th>300</th>
+              </tr>
+            </table>
+          </div>
         </section>
       </section>
       <section id="grammar" class="section1">
@@ -420,6 +448,127 @@ var VSHADER_SOURCE =
               <td>参数的值不会传入函数，但是在函数内部修改其值，函数结束后其值会被修改</td>
             </tr>
           </table>
+        </section>
+      </section>
+      <section id="variable" class="section1">
+        <h4 class="title">着色器中的变量</h4>
+        <section>
+          <h4>变量概述</h4>
+          <p>声明在函数外部的是全局变量，声明在函数内部的是局部变量。</p>
+          <div class="content">
+            <strong>规范</strong>
+            <ul class="ul-1">
+              <li>只包含a-z\A-Z和下划线_</li>
+              <li>首字母大写</li>
+              <li>不能使用保留字</li>
+            </ul>
+          </div>
+        </section>
+        <section id="fragmentBuiltVariable">
+          <h4>片元着色器中的内置变量</h4>
+          <div class="content">
+            <table border="1">
+              <tr>
+                <th colspan="3">片元着色器中的内置变量</th>
+              </tr>
+              <tr>
+                <th>类型和变量名</th>
+                <th>描述</th>
+                <th>实例</th>
+              </tr>
+              <tr>
+                <td>vec4 gl_FragColor</td>
+                <td>指定片元颜色（RGBA格式）</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>vec4 gl_FragCoord</td>
+                <td>片元的窗口坐标，第1个x和第2个y分量表示在canvas坐标系统中（窗口坐标系统）的坐标值。z值是深度值。</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>vec4 gl_PointCoord</td>
+                <td>片元在被绘制的点内的坐标（0.0到1.0）</td>
+                <td>
+                  <ul class="ul-1-num">
+                    <li><a href="../../../WebGL编程指南/ch10/RoundedPoints.html" target="_blank">实现画圆</a></li>
+                  </ul>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </section>
+        <section id="vertexBuiltVariable">
+          <h4>顶点着色器中的内置变量</h4>
+          <div class="content">
+            <table border="1px">
+              <tr>
+                <th colspan="2">顶点着色器的内置变量</th>
+              </tr>
+              <tr>
+                <th>类型和变量名</th>
+                <th>描述</th>
+              </tr>
+              <tr>
+                <td>vec4 gl_Position</td>
+                <td>
+                  表示顶点的位置，注意变量必须被赋值，否则着色器就无法正常工作
+                </td>
+              </tr>
+              <tr>
+                <td>float gl_PointSize</td>
+                <td>
+                  表示点的尺寸(像素数)，
+                  不是必须的，不过不赋值，着色器会取默认值1.0
+                </td>
+              </tr>
+            </table>
+          </div>
+        </section>
+      </section>
+      <section id="dataType" class="section1">
+        <h4 class="title">GLSE中的数据类型</h4>
+        <section id="numberType">
+          <h4>数据值类型</h4>
+          <div class="content">
+            <table border="1" style="border-collapse: collapse">
+              <tr>
+                <th>类型</th>
+                <th>描述</th>
+              </tr>
+              <tr>
+                <td>数值类型</td>
+                <td>支持整数和浮点数</td>
+              </tr>
+              <tr>
+                <td>布尔值类型</td>
+                <td>true\false</td>
+              </tr>
+            </table>
+            <p>不支持字符串类型</p>
+          </div>
+        </section>
+        <section id="texture">
+          <h4>专用于纹理的数据类型</h4>
+          <div class="content">
+            <table border="1">
+              <tr>
+                <th colspan="2">专用于纹理的数据类型</th>
+              </tr>
+              <tr>
+                <th>类型</th>
+                <th>描述</th>
+              </tr>
+              <tr>
+                <td>sampler2D</td>
+                <td>绑定到gl.TEXTURE_2D上的纹理数据类型</td>
+              </tr>
+              <tr>
+                <td>samplerCube</td>
+                <td>绑定到gl.TEXTURE_CUBE_MAP上的纹理数据类型</td>
+              </tr>
+            </table>
+          </div>
         </section>
       </section>
     </div>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>单通道wireframe渲染</title>
+  <link rel="stylesheet" href="../../../css/base.css">
+</head>
+<body>
+<div class="header">
+  <ul>
+    <li><a href="../index.html">首页</a></li>
+    <li><a href="../index.html">webgl概述</a></li>
+    <li><a href="../../opengl/index.html">OpenGL概述</a></li>
+    <li><a href="../../graphics/index.html">图形学</a></li>
+    <li><a href="../../shader/index.html">着色器</a></li>
+    <li><a href="../../webgl/js_API/gl.html">WebGL API</a></li>
+    <li><a href="../../../example/index.html">WebGL实例</a></li>
+  </ul>
+</div>
+<div class="l-r-wrapper">
+  <div class="content">
+    <div class="right">
+    <section id="base" class="section1">
+      <h4 class="title">单通道wireframe渲染</h4>
+      <section>
+        <h4>使用背景：</h4>
+        <p>如果要把一个对象的线框绘制出来，一般的方法是先绘制实体对象，然后通过gl.LINES的模式再绘制一遍模型，此时模型的线框就会被绘制出来。</p>
+        <div class="content">
+          <strong>使用gl.LINES的问题:</strong>
+          <ul class="ul-2-num">
+            <li>此方法需要绘制两遍对象，因此会造成性能的损失。</li>
+            <li>使用此种方式绘制线框的时候，深度值偏移是必要的。那是因为，线条的光栅化过程和多边形的光栅化过程并不是完全一致的。
+              这就导致绘制一个多边形的边和绘制多边形本身，相同位置的片元，其深度值可能并不一样。但是，添加一个偏移并不能完美的
+              解决问题。 这将会导致一些本该被隐藏的线段，未被遮挡。</li>
+            <li>使用gl.LINES的另外一个问题是，在WebGL中，存在一个bug，就是线宽只能设置为1。</li>
+          </ul>
+        </div>
+      </section>
+      <section>
+        <h4>原理:</h4>
+        <p>我们知道，一般对象都是由三角形组成的。而要显示的线框，正好是三角形的边，如果在绘制的时候，给三角形的边一个不同
+          的颜色，便可以实现在对象上面绘制线框的效果。</p>
+      </section>
+      <section>
+        <h4>重心坐标系:</h4>
+        <p>对于三角形而言，重心坐标可以这样定义：</p>
+        <div class="content">
+          <div><img src="01.png" width="350" align="right"></div>
+          <p>三角形所在平面上的任意一点P（笛卡尔坐标），可以通过三角形的三个顶点A、B、C（笛卡尔坐标）来表示：
+            P = Ax + By + C * Z，其中（x、y、z）便是重心坐标。由此可以看出P点其实是A、B、C点加权之和。</p>
+          <p>如下图所示，A点的坐标是(1,0,0),B点的坐标是（0，1，0），C点的坐标是（0，0，1）</p>
+          <strong>重心坐标确定三角形的边:</strong>
+          <p>由上面的讲解和图片展示可以得知，重心坐标（x，y，z）中任何一个值为0的点，都在三角形的边上。不过在实际的图形
+            渲染中，边的宽度不可能是0，而应该是一个大于0的值，所以一般可以指定一个要绘制的线宽width，如果重心坐标
+            （x，y，z）中的任一个分量的值小于这个线宽width，可以认为在边上。</p>
+        </div>
+      </section>
+      <section>
+        <h4>代码实现：</h4>
+        <p>基于上面说的原理，首先需要定义顶点的坐标，对于一个三角形来说，可以把三个顶点的坐标分别指定为(1,0,0)、 (0,1,0)、
+          (0,1,0)即可。而对于一个四边形，有四个顶点 0，1，2，3，而绘制的时候使用索引 0,1,2, 2,1,3来绘制，此时
+          可以把顶点坐标定义如下：</p>
+        <pre>
+        var barycentric = [
+            1,0,0,  0,1,0, 0,0, 1,  1,0,0,
+       ];
+        </pre>
+        <p>然后，在着顶点色器中定义对应的attribute变量，由于顶点坐标最终需要传递到片元着色器中，所以还需要对应的varying
+          变量：</p>
+        <pre>
+        attribute vec3 aBarycentric;
+        ...
+        varying vec3 vBarycentric;
+        void main(){
+           ...
+           vBarycentric = aBarycentric;
+        }
+        </pre>
+        <p>然后，在片元着色器中判断，如果vBarycentric的任意一个分量的值小于指定的宽度值,则颜色为指定的线框颜色：</p>
+        <pre>
+        if(any(lessThan(vBarycentric, vec3(0.02)))){
+           gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
+        }
+        else{
+           gl_FragColor = color;
+        }
+        </pre>
+        <p>通过上面代码，最终绘制的立方体效果如下：</p>
+        <div><img src="02.png"></div>
+      </section>
+    </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

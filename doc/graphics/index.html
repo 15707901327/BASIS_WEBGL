@@ -15,6 +15,7 @@
     <li class="li_heightLight"><a href="../graphics/index.html">图形学</a></li>
     <li><a href="../shader/index.html">着色器</a></li>
     <li><a href="../webgl/js_API/gl.html">WebGL API</a></li>
+    <li><a href="../canvas2D_API/ctx.html">Canvas2D API</a></li>
     <li><a href="../../example/index.html" target="_parent">WebGL实例</a></li>
   </ul>
 </div>
@@ -53,9 +54,10 @@
       </ul>
       <a href="#library">矩阵变换库</a><br>
       <h4><a href="#CoordinateSystem">坐标系</a></h4>
-      <ul>
-        <li class="ul-1"><a href="#Three-dimensionalCoordinateSystem">三维坐标系</a></li>
-        <li class="ul-1"><a href="#SphericalCoordinateSystem">球面坐标系</a></li>
+      <ul class="ul-1">
+        <li><a href="#Three-dimensionalCoordinateSystem">三维坐标系</a></li>
+        <li><a href="#SphericalCoordinateSystem">球面坐标系</a></li>
+        <li><a href="#BarycentricCoordinateSpace">重心坐标空间</a></li>
       </ul>
       <h4><a href="#camera">camera</a></h4>
       <ul class="ul-1">
@@ -366,6 +368,19 @@
             θ = arccos(z/r)
             φ = arctan(y/x)
           </code></pre>
+          </div>
+        </div>
+        <div id="BarycentricCoordinateSpace">
+          <h4>重心坐标空间</h4>
+          <p>重心坐标空间是一个与三角形表面相关联且独立于三角形所在3D坐标空间的坐标空间.</p>
+          <p>三角形所在平面的任意点都能表示为顶点的加权平均值，这个权就称为<strong>重心坐标</strong>。</p>
+          <div class="content">
+            <strong>特点：</strong>
+            <ul class="ul-2-num">
+              <li>三角形三个顶点的重心坐标都是单位向量（1，0，0）、（0，1，0）、（0，0，1）。</li>
+              <li>在某顶点的相对边上的所有点的对应重心坐标分量为0.</li>
+              <li>不只是三角形内的点，该平面上的所有点都能用重心坐标描述。</li>
+            </ul>
           </div>
         </div>
       </section>

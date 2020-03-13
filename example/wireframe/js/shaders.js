@@ -7,8 +7,10 @@ var  normalVS = `
  	varying vec3 vPosition;
  	varying vec4 vColor;
  	varying vec4 vPositionMVP;
- 	varying vec3 vBarycentric;
-  	uniform mat4 uMVPMatrix;
+ 	
+ 	varying vec3 vBarycentric; // 重心坐标
+  uniform mat4 uMVPMatrix;
+  	
  	void main(){
  		gl_Position = uMVPMatrix* aPosition;	
  		vPosition = vec3(aPosition);
@@ -25,7 +27,9 @@ var normalFS = `
 	varying vec3 vNormal;
 	varying vec3 vPosition;
 	varying vec4 vColor;
+	
 	varying vec3 vBarycentric;
+	
 	void main(){
 		vec3 normal = normalize(vNormal);
 		vec3 lightDirection = normalize(uLightPosition - vPosition);
@@ -33,12 +37,13 @@ var normalFS = `
 		vec3 diffuse = uLightColor * vec3(vColor) * 1.0;
 		vec3 ambient = uAmbientLightColor * vec3(vColor);
 		vec4 color = vec4(ambient + diffuse * normalDotDirection,vColor.a);
+		
 		if(any(lessThan(vBarycentric, vec3(0.02)))){
 		    gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
 		}
 		else{
 		    gl_FragColor = color;
 		}
-		
+	
 	}
 `;

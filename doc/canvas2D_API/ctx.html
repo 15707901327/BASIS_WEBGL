@@ -3,111 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <title>上下文</title>
-  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../../css/base.css">
 </head>
 <body>
-<div class="l-r-wrapper">
-  <div class="left">
-    <h4><a href="#fillStyle">ctx.fillStyle</a></h4>
-    <h4><a href="#fillRect">ctx.fillRect()</a></h4>
-    <h4><a href="#RadialGradient">渐变方法</a></h4>
-    <ul class="ul-2-num">
-      <li><a href="#createRadialGradient">ctx.createRadialGradient()</a></li>
-    </ul>
-    <h4><a href="#addColorStop">gradient.addColorStop();</a></h4>
-    <h4><a href="#getImageData">ctx.getImageData()</a></h4>
-    <h4><a href="#path">路径方法</a></h4>
-    <ul class="ul-2-num">
-      <li><a href="#arc">ctx.arc()</a></li>
-    </ul>
-  </div>
-  <div class="right">
-    <section id="fillStyle">
-      <h4>ctx.fillStyle = 'rgba(0,0,255,0.5)';</h4>
-      <div class="content">
-        <p>设置填充颜色为蓝色</p>
-        <strong>参数：</strong>
-        <p>rgb表示颜色（0-255）a ： 透明度 （0.0-1.0）</p>
-        <strong>实例</strong>
-        <ul class="ul-1-num">
-          <li><a href="../WebGL编程指南/ch2/DrawRectangle.html" target="_blank">绘制蓝色矩形</a></li>
-        </ul>
-      </div>
-    </section>
-    <section id="fillRect">
-      <h4>ctx.fillRect(120,10,150,150);</h4>
-      <div class="content">
-        <p>使用填充颜色填充矩形</p>
-        <strong>参数：</strong>
-        <p>前两个指定了待绘制矩形的顶点在《canvas》中的坐标，后两个指定了矩形的宽度和高度</p>
-        <strong>实例</strong>
-        <ul class="ul-1-num">
-          <li><a href="../WebGL编程指南/ch2/DrawRectangle.html" target="_blank">绘制蓝色矩形</a></li>
-        </ul>
-      </div>
-    </section>
-    <section id="RadialGradient" class="section1">
-      <div class="title">渐变方法</div>
-      <section id="createRadialGradient">
-        <h4>ctx.createRadialGradient(x0,y0,r0,x1,y1,r1);</h4>
+<div class="header">
+  <ul>
+    <li><a href="../../index.html">首页</a></li>
+    <li><a href="../webgl/index.html">webgl概述</a></li>
+    <li><a href="../opengl/index.html">OpenGL概述</a></li>
+    <li><a href="../graphics/index.html">图形学</a></li>
+    <li><a href="../shader/index.html">着色器</a></li>
+    <li><a href="../webgl/js_API/gl.html">WebGL API</a></li>
+    <li><a href="../canvas2D_API/ctx.html">canvas2D API</a></li>
+    <li><a href="../../example/index.html" target="_parent">WebGL实例</a></li>
+  </ul>
+</div>
+<div class="content">
+  <div class="l-r-wrapper">
+    <div class="left">
+      <h4><a href="#fillStyle">ctx.fillStyle</a></h4>
+      <h4><a href="#fillRect">ctx.fillRect()</a></h4>
+      <h4><a href="#RadialGradient">渐变方法</a></h4>
+      <ul class="ul-2-num">
+        <li><a href="#createRadialGradient">ctx.createRadialGradient()</a></li>
+      </ul>
+      <h4><a href="#addColorStop">gradient.addColorStop();</a></h4>
+      <h4><a href="#getImageData">ctx.getImageData()</a></h4>
+      <h4><a href="#path">路径方法</a></h4>
+      <ul class="ul-2-num">
+        <li><a href="#arc">ctx.arc()</a></li>
+      </ul>
+    </div>
+    <div class="right">
+      <section id="fillStyle">
+        <h4>ctx.fillStyle = 'rgba(0,0,255,0.5)';</h4>
         <div class="content">
-          <p>方法创建放射状/圆形渐变对象</p>
+          <p>设置填充颜色为蓝色</p>
           <strong>参数：</strong>
-          <ul class="ul-2">
-            <li>x0:渐变的开始圆的 x 坐标</li>
-            <li>y0:渐变的开始圆的 y 坐标</li>
-            <li>r0:开始圆的半径</li>
-            <li>x1:渐变的结束圆的 x 坐标</li>
-            <li>y1:渐变的结束圆的 y 坐标</li>
-            <li>r1:结束圆的半径</li>
+          <p>rgb表示颜色（0-255）a ： 透明度 （0.0-1.0）</p>
+          <strong>实例</strong>
+          <ul class="ul-1-num">
+            <li><a href="../WebGL编程指南/ch2/DrawRectangle.html" target="_blank">绘制蓝色矩形</a></li>
           </ul>
         </div>
       </section>
-      <section id="addColorStop">
-        <h4>gradient.addColorStop(stop,color);</h4>
-        <p>addColorStop() 方法规定 gradient 对象中的颜色和位置。</p>
-        <p>addColorStop() 方法与 createLinearGradient() 或 createRadialGradient() 一起使用。</p>
+      <section id="fillRect">
+        <h4>ctx.fillRect(120,10,150,150);</h4>
         <div class="content">
+          <p>使用填充颜色填充矩形</p>
           <strong>参数：</strong>
-          <ul class="ul-2">
-            <li>stop: 介于 0.0 与 1.0 之间的值，表示渐变中开始与结束之间的位置。</li>
-            <li>color: 在结束位置显示的 CSS 颜色值</li>
+          <p>前两个指定了待绘制矩形的顶点在《canvas》中的坐标，后两个指定了矩形的宽度和高度</p>
+          <strong>实例</strong>
+          <ul class="ul-1-num">
+            <li><a href="../WebGL编程指南/ch2/DrawRectangle.html" target="_blank">绘制蓝色矩形</a></li>
           </ul>
         </div>
       </section>
-    </section>
-    <section id="getImageData">
-      <h4>ctx.getImageData(x,y,width,height);</h4>
-      <div class="content">
-        <p>复制画布上指定矩形的像素数据</p>
-        <strong>参数：</strong>
-        <ul class="ul-2">
-          <li>x:开始复制的左上角位置的 x 坐标</li>
-          <li>y:开始复制的左上角位置的 y 坐标。</li>
-          <li>width:将要复制的矩形区域的宽度。</li>
-          <li>height:将要复制的矩形区域的高度。</li>
-        </ul>
-      </div>
-    </section>
-    <section id="path" class="section1">
-      <div class="title">路径方法</div>
-      <section id="arc">
-        <h4>ctx.arc(x,y,r,sAngle,eAngle,counterclockwise);</h4>
+      <section id="RadialGradient" class="section1">
+        <div class="title">渐变方法</div>
+        <section id="createRadialGradient">
+          <h4>ctx.createRadialGradient(x0,y0,r0,x1,y1,r1);</h4>
+          <div class="content">
+            <p>方法创建放射状/圆形渐变对象</p>
+            <strong>参数：</strong>
+            <ul class="ul-2">
+              <li>x0:渐变的开始圆的 x 坐标</li>
+              <li>y0:渐变的开始圆的 y 坐标</li>
+              <li>r0:开始圆的半径</li>
+              <li>x1:渐变的结束圆的 x 坐标</li>
+              <li>y1:渐变的结束圆的 y 坐标</li>
+              <li>r1:结束圆的半径</li>
+            </ul>
+          </div>
+        </section>
+        <section id="addColorStop">
+          <h4>gradient.addColorStop(stop,color);</h4>
+          <p>addColorStop() 方法规定 gradient 对象中的颜色和位置。</p>
+          <p>addColorStop() 方法与 createLinearGradient() 或 createRadialGradient() 一起使用。</p>
+          <div class="content">
+            <strong>参数：</strong>
+            <ul class="ul-2">
+              <li>stop: 介于 0.0 与 1.0 之间的值，表示渐变中开始与结束之间的位置。</li>
+              <li>color: 在结束位置显示的 CSS 颜色值</li>
+            </ul>
+          </div>
+        </section>
+      </section>
+      <section id="getImageData">
+        <h4>ctx.getImageData(x,y,width,height);</h4>
         <div class="content">
-          <p>创建弧/曲线（用于创建圆或部分圆）。</p>
+          <p>复制画布上指定矩形的像素数据</p>
           <strong>参数：</strong>
           <ul class="ul-2">
-            <li>x: 圆的中心的 x 坐标。</li>
-            <li>y: 圆的中心的 y 坐标。</li>
-            <li>r: 圆的半径。</li>
-            <li>sAngle: 起始角，以弧度计。（弧的圆形的三点钟位置是 0 度）。</li>
-            <li>eAngle: 结束角，以弧度计。</li>
-            <li>counterclockwise: 可选。规定应该逆时针还是顺时针绘图。False = 顺时针，true = 逆时针。</li>
+            <li>x:开始复制的左上角位置的 x 坐标</li>
+            <li>y:开始复制的左上角位置的 y 坐标。</li>
+            <li>width:将要复制的矩形区域的宽度。</li>
+            <li>height:将要复制的矩形区域的高度。</li>
           </ul>
         </div>
       </section>
-    </section>
+      <section id="path" class="section1">
+        <div class="title">路径方法</div>
+        <section id="arc">
+          <h4>ctx.arc(x,y,r,sAngle,eAngle,counterclockwise);</h4>
+          <div class="content">
+            <p>创建弧/曲线（用于创建圆或部分圆）。</p>
+            <strong>参数：</strong>
+            <ul class="ul-2">
+              <li>x: 圆的中心的 x 坐标。</li>
+              <li>y: 圆的中心的 y 坐标。</li>
+              <li>r: 圆的半径。</li>
+              <li>sAngle: 起始角，以弧度计。（弧的圆形的三点钟位置是 0 度）。</li>
+              <li>eAngle: 结束角，以弧度计。</li>
+              <li>counterclockwise: 可选。规定应该逆时针还是顺时针绘图。False = 顺时针，true = 逆时针。</li>
+            </ul>
+          </div>
+        </section>
+      </section>
+    </div>
   </div>
 </div>
+
 </body>
 </html>

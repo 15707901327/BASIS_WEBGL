@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>单通道 solid wireframe</title>
 
-<!--  <link rel="stylesheet" href="../css/base.css">-->
+  <!--  <link rel="stylesheet" href="../css/base.css">-->
   <link rel="stylesheet" href="../../css/base.css">
 
   <script type="text/javascript" src="js/utils.js"></script>
@@ -30,7 +30,7 @@
 
       // 创建正常场景着色器程序
       var programManager = new ProgramManager();
-      var normalProgram = programManager.createProgram(gl,normalVS, normalFS);
+      var normalProgram = programManager.createProgram(gl, normalVS, normalFS);
       programManager.getProgramVariableLocations(gl, normalProgram, ['aPosition', 'aColor', 'aNormal', 'aBarycentric', 'uMVPMatrix', 'uLightColor', 'uLightPosition', 'uAmbientLightColor']);
 
       // 创建立方体数据
@@ -134,13 +134,12 @@
 
       }
 
-      // if ( face instanceof THREE.Face3 ) {
-      //       values[ f ] = [ new THREE.Vector3( 1, 0, 0 ), new THREE.Vector3( 0, 1, 0 ), new THREE.Vector3( 0, 0, 1 ) ];
-      //     } else {
-      //       values[ f ] = [ new THREE.Vector3( 1, 0, 0 ), new THREE.Vector3( 1, 1, 0 ), new THREE.Vector3( 0, 1, 0 ), new THREE.Vector3( 0, 0, 0 ) ];
-      //     }
-
+      /**
+       * 计算重力坐标
+       * @returns {number[]}
+       */
       function computeBarycentric() {
+        // 三角形边
         var barycentric = [
           1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0,
           1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0,
@@ -150,6 +149,7 @@
           1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0,
         ];
 
+        // 画线立方体
         var barycentric = [
           1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0,  //前
           1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0,  //右

@@ -44,6 +44,5 @@ var normalFS = `
 		else{
 		    gl_FragColor = color;
 		}
-	
 	}
 `;

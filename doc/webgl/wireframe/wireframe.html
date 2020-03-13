@@ -74,7 +74,59 @@
         }
         </pre>
         <p>通过上面代码，最终绘制的立方体效果如下：</p>
-        <div><img src="02.png"></div>
+        <div class="content">
+          <div><img src="02.png"></div>
+        </div>
+      </section>
+      <section>
+        <h4>去掉锯齿：</h4>
+        <p>从上面的立方体绘制的效果图可以看出，线框的锯齿很严重，而且线的宽度不是一致的。这是因为，之前的判断是基于三角形
+          表面的，通过光栅化之后，由于线条的角度等原因，最终在屏幕上面的宽度就变得不一致了。</p>
+        <h4>使用fwidth方法:</h4>
+        <p>要线宽的判断基于屏幕，需要使用到一个方法fwidth。该方法需要WebGL 引入一个扩展之后才能使用。该扩展是：
+          OES_standard_derivatives。</p>
+        <p>首先使用WebGL的getExtension方法获取该扩展，代码如下：</p>
+        <pre>
+          gl.getExtension("OES_standard_derivatives");
+        </pre>
+        <p>然后在shader中启用这个扩展，代码如下：</p>
+        <pre>
+          #extension GL_OES_standard_derivatives : enable
+        </pre>
+        <p>然后通过fwidth函数，把vBarycentric的值缩放到vBarycentric在屏幕变化的范围之内，代码如下：</p>
+        <pre>
+          vec3 d = fwidth(vBarycentric);
+          vec3 a3 = smoothstep(vec3(0.0), d*2.0, vBarycentric);
+        </pre>
+        <p>fwidth表示一个变量在屏幕空间的x轴变化dFdx、y轴变化dFdx之和。</p>
+        <p>在获取了基于屏幕像素空间的的重心坐标a3之后，便可以通过通过该变量来进行判断，并绘制出指定宽度的线框：</p>
+        <pre>
+          gl_FragColor.rgb = mix(vec3(0.0,0.0,0.0), vec3(1.0), min(min(a3.x, a3.y), a3.z));
+        </pre>
+        <p>改良之后的绘制效果如下</p>
+        <div class="content">
+          <div><img src="003.webp"></div>
+        </div>
+      </section>
+      <section>
+        <h4>四边形线框：</h4>
+        <p>前面我们看到的都是三角形的线框，有的时候，我们希望获取四边形的线框，应该怎么处理呢？ 其实此时，
+          只需要调整下顶点的重心坐标即可，在前文中，一个四边形的四个顶点的重心坐标如下：</p>
+        <pre>
+          var barycentric = [
+              1,0,0,  0,1,0, 0,0, 1,  1,0,0,
+         ];
+        </pre>
+        <p>如果把四边形的四个顶点的重心坐标调整如下：</p>
+        <pre>
+          var barycentric = [
+             1,0,0,  1,1,0, 0,0, 1,  0,0,0,  //前
+          ];
+        </pre>
+        <p>便可以达到效果，最终绘制的效果如下图所示：</p>
+        <div class="content">
+          <div><img src="004.webp"></div>
+        </div>
       </section>
     </section>
     </div>

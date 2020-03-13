@@ -29,7 +29,7 @@ var normalFS = `
 	varying vec3 vBarycentric;
 	float edgeFactor(){
 	    vec3 d = fwidth(vBarycentric);
-	    vec3 a3 = smoothstep(vec3(0.0), d*1.5, vBarycentric);
+	    vec3 a3 = smoothstep(vec3(0.0), d*2.0, vBarycentric);
 	    return min(min(a3.x, a3.y), a3.z);
 	}
 	void main(){
@@ -39,6 +39,7 @@ var normalFS = `
 		vec3 diffuse = uLightColor * vec3(vColor) * 1.0;
 		vec3 ambient = uAmbientLightColor * vec3(vColor);
 		vec4 color = vec4(ambient + diffuse * normalDotDirection,vColor.a);
+		
 		gl_FragColor.rgb = mix(vec3(1.0,1.0,1.0), color.rgb, edgeFactor());
 	}
 `;

@@ -56,6 +56,7 @@ var normalFS = `
 		vec3 ambient = uAmbientLightColor * vec3(vColor);
 		vec4 color = vec4(ambient + diffuse * normalDotDirection,vColor.a);
 		gl_FragColor = color;
+		
 		gl_FragColor.rgb = mix(vec3(0.0,0.0,0.0), vec3(1.0), edgeFactor3());
 	}
 `;

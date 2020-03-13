@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>着色器偏导数dFdx和dFdy介绍</title>
+
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../css/base.css">
+</head>
+<body>
+<div class="header">
+  <ul>
+    <li><a href="../../index.html">首页</a></li>
+    <li><a href="../webgl/index.html">webgl概述</a></li>
+    <li><a href="../opengl/index.html">OpenGL概述</a></li>
+    <li><a href="../graphics/index.html">图形学</a></li>
+    <li><a href="../shader/index.html">GLSL ES</a></li>
+    <li><a href="../webgl/js_API/gl.html">WebGL API</a></li>
+    <li><a href="../../example/index.html" target="_parent">WebGL实例</a></li>
+  </ul>
+</div>
+<div class="content">
+  <div class="l-r-wrapper">
+    <div class="right">
+      <section class="section1">
+        <h4 class="title">WebGL 着色器偏导数dFdx和dFdy介绍</h4>
+        <p>偏导数函数（HLSL中的ddx和ddy，GLSL中的dFdx和dFdy）是片元着色器中的一个用于计算任何变量基于屏幕空间坐标的变化
+          率的指令（函数）。在WebGL中，使用的是dFdx和dFdy，还有另外一个函数fwidth = dFdx + dFdy。</p>
+        <section>
+          <h4>偏导数计算:</h4>
+          <div class="content">
+            <img src="img/001.png" align="right" width="500">
+            <p>在三角形栅格化期间，GPU会同时跑片元着色器的多个实例，但并不是一个pixel一个pixel去执行的，而是将其组织在2x2
+              的一组pixels块中并行执行。偏导数就是通过像素块中的变量的差值（变化率）而计算出来的。dFdx表示的是像素块中右边
+              像素的值减去素块中左边像素的值，而dFdy表示的是下面像素的值减去上面像素的值。如下图所示，图中显示的是渲染的屏
+              幕像素，图中红色区域是一个像素块，p(x,y)表示在屏幕空间坐标系中坐标（x，y）的片元（像素）上的某一个变量，图中
+              显示了dFdx和dFdy的计算过程。</p>
+            <p>偏导数函数可以用于片元着色器中的任何变量。对于向量和矩阵类型的变量，该函数会计算变量的每一个元素的偏导数。</p>
+          </div>
+        </section>
+        <section>
+          <h4>偏导数和mipmaps:</h4>
+          <p>Mipmaps用于计算纹理的一些列的子图，每个子图都比前一个的尺寸缩小了2倍。 他们用于在纹理缩小（纹理映射到比自身
+            尺寸小的表面）的时候的去锯齿。</p>
+          <p>Mipmaps 对于纹理缓存的一致性也很重要，在遍历一个三角形（的片元）的时候，它会强制获取一个最近的像素比例：
+            这个比例保证三角形上的一个像素尽量对应纹理上的一个像素。</p>
+          <p>Mipmaps是可以同时可视化效果和性能的少数技术之一。在纹理取样过程中使用偏导数来选择最佳的 mipmap 级数。纹理坐
+            标在屏幕空间中的变化率作为选择mimmap级数的依据，变化率越大，mimap级数越大，反之越小。</p>
+        </section>
+        <section>
+          <h4>面的法线向量计算(flat shader):</h4>
+          <p>偏导数函数可以用来在片元着色器中计算当前面（三角形）的法线向量。当前片元的世界坐标系的水平偏导数和垂直
+            偏导数是两个三角形表面上的两个向量，它们的叉乘结果是一个垂直于表面的向量，该向量的归一化结果就是面的法线向量。
+            需要特别注意的是两个向量的叉乘的顺序。下面是GLSL中通过镜头坐标系中坐标计算面法线向量的代码：</p>
+          <pre>
+            normalize( cross(dFdx(pos), dFdy(pos)) );</pre>
+        </section>
+      </section>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -21,7 +21,12 @@
 <div class="content">
   <div class="l-r-wrapper">
     <div class="left">
-      <h4><a href="#shader">着色器概述</a></h4>
+      <h4><a href="#shader">概述</a></h4>
+      <ul class="ul-1">
+        <li><a href="#vertex_shader">Vertex shader</a></li>
+        <li><a href="#primitive_assembly">图元装配</a></li>
+        <li><a href="#fragment_shader">Fragment Shader</a></li>
+      </ul>
       <h4><a href="#grammar">着色器语法</a></h4>
       <ul class="ul-1">
         <li><a href="#annotate">注释说明</a></li>
@@ -63,28 +68,66 @@
     <div class="right">
       <section id="shader" class="section1">
         <h4 class="title">着色器</h4>
+        <p>着色器是图形硬件所执行的一类特殊的函数，可以理解为专门为图形处理单元（GPU）编译的一种小型程序。</p>
+        <p>GLSL ES编程语言是在OpenGL着色器语言（GLSL）的基础上，删除和简化一部分功能后形成的。是专门用来编写着色器的编
+          程语言。</p>
         <section>
-          <strong>定义：</strong>
-          <p>图形硬件所执行的一类特殊的函数，可以理解为专门为图形处理单元（GPU）编译的一种小型程序。</p>
-          <strong>GLSL ES：</strong>
-          <p>GLSL ES编程语言是在OpenGL着色器语言（GLSL）的基础上，删除和简化一部分功能后形成的。是专门用来编写着色器的编
-            程语言。</p>
+          <h4>版本:</h4>
+          <table border="1">
+            <tr>
+              <th>OpenGL ES 版本</th>
+              <th>GLSL ES 版本</th>
+            </tr>
+            <tr>
+              <th>2.0</th>
+              <th>100</th>
+            </tr>
+            <tr>
+              <th>3.0</th>
+              <th>300</th>
+            </tr>
+          </table>
+        </section>
+        <section>
+          <h4>GLSL ES 3.0 图形管线：</h4>
+          <div  class="content">
+            <div><img src="img/pipeline.png" width="450"/></div>
+          </div>
+        </section>
+        <section id="vertex_shader">
+          <h4>Vertex shader</h4>
+          <p>顶点着色器用用来描述顶点特性（如位置、颜色等）的程序。顶点着色器实现了顶点操作通用可编程方法。</p>
           <div class="content">
-            <strong>GLSL ES版本:</strong>
-            <table border="1">
-              <tr>
-                <th>OpenGL ES 版本</th>
-                <th>GLSL ES 版本</th>
-              </tr>
-              <tr>
-                <th>2.0</th>
-                <th>100</th>
-              </tr>
-              <tr>
-                <th>3.0</th>
-                <th>300</th>
-              </tr>
-            </table>
+            <strong>输入：</strong>
+            <ul class="ul-2-num">
+              <li>着色器程序: 描述顶点上执行操作的顶点着色器程序源代码或可执行文件。</li>
+              <li>顶点着色器输入（属性）: 用顶点数组提供每个顶点的数据。</li>
+              <li>统一变量（uniform）：顶点（或片元）着色器使用的不变的数据。</li>
+              <li>采样器：代表顶点着色器使用纹理的特殊统一变量类型。</li>
+            </ul>
+            <strong>输出：</strong>
+            <ul class="ul-2-num">
+              <li>2.0中可变（varying）变量，3.0中顶点着色器输出变量。</li>
+            </ul>
+            <div><img src="img/vertex.png" width="450"/></div>
+          </div>
+        </section>
+        <section id="primitive_assembly">
+          <h4>图元装配</h4>
+          <p>图元（primitive）是三角形、直线或者点精灵等几何对象。</p>
+        </section>
+        <section id="fragment_shader">
+          <h4>Fragment Shader</h4>
+          <p>使其显示在屏幕上。进行逐片元处理过程如光照的程序。</p>
+          <div class="content">
+            <strong>输入：</strong>
+            <ul class="ul-2-num">
+              <li>着色器程序: 描述片段上执行操作的片段着色器程序源代码或可执行文件。</li>
+              <li>输入变量: 光栅单元用插值为每个片段生成的顶点着色器输出。</li>
+              <li>统一变量（uniform）：顶点（或片元）着色器使用的不变的数据。</li>
+              <li>采样器：代表片元着色器使用纹理的特殊统一变量类型。</li>
+            </ul>
+            <div><img src="img/fragment.png" width="450"/></div>
           </div>
         </section>
       </section>

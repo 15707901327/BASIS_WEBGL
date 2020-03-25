@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>一簇水晶</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <script type="module">
+    import WebGLRenderer from "../src/render/WebGLRenderer.js";
+    import ProgramManager from "../src/ProgramManager.js";
+    import {VERTEX_SHADER, FRAGMENT_SHADER} from "./shader/shader.js";
+    import VertexBuffers from "../src/core/VertexBuffer.js";
+
+    window.onload = function() {
+
+      let webGLRenderer = new WebGLRenderer({
+        canvas: document.getElementById("webgl"),
+        antialias: true
+      });
+      let gl = webGLRenderer.getContext();
+
+      let programManager = new ProgramManager();
+      let program = programManager.createProgram(gl, VERTEX_SHADER, FRAGMENT_SHADER);
+      gl.program = program;
+      gl.useProgram(program);
+
+      var vertices = new Float32Array([
+        0.0, 0.5, -0.5, -0.5, 0.5, -0.5
+      ]);
+      let vertexBuffers = new VertexBuffers(gl, vertices);
+      vertexBuffers.init();
+
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 3);
+    }
+  </script>
+</head>
+<body>
+<div id="container">
+  <canvas id="webgl" height="500" width="500"></canvas>
+</div>
+
+</body>
+</html>

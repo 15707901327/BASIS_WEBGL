@@ -19,7 +19,7 @@ let WebGLRenderer = function(options) {
   var _alpha = options.alpha !== undefined ? options.alpha : false;
   var _depth = options.depth !== undefined ? options.depth : false;
   var _antialias = options.antialias !== undefined ? options.antialias : false;
-  var _enableWebGL2 = options.enableWebGL2 !== undefined ? options.enableWebGL2 : true;
+  var _enableWebGL2 = options.enableWebGL2 !== undefined ? options.enableWebGL2 : false;
 
   var webGLUntil = new WebGLUntil(_enableWebGL2);
 

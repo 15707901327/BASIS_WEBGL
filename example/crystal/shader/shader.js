@@ -1,17 +1,26 @@
 export var VERTEX_SHADER = `
- 	attribute vec4 a_Position;
- 	attribute vec4 a_Color;
- 	uniform mat4 u_MvpMatrix;
- 	varying vec4 v_Color;
- 	void main(){
- 	  gl_Position = u_MvpMatrix * a_Position;
- 	  v_Color = a_Color;
- 	}
+precision mediump float;
+precision mediump int;
+attribute vec4 a_Position;
+attribute vec3 a_Color;
+varying vec3 vColor;
+
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+
+void main() {
+  vColor.xyz = a_Color.xyz;
+
+  vec3 transformed = vec3(a_Position);
+  vec4 mvPosition = vec4(transformed, 1.0);
+  mvPosition = modelViewMatrix * mvPosition;
+  gl_Position = projectionMatrix * mvPosition;
+}
 `;
 export var FRAGMENT_SHADER = `
-	precision mediump float;
-	varying vec4 v_Color;
-	void main(){
-	  gl_FragColor = v_Color;
-	}
+precision mediump float;
+varying vec3 vColor;
+void main(){
+  gl_FragColor = vec4(vColor,1.0);
+}
 `;

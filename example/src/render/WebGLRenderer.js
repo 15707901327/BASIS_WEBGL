@@ -73,6 +73,9 @@ let WebGLRenderer = function(options) {
    */
   this.render = function(geometry, camera) {
 
+    // 更新相机矩阵
+    if(camera) camera.updateMatrixWorld();
+
     var gl = this.getContext();
     // 创建缓存区对象
     var vertexColorBuffer = gl.createBuffer();
@@ -110,22 +113,17 @@ let WebGLRenderer = function(options) {
 
     /** 获取变量的存储地址 **/
       // Get the storage location of u_MvpMatrix
-    var u_MvpMatrix = gl.getUniformLocation(gl.program, 'u_MvpMatrix');
-    if (!u_MvpMatrix) {
-      console.log('Failed to get the storage location of u_MvpMatrix');
-      return;
-    }
+    var u_modelViewMatrix = gl.getUniformLocation(gl.program, 'modelViewMatrix');
+    var u_projectionMatrix = gl.getUniformLocation(gl.program, 'projectionMatrix');
 
     /** 设置视点和可视空间 **/
-    var mvpMatrix = new Matrix4();
-    mvpMatrix.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
-    /** 设置视点和可视空间 **/
-    // var mvpMatrix = new Matrix4();
-    // mvpMatrix.setPerspective(30, _canvas.width / _canvas.height, 1, 100);
-    // mvpMatrix.lookAt(3, 3, 7, 0, 0, 0, 0, 1, 0);
+    var modelMatrix = new Matrix4();
+    var modelViewMatrix = new Matrix4();
+    modelViewMatrix.multiplyMatrices(camera.matrixWorldInverse, modelMatrix);
 
     //将视图矩阵和投影矩阵传递给变量
-    gl.uniformMatrix4fv(u_MvpMatrix, false, mvpMatrix.elements);
+    gl.uniformMatrix4fv(u_modelViewMatrix, false, modelViewMatrix.elements);
+    gl.uniformMatrix4fv(u_projectionMatrix, false, camera.projectionMatrix.elements);
 
     //清空颜色缓存区和深度缓存区
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);

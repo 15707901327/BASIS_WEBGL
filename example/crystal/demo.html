@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>一簇水晶</title>
-  <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../../css/base.css">
-<!--  <script src="../../THREE-PGL/src/lib/cuon-matrix.js"></script>-->
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../../css/base.css">
+  <!--  <script src="../../THREE-PGL/src/lib/cuon-matrix.js"></script>-->
   <script type="module">
     import WebGLRenderer from "../src/render/WebGLRenderer.js";
     import ProgramManager from "../src/ProgramManager.js";
@@ -29,9 +29,9 @@
       gl.program = program;
       gl.useProgram(program);
 
-      let perspectiveCamera = new PerspectiveCamera(30, canvas.width / canvas.height, 1, 100);
-      perspectiveCamera.position.set(-30, -30, -7);
-      // perspectiveCamera.lookAt(0,0,0);
+      let perspectiveCamera = new PerspectiveCamera(45, canvas.width / canvas.height, 1, 10000);
+      perspectiveCamera.position.set(3, 3, 7);
+      perspectiveCamera.lookAt(0, 0, 0);
 
       // 几何体
       var bufferGeometry = new BufferGeometry();
@@ -61,7 +61,7 @@
 </head>
 <body>
 <div id="container">
-  <canvas id="webgl" height="500" width="500"></canvas>
+  <canvas id="webgl" height="400" width="400"></canvas>
 </div>
 
 </body>

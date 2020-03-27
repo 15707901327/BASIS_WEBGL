@@ -154,7 +154,7 @@ window.onload = function(ev) {
 
   var camera = new PGL.PerspectiveCamera(45, 400 / 400, 0.1, 30000);
   camera.position.set(3, 3, 7);
-  camera.lookAt(0, 0, 0);
+  // camera.lookAt(0, 0, 0);
 
   var scene = new PGL.Scene();
 
@@ -210,8 +210,8 @@ window.onload = function(ev) {
   function tick() {
     requestAnimationFrame(tick);
 
-    currentAngle = animate(currentAngle);
-    mesh.rotateY(currentAngle * Math.PI / 180);
+    // currentAngle = animate(currentAngle);
+    // mesh.rotateY(currentAngle * Math.PI / 180);
     webGlRenderer.render(scene, camera);
     // camera.position.x += 0.01;
   }

@@ -5,32 +5,57 @@
   <title>一簇水晶</title>
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../../css/base.css">
+<!--  <script src="../../THREE-PGL/src/lib/cuon-matrix.js"></script>-->
   <script type="module">
     import WebGLRenderer from "../src/render/WebGLRenderer.js";
     import ProgramManager from "../src/ProgramManager.js";
     import {VERTEX_SHADER, FRAGMENT_SHADER} from "./shader/shader.js";
-    import VertexBuffers from "../src/core/VertexBuffer.js";
+    import BufferGeometry from "../src/core/BufferGeometry.js";
+    import PerspectiveCamera from "../src/camera/PerspectiveCamera.js";
 
     window.onload = function() {
 
+      // 获取上下文
+      let canvas = document.getElementById("webgl");
       let webGLRenderer = new WebGLRenderer({
-        canvas: document.getElementById("webgl"),
+        canvas: canvas,
         antialias: true
       });
       let gl = webGLRenderer.getContext();
 
+      // 初始化着色器程序
       let programManager = new ProgramManager();
       let program = programManager.createProgram(gl, VERTEX_SHADER, FRAGMENT_SHADER);
       gl.program = program;
       gl.useProgram(program);
 
-      var vertices = new Float32Array([
-        0.0, 0.5, -0.5, -0.5, 0.5, -0.5
-      ]);
-      let vertexBuffers = new VertexBuffers(gl, vertices);
-      vertexBuffers.init();
+      let perspectiveCamera = new PerspectiveCamera(30, canvas.width / canvas.height, 1, 100);
+      perspectiveCamera.position.set(-30, -30, -7);
+      // perspectiveCamera.lookAt(0,0,0);
 
-      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 3);
+      // 几何体
+      var bufferGeometry = new BufferGeometry();
+      bufferGeometry.attributes.vertices = new Float32Array([
+        // 顶点和颜色坐标
+        1.0, 1.0, 1.0, 1.0, 1.0, 1.0,  // v0 White
+        -1.0, 1.0, 1.0, 1.0, 0.0, 1.0,  // v1 Magenta
+        -1.0, -1.0, 1.0, 1.0, 0.0, 0.0,  // v2 Red
+        1.0, -1.0, 1.0, 1.0, 1.0, 0.0,  // v3 Yellow
+        1.0, -1.0, -1.0, 0.0, 1.0, 0.0,  // v4 Green
+        1.0, 1.0, -1.0, 0.0, 1.0, 1.0,  // v5 Cyan
+        -1.0, 1.0, -1.0, 0.0, 0.0, 1.0,  // v6 Blue
+        -1.0, -1.0, -1.0, 0.0, 0.0, 0.0   // v7 Black
+      ]);
+      bufferGeometry.attributes.indexes = new Uint8Array([
+        0, 1, 2, 0, 2, 3,    // front
+        0, 3, 4, 0, 4, 5,    // right
+        0, 5, 6, 0, 6, 1,    // up
+        1, 6, 7, 1, 7, 2,    // left
+        7, 4, 3, 7, 3, 2,    // down
+        4, 7, 6, 4, 6, 5     // back
+      ]);
+
+      webGLRenderer.render(bufferGeometry, perspectiveCamera);
     }
   </script>
 </head>

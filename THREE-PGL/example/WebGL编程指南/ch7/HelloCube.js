@@ -137,7 +137,11 @@ function initVertexBuffers(gl) {
   return indices.length;
 }
 
-window.onload = function (ev) {
+import {MeshBasicMaterial} from "../../../src/materials/MeshBasicMaterial.js";
+import {PGL} from "../../../src/built/PGL.js";
+import {Color} from "../../../src/math/Color.js";
+import {Mesh} from "../../../src/object/Mesh.js";
+window.onload = function(ev) {
   // main();
 
   // 获取<canvas>元素
@@ -146,11 +150,11 @@ window.onload = function (ev) {
   var webGlRenderer = new PGL.WebGLRenderer({
     canvas: canvas
   });
-  webGlRenderer.setClearColor(new PGL.Color(0, 0, 0), 1);
+  webGlRenderer.setClearColor(new Color(0, 0, 0), 1);
 
   var camera = new PGL.PerspectiveCamera(45, 400 / 400, 0.1, 30000);
-  camera.position.set(0, 5, 5);
-  camera.lookAt(0,0,0);
+  camera.position.set(3, 3, 7);
+  camera.lookAt(0, 0, 0);
 
   var scene = new PGL.Scene();
 
@@ -177,7 +181,6 @@ window.onload = function (ev) {
     0.0, 0.0, 1.0,  // v6 Blue
     0.0, 0.0, 0.0   // v7 Black
   ]);
-  // 顶点索引
   var indices = [
     0, 1, 2, 0, 2, 3,    // front
     0, 3, 4, 0, 4, 5,    // right
@@ -185,16 +188,17 @@ window.onload = function (ev) {
     1, 6, 7, 1, 7, 2,    // left
     7, 4, 3, 7, 3, 2,    // down
     4, 7, 6, 4, 6, 5     // back
-  ];
-  bufferGeometry.setIndex( indices );
-  bufferGeometry.addAttribute('position', new PGL.Float32BufferAttribute(positions, 3));
-  bufferGeometry.addAttribute('color', new PGL.Float32BufferAttribute(color, 3));
+  ]; // 顶点索引
 
-  var meshPhongMaterial = new PGL.MeshPhongMaterial();
-  meshPhongMaterial.vertexColors = PGL.VertexColors;
+  bufferGeometry.setIndex(indices);
+  bufferGeometry.setAttribute('position', new PGL.Float32BufferAttribute(positions, 3));
+  bufferGeometry.setAttribute('color', new PGL.Float32BufferAttribute(color, 3));
 
-  var mesh = new PGL.Mesh(bufferGeometry, meshPhongMaterial);
-  mesh.translateX(0.75);
+  var material = new MeshBasicMaterial({
+    vertexColors: true
+  });
+
+  var mesh = new Mesh(bufferGeometry, material);
   scene.add(mesh);
 
   var ANGLE_STEP = 45;

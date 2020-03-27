@@ -1,8 +1,12 @@
+/**
+ * 几何体
+ * @constructor
+ */
 function BufferGeometry() {
   this.attributes = {}; // 保存属性信息
 }
-Object.assign(BufferGeometry.prototype,{
 
+Object.assign(BufferGeometry.prototype, {
 });
 
 export default BufferGeometry;

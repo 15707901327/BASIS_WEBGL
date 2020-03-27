@@ -1,3 +1,5 @@
+import {Vector3} from "./Vector3.js";
+
 /**
  * @author mrdoob / http://mrdoob.com/
  * @author supereggbert / http://www.paulbrunt.co.uk/
@@ -38,7 +40,7 @@ Object.assign(Matrix4.prototype, {
 
   isMatrix4: true,
 
-  set: function (n11, n12, n13, n14, n21, n22, n23, n24, n31, n32, n33, n34, n41, n42, n43, n44) {
+  set: function(n11, n12, n13, n14, n21, n22, n23, n24, n31, n32, n33, n34, n41, n42, n43, n44) {
 
     var te = this.elements;
 
@@ -63,7 +65,7 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  identity: function () {
+  identity: function() {
 
     this.set(
       1, 0, 0, 0,
@@ -76,13 +78,13 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  clone: function () {
+  clone: function() {
 
     return new Matrix4().fromArray(this.elements);
 
   },
 
-  copy: function (m) {
+  copy: function(m) {
 
     var te = this.elements;
     var me = m.elements;
@@ -108,7 +110,7 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  copyPosition: function (m) {
+  copyPosition: function(m) {
 
     var te = this.elements, me = m.elements;
 
@@ -120,7 +122,7 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  extractBasis: function (xAxis, yAxis, zAxis) {
+  extractBasis: function(xAxis, yAxis, zAxis) {
 
     xAxis.setFromMatrixColumn(this, 0);
     yAxis.setFromMatrixColumn(this, 1);
@@ -130,7 +132,7 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  makeBasis: function (xAxis, yAxis, zAxis) {
+  makeBasis: function(xAxis, yAxis, zAxis) {
 
     this.set(
       xAxis.x, yAxis.x, zAxis.x, 0,
@@ -143,7 +145,7 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  extractRotation: function () {
+  extractRotation: function() {
 
     var v1 = new Vector3();
 
@@ -184,7 +186,7 @@ Object.assign(Matrix4.prototype, {
 
   }(),
 
-  makeRotationFromEuler: function (euler) {
+  makeRotationFromEuler: function(euler) {
 
     if (!(euler && euler.isEuler)) {
 
@@ -316,7 +318,7 @@ Object.assign(Matrix4.prototype, {
    * 根据四元数初始化一个矩阵
    * @param q Quaternion实例
    */
-  makeRotationFromQuaternion: function () {
+  makeRotationFromQuaternion: function() {
 
     var zero = new Vector3(0, 0, 0);
     var one = new Vector3(1, 1, 1);
@@ -329,7 +331,7 @@ Object.assign(Matrix4.prototype, {
 
   }(),
 
-  lookAt: function () {
+  lookAt: function() {
 
     var x = new Vector3();
     var y = new Vector3();
@@ -395,7 +397,7 @@ Object.assign(Matrix4.prototype, {
 
   }(),
 
-  multiply: function (m, n) {
+  multiply: function(m, n) {
 
     if (n !== undefined) {
 
@@ -408,13 +410,13 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  premultiply: function (m) {
+  premultiply: function(m) {
 
     return this.multiplyMatrices(m, this);
 
   },
 
-  multiplyMatrices: function (a, b) {
+  multiplyMatrices: function(a, b) {
 
     var ae = a.elements;
     var be = b.elements;
@@ -454,7 +456,7 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  multiplyScalar: function (s) {
+  multiplyScalar: function(s) {
 
     var te = this.elements;
 
@@ -479,7 +481,7 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  applyToBufferAttribute: function () {
+  applyToBufferAttribute: function() {
 
     var v1 = new Vector3();
 
@@ -507,7 +509,7 @@ Object.assign(Matrix4.prototype, {
    * 计算并返回当前矩阵的行列式
    * @return {number}
    */
-  determinant: function () {
+  determinant: function() {
 
     var te = this.elements;
 
@@ -557,7 +559,7 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  transpose: function () {
+  transpose: function() {
 
     var te = this.elements;
     var tmp;
@@ -586,7 +588,7 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  setPosition: function (v) {
+  setPosition: function(v) {
 
     var te = this.elements;
 
@@ -604,7 +606,7 @@ Object.assign(Matrix4.prototype, {
    * @param throwOnDegenerate
    * @return {*}
    */
-  getInverse: function (m, throwOnDegenerate) {
+  getInverse: function(m, throwOnDegenerate) {
 
     // based on http://www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm
     var te = this.elements,
@@ -666,7 +668,7 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  scale: function (v) {
+  scale: function(v) {
 
     var te = this.elements;
     var x = v.x, y = v.y, z = v.z;
@@ -688,7 +690,7 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  getMaxScaleOnAxis: function () {
+  getMaxScaleOnAxis: function() {
 
     var te = this.elements;
 
@@ -700,7 +702,7 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  makeTranslation: function (x, y, z) {
+  makeTranslation: function(x, y, z) {
 
     this.set(
       1, 0, 0, x,
@@ -713,7 +715,7 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  makeRotationX: function (theta) {
+  makeRotationX: function(theta) {
 
     var c = Math.cos(theta), s = Math.sin(theta);
 
@@ -728,7 +730,7 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  makeRotationY: function (theta) {
+  makeRotationY: function(theta) {
 
     var c = Math.cos(theta), s = Math.sin(theta);
 
@@ -743,7 +745,7 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  makeRotationZ: function (theta) {
+  makeRotationZ: function(theta) {
 
     var c = Math.cos(theta), s = Math.sin(theta);
 
@@ -758,7 +760,7 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  makeRotationAxis: function (axis, angle) {
+  makeRotationAxis: function(axis, angle) {
 
     // Based on http://www.gamedev.net/reference/articles/article1199.asp
 
@@ -779,7 +781,7 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  makeScale: function (x, y, z) {
+  makeScale: function(x, y, z) {
 
     this.set(
       x, 0, 0, 0,
@@ -792,7 +794,7 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  makeShear: function (x, y, z) {
+  makeShear: function(x, y, z) {
 
     this.set(
       1, y, z, 0,
@@ -812,7 +814,7 @@ Object.assign(Matrix4.prototype, {
    * @param scale
    * @return {compose}
    */
-  compose: function (position, quaternion, scale) {
+  compose: function(position, quaternion, scale) {
 
     var te = this.elements;
 
@@ -848,7 +850,7 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  decompose: function () {
+  decompose: function() {
 
     var vector = new Vector3();
     var matrix = new Matrix4();
@@ -910,7 +912,7 @@ Object.assign(Matrix4.prototype, {
    * @param far
    * @return {makePerspective}
    */
-  makePerspective: function (left, right, top, bottom, near, far) {
+  makePerspective: function(left, right, top, bottom, near, far) {
 
     if (far === undefined) {
 
@@ -948,7 +950,7 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  makeOrthographic: function (left, right, top, bottom, near, far) {
+  makeOrthographic: function(left, right, top, bottom, near, far) {
 
     var te = this.elements;
     var w = 1.0 / (right - left);
@@ -980,7 +982,7 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  equals: function (matrix) {
+  equals: function(matrix) {
 
     var te = this.elements;
     var me = matrix.elements;
@@ -995,7 +997,7 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  fromArray: function (array, offset) {
+  fromArray: function(array, offset) {
 
     if (offset === undefined) offset = 0;
 
@@ -1009,7 +1011,7 @@ Object.assign(Matrix4.prototype, {
 
   },
 
-  toArray: function (array, offset) {
+  toArray: function(array, offset) {
 
     if (array === undefined) array = [];
     if (offset === undefined) offset = 0;
@@ -1041,3 +1043,5 @@ Object.assign(Matrix4.prototype, {
   }
 
 });
+
+export {Matrix4};

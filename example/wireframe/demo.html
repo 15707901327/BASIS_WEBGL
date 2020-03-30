@@ -14,7 +14,7 @@
 
   <script type="module">
     import WebGLRenderer from "../src/render/WebGLRenderer.js";
-    import ProgramManager from "../src/ProgramManager.js";
+    import WebGLProgram from "../src/WebGLProgram.js";
 
     window.onload = function() {
       var canvas = document.getElementById('webgl');
@@ -29,7 +29,7 @@
       gl.getExtension("OES_standard_derivatives");
 
       // 创建正常场景着色器程序
-      var programManager = new ProgramManager();
+      var programManager = new WebGLProgram();
       var normalProgram = programManager.createProgram(gl, normalVS, normalFS);
       programManager.getProgramVariableLocations(gl, normalProgram, ['aPosition', 'aColor', 'aNormal', 'aBarycentric', 'uMVPMatrix', 'uLightColor', 'uLightPosition', 'uAmbientLightColor']);
 

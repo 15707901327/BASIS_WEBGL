@@ -15,7 +15,7 @@
     import MatrixState from "./js/util/MatrixState.js";
     import FileLoader from "../src/loader/FileLoader.js";
     import TextureLoader from "../src/loader/TextureLoader.js";
-    import ProgramManager from "../src/ProgramManager.js";
+    import WebGLProgram from "../src/WebGLProgram.js";
     import OBJLoader from "../src/loader/OBJLoader.js";
 
     window.onload = function() {
@@ -54,7 +54,7 @@
       var fileLoader = new FileLoader();
       fileLoader.load("shader/shader.bns", function(text) {
         var shaderStrA = text.split("<#BREAK_BN#>");
-        var programManage = new ProgramManager();
+        var programManage = new WebGLProgram();
         var program = programManage.createProgram(gl, shaderStrA[0], shaderStrA[1]);
         gl.useProgram(program);
 

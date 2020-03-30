@@ -5,10 +5,9 @@
   <title>一簇水晶</title>
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../../css/base.css">
-  <!--  <script src="../../THREE-PGL/src/lib/cuon-matrix.js"></script>-->
   <script type="module">
     import WebGLRenderer from "../src/render/WebGLRenderer.js";
-    import ProgramManager from "../src/ProgramManager.js";
+    import WebGLProgram from "../src/WebGLProgram.js";
     import {VERTEX_SHADER, FRAGMENT_SHADER} from "./shader/shader.js";
     import BufferGeometry from "../src/core/BufferGeometry.js";
     import PerspectiveCamera from "../src/camera/PerspectiveCamera.js";
@@ -24,9 +23,8 @@
       let gl = webGLRenderer.getContext();
 
       // 初始化着色器程序
-      let programManager = new ProgramManager();
+      let programManager = new WebGLProgram();
       let program = programManager.createProgram(gl, VERTEX_SHADER, FRAGMENT_SHADER);
-      gl.program = program;
       gl.useProgram(program);
 
       let perspectiveCamera = new PerspectiveCamera(45, canvas.width / canvas.height, 1, 10000);

@@ -2,14 +2,199 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/example/OPENGL_ES_3.0编程指南/ch02/Hello_Triangl.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/OPENGL_ES_3.0编程指南/ch02/shader/hello_Triangle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/OPENGL_ES_3.0编程指南/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/OPENGL_ES_3.0编程指南/left.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/OPENGL_ES_3.0编程指南/right.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/OPENGL_ES_3.0编程指南/top.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/src/core/BufferAttribute.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/src/render/WebGLAttributes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch7/HelloCube.js" beforeDir="false" afterPath="$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch7/HelloCube.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch7/shader/Fragment.glsl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch7/shader/Vertex.glsl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/ColoredCube.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/ColoredCube.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/ColoredCube.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/ColoredCube.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/ColoredCube_singleColor.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/ColoredCube_singleColor.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/ColoredCube_singleColor.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/ColoredCube_singleColor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/DepthBuffer.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/DepthBuffer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/DepthBuffer.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/DepthBuffer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/HelloCube.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/HelloCube.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/HelloCube.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/HelloCube.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/LookAtRotatedTriangles.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/LookAtRotatedTriangles.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/LookAtRotatedTriangles.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/LookAtRotatedTriangles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/LookAtRotatedTrianglesWithKeys.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/LookAtRotatedTrianglesWithKeys.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/LookAtRotatedTrianglesWithKeys.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/LookAtRotatedTrianglesWithKeys.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/LookAtRotatedTrianglesWithKeys_ViewVolime.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/LookAtRotatedTrianglesWithKeys_ViewVolime.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/LookAtRotatedTrianglesWithKeys_ViewVolume.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/LookAtRotatedTrianglesWithKeys_ViewVolume.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/LookAtRotatedTriangles_mvMatrix.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/LookAtRotatedTriangles_mvMatrix.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/LookAtRotatedTriangles_mvMatrix.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/LookAtRotatedTriangles_mvMatrix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/LookAtTriangles.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/LookAtTriangles.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/LookAtTriangles.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/LookAtTriangles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/OrthoView.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/OrthoView.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/OrthoView.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/OrthoView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/OrthoView_halfSize.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/OrthoView_halfSize.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/OrthoView_halfSize.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/OrthoView_halfSize.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/PerspectiveView_mvp.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/PerspectiveView_mvp.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/PerspectiveView_mvp.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/PerspectiveView_mvp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/PerspectiveView_mvpMatrix.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/PerspectiveView_mvpMatrix.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/PerspectiveView_mvpMatrix.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/PerspectiveView_mvpMatrix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/Zfighting.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/Zfighting.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/Zfighting.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/Zfighting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/perspectiveview.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/perspectiveview.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/perspectiveview.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/perspectiveview.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/u_MvpMatrix.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/u_MvpMatrix.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch07/u_MvpMatrix.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch07/u_MvpMatrix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch08/LightedCube.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch08/LightedCube.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch08/LightedCube.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch08/LightedCube.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch08/LightedCube_ambient.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch08/LightedCube_ambient.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch08/LightedCube_ambient.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch08/LightedCube_ambient.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch08/LightedTranslatedRotatedCube.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch08/LightedTranslatedRotatedCube.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch08/LightedTranslatedRotatedCube.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch08/LightedTranslatedRotatedCube.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch08/PointLightedCube.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch08/PointLightedCube.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch08/PointLightedCube.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch08/PointLightedCube.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch08/PointLightedCube_perFragment.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch08/PointLightedCube_perFragment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch08/PointLightedCube_perFragment.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch08/PointLightedCube_perFragment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch09/JointModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch09/JointModel.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch09/JointModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch09/JointModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch09/MultiJointModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch09/MultiJointModel.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch09/MultiJointModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch09/MultiJointModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch09/MultiJointModel_segment.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch09/MultiJointModel_segment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch09/MultiJointModel_segment.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch09/MultiJointModel_segment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/3DoverWeb.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/3DoverWeb.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/3DoverWeb.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/3DoverWeb.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/BlendedCube.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/BlendedCube.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/BlendedCube.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/BlendedCube.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/Fog.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/Fog.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/Fog.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/Fog.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/Fog_w.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/Fog_w.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/Fog_w.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/Fog_w.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/FramebufferObject.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/FramebufferObject.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/FramebufferObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/FramebufferObject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/HUD.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/HUD.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/HUD.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/HUD.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/LookAtBlendedTriangles.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/LookAtBlendedTriangles.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/LookAtBlendedTriangles.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/LookAtBlendedTriangles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/MQOParser.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/MQOParser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/OBJViewer.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/OBJViewer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/OBJViewer.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/OBJViewer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/PickFace.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/PickFace.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/PickFace.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/PickFace.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/PickObject.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/PickObject.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/PickObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/PickObject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/Picking.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/Picking.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/Picking.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/Picking.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/ProgramObject.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/ProgramObject.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/ProgramObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/ProgramObject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/RotateObject.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/RotateObject.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/RotateObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/RotateObject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/RotatingTriangle_contextLost.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/RotatingTriangle_contextLost.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/RotatingTriangle_contextLost.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/RotatingTriangle_contextLost.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/RoundedPoints.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/RoundedPoints.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/RoundedPoints.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/RoundedPoints.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/Shadow.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/Shadow.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/Shadow.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/Shadow.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/Shadow_highp.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/Shadow_highp.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/Shadow_highp.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/Shadow_highp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/Shadow_highp_sphere.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/Shadow_highp_sphere.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/Shadow_highp_sphere.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/Shadow_highp_sphere.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/cube.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/resources/cube.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch10/cube.obj" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/resources/cube.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch2/ClickedPoints.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch2/ClickedPoints.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch2/ClickedPoints.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch2/ClickedPoints.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch2/ColoredPoints.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch2/ColoredPoints.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch2/ColoredPoints.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch2/ColoredPoints.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch2/DrawRectangle.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch2/DrawRectangle.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch2/DrawRectangle.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch2/DrawRectangle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch2/HelloCanvas.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch2/HelloCanvas.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch2/HelloCanvas.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch2/HelloCanvas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch2/HelloPoint1.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch2/HelloPoint1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch2/HelloPoint1.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch2/HelloPoint1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch2/HelloPoint2.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch2/HelloPoint2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch2/HelloPoint2.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch2/HelloPoint2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch3/HelloQuad.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch3/HelloQuad.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch3/HelloQuad.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch3/HelloQuad.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch3/HelloQuad_FAN.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch3/HelloQuad_FAN.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch3/HelloQuad_FAN.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch3/HelloQuad_FAN.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch3/HelloQuad_smoothstep.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch3/HelloQuad_smoothstep.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch3/HelloQuad_smoothstep.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch3/HelloQuad_smoothstep.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch3/HelloQuad_smoothstep2.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch3/HelloQuad_smoothstep2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch3/HelloQuad_smoothstep2.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch3/HelloQuad_smoothstep2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch3/HelloQuad_smoothstep3.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch3/HelloQuad_smoothstep3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch3/HelloQuad_smoothstep3.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch3/HelloQuad_smoothstep3.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch3/HelloTriangle.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch3/HelloTriangle.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch3/HelloTriangle.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch3/HelloTriangle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch3/MultiPoints.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch3/MultiPoints.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch3/MultiPoints.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch3/MultiPoints.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch3/RotatedTriangle.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch3/RotatedTriangle.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch3/RotatedTriangle.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch3/RotatedTriangle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch3/RotatedTriangle_Matrix.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch3/RotatedTriangle_Matrix.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch3/RotatedTriangle_Matrix.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch3/RotatedTriangle_Matrix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch3/TranslatedTriangle.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch3/TranslatedTriangle.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch3/TranslatedTriangle.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch3/TranslatedTriangle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch4/RotatedTranslatedTriangle.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch4/RotatedTranslatedTriangle.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch4/RotatedTranslatedTriangle.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch4/RotatedTranslatedTriangle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch4/RotatedTriangle_Matrix4.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch4/RotatedTriangle_Matrix4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch4/RotatedTriangle_Matrix4.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch4/RotatedTriangle_Matrix4.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch4/RotatingTranslatedTriangle.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch4/RotatingTranslatedTriangle.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch4/RotatingTranslatedTriangle.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch4/RotatingTranslatedTriangle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch4/RotatingTriangle.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch4/RotatingTriangle.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch4/RotatingTriangle.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch4/RotatingTriangle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch4/RotatingTriangle_withButtons.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch4/RotatingTriangle_withButtons.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch4/RotatingTriangle_withButtons.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch4/RotatingTriangle_withButtons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch5/ColoredTriangle.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch5/ColoredTriangle.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch5/ColoredTriangle.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch5/ColoredTriangle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch5/HelloTriangle_FragCoord.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch5/HelloTriangle_FragCoord.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch5/HelloTriangle_FragCoord.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch5/HelloTriangle_FragCoord.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch5/MulitTexture.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch5/MulitTexture.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch5/MultiAttributeColor.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch5/MultiAttributeColor.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch5/MultiAttributeColor.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch5/MultiAttributeColor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch5/MultiAttributeSize.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch5/MultiAttributeSize.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch5/MultiAttributeSize.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch5/MultiAttributeSize.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch5/MultiAttributeSize_interleaved.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch5/MultiAttributeSize_interleaved.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch5/MultiAttributeSize_interleaved.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch5/MultiAttributeSize_interleaved.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch5/MultiTexture.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch5/MultiTexture.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch5/TexturedQuad.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch5/TexturedQuad.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch5/TexturedQuad.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch5/TexturedQuad.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch5/TexturedQuad_Mirror.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch5/TexturedQuad_Mirror.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch5/TexturedQuad_Mirror.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch5/TexturedQuad_Mirror.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch5/TexturedQuad_Repeat.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch5/TexturedQuad_Repeat.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch5/TexturedQuad_Repeat.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch5/TexturedQuad_Repeat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch5/TexturedQuad_Rotate.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch5/TexturedQuad_Rotate.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/ch5/TexturedQuad_Rotate.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch5/TexturedQuad_Rotate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/lib/cuon-matrix.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/lib/cuon-matrix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/lib/cuon-matrix说明.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/lib/cuon-matrix说明.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/lib/cuon-utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/lib/cuon-utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/lib/webgl-debug.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/lib/webgl-debug.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/lib/webgl-utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/lib/webgl-utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/resources/3objects.mqo" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/resources/3objects.mqo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/resources/7herbs.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/resources/7herbs.JPG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/resources/blueflower.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/resources/blueflower.JPG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/resources/blueflower2.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/resources/blueflower2.JPG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/resources/circle.gif" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/resources/circle.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/resources/cube.mqo" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/resources/cube.mqo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/resources/cube.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/cube.mtl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/resources/cube.obj" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch10/cube.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/resources/kaeru.mqo" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/resources/kaeru.mqo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/resources/lightblueflower.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/resources/lightblueflower.JPG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/resources/numbers.png" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/resources/numbers.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/resources/orange.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/resources/orange.JPG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/resources/parasol.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/resources/parasol.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/resources/particle.png" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/resources/particle.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/resources/pinkflower.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/resources/pinkflower.JPG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/resources/redflower.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/resources/redflower.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/resources/sky.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/resources/sky.JPG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/resources/sky_cloud.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/resources/sky_cloud.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/resources/sky_roof.JPG" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/resources/sky_roof.JPG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/resources/sphere.mqo" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/resources/sphere.mqo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/resources/vase.mqo" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/resources/vase.mqo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebGL编程指南/resources/yellowflower.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/resources/yellowflower.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/crystal/demo.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/crystal/demo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/crystal/shader/shader.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/crystal/shader/shader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/src/math/Matrix4.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/src/math/Matrix4.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/mirror/demo.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/mirror/demo.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/src/ProgramManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/src/render/WebGLProgram.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/src/core/BufferGeometry.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/src/core/BufferGeometry.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/src/render/WebGLRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/src/render/WebGLRenderer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/wireframe/demo.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/wireframe/demo.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,17 +204,62 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/example/crystal/demo.html">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/example/OPENGL_ES_3.0编程指南/ch02/Hello_Triangl.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="168">
+              <caret line="6" column="66" selection-start-line="6" selection-start-column="66" selection-end-line="6" selection-end-column="66" />
+              <folding>
+                <element signature="e#616#648#0" />
+                <element signature="e#933#1011#0" />
+                <element signature="e#1070#1111#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/example/OPENGL_ES_3.0编程指南/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="112">
-              <caret line="7" column="46" lean-forward="true" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
-              <folding>
-                <element signature="e#289#348#0" expanded="true" />
-                <element signature="e#762#819#0" />
-                <element signature="e#1390#1837#0" />
-                <element signature="e#1897#2128#0" />
-              </folding>
+              <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/example/index.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="341">
+              <caret line="21" column="53" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/example/OPENGL_ES_3.0编程指南/right.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/example/OPENGL_ES_3.0编程指南/top.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="140">
+              <caret line="5" column="34" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/example/OPENGL_ES_3.0编程指南/left.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="140">
+              <caret line="5" column="34" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -37,18 +267,59 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/example/src/render/WebGLRenderer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1279">
-              <caret line="132" column="2" lean-forward="true" selection-start-line="132" selection-start-column="2" selection-end-line="132" selection-end-column="2" />
+            <state relative-caret-position="281">
+              <caret line="82" column="33" lean-forward="true" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
               <folding>
                 <element signature="n#!!doc" />
                 <element signature="e#154#198#0" expanded="true" />
                 <element signature="e#808#950#0" />
                 <element signature="e#981#1178#0" />
+                <element signature="e#1234#1255#0" />
                 <element signature="e#1312#1372#0" />
                 <element signature="e#1377#1398#0" />
                 <element signature="e#1433#1478#0" />
-                <element signature="e#2050#2145#0" />
-                <element signature="e#2380#2472#0" />
+                <element signature="e#2121#2391#0" />
+                <element signature="e#2327#2701#0" />
+                <element signature="e#2438#2530#0" />
+                <element signature="e#2722#2777#0" />
+                <element signature="e#2876#2901#0" />
+                <element signature="e#2953#3559#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/example/src/core/BufferGeometry.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="284">
+              <caret line="19" column="24" selection-start-line="19" selection-start-column="2" selection-end-line="19" selection-end-column="24" />
+              <folding>
+                <element signature="e#141#208#0" />
+                <element signature="e#251#295#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/example/src/render/WebGLProgram.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="144" column="30" selection-start-line="144" selection-start-column="30" selection-end-line="144" selection-end-column="30" />
+              <folding>
+                <element signature="e#106#185#0" />
+                <element signature="e#232#463#0" />
+                <element signature="e#468#596#0" />
+                <element signature="e#645#1522#0" />
+                <element signature="e#1231#1470#0" />
+                <element signature="e#1527#1646#0" />
+                <element signature="e#1688#2233#0" />
+                <element signature="e#2238#2361#0" />
+                <element signature="e#2413#2858#0" />
+                <element signature="e#2863#2960#0" />
+                <element signature="e#3029#3238#0" />
+                <element signature="e#3269#3279#0" />
               </folding>
             </state>
           </provider>
@@ -60,16 +331,14 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="HTML File" />
         <option value="GLSL Shader" />
+        <option value="HTML File" />
         <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>PHONG</find>
-      <find>MATCAP</find>
       <find>SHADER_NAME</find>
       <find>VERTEX_TEXTURES</find>
       <find>precisionSafeLength</find>
@@ -98,6 +367,8 @@
       <find>bufferRenderer</find>
       <find>uniformMatrix4fv</find>
       <find>getInverse</find>
+      <find>bufferGeometry</find>
+      <find>BufferAttribute</find>
     </findStrings>
     <replaceStrings>
       <replace>PGL.Vector3</replace>
@@ -130,19 +401,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/doc/shader/index.html" />
-        <option value="$PROJECT_DIR$/WebGL编程指南/index.html" />
-        <option value="$PROJECT_DIR$/example/src/core/BufferGeometry.js" />
-        <option value="$PROJECT_DIR$/doc/graphics/index.html" />
-        <option value="$PROJECT_DIR$/example/src/math/Quaternion.js" />
-        <option value="$PROJECT_DIR$/example/src/math/Vector3.js" />
-        <option value="$PROJECT_DIR$/example/src/camera/PerspectiveCamera.js" />
-        <option value="$PROJECT_DIR$/WebGL编程指南/ch07/HelloCube.js" />
-        <option value="$PROJECT_DIR$/THREE-PGL/src/lib/cuon-matrix说明.html" />
-        <option value="$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch7/helloCube.glsl" />
-        <option value="$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch7/shader/Fragment.glsl" />
-        <option value="$PROJECT_DIR$/THREE-PGL/src/materials/PointsMaterial.js" />
-        <option value="$PROJECT_DIR$/THREE-PGL/src/materials/MeshPhongMaterial.js" />
         <option value="$PROJECT_DIR$/THREE-PGL/src/materials/ShaderMaterial.js" />
         <option value="$PROJECT_DIR$/THREE-PGL/src/math/Color.js" />
         <option value="$PROJECT_DIR$/THREE-PGL/src/math/Quaternion.js" />
@@ -178,9 +436,22 @@
         <option value="$PROJECT_DIR$/THREE-PGL/src/built/PGL.js" />
         <option value="$PROJECT_DIR$/example/crystal/shader/shader.js" />
         <option value="$PROJECT_DIR$/example/src/math/Matrix4.js" />
-        <option value="$PROJECT_DIR$/example/src/render/WebGLRenderer.js" />
         <option value="$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch7/HelloCube.js" />
         <option value="$PROJECT_DIR$/example/crystal/demo.html" />
+        <option value="$PROJECT_DIR$/example/src/render/WebGLAttributeBuffer.js" />
+        <option value="$PROJECT_DIR$/example/OPENGL_ES_3.0编程指南/ch02/shader/hello_Triangle.js" />
+        <option value="$PROJECT_DIR$/example/src/render/WebGLBufferAttribute.js" />
+        <option value="$PROJECT_DIR$/example/src/render/WebGLAttribute.js" />
+        <option value="$PROJECT_DIR$/example/src/render/WebGLAttributes.js" />
+        <option value="$PROJECT_DIR$/example/OPENGL_ES_3.0编程指南/ch02/Hello_Triangl.html" />
+        <option value="$PROJECT_DIR$/example/src/render/WebGLProgram.js" />
+        <option value="$PROJECT_DIR$/example/src/core/BufferGeometry.js" />
+        <option value="$PROJECT_DIR$/example/src/render/WebGLRenderer.js" />
+        <option value="$PROJECT_DIR$/example/OPENGL_ES_3.0编程指南/top.html" />
+        <option value="$PROJECT_DIR$/example/left.html" />
+        <option value="$PROJECT_DIR$/example/OPENGL_ES_3.0编程指南/left.html" />
+        <option value="$PROJECT_DIR$/example/OPENGL_ES_3.0编程指南/index.html" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -194,6 +465,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -201,59 +473,17 @@
               <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
               <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-              <item name="crystal" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
-              <item name="THREE-PGL" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
-              <item name="THREE-PGL" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
-              <item name="THREE-PGL" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
-              <item name="THREE-PGL" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="math" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ThreeSourceCodeAnalysis/src/cameras/PerspectiveCamera.js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/example/OPENGL_ES_3.0编程指南" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -265,19 +495,19 @@
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/../ThreeSourceCodeAnalysis/src/cameras/PerspectiveCamera.js" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\workHome\BASIS_WEBGL\THREE-PGL\example\WebGL编程指南\ch7\shader" />
-      <recent name="D:\workHome\BASIS_WEBGL\doc\shader\img" />
-      <recent name="D:\workHome\BASIS_WEBGL\doc\graphics\img" />
-      <recent name="D:\workHome\BASIS_WEBGL\doc\webgl\img" />
-      <recent name="D:\workHome\BASIS_WEBGL\img" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\workHome\BASIS_WEBGL\example\OPENGL_ES_3.0编程指南" />
       <recent name="D:\workHome\BASIS_WEBGL\THREE-PGL\example\WebGL编程指南\ch7\shader" />
       <recent name="D:\workHome\BASIS_WEBGL\THREE-PGL\src\renderers\shaderLib" />
       <recent name="D:\workHome\BASIS_WEBGL\THREE-PGL\src\renderers\shaders" />
       <recent name="D:\workHome\BASIS_WEBGL\example\src\math" />
-      <recent name="D:\workHome\BASIS_WEBGL\example\crystal\jsm" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\workHome\BASIS_WEBGL\example\OPENGL_ES_3.0编程指南" />
+      <recent name="D:\workHome\BASIS_WEBGL\example\src\core" />
+      <recent name="D:\workHome\BASIS_WEBGL\example\src\render" />
+      <recent name="D:\workHome\BASIS_WEBGL\example" />
+      <recent name="D:\workHome\BASIS_WEBGL\THREE-PGL\example\WebGL编程指南\ch7\shader" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -480,14 +710,8 @@
       <workItem from="1585130420300" duration="887000" />
       <workItem from="1585185808983" duration="19195000" />
       <workItem from="1585216145773" duration="949000" />
-      <workItem from="1585270917886" duration="18222000" />
-    </task>
-    <task id="LOCAL-00028" summary="1.图形噪声">
-      <created>1572241542160</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1572241542160</updated>
+      <workItem from="1585270917886" duration="23249000" />
+      <workItem from="1585531354863" duration="10549000" />
     </task>
     <task id="LOCAL-00029" summary="1.图形噪声">
       <created>1572256938360</created>
@@ -825,11 +1049,18 @@
       <option name="project" value="LOCAL" />
       <updated>1585292022373</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="1.绘制cube渐变颜色实例">
+      <created>1585298633452</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1585298633453</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="779834000" />
+    <option name="totallyTimeSpent" value="795410000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -868,7 +1099,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.shader数组" />
     <MESSAGE value="1.模板缓存" />
     <MESSAGE value="1.颜色缓冲" />
     <MESSAGE value="1.重构结构" />
@@ -893,169 +1123,21 @@
     <MESSAGE value="1.偏导函数" />
     <MESSAGE value="1.GLSE文档" />
     <MESSAGE value="1.绘制渐变颜色实例" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.绘制渐变颜色实例" />
+    <MESSAGE value="1.绘制cube渐变颜色实例" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.绘制cube渐变颜色实例" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/THREE-PGL/src/built/PGL.js</url>
+          <line>908</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/WebGL编程指南/ch07/HelloCube.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="69" column="51" selection-start-line="69" selection-start-column="35" selection-end-line="69" selection-end-column="51" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#675#758#0" />
-            <element signature="e#840#906#0" />
-            <element signature="e#967#1041#0" />
-            <element signature="e#1294#1381#0" />
-            <element signature="n#!!block;n#initVertexBuffers#0" />
-            <element signature="e#1838#1854#0" />
-            <element signature="e#2022#2429#0" />
-            <element signature="e#2473#2676#0" />
-            <element signature="e#2819#2839#0" />
-            <element signature="e#3122#3211#0" />
-            <element signature="e#3436#3522#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WebGL编程指南/ch07/HelloCube.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="16" column="24" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch5/ColoredTriangle.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5796">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch5/ColoredTriangle.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch5/TexturedQuad.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="24" column="9" lean-forward="true" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch5/MultiAttributeSize.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-807">
-          <caret line="17" column="30" lean-forward="true" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch5/MultiAttributeSize.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="13" column="30" lean-forward="true" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch2/ClickedPoint.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch2/ClickedPoints.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
-          <caret line="1" column="16" lean-forward="true" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/materials/PointsMaterial.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
-          <folding>
-            <element signature="e#42#202#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/materials/MeshPhongMaterial.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
-          <folding>
-            <element signature="e#86#255#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/materials/ShaderMaterial.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/math/Color.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="14" selection-start-column="14" selection-end-column="14" />
-          <folding>
-            <element signature="e#203#4709#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/math/Quaternion.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="551" column="20" selection-start-line="551" selection-start-column="20" selection-end-line="551" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#106#0" />
-            <element signature="e#150#280#0" />
-            <element signature="e#336#1279#0" />
-            <element signature="e#1326#13417#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/math/Vector3.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="619" column="4" selection-start-line="619" selection-start-column="4" selection-end-line="619" selection-end-column="4" />
-          <folding>
-            <element signature="e#33#115#0" />
-            <element signature="e#4058#4193#0" />
-            <element signature="e#4231#4514#0" />
-            <element signature="e#4561#4717#0" />
-            <element signature="e#4755#5149#0" />
-            <element signature="e#5190#5805#0" />
-            <element signature="e#5843#5959#0" />
-            <element signature="e#6001#6121#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/math/Box3.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="35" selection-start-column="35" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/math/Sphere.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
-          <caret line="1" column="35" selection-start-line="1" selection-start-column="35" selection-end-line="1" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/THREE-PGL/src/math/Vector4.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
@@ -1168,13 +1250,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/meshbasic_vert1.glsl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1153">
-          <caret line="323" column="58" selection-start-line="323" selection-start-column="58" selection-end-line="323" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/meshbasic_vert1.glsl.js" />
     <entry file="file://$PROJECT_DIR$/THREE-PGL/src/textures/textures.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="28">
@@ -1189,13 +1265,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch7/shader/Vertex.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch7/shader/Vertex.glsl" />
     <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/meshbasic_frag.glsl.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="364">
@@ -1249,13 +1319,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch7/shader/Fragment.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3052">
-          <caret line="109" column="10" lean-forward="true" selection-start-line="109" selection-start-column="10" selection-end-line="109" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch7/shader/Fragment.glsl" />
     <entry file="file://$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch7/shader/Vertex1.glsl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-219">
@@ -1287,46 +1351,6 @@
             <element signature="e#1427#1706#0" />
             <element signature="e#1743#2069#0" />
             <element signature="e#2096#2228#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/built/PGL.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="372" column="8" selection-start-line="372" selection-start-column="8" selection-end-line="372" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-            <element signature="e#7713#7987#0" />
-            <element signature="e#8028#8319#0" />
-            <element signature="e#8324#8419#0" />
-            <element signature="e#8457#8583#0" />
-            <element signature="e#8606#8659#0" />
-            <element signature="e#9510#9934#0" />
-            <element signature="e#9939#10213#0" />
-            <element signature="e#10254#10499#0" />
-            <element signature="e#10504#10584#0" />
-            <element signature="e#10614#10741#0" />
-            <element signature="e#10774#10884#0" />
-            <element signature="e#10914#11042#0" />
-            <element signature="e#11073#11202#0" />
-            <element signature="e#11207#12344#0" />
-            <element signature="e#12415#12933#0" />
-            <element signature="e#12966#13080#0" />
-            <element signature="e#13085#13142#0" />
-            <element signature="e#13180#13985#0" />
-            <element signature="e#14013#14475#0" />
-            <element signature="e#14511#14642#0" />
-            <element signature="e#31658#32006#0" />
-            <element signature="e#32037#32080#0" />
-            <element signature="e#38351#39511#0" />
-            <element signature="e#39682#42260#0" />
-            <element signature="e#41289#41483#0" />
-            <element signature="e#41525#41628#0" />
-            <element signature="e#41661#42161#0" />
-            <element signature="e#41725#41787#0" />
-            <element signature="e#41840#41902#0" />
-            <element signature="e#41952#42039#0" />
           </folding>
         </state>
       </provider>
@@ -1393,57 +1417,255 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch7/HelloCube.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="156" column="28" lean-forward="true" selection-start-line="156" selection-start-column="28" selection-end-line="156" selection-end-column="28" />
+        <state relative-caret-position="317">
+          <caret line="193" column="72" selection-start-line="193" selection-start-column="50" selection-end-line="193" selection-end-column="72" />
           <folding>
             <element signature="n#!!block;n#main#0" />
             <element signature="n#!!block;n#initVertexBuffers#0" />
             <element signature="e#3838#3916#0" expanded="true" />
             <element signature="e#4221#4245#0" />
-            <element signature="e#4547#4725#0" />
-            <element signature="e#4759#5029#0" />
-            <element signature="e#5048#5251#0" />
-            <element signature="e#5509#5537#0" />
-            <element signature="e#5939#6099#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch7/HelloCube.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="12" column="59" lean-forward="true" selection-start-line="12" selection-start-column="59" selection-end-line="12" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/src/render/WebGLRenderer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1279">
-          <caret line="132" column="2" lean-forward="true" selection-start-line="132" selection-start-column="2" selection-end-line="132" selection-end-column="2" />
-          <folding>
-            <element signature="n#!!doc" />
-            <element signature="e#154#198#0" expanded="true" />
-            <element signature="e#808#950#0" />
-            <element signature="e#981#1178#0" />
-            <element signature="e#1312#1372#0" />
-            <element signature="e#1377#1398#0" />
-            <element signature="e#1433#1478#0" />
-            <element signature="e#2050#2145#0" />
-            <element signature="e#2380#2472#0" />
+            <element signature="e#4550#4728#0" />
+            <element signature="e#4762#5032#0" />
+            <element signature="e#5051#5254#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/example/crystal/demo.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="7" column="46" lean-forward="true" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
+        <state relative-caret-position="511">
+          <caret line="26" column="85" selection-start-line="26" selection-start-column="85" selection-end-line="26" selection-end-column="85" />
           <folding>
-            <element signature="e#289#348#0" expanded="true" />
-            <element signature="e#762#819#0" />
-            <element signature="e#1390#1837#0" />
-            <element signature="e#1897#2128#0" />
+            <element signature="e#690#747#0" />
+            <element signature="e#1284#1731#0" />
+            <element signature="e#1791#2022#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2363">
+          <caret line="3846" column="4" selection-start-line="3846" selection-start-column="4" selection-end-line="3846" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/built/PGL.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7885">
+          <caret line="1185" selection-start-line="1185" selection-end-line="1185" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#7713#7987#0" />
+            <element signature="e#8028#8319#0" />
+            <element signature="e#8324#8419#0" />
+            <element signature="e#8457#8583#0" />
+            <element signature="e#8606#8659#0" />
+            <element signature="e#9510#9934#0" />
+            <element signature="e#9939#10213#0" />
+            <element signature="e#10254#10499#0" />
+            <element signature="e#10504#10584#0" />
+            <element signature="e#10614#10741#0" />
+            <element signature="e#10774#10884#0" />
+            <element signature="e#10914#11042#0" />
+            <element signature="e#11073#11202#0" />
+            <element signature="e#11207#12344#0" />
+            <element signature="e#12415#12933#0" />
+            <element signature="e#12966#13080#0" />
+            <element signature="e#13085#13142#0" />
+            <element signature="e#13180#13985#0" />
+            <element signature="e#14013#14475#0" />
+            <element signature="e#14511#14642#0" />
+            <element signature="e#15649#15852#0" />
+            <element signature="e#19197#19444#0" />
+            <element signature="e#19477#19528#0" />
+            <element signature="e#19556#19816#0" />
+            <element signature="e#19865#20075#0" />
+            <element signature="e#20107#20159#0" />
+            <element signature="e#20198#20615#0" />
+            <element signature="e#20657#21053#0" />
+            <element signature="e#21095#21525#0" />
+            <element signature="e#31658#32006#0" />
+            <element signature="e#32037#32080#0" />
+            <element signature="e#38351#39511#0" />
+            <element signature="e#39682#42260#0" />
+            <element signature="e#41289#41483#0" />
+            <element signature="e#41525#41628#0" />
+            <element signature="e#41661#42161#0" />
+            <element signature="e#41725#41787#0" />
+            <element signature="e#41840#41902#0" />
+            <element signature="e#41952#42039#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch7/HelloCube.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="61">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/OPENGL_ES_3.0编程指南/ch02/shader/hello_Triangle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="21" lean-forward="true" selection-start-column="21" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch3/HelloTriangle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="4" column="36" lean-forward="true" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/WebGL编程指南/ch3/HelloTriangle.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="7" column="24" lean-forward="true" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/src/core/BufferAttribute.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="17" column="1" lean-forward="true" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
+          <folding>
+            <element signature="n#!!doc;n#BufferAttribute#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/src/render/WebGLAttributes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="5" column="43" lean-forward="true" selection-start-line="5" selection-start-column="43" selection-end-line="5" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/WebGL编程指南/ch3/HelloTriangle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="62" column="2" selection-start-line="62" selection-start-column="2" selection-end-line="159" selection-end-column="41" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#1369#1469#0" />
+            <element signature="e#1531#1606#0" />
+            <element signature="e#1612#2001#0" />
+            <element signature="e#2074#2575#0" />
+            <element signature="e#2790#2876#0" />
+            <element signature="e#2882#3834#0" />
+            <element signature="e#3904#4104#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/src/render/WebGLProgram.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="144" column="30" selection-start-line="144" selection-start-column="30" selection-end-line="144" selection-end-column="30" />
+          <folding>
+            <element signature="e#106#185#0" />
+            <element signature="e#232#463#0" />
+            <element signature="e#468#596#0" />
+            <element signature="e#645#1522#0" />
+            <element signature="e#1231#1470#0" />
+            <element signature="e#1527#1646#0" />
+            <element signature="e#1688#2233#0" />
+            <element signature="e#2238#2361#0" />
+            <element signature="e#2413#2858#0" />
+            <element signature="e#2863#2960#0" />
+            <element signature="e#3029#3238#0" />
+            <element signature="e#3269#3279#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/src/core/BufferGeometry.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="19" column="24" selection-start-line="19" selection-start-column="2" selection-end-line="19" selection-end-column="24" />
+          <folding>
+            <element signature="e#141#208#0" />
+            <element signature="e#251#295#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/src/render/WebGLRenderer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="82" column="33" lean-forward="true" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
+          <folding>
+            <element signature="n#!!doc" />
+            <element signature="e#154#198#0" expanded="true" />
+            <element signature="e#808#950#0" />
+            <element signature="e#981#1178#0" />
+            <element signature="e#1234#1255#0" />
+            <element signature="e#1312#1372#0" />
+            <element signature="e#1377#1398#0" />
+            <element signature="e#1433#1478#0" />
+            <element signature="e#2121#2391#0" />
+            <element signature="e#2327#2701#0" />
+            <element signature="e#2438#2530#0" />
+            <element signature="e#2722#2777#0" />
+            <element signature="e#2876#2901#0" />
+            <element signature="e#2953#3559#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/OPENGL_ES_3.0编程指南/ch02/Hello_Triangl.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="6" column="66" selection-start-line="6" selection-start-column="66" selection-end-line="6" selection-end-column="66" />
+          <folding>
+            <element signature="e#616#648#0" />
+            <element signature="e#933#1011#0" />
+            <element signature="e#1070#1111#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/OPENGL_ES_3.0编程指南/right.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/left.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="5" column="34" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/OPENGL_ES_3.0编程指南/top.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="5" column="34" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/OPENGL_ES_3.0编程指南/left.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="5" column="34" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/OPENGL_ES_3.0编程指南/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="341">
+          <caret line="21" column="53" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
         </state>
       </provider>
     </entry>

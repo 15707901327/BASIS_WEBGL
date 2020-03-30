@@ -2,10 +2,10 @@
  * 创建着色器程序
  * @constructor
  */
-function ProgramManager() {
+function WebGLProgram() {
 }
 
-Object.assign(ProgramManager.prototype, {
+Object.assign(WebGLProgram.prototype, {
   /**
    * 初始化shader
    * @param gl
@@ -63,6 +63,9 @@ Object.assign(ProgramManager.prototype, {
       gl.deleteShader(vertexShader);
       return null;
     }
+
+    gl.program = program;
+
     return program;
   },
 
@@ -138,6 +141,21 @@ Object.assign(ProgramManager.prototype, {
       program[variableName] = this.getVariableLocation(gl, program, variableName);
     }
   },
+
+  getAttributes: function(gl) {
+    var program = gl.program;
+    var attributes = {};
+
+    var n = gl.getProgramParameter(program, gl.ACTIVE_ATTRIBUTES);
+
+    for (var i = 0; i < n; i++) {
+
+      var info = gl.getActiveAttrib(program, i);
+      var name = info.name;
+      attributes[name] = gl.getAttribLocation(program, name);
+    }
+    return attributes;
+  }
 });
 
-export default ProgramManager;
+export default WebGLProgram;

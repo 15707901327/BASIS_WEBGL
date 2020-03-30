@@ -12,6 +12,7 @@
 import {WebGLUntil} from "../WebGLUntil.js";
 import WebGLProgram from "../../src/render/WebGLProgram.js";
 import {WebGLAttributes} from "./WebGLAttributes.js";
+import Matrix4 from "../../src/math/Matrix4.js";
 
 let WebGLRenderer = function(options) {
 
@@ -90,43 +91,34 @@ let WebGLRenderer = function(options) {
 
     // 几何体
     for (var name in geometry.attributes) {
-      attributes.createBuffer(geometry.attributes[name]);
+      if (name === "indexes") {
+        attributes.createBuffer(geometry.attributes[name], gl.ELEMENT_ARRAY_BUFFER);
+        continue;
+      }
+      attributes.createBuffer(geometry.attributes[name], gl.ARRAY_BUFFER);
 
       var a_name = geometry.translateAttributeName(name);
-      gl.vertexAttribPointer(programAttributes[a_name], 3, gl.FLOAT, false, 0, 0);
+      gl.vertexAttribPointer(programAttributes[a_name], geometry.attributes[name].itemSize, gl.FLOAT, false, 0, 0);
       gl.enableVertexAttribArray(programAttributes[a_name]);
     }
 
-    /*// 将纹理坐标分派给a_TexCoord，并开启它
-    var a_Color = gl.getAttribLocation(gl.program, 'a_Color');
-    if (a_Color < 0) {
-      console.log('Failed to get the storage location of a_Color');
-      return -1;
-    }
-    gl.vertexAttribPointer(a_Color, 3, gl.FLOAT, false, FSIZE * 6, FSIZE * 3);
-    gl.enableVertexAttribArray(a_Color);  // Enable the assignment of the buffer object*/
-
-    // gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
-    // gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, geometry.attributes.indexes, gl.STATIC_DRAW);
-
-    // 设置<canvas>背景色，并开启隐藏面消除
-    // gl.clearColor(0.0, 0.0, 0.0, 1.0);
-
     gl.enable(gl.DEPTH_TEST);
 
-    /* /!** 获取变量的存储地址 **!/
-       // Get the storage location of u_MvpMatrix
-     var u_modelViewMatrix = gl.getUniformLocation(gl.program, 'modelViewMatrix');
-     var u_projectionMatrix = gl.getUniformLocation(gl.program, 'projectionMatrix');
+    if (camera) {
+      /** 获取变量的存储地址 **/
+        // Get the storage location of u_MvpMatrix
+      var u_modelViewMatrix = gl.getUniformLocation(gl.program, 'modelViewMatrix');
+      var u_projectionMatrix = gl.getUniformLocation(gl.program, 'projectionMatrix');
 
-     /!** 设置视点和可视空间 **!/
-     var modelMatrix = new Matrix4();
-     var modelViewMatrix = new Matrix4();
-     modelViewMatrix.multiplyMatrices(camera.matrixWorldInverse, modelMatrix);
+      /** 设置视点和可视空间 **/
+      var modelMatrix = new Matrix4();
+      var modelViewMatrix = new Matrix4();
+      modelViewMatrix.multiplyMatrices(camera.matrixWorldInverse, modelMatrix);
 
-     //将视图矩阵和投影矩阵传递给变量
-     gl.uniformMatrix4fv(u_modelViewMatrix, false, modelViewMatrix.elements);
-     gl.uniformMatrix4fv(u_projectionMatrix, false, camera.projectionMatrix.elements);*/
+      //将视图矩阵和投影矩阵传递给变量
+      gl.uniformMatrix4fv(u_modelViewMatrix, false, modelViewMatrix.elements);
+      gl.uniformMatrix4fv(u_projectionMatrix, false, camera.projectionMatrix.elements);
+    }
 
     //清空颜色缓存区和深度缓存区
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);

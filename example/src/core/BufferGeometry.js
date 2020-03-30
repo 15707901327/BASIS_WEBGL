@@ -18,11 +18,20 @@ Object.assign(BufferGeometry.prototype, {
   },
 
   translateAttributeName: function(name) {
-    if (name === "vertices") {
-      return "a_Position";
+    var a_name
+
+    switch(name){
+      case "vertices":
+        a_name = "a_Position";
+        break;
+      case "color":
+        a_name = "a_Color";
+        break;
+      default:
+        a_name = name;
     }
 
-    return name;
+    return a_name;
   }
 });
 

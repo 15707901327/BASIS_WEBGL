@@ -1,15 +1,15 @@
-import polygonVertexGenerator from "polygonVertexGenerator.js";
+import {polygonVertexGenerator} from "./polygonVertexGenerator.js";
 
-/**
- * 生成多边形棱柱的顶点数据
- * @param faceNumber 多边形面数
- * @param polygonCircleRadius 包围圆半径
- * @param angleDithringFactor 随机角度抖动的比率（0~1）
- * @param circleRadiusDithringFactor 立柱高度
- * @param cylinderHeight 顶锥高度
- * @param conHeight
- * @param conUvStart 顶锥起始点的v值
+/* 
+生成多边形棱柱的顶点数据
+faceNumber 多边形面数
+polygonCircleRadius 包围圆半径
+angleDithringFactor 随机角度抖动的比率（0~1）
+cylinderHeight 立柱高度
+conHeight 顶锥高度
+conUvStart 顶锥起始点的v值
  */
+
 function generatePyramidVertex(faceNumber, polygonCircleRadius, angleDithringFactor, circleRadiusDithringFactor, cylinderHeight, conHeight, conUvStart) {
   let pyramid = {};
   let vertexs = [];
@@ -24,6 +24,7 @@ function generatePyramidVertex(faceNumber, polygonCircleRadius, angleDithringFac
 
   // 合并所有顶点
   vertexs = [...vertexsCylinderDown, ...vertexsCylinderTop, ...vertexsCon];
+  // console.log(vertexs);
 
   // 生成棱柱包围面索引，除最后一面
   for (let i = 0; i < (faceNumber - 1); i++) {
@@ -103,4 +104,4 @@ function convert2DVertexTo3D(vertexs, height) {
   return vertexs3D;
 }
 
-export default generatePyramidVertex;
+export {generatePyramidVertex};

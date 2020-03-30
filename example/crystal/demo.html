@@ -11,6 +11,7 @@
     import BufferGeometry from "../src/core/BufferGeometry.js";
     import PerspectiveCamera from "../src/camera/PerspectiveCamera.js";
     import {Float32BufferAttribute,Uint8BufferAttribute} from "../src/core/BufferAttribute.js";
+    import {CristalCluster} from "./jsm/CristalCluster.js";
 
     window.onload = function() {
 
@@ -22,8 +23,11 @@
       });
 
       let perspectiveCamera = new PerspectiveCamera(45, canvas.width / canvas.height, 1, 10000);
-      perspectiveCamera.position.set(3, 3, 7);
+      perspectiveCamera.position.set(3, 10, 7);
       perspectiveCamera.lookAt(0, 0, 0);
+
+      var cristalCluster = new CristalCluster(10, 40);
+      var cluster = cristalCluster.getCluster();
 
       // 几何体
       var vertices = [
@@ -38,7 +42,24 @@
         -1.0, -1.0, -1.0,
       ];
       var color = [
-        // 顶点和颜色坐标
+        1.0, 1.0, 1.0,  // v0 White
+        1.0, 0.0, 1.0,  // v1 Magenta
+        1.0, 0.0, 0.0,  // v2 Red
+        1.0, 1.0, 0.0,  // v3 Yellow
+        0.0, 1.0, 0.0,  // v4 Green
+        0.0, 1.0, 1.0,  // v5 Cyan
+        0.0, 0.0, 1.0,  // v6 Blue
+        0.0, 0.0, 0.0,   // v7 Black
+
+        1.0, 1.0, 1.0,  // v0 White
+        1.0, 0.0, 1.0,  // v1 Magenta
+        1.0, 0.0, 0.0,  // v2 Red
+        1.0, 1.0, 0.0,  // v3 Yellow
+        0.0, 1.0, 0.0,  // v4 Green
+        0.0, 1.0, 1.0,  // v5 Cyan
+        0.0, 0.0, 1.0,  // v6 Blue
+        0.0, 0.0, 0.0,   // v7 Black
+
         1.0, 1.0, 1.0,  // v0 White
         1.0, 0.0, 1.0,  // v1 Magenta
         1.0, 0.0, 0.0,  // v2 Red
@@ -57,8 +78,8 @@
         4, 7, 6, 4, 6, 5     // back
       ]);
       var bufferGeometry = new BufferGeometry();
-      bufferGeometry.setAttribute("vertices", new Float32BufferAttribute(vertices, 3));
-      bufferGeometry.setAttribute("indexes", new Uint8BufferAttribute(indexes, 3));
+      bufferGeometry.setAttribute("vertices", new Float32BufferAttribute(cluster.positions, 3));
+      bufferGeometry.setAttribute("indexes", new Uint8BufferAttribute(cluster.indices, 3));
       bufferGeometry.setAttribute("color", new Float32BufferAttribute(color, 3));
 
       var material = {

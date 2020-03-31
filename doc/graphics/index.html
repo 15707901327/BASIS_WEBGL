@@ -22,10 +22,16 @@
 <div class="content">
   <div class="l-r-wrapper">
     <div class="left">
-      <h4><a href="#concept">概念</a></h4>
+      <h4><a href="#concept">基本概念</a></h4>
       <ul class="ul-1">
         <li><a href="#homogeneousCoordinates">齐次坐标</a></li>
         <li><a href="#Quaternion">四元数</a></li>
+      </ul>
+      <h4><a href="#normal">法线</a></h4>
+      <ul class="ul-1">
+        <li><a href="#faceNormal">面法线</a></li>
+        <li><a href="#vertexNormal">顶点法线</a></li>
+        <li><a href="#matrixNormal">法线矩阵</a></li>
       </ul>
       <h4><a href="#Transform">变换分类</a></h4>
       <ul class="ul-1">
@@ -45,7 +51,6 @@
         <li><a href="#mirror_matrix">镜像</a></li>
         <li><a href="#shear_matrix">切变</a></li>
         <li><a href="#viewMatrix">viewMatrix</a></li>
-        <li><a href="#normalMatrix">normalMatrix</a></li>
       </ul>
       <h4><a href="#translation">位移(translation)</a></h4>
       <ul class="ul-1">
@@ -67,7 +72,7 @@
     </div>
     <div class="right">
       <section class="section1" id="concept">
-        <div class="title">概念</div>
+        <div class="title">基本概念</div>
         <section>
           <h4>基本概念</h4>
           <div class="content">
@@ -95,6 +100,22 @@
                   target="_blank">实例webgl_buffergeometry_instancing_dynamic</a></li>
             </ul>
           </div>
+        </section>
+      </section>
+      <section class="section1" id="normal">
+        <div class="title">法线</div>
+        <section id="faceNormal">
+          <h4>面法线</h4>
+          <p>设有两个向量组成一个面，向量分别表示为V1(x,y,z)，V2(x,y,z)，将两向量叉乘便可得到面法线向量.</p>
+        </section>
+        <section id="vertexNormal">
+          <h4>顶点法线</h4>
+          <p>计算所有经过该点的面法线向量的和的归一化（去除共面）。</p>
+        </section>
+        <section id="matrixNormal">
+          <h4>normalMatrix</h4>
+          <p>保持法线向量与表面向量垂直的正确的变换矩阵。</p>
+          <p>法线矩阵可以由模型视图矩阵的逆矩阵转置获得。</p>
         </section>
       </section>
       <section class="section1" id="Transform">
@@ -288,11 +309,6 @@
             <p>模型视图矩阵的作用是：乘以一个点坐标，获得一个新的点坐标，获得的点坐标表示点在世界里变换，观察者也变换后，
               点相对于观察者的位置。</p>
           </div>
-        </section>
-        <section id="normalMatrix">
-          <h4>normalMatrix</h4>
-          <p>保持法线向量与表面向量垂直的正确的变换矩阵。</p>
-          <p>法线矩阵可以由模型视图矩阵的逆矩阵转置获得。</p>
         </section>
       </section>
       <section id="translation" class="section1">

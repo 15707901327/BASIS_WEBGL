@@ -1,3 +1,5 @@
+import {Vector3} from "./Vector3.js"
+
 function Matrix3() {
 
   this.elements = [

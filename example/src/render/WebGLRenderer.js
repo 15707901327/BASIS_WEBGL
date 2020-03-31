@@ -91,15 +91,15 @@ let WebGLRenderer = function(options) {
 
     // 几何体
     for (var name in geometry.attributes) {
-      if (name === "indexes") {
-        attributes.createBuffer(geometry.attributes[name], gl.ELEMENT_ARRAY_BUFFER);
-        continue;
-      }
       attributes.createBuffer(geometry.attributes[name], gl.ARRAY_BUFFER);
 
       var a_name = geometry.translateAttributeName(name);
       gl.vertexAttribPointer(programAttributes[a_name], geometry.attributes[name].itemSize, gl.FLOAT, false, 0, 0);
       gl.enableVertexAttribArray(programAttributes[a_name]);
+    }
+
+    if (geometry.index) {
+      attributes.createBuffer(geometry.index, gl.ELEMENT_ARRAY_BUFFER);
     }
 
     gl.enable(gl.DEPTH_TEST);
@@ -123,8 +123,10 @@ let WebGLRenderer = function(options) {
     //清空颜色缓存区和深度缓存区
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    if (geometry.attributes.indexes) {
-      gl.drawElements(gl.TRIANGLES, 36, gl.UNSIGNED_BYTE, 0); // 绘制图形
+    var count = geometry.index ? geometry.index.count : geometry.attributes.vertices.count;
+
+    if (geometry.index) {
+      gl.drawElements(gl.TRIANGLES, count, gl.UNSIGNED_BYTE, 0); // 绘制图形
     } else {
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     }

@@ -20,4 +20,18 @@ function Uint8BufferAttribute(array, itemSize) {
   BufferAttribute.call(this, new Uint8Array(array), itemSize)
 }
 
-export {BufferAttribute, Float32BufferAttribute, Uint8BufferAttribute};
+function Uint16BufferAttribute(array, itemSize) {
+  BufferAttribute.call(this, new Uint16Array(array), itemSize)
+}
+
+function Uint32BufferAttribute(array, itemSize) {
+  BufferAttribute.call(this, new Uint32Array(array), itemSize)
+}
+
+export {
+  BufferAttribute,
+  Float32BufferAttribute,
+  Uint8BufferAttribute,
+  Uint16BufferAttribute,
+  Uint32BufferAttribute
+};

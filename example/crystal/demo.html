@@ -10,7 +10,7 @@
     import {VERTEX_SHADER, FRAGMENT_SHADER} from "./shader/shader.js";
     import BufferGeometry from "../src/core/BufferGeometry.js";
     import PerspectiveCamera from "../src/camera/PerspectiveCamera.js";
-    import {Float32BufferAttribute,Uint8BufferAttribute} from "../src/core/BufferAttribute.js";
+    import {Float32BufferAttribute, Uint8BufferAttribute} from "../src/core/BufferAttribute.js";
     import {CristalCluster} from "./jsm/CristalCluster.js";
 
     window.onload = function() {
@@ -23,7 +23,7 @@
       });
 
       let perspectiveCamera = new PerspectiveCamera(45, canvas.width / canvas.height, 1, 10000);
-      perspectiveCamera.position.set(3, 10, 7);
+      perspectiveCamera.position.set(30, 30, 0);
       perspectiveCamera.lookAt(0, 0, 0);
 
       var cristalCluster = new CristalCluster(10, 40);
@@ -69,17 +69,18 @@
         0.0, 0.0, 1.0,  // v6 Blue
         0.0, 0.0, 0.0   // v7 Black
       ];
-      var indexes = new Uint8Array([
+      var indexes = [
         0, 1, 2, 0, 2, 3,    // front
         0, 3, 4, 0, 4, 5,    // right
         0, 5, 6, 0, 6, 1,    // up
         1, 6, 7, 1, 7, 2,    // left
         7, 4, 3, 7, 3, 2,    // down
         4, 7, 6, 4, 6, 5     // back
-      ]);
+      ];
       var bufferGeometry = new BufferGeometry();
+
       bufferGeometry.setAttribute("vertices", new Float32BufferAttribute(cluster.positions, 3));
-      bufferGeometry.setAttribute("indexes", new Uint8BufferAttribute(cluster.indices, 3));
+      bufferGeometry.setIndex(cluster.indices);
       bufferGeometry.setAttribute("color", new Float32BufferAttribute(color, 3));
 
       var material = {

@@ -2,7 +2,11 @@
  * 几何体
  * @constructor
  */
+import {arrayMax} from "../utils.js";
+import {Uint32BufferAttribute, Uint16BufferAttribute} from "../core/BufferAttribute.js";
+
 function BufferGeometry() {
+  this.index = null; // 索引值
   this.attributes = {}; // 保存属性信息
 }
 
@@ -17,8 +21,20 @@ Object.assign(BufferGeometry.prototype, {
     this.attributes[name] = attribute;
   },
 
+  /**
+   * 设置索引值
+   * @param index
+   */
+  setIndex: function(index) {
+    if (Array.isArray(index)) {
+      this.index = new (arrayMax(index) > 65535 ? Uint32BufferAttribute : Uint16BufferAttribute)(index, 1);
+    } else {
+      this.index = index;
+    }
+  },
+
   translateAttributeName: function(name) {
-    var a_name
+    var a_name;
 
     switch(name){
       case "vertices":

@@ -3,7 +3,6 @@ import {Vector3} from "../math/Vector3.js";
 import {Vector4} from "../math/Vector4.js";
 import {Sphere} from "../math/Sphere.js";
 import {Matrix4} from '../math/Matrix4.js';
-import {Box3} from "../math/Box3.js";
 import {Plane} from "../math/Plane.js";
 import {_Math} from "../math/math.js"
 import {Object3D} from "../core/Object3D.js";
@@ -11,6 +10,8 @@ import {WebGLProgram} from "../renderers/webgl/WebGLProgram.js";
 import {ShaderLib} from "../renderers/shaders/ShaderLib.js";
 import {UniformsUtils} from "../renderers/shaders/UniformsUtils.js";
 import {WebGLUniforms} from "../renderers/webgl/WebGLUniforms.js";
+import {BufferGeometry} from "../core/BufferGeometry.js";
+import {WebGLLights} from "../renderers/webgl/WebGLLights.js";
 
 var PGL = PGL || {};
 
@@ -699,7 +700,7 @@ PGL.Points = function(geometry, material) {
 
   Object3D.call(this);
 
-  this.geometry = geometry !== undefined ? geometry : new PGL.BufferGeometry();
+  this.geometry = geometry !== undefined ? geometry : new BufferGeometry();
   this.material = material !== undefined ? material : new PGL.PointsMaterial({color: Math.random() * 0xffffff});
 };
 PGL.Points.prototype = Object.assign(Object.create(Object3D.prototype), {
@@ -708,471 +709,10 @@ PGL.Points.prototype = Object.assign(Object.create(Object3D.prototype), {
   isPoints: true
 });
 
-var bufferGeometryId = 1; // BufferGeometry uses odd numbers as Id
-PGL.BufferGeometry = function() {
-  Object.defineProperty(this, 'id', {value: bufferGeometryId += 2});
-
-  this.attributes = {}; // 保存属性信息
-  this.morphAttributes = {};
-
-  this.boundingBox = null; // 包围盒子
-  this.boundingSphere = null; // 包围球
-};
-Object.assign(PGL.BufferGeometry.prototype, {
-
-  constructor: PGL.BufferGeometry,
-
-  isBufferGeometry: true,
-
-  /**
-   * 设置顶点索引
-   * @param index 索引值
-   */
-  setIndex: function(index) {
-
-    if (Array.isArray(index)) {
-      this.index = new (PGL.arrayMax(index) > 65535 ? PGL.Uint32BufferAttribute : PGL.Uint16BufferAttribute)(index, 1);
-    } else {
-      this.index = index;
-    }
-  },
-
-  /**
-   * 把属性添加到this.attributes中
-   * @param name
-   * @param attribute
-   * @return {*}
-   */
-  setAttribute: function(name, attribute) {
-    this.attributes[name] = attribute;
-    return this;
-  },
-
-  /**
-   * 计算模型的最小包围球的大小
-   */
-  computeBoundingSphere: function() {
-
-    var box = new Box3();
-    var boxMorphTargets = new Box3();
-    var vector = new Vector3();
-
-    return function computeBoundingSphere() {
-
-      if (this.boundingSphere === null) {
-        this.boundingSphere = new Sphere();
-      }
-
-      var position = this.attributes.position;
-      var morphAttributesPosition = this.morphAttributes.position;
-
-      if (position) {
-
-        // first, find the center of the bounding sphere
-
-        var center = this.boundingSphere.center;
-
-        box.setFromBufferAttribute(position);
-
-        // process morph attributes if present
-        if (morphAttributesPosition) {
-
-          for (var i = 0, il = morphAttributesPosition.length; i < il; i++) {
-
-            var morphAttribute = morphAttributesPosition[i];
-            boxMorphTargets.setFromBufferAttribute(morphAttribute);
-
-            box.expandByPoint(boxMorphTargets.min);
-            box.expandByPoint(boxMorphTargets.max);
-
-          }
-
-        }
-
-        box.getCenter(center);
-
-        // second, try to find a boundingSphere with a radius smaller than the
-        // boundingSphere of the boundingBox: sqrt(3) smaller in the best case
-        // 获取最大半径的平方
-        var maxRadiusSq = 0;
-
-        for (var i = 0, il = position.count; i < il; i++) {
-          vector.fromBufferAttribute(position, i);
-          maxRadiusSq = Math.max(maxRadiusSq, center.distanceToSquared(vector));
-        }
-
-        // process morph attributes if present
-
-        if (morphAttributesPosition) {
-
-          for (var i = 0, il = morphAttributesPosition.length; i < il; i++) {
-
-            var morphAttribute = morphAttributesPosition[i];
-
-            for (var j = 0, jl = morphAttribute.count; j < jl; j++) {
-
-              vector.fromBufferAttribute(morphAttribute, j);
-
-              maxRadiusSq = Math.max(maxRadiusSq, center.distanceToSquared(vector));
-
-            }
-
-          }
-
-        }
-
-        this.boundingSphere.radius = Math.sqrt(maxRadiusSq);
-
-        if (isNaN(this.boundingSphere.radius)) {
-          console.error('THREE.BufferGeometry.computeBoundingSphere(): Computed radius is NaN. The "position" attribute is likely to have NaN values.', this);
-        }
-
-      }
-
-    };
-
-  }()
-});
-
 var geometryId = 0; // Geometry uses even numbers as Id
 PGL.Geometry = function() {
   Object.defineProperty(this, 'id', {value: geometryId += 2});
 };
-
-/**
- *
- * @param array 数组
- * @param itemSize 数据长度
- * @param normalized 表明是否是浮点数
- * @constructor
- */
-PGL.BufferAttribute = function(array, itemSize, normalized) {
-  this.array = array;
-  this.itemSize = itemSize;
-  this.count = array !== undefined ? array.length / itemSize : 0;
-
-  this.normalized = normalized === true; // 表明是否是浮点数
-
-  this.dynamic = false; // false 只会向缓存区对象中写入一次数据，但需要绘制很多次 true 多次写入，绘制多次
-
-  this.version = 0; // 版本
-};
-Object.defineProperty(PGL.BufferAttribute.prototype, 'needsUpdate', {
-  set: function(value) {
-    if (value === true) this.version++;
-  }
-});
-Object.assign(PGL.BufferAttribute.prototype, {
-
-  isBufferAttribute: true,
-
-  onUploadCallback: function() {
-  },
-
-  setArray: function(array) {
-
-    if (Array.isArray(array)) {
-
-      throw new TypeError('THREE.BufferAttribute: array should be a Typed Array.');
-
-    }
-
-    this.count = array !== undefined ? array.length / this.itemSize : 0;
-    this.array = array;
-
-    return this;
-
-  },
-
-  setDynamic: function(value) {
-
-    this.dynamic = value;
-
-    return this;
-
-  },
-
-  copy: function(source) {
-
-    this.name = source.name;
-    this.array = new source.array.constructor(source.array);
-    this.itemSize = source.itemSize;
-    this.count = source.count;
-    this.normalized = source.normalized;
-
-    this.dynamic = source.dynamic;
-
-    return this;
-
-  },
-
-  copyAt: function(index1, attribute, index2) {
-
-    index1 *= this.itemSize;
-    index2 *= attribute.itemSize;
-
-    for (var i = 0, l = this.itemSize; i < l; i++) {
-
-      this.array[index1 + i] = attribute.array[index2 + i];
-
-    }
-
-    return this;
-
-  },
-
-  copyArray: function(array) {
-
-    this.array.set(array);
-
-    return this;
-
-  },
-
-  copyColorsArray: function(colors) {
-
-    var array = this.array, offset = 0;
-
-    for (var i = 0, l = colors.length; i < l; i++) {
-
-      var color = colors[i];
-
-      if (color === undefined) {
-
-        console.warn('THREE.BufferAttribute.copyColorsArray(): color is undefined', i);
-        color = new Color();
-
-      }
-
-      array[offset++] = color.r;
-      array[offset++] = color.g;
-      array[offset++] = color.b;
-
-    }
-
-    return this;
-
-  },
-
-  copyVector2sArray: function(vectors) {
-
-    var array = this.array, offset = 0;
-
-    for (var i = 0, l = vectors.length; i < l; i++) {
-
-      var vector = vectors[i];
-
-      if (vector === undefined) {
-
-        console.warn('THREE.BufferAttribute.copyVector2sArray(): vector is undefined', i);
-        vector = new Vector2();
-
-      }
-
-      array[offset++] = vector.x;
-      array[offset++] = vector.y;
-
-    }
-
-    return this;
-
-  },
-
-  copyVector3sArray: function(vectors) {
-
-    var array = this.array, offset = 0;
-
-    for (var i = 0, l = vectors.length; i < l; i++) {
-
-      var vector = vectors[i];
-
-      if (vector === undefined) {
-
-        console.warn('THREE.BufferAttribute.copyVector3sArray(): vector is undefined', i);
-        vector = new Vector3();
-
-      }
-
-      array[offset++] = vector.x;
-      array[offset++] = vector.y;
-      array[offset++] = vector.z;
-
-    }
-
-    return this;
-
-  },
-
-  copyVector4sArray: function(vectors) {
-
-    var array = this.array, offset = 0;
-
-    for (var i = 0, l = vectors.length; i < l; i++) {
-
-      var vector = vectors[i];
-
-      if (vector === undefined) {
-
-        console.warn('THREE.BufferAttribute.copyVector4sArray(): vector is undefined', i);
-        vector = new Vector4();
-
-      }
-
-      array[offset++] = vector.x;
-      array[offset++] = vector.y;
-      array[offset++] = vector.z;
-      array[offset++] = vector.w;
-
-    }
-
-    return this;
-
-  },
-
-  set: function(value, offset) {
-
-    if (offset === undefined) offset = 0;
-
-    this.array.set(value, offset);
-
-    return this;
-
-  },
-
-  getX: function(index) {
-    return this.array[index * this.itemSize];
-  },
-
-  setX: function(index, x) {
-
-    this.array[index * this.itemSize] = x;
-
-    return this;
-
-  },
-
-  getY: function(index) {
-
-    return this.array[index * this.itemSize + 1];
-
-  },
-
-  setY: function(index, y) {
-
-    this.array[index * this.itemSize + 1] = y;
-
-    return this;
-
-  },
-
-  getZ: function(index) {
-
-    return this.array[index * this.itemSize + 2];
-
-  },
-
-  setZ: function(index, z) {
-
-    this.array[index * this.itemSize + 2] = z;
-
-    return this;
-
-  },
-
-  getW: function(index) {
-
-    return this.array[index * this.itemSize + 3];
-
-  },
-
-  setW: function(index, w) {
-
-    this.array[index * this.itemSize + 3] = w;
-
-    return this;
-
-  },
-
-  setXY: function(index, x, y) {
-
-    index *= this.itemSize;
-
-    this.array[index + 0] = x;
-    this.array[index + 1] = y;
-
-    return this;
-
-  },
-
-  setXYZ: function(index, x, y, z) {
-
-    index *= this.itemSize;
-
-    this.array[index + 0] = x;
-    this.array[index + 1] = y;
-    this.array[index + 2] = z;
-
-    return this;
-
-  },
-
-  setXYZW: function(index, x, y, z, w) {
-
-    index *= this.itemSize;
-
-    this.array[index + 0] = x;
-    this.array[index + 1] = y;
-    this.array[index + 2] = z;
-    this.array[index + 3] = w;
-
-    return this;
-
-  },
-
-  onUpload: function(callback) {
-
-    this.onUploadCallback = callback;
-
-    return this;
-
-  },
-
-  clone: function() {
-
-    return new this.constructor(this.array, this.itemSize).copy(this);
-
-  },
-
-  toJSON: function() {
-
-    return {
-      itemSize: this.itemSize,
-      type: this.array.constructor.name,
-      array: Array.prototype.slice.call(this.array),
-      normalized: this.normalized
-    };
-
-  }
-
-});
-
-PGL.Float32BufferAttribute = function(array, itemSize, normalized) {
-  PGL.BufferAttribute.call(this, new Float32Array(array), itemSize, normalized);
-};
-PGL.Float32BufferAttribute.prototype = Object.create(PGL.BufferAttribute.prototype);
-PGL.Float32BufferAttribute.prototype.constructor = PGL.Float32BufferAttribute;
-
-PGL.Uint32BufferAttribute = function(array, itemSize, normalized) {
-  PGL.BufferAttribute.call(this, new Uint32Array(array), itemSize, normalized);
-};
-PGL.Uint32BufferAttribute.prototype = Object.create(PGL.BufferAttribute.prototype);
-PGL.Uint32BufferAttribute.prototype.constructor = PGL.Uint32BufferAttribute;
-
-PGL.Uint16BufferAttribute = function(array, itemSize, normalized) {
-  PGL.BufferAttribute.call(this, new Uint16Array(array), itemSize, normalized);
-};
-PGL.Uint16BufferAttribute.prototype = Object.create(PGL.BufferAttribute.prototype);
-PGL.Uint16BufferAttribute.prototype.constructor = PGL.Uint16BufferAttribute;
 
 /**
  * WebGL渲染器
@@ -1443,8 +983,7 @@ PGL.WebGLRenderer = function(parameters) {
           renderer.setMode(_gl.TRIANGLE_FAN);
           break;
       }
-    }
-    else if (object.isPoints) {
+    } else if (object.isPoints) {
       renderer.setMode(_gl.POINTS);
     }
 
@@ -1491,8 +1030,7 @@ PGL.WebGLRenderer = function(parameters) {
 
           _gl.bindBuffer(_gl.ARRAY_BUFFER, buffer);
           _gl.vertexAttribPointer(programAttribute, size, type, normalized, 0, 0);
-        }
-        else if (materialDefaultAttributeValues !== undefined) {
+        } else if (materialDefaultAttributeValues !== undefined) {
           var value = materialDefaultAttributeValues[name];
 
           switch(value.length){
@@ -1691,8 +1229,8 @@ PGL.WebGLRenderer = function(parameters) {
     // 获取管理灯光
     var lights = currentRenderState.state.lights;
 
-    var lightsHash = materialProperties.lightsHash;
-    var lightsStateHash = lights.state.hash;
+    // 获取灯光版本
+    var lightsStateVersion = lights.state.version;
 
     // 获取参数
     var parameters = programCache.getParameters(material, lights.state, null, scene, null, null, object);
@@ -1715,6 +1253,16 @@ PGL.WebGLRenderer = function(parameters) {
     // 获取uniform变量
     var uniforms = materialProperties.uniforms;
 
+    // store the light setup it was created for
+    materialProperties.needsLights = materialNeedsLights(material);
+    materialProperties.lightsStateVersion = lightsStateVersion;
+
+    // 添加灯光属性
+    if (materialProperties.needsLights) {
+      // wire up the material to this renderer's lighting state
+      uniforms.ambientLightColor.value = lights.state.ambient;
+    }
+
     var progUniforms = materialProperties.program.getUniforms();
     var uniformsList = WebGLUniforms.seqWithValue(progUniforms.seq, uniforms);
     materialProperties.uniformsList = uniformsList;
@@ -1731,9 +1279,6 @@ PGL.WebGLRenderer = function(parameters) {
 
     var materialProperties = properties.get(material);
     var lights = currentRenderState.state.lights; // 获取灯光数据
-
-    var lightsHash = materialProperties.lightsHash;
-    var lightsStateHash = lights.state.hash;
 
     if (material.version === materialProperties.__version) {
 
@@ -1797,11 +1342,10 @@ PGL.WebGLRenderer = function(parameters) {
       // 获取unform变量地址
       if (material.isMeshBasicMaterial) {
         refreshUniformsCommon(m_uniforms, material);
-      }
-      else if (object.material.isMeshPhongMaterial) {
+      } else if (object.material.isMeshPhongMaterial) {
         refreshUniformsCommon(m_uniforms, material);
-      }
-      else if (object.material.isPointsMaterial) {
+        refreshUniformsPhong(m_uniforms, material);
+      } else if (object.material.isPointsMaterial) {
         // 更新uniform相关变量
         refreshUniformsPoints(m_uniforms, material);
       }
@@ -1825,14 +1369,34 @@ PGL.WebGLRenderer = function(parameters) {
       uniforms.diffuse.value = material.color;
     }
 
+    if (material.emissive) {
+      uniforms.emissive.value.copy(material.emissive).multiplyScalar(material.emissiveIntensity);
+    }
+
     if (material.map) {
       uniforms.map.value = material.map;
     }
   }
 
+  /**
+   * 设置高亮材质uniform属性
+   * @param uniforms
+   * @param material
+   */
+  function refreshUniformsPhong(uniforms, material) {
+  }
+
   function refreshUniformsPoints(uniforms, material) {
     uniforms.diffuse.value = material.color;
     uniforms.size.value = material.size;
+  }
+
+  function materialNeedsLights(material) {
+
+    return material.isMeshLambertMaterial || material.isMeshToonMaterial || material.isMeshPhongMaterial ||
+      material.isMeshStandardMaterial || material.isShadowMaterial ||
+      (material.isShaderMaterial && material.lights === true);
+
   }
 
   // Textures
@@ -1953,350 +1517,6 @@ PGL.WebGLInfo = function(gl) {
 
 };
 
-PGL.UniformsCache = function() {
-
-  var lights = {};
-
-  return {
-
-    get: function(light) {
-
-      if (lights[light.id] !== undefined) {
-
-        return lights[light.id];
-
-      }
-
-      var uniforms;
-
-      switch(light.type){
-
-        case 'DirectionalLight':
-          uniforms = {
-            direction: new Vector3(),
-            color: new Color(),
-
-            shadow: false,
-            shadowBias: 0,
-            shadowRadius: 1,
-            shadowMapSize: new PGL.Vector2()
-          };
-          break;
-
-        case 'SpotLight':
-          uniforms = {
-            position: new Vector3(),
-            direction: new Vector3(),
-            color: new Color(),
-            distance: 0,
-            coneCos: 0,
-            penumbraCos: 0,
-            decay: 0,
-
-            shadow: false,
-            shadowBias: 0,
-            shadowRadius: 1,
-            shadowMapSize: new Vector2()
-          };
-          break;
-
-        case 'PointLight':
-          uniforms = {
-            position: new Vector3(),
-            color: new Color(),
-            distance: 0,
-            decay: 0,
-
-            shadow: false,
-            shadowBias: 0,
-            shadowRadius: 1,
-            shadowMapSize: new Vector2(),
-            shadowCameraNear: 1,
-            shadowCameraFar: 1000
-          };
-          break;
-
-        case 'HemisphereLight':
-          uniforms = {
-            direction: new Vector3(),
-            skyColor: new Color(),
-            groundColor: new Color()
-          };
-          break;
-
-        case 'RectAreaLight':
-          uniforms = {
-            color: new Color(),
-            position: new Vector3(),
-            halfWidth: new Vector3(),
-            halfHeight: new Vector3()
-            // TODO (abelnation): set RectAreaLight shadow uniforms
-          };
-          break;
-
-      }
-
-      lights[light.id] = uniforms;
-
-      return uniforms;
-
-    }
-
-  };
-};
-var count = 0;
-PGL.WebGLLights = function() {
-
-  var cache = new PGL.UniformsCache();
-
-  var state = {
-
-    id: count++,
-
-    hash: {
-      stateID: -1,
-      directionalLength: -1,
-      pointLength: -1,
-      spotLength: -1,
-      rectAreaLength: -1,
-      hemiLength: -1,
-      shadowsLength: -1
-    },
-
-    ambient: [0, 0, 0],
-    probe: [],
-    directional: [],
-    directionalShadowMap: [],
-    directionalShadowMatrix: [],
-    spot: [],
-    spotShadowMap: [],
-    spotShadowMatrix: [],
-    rectArea: [],
-    point: [],
-    pointShadowMap: [],
-    pointShadowMatrix: [],
-    hemi: []
-
-  };
-
-  for (var i = 0; i < 9; i++) state.probe.push(new Vector3());
-
-  var vector3 = new Vector3();
-  var matrix4 = new Matrix4();
-  var matrix42 = new Matrix4();
-
-  function setup(lights, shadows, camera) {
-
-    var r = 0, g = 0, b = 0;
-
-    for (var i = 0; i < 9; i++) state.probe[i].set(0, 0, 0);
-
-    var directionalLength = 0;
-    var pointLength = 0;
-    var spotLength = 0;
-    var rectAreaLength = 0;
-    var hemiLength = 0;
-
-    var viewMatrix = camera.matrixWorldInverse;
-
-    for (var i = 0, l = lights.length; i < l; i++) {
-
-      var light = lights[i];
-
-      var color = light.color;
-      var intensity = light.intensity;
-      var distance = light.distance;
-
-      var shadowMap = (light.shadow && light.shadow.map) ? light.shadow.map.texture : null;
-
-      if (light.isAmbientLight) {
-
-        r += color.r * intensity;
-        g += color.g * intensity;
-        b += color.b * intensity;
-
-      } else if (light.isLightProbe) {
-
-        for (var j = 0; j < 9; j++) {
-
-          state.probe[j].addScaledVector(light.sh.coefficients[j], intensity);
-
-        }
-
-      } else if (light.isDirectionalLight) {
-
-        var uniforms = cache.get(light);
-
-        uniforms.color.copy(light.color).multiplyScalar(light.intensity);
-        uniforms.direction.setFromMatrixPosition(light.matrixWorld);
-        vector3.setFromMatrixPosition(light.target.matrixWorld);
-        uniforms.direction.sub(vector3);
-        uniforms.direction.transformDirection(viewMatrix);
-
-        uniforms.shadow = light.castShadow;
-
-        if (light.castShadow) {
-
-          var shadow = light.shadow;
-
-          uniforms.shadowBias = shadow.bias;
-          uniforms.shadowRadius = shadow.radius;
-          uniforms.shadowMapSize = shadow.mapSize;
-
-        }
-
-        // state.directionalShadowMap[directionalLength] = shadowMap;
-        // state.directionalShadowMatrix[directionalLength] = light.shadow.matrix;
-        state.directional[directionalLength] = uniforms;
-
-        directionalLength++;
-
-      } else if (light.isSpotLight) {
-
-        var uniforms = cache.get(light);
-
-        uniforms.position.setFromMatrixPosition(light.matrixWorld);
-        uniforms.position.applyMatrix4(viewMatrix);
-
-        uniforms.color.copy(color).multiplyScalar(intensity);
-        uniforms.distance = distance;
-
-        uniforms.direction.setFromMatrixPosition(light.matrixWorld);
-        vector3.setFromMatrixPosition(light.target.matrixWorld);
-        uniforms.direction.sub(vector3);
-        uniforms.direction.transformDirection(viewMatrix);
-
-        uniforms.coneCos = Math.cos(light.angle);
-        uniforms.penumbraCos = Math.cos(light.angle * (1 - light.penumbra));
-        uniforms.decay = light.decay;
-
-        uniforms.shadow = light.castShadow;
-
-        if (light.castShadow) {
-
-          var shadow = light.shadow;
-
-          uniforms.shadowBias = shadow.bias;
-          uniforms.shadowRadius = shadow.radius;
-          uniforms.shadowMapSize = shadow.mapSize;
-
-        }
-
-        state.spotShadowMap[spotLength] = shadowMap;
-        state.spotShadowMatrix[spotLength] = light.shadow.matrix;
-        state.spot[spotLength] = uniforms;
-
-        spotLength++;
-
-      } else if (light.isRectAreaLight) {
-
-        var uniforms = cache.get(light);
-
-        // (a) intensity is the total visible light emitted
-        //uniforms.color.copy( color ).multiplyScalar( intensity / ( light.width * light.height * Math.PI ) );
-
-        // (b) intensity is the brightness of the light
-        uniforms.color.copy(color).multiplyScalar(intensity);
-
-        uniforms.position.setFromMatrixPosition(light.matrixWorld);
-        uniforms.position.applyMatrix4(viewMatrix);
-
-        // extract local rotation of light to derive width/height half vectors
-        matrix42.identity();
-        matrix4.copy(light.matrixWorld);
-        matrix4.premultiply(viewMatrix);
-        matrix42.extractRotation(matrix4);
-
-        uniforms.halfWidth.set(light.width * 0.5, 0.0, 0.0);
-        uniforms.halfHeight.set(0.0, light.height * 0.5, 0.0);
-
-        uniforms.halfWidth.applyMatrix4(matrix42);
-        uniforms.halfHeight.applyMatrix4(matrix42);
-
-        // TODO (abelnation): RectAreaLight distance?
-        // uniforms.distance = distance;
-
-        state.rectArea[rectAreaLength] = uniforms;
-
-        rectAreaLength++;
-
-      } else if (light.isPointLight) {
-
-        var uniforms = cache.get(light);
-
-        uniforms.position.setFromMatrixPosition(light.matrixWorld);
-        uniforms.position.applyMatrix4(viewMatrix);
-
-        uniforms.color.copy(light.color).multiplyScalar(light.intensity);
-        uniforms.distance = light.distance;
-        uniforms.decay = light.decay;
-
-        uniforms.shadow = light.castShadow;
-
-        if (light.castShadow) {
-
-          var shadow = light.shadow;
-
-          uniforms.shadowBias = shadow.bias;
-          uniforms.shadowRadius = shadow.radius;
-          uniforms.shadowMapSize = shadow.mapSize;
-          uniforms.shadowCameraNear = shadow.camera.near;
-          uniforms.shadowCameraFar = shadow.camera.far;
-
-        }
-
-        state.pointShadowMap[pointLength] = shadowMap;
-        state.pointShadowMatrix[pointLength] = light.shadow.matrix;
-        state.point[pointLength] = uniforms;
-
-        pointLength++;
-
-      } else if (light.isHemisphereLight) {
-
-        var uniforms = cache.get(light);
-
-        uniforms.direction.setFromMatrixPosition(light.matrixWorld);
-        uniforms.direction.transformDirection(viewMatrix);
-        uniforms.direction.normalize();
-
-        uniforms.skyColor.copy(light.color).multiplyScalar(intensity);
-        uniforms.groundColor.copy(light.groundColor).multiplyScalar(intensity);
-
-        state.hemi[hemiLength] = uniforms;
-
-        hemiLength++;
-
-      }
-
-    }
-
-    state.ambient[0] = r;
-    state.ambient[1] = g;
-    state.ambient[2] = b;
-
-    state.directional.length = directionalLength;
-    state.spot.length = spotLength;
-    state.rectArea.length = rectAreaLength;
-    state.point.length = pointLength;
-    state.hemi.length = hemiLength;
-
-    state.hash.stateID = state.id;
-    state.hash.directionalLength = directionalLength;
-    state.hash.pointLength = pointLength;
-    state.hash.spotLength = spotLength;
-    state.hash.rectAreaLength = rectAreaLength;
-    state.hash.hemiLength = hemiLength;
-    state.hash.shadowsLength = shadows.length;
-
-  }
-
-  return {
-    setup: setup,
-    state: state
-  };
-
-};
-
 /**
  * Webgl渲染状态
  * @returns {{init: init, pushLight: pushLight, pushShadow: pushShadow, state: {shadowsArray: Array, lightsArray: Array, lights: {setup, state}}, setupLights: setupLights}}
@@ -2304,7 +1524,7 @@ PGL.WebGLLights = function() {
  */
 PGL.WebGLRenderState = function() {
 
-  var lights = new PGL.WebGLLights();
+  var lights = new WebGLLights();
 
   var lightsArray = []; // 场景灯光
   var shadowsArray = []; // 贴图灯光
@@ -3530,8 +2750,10 @@ PGL.WebGLPrograms = function(renderer, extensions, capabilities, textures) {
       isShaderMaterial: material.isShaderMaterial,
 
       precision: precision,
+
       map: !!material.map,
-      vertexColors: material.vertexColors,
+
+      vertexColors: material.vertexColors, // 顶点颜色
 
       numDirLights: lights.directional.length // 光照的数量
     };

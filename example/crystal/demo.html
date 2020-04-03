@@ -30,17 +30,6 @@
       var cluster = cristalCluster.getCluster();
 
       // 几何体
-      var vertices = [
-        // 顶点和颜色坐标
-        1.0, 1.0, 1.0,
-        -1.0, 1.0, 1.0,
-        -1.0, -1.0, 1.0,
-        1.0, -1.0, 1.0,
-        1.0, -1.0, -1.0,
-        1.0, 1.0, -1.0,
-        -1.0, 1.0, -1.0,
-        -1.0, -1.0, -1.0,
-      ];
       var color = [
         1.0, 1.0, 1.0,  // v0 White
         1.0, 0.0, 1.0,  // v1 Magenta
@@ -68,14 +57,6 @@
         0.0, 1.0, 1.0,  // v5 Cyan
         0.0, 0.0, 1.0,  // v6 Blue
         0.0, 0.0, 0.0   // v7 Black
-      ];
-      var indexes = [
-        0, 1, 2, 0, 2, 3,    // front
-        0, 3, 4, 0, 4, 5,    // right
-        0, 5, 6, 0, 6, 1,    // up
-        1, 6, 7, 1, 7, 2,    // left
-        7, 4, 3, 7, 3, 2,    // down
-        4, 7, 6, 4, 6, 5     // back
       ];
       var bufferGeometry = new BufferGeometry();
 

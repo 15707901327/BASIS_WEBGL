@@ -1,7 +1,11 @@
-import {MeshBasicMaterial} from "../../../src/materials/MeshBasicMaterial.js";
 import {PGL} from "../../../src/built/PGL.js";
 import {Color} from "../../../src/math/Color.js";
 import {Mesh} from "../../../src/object/Mesh.js";
+import {BufferGeometry} from "../../../src/core/BufferGeometry.js";
+import {Float32BufferAttribute} from "../../../src/core/BufferAttribute.js";
+import {MeshPhongMaterial} from "../../../src/materials/MeshPhongMaterial.js";
+import {AmbientLight} from "../../../src/Lights/AmbientLight.js";
+import {} from "../../../src/built/PUntils.js";
 
 window.onload = function(ev) {
   // 获取<canvas>元素
@@ -18,8 +22,11 @@ window.onload = function(ev) {
 
   var scene = new PGL.Scene();
 
-  var bufferGeometry = new PGL.BufferGeometry();
-  var positions = new Float32Array([
+  var ambientLight = new AmbientLight(0xff0000, 0.4);
+  scene.add(ambientLight);
+
+  var bufferGeometry = new BufferGeometry();
+  var positions = [
     // 顶点
     1.0, 1.0, 1.0,
     -1.0, 1.0, 1.0,
@@ -29,8 +36,8 @@ window.onload = function(ev) {
     1.0, 1.0, -1.0,
     -1.0, 1.0, -1.0,
     -1.0, -1.0, -1.0
-  ]);
-  var color = new Float32Array([
+  ];
+  var color = [
     // 颜色
     1.0, 1.0, 1.0,  // v0 White
     1.0, 0.0, 1.0,  // v1 Magenta
@@ -40,7 +47,7 @@ window.onload = function(ev) {
     0.0, 1.0, 1.0,  // v5 Cyan
     0.0, 0.0, 1.0,  // v6 Blue
     0.0, 0.0, 0.0   // v7 Black
-  ]);
+  ];
   var indices = [
     0, 1, 2, 0, 2, 3,    // front
     0, 3, 4, 0, 4, 5,    // right
@@ -51,10 +58,11 @@ window.onload = function(ev) {
   ]; // 顶点索引
 
   bufferGeometry.setIndex(indices);
-  bufferGeometry.setAttribute('position', new PGL.Float32BufferAttribute(positions, 3));
-  bufferGeometry.setAttribute('color', new PGL.Float32BufferAttribute(color, 3));
+  bufferGeometry.setAttribute('position', new Float32BufferAttribute(positions, 3));
+  bufferGeometry.setAttribute('color', new Float32BufferAttribute(color, 3));
+  bufferGeometry.initNormals(indices, positions);
 
-  var material = new MeshBasicMaterial({
+  var material = new MeshPhongMaterial({
     vertexColors: true
   });
 

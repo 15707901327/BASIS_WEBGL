@@ -12,9 +12,12 @@ var UniformsLib = {
     diffuse: {value: new Color(0xeeeeee)}
   },
   lights: {
-    ambientLightColor: {value: []},
+    ambientLightColor: {
+      value: []
+    },
     directionalLights: {
-      value: [], properties: {
+      value: [],
+      properties: {
         direction: {},
         color: {},
 

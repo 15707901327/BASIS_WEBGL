@@ -1,6 +1,7 @@
 import {mergeUniforms, UniformsUtils} from "./UniformsUtils.js";
 import {ShaderChunk} from "./ShaderChunk.js";
 import {UniformsLib} from "./UniformsLib.js";
+import {Color} from "../../math/Color.js";
 
 var ShaderLib = {
   basic: {
@@ -15,12 +16,16 @@ var ShaderLib = {
   phong: {
     uniforms: UniformsUtils.merge([
       UniformsLib.common,
-      UniformsLib.lights
+      UniformsLib.lights,
+      {
+        emissive: {value: new Color(0x000000)},
+      }
     ]),
 
     vertexShader: ShaderChunk.meshphong_vert,
     fragmentShader: ShaderChunk.meshphong_frag
   },
+
   points: {
 
     uniforms: UniformsUtils.merge([

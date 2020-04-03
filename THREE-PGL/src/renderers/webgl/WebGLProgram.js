@@ -150,7 +150,8 @@ function WebGLProgram(renderer, cacheKey, parameters) {
       '#define SHADER_NAME ' + parameters.shaderName,
 
       parameters.map ? '#define USE_MAP' : '',
-      parameters.vertexColors ? '#define USE_COLOR' : '',
+
+      parameters.vertexColors ? '#define USE_COLOR' : '', // 启用顶点颜色
 
       'uniform mat4 modelViewMatrix;',
       'uniform mat4 projectionMatrix;',
@@ -160,6 +161,11 @@ function WebGLProgram(renderer, cacheKey, parameters) {
       'attribute vec4 position;',
       'attribute vec3 normal;',
       'attribute vec2 uv;',
+
+      // 添加颜色变量
+      '#ifdef USE_COLOR',
+      '	attribute vec3 color;',
+      '#endif',
 
       '\n'
 
@@ -172,7 +178,10 @@ function WebGLProgram(renderer, cacheKey, parameters) {
       '#define SHADER_NAME ' + parameters.name,
 
       parameters.map ? '#define USE_MAP' : '',
-      parameters.vertexColors ? '#define USE_COLOR' : '',
+
+      parameters.vertexColors ? '#define USE_COLOR' : '', // 顶点颜色
+
+      'uniform mat4 viewMatrix;', // 视图矩阵
 
       '\n'
 

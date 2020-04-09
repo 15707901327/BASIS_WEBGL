@@ -28,7 +28,7 @@ struct IncidentLight {
 struct ReflectedLight {
     vec3 directDiffuse;
     vec3 directSpecular;
-    vec3 indirectDiffuse;
+    vec3 indirectDiffuse; // 漫反射的光照
     vec3 indirectSpecular;
 };
 
@@ -41,7 +41,10 @@ struct GeometricContext {
     #endif
 };
 
-// http://en.wikibooks.org/wiki/GLSL_Programming/Applying_Matrix_Transformations
+/*
+ * // http://en.wikibooks.org/wiki/GLSL_Programming/Applying_Matrix_Transformations
+ * 逆变换方向
+ */
 vec3 inverseTransformDirection( in vec3 dir, in mat4 matrix ) {
 	// dir can be either a direction vector or a normal vector
 	// upper-left 3x3 of matrix is assumed to be orthogonal
@@ -54,7 +57,9 @@ vec3 inverseTransformDirection( in vec3 dir, in mat4 matrix ) {
 #endif
 
 /**** bsdfs.glsl.js ***********************/
-
+/*
+ * 兰伯特模型计算漫反射光照
+ */
 vec3 BRDF_Diffuse_Lambert( const in vec3 diffuseColor ) {
 	return RECIPROCAL_PI * diffuseColor;
 } // validated
@@ -105,8 +110,11 @@ vec3 BRDF_Specular_BlinnPhong( const in IncidentLight incidentLight, const in Ge
 /**** lights_pars_begin.glsl.js ***********/
 uniform bool receiveShadow;
 uniform vec3 ambientLightColor;
-uniform vec3 lightProbe[ 9 ];
+uniform vec3 lightProbe[ 9 ]; // 光探头
 
+/*
+ * 获取辐照度
+ */
 vec3 shGetIrradianceAt( in vec3 normal, in vec3 shCoefficients[ 9 ] ) {
     float x = normal.x, y = normal.y, z = normal.z;
     vec3 result = shCoefficients[ 0 ] * 0.886227;
@@ -121,12 +129,19 @@ vec3 shGetIrradianceAt( in vec3 normal, in vec3 shCoefficients[ 9 ] ) {
     return result;
 }
 
+/*
+ * 探头
+ */
 vec3 getLightProbeIrradiance( const in vec3 lightProbe[ 9 ], const in GeometricContext geometry ) {
 	vec3 worldNormal = inverseTransformDirection( geometry.normal, viewMatrix );
 	vec3 irradiance = shGetIrradianceAt( worldNormal, lightProbe );
 	return irradiance;
 }
 
+/* 
+ * 获取环境光照射强度
+ * 返回：环境光的强度
+ */
 vec3 getAmbientLightIrradiance( const in vec3 ambientLightColor ) {
 	vec3 irradiance = ambientLightColor;
 	#ifndef PHYSICALLY_CORRECT_LIGHTS
@@ -161,6 +176,9 @@ void RE_Direct_BlinnPhong( const in IncidentLight directLight, const in Geometri
 	reflectedLight.directSpecular += irradiance * BRDF_Specular_BlinnPhong( directLight, geometry, material.specularColor, material.specularShininess ) * material.specularStrength;
 }
 
+/*
+ * 计算漫反射的光照
+ */
 void RE_IndirectDiffuse_BlinnPhong( const in vec3 irradiance, const in GeometricContext geometry, const in BlinnPhongMaterial material, inout ReflectedLight reflectedLight ) {
 	reflectedLight.indirectDiffuse += irradiance * BRDF_Diffuse_Lambert( material.diffuseColor );
 }
@@ -204,27 +222,29 @@ void main() {
     material.specularColor = specular;
     material.specularShininess = shininess;
     material.specularStrength = specularStrength;
-    
+
     // 设置几何体
     GeometricContext geometry;
     geometry.position = - vViewPosition;
     geometry.normal = normal;
     
+    // 入射光
     IncidentLight directLight;
     #if defined( RE_IndirectDiffuse )
+        // 辐照度
         vec3 iblIrradiance = vec3( 0.0 );
+        // 照度
         vec3 irradiance = getAmbientLightIrradiance( ambientLightColor );
         irradiance += getLightProbeIrradiance( lightProbe, geometry );
     #endif
-    
+
     #if defined(RE_IndirectDiffuse)
         RE_IndirectDiffuse(irradiance, geometry, material, reflectedLight);
     #endif
-    
+
     vec3 outgoingLight = reflectedLight.directDiffuse + reflectedLight.indirectDiffuse + reflectedLight.directSpecular + reflectedLight.indirectSpecular + totalEmissiveRadiance;
     gl_FragColor = vec4(outgoingLight, diffuseColor.a);
     gl_FragColor = linearToOutputTexel( gl_FragColor );
-    gl_FragColor = vec4(emissive,1.0);
 }
 `;
 

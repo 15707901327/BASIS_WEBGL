@@ -6,12 +6,13 @@ import {Float32BufferAttribute} from "../../../src/core/BufferAttribute.js";
 import {MeshPhongMaterial} from "../../../src/materials/MeshPhongMaterial.js";
 import {AmbientLight} from "../../../src/Lights/AmbientLight.js";
 import {} from "../../../src/built/PUntils.js";
+import {WebGLRenderer} from "../../../src/renderers/WebGLRenderer.js";
 
 window.onload = function(ev) {
   // 获取<canvas>元素
   var canvas = document.getElementById('webgl');
 
-  var webGlRenderer = new PGL.WebGLRenderer({
+  var webGlRenderer = new WebGLRenderer({
     canvas: canvas
   });
   webGlRenderer.setClearColor(new Color(0, 0, 0), 1);
@@ -22,7 +23,7 @@ window.onload = function(ev) {
 
   var scene = new PGL.Scene();
 
-  var ambientLight = new AmbientLight(0xff0000, 0.4);
+  var ambientLight = new AmbientLight(0xffffff, 0.4);
   scene.add(ambientLight);
 
   var bufferGeometry = new BufferGeometry();
@@ -63,7 +64,8 @@ window.onload = function(ev) {
   bufferGeometry.initNormals(indices, positions);
 
   var material = new MeshPhongMaterial({
-    vertexColors: true
+    vertexColors: true,
+    // emissive: 0xff0000
   });
 
   var mesh = new Mesh(bufferGeometry, material);

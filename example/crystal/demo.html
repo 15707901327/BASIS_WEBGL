@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>一簇水晶</title>
-  <link rel="stylesheet" href="../css/base.css">
+<!--  <link rel="stylesheet" href="../css/base.css">-->
   <link rel="stylesheet" href="../../css/base.css">
   <script type="module">
     import WebGLRenderer from "../src/render/WebGLRenderer.js";
     import {VERTEX_SHADER, FRAGMENT_SHADER} from "./shader/shader.js";
     import BufferGeometry from "../src/core/BufferGeometry.js";
     import PerspectiveCamera from "../src/camera/PerspectiveCamera.js";
-    import {Float32BufferAttribute, Uint8BufferAttribute} from "../src/core/BufferAttribute.js";
+    import {Float32BufferAttribute} from "../src/core/BufferAttribute.js";
     import {CristalCluster} from "./jsm/CristalCluster.js";
 
     window.onload = function() {
@@ -23,46 +23,17 @@
       });
 
       let perspectiveCamera = new PerspectiveCamera(45, canvas.width / canvas.height, 1, 10000);
-      perspectiveCamera.position.set(30, 30, 0);
+      perspectiveCamera.position.set(30, 30, 30);
       perspectiveCamera.lookAt(0, 0, 0);
 
       var cristalCluster = new CristalCluster(10, 40);
       var cluster = cristalCluster.getCluster();
 
       // 几何体
-      var color = [
-        1.0, 1.0, 1.0,  // v0 White
-        1.0, 0.0, 1.0,  // v1 Magenta
-        1.0, 0.0, 0.0,  // v2 Red
-        1.0, 1.0, 0.0,  // v3 Yellow
-        0.0, 1.0, 0.0,  // v4 Green
-        0.0, 1.0, 1.0,  // v5 Cyan
-        0.0, 0.0, 1.0,  // v6 Blue
-        0.0, 0.0, 0.0,   // v7 Black
-
-        1.0, 1.0, 1.0,  // v0 White
-        1.0, 0.0, 1.0,  // v1 Magenta
-        1.0, 0.0, 0.0,  // v2 Red
-        1.0, 1.0, 0.0,  // v3 Yellow
-        0.0, 1.0, 0.0,  // v4 Green
-        0.0, 1.0, 1.0,  // v5 Cyan
-        0.0, 0.0, 1.0,  // v6 Blue
-        0.0, 0.0, 0.0,   // v7 Black
-
-        1.0, 1.0, 1.0,  // v0 White
-        1.0, 0.0, 1.0,  // v1 Magenta
-        1.0, 0.0, 0.0,  // v2 Red
-        1.0, 1.0, 0.0,  // v3 Yellow
-        0.0, 1.0, 0.0,  // v4 Green
-        0.0, 1.0, 1.0,  // v5 Cyan
-        0.0, 0.0, 1.0,  // v6 Blue
-        0.0, 0.0, 0.0   // v7 Black
-      ];
       var bufferGeometry = new BufferGeometry();
 
       bufferGeometry.setAttribute("vertices", new Float32BufferAttribute(cluster.positions, 3));
       bufferGeometry.setIndex(cluster.indices);
-      bufferGeometry.setAttribute("color", new Float32BufferAttribute(color, 3));
 
       var material = {
         vertex: VERTEX_SHADER,
@@ -80,7 +51,7 @@
 </head>
 <body>
 <div id="container">
-  <canvas id="webgl" height="400" width="400"></canvas>
+  <canvas id="webgl" height="500" width="500"></canvas>
 </div>
 
 </body>

@@ -24,12 +24,7 @@ function UniformsCache() {
         case 'DirectionalLight':
           uniforms = {
             direction: new Vector3(),
-            color: new Color(),
-
-            shadow: false,
-            shadowBias: 0,
-            shadowRadius: 1,
-            shadowMapSize: new Vector2()
+            color: new Color()
           };
           break;
 
@@ -169,7 +164,8 @@ function WebGLLights() {
         g += color.g * intensity;
         b += color.b * intensity;
 
-      } else if (light.isLightProbe) {
+      }
+      else if (light.isLightProbe) {
 
         for (var j = 0; j < 9; j++) {
 
@@ -177,7 +173,8 @@ function WebGLLights() {
 
         }
 
-      } else if (light.isDirectionalLight) {
+      }
+      else if (light.isDirectionalLight) {
 
         var uniforms = cache.get(light);
 

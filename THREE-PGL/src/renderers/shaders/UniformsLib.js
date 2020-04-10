@@ -15,18 +15,16 @@ var UniformsLib = {
     ambientLightColor: {
       value: []
     },
+
+    lightProbe: {value: []},
+
     directionalLights: {
       value: [],
       properties: {
         direction: {},
-        color: {},
-
-        shadow: {},
-        shadowBias: {},
-        shadowRadius: {},
-        shadowMapSize: {}
+        color: {}
       }
-    }
+    },
   }
 };
 

@@ -2,12 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/THREE-PGL/src/Lights/DirectionalLight.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/THREE-PGL/src/renderers/webgl/WebGLRenderState.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/THREE-PGL/example/buffergeometry/MeshPhongMaterial/demo.html" beforeDir="false" afterPath="$PROJECT_DIR$/THREE-PGL/example/buffergeometry/MeshPhongMaterial/demo.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/THREE-PGL/example/buffergeometry/MeshPhongMaterial/demo.js" beforeDir="false" afterPath="$PROJECT_DIR$/THREE-PGL/example/buffergeometry/MeshPhongMaterial/demo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/THREE-PGL/src/built/PGL.js" beforeDir="false" afterPath="$PROJECT_DIR$/THREE-PGL/src/built/PGL.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/THREE-PGL/src/built/require.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/THREE-PGL/src/renderers/WebGLRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/THREE-PGL/src/renderers/WebGLRenderer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/meshphong_frag.glsl.js" beforeDir="false" afterPath="$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/meshphong_frag.glsl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/meshphong_vert.glsl.js" beforeDir="false" afterPath="$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/meshphong_vert.glsl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/THREE-PGL/src/renderers/shaders/ShaderLib.js" beforeDir="false" afterPath="$PROJECT_DIR$/THREE-PGL/src/renderers/shaders/ShaderLib.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/THREE-PGL/src/renderers/shaders/UniformsLib.js" beforeDir="false" afterPath="$PROJECT_DIR$/THREE-PGL/src/renderers/shaders/UniformsLib.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/THREE-PGL/src/renderers/webgl/WebGLLights.js" beforeDir="false" afterPath="$PROJECT_DIR$/THREE-PGL/src/renderers/webgl/WebGLLights.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/THREE-PGL/src/renderers/webgl/WebGLUniforms.js" beforeDir="false" afterPath="$PROJECT_DIR$/THREE-PGL/src/renderers/webgl/WebGLUniforms.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,10 +25,36 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/shaders/ShaderLib.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="560">
+              <caret line="23" column="7" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
+              <folding>
+                <element signature="e#0#64#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/shaders/UniformsLib.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="560">
+              <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+              <folding>
+                <element signature="e#74#173#0" />
+                <element signature="e#185#256#0" />
+                <element signature="e#293#316#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/vertex.glsl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="481">
-              <caret line="246" column="3" selection-start-line="246" selection-start-column="3" selection-end-line="250" selection-end-column="37" />
+            <state relative-caret-position="3500">
+              <caret line="125" column="28" selection-start-line="125" selection-start-column="28" selection-end-line="125" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -29,17 +62,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/fragment.glsl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="327">
-              <caret line="1009" column="53" selection-start-line="1009" selection-start-column="53" selection-end-line="1009" selection-end-column="53" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/meshphong_vert.glsl.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
+            <state relative-caret-position="27216">
+              <caret line="972" column="22" selection-start-line="972" selection-start-column="4" selection-end-line="972" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -47,33 +71,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/meshphong_frag.glsl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="239" lean-forward="true" selection-start-line="239" selection-end-line="239" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/THREE-PGL/example/buffergeometry/MeshPhongMaterial/demo.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="5" column="82" selection-start-line="5" selection-start-column="82" selection-end-line="5" selection-end-column="82" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/THREE-PGL/example/buffergeometry/MeshPhongMaterial/demo.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-390">
-              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-              <folding>
-                <element signature="e#629#653#0" />
-                <element signature="e#1016#1194#0" />
-                <element signature="e#1210#1480#0" />
-                <element signature="e#1498#1701#0" />
-                <element signature="e#2001#2044#0" />
-              </folding>
+            <state relative-caret-position="383">
+              <caret line="300" column="55" lean-forward="true" selection-start-line="300" selection-start-column="55" selection-end-line="300" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -81,11 +80,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/WebGLRenderer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="623" lean-forward="true" selection-start-line="623" selection-end-line="623" />
+            <state relative-caret-position="433">
+              <caret line="559" column="35" selection-start-line="559" selection-start-column="23" selection-end-line="559" selection-end-column="35" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
+                <element signature="e#14237#14617#0" />
+                <element signature="e#14922#15177#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/THREE-PGL/example/buffergeometry/MeshPhongMaterial/demo.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="112">
+              <caret line="4" column="24" lean-forward="true" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -97,43 +107,43 @@
       <list>
         <option value="CSS File" />
         <option value="HTML File" />
-        <option value="JavaScript File" />
         <option value="GLSL Shader" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>initMaterial</find>
-      <find>setPro</find>
-      <find>setPr</find>
-      <find>refreshUniformsCommon</find>
-      <find>USE_SPECULARMAP</find>
-      <find>vViewPosition</find>
-      <find>vNormal</find>
+      <find>projectObject</find>
+      <find>DataTexture2DArray</find>
+      <find>USE_INSTANCING</find>
+      <find>USE_TANGENT</find>
+      <find>USE_COLOR</find>
       <find>FLAT_SHADED</find>
-      <find>normalMatrix</find>
-      <find>WebGLRenderer</find>
-      <find>ReflectedLight</find>
-      <find>ambientLightColor</find>
-      <find>PHYSICALLY_CORRECT_LIGHTS</find>
-      <find>PI</find>
-      <find>PGL.WebGLRenderer</find>
-      <find>uniforms.lightProbe.value</find>
-      <find>materialProperties.needsLights</find>
-      <find>viewMatrix</find>
-      <find>inverseTransformDirection</find>
-      <find>lightProbe[ 9 ]</find>
-      <find>lightProbe</find>
-      <find>getLightProbeIrradiance</find>
-      <find>shGetIrradianceAt</find>
+      <find>HIGH_PRECISION</find>
+      <find>USE_UV</find>
+      <find>USE_MORPHTARGETS</find>
+      <find>USE_SKINNING</find>
+      <find>LinearToLinear</find>
+      <find>RE_IndirectSpecular</find>
+      <find>directionalLights[ 0 ]</find>
+      <find>DirectionalLight</find>
+      <find>directionalLights</find>
+      <find>directLight</find>
+      <find>IncidentLight</find>
+      <find>getDirectionalDirectLightIrradiance</find>
       <find>reflectedLight</find>
-      <find>RE_IndirectDiffuse</find>
-      <find>RE_IndirectDiffuse_BlinnPhong</find>
+      <find>saturate</find>
+      <find>PHYSICALLY_CORRECT_LIGHTS</find>
       <find>BRDF_Diffuse_Lambert</find>
-      <find>indirectDiffuse</find>
-      <find>irradiance</find>
-      <find>getAmbientLightIrradiance</find>
+      <find>BRDF_Specular_BlinnPhong</find>
+      <find>RE_Direct_BlinnPhong</find>
+      <find>RE_Direct</find>
+      <find>ReflectedLight</find>
+      <find>RE_IndirectDiffuse_BlinnPhong</find>
+      <find>RE_IndirectDiffuse</find>
+      <find>indirectSpecular</find>
+      <find>totalEmissiveRadiance</find>
     </findStrings>
     <replaceStrings>
       <replace>PGL.Vector3</replace>
@@ -167,8 +177,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch7/shader/Vertex.glsl" />
-        <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/meshbasic_vert.glsl.js" />
         <option value="$PROJECT_DIR$/example/src/math/Matrix4.js" />
         <option value="$PROJECT_DIR$/THREE-PGL/example/WebGL编程指南/ch7/HelloCube.js" />
         <option value="$PROJECT_DIR$/example/src/render/WebGLAttributeBuffer.js" />
@@ -201,22 +209,24 @@
         <option value="$PROJECT_DIR$/THREE-PGL/src/Lights/Light.js" />
         <option value="$PROJECT_DIR$/THREE-PGL/src/Lights/AmbientLight.js" />
         <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/webgl/WebGLLights..js" />
-        <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/shaders/UniformsLib.js" />
         <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/meshphone_frag.glsl.js" />
         <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/meshphone_vert.glsl.js" />
         <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/shaders/ShaderChunk.js" />
-        <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/webgl/WebGLLights.js" />
-        <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/vertex.glsl" />
         <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/webgl/WebGLProgram.js" />
-        <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/webgl/WebGLUniforms.js" />
-        <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/fragment.glsl" />
         <option value="$PROJECT_DIR$/THREE-PGL/src/materials/MeshPhongMaterial.js" />
-        <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/shaders/ShaderLib.js" />
         <option value="$PROJECT_DIR$/THREE-PGL/example/buffergeometry/MeshPhongMaterial/demo.html" />
-        <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/meshphong_vert.glsl.js" />
-        <option value="$PROJECT_DIR$/THREE-PGL/src/built/PGL.js" />
-        <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/WebGLRenderer.js" />
+        <option value="$PROJECT_DIR$/THREE-PGL/src/Lights/DirectionalLight.js" />
         <option value="$PROJECT_DIR$/THREE-PGL/example/buffergeometry/MeshPhongMaterial/demo.js" />
+        <option value="$PROJECT_DIR$/THREE-PGL/src/built/PGL.js" />
+        <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/webgl/WebGLRenderState.js" />
+        <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/webgl/WebGLLights.js" />
+        <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/shaders/ShaderLib.js" />
+        <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/WebGLRenderer.js" />
+        <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/shaders/UniformsLib.js" />
+        <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/webgl/WebGLUniforms.js" />
+        <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/meshphong_vert.glsl.js" />
+        <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/vertex.glsl" />
+        <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/fragment.glsl" />
         <option value="$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/meshphong_frag.glsl.js" />
       </list>
     </option>
@@ -231,6 +241,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -241,12 +252,28 @@
             <path>
               <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
               <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
-              <item name="doc" type="462c0819:PsiDirectoryNode" />
+              <item name="THREE-PGL" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
               <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
               <item name="THREE-PGL" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
+              <item name="THREE-PGL" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+              <item name="buffergeometry" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
+              <item name="THREE-PGL" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+              <item name="buffergeometry" type="462c0819:PsiDirectoryNode" />
+              <item name="MeshPhongMaterial" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
@@ -254,18 +281,32 @@
               <item name="THREE-PGL" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
+              <item name="THREE-PGL" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="renderers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
+              <item name="THREE-PGL" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="renderers" type="462c0819:PsiDirectoryNode" />
+              <item name="shaderLib" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/THREE-PGL/src/renderers" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -274,7 +315,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.HTML" />
-    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/../ThreeSourceCodeAnalysis/src/lights/Light.js" />
+    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/../ThreeSourceCodeAnalysis/src/renderers/webgl/WebGLUniforms.js" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -506,14 +547,8 @@
       <workItem from="1585884453341" duration="6000" />
       <workItem from="1585884831038" duration="4037000" />
       <workItem from="1585907835681" duration="94000" />
-      <workItem from="1586396453074" duration="11224000" />
-    </task>
-    <task id="LOCAL-00035" summary="1.球形坐标">
-      <created>1572832333636</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1572832333636</updated>
+      <workItem from="1586396453074" duration="21274000" />
+      <workItem from="1586501727010" duration="5643000" />
     </task>
     <task id="LOCAL-00036" summary="1.OpenGL概述">
       <created>1572932999555</created>
@@ -851,11 +886,18 @@
       <option name="project" value="LOCAL" />
       <updated>1585907878032</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="1.实现环境光">
+      <created>1586414838252</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1586414838253</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="857425000" />
+    <option name="totallyTimeSpent" value="873118000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -870,7 +912,7 @@
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23907864" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21763304" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -894,7 +936,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.更新" />
     <MESSAGE value="1.更新矩阵" />
     <MESSAGE value="1.更新webgl实例" />
     <MESSAGE value="1.更新帧缓冲对象方法说明" />
@@ -919,7 +960,8 @@
     <MESSAGE value="1.水晶开发" />
     <MESSAGE value="1.法线计算" />
     <MESSAGE value="1.测试灯光" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.测试灯光" />
+    <MESSAGE value="1.实现环境光" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.实现环境光" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -927,79 +969,12 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/THREE-PGL/src/renderers/WebGLRenderer01.js</url>
           <line>1039</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/example/src/render/WebGLProgram.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="136" column="2" selection-start-line="136" selection-start-column="2" selection-end-line="136" selection-end-column="2" />
-          <folding>
-            <element signature="e#106#185#0" />
-            <element signature="e#232#463#0" />
-            <element signature="e#468#596#0" />
-            <element signature="e#645#1522#0" />
-            <element signature="e#1231#1470#0" />
-            <element signature="e#1527#1646#0" />
-            <element signature="e#1688#2233#0" />
-            <element signature="e#2238#2361#0" />
-            <element signature="e#2413#2858#0" />
-            <element signature="e#2863#2960#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/wireframe/demo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="728">
-          <caret line="30" column="40" selection-start-line="30" selection-start-column="40" selection-end-line="30" selection-end-column="40" />
-          <folding>
-            <element signature="e#498#557#0" expanded="true" />
-            <element signature="e#744#825#0" />
-            <element signature="e#1345#2607#0" />
-            <element signature="e#2886#3100#0" />
-            <element signature="e#3712#4294#0" />
-            <element signature="e#4324#5626#0" />
-            <element signature="e#5634#5692#0" />
-            <element signature="e#5729#6461#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/mirror/demo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="219" column="7" lean-forward="true" selection-start-line="219" selection-start-column="7" selection-end-line="219" selection-end-column="7" />
-          <folding>
-            <element signature="e#352#411#0" expanded="true" />
-            <element signature="e#968#1061#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/crystal/jsm/pyramidVertex.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="53">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-          <folding>
-            <element signature="e#69#222#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/crystal/jsm/CristalCluster.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="n#!!block;n#CristalCluster#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/example/src/utils.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-499">
@@ -1174,33 +1149,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/THREE-PGL/src/Lights/Lights.js" />
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/Lights/Light.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="59" selection-start-line="59" selection-end-line="59" />
-          <folding>
-            <element signature="e#0#47#0" expanded="true" />
-            <element signature="n#!!doc;n#Light#0" />
-            <element signature="n#!!block;n#Light#0" />
-            <element signature="e#474#1342#0" />
-            <element signature="e#543#686#0" />
-            <element signature="e#716#1339#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/Lights/AmbientLight.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
-          <folding>
-            <element signature="n#!!doc;n#AmbientLight#0" />
-            <element signature="n#!!block;n#AmbientLight#0" />
-            <element signature="e#308#364#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/meshbasic_vert.glsl.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="28">
@@ -1280,36 +1228,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/shaders/ShaderLib.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/shaders/UniformsLib.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
-          <folding>
-            <element signature="e#185#256#0" />
-            <element signature="e#268#536#0" />
-            <element signature="e#293#316#0" />
-            <element signature="e#341#532#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/vertex.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="481">
-          <caret line="246" column="3" selection-start-line="246" selection-start-column="3" selection-end-line="250" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/example/src/core/BufferGeometry.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="179">
@@ -1332,21 +1250,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/WebGLRenderer01.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2257">
-          <caret line="39" column="11" selection-start-line="39" selection-start-column="11" selection-end-line="39" selection-end-column="11" />
-          <folding>
-            <element signature="e#179#280#0" />
-            <element signature="e#284#1054#0" />
-            <element signature="e#4937#9862#0" />
-            <element signature="e#10854#10898#0" />
-            <element signature="e#10915#36851#0" />
-            <element signature="e#36895#57792#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/WebGLRenderer01.js" />
     <entry file="file://$PROJECT_DIR$/example/src/render/WebGLRenderer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -1355,23 +1259,6 @@
             <element signature="n#!!doc" />
             <element signature="e#154#198#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/built/PGL.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="1257" column="41" selection-start-line="1257" selection-start-column="28" selection-end-line="1257" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/fragment.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="1009" column="53" selection-start-line="1009" selection-start-column="53" selection-end-line="1009" selection-end-column="53" />
         </state>
       </provider>
     </entry>
@@ -1385,66 +1272,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/webgl/WebGLUniforms.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="538" column="20" selection-start-line="538" selection-start-column="20" selection-end-line="538" selection-end-column="20" />
-          <folding>
-            <element signature="e#286#440#0" />
-            <element signature="e#467#541#0" />
-            <element signature="e#571#681#0" />
-            <element signature="e#770#1089#0" />
-            <element signature="e#1091#1132#0" />
-            <element signature="e#1161#1752#0" />
-            <element signature="e#1782#2195#0" />
-            <element signature="e#5325#5375#0" />
-            <element signature="e#5409#6360#0" />
-            <element signature="e#8050#8368#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/webgl/WebGLLights.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="331" column="31" selection-start-line="331" selection-start-column="31" selection-end-line="331" selection-end-column="31" />
-          <folding>
-            <element signature="e#3229#8408#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/example/buffergeometry/MeshPhongMaterial/demo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-390">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-          <folding>
-            <element signature="e#629#653#0" />
-            <element signature="e#1016#1194#0" />
-            <element signature="e#1210#1480#0" />
-            <element signature="e#1498#1701#0" />
-            <element signature="e#2001#2044#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/meshphong_vert.glsl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/WebGLRenderer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="623" lean-forward="true" selection-start-line="623" selection-end-line="623" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/ShaderChunk/lights_pars_begin.glsl.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
@@ -1452,17 +1279,200 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/THREE-PGL/example/buffergeometry/MeshPhongMaterial/demo.html">
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/Lights/AmbientLight.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="18" column="2" lean-forward="true" selection-start-line="18" selection-start-column="2" selection-end-line="20" selection-end-column="22" />
+          <folding>
+            <element signature="n#!!doc;n#AmbientLight#0" />
+            <element signature="n#!!block;n#AmbientLight#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/Lights/Light.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+            <element signature="n#!!doc;n#Light#0" />
+            <element signature="e#479#1381#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/Lights/DirectionalLight.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="4" column="5" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/built/require.js" />
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/core/Object3D.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="276" column="1" selection-start-line="276" selection-start-column="1" selection-end-line="312" selection-end-column="4" />
+          <folding>
+            <element signature="n#!!block;n#Object3D#0" />
+            <element signature="e#581#1005#0" />
+            <element signature="e#1427#1706#0" />
+            <element signature="e#1743#2069#0" />
+            <element signature="e#2096#2228#0" />
+            <element signature="e#2255#2387#0" />
+            <element signature="e#2414#2546#0" />
+            <element signature="e#2581#2913#0" />
+            <element signature="e#2943#3087#0" />
+            <element signature="e#3117#3261#0" />
+            <element signature="e#3291#3435#0" />
+            <element signature="e#3442#3545#0" />
+            <element signature="e#4835#4890#0" />
+            <element signature="e#4928#5462#0" />
+            <element signature="e#5030#5290#0" />
+            <element signature="e#5065#5120#0" />
+            <element signature="e#5404#5457#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/webgl/WebGLRenderState.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="30" column="9" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="9" />
+          <folding>
+            <element signature="n#!!doc;n#WebGLRenderState#0" />
+            <element signature="n#!!block;n#init#0;n#!!block;n#WebGLRenderState#0" />
+            <element signature="n#!!block;n#pushLight#0;n#!!block;n#WebGLRenderState#0" />
+            <element signature="n#!!block;n#pushShadow#0;n#!!block;n#WebGLRenderState#0" />
+            <element signature="e#720#807#0" />
+            <element signature="e#819#942#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/built/PGL.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="795" column="16" lean-forward="true" selection-start-line="795" selection-start-column="16" selection-end-line="795" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/webgl/WebGLLights.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="95" lean-forward="true" selection-start-line="95" selection-end-line="95" />
+          <folding>
+            <element signature="n#!!block;n#UniformsCache#0" />
+            <element signature="e#315#359#0" />
+            <element signature="e#3495#3608#0" />
+            <element signature="e#3638#3778#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/shaders/UniformsUtils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="66" selection-start-line="66" selection-end-line="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/webgl/WebGLUniforms.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
-          <caret line="5" column="82" selection-start-line="5" selection-start-column="82" selection-end-line="5" selection-end-column="82" />
+          <caret line="5" selection-start-line="5" selection-start-column="3" selection-end-line="7" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/example/buffergeometry/MeshPhongMaterial/demo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="341">
+          <caret line="25" column="25" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#46#0" expanded="true" />
+            <element signature="e#629#653#0" />
+            <element signature="e#1016#1194#0" />
+            <element signature="e#1210#1480#0" />
+            <element signature="e#1498#1701#0" />
+            <element signature="e#2001#2044#0" />
+            <element signature="e#2131#2210#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/meshphong_vert.glsl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-303">
+          <caret line="7" column="23" lean-forward="true" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/shaders/ShaderLib.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="23" column="7" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/shaders/UniformsLib.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+          <folding>
+            <element signature="e#74#173#0" />
+            <element signature="e#185#256#0" />
+            <element signature="e#293#316#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/vertex.glsl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3500">
+          <caret line="125" column="28" selection-start-line="125" selection-start-column="28" selection-end-line="125" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/fragment.glsl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27216">
+          <caret line="972" column="22" selection-start-line="972" selection-start-column="4" selection-end-line="972" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/example/buffergeometry/MeshPhongMaterial/demo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="4" column="24" lean-forward="true" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/WebGLRenderer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="559" column="35" selection-start-line="559" selection-start-column="23" selection-end-line="559" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+            <element signature="e#14237#14617#0" />
+            <element signature="e#14922#15177#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/THREE-PGL/src/renderers/shaderLib/meshphong_frag.glsl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="239" lean-forward="true" selection-start-line="239" selection-end-line="239" />
+        <state relative-caret-position="383">
+          <caret line="300" column="55" lean-forward="true" selection-start-line="300" selection-start-column="55" selection-end-line="300" selection-end-column="55" />
         </state>
       </provider>
     </entry>

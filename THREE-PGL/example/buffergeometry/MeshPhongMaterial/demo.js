@@ -4,9 +4,11 @@ import {Mesh} from "../../../src/object/Mesh.js";
 import {BufferGeometry} from "../../../src/core/BufferGeometry.js";
 import {Float32BufferAttribute} from "../../../src/core/BufferAttribute.js";
 import {MeshPhongMaterial} from "../../../src/materials/MeshPhongMaterial.js";
-import {AmbientLight} from "../../../src/Lights/AmbientLight.js";
 import {} from "../../../src/built/PUntils.js";
 import {WebGLRenderer} from "../../../src/renderers/WebGLRenderer.js";
+
+import {AmbientLight} from "../../../src/Lights/AmbientLight.js";
+import {DirectionalLight} from "../../../src/Lights/DirectionalLight.js";
 
 window.onload = function(ev) {
   // 获取<canvas>元素
@@ -25,6 +27,10 @@ window.onload = function(ev) {
 
   var ambientLight = new AmbientLight(0xffffff, 0.4);
   scene.add(ambientLight);
+
+  var light = new DirectionalLight(0xffffff, 0.5);
+  light.position.set(1.5, 3.0, 4.0);
+  scene.add(light);
 
   var bufferGeometry = new BufferGeometry();
   var positions = [

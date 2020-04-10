@@ -2,6 +2,7 @@ import {Matrix4} from "../math/Matrix4.js";
 import {Vector3} from "../math/Vector3.js";
 import {WebGLUniforms} from "./webgl/WebGLUniforms.js";
 import {PGL} from "../built/PGL.js";
+import {WebGLRenderStates} from "./webgl/WebGLRenderState.js";
 
 /**
  * WebGL渲染器
@@ -128,7 +129,7 @@ function WebGLRenderer(parameters) {
 
     programCache = new PGL.WebGLPrograms(_this, extensions, capabilities);
     renderLists = new PGL.WebGLRenderLists();
-    renderStates = new PGL.WebGLRenderStates();
+    renderStates = new WebGLRenderStates();
 
     background = new PGL.WebGLBackground(_this, state);
 
@@ -550,6 +551,8 @@ function WebGLRenderer(parameters) {
     if (materialProperties.needsLights) {
       // wire up the material to this renderer's lighting state
       uniforms.ambientLightColor.value = lights.state.ambient;
+      uniforms.lightProbe.value = lights.state.probe;
+      uniforms.directionalLights.value = lights.state.directional;
     }
 
     var progUniforms = materialProperties.program.getUniforms();

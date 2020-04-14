@@ -21,6 +21,7 @@
 <div class="content">
   <div class="l-r-wrapper">
     <div class="left">
+      <h4><a href="#base">基本概念</a></h4>
       <h4><a href="#onlyReadyProperty">只读属性</a></h4>
       <ul class="ul-1">
         <li><a href="#drawingBufferWidth">gl.drawingBufferWidth</a></li>
@@ -46,7 +47,8 @@
         <li><a href="#deleteBuffer" title="gl.deleteBuffer()">gl.deleteBuffer()</a></li>
         <li><a href="#bindBuffer" title="gl.bindBuffer()">gl.bindBuffer()</a></li>
         <li><a href="#bufferData" title="gl.bufferData()">gl.bufferData()</a></li>
-        <li><a href="#enableVertexAttribArray" title="gl.enableVertexAttribArray()">gl.enableVertexAttribArray()</a></li>
+        <li><a href="#enableVertexAttribArray" title="gl.enableVertexAttribArray()">gl.enableVertexAttribArray()</a>
+        </li>
         <li><a href="#disableVertexAttribArray"
                title="gl.disableVertexAttribArray()">gl.disableVertexAttribArray()</a></li>
       </ul>
@@ -153,6 +155,37 @@
     </div>
     <div class="right">
       <!-- 只读属性 -->
+      <section id="base" class="section1">
+        <h4 class="title">基本概念</h4>
+        <section id="typeAndFormat">
+          <h4>类型与格式:</h4>
+          <table border="1">
+            <tr>
+              <th colspan="3">类型与格式对应关系</th>
+            </tr>
+            <tr>
+              <th>类型</th>
+              <th>格式</th>
+              <th>描述</th>
+            </tr>
+            <tr>
+              <td>gl.UNSIGNED</td>
+              <td>Uint8Array</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>gl.UNSIGNED_SHORT</td>
+              <td>Uint16Array</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>gl.UNSIGNED_INT</td>
+              <td>Uint32Array</td>
+              <td></td>
+            </tr>
+          </table>
+        </section>
+      </section>
       <section id="onlyReadyProperty" class="section1">
         <h4 class="title">只读属性</h4>
         <section id="drawingBufferWidth">
@@ -242,16 +275,16 @@
             <strong>参数：</strong>
             <ul class="ul-2">
               <li>
-                mode：指定绘制的方式，可以接收一下常量符号：gl_POINTS, gl_LINES, gl_LINE_STRIP, gl_LINE_LOOP, gl_TRIANGLES, gl_TRIANGLE_STRIP, gl_TRIANGLE_FAN.
+                mode：指定绘制的方式，可以接收一下常量符号：gl_POINTS, gl_LINES, gl_LINE_STRIP, gl_LINE_LOOP, gl_TRIANGLES,
+                gl_TRIANGLE_STRIP, gl_TRIANGLE_FAN.
               </li>
               <li>count：指定绘制需要用到多少个顶点（整形数）</li>
               <li>
-                type: 用于指定元素数组缓冲区中值的类型。 可能的值为：
+                type: 用于指定元素数组缓冲区中值的类型(<a href="#typeAndFormat">类型与格式对应关系</a>)。 可能的值为：
                 <ul class="ul-2">
-                  <li>gl.UNSIGNED : 对应 Uint8Array 数组</li>
-                  <li>gl.UNSIGNED_SHORT : 对应 Uint16Array 数组</li>
-                  <li></li>
-                  <li>gl.UNSIGNED_INT : 对应 Uint32Array 数组 <strong>( When using the OES_element_index_uint extension )</strong></li>
+                  <li>gl.UNSIGNED</li>
+                  <li>gl.UNSIGNED_SHORT</li>
+                  <li>gl.UNSIGNED_INT<strong>( When using the OES_element_index_uint extension )</strong></li>
                 </ul>
               </li>
               <li>offset: 指定索引数组中开始绘制的位置，以字节为单位</li>

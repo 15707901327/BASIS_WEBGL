@@ -13,6 +13,7 @@ import {WebGLUntil} from "../WebGLUntil.js";
 import WebGLProgram from "../../src/render/WebGLProgram.js";
 import {WebGLAttributes} from "./WebGLAttributes.js";
 import Matrix4 from "../../src/math/Matrix4.js";
+import {WebGLIndexedBufferRenderer} from "./webgl/WebGLIndexedBufferRenderer.js";
 
 let WebGLRenderer = function(options) {
 
@@ -27,6 +28,7 @@ let WebGLRenderer = function(options) {
 
   var _gl = getContext(_canvas);
   var attributes = new WebGLAttributes(_gl);
+  var indexedBufferRenderer = new WebGLIndexedBufferRenderer(_gl);
 
   /**
    * 获取上下文
@@ -89,17 +91,23 @@ let WebGLRenderer = function(options) {
     var programAttributes = program.getAttributes(gl);
     gl.useProgram(gl.program);
 
-    // 几何体
+    // 几何体属性
+    var index = geometry.index;
+    if (index !== null) {
+      attributes.update(geometry.index, gl.ELEMENT_ARRAY_BUFFER);
+    }
     for (var name in geometry.attributes) {
-      attributes.createBuffer(geometry.attributes[name], gl.ARRAY_BUFFER);
+      attributes.update(geometry.attributes[name], gl.ARRAY_BUFFER);
 
       var a_name = geometry.translateAttributeName(name);
       gl.vertexAttribPointer(programAttributes[a_name], geometry.attributes[name].itemSize, gl.FLOAT, false, 0, 0);
       gl.enableVertexAttribArray(programAttributes[a_name]);
     }
 
-    if (geometry.index) {
-      attributes.createBuffer(geometry.index, gl.ELEMENT_ARRAY_BUFFER);
+    var attribute;
+    if (index !== null) {
+      attribute = attributes.get(index);
+      indexedBufferRenderer.setIndex(attribute);
     }
 
     gl.enable(gl.DEPTH_TEST);
@@ -120,13 +128,13 @@ let WebGLRenderer = function(options) {
       gl.uniformMatrix4fv(u_projectionMatrix, false, camera.projectionMatrix.elements);
     }
 
-    //清空颜色缓存区和深度缓存区
+    // 清空颜色缓存区和深度缓存区
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     var count = geometry.index ? geometry.index.count : geometry.attributes.vertices.count;
 
     if (geometry.index) {
-      gl.drawElements(gl.TRIANGLES, count, gl.UNSIGNED_BYTE, 0); // 绘制图形
+      indexedBufferRenderer.render(0, count);
     } else {
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     }

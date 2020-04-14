@@ -3,7 +3,7 @@
  * @constructor
  */
 import {arrayMax} from "../utils.js";
-import {Uint32BufferAttribute, Uint16BufferAttribute} from "../core/BufferAttribute.js";
+import {Uint32BufferAttribute, Uint16BufferAttribute, Uint8BufferAttribute} from "../core/BufferAttribute.js";
 
 function BufferGeometry() {
   this.index = null; // 索引值
@@ -27,7 +27,7 @@ Object.assign(BufferGeometry.prototype, {
    */
   setIndex: function(index) {
     if (Array.isArray(index)) {
-      this.index = new (arrayMax(index) > 65535 ? Uint32BufferAttribute : Uint16BufferAttribute)(index, 1);
+      this.index = new (arrayMax(index) > 255 ? (arrayMax(index) > 65535 ? Uint32BufferAttribute : Uint16BufferAttribute) : Uint8BufferAttribute)(index, 1);
     } else {
       this.index = index;
     }

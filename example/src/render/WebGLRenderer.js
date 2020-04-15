@@ -130,13 +130,32 @@ let WebGLRenderer = function(options) {
 
     // 清空颜色缓存区和深度缓存区
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-
     var count = geometry.index ? geometry.index.count : geometry.attributes.vertices.count;
 
-    if (geometry.index) {
-      indexedBufferRenderer.render(0, count);
+    if (geometry.isInstance) {
+      if (_enableWebGL2) {
+        if (geometry.index) {
+          gl.vertexAttribDivisor(programAttributes["a_Offset"], 1);
+          gl.drawElementsInstanced(gl.TRIANGLES, count, gl.UNSIGNED_BYTE, 0, geometry.attributes.offset.count);
+        } else{
+
+        }
+      } else {
+        var ext = gl.getExtension('ANGLE_instanced_arrays');
+        ext.vertexAttribDivisorANGLE(programAttributes["a_Offset"], 1);
+
+        if (geometry.index) {
+          ext.drawElementsInstancedANGLE(gl.TRIANGLES, count, gl.UNSIGNED_BYTE, 0, geometry.attributes.offset.count);
+        } else {
+          ext.drawArraysInstancedANGLE(gl.TRIANGLES, 0, count, geometry.attributes.offset.count);
+        }
+      }
     } else {
-      gl.drawArrays(gl.TRIANGLES, 0, 3);
+      if (geometry.index) {
+        indexedBufferRenderer.render(0, count);
+      } else {
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+      }
     }
   }
 };

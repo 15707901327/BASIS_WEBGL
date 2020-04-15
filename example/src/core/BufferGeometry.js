@@ -43,6 +43,9 @@ Object.assign(BufferGeometry.prototype, {
       case "color":
         a_name = "a_Color";
         break;
+        case "offset":
+        a_name = "a_Offset";
+        break;
       default:
         a_name = name;
     }

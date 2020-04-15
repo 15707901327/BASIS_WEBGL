@@ -38,6 +38,10 @@
         <li><a href="#drawArrays">gl.drawArrays()</a></li>
         <li><a href="#drawElements">gl.drawElements()</a></li>
         <li><a href="#drawBuffers">gl.drawBuffers()</a></li>
+        <li><strong>webgl2</strong></li>
+        <li><a href="#vertexAttribDivisor">gl.vertexAttribDivisor()</a></li>
+        <li><a href="#drawElementsInstanced">gl.drawElementsInstanced()</a></li>
+        <li><a href="#drawArraysInstanced">gl.drawArraysInstanced()</a></li>
       </ul>
       <h4><a href="#buffer">缓冲区方法</a></h4>
       <ul class="ul-1">
@@ -318,6 +322,72 @@
             <pre>
     gl.drawBuffers([gl.NONE, gl.COLOR_ATTACHMENT1]);
           </pre>
+          </div>
+        </section>
+        <section id="vertexAttribDivisor">
+          <h4>gl.vertexAttribDivisor(index, divisor);</h4>
+          <p>通用顶点属性前进的速率。</p>
+          <div class="content">
+            <strong>参数</strong>
+            <ul class="ul-1">
+              <li>index:指定通用顶点属性的索引。</li>
+              <li>divisor:指定在泛型属性更新之间传递的实例数。</li>
+            </ul>
+          </div>
+        </section>
+        <section id="drawElementsInstanced">
+          <h4>gl.drawElementsInstanced(mode, count, type, offset, instanceCount)</h4>
+          <p>从数组数据中呈现基元。 另外，它可以执行一组元素的多个实例。</p>
+          <div class="content">
+            <strong>参数：</strong>
+            <ul class="ul-2">
+              <li>
+                mode：指定绘制的方式，可以接收一下常量符号：gl_POINTS, gl_LINES, gl_LINE_STRIP, gl_LINE_LOOP, gl_TRIANGLES,
+                gl_TRIANGLE_STRIP, gl_TRIANGLE_FAN.
+              </li>
+              <li>count：指定绘制需要用到多少个顶点（整形数）</li>
+              <li>
+                type: 用于指定元素数组缓冲区中值的类型(<a href="#typeAndFormat">类型与格式对应关系</a>)。 可能的值为：
+                <ul class="ul-2">
+                  <li>gl.UNSIGNED</li>
+                  <li>gl.UNSIGNED_SHORT</li>
+                  <li>gl.UNSIGNED_INT<strong>( When using the OES_element_index_uint extension )</strong></li>
+                </ul>
+              </li>
+              <li>offset: 指定索引数组中开始绘制的位置，以字节为单位</li>
+              <li>instanceCount: 指定要执行的元素集的实例数</li>
+            </ul>
+            <strong>返回值：</strong>
+            <p>无</p>
+            <strong>错误：</strong>
+            <ul class="ul-2">
+              <li>INVALID_ENUM：传入的mode参数不是前述参数之一</li>
+              <li>INVALID_VALUE：参数offset或count是负数</li>
+            </ul>
+          </div>
+        </section>
+        <section id="drawArraysInstanced">
+          <h4>gl.drawArraysInstanced(mode, first, count, instanceCount);</h4>
+          <p>绘制实例</p>
+          <div class="content">
+            <strong>参数：</strong>
+            <ul class="ul-1">
+              <li>
+                mode：指定绘制的方式，可以接收一下常量符号：gl_POINTS,gl_LINES,gl_LINE_STRIP,
+                gl_LINE_LOOP,gl_TRIANGLES,gl_TRIANGLE_STRIP,gl_TRIANGLE_FAN.
+                <p>参考:<a href="../WebGL可以绘制的基本图形.html">WebGL可以绘制的基本图形</a></p>
+              </li>
+              <li>first:指定从那个顶点开始绘制</li>
+              <li>count：指定绘制需要用到多少个顶点（整形数）</li>
+              <li>instanceCount：实例数量</li>
+            </ul>
+            <strong>返回值：</strong>
+            <p>无</p>
+            <strong>错误：</strong>
+            <ul>
+              <li>INVALID_ENUM：传入的mode参数不是前述参数之一</li>
+              <li>INVALID_VALUE：参数first或count是负数</li>
+            </ul>
           </div>
         </section>
       </section>

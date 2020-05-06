@@ -50,7 +50,9 @@
         <li><a href="#scale">缩放（scale)</a></li>
         <li><a href="#mirror_matrix">镜像</a></li>
         <li><a href="#shear_matrix">切变</a></li>
-        <li><a href="#viewMatrix">viewMatrix</a></li>
+        <li><a href="#modelMatrix">模型矩阵</a></li>
+        <li><a href="#viewMatrix">视图矩阵</a></li>
+        <li><a href="#projectMatrix">投影矩阵</a></li>
       </ul>
       <h4><a href="#translation">位移(translation)</a></h4>
       <ul class="ul-1">
@@ -289,8 +291,13 @@
         <section id="shear_matrix">
           <h3>切变</h3>
         </section>
+        <section id="modelMatrix">
+          <h4>模型矩阵：</h4>
+          <p>将物体坐标变换为世界坐标。</p>
+        </section>
         <section id="viewMatrix">
-          <h4>viewMatrix</h4>
+          <h4>视图矩阵：</h4>
+          <p>将世界坐标，变换为眼睛坐标。</p>
           <p>观察者的位置和方向会变化，看上去就好像整个世界的位置和方向发生变化了一样，所以我们将世界里的所有模型看作一个大模型，
             在所有模型矩阵的左侧再乘以一个表示整个世界变换的模型矩阵，就可以了。这个表示整个世界变换的矩阵又称为「视图矩阵」。</p>
           <p>简单来说，固定其他因素，我们改变了相机的位置和角度后，它眼中的世界也会发生变化，这种变化就是视图矩阵。</p>
@@ -309,6 +316,10 @@
             <p>模型视图矩阵的作用是：乘以一个点坐标，获得一个新的点坐标，获得的点坐标表示点在世界里变换，观察者也变换后，
               点相对于观察者的位置。</p>
           </div>
+        </section>
+        <section id="projectMatrix">
+          <h4>投影矩阵：</h4>
+          <p>将眼睛坐标变换为裁剪坐标</p>
         </section>
       </section>
       <section id="translation" class="section1">

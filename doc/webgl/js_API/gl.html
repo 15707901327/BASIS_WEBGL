@@ -88,7 +88,7 @@
         <li><a href="#pixelStorei" title="gl.pixelStorei()">gl.pixelStorei()</a></li>
         <li><a href="#activeTexture" title="gl.activeTexture()">gl.activeTexture()</a></li>
         <li><a href="#bindTexture" title="gl.bindTexture()">gl.bindTexture()</a></li>
-        <li><a href="#texParameteri" title="gl.texParameteri()">gl.texParameteri()</a></li>
+        <li><a href="#texParameteri" title="gl.texParameter[fi]()">gl.texParameter[fi]()</a></li>
         <li><a href="#texImage2D" title="gl.texImage2D()">gl.texImage2D()</a></li>
         <li><a href="#copyTexImage2D" title="gl.copyTexImage2D()">gl.copyTexImage2D()</a></li>
       </ul>
@@ -1050,6 +1050,111 @@
               <td>gl.TEXTURE_2D_ARRAY</td>
               <td>二维数组纹理</td>
             </tr>
+          </table><br/>
+          <table border="1" id="internalFormat">
+            <tr>
+              <th colspan="2">纹素数据的格式</th>
+            </tr>
+            <tr>
+              <th>格式</th>
+              <th>描述</th>
+            </tr>
+            <tr>
+              <td>gl.RGB</td>
+              <td>红、绿、蓝</td>
+            </tr>
+            <tr>
+              <td>gl.RGBA</td>
+              <td>红、绿、蓝、透明度</td>
+            </tr>
+            <tr>
+              <td>gl.ALPHA</td>
+              <td>（0.0,0.0,0.0,透明度）</td>
+            </tr>
+            <tr>
+              <td>gl.LUMINANCE</td>
+              <td>L、L、L、1L：流明（表示我们感知到的物体表面的亮度。通常使用物体表面红、绿、蓝颜色分量值的加权平均来计算流明）</td>
+            </tr>
+            <tr>
+              <td>gl.LUMINANCE_ALPHA</td>
+              <td>L、L、L、透明度</td>
+            </tr>
+          </table><br/>
+          <table border="1">
+            <tr>
+              <th colspan="2">纹理数据的数据格式</th>
+            </tr>
+            <tr>
+              <th>格式</th>
+              <th>描述</th>
+            </tr>
+            <tr>
+              <td>gl.UNSIGNED_BYTE</td>
+              <td>无符号整型，每个颜色分量占据1字节</td>
+            </tr>
+            <tr>
+              <td>gl.UNSIGNED_SHORT_5_6_5</td>
+              <td>RGB:每个分量分别占用5、6、5比特</td>
+            </tr>
+            <tr>
+              <td>gl.UNSIGNED_SHORT_4_4_4_4</td>
+              <td>RGB:每个分量分别占用4、4、4、4比特</td>
+            </tr>
+            <tr>
+              <td>gl.UNSIGNED_SHORT_5_5_5_1</td>
+              <td>RGB:RGB每个分量分别占用5、5、5比特，A分量占据1比特</td>
+            </tr>
+            <tr>
+              <th colspan="2">OES_texture_float</th>
+            </tr>
+            <tr>
+              <td>gl.FLOAT</td>
+              <td>When using the OES_texture_float extension</td>
+            </tr>
+          </table><br/>
+          <table border="1" id="internalFormatType">
+            <tr>
+              <th colspan="3">对照表</th>
+            </tr>
+            <tr>
+              <th>internal format</th>
+              <th>Format</th>
+              <th>Type</th>
+            </tr>
+            <tr>
+              <td>gl.RGB</td>
+              <td>gl.RGB</td>
+              <td>
+                UNSIGNED_BYTE <br/>UNSIGNED_SHORT_5_6_5
+              </td>
+            </tr>
+            <tr>
+              <td>gl.RGBA</td>
+              <td>gl.RGBA</td>
+              <td>
+                UNSIGNED_BYTE<br/>
+                UNSIGNED_SHORT_4_4_4_4<br/>
+                UNSIGNED_SHORT_5_5_5_1<br/>
+              </td>
+            </tr>
+            <tr>
+              <td>gl.ALPHA</td>
+              <td>gl.ALPHA</td>
+              <td>UNSIGNED_BYTE</td>
+            </tr>
+            <tr>
+              <td>gl.LUMINANCE</td>
+              <td>gl.LUMINANCE</td>
+              <td>UNSIGNED_BYTE</td>
+            </tr>
+            <tr>
+              <td>gl.LUMINANCE_ALPHA</td>
+              <td>gl.LUMINANCE_ALPHA</td>
+              <td>UNSIGNED_BYTE</td>
+            </tr>
+            <tr>
+              <th colspan="4">WebGL2 对照表</th>
+            </tr>
           </table>
         </section>
         <section id="createTexture">
@@ -1143,11 +1248,13 @@
           </div>
         </section>
         <section id="texParameteri">
-          <h4>gl.texParameteri(target,pname，param)</h4>
+          <h4>gl.texParameter[fi]()</h4>
+          <p>gl.texParameterf(GLenum target, GLenum pname, GLfloat param);</p>
+          <p>gl.texParameteri(GLenum target, GLenum pname, GLint param);</p>
           <p>将param的值赋给绑定到目标的纹理对象的pname参数上。</p>
           <div class="content">
             <strong>参数</strong>
-            <ul>
+            <ul class="ul-2">
               <li>target：<a href="#textureType">纹理类型</a></li>
               <li>
                 pname：纹理参数
@@ -1179,6 +1286,14 @@
                     <td>gl.TEXTURE_WRAP_T</td>
                     <td>纹理垂直填充</td>
                     <td>gl.REPEAT</td>
+                  </tr>
+                  <tr>
+                    <th colspan="3">Additionally available when using the EXT_texture_filter_anisotropic extension</th>
+                  </tr>
+                  <tr>
+                    <td>ext.TEXTURE_MAX_ANISOTROPY_EXT</td>
+                    <td>纹理的最大各向异性</td>
+                    <td></td>
                   </tr>
                 </table>
               </li>
@@ -1268,132 +1383,12 @@
                 </ul>
               </li>
               <li>level: 级别0是基本图像级别，级别n是第n个mipmap缩减级别。</li>
-              <li>internalformat: 图像的内部格式
-                <table border="1">
-                  <tr>
-                    <th colspan="3">纹素数据的格式</th>
-                  </tr>
-                  <tr>
-                    <th>Format</th>
-                    <th>Type</th>
-                    <th>描述</th>
-                  </tr>
-                  <tr>
-                    <td>gl.RGB</td>
-                    <td>UNSIGNED_BYTE</td>
-                    <td>红、绿、蓝</td>
-                  </tr>
-                  <tr>
-                    <td>gl.RGB</td>
-                    <td>UNSIGNED_SHORT_5_6_5</td>
-                    <td>红、绿、蓝</td>
-                  </tr>
-                  <tr>
-                    <td>gl.RGBA</td>
-                    <td>UNSIGNED_BYTE</td>
-                    <td>红、绿、蓝、透明度</td>
-                  </tr>
-                  <tr>
-                    <td>gl.RGBA</td>
-                    <td>UNSIGNED_SHORT_4_4_4_4</td>
-                    <td>红、绿、蓝、透明度</td>
-                  </tr>
-                  <tr>
-                    <td>gl.RGBA</td>
-                    <td>UNSIGNED_SHORT_5_5_5_1</td>
-                    <td>红、绿、蓝、透明度</td>
-                  </tr>
-                  <tr>
-                    <td>gl.ALPHA</td>
-                    <td>UNSIGNED_BYTE</td>
-                    <td>（0.0,0.0,0.0,透明度）</td>
-                  </tr>
-                  <tr>
-                    <td>gl.LUMINANCE</td>
-                    <td>UNSIGNED_BYTE</td>
-                    <td>L、L、L、1L：流明（表示我们感知到的物体表面的亮度。通常使用物体表面红、绿、蓝颜色分量值的加权平均来计算流明）</td>
-                  </tr>
-                  <tr>
-                    <td>gl.LUMINANCE_ALPHA</td>
-                    <td>UNSIGNED_BYTE</td>
-                    <td>L、L、L、透明度</td>
-                  </tr>
-                </table>
-                <br>
-                <table border="1">
-                  <tr>
-                    <th colspan="3">WebGL2中用于采用ArrayBufferView或GLintptr偏移量的texImage2D版本的其他可能值</th>
-                  </tr>
-                  <tr>
-                    <th>Sized Format</th>
-                    <th>Base Format</th>
-                  </tr>
-                  <tr>
-                    <td>gl.RGB16F</td>
-                    <td>gl.RGB</td>
-                  </tr>
-                </table>
-              </li>
+              <li>internal format: 图像的内部格式，<a href="#internalFormat">纹素数据格式</a>。</li>
               <li>width : 纹理的宽度</li>
               <li>height : 纹理的高度</li>
               <li>border :A GLint specifying the width of the border. Must be 0.</li>
-              <li>format: 纹理数据的格式，在WebGL1中必须使用与internalformat相同的值。在WebGL 2中...
-                <table border="1">
-                  <tr>
-                    <th colspan="2">纹理图片格式说明</th>
-                  </tr>
-                  <tr>
-                    <th>格式</th>
-                    <th>像素表示方法</th>
-                  </tr>
-                  <tr>
-                    <td>JPG格式</td>
-                    <td>RGB</td>
-                  </tr>
-                  <tr>
-                    <td>PNG格式</td>
-                    <td>RGBA</td>
-                  </tr>
-                  <tr>
-                    <td>BMP格式</td>
-                    <td>RGB</td>
-                  </tr>
-                </table>
-              </li>
-              <li>type: 纹理数据类型
-                <table border="1">
-                  <tr>
-                    <th colspan="2">纹理数据的数据格式</th>
-                  </tr>
-                  <tr>
-                    <th>格式</th>
-                    <th>描述</th>
-                  </tr>
-                  <tr>
-                    <td>gl.UNSIGNED_BYTE</td>
-                    <td>无符号整型，每个颜色分量占据1字节</td>
-                  </tr>
-                  <tr>
-                    <td>gl.UNSIGNED_SHORT_5_6_5</td>
-                    <td>RGB:每个分量分别占用5、6、5比特</td>
-                  </tr>
-                  <tr>
-                    <td>gl.UNSIGNED_SHORT_4_4_4_4</td>
-                    <td>RGB:每个分量分别占用4、4、4、4比特</td>
-                  </tr>
-                  <tr>
-                    <td>gl.UNSIGNED_SHORT_5_5_5_1</td>
-                    <td>RGB:RGB每个分量分别占用5、5、5比特，A分量占据1比特</td>
-                  </tr>
-                  <tr>
-                    <th colspan="2">OES_texture_float</th>
-                  </tr>
-                  <tr>
-                    <td>gl.FLOAT</td>
-                    <td>When using the OES_texture_float extension</td>
-                  </tr>
-                </table>
-              </li>
+              <li>format: 纹理数据的格式，与internalformat、type的<a href="#internalFormatType">参考关系</a>。</li>
+              <li>type: 纹理数据类型。<a href="#internalFormat">纹理数据的数据格式。</a></li>
               <li>image: 包含纹理图像的Image对象</li>
             </ul>
             <strong>返回值</strong>

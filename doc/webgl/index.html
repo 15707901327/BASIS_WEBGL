@@ -7,14 +7,19 @@
 </head>
 <body>
 <div class="header">
-  <ul>
-    <li><a href="../../index.html">首页</a></li>
-    <li class="li_heightLight"><a href="../webgl/index.html">webgl概述</a></li>
-    <li><a href="../opengl/index.html">OpenGL概述</a></li>
-    <li><a href="../graphics/index.html">图形学</a></li>
-    <li><a href="../shader/index.html">GLSL ES</a></li>
-    <li><a href="../webgl/js_API/gl.html">WebGL API</a></li>
-    <li><a href="../../example/index.html">WebGL实例</a></li>
+  <ul class="ul_1">
+    <li class="li_1"><a href="../../index.html">首页</a></li>
+    <li class="li_1 li_heightLight"><a href="../webgl/index.html">webgl概述</a></li>
+    <li class="li_1"><a href="../opengl/index.html">OpenGL概述</a></li>
+    <li class="li_1"><a href="../graphics/index.html">图形学</a></li>
+    <li class="li_1">
+      <a href="../shader/index.html">GLSL ES</a>
+      <ul class="ul_2">
+        <li><a href="../shader/BuiltInFunction.html">内置函数</a></li>
+      </ul>
+    </li>
+    <li class="li_1"><a href="../webgl/js_API/gl.html">WebGL API</a></li>
+    <li class="li_1"><a href="../../example/index.html">WebGL实例</a></li>
   </ul>
 </div>
 <div class="content">
@@ -30,7 +35,10 @@
         <li><a href="#type_array">类型化数组</a></li>
         <li><a href="#noise">图形噪声</a></li>
       </ul>
-      <h4><a href="#texture">texture</a></h4>
+      <h4><a href="#texture">纹理贴图</a></h4>
+      <ul class="ul-1">
+        <li><a href="#textureObject">纹理对象</a></li>
+      </ul>
       <h4><a href="#blending">blending</a></h4>
       <ul class="ul-1">
         <li><a href="#blendFunc">混合功能</a></li>
@@ -117,7 +125,8 @@
         </section>
         <section id="WebGL_System">
           <h4>着色器</h4>
-          <p>WebGL需要两种着色器，即<a href="../shader/index.html#vertex_shader">顶点着色器（Vertex shader）</a>和片元着色器（Fragment shader）。着色器运行在WebGL系统中。</p>
+          <p>WebGL需要两种着色器，即<a href="../shader/index.html#vertex_shader">顶点着色器（Vertex shader）</a>和片元着色器（Fragment
+            shader）。着色器运行在WebGL系统中。</p>
         </section>
         <section id="type_array">
           <h4>类型化数组</h4>
@@ -234,13 +243,11 @@
         </section>
       </section>
       <section id="texture" class="section1">
-        <h4 class="title">texture</h4>
+        <h4 class="title">纹理贴图</h4>
         <section>
           <h4>基本概念</h4>
           <p>纹理是数据的简单矩阵排列——比如。颜色数据、亮度数据或者颜色和alpha（透明度）数据。</p>
           <div class="content">
-            <strong>纹理单元：</strong>
-            <p>纹理数组中的每个独立的数值通常称为一个纹理单元.</p>
             <strong>纹理映射：</strong>
             <p>一种将<strong>纹理图像</strong>应用于物体表面的技术（就是把图像贴到构成物体表面的多边形上去），就像该图像是
               一种贴画纸或玻璃纸附着于物体的表面上。此时，这张图像又可以称为<strong>纹理图像（texture image）</strong>或
@@ -295,6 +302,15 @@
             <p>纹理被缩小:比方说一个8 x 8的纹理贴到一个平行于xy平面的正方形上，最后该正方形在屏幕上仅仅占4 x 4的象素矩阵，这样的情况下一个象素相应着多个纹理单元。</p>
             <p>纹理被放大:这样的情况刚好跟上面相反。假如我们放大该正方形，最后正方形在屏幕上占了一个16 x 16的象素矩阵，这样就变成一个纹理单元相应着多个象素。</p>
           </div>
+        </section>
+        <section id="textureObject">
+          <h4>纹理对象</h4>
+          <p>纹理对象用来管理WebGL系统中的纹理。</p>
+        </section>
+        <section id="textureUnit">
+          <h4>纹理单元：</h4>
+          <p>WebGL通过一种称为纹理单元（texture unit）的机制来同时使用多个纹理。每个纹理单元有一个单元编号来管理一张纹理图像。即使只需要使用一张纹理图像，也得为其指定一个纹理单元。</p>
+          <p>纹理数组中的每个独立的数值通常称为一个纹理单元。</p>
         </section>
       </section>
       <section id="blending" class="section1">

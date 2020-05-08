@@ -8,14 +8,19 @@
 </head>
 <body>
 <div class="header">
-  <ul>
-    <li><a href="../../../index.html">首页</a></li>
-    <li><a href="../../webgl/index.html">webgl概述</a></li>
-    <li><a href="../../opengl/index.html">OpenGL</a></li>
-    <li><a href="../../graphics/index.html">图形学</a></li>
-    <li><a href="../../shader/index.html">着色器</a></li>
-    <li><a href="../../webgl/js_API/gl.html">WebGL API</a></li>
-    <li><a href="../../../example/index.html">WebGL实例</a></li>
+  <ul class="ul_1">
+    <li class="li_1"><a href="../../../index.html">首页</a></li>
+    <li class="li_1"><a href="../../webgl/index.html">webgl概述</a></li>
+    <li class="li_1"><a href="../../opengl/index.html">OpenGL概述</a></li>
+    <li class="li_1"><a href="../../graphics/index.html">图形学</a></li>
+    <li class="li_1">
+      <a href="../../shader/index.html">GLSL ES</a>
+      <ul class="ul_2">
+        <li><a href="../../shader/BuiltInFunction.html">内置函数</a></li>
+      </ul>
+    </li>
+    <li class="li_1 li_heightLight"><a href="../../webgl/js_API/gl.html">WebGL API</a></li>
+    <li class="li_1"><a href="../../../example/index.html">WebGL实例</a></li>
   </ul>
 </div>
 <div class="content">
@@ -75,19 +80,20 @@
         <li><a href="#vertexAttribPointer">gl.vertexAttribPointer()</a></li>
         <li><a href="#getActiveAttrib">gl.getActiveAttrib()</a></li>
         <li><a href="#WebGLActiveInfo">WebGLActiveInfo</a></li>
-        <li><h4>与uniform变量相关方法</h4></li>
+        <li><h4>uniform变量方法</h4></li>
         <li><a href="#getUniformLocation" title="gl.getUniformLocation()">gl.getUniformLocation()</a></li>
-        <li><a href="#uniform" title="gl.uniform()">gl.uniform()</a></li>
+        <li><a href="#uniform" title="gl.uniform[1234][fi][v]()">gl.uniform[1234][fi][v]()</a></li>
         <li><a href="#uniformMatrix4fv" title="gl.uniformMatrix4fv()">gl.uniformMatrix4fv()</a></li>
         <li><a href="#getActiveUniform" title="gl.getActiveUniform()">gl.getActiveUniform()</a></li>
       </ul>
-      <h4><a href="#texture">Texture</a></h4>
+      <h4><a href="#texture">纹理对象</a></h4>
       <ul class="ul-1">
         <li><a href="#createTexture" title="gl.createTexture()">gl.createTexture()</a></li>
         <li><a href="#deleteTexture" title="gl.deleteTexture()">gl.deleteTexture()</a></li>
         <li><a href="#pixelStorei" title="gl.pixelStorei()">gl.pixelStorei()</a></li>
         <li><a href="#activeTexture" title="gl.activeTexture()">gl.activeTexture()</a></li>
         <li><a href="#bindTexture" title="gl.bindTexture()">gl.bindTexture()</a></li>
+        <li><a href="#generateMipmap" title="gl.generateMipmap()">gl.generateMipmap()</a></li>
         <li><a href="#texParameteri" title="gl.texParameter[fi]()">gl.texParameter[fi]()</a></li>
         <li><a href="#texImage2D" title="gl.texImage2D()">gl.texImage2D()</a></li>
         <li><a href="#copyTexImage2D" title="gl.copyTexImage2D()">gl.copyTexImage2D()</a></li>
@@ -908,11 +914,13 @@
           </div>
         </section>
         <section id="uniform">
-          <h4>gl.uniform[1234]f(location, v0, v1, v2, v3);</h4>
+          <h4>gl.uniform[1234][fi][v]()</h4>
+          <p>gl.uniform[1234]f(location, v0, v1, v2, v3);</p>
+          <p>gl.uniform[1234]v(location, value);</p>
           <p>将数据（v0，v1，v2,v3）传给由location参数指定的uniform变量</p>
           <div class="content">
             <strong>参数：</strong>
-            <ul>
+            <ul class="ul-2">
               <li>location：指定将要修改的uniform变量的存储位置</li>
               <li>v0：指定填充uniform变量第一个分量的值</li>
               <li>v1：指定填充uniform变量第二个分量的值</li>
@@ -1019,9 +1027,9 @@
           </div>
         </section>
       </section>
-      <!-- 纹理图像 -->
+      <!-- 纹理对象 -->
       <section class="section1" id="texture">
-        <div class="title">Texture</div>
+        <div class="title">纹理对象</div>
         <section>
           <table border="1">
             <tr>
@@ -1050,14 +1058,134 @@
               <td>gl.TEXTURE_2D_ARRAY</td>
               <td>二维数组纹理</td>
             </tr>
-          </table><br/>
-          <table border="1" id="internalFormat">
+          </table>
+          <br/>
+          <table border="1" id="textureParam">
             <tr>
-              <th colspan="2">纹素数据的格式</th>
+              <th colspan="3">纹理参数</th>
             </tr>
             <tr>
-              <th>格式</th>
+              <th>纹理参数</th>
               <th>描述</th>
+              <th>参数值</th>
+            </tr>
+            <tr>
+              <td>gl.TEXTURE_MAG_FILTER</td>
+              <td>纹理的放大</td>
+              <td>
+                <ul style="text-align: left">
+                  <li>gl.LINEAR (默认值)</li>
+                  <li>gl.NEAREST</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>gl.TEXTURE_MIN_FILTER</td>
+              <td>纹理的缩小</td>
+              <td>
+                <ul style="text-align: left">
+                  <li>gl.LINEAR</li>
+                  <li>gl.NEAREST</li>
+                  <li>gl.NEAREST_MIPMAP_NEAREST</li>
+                  <li>gl.LINEAR_MIPMAP_NEAREST</li>
+                  <li>gl.NEAREST_MIPMAP_LINEAR(默认值)</li>
+                  <li>gl.LINEAR_MIPMAP_LINEAR</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>gl.TEXTURE_WRAP_S</td>
+              <td>纹理水平填充</td>
+              <td>
+                <ul style="text-align: left">
+                  <li>gl.REPEAT(默认值)</li>
+                  <li>gl.MIRRORED_REPEAT</li>
+                  <li>gl.CLAMP_TO_EDGE</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>gl.TEXTURE_WRAP_T</td>
+              <td>纹理垂直填充</td>
+              <td>
+                <ul style="text-align: left">
+                  <li>gl.REPEAT(默认值)</li>
+                  <li>gl.MIRRORED_REPEAT</li>
+                  <li>gl.CLAMP_TO_EDGE</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <th colspan="3">Additionally available when using the EXT_texture_filter_anisotropic extension</th>
+            </tr>
+            <tr>
+              <td>ext.TEXTURE_MAX_ANISOTROPY_EXT</td>
+              <td>纹理的最大各向异性</td>
+              <td></td>
+            </tr>
+          </table>
+          <br/>
+          <table border="1" id="textureParamValue">
+            <tr>
+              <th colspan="2">纹理参数值</th>
+            </tr>
+            <tr>
+              <th>值</th>
+              <th>描述</th>
+            </tr>
+            <tr>
+              <td>gl.NEAREST</td>
+              <td>使用原纹理上距离映射后像素（新像素）中心最近的那个颜色值，作为新像素的值（使用曼哈顿距离）</td>
+            </tr>
+            <tr>
+              <td>gl.LINEAR</td>
+              <td>使用距离新像素中心最近的四个像素的颜色值的加权平均，作为新像素的值（与gl.NEAREST相比，该方法图像质量更好，但会有较大的开销）（双线性样本）</td>
+            </tr>
+            <tr>
+              <td>gl.NEAREST_MIPMAP_NEAREST</td>
+              <td>从所选的最近的mip级别中取得单点样本。</td>
+            </tr>
+            <tr>
+              <td>gl.NEAREST_MIPMAP_LINEAR</td>
+              <td>从两个最近的mip级别中获取样本，并在这些样本间插值。</td>
+            </tr>
+            <tr>
+              <td>gl.LINEAR_MIPMAP_NEAREST</td>
+              <td>从所选的最近的mip级别中取得双线性样本。</td>
+            </tr>
+            <tr>
+              <td>gl.LINEAR_MIPMAP_LINEAR</td>
+              <td>从两个最近的mip级别中获取双线性样本，并在这些样本间插值。通常这种模式称为三线性过滤，产生所有模式中最佳的质量。</td>
+            </tr>
+
+            <tr>
+              <th colspan="2">可以赋值给gl.TEXTURE_WRAP_S和gl.TEXTURE_WRAP_T的常量</th>
+            </tr>
+            <tr>
+              <td>值</td>
+              <td>描述</td>
+            </tr>
+            <tr>
+              <td>gl.REPEAT</td>
+              <td>平铺式的重复纹理</td>
+            </tr>
+            <tr>
+              <td>gl.MIRRORED_REPEAT</td>
+              <td>镜像对称式的重复纹理</td>
+            </tr>
+            <tr>
+              <td>gl.CLAMP_TO_EDGE</td>
+              <td>使用纹理图像边缘值</td>
+            </tr>
+          </table>
+          <br/>
+          <table border="1" id="internalFormat">
+            <tr>
+              <th colspan="2">图像、纹理的数据格式</th>
+            </tr>
+            <tr>
+              <th>数据格式</th>
+              <th>格式描述</th>
             </tr>
             <tr>
               <td>gl.RGB</td>
@@ -1079,14 +1207,15 @@
               <td>gl.LUMINANCE_ALPHA</td>
               <td>L、L、L、透明度</td>
             </tr>
-          </table><br/>
+          </table>
+          <br/>
           <table border="1">
             <tr>
-              <th colspan="2">纹理数据的数据格式</th>
+              <th colspan="2">纹理数据类型</th>
             </tr>
             <tr>
-              <th>格式</th>
-              <th>描述</th>
+              <th>数据类型</th>
+              <th>类型描述</th>
             </tr>
             <tr>
               <td>gl.UNSIGNED_BYTE</td>
@@ -1111,15 +1240,16 @@
               <td>gl.FLOAT</td>
               <td>When using the OES_texture_float extension</td>
             </tr>
-          </table><br/>
+          </table>
+          <br/>
           <table border="1" id="internalFormatType">
             <tr>
               <th colspan="3">对照表</th>
             </tr>
             <tr>
-              <th>internal format</th>
-              <th>Format</th>
-              <th>Type</th>
+              <th>internal format（图像内部格式）</th>
+              <th>Format（纹理格式）</th>
+              <th>Type（纹理类型）</th>
             </tr>
             <tr>
               <td>gl.RGB</td>
@@ -1159,29 +1289,21 @@
         </section>
         <section id="createTexture">
           <h4>gl.createTexture()</h4>
-          <p>创建纹理对象以存储纹理图像</p>
+          <p>创建 <a href="../index.html#textureObject">纹理对象</a> 以存储纹理图像。</p>
           <div class="content">
-            <strong>参数</strong>
-            <p>无</p>
-            <strong>返回值</strong>
-            <ul>
+            <strong>返回值：</strong>
+            <ul class="ul-2">
               <li>non-null:新创建的纹理对象</li>
               <li>null:创建纹理对象失败</li>
             </ul>
-            <strong>错误</strong>
-            <p>无</p>
           </div>
         </section>
         <section id="deleteTexture">
           <h4>gl.deleteTexture(texture)</h4>
-          <p>使用texture删除纹理对象</p>
+          <p>删除 <a href="../index.html#textureObject">纹理对象</a></p>
           <div class="content">
-            <strong>参数</strong>
-            <p>texture：待删除的纹理对象</p>
-            <strong>返回值</strong>
-            <p>无</p>
-            <strong>错误</strong>
-            <p>无</p>
+            <strong>参数:</strong>
+            <p>texture：待删除的 <a href="../index.html#textureObject">纹理对象</a></p>
           </div>
         </section>
         <section id="pixelStorei">
@@ -1205,15 +1327,14 @@
           </div>
         </section>
         <section id="activeTexture">
-          <h4>gl.activeTexture(texture)</h4>
-          <p>激活texture指定的纹理单元</p>
+          <h4>gl.activeTexture(texUnit)</h4>
+          <p>激活texUnit指定的<a href="../index.html#textureUnit">纹理单元</a></p>
           <div class="content">
             <strong>参数：</strong>
             <ul class="ul-1">
               <li>
-                texture：指定准备激活的纹理单元,其值是 gl.TEXTUREI ，其中的 I 在 0 到 gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS - 1
-                范围内。例如：gl.TEXTURE0、gl.TEXTURE1、gl.TEXTURE2、
-                gl.TEXTURE03、gl.TEXTURE4、gl.TEXTURE5、gl.TEXTURE6、gl.TEXTURE7。
+                texUnit：指定准备激活的纹理单元,其值是 gl.TEXTUREI ，其中的 I 在 0 到 gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS - 1
+                范围内。例如：gl.TEXTURE0、gl.TEXTURE1......gl.TEXTURE7。
                 最后的数字表示纹理单元的编号。
               </li>
             </ul>
@@ -1256,91 +1377,24 @@
             <strong>参数</strong>
             <ul class="ul-2">
               <li>target：<a href="#textureType">纹理类型</a></li>
-              <li>
-                pname：纹理参数
-                <table border="1">
-                  <tr>
-                    <th colspan="3">纹理参数及它们的默认值</th>
-                  </tr>
-                  <tr>
-                    <th>纹理参数</th>
-                    <th>描述</th>
-                    <th>默认值</th>
-                  </tr>
-                  <tr>
-                    <td>gl.TEXTURE_MAG_FILTER</td>
-                    <td>纹理的放大</td>
-                    <td>gl.LINEAR</td>
-                  </tr>
-                  <tr>
-                    <td>gl.TEXTURE_MIN_FILTER</td>
-                    <td>纹理的缩小</td>
-                    <td>gl.NEAREST_MIPMAP_LINEAR</td>
-                  </tr>
-                  <tr>
-                    <td>gl.TEXTURE_WRAP_S</td>
-                    <td>纹理水平填充</td>
-                    <td>gl.REPEAT</td>
-                  </tr>
-                  <tr>
-                    <td>gl.TEXTURE_WRAP_T</td>
-                    <td>纹理垂直填充</td>
-                    <td>gl.REPEAT</td>
-                  </tr>
-                  <tr>
-                    <th colspan="3">Additionally available when using the EXT_texture_filter_anisotropic extension</th>
-                  </tr>
-                  <tr>
-                    <td>ext.TEXTURE_MAX_ANISOTROPY_EXT</td>
-                    <td>纹理的最大各向异性</td>
-                    <td></td>
-                  </tr>
-                </table>
-              </li>
-              <li>param：纹理参数值
-                <table border="1">
-                  <tr>
-                    <th colspan="2">可以赋值给gl.TEXTURE_MAG_FILTER和gl.TEXTURE_MIN_FILTER的非金字塔纹理类型常量</th>
-                  </tr>
-                  <tr>
-                    <th>值</th>
-                    <th>描述</th>
-                  </tr>
-                  <tr>
-                    <td>gl.NEAREST</td>
-                    <td>使用原纹理上距离映射后像素（新像素）中心最近的那个颜色值，作为新像素的值（使用曼哈顿距离）</td>
-                  </tr>
-                  <tr>
-                    <td>gl.LINEAR</td>
-                    <td>使用距离新像素中心最近的四个像素的颜色值的加权平均，作为新像素的值（与gl.NEAREST相比，该方法图像质量更好，但会有较大的开销）</td>
-                  </tr>
-                  <tr>
-                    <th colspan="2">可以赋值给gl.TEXTURE_WRAP_S和gl.TEXTURE_WRAP_T的常量</th>
-                  </tr>
-                  <tr>
-                    <td>值</td>
-                    <td>描述</td>
-                  </tr>
-                  <tr>
-                    <td>gl.REPEAT</td>
-                    <td>平铺式的重复纹理</td>
-                  </tr>
-                  <tr>
-                    <td>gl.MIRRORED_REPEAT</td>
-                    <td>镜像对称式的重复纹理</td>
-                  </tr>
-                  <tr>
-                    <td>gl.CLAMP_TO_EDGE</td>
-                    <td>使用纹理图像边缘值</td>
-                  </tr>
-                </table>
-              </li>
+              <li>pname：<a href="#textureParam">纹理参数</a></li>
+              <li>param：<a href="#textureParamValue">纹理参数值</a></li>
             </ul>
             <strong>返回值</strong>
             <p>无</p>
             <strong>错误</strong>
             <p>INVALID_ENUM：target不是合法的值</p>
             <p>INVALID_OPERATION：当前目标上没有绑定纹理对象</p>
+          </div>
+        </section>
+        <section id="generateMipmap">
+          <h4>gl.generateMipmap(target);</h4>
+          <p>对象生成一组mipmap。</p>
+          <div class="content">
+            <strong>参数</strong>
+            <ul class="ul-2">
+              <li>target：<a href="#textureType">纹理类型</a></li>
+            </ul>
           </div>
         </section>
         <section id="texImage2D">
@@ -1383,12 +1437,12 @@
                 </ul>
               </li>
               <li>level: 级别0是基本图像级别，级别n是第n个mipmap缩减级别。</li>
-              <li>internal format: 图像的内部格式，<a href="#internalFormat">纹素数据格式</a>。</li>
+              <li>internal format: 图像的<a href="#internalFormat">内部格式</a>。</li>
               <li>width : 纹理的宽度</li>
               <li>height : 纹理的高度</li>
               <li>border :A GLint specifying the width of the border. Must be 0.</li>
-              <li>format: 纹理数据的格式，与internalformat、type的<a href="#internalFormatType">参考关系</a>。</li>
-              <li>type: 纹理数据类型。<a href="#internalFormat">纹理数据的数据格式。</a></li>
+              <li>format: <a href="#internalFormat">纹理数据的格式</a>，参考图像内部格式设置（<a href="#internalFormatType">参考关系表</a>）。</li>
+              <li>type: <a href="#internalFormat">纹理数据类型</a>，参考纹理数据的格式设置（<a href="#internalFormatType">参考关系表</a>）</li>
               <li>image: 包含纹理图像的Image对象</li>
             </ul>
             <strong>返回值</strong>

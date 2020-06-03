@@ -1311,15 +1311,36 @@
           <p>使用pname和param指定的方式处理加载得到的图像。</p>
           <div class="content">
             <strong>参数:</strong>
-            <ul class="ul-1">
-              <li>
-                panme：
-                <p>gl.UNPACK_FLIP_Y_WEBGL:对图像进行Y轴反转。默认为false。</p>
-                <p>gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL:将图像RGB颜色值的每一个分量乘以A。默认值为false。</p>
-                <p>gl.UNPACK_ALIGNMENT:从内存中解压缩像素数据。</p>
-              </li>
-              <li>param:指定非0（true）或0（false）。必须为整数。</li>
-            </ul>
+            <table border="1">
+              <tr>
+                <th colspan="4">对照表</th>
+              </tr>
+              <tr>
+                <th>panme</th>
+                <th>allowed value for param</th>
+                <th>description</th>
+              </tr>
+              <tr>
+                <th>gl.UNPACK_FLIP_Y_WEBGL</th>
+                <th>false（default）、true</th>
+                <th>对图像进行Y轴反转</th>
+              </tr>
+              <tr>
+                <th>gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL</th>
+                <th>false（default）、true</th>
+                <th>将图像RGB颜色值的每一个分量乘以A</th>
+              </tr>
+              <tr>
+                <th>gl.UNPACK_ALIGNMENT</th>
+                <th>1、2、4（default）、8</th>
+                <th>从内存中解压缩像素数据</th>
+              </tr>
+              <tr>
+                <th>gl.UNPACK_COLORSPACE_CONVERSION_WEBGL</th>
+                <th>gl.BROWSER_DEFAULT_WEBGL（default）、gl.NONE</th>
+                <th>默认颜色空间转换或不进行颜色空间转换</th>
+              </tr>
+            </table>
             <strong>返回值</strong>
             <p>无</p>
             <strong>错误</strong>

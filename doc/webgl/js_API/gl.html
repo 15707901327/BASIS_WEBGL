@@ -56,10 +56,11 @@
         <li><a href="#deleteBuffer" title="gl.deleteBuffer()">gl.deleteBuffer()</a></li>
         <li><a href="#bindBuffer" title="gl.bindBuffer()">gl.bindBuffer()</a></li>
         <li><a href="#bufferData" title="gl.bufferData()">gl.bufferData()</a></li>
-        <li><a href="#enableVertexAttribArray" title="gl.enableVertexAttribArray()">gl.enableVertexAttribArray()</a>
-        </li>
+        <li><a href="#enableVertexAttribArray" title="gl.enableVertexAttribArray()">gl.enableVertexAttribArray()</a></li>
         <li><a href="#disableVertexAttribArray"
                title="gl.disableVertexAttribArray()">gl.disableVertexAttribArray()</a></li>
+        <li><strong>webgl2</strong></li>
+        <li><a href="#bindVertexArray" title="gl.bindVertexArray()">gl.bindVertexArray()</a></li>
       </ul>
       <h4><a href="#color">颜色缓冲</a></h4>
       <ul class="ul-1">
@@ -475,6 +476,8 @@
                 target:
                 <p>gl.ARRAY_BUFFER：表示缓存区对象中包含了顶点的数据</p>
                 <p>gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值"OpenGL ES着色器语言[GLSL ES]"</p>
+                <strong>webgl2:</strong>
+                <p>gl.UNIFORM_BUFFER：用于存储统一块的缓冲区</p>
               </li>
               <li>buffer:指定之前由gl.createBuffer()返回的待绑定的缓存区对象，如果指定为空，则禁用对target的绑定</li>
             </ul>
@@ -508,6 +511,8 @@
                 target:
                 <p>gl.ARRAY_BUFFER：表示缓存区对象中包含了顶点的数据</p>
                 <p>gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值"OpenGL ES着色器语言[GLSL ES]"</p>
+                <strong>webgl2:</strong>
+                <p>gl.UNIFORM_BUFFER：用于存储统一块的缓冲区</p>
               </li>
               <li>size:设定Buffer对象的数据存储区大小</li>
               <li>srcData:一个ArrayBuffer，SharedArrayBuffer 或者 ArrayBufferView 类型的数组对象，将被复制到Buffer的数据存储区。
@@ -620,6 +625,10 @@
               <li><a href="../../WebGL编程指南/ch3/MultiPoints.html">绘制三角形的三个顶点</a></li>
             </ul>
           </div>
+        </section>
+        <section id="bindVertexArray">
+          <h4>gl.bindVertexArray(vertexArray);</h4>
+          <p>将vertexArray对象绑定到缓冲区</p>
         </section>
       </section>
       <!-- 颜色缓冲方法 -->

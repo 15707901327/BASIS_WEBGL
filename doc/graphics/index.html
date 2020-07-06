@@ -28,10 +28,10 @@
     <div class="left">
       <h4><a href="#concept">基本概念</a></h4>
       <ul class="ul-1">
+        <li><a href="#vector">向量</a></li>
         <li><a href="#homogeneousCoordinates">齐次坐标</a></li>
         <li><a href="#Quaternion">四元数</a></li>
       </ul>
-      <h4><a href="#vector">向量</a></h4>
       <h4><a href="#normal">法线</a></h4>
       <ul class="ul-1">
         <li><a href="#faceNormal">面法线</a></li>
@@ -53,45 +53,51 @@
         <li><a href="#rotation">旋转(Rotation)</a></li>
         <li><a href="#rotation_matrix">旋转矩阵推导</a></li>
         <li><a href="#scale">缩放（scale)</a></li>
+        <li><a href="#translation">位移(translation)</a></li>
         <li><a href="#mirror_matrix">镜像</a></li>
         <li><a href="#shear_matrix">切变</a></li>
         <li><a href="#modelMatrix">模型矩阵</a></li>
         <li><a href="#viewMatrix">视图矩阵</a></li>
         <li><a href="#projectMatrix">投影矩阵</a></li>
+        <li><a href="#library">矩阵变换库</a></li>
       </ul>
-      <h4><a href="#translation">位移(translation)</a></h4>
-      <ul class="ul-1">
-        <li><a href="#translation_matrix">四维平移矩阵</a></li>
-      </ul>
-      <a href="#library">矩阵变换库</a><br>
       <h4><a href="#CoordinateSystem">坐标系</a></h4>
       <ul class="ul-1">
         <li><a href="#Three-dimensionalCoordinateSystem">三维坐标系</a></li>
         <li><a href="#SphericalCoordinateSystem">球面坐标系</a></li>
         <li><a href="#BarycentricCoordinateSpace">重心坐标系</a></li>
       </ul>
-      <h4><a href="#camera">camera</a></h4>
-      <ul class="ul-1">
-        <li><a href="#projection">投影算法</a></li>
-        <li><a href="#orthographicProjection">正交投影</a></li>
-        <li><a href="#perspectiveProjection">透视投影</a></li>
-      </ul>
     </div>
     <div class="right">
       <section class="section1" id="concept">
         <div class="title">基本概念</div>
-        <section>
-          <h4>基本概念</h4>
+        <section id="vector">
+          <h4>向量</h4>
           <div class="content">
-            <p>三维的笛卡尔坐标添加一个额外坐标转换为<a href="#homogeneousCoordinates">齐次坐标</a>。</p>
+            <strong>点乘（dot）：</strong>
+            <ul class="ul-3-num">
+              <li>计算向量的夹角</li>
+              <li>计算投影</li>
+              <li>判断向量的方向以及接近的程度</li>
+            </ul>
+            <strong>叉乘（cross）：</strong>
+            <p>得到与叉乘的两向量所在平面垂直的向量</p>
+            <ul class="ul-3-num">
+              <li>求面的法向量</li>
+              <li>得到向量左右的位置关系</li>
+              <li>得到点是否在三角形的内部</li>
+            </ul>
           </div>
         </section>
         <section id="homogeneousCoordinates">
-          <h4>齐次坐标</h4>
-          <p>由四个分量组成的矢量（x,y,z,w）。</p>
+          <h4>齐次坐标：</h4>
+          <p>齐次坐标就是将一个原本是n维的向量用一个n+1维向量来表示。</p>
+          <p>在矩阵应用中，需要把旋转、平移、缩放合并到一个矩阵中，但是由于平移矩阵的特殊性，没办法和其他两个矩阵合并，
+            所以增加一个维度来把三个矩阵合并。例如3*3的矩阵，扩展成4*4的矩阵。</p>
         </section>
         <section id="Quaternion">
           <h4>四元数</h4>
+          <p>由于矩阵不适合用来做插值计算，所以引入四元数来进行插值计算。</p>
           <div class="content">
             <strong>在GLSL中通过四元数旋转顶点</strong>
             <p><a href="Quaternion.html" target="_blank">四元数旋转顶点原理</a></p>
@@ -108,23 +114,6 @@
             </ul>
           </div>
         </section>
-      </section>
-      <section class="section1" id="vector">
-        <div class="title">向量</div>
-        <div class="content">
-          <strong>点乘（dot）：</strong>
-          <ul class="ul-3-num">
-            <li>计算向量的夹角</li>
-            <li>计算投影</li>
-            <li>判断向量的方向以及接近的程度</li>
-          </ul>
-          <strong>差乘（cross）：</strong>
-          <p>输出向量与输入向量垂直</p>
-          <ul class="ul-3-num">
-            <li>得到向量左右的位置关系</li>
-            <li>得到点是否在三角形的内部</li>
-          </ul>
-        </div>
       </section>
       <section class="section1" id="normal">
         <div class="title">法线</div>
@@ -307,6 +296,20 @@
             </ul>
           </div>
         </section>
+        <section id="translation">
+          <h4>位移(translation)</h4>
+          <p>对于一个三维坐标（x, y, z），我们想让它往x轴正方向移动1个单位，往y轴正方向移动1个单位，往z轴正方向移动1个单位，则可以让它加上一个向量（1, 1, 1）。</p>
+          <div class="content">
+            <h4>四维平移矩阵</h4>
+            <div style="height: 200px; width: 800px; background-image: url('../../img/3.10.webp')" class="bg-1"></div>
+            <p>从上图中可以看到，四维位移矩阵，是在一个四维单位矩阵（就是对角线都是1，其他都是0的矩阵）的最后一列，放入你想要位移的向量（tx, ty, tz）</p>
+            <strong>实例</strong>
+            <ul>
+              <li><a href="../../example/WebGL编程指南/ch3/TranslatedTriangle.html">平移三角形</a></li>
+              <li><a href="../../example/WebGL编程指南/ch3/RotatedTriangle_Matrix.html">平移三角形(使用矩阵)</a></li>
+            </ul>
+          </div>
+        </section>
         <section id="mirror_matrix">
           <h3>镜像</h3>
         </section>
@@ -315,16 +318,15 @@
         </section>
         <section id="modelMatrix">
           <h4>模型矩阵：</h4>
-          <p>将物体坐标变换为世界坐标。</p>
+          <p>将物体坐标变换为世界坐标。包换物体的平移 旋转 缩放.</p>
         </section>
         <section id="viewMatrix">
           <h4>视图矩阵：</h4>
-          <p>将世界坐标，变换为眼睛坐标。</p>
-          <p>观察者的位置和方向会变化，看上去就好像整个世界的位置和方向发生变化了一样，所以我们将世界里的所有模型看作一个大模型，
-            在所有模型矩阵的左侧再乘以一个表示整个世界变换的模型矩阵，就可以了。这个表示整个世界变换的矩阵又称为「视图矩阵」。</p>
+          <p>视图矩阵用来表示把相机当前位置、方向变换到一个固定位置、固定方向的一个矩阵，通常固定为原点，上方向为y，看向-z方向。
+            当把相机位置变换到一个固定位置时，要想保证眼中的世界不发生变化，就要把所有的模型进行同样的变换，把每一个模型都左乘视图矩阵,
+            这样就世界坐标变换为眼睛坐标。</p>
           <p>简单来说，固定其他因素，我们改变了相机的位置和角度后，它眼中的世界也会发生变化，这种变化就是视图矩阵。</p>
-          <p>观察者视为一个模型，那么视图矩阵就是观察者的模型矩阵的逆矩阵。具体来说：</p>
-          <p>相机在三维空间中的位置是 camera.matrixWorld ，而它的视图矩阵是相机位置矩阵的逆矩阵 CameraMatrixWorldInverse ，它也符合了我们的生活经验：</p>
+          <p>具体来说：相机在三维空间中的位置是 camera.matrixWorld ，而它的视图矩阵是相机位置矩阵的逆矩阵 CameraMatrixWorldInverse ，它也符合了我们的生活经验：</p>
           <ul class="ul-3-num">
             <li>固定相机，人向左移动</li>
             <li>固定人，向右移动相机</li>
@@ -341,32 +343,59 @@
         </section>
         <section id="projectMatrix">
           <h4>投影矩阵：</h4>
-          <p>将眼睛坐标变换为裁剪坐标</p>
-        </section>
-      </section>
-      <section id="translation" class="section1">
-        <div class="title">位移(translation)</div>
-        <section>
-          <p>对于一个三维坐标（x, y, z），我们想让它往x轴正方向移动1个单位，往y轴正方向移动1个单位，往z轴正方向移动1个单位，则可以让它加上一个向量（1, 1, 1）。</p>
-        </section>
-        <section id="translation_matrix">
-          <h4>四维平移矩阵</h4>
+          <p>将眼睛坐标变换为裁剪坐标.</p>
           <div class="content">
-            <div style="height: 200px; width: 800px; background-image: url('../../img/3.10.webp')" class="bg-1"></div>
-            <p>从上图中可以看到，四维位移矩阵，是在一个四维单位矩阵（就是对角线都是1，其他都是0的矩阵）的最后一列，放入你想要位移的向量（tx, ty, tz）</p>
-            <strong>实例</strong>
-            <ul>
-              <li><a href="../../WebGL编程指南/ch3/TranslatedTriangle.html">平移三角形</a></li>
-              <li><a href="../../WebGL编程指南/ch3/RotatedTriangle_Matrix.html">平移三角形(使用矩阵)</a></li>
+            <strong>投影算法:</strong>
+            <p>三维空间中的物体，投射在相机视平面的转换算法。</p>
+
+            <strong>投影类型:</strong>
+            <ul class="ul-2-num">
+              <li>
+                <strong>正交投影(orthographic projection):</strong>
+                投影线垂直于投影面的投影属于正交投影，也称平行投影。
+              </li>
+              <li>
+                <strong>透视投影（perspective projection):</strong>
+                透视投影（透视图、透视）是中心投影，从某个投影中心将物体投影到单一投影面所得到的图形。
+              </li>
+            </ul>
+
+            <strong>投影相关因素：</strong>
+            <ul class="ul-2-num">
+              <li>相机的投影类型（<a href="#orthographicProjection">正射投影</a>、<a href="#perspectiveProjection">透视投影</a>）：投影矩阵（ProjectMatrix）
+              </li>
+              <li>相机的位置和方向：<a href="#viewMatrix">视图矩阵(CameraMatrixWorldInverse或ViewMatrix)</a></li>
+              <li>物体的位置和形变（旋转/缩放/平移）：模型矩阵( ObjectWorldMatrix )</li>
+              <li>对结果图像拉伸或者压缩，变换为需要的图片大小(视口变换,viewpoint transform)</li>
+            </ul>
+            <p>三维投影算法就是将上诉因素抽象为数学算法，用来计算三维物体在相机视平面上的位置。实际应用中我们是通过矩阵计算来实现的。简而言之，我们将相机的位置方向, 相机的类型, 物体的位置和形变能转换为 矩阵 ,
+              将这些矩阵进行一系列计算后, 最终得到三维投影矩阵.</p>
+
+            <strong>三维投影矩阵计算公式：</strong>
+            <p>uMatrix = ProjectMatrix * CameraMatrixWorldInverse * ObjectMatrixWorld</p>
+
+            <strong>可视空间：</strong>
+            <ul class="ul-2-num">
+              <li>长方形可视空间，也称盒状空间，由<a href="#orthographicProjection">正射投影（orthographic projection）</a>产生。</li>
+              <li>四棱锥/金字塔可视空间，由<a href="#perspectiveProjection">透视投影(perspective projection)</a>产生</li>
+            </ul>
+
+            <h4>获取屏幕二维坐标:</h4>
+            <p>const [x, y] = ProjectionMatrix * CameraWorldMatrixInverse * [x, y, z]</p>
+
+            <h4>屏幕坐标转化为三维坐标:</h4>
+            <p>const [x, y, z] = CameraWorldMatrix * ProjectionMatrixInverse * [x, y, z]</p>
+            <p>不过屏幕坐标转化为三维坐标不是这么简单，因为屏幕上的二维坐标在三维空间中其实对应的是一条射线，其可以对应了无限个三维坐标点.</p>
+          </div>
+        </section>
+        <section id="library">
+          <h4>矩阵变换库</h4>
+          <div class="content">
+            <ul class="ul-1-num">
+              <li><a href="../../example/WebGL编程指南/lib/cuon-matrix说明.html">WebGL编程指南书中提供的矩阵变换库</a></li>
             </ul>
           </div>
         </section>
-      </section>
-      <section id="library">
-        <h4>矩阵变换库</h4>
-        <ul>
-          <li><a href="../../WebGL编程指南/lib/cuon-matrix说明.html">WebGL编程指南书中提供的矩阵变换库</a></li>
-        </ul>
       </section>
       <section id="CoordinateSystem" class="section1">
         <div class="title">坐标系</div>
@@ -436,49 +465,6 @@
             </ul>
           </div>
         </div>
-      </section>
-      <section id="camera" class="section1">
-        <div class="title">camera</div>
-        <section id="projection">
-          <h3>投影算法</h3>
-          <p>三维空间中的物体，投射在相机视平面的转换算法。</p>
-          <div class="content">
-            <strong>相机看到的景象和以下因素有关：</strong>
-            <ul class="ul-2-num">
-              <li>相机的投影类型（<a href="#orthographicProjection">正射投影</a>、<a href="#perspectiveProjection">透视投影</a>）：投影矩阵（ProjectMatrix）
-              </li>
-              <li>相机的位置和方向：<a href="#viewMatrix">视图矩阵(CameraMatrixWorldInverse或ViewMatrix)</a></li>
-              <li>物体的位置和形变（旋转/缩放/平移）：模型矩阵( ObjectWorldMatrix )</li>
-              <li>对结果图像拉伸或者压缩，变换为需要的图片大小(视口变换,viewpoint transform)</li>
-            </ul>
-            <p>三维投影算法就是将上诉因素抽象为数学算法，用来计算三维物体在相机视平面上的位置。实际应用中我们是通过矩阵计算来实现的。简而言之，我们将相机的位置方向, 相机的类型, 物体的位置和形变能转换为 矩阵 ,
-              将这些矩阵进行一系列计算后, 最终得到三维投影矩阵.</p>
-
-            <strong>三维投影矩阵计算公式：</strong>
-            <p>uMatrix = ProjectMatrix * CameraMatrixWorldInverse * ObjectMatrixWorld</p>
-
-            <strong>可视空间：</strong>
-            <ul class="ul-2-num">
-              <li>长方形可视空间，也称盒状空间，由<a href="#orthographicProjection">正射投影（orthographic projection）</a>产生。</li>
-              <li>四棱锥/金字塔可视空间，由<a href="#perspectiveProjection">透视投影(perspective projection)</a>产生</li>
-            </ul>
-
-            <h4>获取屏幕二维坐标:</h4>
-            <p>const [x, y] = ProjectionMatrix * CameraWorldMatrixInverse * [x, y, z]</p>
-
-            <h4>屏幕坐标转化为三维坐标:</h4>
-            <p>const [x, y, z] = CameraWorldMatrix * ProjectionMatrixInverse * [x, y, z]</p>
-            <p>不过屏幕坐标转化为三维坐标不是这么简单，因为屏幕上的二维坐标在三维空间中其实对应的是一条射线，其可以对应了无限个三维坐标点.</p>
-          </div>
-        </section>
-        <section id="orthographicProjection">
-          <h3>正交投影(orthographic projection)</h3>
-          <p>投影线垂直于投影面的投影属于正交投影，也称平行投影。</p>
-        </section>
-        <section id="perspectiveProjection">
-          <h3>透视投影（perspective projection）</h3>
-          <p>透视投影（透视图、透视）是中心投影，从某个投影中心将物体投影到单一投影面所得到的图形。</p>
-        </section>
       </section>
     </div>
   </div>

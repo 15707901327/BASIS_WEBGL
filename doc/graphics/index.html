@@ -31,6 +31,7 @@
         <li><a href="#vector">向量</a></li>
         <li><a href="#homogeneousCoordinates">齐次坐标</a></li>
         <li><a href="#Quaternion">四元数</a></li>
+        <li><a href="#sampling">采样</a></li>
       </ul>
       <h4><a href="#normal">法线</a></h4>
       <ul class="ul-1">
@@ -111,6 +112,32 @@
               <li><a
                   href="https://15707901327.github.io/ThreeSourceCodeAnalysis/example/instance_buffergeometry/webgl_buffergeometry_instancing_dynamic.html"
                   target="_blank">实例webgl_buffergeometry_instancing_dynamic</a></li>
+            </ul>
+          </div>
+        </section>
+        <section id="sampling">
+          <h4>采样</h4>
+          <div class="content">
+            <strong>采样类型：</strong>
+            <ul class="ul-2-num">
+              <li>不同位置</li>
+              <li>不同时间</li>
+            </ul>
+
+            <strong>走样（artifact）:</strong>
+            <p>信号的速度太快，采样的速度跟不上。</p>
+            <ul class="ul-2-num">
+              <li>锯齿（位置）</li>
+              <li>摩尔纹（位置）</li>
+              <li>车轮效应（时间）</li>
+            </ul>
+
+            <strong>反走样：</strong>
+            <ul class="ul-2-num">
+              <li>采样之前做模糊（滤波），再采样</li>
+              <li>MSAA：增加采样点，每个像素多个采样点，计算平均值</li>
+              <li>FXAA：图像后期处理</li>
+              <li>FXAA：复用上一帧的数据</li>
             </ul>
           </div>
         </section>

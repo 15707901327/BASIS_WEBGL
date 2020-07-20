@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>图形噪声</title>
   <link rel="stylesheet" href="../../css/base.css">
-  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="../css/base.css">
 </head>
 <body>
 <header>图形噪声</header>
@@ -24,7 +24,7 @@
         <li><a href="#GradientNoise">梯度噪声(Gradient Noise)</a></li>
         <li><a href="#CelluarNoise">细胞噪声(Celluar Noise)</a></li>
       </ul>
-      <div><img src="img/baseNoise.png" class="img1" style="max-width: 500px;"></div>
+      <div><img src="img/noise/baseNoise.png" class="img1" style="max-width: 500px;"></div>
       <p>上图是各类噪声函数在片元着色器中的运行效果，代码如下：</p>
       <pre><code>
           // noise fragment shader
@@ -58,7 +58,7 @@
         </li>
         <li>
           <div>网格随机梯度生成:梯度向量生成，这一步是根据第一步生成的网格的顶点来产生随机向量，四个顶点就有四个梯度向量；</div>
-          <div><img src="img/noise1.webp" style="max-width: 500px"></div>
+          <div><img src="img/noise/noise1.webp" style="max-width: 500px"></div>
           <p>我们需要将每个网格对应的随机向量记录下来，确保不同片元在相同网格中获取的随机向量是一致的。</p>
           <pre><code>
           // 输入网格顶点位置，输出随机向量
@@ -77,7 +77,7 @@
         </li>
         <li>
           梯度贡献值计算:这一步是通过计算四个梯度向量对当前片元点P的影响，主要先求出点P到四个顶点的距离向量，然后和对应的梯度向量进行点积。
-          <div><img src="img/baseNoise1.png" class="img1" style="max-width: 600px"></div>
+          <div><img src="img/noise/baseNoise1.png" class="img1" style="max-width: 600px"></div>
           <p>如图，网格内的片元点P的四个顶点距离向量为a1, a2, a3, a4，此时将距离向量与梯度向量g1, g2, g3, g4进行点积运算：c[i] = a[i] · g[i]；</p>
         </li>
         <li>平滑插值:这一步我们对四个贡献值进行线性叠加，使用smoothstep()方法，平滑网格边界，最终得到当前片元的噪声值。具体代码如下：
@@ -106,9 +106,9 @@
     <section id="CelluarNoise">
       <div class="title">细胞噪声 (Celluar Noise)</div>
       <p>Celluar Noise生成的噪声图由很多个“晶胞”组成，每个晶胞向外扩张，晶胞之间相互抑制。这类噪声可以模拟细胞形态、皮革纹理等。</p>
-      <div><img src="img/noise2.webp" class="img1" style="max-width: 500px;"></div>
+      <div><img src="img/noise/noise2.webp" class="img1" style="max-width: 500px;"></div>
       <div>
-        <div class="divRight"><img src="img/noise3.webp" width="300px"></div>
+        <div class="divRight"><img src="img/noise/noise3.webp" width="300px"></div>
         <div><strong>算法步骤：</strong>
           <p>细胞噪声算法主要通过距离场的形式实现的，以单个特征点为中心的径向渐变，多个特征点共同作用而成。主要分为三步：</p>
           <ul class="ul-2-num">
@@ -132,7 +132,7 @@
           </code></pre>
             </li>
             <li>
-              <div class="divRight"><img src="img/noise4.webp" width="300px"></div>
+              <div class="divRight"><img src="img/noise/noise4.webp" width="300px"></div>
               针对当前像素点p，计算出距离点p最近的特征点v，将点p到点v的距离记为F1；
               <pre><code>
           float noise(vec2 p) {
@@ -177,7 +177,7 @@
     <section id="FractalBrownianMotion">
       <div class="title">分形布朗运动（Fractal Brownian Motion）</div>
       <p>分形布朗运动，简称fbm，是通过将不同频率和振幅的噪声函数进行操作，最常用的方法是：将频率乘2的倍数，振幅除2的倍数，线性相加。</p>
-      <div><img src="img/noise5.webp" style="width: 100%; max-width: 500px;"></div>
+      <div><img src="img/noise/noise5.webp" style="width: 100%; max-width: 500px;"></div>
       <p><strong>公式：fbm = noise(st) + 0.5 * noise(2*st) + 0.25 * noise(4*st)</strong></p>
       <pre><code>
       // fragment shader片元着色器
@@ -221,7 +221,7 @@
       }
       </code></pre>
       <p>现在结合上文提到的梯度噪声和细胞噪声分别进行fbm，可以实现以下效果：</p>
-      <div><img src="img/noise6.webp" width="300px"></div>
+      <div><img src="img/noise/noise6.webp" width="300px"></div>
       <strong>算法实例</strong>
       <ul class="ul-2">
         <li><a href="../../example/noise/Turbulence.html" target="_blank">实例1</a></li>
@@ -280,17 +280,17 @@
       <div id="ColorMapping">
         <strong>Color Mapping</strong>
         <p>彩色贴图是最常用的是方式，即直接将噪声值映射为片元颜色值，作为材质的Texture图案:</p>
-        <div><img src="img/noise9.webp" width="400px"></div>
+        <div><img src="img/noise/noise9.webp" width="400px"></div>
       </div>
       <div id="HeightMapping">
         <strong>Height Mapping</strong>
         <p>Height Mapping高度贴图，生成地形高度。高度贴图的每个像素映射到平面点的高度值，通过图形噪声生成的Height Map可模拟连绵起伏的山脉:</p>
-        <div><img src="img/noise10.webp" width="600px"></div>
+        <div><img src="img/noise/noise10.webp" width="600px"></div>
       </div>
       <div id="NormalMapping">
         <strong>Normal Mapping</strong>
         <p>除了通过heightMap生成地形，还可以通过法线贴图改变光照效果，实现材质表面的凹凸细节:</p>
-        <div><img src="img/noise11.webp" width="600px"></div>
+        <div><img src="img/noise/noise11.webp" width="600px"></div>
         <p>这里的噪声值被映射为法线贴图的color值</p>
       </div>
     </section>

@@ -5,7 +5,7 @@
   <title>Draw quad with texture</title>
 </head>
 <script type="module">
-  import {Shaders} from "../jsm/ProgramManager.js";
+  import WebGLProgram from "../src/render/WebGLProgram.js";
 
   var VSHADER_SOURCE =
     'attribute vec4 a_Position;\n' +
@@ -46,8 +46,8 @@
     '  vec4 color = texture2D(u_Sampler, v_TexCoord);\n' +
     '  // 通过噪声函数计算片元坐标对应噪声值\n' +
     '  float n = noise(v_TexCoord);\n' +
-    // '  gl_FragColor = color + vec4(n, n, n, 1.0);\n' +
-    '  gl_FragColor = vec4(n, n, n, 1.0);\n' +
+    '  gl_FragColor = color + vec4(n, n, n, 1.0);\n' +
+    // '  gl_FragColor = vec4(n, n, n, 1.0);\n' +
     '}\n';
 
   /** 设置顶点信息（顶点坐标、纹理坐标）**/
@@ -154,8 +154,8 @@
     var canvas = document.getElementById('webgl');
     var gl = canvas.getContext("webgl");
 
-    var shaders = new Shaders();
-    shaders.initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE);
+    var webGLProgram = new WebGLProgram();
+    webGLProgram.initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE);
 
     // 设置顶点信息
     var n = initVertexBuffers(gl);

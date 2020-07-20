@@ -33,6 +33,7 @@
         <li><a href="#Quaternion">四元数</a></li>
         <li><a href="#sampling">采样</a></li>
         <li><a href="#shading">着色</a></li>
+        <li><a href="#noise">图形噪声</a></li>
       </ul>
       <h4><a href="#normal">法线</a></h4>
       <ul class="ul-1">
@@ -157,6 +158,11 @@
               <li>Phone shading(逐像素着色)</li>
             </ul>
           </div>
+        </section>
+        <section id="noise">
+          <h4>图形噪声</h4>
+          <p>图形噪声，是计算机图形学中一类随机算法，经常用来模拟自然界中的各种纹理材质，如云、山脉等，都是通过噪声算法模拟出来的​。</p>
+          <p><a href="Noise.html" target="_blank">详细说明</a></p>
         </section>
       </section>
       <section class="section1" id="normal">
@@ -539,6 +545,10 @@
               <li>三角形三个顶点的重心坐标都是单位向量（1，0，0）、（0，1，0）、（0，0，1）。</li>
               <li>在某顶点的相对边上的所有点的对应重心坐标分量为0.</li>
               <li>不只是三角形内的点，该平面上的所有点都能用重心坐标描述。</li>
+            </ul>
+            <strong>重心坐标的应用：</strong>
+            <ul class="ul-2-num">
+              <li>渲染中，三角形内作插值</li>
             </ul>
           </div>
         </div>

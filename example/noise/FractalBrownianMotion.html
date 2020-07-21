@@ -5,7 +5,7 @@
   <title>分形布朗运动（Fractal Brownian Motion）</title>
 </head>
 <script type="module">
-  import {Shaders} from "../jsm/ProgramManager.js";
+  import WebGLProgram from "../src/render/WebGLProgram.js";
 
   var VSHADER_SOURCE =
     'attribute vec4 a_Position;\n' +
@@ -166,8 +166,8 @@
     var canvas = document.getElementById('webgl');
     var gl = canvas.getContext("webgl");
 
-    var shaders = new Shaders();
-    shaders.initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE);
+    var webGLProgram = new WebGLProgram();
+    webGLProgram.initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE);
 
     // 设置顶点信息
     var n = initVertexBuffers(gl);

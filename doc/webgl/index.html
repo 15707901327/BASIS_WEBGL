@@ -28,6 +28,7 @@
       <h4><a href="#basicConcept">基本概念</a></h4>
       <ul class="ul-1">
         <li><a href="#pipeline">渲染管线</a></li>
+        <li><a href="#depth_test">深度测试</a></li>
         <li><a href="#WebGL">WebGL程序</a></li>
         <li><a href="#WebGL_System">着色器</a></li>
         <li><a href="WebGL可以绘制的基本图形.html" target="_blank">WebGL绘制的基本图形</a></li>
@@ -100,13 +101,14 @@
         </section>
         <section id="pipeline">
           <h4>渲染管线</h4>
+          <p>渲染管线指的是WebGL程序的执行过程，如下图所示，主要分为以下步骤：</p>
           <div class="content">
             <div><img src="img/pipeline.png"/></div>
-            <p>渲染管线指的是WebGL程序的执行过程，如上图所示，主要分为 4 个步骤：</p>
             <ul class="ul-1-num">
               <li>顶点着色器的处理，主要是一组矩阵变换操作，用来把3D模型（顶点和原型）投影到viewport上，输出是一个个的多边形，比如三角形。</li>
               <li>光栅化，也就是把三角形连接区域按一定的粒度逐行转化成片元（fragement），类似于2D空间中，可以把这些片元看做是3D空间的一个像素点。</li>
               <li>片元着色器的处理，为每个片元添加颜色或者纹理。只要给出纹理或者颜色，以及纹理坐标(uv)，管线就会根据纹理坐标进行插值运算，将纹理或者图片着色在相应的片元上。</li>
+              <li><a href="">深度测试: </a>通过检测物体（的每个像素的）的深度来决定是否将其画出来。</li>
               <li>把3D空间的片元合并输出为2D像素数组并显示在屏幕上。</li>
             </ul>
           </div>
@@ -236,6 +238,38 @@
           </div>
         </section>
       </section>
+      <section id="depth_test" class="section1">
+        <h4 class="title">深度测试(隐藏面消除)</h4>
+        <p>通过检测物体（的每个像素的）的深度来决定是否将其画出来。</p>
+        <p>
+          WebGL在默认情况下会按照缓存区中顺序绘制图形，而且后绘制的图形覆盖先绘制的图形，这样做效率很高。但是如果视角在不断的变化，就不能事先决定对象出现的顺序，为解决这个问题，WebGL提供隐藏面消除功能来解决这个问题。</p>
+        <section id="">
+          <h4>隐藏面消除</h4>
+          <p>可以消除那些被遮挡的表面，绘制时，就不需要顾及各个物体在缓存区中的顺序。</p>
+          <div class="content">
+            <strong>开启流程：</strong>
+            <ul class="ul-1-num">
+              <li>
+                开启隐藏面消除功能<br>
+                <a href="js_API/gl.html#enable"
+                   target="_blank">gl.enable(DEPTH_TEST)</a>
+              </li>
+              <li>
+                在绘制之前，清除深度缓存区<br>
+                <a href="js_API/gl.html#clear" target="_blank">gl.clear(gl.DEPTH_BUFFER_BIT)</a>
+              </li>
+            </ul>
+            <strong>实例</strong>
+            <ul class="ul-1-num">
+              <li><a href="../../WebGL编程指南/ch07/DepthBuffer.html" target="_blank">隐藏面消除</a></li>
+            </ul>
+            <strong>问题:</strong>
+            <ul class="ul-1-num">
+              <li><a href="#basicConcept">深度冲突</a></li>
+            </ul>
+          </div>
+        </section>
+      </section>
       <section id="texture" class="section1">
         <h4 class="title">纹理贴图</h4>
         <section>
@@ -251,7 +285,8 @@
             <strong>MipMap：</strong>
             <p>Mipmap由Lance Williams 在1983的一篇文章“Pyramidal
               parametrics”中提出。Wiki中有非常具体的介绍(http://en.wikipedia.org/wiki/Mipmap
-              )。比方一张256X256的图，在长和宽方向每次降低一倍，生成：128X128, 64X64, 32X32, 16X16, 8X8, 4X4, 2X2, 1X1 八张图，组成MipMap。</p>
+              )。比方一张256X256的图，在长和宽方向每次降低一倍，生成：128X128, 64X64, 32X32, 16X16, 8X8, 4X4, 2X2, 1X1
+              八张图，组成MipMap。</p>
             <p>
               Mipmap早已被硬件支持，硬件会自己主动为创建的Texture生成mipmap的各级。在D3D的API：CreateTexture中有一个參数levels，就是用于指定生成mipmap到哪个级别，当不指定时就一直生成到1X1。</p>
             <strong>各向同性:</strong>
@@ -269,23 +304,28 @@
               <li>Nearest Point Sampling（近期点採样):仅仅是针对每个象素对最接近它的纹理单元进行採样。可用于上面两种情况。
                 可是这样的纹理过滤方法的效果最差，在屏幕显示的图像会显得十分模糊。
               </li>
-              <li>Bilinear（双线性过滤）:每个象素要对最接近它的2 x 2的纹理单元矩阵进行採样，取4个纹理单元的平均值。也可用于上面的两种情况。这样的纹理过滤方法的效果比上面的要好非常多。<br>
-                双线性过滤像素之间的过渡更加平滑，可是它仅仅作用于一个MipMap Level,它选取texel和pixel之间大小最接近的那一层MipMap进行採样。当和pixel大小匹配的texel大小在两层Mipmap
+              <li>Bilinear（双线性过滤）:每个象素要对最接近它的2 x
+                2的纹理单元矩阵进行採样，取4个纹理单元的平均值。也可用于上面的两种情况。这样的纹理过滤方法的效果比上面的要好非常多。<br>
+                双线性过滤像素之间的过渡更加平滑，可是它仅仅作用于一个MipMap
+                Level,它选取texel和pixel之间大小最接近的那一层MipMap进行採样。当和pixel大小匹配的texel大小在两层Mipmap
                 level之间时，双线性过滤在有些情况效果就不太好。于是就有了三线性过滤。
               </li>
               <li>
                 Trilinear（三线性过滤）:三线性过滤相对的比較复杂，它仅仅能用于纹理被缩小的情况，须要先构造纹理图像的mipmap，mip的意思是“在狭窄的地方里的很多东西”，mipmap就是对最初的纹理图像构造的一系列分辨率降低而且预先过滤的纹理图。对于一个8
                 x 8的纹理来说须要为它构造4 x 4、2 x 2、1 x 1这三个mipmap。
-                <p>假设正方形被缩小到在屏幕上占6 x 6的象素矩阵，一个象素的採样过程就变成这样。首先是到8 x 8的纹理图中进行对最接近它2 x 2的纹理单元矩阵进行採样（也就是上面的线性过滤）；其次是到4 x
+                <p>假设正方形被缩小到在屏幕上占6 x 6的象素矩阵，一个象素的採样过程就变成这样。首先是到8 x 8的纹理图中进行对最接近它2 x
+                  2的纹理单元矩阵进行採样（也就是上面的线性过滤）；其次是到4 x
                   4的纹理图中反复上面的过程；接着把上面两次採样的结果进行加权平均，得到最后的採样数据。能够看出整个过程一共进行了三次的线性过滤。所以这样的方法叫做三线性过滤，它的效果是三种纹理过滤方法里面最好的。</p>
               </li>
               <li>Anisotropic Filtering（各向异性过滤）:
-                <p>各向异性过滤让表面倾斜物体纹理更加清晰锐利同一时候看上去非常密集。透明度又让密集的纹理变得模糊平缓。各异向性纹理过滤不是单独使用而是和前面所述的其它过滤方法结合一起使用的。</p>
+                <p>
+                  各向异性过滤让表面倾斜物体纹理更加清晰锐利同一时候看上去非常密集。透明度又让密集的纹理变得模糊平缓。各异向性纹理过滤不是单独使用而是和前面所述的其它过滤方法结合一起使用的。</p>
                 <p>
                   如果Px为纹理在x坐标方向上的缩放的比例因子。Py为纹理在y坐标方向上的缩放的比例因子。Pmax为Px和Py中的最大值。Pmin为Px和Py中的最小值。当Pmax/Pmin等于1时。也就是说Px等于Py，纹理的缩放是各同向的；可是如果Pmax/Pmin不等于1而是大于1，Px不等于Py，也就是说纹理在x坐标方向和在y坐标方向缩放的比例不一样，纹理的缩放是各异向的，Pmax/Pmin代表了各异向的程度。</p>
                 <p> 举个样例来说，64 x 64的纹理贴到一个開始平行于xy平面的正方形上。可是正方形绕y轴旋转60度。最后投影到屏幕上占了16 x 32的象素矩阵。
                   纹理在x坐标方向上缩放的比例因子为64/16等于4，在y坐标方向缩放的比例因子为64/32等于2，Pmax等于4，Pmin等于2。缩放的各异向程度为2。
-                  当把各异向性过滤和线性过滤结合起来的时候。应该是对最接近象素的4 x 2的纹理单元矩阵採样才合理，由于一个象素在x坐标方向上相应了很多其它的纹理单元（Px > Py）。</p>
+                  当把各异向性过滤和线性过滤结合起来的时候。应该是对最接近象素的4 x 2的纹理单元矩阵採样才合理，由于一个象素在x坐标方向上相应了很多其它的纹理单元（Px >
+                  Py）。</p>
                 <p>
                   即使是纹理在一个轴方向上缩小而在还有一个轴方向上放大，处理的过程也是一样的（注意的是如果纹理在一个轴方向上缩小而在还有一个轴方向上放大，OpenGL仍然把它当作是纹理被缩小的情况。将採用为纹理缩小情况设置的过滤方法为基本过滤方法。然后再加上各异向性过滤）。如果被贴图的正方形最后在屏幕上占了一个128
                   x 32 的象素矩阵。纹理在x坐标方向上缩放的比例因子为64/128等于0.5，在y坐标方向缩放的比例因子为64/32等于2，因为Py > Px 且
@@ -327,7 +367,8 @@
           <p>这种类型的混合在3D渲染中具有许多用途，例如在粒子效果中，其似乎发出光或覆盖物，例如围绕光的电晕，或围绕光剑的发光效果。</p>
           <p>可以通过调用<a href="js_API/gl.html#blendFunc"> gl.BlendFunc(GL_ONE，GL_ONE) </a>来指定加法混合。 这导致混合方程output
             =
-            (1 * source fragment) + (1 * destination fragment)，其折叠成output = source fragment + destination fragment.</p>
+            (1 * source fragment) + (1 * destination fragment)，其折叠成output = source fragment + destination
+            fragment.</p>
         </section>
         <section>
           <h4>Multiplicative blending</h4>
@@ -335,7 +376,8 @@
             在左边的例子中，我们可以看到一个表面反射一些红色和一些绿色，但很少蓝色。</p>
           <p>当多纹理不可用时，乘法混合用于在游戏中实现光照贴图。 纹理与光照贴图相乘，以填充亮起和阴影区域。</p>
           <p>可以通过调用<a href="js_API/gl.html#blendFunc">gl.BlendFunc(GL_DST_COLOR，GL_ZERO)</a>来指定乘法混合。
-            这导致混合方程output = (destination fragment * source fragment) + (0 * destination fragment)，其折叠成output = source
+            这导致混合方程output = (destination fragment * source fragment) + (0 * destination fragment)，其折叠成output
+            = source
             fragment * destination fragment.</p>
         </section>
         <section>
@@ -345,7 +387,8 @@
             即使排序也不是完美的，因为三角形可能重叠并相交，但产生的伪像可能是可接受的。</p>
           <p>插值通常用于将相邻表面混合在一起，以及做有色玻璃或淡入/淡出等效果。 左侧的图像显示了使用插值混合在一起的两个纹理。</p>
           <p>通过调用<a href="js_API/gl.html#blendFunc">gl.BlendFunc（GL_SRC_ALPHA，GL_ONE_MINUS_SRC_ALPHA）</a>指定插值。
-            这导致混合方程output = (source alpha * source fragment) + ((1 – source alpha) * destination fragment).</p>
+            这导致混合方程output = (source alpha * source fragment) + ((1 – source alpha) * destination fragment).
+          </p>
         </section>
         <section>
           <h4>资料地址</h4>
@@ -796,13 +839,18 @@
             <h4>实例1: <a href="../../WebGL编程指南/ch10/FramebufferObject.html" target="_blank">帧缓冲对象实例</a></h4>
             <p>实例帧缓冲区配置实现步骤:</p>
             <ul class="ul-3-num">
-              <li>创建帧缓冲区对象<a href="js_API/gl.html#createFramebuffer" target="_blank">（gl.createFramebuffer()）</a></li>
-              <li>创建纹理对象并设置其尺寸和参数<a href="js_API/gl.html#texture" target="_blank">（gl.createTexture()...）</a></li>
-              <li>创建渲染缓冲区对象<a href="js_API/gl.html#renderBuffer" target="_blank">（gl.createRenderBuffer）</a></li>
-              <li>绑定渲染缓冲区并设置其尺寸<a href="js_API/gl.html#renderBuffer" target="_blank">（gl.bindRenderBuffer）</a></li>
+              <li>创建帧缓冲区对象<a href="js_API/gl.html#createFramebuffer" target="_blank">（gl.createFramebuffer()）</a>
+              </li>
+              <li>创建纹理对象并设置其尺寸和参数<a href="js_API/gl.html#texture"
+                                    target="_blank">（gl.createTexture()...）</a></li>
+              <li>创建渲染缓冲区对象<a href="js_API/gl.html#renderBuffer"
+                              target="_blank">（gl.createRenderBuffer）</a></li>
+              <li>绑定渲染缓冲区并设置其尺寸<a href="js_API/gl.html#renderBuffer"
+                                  target="_blank">（gl.bindRenderBuffer）</a></li>
               <li>将帧缓冲区的颜色关联对象指定为一个纹理对象<a href="js_API/gl.html#framebufferTexture2D" target="_blank">（gl.framebufferTexture2D）</a>
               </li>
-              <li>将帧缓冲区的深度关联对象指定为一个渲染缓冲区对象<a href="js_API/gl.html#framebufferRenderbuffer" target="_blank">（gl.framebufferRenderbuffer）</a>
+              <li>将帧缓冲区的深度关联对象指定为一个渲染缓冲区对象<a href="js_API/gl.html#framebufferRenderbuffer"
+                                             target="_blank">（gl.framebufferRenderbuffer）</a>
               </li>
               <li>检查帧缓冲区是否正确配置<a href="js_API/gl.html#checkFramebufferStatus" target="_blank">（gl.checkFramebufferStatus）</a>
               </li>
@@ -822,7 +870,8 @@
           <div class="content">
             <strong>创建浮点帧缓冲:</strong>
             <p>gl.bindTexture(gl.TEXTURE_2D, colorBuffer);</p>
-            <p>gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB16F, SCR_WIDTH, SCR_HEIGHT, 0, gl.RGB, gl.FLOAT, NULL);</p>
+            <p>gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB16F, SCR_WIDTH, SCR_HEIGHT, 0, gl.RGB, gl.FLOAT,
+              NULL);</p>
             <p>帧缓冲默认一个颜色分量只占用8位(bits)。当使用一个使用32位每颜色分量时(使用gl.RGB32F 或者 gl.RGBA32F)，我们
               需要四倍的内存来存储这些颜色。所以除非你需要一个非常高的精确度，32位不是必须的，使用 gl.RGB16F就足够了。</p>
           </div>
@@ -855,7 +904,8 @@
             <p>只能使用addEventListener来注册事件</p>
             <strong>实例</strong>
             <ul class="ul-1-num">
-              <li><a href="../../WebGL编程指南/ch10/RotatingTriangle_contextLost.html" target="_blank">上下文丢失</a></li>
+              <li><a href="../../WebGL编程指南/ch10/RotatingTriangle_contextLost.html"
+                     target="_blank">上下文丢失</a></li>
             </ul>
           </div>
         </section>
@@ -896,32 +946,6 @@
       </section>
       <section id="inner" class="section1">
         <div class="title">WebGL内置功能</div>
-        <section id="depth_test">
-          <h4>隐藏面消除</h4>
-          <p>可以消除那些被遮挡的表面，绘制时，就不需要顾及各个物体在缓存区中的顺序。</p>
-          <div class="content">
-            <strong>开启流程：</strong>
-            <ul class="ul-1-num">
-              <li>
-                开启隐藏面消除功能<br>
-                <a href="js_API/gl.html#enable"
-                   target="_blank">gl.enable(DEPTH_TEST)</a>
-              </li>
-              <li>
-                在绘制之前，清除深度缓存区<br>
-                <a href="js_API/gl.html#clear" target="_blank">gl.clear(gl.DEPTH_BUFFER_BIT)</a>
-              </li>
-            </ul>
-            <strong>实例</strong>
-            <ul class="ul-1-num">
-              <li><a href="../../WebGL编程指南/ch07/DepthBuffer.html" target="_blank">隐藏面消除</a></li>
-            </ul>
-            <strong>问题:</strong>
-            <ul class="ul-1-num">
-              <li><a href="#basicConcept">深度冲突</a></li>
-            </ul>
-          </div>
-        </section>
         <section id="ploygonOffset">
           <h4>多边形偏移</h4>
           <p>在使用隐藏面消除时，解决深度缓存的问题</p>
@@ -955,7 +979,8 @@
           <div class="content">
             <ul>
               <li><a href="../../WebGL编程指南/index.html" target="_blank">WebGL编程指南实例</a></li>
-              <li><a href="../../WebGL编程指南/lib/cuon-matrix说明.html" target="_blank">矩阵库说明（cuon-matrix.js）</a></li>
+              <li><a href="../../WebGL编程指南/lib/cuon-matrix说明.html"
+                     target="_blank">矩阵库说明（cuon-matrix.js）</a></li>
             </ul>
           </div>
         </section>

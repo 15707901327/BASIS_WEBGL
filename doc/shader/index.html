@@ -58,10 +58,9 @@
         <li><a href="BRDF.html" target="_blank">BRDF*基于物理的着色器技术</a></li>
         <li><a href="dFdxy.html">偏导数dFdx和dFdy介绍</a></li>
       </ul>
-      <h4><a href="#variable">着色器中的变量</a></h4>
+      <h4><a href="#variable">着色器变量</a></h4>
       <ul class="ul-1">
-        <li><a href="#fragmentBuiltVariable">片元着色器中的内置变量</a></li>
-        <li><a href="#vertexBuiltVariable">顶点着色器中的内置变量</a></li>
+        <li><a href="#BuiltVariable">内置变量</a></li>
       </ul>
       <h4><a href="#dataType">数据类型</a></h4>
       <ul class="ul-1">
@@ -512,8 +511,8 @@ var VSHADER_SOURCE =
             </ul>
           </div>
         </section>
-        <section id="fragmentBuiltVariable">
-          <h4>片元着色器中的内置变量</h4>
+        <section id="BuiltVariable">
+          <h4>内置变量</h4>
           <div class="content">
             <table border="1">
               <tr>
@@ -535,19 +534,21 @@ var VSHADER_SOURCE =
                 <td></td>
               </tr>
               <tr>
+                <td>float gl_FragDepthEXT</td>
+                <td>用于设置片段着色器中片段的深度值</td>
+                <td></td>
+              </tr>
+              <tr>
                 <td>vec4 gl_PointCoord</td>
                 <td>片元在被绘制的点内的坐标（0.0到1.0）</td>
                 <td>
                   <ul class="ul-1-num">
-                    <li><a href="../../../WebGL编程指南/ch10/RoundedPoints.html" target="_blank">实现画圆</a></li>
+                    <li><a href="../../example/WebGL编程指南/ch10/RoundedPoints.html" target="_blank">实现画圆</a></li>
                   </ul>
                 </td>
               </tr>
             </table>
           </div>
-        </section>
-        <section id="vertexBuiltVariable">
-          <h4>顶点着色器中的内置变量</h4>
           <div class="content">
             <table border="1px">
               <tr>

@@ -19,24 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="1. 着色器文档更新">
-      <change afterPath="$PROJECT_DIR$/doc/graphics/img/line01.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/graphics/img/line02.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/graphics/img/line03.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/graphics/img/line04.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/graphics/img/lineSeg01.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/graphics/img/lineSeg02.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/graphics/img/lineSeg03.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/graphics/img/polygon01.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/graphics/img/polygon02.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/graphics/img/polygon03.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/graphics/img/rect01.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/graphics/math.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/test.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/MathUtils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+    <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="1. 多边形交集">
+      <change afterPath="$PROJECT_DIR$/doc/graphics/img/polygon04.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/graphics/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/graphics/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/graphics/math.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/graphics/math.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +70,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="proofread" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/../ThreeSourceCodeAnalysis/src/renderers/webgl/WebGLUniforms.js" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -116,7 +102,7 @@
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
-    <configuration>C:\Users\Cream\AppData\Roaming\Subversion</configuration>
+    <configuration>C:\Users\admin\AppData\Roaming\Subversion</configuration>
     <supportedVersion>125</supportedVersion>
   </component>
   <component name="TaskManager">
@@ -369,14 +355,8 @@
       <workItem from="1611994439517" duration="119000" />
       <workItem from="1629260611659" duration="153000" />
       <workItem from="1631588298577" duration="18389000" />
-      <workItem from="1631669656191" duration="13694000" />
-    </task>
-    <task id="LOCAL-00055" summary="1.镜面效果">
-      <created>1576123526677</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1576123526677</updated>
+      <workItem from="1631669656191" duration="14671000" />
+      <workItem from="1631694139038" duration="108000" />
     </task>
     <task id="LOCAL-00056" summary="1.修改样式结构">
       <created>1576133207255</created>
@@ -714,7 +694,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608687778443</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL-00104" summary="1. 多边形交集">
+      <created>1631693350327</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1631693350327</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -733,7 +720,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.修改内置函数dom" />
     <MESSAGE value="1.偏导函数" />
     <MESSAGE value="1.GLSE文档" />
     <MESSAGE value="1.绘制渐变颜色实例" />
@@ -758,7 +744,8 @@
     <MESSAGE value="1. 走样原理" />
     <MESSAGE value="1. 着色" />
     <MESSAGE value="1. 着色器文档更新" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. 着色器文档更新" />
+    <MESSAGE value="1. 多边形交集" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. 多边形交集" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

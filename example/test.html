@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>线段相交</title>
+    <script type="module">
+
+        import {MathUtils} from "../lib/MathUtils.js"
+
+        // 测试点是否再多边形内
+        // let poly = [
+        //     {x: 0, y: 0},
+        //     {x: 10, y: 0},
+        //     {x: 10, y: 10},
+        //     {x: 0, y: 10},
+        // ]
+        // let point = {
+        //     x: 5,
+        //     y: 5
+        // }
+
+        // let result = MathUtils.IsPointInPolygon(poly, point);
+
+        let poly = [];
+        let poly1 = [
+            {
+                x: 0, y: 0
+            },
+            {
+                x: 10, y: 0
+            },
+            {
+                x: 10, y: 10
+            },
+            {
+                x: 0, y: 10
+            },
+        ];
+        let poly2 = [
+            {
+                x: -100, y: -100
+            },
+            {
+                x: 100, y: -100
+            },
+            {
+                x: 100, y: 100
+            },
+            {
+                x: -100, y: 100
+            }
+        ];
+        let result = MathUtils.PolygonClip(poly1, poly2, poly)
+
+        console.log(poly);
+
+    </script>
+</head>
+<body>
+</body>
+</html>

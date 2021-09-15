@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图形学-算法</title>
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../css/base.css">
+</head>
+<body>
+<div class="header">
+    <ul class="ul_1">
+        <li class="li_1"><a href="../../index.html">首页</a></li>
+        <li class="li_1"><a href="../webgl/index.html">webgl概述</a></li>
+        <li class="li_1"><a href="../opengl/index.html">OpenGL概述</a></li>
+        <li class="li_1 li_heightLight">
+            <a href="../graphics/index.html">图形学</a>
+            <ul class="ul_2">
+                <li><a href="./math.html">计算几何</a></li>
+            </ul>
+        </li>
+        <li class="li_1">
+            <a href="../shader/index.html">GLSL ES</a>
+            <ul class="ul_2">
+                <li><a href="../shader/BuiltInFunction.html">内置函数</a></li>
+            </ul>
+        </li>
+        <li class="li_1"><a href="../webgl/js_API/gl.html">WebGL API</a></li>
+        <li class="li_1"><a href="../../example/index.html">WebGL实例</a></li>
+    </ul>
+</div>
+<div class="content">
+    <div class="l-r-wrapper">
+        <div class="left">
+            <h4><a href="#point">点</a></h4>
+            <h4><a href="#line">线</a></h4>
+            <ul class="ul-1">
+                <li><a href="#line_intersect">向量计算交点</a></li>
+            </ul>
+            <h4><a href="#lineSegment">线段</a></h4>
+            <ul class="ul-1">
+                <li><a href="#lineSegment_intersect">线段交点</a></li>
+            </ul>
+            <h4><a href="#polygon">多边形</a></h4>
+            <ul class="ul-1">
+                <li><a href="#containPoint">判断包含点</a></li>
+                <li><a href="#VertexSorting">点集排序</a></li>
+                <li><a href="#occurSimultaneously">多边形交集</a></li>
+            </ul>
+        </div>
+        <div class="right">
+            <section class="section1" id="point">
+                <div class="title">点</div>
+            </section>
+            <section class="section1" id="line">
+                <div class="title">线</div>
+                <section id="line_intersect">
+                    <h4>向量法求解线交点:</h4>
+                    <div class="content">
+                        <p>设交点为(x0,y0)，则下列方程组成立：</p>
+                        <p><img src="img/line01.png"></p>
+                        <p>根据以上方程组，消除参数k1和k2，得到如下方程：</p>
+                        <p><img src="img/line02.png"></p>
+                        <p>然后求解(x0,y0)，结果如下所示：</p>
+                        <p><img src="img/line03.png"></p>
+                        <p>代码实现：<a href="../../lib/Math.js" target="_blank">Math.computerFocus()</a></p>
+                        <p><img src="img/line04.png"></p>
+                    </div>
+                </section>
+            </section>
+            <section class="section1" id="lineSegment">
+                <div class="title">线段</div>
+                <section id="lineSegment_intersect">
+                    <h4>线段交点计算:</h4>
+                    <p>已知两条线段P1P2和Q1Q2，判断P1P2和Q1Q2是否相交，若相交，求出交点。</p>
+                    <div class="content">
+                        <strong>1.快速排斥实验:</strong>
+                        <p>设以线段P1P2为对角线的矩形为R，设以线段Q1Q2为对角线的矩形为T，如果R和T不相交，则两线段不相交。</p>
+                        <p><img src="img/rect01.png"></p>
+                        <strong>2.跨立实验:</strong>
+                        <p>如果两线段相交，则两线段必然相互跨立对方。</p>
+                        <p>若P1P2跨立Q1Q2，则矢量(P1-Q1)和(P2-Q1)位于矢量(Q2-Q1)的两侧，即( P1 - Q1 ) × ( Q2 - Q1 ) * ( P2 - Q1 ) × ( Q2
+                            - Q1 ) < 0。</p>
+                        <p>若Q1Q2跨立P1P2，则矢量(Q1-P1)和(Q2-P1)位于矢量(P2-P1)的两侧，即( Q1 - P1 ) × ( P2 - P1 ) * ( Q2 - P1 ) × ( P2
+                            - P1 ) < 0。</p>
+                        <p>排斥实验和跨立实验的示例如下图所示:</p>
+                        <p><img src="img/lineSeg01.png"></p>
+                        <p><img src="img/lineSeg02.png"></p>
+                        <strong>3.计算交点</strong>
+                        <p>使用<a href="#line_intersect">向量计算线交点</a>计算线段交点</p>
+                        <strong>计算实例</strong>
+                        <p><img src="img/lineSeg02.png"></p>
+                    </div>
+                </section>
+            </section>
+            <section class="section1" id="polygon">
+                <div class="title">多边形</div>
+                <section id="containPoint">
+                    <h4>多边形是否包含指定点:</h4>
+                    <p>已知点P(x,y)和多边形Poly，判断点P(x,y)是否在多边形内部。</p>
+                    <div class="content">
+                        <p>当L和多边形的交点数目C是奇数的时候，P在多边形内，是偶数，则P在多边形外。</p>
+                        <p>条件1：((ploy[i].y <= pt.y) && (pt.y < poly[j].y)) || ((ploy[j].y <= pt.y) && (pt.y <
+                            poly[i].y))</p>
+                        <p> 由于判断过程主要是判断，射线L与多边形每条边是否存在交点，而射线L平行于X轴，因此条件1相当于判断点P在Pi和Pj在垂直距离之间。</p>
+                        <p>条件2: (pt.x < (poly[j].x - poly[i].x) * (pt.y - poly[i].y)/(poly[j].y - poly[i].y) +
+                            poly[i].x)</p>
+                        <p>条件2可转换成：(pt.x - poly[i].x) * (poly[j].y - poly[i].y) - (poly[j].x - poly[i].x) * (pt.y -
+                            poly[i].y) < 0，相当于向量PiP和向量PiPj的叉积。</p>
+                        <p>
+                            当向量PiP和向量PiPj的叉积小于0时，向量PiP在向量PiPj的逆时针方向，相当于向量PiP在向量PiPj的右侧，而射线L由左侧射出，而且点P在Pi和Pj在垂直距离之间，因此，射线L和PiPj的跨立条件成立，相交。</p>
+                        <strong>实例</strong>
+                        <p><img src="img/polygon01.png"></p>
+                    </div>
+                </section>
+                <section id="VertexSorting">
+                    <h4>多边形点集排序</h4>
+                    <p>问题描述：已知多边形点集C={P1,P2,...,PN}，其排列顺序是杂乱，依次连接这N个点，无法形成确定的多边形，需要对点集C进行排序后，再绘制多边形。</p>
+                    <div class="content">
+                        <p>点集排序过程中，关键在于如何定义点的大小关系。</p>
+                        <p>以按逆时针排序为例，算法步骤如下：</p>
+                        <p>定义：点A在点B的逆时针方向，则点A大于点B</p>
+                        <p>1.计算点集的重心O，以重心作为逆时针旋转的中心点。</p>
+                        <p>2.计算点之间的大小关系。</p>
+                        <p>大小关系的计算，可由两种方法进行计算。</p>
+                        <strong>方法1：</strong>
+                        <p>以重心O作一条平行于X轴的单位向量OX，然后依次计算OPi和OX的夹角，根据夹角的大小，确定点之间的大小关系。 OPi和OX夹角越大，说明点Pi越小，如图所示。</p>
+                        <p><img src="img/polygon02.png"></p>
+                        <strong>方法2：</strong>
+                        <p>根据向量叉积的定义，向量OPi和OPj的叉积大于0，则向量OPj在向量OPi的逆时针方向，即点Pj小于点Pi。</p>
+                        <p><img src="img/polygon03.png"></p>
+                    </div>
+                </section>
+                <section id="occurSimultaneously">
+                    <h4>多边形交集</h4>
+                    <p>已知两个多边形Poly1和Poly2，分别由点集C1={P1,P2,...,Pm}和C2={Q1,Q2,...,Qn}表示，求这两个多边形的交集。</p>
+                    <div class="content">
+                        <strong>算法思想：</strong>
+                        <p>两个多边形相交后，其顶点要么是两个多边形边的交点，要么是在多边形内部的点。</p>
+                        <strong>算法步骤：</strong>
+                        <p>1.计算两个多边形每条边之间的交点。</p>
+                        <p>2.计算包含在多边形内部的点。</p>
+                        <p>3.将交点和多边形内部的点，按逆时针(或顺时针)排序，得出最终的点集。</p>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </div>
+</div>
+</body>
+</html>

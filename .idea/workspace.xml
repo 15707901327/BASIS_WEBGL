@@ -20,7 +20,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="1. 着色器文档更新">
+      <change afterPath="$PROJECT_DIR$/doc/graphics/img/line01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/graphics/img/line02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/graphics/img/line03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/graphics/img/line04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/graphics/img/lineSeg01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/graphics/img/lineSeg02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/graphics/img/lineSeg03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/graphics/img/polygon01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/graphics/img/polygon02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/graphics/img/polygon03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/graphics/img/rect01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/graphics/math.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/test.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/MathUtils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/graphics/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/graphics/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +57,14 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SET_USER_NAME_GLOBALLY" value="false" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="ProjectId" id="1jaVfVAWu6ctIYtJqVgrgiL25N6" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -49,9 +73,10 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../FengMap_JSSDK_v30" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -59,25 +84,35 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.HTML" />
+    <property name="settings.editor.selected.configurable" value="proofread" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/../ThreeSourceCodeAnalysis/src/renderers/webgl/WebGLUniforms.js" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\workhome\BASIS_WEBGL\lib" />
+      <recent name="D:\workhome\BASIS_WEBGL\doc\graphics" />
       <recent name="D:\workHome\BASIS_WEBGL\doc\graphics\img\noise" />
       <recent name="D:\workHome\BASIS_WEBGL\example\webgl2\InstancedArrays" />
       <recent name="D:\workHome\BASIS_WEBGL\THREE-PGL\src\renderers" />
-      <recent name="D:\workHome\BASIS_WEBGL\THREE-PGL\src\renderers\ShaderChunk" />
-      <recent name="D:\workHome\BASIS_WEBGL\THREE-PGL\src\renderers\shaderLib" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\workhome\BASIS_WEBGL\example" />
+      <recent name="D:\workhome\BASIS_WEBGL" />
+      <recent name="D:\workhome\BASIS_WEBGL\doc\graphics\img" />
+      <recent name="D:\workhome\BASIS_WEBGL\example\lib" />
       <recent name="D:\workHome\BASIS_WEBGL\doc\graphics\img\noise" />
-      <recent name="D:\workHome\BASIS_WEBGL\doc\graphics" />
-      <recent name="D:\workHome\BASIS_WEBGL\example\crystal\jsm" />
-      <recent name="D:\workHome\BASIS_WEBGL\example\OPENGL_ES_3.0编程指南" />
-      <recent name="D:\workHome\BASIS_WEBGL\example\src\core" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="MathUtils.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/lib/MathUtils.js" working-dir="$PROJECT_DIR$/lib">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.MathUtils.js" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -332,6 +367,9 @@
       <workItem from="1608600704556" duration="675000" />
       <workItem from="1608687527183" duration="275000" />
       <workItem from="1611994439517" duration="119000" />
+      <workItem from="1629260611659" duration="153000" />
+      <workItem from="1631588298577" duration="18389000" />
+      <workItem from="1631669656191" duration="13694000" />
     </task>
     <task id="LOCAL-00055" summary="1.镜面效果">
       <created>1576123526677</created>
@@ -722,28 +760,6 @@
     <MESSAGE value="1. 着色器文档更新" />
     <option name="LAST_COMMIT_MESSAGE" value="1. 着色器文档更新" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1608687568629">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1608687568629" />
-    <state x="67" y="0" width="988" height="680" key="SettingsEditor" timestamp="1605581926677">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="67" y="0" width="988" height="680" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1605581926677" />
-    <state width="542" height="446" key="SwitcherDM" timestamp="1605580115063">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="542" height="446" key="SwitcherDM/0.0.1280.680@0.0.1280.680" timestamp="1605580115063" />
-    <state x="233" y="74" key="Vcs.Push.Dialog.v2" timestamp="1608687782384">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="233" y="74" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1608687782384" />
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1605580598009">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1605580598009" />
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -754,5 +770,9 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

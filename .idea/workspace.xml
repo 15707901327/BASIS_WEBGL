@@ -20,9 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="1. 多边形交集">
-      <change afterPath="$PROJECT_DIR$/doc/graphics/img/polygon04.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/graphics/math.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/graphics/math.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/doc/css/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/graphics/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/graphics/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/shader/BuiltInFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/shader/BuiltInFunction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/shader/customFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/shader/basicAlgorithm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/shader/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/shader/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +66,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../FengMap_JSSDK_v30" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/doc/shader" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -76,11 +80,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\workhome\BASIS_WEBGL\doc\shader" />
       <recent name="D:\workhome\BASIS_WEBGL\lib" />
       <recent name="D:\workhome\BASIS_WEBGL\doc\graphics" />
       <recent name="D:\workHome\BASIS_WEBGL\doc\graphics\img\noise" />
       <recent name="D:\workHome\BASIS_WEBGL\example\webgl2\InstancedArrays" />
-      <recent name="D:\workHome\BASIS_WEBGL\THREE-PGL\src\renderers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\workhome\BASIS_WEBGL\example" />
@@ -356,14 +360,16 @@
       <workItem from="1629260611659" duration="153000" />
       <workItem from="1631588298577" duration="18389000" />
       <workItem from="1631669656191" duration="14671000" />
-      <workItem from="1631694139038" duration="108000" />
-    </task>
-    <task id="LOCAL-00056" summary="1.修改样式结构">
-      <created>1576133207255</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1576133207256</updated>
+      <workItem from="1631694139038" duration="190000" />
+      <workItem from="1631694378813" duration="11000" />
+      <workItem from="1632364639794" duration="830000" />
+      <workItem from="1633766440050" duration="1840000" />
+      <workItem from="1634266436240" duration="27000" />
+      <workItem from="1634283846355" duration="739000" />
+      <workItem from="1634539588223" duration="5000" />
+      <workItem from="1635481778812" duration="776000" />
+      <workItem from="1635486556414" duration="24000" />
+      <workItem from="1635739511504" duration="4401000" />
     </task>
     <task id="LOCAL-00057" summary="1.修改文档结构">
       <created>1576135430754</created>
@@ -701,7 +707,14 @@
       <option name="project" value="LOCAL" />
       <updated>1631693350327</updated>
     </task>
-    <option name="localTasksCounter" value="105" />
+    <task id="LOCAL-00105" summary="1. 多边形交集">
+      <created>1631694309121</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1631694309121</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

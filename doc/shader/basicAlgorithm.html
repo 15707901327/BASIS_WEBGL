@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>基础算法</title>
+	<link rel="stylesheet" href="../../css/base.css">
+	<link rel="stylesheet" href="../css/base.css">
+</head>
+<body>
+<div class="header">
+	<ul class="ul_1">
+		<li class="li_1"><a href="../../index.html">首页</a></li>
+		<li class="li_1"><a href="../webgl/index.html">webgl概述</a></li>
+		<li class="li_1"><a href="../opengl/index.html">OpenGL概述</a></li>
+		<li class="li_1"><a href="../graphics/index.html">图形学</a></li>
+		<li class="li_1 li_heightLight">
+			<a href="../shader/index.html">GLSL ES</a>
+			<ul class="ul_2">
+				<li><a href="basicAlgorithm.html">基础算法</a></li>
+				<li><a href="BuiltInFunction.html">内置函数</a></li>
+			</ul>
+		</li>
+		<li class="li_1"><a href="../webgl/js_API/gl.html">WebGL API</a></li>
+		<li class="li_1"><a href="../../example/index.html" target="_parent">WebGL实例</a></li>
+	</ul>
+</div>
+<div class="content">
+	<div class="l-r-wrapper">
+		<div class="left">
+			<h4><a href="#basicAlgorithm">基础算法</a></h4>
+			<ul class="ul-1">
+				<li><a href="#colorGray">转换色彩灰阶</a></li>
+			</ul>
+			<h4><a href="#usefulLittleFunctions">有用的小函数</a></h4>
+			<ul class="ul-1">
+				<li><a href="#almostIdentity">almostIdentity()</a></li>
+				<li><a href="#almostIdentity2">almostIdentity()</a></li>
+				<li><a href="#expImpulse">Exponential Impulse</a></li>
+				<li><a href="#quaImpulse">Polynomial Impulse</a></li>
+				<li><a href="#cubicPulse">Cubic Pulse</a></li>
+				<li><a href="#expStep">Exponential Step</a></li>
+				<li><a href="#parabola">Parabola</a></li>
+				<li><a href="#pcurve">Power curve</a></li>
+				<li><a href="#sinc">Sinc curve</a></li>
+			</ul>
+		</div>
+		<div class="right">
+			<section id="basicAlgorithm" class="section1">
+				<div class="title">基础算法</div>
+				<section id="colorGray">
+					<h4>转换色彩灰阶：</h4>
+					<p>将彩色像素（R,G,B）映射到一个单独的数字作为的灰度值。</p>
+					<div class="content">
+						<ul class="ul-2-num">
+							<li>lightness方法：是取最突触颜色和最不突出颜色的平均值： (max(R, G, B) + min(R, G, B)) / 2</li>
+							<li>average方法：最简单取R,G,B的平均值：(R+G+B)/3 .</li>
+							<li>luminosity方法：是平均方法的一个更复杂的版本。它也是平均值，但它通过加权平均来解释人类感知。我们对绿色比其他颜色更敏感，所以绿色加权最大。其计算公式为亮度为0.21
+								R +0.72 G +0.07 B.
+							</li>
+						</ul>
+						<strong>luminosity实例</strong>
+						<pre><code>
+	vec3 luma = vec3( 0.299, 0.587, 0.114 );
+	float v = dot( texel.xyz, luma );
+						</code></pre>
+					</div>
+				</section>
+			</section>
+			<section id="usefulLittleFunctions" class="section1">
+				<div class="title">有用的小函数</div>
+				<section id="almostIdentity">
+					<h4>almostIdentity()</h4>
+					<div class="divRight"><img src="./img/almostIdentity.png" width="200"></div>
+					<p>假设不想改变数值，除非这个数值是0或者接近0的值。在这种情况，想用一个比较小的值来替换它，然后可以进行值与阈
+						的平滑融合，而不必引入不连续的条件分支。设m为阈值（任何大于m的值保持不变），当输入为0时，获得n值。</p>
+					<div class="content">
+          <pre><code>
+        float almostIdentity( float x, float m, float n )
+        {
+            if( x>m ) return x;
+            const float a = 2.0*n - m
+            const float b = 2.0*m - 3.0*n;
+            const float t = x/m;
+            return (a*t + b)*t*t + n;
+        }
+          </code></pre>
+					</div>
+				</section>
+				<section id="almostIdentity2">
+					<h4>almostIdentity()</h4>
+					<div class="divRight"><img src="./img/almostIdentity2.png" width="200"></div>
+					<p>另一种获取近距离标识的方法是通过偏移的平方值的平方根来代替上面的三次方多项式。根据硬件的不同，这种方法可能比
+						上面的三次方慢一点，并且当它有0介导或者非0的二阶导时，会导致一些问题。</p>
+					<div class="content">
+          <pre><code>
+        float almostIdentity( float x, float n )
+        {
+            return sqrt(x*x+n);
+        }
+          </code></pre>
+					</div>
+				</section>
+				<section id="expImpulse">
+					<h4>Exponential Impulse</h4>
+					<div class="divRight"><img src="./img/exponentialImpulse.png" width="300"></div>
+					<p>非常适合触发行为、制作动画、音乐的舒缓，以及用于快速增长然后缓慢下降的任何事物。使用k控制功能的拉伸。最大为1，恰好x = 1 / k。</p>
+					<div class="content">
+          <pre><code>
+        float expImpulse( float k, float x )
+        {
+            const float h = k*x;
+            return h*exp(1.0-h);
+        }
+          </code></pre>
+					</div>
+				</section>
+				<section id="quaImpulse">
+					<h4>Polynomial Impulse</h4>
+					<div class="divRight"><img src="./img/quaImpulse.png" width="300"></div>
+					<p>另一个脉冲函数不使用指数而是使用多项式。使用k控制函数衰减，例如一个二次的被使用，它的峰值在x = sqrt(1/k).</p>
+					<div class="content">
+          <pre><code>
+        float quaImpulse( float k, float x )
+        {
+            return 2.0*sqrt(k)*x/(1.0+k*x*x);
+        }
+          </code></pre>
+						<p>您可以轻松地将其推广到其他幂以得到不同的衰减形状，其中n是多项式的次数：</p>
+						<pre><code>
+        float polyImpulse( float k, float n, float x )
+        {
+            return (n/(n-1.0))*pow((n-1.0)*k,1.0/n) * x/(1.0+k*pow(x,n));
+        }
+          </code></pre>
+						<p>这些广义脉冲在x = [k（n-1）]-1 / n时达到峰值</p>
+					</div>
+				</section>
+				<section id="cubicPulse">
+					<h4>Cubic Pulse</h4>
+					<div class="divRight"><img src="./img/CubicPulse.png" width="300"></div>
+					<p>理所当然的你会发现你经常使用smoothstep(c-w,c,x)-smoothstep(c,c+w,x)来进行计算，也许你会尝试解析它的信号特点。
+						cubicPulse()方法，将会是你最好的朋友，你也可以廉价的用它来代替高斯模糊。</p>
+					<div class="content">
+          <pre><code>
+        float cubicPulse( float c, float w, float x )
+        {
+            x = fabs(x - c);
+            if( x>w ) return 0.0;
+            x /= w;
+            return 1.0 - x*x*(3.0-2.0*x);
+        }
+          </code></pre>
+					</div>
+				</section>
+				<section id="expStep">
+					<h4>Exponential Step</h4>
+					<div class="divRight"><img src="./img/expStep.png" width="300"></div>
+					<p>自然衰减是线性衰减量的指数：黄色曲线exp（-x）。 高斯是二次衰减量的指数：浅绿色曲线exp（-x2）。
+						您可以概括并保持幂次增加，并获得越来越锐利的S形曲线，直到获得极限中的step（）为止。</p>
+					<div class="content">
+          <pre><code>
+       float expStep( float x, float k, float n )
+      {
+          return exp( -k*pow(x,n) );
+      }
+          </code></pre>
+						<div class="divRight" style="clear: both;"><img src="./img/gain.png"
+																		width="300"></div>
+						<p>通过扩展边并压缩中心并将1/2映射为1/2，可以将增益重新映射为单位间隔，这可以使用gain（）函数完成。 这是RSL教
+							程（Renderman着色语言）中的常用功能。 k = 1是恒等曲线，k <1产生经典的gain（）形状，k> 1产生“ s”形的曲线。
+							对于k ＝ a和k ＝ 1 / a，曲线是对称的（并且是相反的）。</p>
+						<pre><code>
+       float gain(float x, float k)
+      {
+          const float a = 0.5*pow(2.0*((x<0.5)?x:1.0-x), k);
+          return (x<0.5)?a:1.0-a;
+      }
+          </code></pre>
+					</div>
+				</section>
+				<section id="parabola">
+					<h4>Parabola</h4>
+					<div class="divRight"><img src="./img/parabola.png" width="300"></div>
+					<p>将0..1间隔重新映射为0..1的一种不错的选择，以便将角映射到0，将中心映射到1。换句话说，parabola（0）=
+						parabola（1）= 0，而parabola（ 1/2）= 1。</p>
+					<div class="content">
+          <pre><code>
+       float parabola( float x, float k )
+      {
+          return pow( 4.0*x*(1.0-x), k );
+      }
+          </code></pre>
+					</div>
+				</section>
+				<section id="pcurve">
+					<h4>Power curve</h4>
+					<div class="divRight"><img src="./img/pcurve.png" width="300"></div>
+					<p>这是上面的Parabola（）的概括。 它还通过将拐角映射到0来将0..1间隔映射到0..1。但是，在此概括中，您可以控制曲线
+						的任一侧的形状，这在创建叶子，眼睛和许多其他形状时非常方便 有趣的形状。</p>
+					<div class="content">
+          <pre><code>
+       float pcurve( float x, float a, float b )
+      {
+          const float k = pow(a+b,a+b) / (pow(a,a)*pow(b,b));
+          return k * pow( x, a ) * pow( 1.0-x, b );
+      }
+          </code></pre>
+						<p>请注意，出于说明目的，选择k时应使pcurve（）的最大值恰好达到1，但是在许多应用中，无论如何都需要对曲线进行缩放,
+							以便可以简单地避免k的缓慢计算。</p>
+					</div>
+				</section>
+				<section id="sinc">
+					<h4>Sinc curve</h4>
+					<div class="divRight"><img src="./img/sinc.png" width="300"></div>
+					<p>A phase shifted sinc curve can be useful if it starts at zero and ends at zero, for some bouncing
+						behaviors
+						(suggested by Hubert-Jan). Give k different integer values to tweak the amount of bounces. It
+						peaks at 1.0,
+						but that take negative values, which can make it unusable in some applications.</p>
+					<div class="content">
+          <pre><code>
+       float sinc( float x, float k )
+      {
+          const float a = PI*((k*x-1.0);
+          return sin(a)/a;
+      }
+          </code></pre>
+					</div>
+				</section>
+			</section>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

@@ -1,321 +1,325 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>图形学</title>
-  <link rel="stylesheet" href="../../css/base.css">
-  <link rel="stylesheet" href="../css/base.css">
+	<meta charset="UTF-8">
+	<title>图形学</title>
+	<link rel="stylesheet" href="../../css/base.css">
+	<link rel="stylesheet" href="../css/base.css">
 </head>
 <body>
 <div class="header">
-  <ul class="ul_1">
-    <li class="li_1"><a href="../../index.html">首页</a></li>
-    <li class="li_1"><a href="../webgl/index.html">webgl概述</a></li>
-    <li class="li_1"><a href="../opengl/index.html">OpenGL概述</a></li>
-    <li class="li_1 li_heightLight">
-      <a href="../graphics/index.html">图形学</a>
-      <ul class="ul_2">
-        <li><a href="./math.html">计算几何</a></li>
-      </ul>
-    </li>
-    <li class="li_1">
-      <a href="../shader/index.html">GLSL ES</a>
-      <ul class="ul_2">
-        <li><a href="../shader/BuiltInFunction.html">内置函数</a></li>
-      </ul>
-    </li>
-    <li class="li_1"><a href="../webgl/js_API/gl.html">WebGL API</a></li>
-    <li class="li_1"><a href="../../example/index.html">WebGL实例</a></li>
-  </ul>
+	<ul class="ul_1">
+		<li class="li_1"><a href="../../index.html">首页</a></li>
+		<li class="li_1"><a href="../webgl/index.html">webgl概述</a></li>
+		<li class="li_1"><a href="../opengl/index.html">OpenGL概述</a></li>
+		<li class="li_1 li_heightLight">
+			<a href="../graphics/index.html">图形学</a>
+			<ul class="ul_2">
+				<li><a href="./math.html">计算几何</a></li>
+			</ul>
+		</li>
+		<li class="li_1">
+			<a href="../shader/index.html">GLSL ES</a>
+			<ul class="ul_2">
+				<li><a href="../shader/BuiltInFunction.html">内置函数</a></li>
+			</ul>
+		</li>
+		<li class="li_1"><a href="../webgl/js_API/gl.html">WebGL API</a></li>
+		<li class="li_1"><a href="../../example/index.html">WebGL实例</a></li>
+	</ul>
 </div>
 <div class="content">
-  <div class="l-r-wrapper">
-    <div class="left">
-      <h4><a href="#concept">基本概念</a></h4>
-      <ul class="ul-1">
-        <li><a href="#vector">向量</a></li>
-        <li><a href="#homogeneousCoordinates">齐次坐标</a></li>
-        <li><a href="#Quaternion">四元数</a></li>
-        <li><a href="#sampling">采样</a></li>
-        <li><a href="#shading">着色</a></li>
-        <li><a href="#noise">图形噪声</a></li>
-        <li><a href="#noise">空间分割</a></li>
-      </ul>
-      <h4><a href="#normal">法线</a></h4>
-      <ul class="ul-1">
-        <li><a href="#faceNormal">面法线</a></li>
-        <li><a href="#vertexNormal">顶点法线</a></li>
-        <li><a href="#matrixNormal">法线矩阵</a></li>
-      </ul>
-      <h4><a href="#Transform">变换分类</a></h4>
-      <ul class="ul-1">
-        <li><a href="#LinearTransformation">线性变换</a></li>
-        <li><a href="#AffineTransformation">仿射变换</a></li>
-        <li><a href="#InverseTransform">可逆变换</a></li>
-        <li><a href="#">等角变换</a></li>
-        <li><a href="#">正交变换</a></li>
-        <li><a href="#">刚体变换</a></li>
-      </ul>
-      <h4><a href="#matrix">矩阵</a></h4>
-      <ul class="ul-1">
-        <li><a href="#matrix">Matrix</a></li>
-        <li><a href="#rotation">旋转(Rotation)</a></li>
-        <li><a href="#rotation_matrix">旋转矩阵推导</a></li>
-        <li><a href="#scale">缩放（scale)</a></li>
-        <li><a href="#translation">位移(translation)</a></li>
-        <li><a href="#mirror_matrix">镜像</a></li>
-        <li><a href="#shear_matrix">切变</a></li>
-        <li><a href="#modelMatrix">模型矩阵</a></li>
-        <li><a href="#viewMatrix">视图矩阵</a></li>
-        <li><a href="#projectMatrix">投影矩阵</a></li>
-        <li><a href="#library">矩阵变换库</a></li>
-      </ul>
-      <h4><a href="#light">光照</a></h4>
-      <ul class="ul-1">
-        <li><a href="#lightBase">光照基础</a></li>
-        <li><a href="#Blinn-Phone">Blinn-Phone</a></li>
-      </ul>
-      <h4><a href="#CoordinateSystem">坐标系</a></h4>
-      <ul class="ul-1">
-        <li><a href="#Three-dimensionalCoordinateSystem">三维坐标系</a></li>
-        <li><a href="#SphericalCoordinateSystem">球面坐标系</a></li>
-        <li><a href="#BarycentricCoordinateSpace">重心坐标系</a></li>
-      </ul>
-    </div>
-    <div class="right">
-      <section class="section1" id="concept">
-        <div class="title">基本概念</div>
-        <section id="vector">
-          <h4>向量</h4>
-          <div class="content">
-            <strong>点乘（dot）：</strong>
-            <ul class="ul-3-num">
-              <li>
-                计算向量的夹角<br>
-                a∙b>0→方向基本相同，夹角在0°到90°之间<br>
-                a∙b=0→ 正交，相互垂直<br>
-                a∙b<0→ 方向基本相反，夹角在90°到180°之间<br>
-              </li>
-              <li>计算投影</li>
-              <li>判断向量的方向以及接近的程度</li>
-            </ul>
-            <strong>叉乘（cross）：</strong>
-            <p>得到与叉乘的两向量所在平面垂直的向量</p>
-            <ul class="ul-3-num">
-              <li>求面的法向量</li>
-              <li>得到向量左右的位置关系</li>
-              <li>得到点是否在三角形的内部</li>
-            </ul>
-          </div>
-        </section>
-        <section id="homogeneousCoordinates">
-          <h4>齐次坐标：</h4>
-          <p>齐次坐标就是将一个原本是n维的向量用一个n+1维向量来表示。</p>
-          <p>在矩阵应用中，需要把旋转、平移、缩放合并到一个矩阵中，但是由于平移矩阵的特殊性，没办法和其他两个矩阵合并，
-            所以增加一个维度来把三个矩阵合并。例如3*3的矩阵，扩展成4*4的矩阵。</p>
-        </section>
-        <section id="Quaternion">
-          <h4>四元数</h4>
-          <p>由于矩阵不适合用来做插值计算，所以引入四元数来进行插值计算。</p>
-          <div class="content">
-            <strong>在GLSL中通过四元数旋转顶点</strong>
-            <p><a href="Quaternion.html" target="_blank">四元数旋转顶点原理</a></p>
-            <p>算法：position += 2.0 * cross( quaternion.xyz, cross( quaternion.xyz, position ) + quaternion.w * position
-              );</p>
-            <p>实例：</p>
-            <ul class="ul-2">
-              <li><a
-                  href="https://15707901327.github.io/ThreeSourceCodeAnalysis/example/instance_buffergeometry/webgl_buffergeometry_instancing2.html"
-                  target="_blank">实例webgl_buffergeometry_instancing2</a></li>
-              <li><a
-                  href="https://15707901327.github.io/ThreeSourceCodeAnalysis/example/instance_buffergeometry/webgl_buffergeometry_instancing_dynamic.html"
-                  target="_blank">实例webgl_buffergeometry_instancing_dynamic</a></li>
-            </ul>
-          </div>
-        </section>
-        <section id="sampling">
-          <h4>采样</h4>
-          <div class="content">
-            <strong>采样类型：</strong>
-            <ul class="ul-2-num">
-              <li>不同位置</li>
-              <li>不同时间</li>
-            </ul>
+	<div class="l-r-wrapper">
+		<div class="left">
+			<h4><a href="#concept">基本概念</a></h4>
+			<ul class="ul-1">
+				<li><a href="#vector">向量</a></li>
+				<li><a href="#homogeneousCoordinates">齐次坐标</a></li>
+				<li><a href="#Quaternion">四元数</a></li>
+				<li><a href="#sampling">采样</a></li>
+				<li><a href="#shading">着色</a></li>
+				<li><a href="#noise">图形噪声</a></li>
+				<li><a href="#noise">空间分割</a></li>
+			</ul>
+			<h4><a href="#normal">法线</a></h4>
+			<ul class="ul-1">
+				<li><a href="#faceNormal">面法线</a></li>
+				<li><a href="#vertexNormal">顶点法线</a></li>
+				<li><a href="#matrixNormal">法线矩阵</a></li>
+			</ul>
+			<h4><a href="#Transform">变换分类</a></h4>
+			<ul class="ul-1">
+				<li><a href="#LinearTransformation">线性变换</a></li>
+				<li><a href="#AffineTransformation">仿射变换</a></li>
+				<li><a href="#InverseTransform">可逆变换</a></li>
+				<li><a href="#">等角变换</a></li>
+				<li><a href="#">正交变换</a></li>
+				<li><a href="#">刚体变换</a></li>
+			</ul>
+			<h4><a href="#matrix">矩阵</a></h4>
+			<ul class="ul-1">
+				<li><a href="#matrix">Matrix</a></li>
+				<li><a href="#rotation">旋转(Rotation)</a></li>
+				<li><a href="#rotation_matrix">旋转矩阵推导</a></li>
+				<li><a href="#scale">缩放（scale)</a></li>
+				<li><a href="#translation">位移(translation)</a></li>
+				<li><a href="#mirror_matrix">镜像</a></li>
+				<li><a href="#shear_matrix">切变</a></li>
+				<li><a href="#modelMatrix">模型矩阵</a></li>
+				<li><a href="#viewMatrix">视图矩阵</a></li>
+				<li><a href="#projectMatrix">投影矩阵</a></li>
+				<li><a href="#library">矩阵变换库</a></li>
+			</ul>
+			<h4><a href="#light">光照</a></h4>
+			<ul class="ul-1">
+				<li><a href="#lightBase">光照基础</a></li>
+				<li><a href="#Blinn-Phone">Blinn-Phone</a></li>
+			</ul>
+			<h4><a href="#CoordinateSystem">坐标系</a></h4>
+			<ul class="ul-1">
+				<li><a href="#Three-dimensionalCoordinateSystem">三维坐标系</a></li>
+				<li><a href="#SphericalCoordinateSystem">球面坐标系</a></li>
+				<li><a href="#BarycentricCoordinateSpace">重心坐标系</a></li>
+			</ul>
+		</div>
+		<div class="right">
+			<section class="section1" id="concept">
+				<div class="title">基本概念</div>
+				<section id="vector">
+					<h4>向量</h4>
+					<div class="content">
+						<strong>点乘（dot）：</strong>
+						<ul class="ul-3-num">
+							<li>
+								计算向量的夹角<br>
+								a∙b>0→方向基本相同，夹角在0°到90°之间<br>
+								a∙b=0→ 正交，相互垂直<br>
+								a∙b<0→ 方向基本相反，夹角在90°到180°之间<br>
+							</li>
+							<li>计算投影</li>
+							<li>判断向量的方向以及接近的程度</li>
+							<li>计算加权平均值</li>
+						</ul>
+						<strong>叉乘（cross）：</strong>
+						<p>得到与叉乘的两向量所在平面垂直的向量</p>
+						<ul class="ul-3-num">
+							<li>求面的法向量</li>
+							<li>得到向量左右的位置关系</li>
+							<li>得到点是否在三角形的内部</li>
+						</ul>
+					</div>
+				</section>
+				<section id="homogeneousCoordinates">
+					<h4>齐次坐标：</h4>
+					<p>齐次坐标就是将一个原本是n维的向量用一个n+1维向量来表示。</p>
+					<p>在矩阵应用中，需要把旋转、平移、缩放合并到一个矩阵中，但是由于平移矩阵的特殊性，没办法和其他两个矩阵合并，
+						所以增加一个维度来把三个矩阵合并。例如3*3的矩阵，扩展成4*4的矩阵。</p>
+				</section>
+				<section id="Quaternion">
+					<h4>四元数</h4>
+					<p>由于矩阵不适合用来做插值计算，所以引入四元数来进行插值计算。</p>
+					<div class="content">
+						<strong>在GLSL中通过四元数旋转顶点</strong>
+						<p><a href="Quaternion.html" target="_blank">四元数旋转顶点原理</a></p>
+						<p>算法：position += 2.0 * cross( quaternion.xyz, cross( quaternion.xyz, position ) + quaternion.w
+							* position
+							);</p>
+						<p>实例：</p>
+						<ul class="ul-2">
+							<li><a
+									href="https://15707901327.github.io/ThreeSourceCodeAnalysis/example/instance_buffergeometry/webgl_buffergeometry_instancing2.html"
+									target="_blank">实例webgl_buffergeometry_instancing2</a></li>
+							<li><a
+									href="https://15707901327.github.io/ThreeSourceCodeAnalysis/example/instance_buffergeometry/webgl_buffergeometry_instancing_dynamic.html"
+									target="_blank">实例webgl_buffergeometry_instancing_dynamic</a></li>
+						</ul>
+					</div>
+				</section>
+				<section id="sampling">
+					<h4>采样</h4>
+					<div class="content">
+						<strong>采样类型：</strong>
+						<ul class="ul-2-num">
+							<li>不同位置</li>
+							<li>不同时间</li>
+						</ul>
 
-            <strong>走样（artifact）:</strong>
-            <p>信号的速度太快，采样的速度跟不上。</p>
-            <ul class="ul-2-num">
-              <li>锯齿（位置）</li>
-              <li>摩尔纹（位置）</li>
-              <li>车轮效应（时间）</li>
-            </ul>
+						<strong>走样（artifact）:</strong>
+						<p>信号的速度太快，采样的速度跟不上。</p>
+						<ul class="ul-2-num">
+							<li>锯齿（位置）</li>
+							<li>摩尔纹（位置）</li>
+							<li>车轮效应（时间）</li>
+						</ul>
 
-            <strong>反走样：</strong>
-            <ul class="ul-2-num">
-              <li>采样之前做模糊（滤波），再采样</li>
-              <li>MSAA：增加采样点，每个像素多个采样点，计算平均值</li>
-              <li>FXAA：图像后期处理</li>
-              <li>FXAA：复用上一帧的数据</li>
-            </ul>
-          </div>
-        </section>
-        <section id="shading">
-          <h4>着色</h4>
-          <div class="content">
-            <strong>着色频率：</strong>
-            <ul class="ul-2-num">
-              <li>flat shading(三角面着色)</li>
-              <li>Gouraud shading(顶点着色)</li>
-              <li>Phone shading(逐像素着色)</li>
-            </ul>
-          </div>
-        </section>
-        <section id="noise">
-          <h4>图形噪声</h4>
-          <p>图形噪声，是计算机图形学中一类随机算法，经常用来模拟自然界中的各种纹理材质，如云、山脉等，都是通过噪声算法模拟出来的​。</p>
-          <p><a href="Noise.html" target="_blank">详细说明</a></p>
-        </section>
-      </section>
-      <section class="section1" id="normal">
-        <div class="title">法线</div>
-        <section id="faceNormal">
-          <h4>面法线</h4>
-          <p>设有两个向量组成一个面，向量分别表示为V1(x,y,z)，V2(x,y,z)，将两向量叉乘便可得到面法线向量.</p>
-        </section>
-        <section id="vertexNormal">
-          <h4>顶点法线</h4>
-          <p>计算所有经过该点的面法线向量的和的归一化（去除共面）。</p>
-          <p>计算所有经过该点的面法线向量的加权平均（一般使用面的面积来加权平均）。</p>
-        </section>
-        <section id="matrixNormal">
-          <h4>normalMatrix</h4>
-          <p>保持法线向量与表面向量垂直的正确的变换矩阵。</p>
-          <p>法线矩阵可以由模型视图矩阵的逆矩阵转置获得。</p>
-        </section>
-      </section>
-      <section class="section1" id="Transform">
-        <h4 class="title">变换分类</h4>
-        <section id="LinearTransformation">
-          <h4>线性变换</h4>
-          <p>一般来说，方阵能描述任意线性变换。</p>
-          <div class="content">
-            <strong>常用线性变换：</strong>
-            <ul class="ul-2-num">
-              <li><a href="#">旋转</a></li>
-              <li><a href="#">缩放</a></li>
-              <li><a href="#">投影</a></li>
-              <li><a href="#">镜像</a></li>
-              <li><a href="#">仿射</a></li>
-            </ul>
-            <strong>列向量说明：</strong>
-            <p>线性变换（Linear Transformation / Xforms）是渲染和游戏引擎等图形学工具进行坐标变换的方式，是可逆的。 线性变换的等式如下： V2 = M*V1</p>
-            <ul class="ul-3-num">
-              <li>V是齐次（homogeneous）四维向量（x,y,z,w），竖着写的</li>
-              <li>M是齐次4×4矩阵</li>
-              <li>当w=1时，四维坐标会变成三维坐标</li>
-              <li>对于三维坐标（x, y, z），将其转换为四维坐标，可以直接加个1，即变成（x, y, z, 1）</li>
-              <li>对于四维坐标（x, y, z, w），都除以w即可转换为三维坐标，即（x/w, y/w, z/w）</li>
-            </ul>
-            <strong>拆解：</strong>
-            <p>对于任何一个线性变换矩阵，我们可以把它拆解（decompose）为TRS或TSR三个矩阵的乘积的形式。</p>
-            <div style="height: 400px; width: 600px; background-image: url('../../img/LinearTrans_01.webp')"
-                 class="bg-1"></div>
-            <ul class="ul-2-num">
-              <li>首先提取最后一列，得到位移</li>
-              <li>剩余的矩阵是R和S相乘的矩阵</li>
-            </ul>
-            <div style="height: 350px; width: 800px; background-image: url('../../img/LinearTrans_02.webp')"
-                 class="bg-1"></div>
-            <p>从图中可以看出，SR矩阵，第一行的平方和开根就是Sx，第二行的平方和开根就是Sy，第三行的平方和开根就是Sz。第一行除以Sx，第二行除以Sy，第三行除以Sz，即可得到旋转矩阵。</p>
-            <strong>四维变换的逆变换：</strong>
-            <ul class="ul-2">
-              <li>位移:T的逆矩阵是-T，即向反方向移动.</li>
-              <li>旋转: R的逆矩阵是R的转置矩阵，即以对角线翻转矩阵。 怎么理解呢？比如R是绕X轴旋转θ，那么逆操作就是绕X轴旋转-θ，带入-θ就会发现它变成了转置矩阵。</li>
-              <li>缩放:S的逆矩阵是1/S，即把对角线上的三个元素都变成倒数，即反向缩放。</li>
-              <li>线性变换Xforms: TSR的逆矩阵 = R的逆×S的逆×T的逆</li>
-            </ul>
-          </div>
-        </section>
-        <section id="AffineTransformation">
-          <h4>仿射变换(affine transformation)</h4>
-          <p>仿射变换是指线性变换后接着平移。因此仿射变换的集合是线性变换的超集，任何线性变换都是仿射变换，但不是所有的仿射变换都是线性变换。</p>
-        </section>
-        <section id="InverseTransform">
-          <h4>可逆变换</h4>
-          <p>因为任意变换都能表达为矩阵，多以求逆变换等价于求矩阵的逆。</p>
-          <div class="content">
-            <strong>注意：</strong>
-            <ul class="ul-2-num">
-              <li>除了投影其他变换可撤销。</li>
-              <li>如果矩阵是奇异的，则变换不可逆。</li>
-              <li>可逆矩阵的行列式不为零.</li>
-            </ul>
-          </div>
-        </section>
-      </section>
-      <section class="section1" id="matrix">
-        <h4 class="title">Matrix</h4>
-        <section>
-          <h4>Matrix</h4>
-          <p>描述两个坐标系统间的关系，通过一种运算而将一个坐标系中的向量转换到另一个坐标系中。</p>
-          <div class="content">
-            <strong>方阵:</strong>
-            <p>行数和列数相同的矩阵称为方阵。</p>
-            <strong>对角矩阵:</strong>
-            <p>如果所有非对角线元素都为0，那么称这种矩阵为对角矩阵。</p>
-            <strong>单位矩阵:</strong>
-            <p>是一种特殊的对角矩阵。</p>
-            <strong>转置矩阵:</strong>
-            <p>沿着矩阵的对角线翻折。</p>
-            <strong>矩阵的性质:</strong>
-            <ul class="ul-2-num">
-              <li>矩阵乘法不满足交换律，即AB != BA</li>
-              <li>矩阵乘法满足结合律，即（AB）C = A(BC)</li>
-              <li>满足与标量活向量的结合律，即(kA)B = k(AB)= A(kB)、(vA)B = v(AB)</li>
-              <li>矩阵积的转置相当于先转置矩阵然后以相反的顺序乘：(AB)^T = B^TA^T</li>
-              <li>矩阵-向量乘法满足对向量加法的分配律，（v+w）M = vM + wM</li>
-            </ul>
-            <strong>矩阵的行列式几何意义：</strong>
-            <p>2D中：行列式等于以基向量为两边的平行四边形的有符号面积。</p>
-            <p>3D中：行列式等于以变换后的基向量为三边的平行六面体的有符号体积。</p>
-            <p>矩阵的行列式还能对矩阵所代表的变换进行分类：</p>
-            <ul class="ul-3-num">
-              <li>矩阵行列式为零，那么该矩阵包含投影。</li>
-              <li>矩阵行列式为负，那么该矩阵包含镜像。</li>
-            </ul>
-          </div>
-        </section>
-        <section id="rotation">
-          <h4>旋转(Rotation)</h4>
-          <div class="content">
-            <p>对于一个三维坐标（x, y, z），让其绕x, y, z轴旋转θ角的方法是在其左边乘上一个旋转矩阵。绕x轴，绕y轴，绕z轴的旋转矩阵分别是：</p>
-            <div style="height: 300px; width: 300px; background-image: url('../../img/rotation_01.webp')"
-                 class="bg-1"></div>
-            <p>如果我们想更加通用一点，即点（x, y, z）绕轴（u, v, w）旋转θ的矩阵是什么？
-              如果u, v, w三者的平方和为1，即该向量是个单位向量，那么矩阵如下：</p>
-            <div style="height: 250px; width: 1000px; background-image: url('../../img/rotation_02.webp')"
-                 class="bg-1"></div>
-            <strong>四维旋转(绕x轴转θ)</strong>
-            <div style="height: 250px; width: 1000px; background-image: url('../../img/rotation_03.webp')"
-                 class="bg-1"></div>
-            <p>从上图中可以看到，四维旋转矩阵，是在我们上面刚说的三维绕轴旋转矩阵的基础上，在最后一行和最后一列补上一个（0，0，0，1）。</p>
-          </div>
-        </section>
-        <section id="rotation_matrix">
-          <h4>旋转矩阵的推导</h4>
-          <div class="content">
-            <strong>矩阵的乘法</strong>
-            <p>将矩阵（中间）和矢量（右边）相乘，就获得一个新的矢量（左边）。</p>
-            <p>注意矩阵的乘法不符合交换律，也就是说AXB和BXA是不相等的。</p>
-            <p>只有在矩阵的列数与矢量的行数相等时，才可以将两者相乘。</p>
-            <div style="height: 200px; width: 300px; background-image: url('../../img/3X3矩阵.png')" class="bg-1"></div>
-            <p>上图中x',y',z'的计算：</p>
-            <p>x' = ax + by + cz</p>
-            <p>y' = dx + ey + fz</p>
-            <p>z' = gx + hy + iz</p>
-            <h4>点变换</h4>
-            <div style="height: 200px; width: 200px; background-image: url('../../img/3.22.png')" class="bg-1"></div>
-            <pre>
+						<strong>反走样：</strong>
+						<ul class="ul-2-num">
+							<li>采样之前做模糊（滤波），再采样</li>
+							<li>MSAA：增加采样点，每个像素多个采样点，计算平均值</li>
+							<li>FXAA：图像后期处理</li>
+							<li>FXAA：复用上一帧的数据</li>
+						</ul>
+					</div>
+				</section>
+				<section id="shading">
+					<h4>着色</h4>
+					<div class="content">
+						<strong>着色频率：</strong>
+						<ul class="ul-2-num">
+							<li>flat shading(三角面着色)</li>
+							<li>Gouraud shading(顶点着色)</li>
+							<li>Phone shading(逐像素着色)</li>
+						</ul>
+					</div>
+				</section>
+				<section id="noise">
+					<h4>图形噪声</h4>
+					<p>图形噪声，是计算机图形学中一类随机算法，经常用来模拟自然界中的各种纹理材质，如云、山脉等，都是通过噪声算法模拟出来的​。</p>
+					<p><a href="Noise.html" target="_blank">详细说明</a></p>
+				</section>
+			</section>
+			<section class="section1" id="normal">
+				<div class="title">法线</div>
+				<section id="faceNormal">
+					<h4>面法线</h4>
+					<p>设有两个向量组成一个面，向量分别表示为V1(x,y,z)，V2(x,y,z)，将两向量叉乘便可得到面法线向量.</p>
+				</section>
+				<section id="vertexNormal">
+					<h4>顶点法线</h4>
+					<p>计算所有经过该点的面法线向量的和的归一化（去除共面）。</p>
+					<p>计算所有经过该点的面法线向量的加权平均（一般使用面的面积来加权平均）。</p>
+				</section>
+				<section id="matrixNormal">
+					<h4>normalMatrix</h4>
+					<p>保持法线向量与表面向量垂直的正确的变换矩阵。</p>
+					<p>法线矩阵可以由模型视图矩阵的逆矩阵转置获得。</p>
+				</section>
+			</section>
+			<section class="section1" id="Transform">
+				<h4 class="title">变换分类</h4>
+				<section id="LinearTransformation">
+					<h4>线性变换</h4>
+					<p>一般来说，方阵能描述任意线性变换。</p>
+					<div class="content">
+						<strong>常用线性变换：</strong>
+						<ul class="ul-2-num">
+							<li><a href="#">旋转</a></li>
+							<li><a href="#">缩放</a></li>
+							<li><a href="#">投影</a></li>
+							<li><a href="#">镜像</a></li>
+							<li><a href="#">仿射</a></li>
+						</ul>
+						<strong>列向量说明：</strong>
+						<p>线性变换（Linear Transformation / Xforms）是渲染和游戏引擎等图形学工具进行坐标变换的方式，是可逆的。 线性变换的等式如下： V2 = M*V1</p>
+						<ul class="ul-3-num">
+							<li>V是齐次（homogeneous）四维向量（x,y,z,w），竖着写的</li>
+							<li>M是齐次4×4矩阵</li>
+							<li>当w=1时，四维坐标会变成三维坐标</li>
+							<li>对于三维坐标（x, y, z），将其转换为四维坐标，可以直接加个1，即变成（x, y, z, 1）</li>
+							<li>对于四维坐标（x, y, z, w），都除以w即可转换为三维坐标，即（x/w, y/w, z/w）</li>
+						</ul>
+						<strong>拆解：</strong>
+						<p>对于任何一个线性变换矩阵，我们可以把它拆解（decompose）为TRS或TSR三个矩阵的乘积的形式。</p>
+						<div style="height: 400px; width: 600px; background-image: url('../../img/LinearTrans_01.webp')"
+							 class="bg-1"></div>
+						<ul class="ul-2-num">
+							<li>首先提取最后一列，得到位移</li>
+							<li>剩余的矩阵是R和S相乘的矩阵</li>
+						</ul>
+						<div style="height: 350px; width: 800px; background-image: url('../../img/LinearTrans_02.webp')"
+							 class="bg-1"></div>
+						<p>从图中可以看出，SR矩阵，第一行的平方和开根就是Sx，第二行的平方和开根就是Sy，第三行的平方和开根就是Sz。第一行除以Sx，第二行除以Sy，第三行除以Sz，即可得到旋转矩阵。</p>
+						<strong>四维变换的逆变换：</strong>
+						<ul class="ul-2">
+							<li>位移:T的逆矩阵是-T，即向反方向移动.</li>
+							<li>旋转: R的逆矩阵是R的转置矩阵，即以对角线翻转矩阵。 怎么理解呢？比如R是绕X轴旋转θ，那么逆操作就是绕X轴旋转-θ，带入-θ就会发现它变成了转置矩阵。</li>
+							<li>缩放:S的逆矩阵是1/S，即把对角线上的三个元素都变成倒数，即反向缩放。</li>
+							<li>线性变换Xforms: TSR的逆矩阵 = R的逆×S的逆×T的逆</li>
+						</ul>
+					</div>
+				</section>
+				<section id="AffineTransformation">
+					<h4>仿射变换(affine transformation)</h4>
+					<p>仿射变换是指线性变换后接着平移。因此仿射变换的集合是线性变换的超集，任何线性变换都是仿射变换，但不是所有的仿射变换都是线性变换。</p>
+				</section>
+				<section id="InverseTransform">
+					<h4>可逆变换</h4>
+					<p>因为任意变换都能表达为矩阵，多以求逆变换等价于求矩阵的逆。</p>
+					<div class="content">
+						<strong>注意：</strong>
+						<ul class="ul-2-num">
+							<li>除了投影其他变换可撤销。</li>
+							<li>如果矩阵是奇异的，则变换不可逆。</li>
+							<li>可逆矩阵的行列式不为零.</li>
+						</ul>
+					</div>
+				</section>
+			</section>
+			<section class="section1" id="matrix">
+				<h4 class="title">Matrix</h4>
+				<section>
+					<h4>Matrix</h4>
+					<p>描述两个坐标系统间的关系，通过一种运算而将一个坐标系中的向量转换到另一个坐标系中。</p>
+					<div class="content">
+						<strong>方阵:</strong>
+						<p>行数和列数相同的矩阵称为方阵。</p>
+						<strong>对角矩阵:</strong>
+						<p>如果所有非对角线元素都为0，那么称这种矩阵为对角矩阵。</p>
+						<strong>单位矩阵:</strong>
+						<p>是一种特殊的对角矩阵。</p>
+						<strong>转置矩阵:</strong>
+						<p>沿着矩阵的对角线翻折。</p>
+						<strong>矩阵的性质:</strong>
+						<ul class="ul-2-num">
+							<li>矩阵乘法不满足交换律，即AB != BA</li>
+							<li>矩阵乘法满足结合律，即（AB）C = A(BC)</li>
+							<li>满足与标量活向量的结合律，即(kA)B = k(AB)= A(kB)、(vA)B = v(AB)</li>
+							<li>矩阵积的转置相当于先转置矩阵然后以相反的顺序乘：(AB)^T = B^TA^T</li>
+							<li>矩阵-向量乘法满足对向量加法的分配律，（v+w）M = vM + wM</li>
+						</ul>
+						<strong>矩阵的行列式几何意义：</strong>
+						<p>2D中：行列式等于以基向量为两边的平行四边形的有符号面积。</p>
+						<p>3D中：行列式等于以变换后的基向量为三边的平行六面体的有符号体积。</p>
+						<p>矩阵的行列式还能对矩阵所代表的变换进行分类：</p>
+						<ul class="ul-3-num">
+							<li>矩阵行列式为零，那么该矩阵包含投影。</li>
+							<li>矩阵行列式为负，那么该矩阵包含镜像。</li>
+						</ul>
+					</div>
+				</section>
+				<section id="rotation">
+					<h4>旋转(Rotation)</h4>
+					<div class="content">
+						<p>对于一个三维坐标（x, y, z），让其绕x, y, z轴旋转θ角的方法是在其左边乘上一个旋转矩阵。绕x轴，绕y轴，绕z轴的旋转矩阵分别是：</p>
+						<div style="height: 300px; width: 300px; background-image: url('../../img/rotation_01.webp')"
+							 class="bg-1"></div>
+						<p>如果我们想更加通用一点，即点（x, y, z）绕轴（u, v, w）旋转θ的矩阵是什么？
+							如果u, v, w三者的平方和为1，即该向量是个单位向量，那么矩阵如下：</p>
+						<div style="height: 250px; width: 1000px; background-image: url('../../img/rotation_02.webp')"
+							 class="bg-1"></div>
+						<strong>四维旋转(绕x轴转θ)</strong>
+						<div style="height: 250px; width: 1000px; background-image: url('../../img/rotation_03.webp')"
+							 class="bg-1"></div>
+						<p>从上图中可以看到，四维旋转矩阵，是在我们上面刚说的三维绕轴旋转矩阵的基础上，在最后一行和最后一列补上一个（0，0，0，1）。</p>
+					</div>
+				</section>
+				<section id="rotation_matrix">
+					<h4>旋转矩阵的推导</h4>
+					<div class="content">
+						<strong>矩阵的乘法</strong>
+						<p>将矩阵（中间）和矢量（右边）相乘，就获得一个新的矢量（左边）。</p>
+						<p>注意矩阵的乘法不符合交换律，也就是说AXB和BXA是不相等的。</p>
+						<p>只有在矩阵的列数与矢量的行数相等时，才可以将两者相乘。</p>
+						<div style="height: 200px; width: 300px; background-image: url('../../img/3X3矩阵.png')"
+							 class="bg-1"></div>
+						<p>上图中x',y',z'的计算：</p>
+						<p>x' = ax + by + cz</p>
+						<p>y' = dx + ey + fz</p>
+						<p>z' = gx + hy + iz</p>
+						<h4>点变换</h4>
+						<div style="height: 200px; width: 200px; background-image: url('../../img/3.22.png')"
+							 class="bg-1"></div>
+						<pre>
         r是从原点到点p的距离，而∂是x轴旋转到点p的角度，用这两个点来计算点p的坐标。
           x = r cos∂
           y = r sin∂
@@ -332,240 +336,248 @@
           x' = x cos𝞫 - y sin𝞫
           y' = x sin𝞫 + y cos𝞫
         </pre>
-            <strong>旋转矩阵</strong>
-            <p>由上面矩阵乘法和点变换可得旋转矩阵：</p>
-            <div style="height: 200px; width: 400px; background-image: url('../../img/3.7.png')" class="bg-1"></div>
-            <strong>四阶旋转矩阵</strong>
-            <div style="height: 200px; width: 400px; background-image: url('../../img/四阶旋转矩阵.png')" class="bg-1"></div>
-            <strong>实例</strong>
-            <ul>
-              <li><a href="../../WebGL编程指南/ch3/RotatedTriangle.html">旋转三角形</a></li>
-              <li><a href="../../WebGL编程指南/ch3/RotatedTriangle_Matrix.html">旋转三角形(使用矩阵)</a></li>
-            </ul>
-          </div>
-        </section>
-        <section id="scale">
-          <h4>缩放（scale)</h4>
-          <div class="content">
-            <p>对于一个三维坐标（x, y, z），我们想让它扩大2倍，则可以让它变成（2x, 2y, 2z）。写成矩阵乘法的话，V2 = M*V1，M如下图：</p>
-            <div style="height: 200px; width: 400px; background-image: url('../../img/03.png')" class="bg-1"></div>
-            <strong>四维缩放矩阵</strong>
-            <div style="height: 250px; width: 900px; background-image: url('../../img/rotation_04.webp')"
-                 class="bg-1"></div>
-            <strong>实例</strong>
-            <ul>
-              <li><a href="../../WebGL编程指南/ch3/RotatedTriangle_Matrix.html">缩放三角形(使用矩阵)</a></li>
-            </ul>
-          </div>
-        </section>
-        <section id="translation">
-          <h4>位移(translation)</h4>
-          <p>对于一个三维坐标（x, y, z），我们想让它往x轴正方向移动1个单位，往y轴正方向移动1个单位，往z轴正方向移动1个单位，则可以让它加上一个向量（1, 1, 1）。</p>
-          <div class="content">
-            <h4>四维平移矩阵</h4>
-            <div style="height: 200px; width: 800px; background-image: url('../../img/3.10.webp')" class="bg-1"></div>
-            <p>从上图中可以看到，四维位移矩阵，是在一个四维单位矩阵（就是对角线都是1，其他都是0的矩阵）的最后一列，放入你想要位移的向量（tx, ty, tz）</p>
-            <strong>实例</strong>
-            <ul>
-              <li><a href="../../example/WebGL编程指南/ch3/TranslatedTriangle.html">平移三角形</a></li>
-              <li><a href="../../example/WebGL编程指南/ch3/RotatedTriangle_Matrix.html">平移三角形(使用矩阵)</a></li>
-            </ul>
-          </div>
-        </section>
-        <section id="mirror_matrix">
-          <h3>镜像</h3>
-        </section>
-        <section id="shear_matrix">
-          <h3>切变</h3>
-        </section>
-        <section id="modelMatrix">
-          <h4>模型矩阵：</h4>
-          <p>将物体坐标变换为世界坐标。包换物体的平移 旋转 缩放.</p>
-        </section>
-        <section id="viewMatrix">
-          <h4>视图矩阵：</h4>
-          <p>视图矩阵用来表示把相机当前位置、方向变换到一个固定位置、固定方向的一个矩阵，通常固定为原点，上方向为y，看向-z方向。
-            当把相机位置变换到一个固定位置时，要想保证眼中的世界不发生变化，就要把所有的模型进行同样的变换，把每一个模型都左乘视图矩阵,
-            这样就世界坐标变换为眼睛坐标。</p>
-          <p>简单来说，固定其他因素，我们改变了相机的位置和角度后，它眼中的世界也会发生变化，这种变化就是视图矩阵。</p>
-          <p>具体来说：相机在三维空间中的位置是 camera.matrixWorld ，而它的视图矩阵是相机位置矩阵的逆矩阵 CameraMatrixWorldInverse ，它也符合了我们的生活经验：</p>
-          <ul class="ul-3-num">
-            <li>固定相机，人向左移动</li>
-            <li>固定人，向右移动相机</li>
-          </ul>
-          <div class="content">
-            <strong>视图坐标：</strong>
-            <p>空间中的点相对于观察者的位置。</p>
-            <p>如果观察者置于原点处，面向Z轴负半轴，那么点的世界坐标就是其视图坐标。</p>
-            <strong>模型视图矩阵:</strong>
-            <p>视图矩阵乘以模型矩阵得到的矩阵。</p>
-            <p>模型视图矩阵的作用是：乘以一个点坐标，获得一个新的点坐标，获得的点坐标表示点在世界里变换，观察者也变换后，
-              点相对于观察者的位置。</p>
-          </div>
-        </section>
-        <section id="projectMatrix">
-          <h4>投影矩阵：</h4>
-          <p>将眼睛坐标变换为裁剪坐标.</p>
-          <div class="content">
-            <strong>投影算法:</strong>
-            <p>三维空间中的物体，投射在相机视平面的转换算法。</p>
+						<strong>旋转矩阵</strong>
+						<p>由上面矩阵乘法和点变换可得旋转矩阵：</p>
+						<div style="height: 200px; width: 400px; background-image: url('../../img/3.7.png')"
+							 class="bg-1"></div>
+						<strong>四阶旋转矩阵</strong>
+						<div style="height: 200px; width: 400px; background-image: url('../../img/四阶旋转矩阵.png')"
+							 class="bg-1"></div>
+						<strong>实例</strong>
+						<ul>
+							<li><a href="../../WebGL编程指南/ch3/RotatedTriangle.html">旋转三角形</a></li>
+							<li><a href="../../WebGL编程指南/ch3/RotatedTriangle_Matrix.html">旋转三角形(使用矩阵)</a></li>
+						</ul>
+					</div>
+				</section>
+				<section id="scale">
+					<h4>缩放（scale)</h4>
+					<div class="content">
+						<p>对于一个三维坐标（x, y, z），我们想让它扩大2倍，则可以让它变成（2x, 2y, 2z）。写成矩阵乘法的话，V2 = M*V1，M如下图：</p>
+						<div style="height: 200px; width: 400px; background-image: url('../../img/03.png')"
+							 class="bg-1"></div>
+						<strong>四维缩放矩阵</strong>
+						<div style="height: 250px; width: 900px; background-image: url('../../img/rotation_04.webp')"
+							 class="bg-1"></div>
+						<strong>实例</strong>
+						<ul>
+							<li><a href="../../WebGL编程指南/ch3/RotatedTriangle_Matrix.html">缩放三角形(使用矩阵)</a></li>
+						</ul>
+					</div>
+				</section>
+				<section id="translation">
+					<h4>位移(translation)</h4>
+					<p>对于一个三维坐标（x, y, z），我们想让它往x轴正方向移动1个单位，往y轴正方向移动1个单位，往z轴正方向移动1个单位，则可以让它加上一个向量（1, 1, 1）。</p>
+					<div class="content">
+						<h4>四维平移矩阵</h4>
+						<div style="height: 200px; width: 800px; background-image: url('../../img/3.10.webp')"
+							 class="bg-1"></div>
+						<p>从上图中可以看到，四维位移矩阵，是在一个四维单位矩阵（就是对角线都是1，其他都是0的矩阵）的最后一列，放入你想要位移的向量（tx, ty, tz）</p>
+						<strong>实例</strong>
+						<ul>
+							<li><a href="../../example/WebGL编程指南/ch3/TranslatedTriangle.html">平移三角形</a></li>
+							<li><a href="../../example/WebGL编程指南/ch3/RotatedTriangle_Matrix.html">平移三角形(使用矩阵)</a></li>
+						</ul>
+					</div>
+				</section>
+				<section id="mirror_matrix">
+					<h3>镜像</h3>
+				</section>
+				<section id="shear_matrix">
+					<h3>切变</h3>
+				</section>
+				<section id="modelMatrix">
+					<h4>模型矩阵：</h4>
+					<p>将物体坐标变换为世界坐标。包换物体的平移 旋转 缩放.</p>
+				</section>
+				<section id="viewMatrix">
+					<h4>视图矩阵：</h4>
+					<p>视图矩阵用来表示把相机当前位置、方向变换到一个固定位置、固定方向的一个矩阵，通常固定为原点，上方向为y，看向-z方向。
+						当把相机位置变换到一个固定位置时，要想保证眼中的世界不发生变化，就要把所有的模型进行同样的变换，把每一个模型都左乘视图矩阵,
+						这样就世界坐标变换为眼睛坐标。</p>
+					<p>简单来说，固定其他因素，我们改变了相机的位置和角度后，它眼中的世界也会发生变化，这种变化就是视图矩阵。</p>
+					<p>具体来说：相机在三维空间中的位置是 camera.matrixWorld ，而它的视图矩阵是相机位置矩阵的逆矩阵 CameraMatrixWorldInverse
+						，它也符合了我们的生活经验：</p>
+					<ul class="ul-3-num">
+						<li>固定相机，人向左移动</li>
+						<li>固定人，向右移动相机</li>
+					</ul>
+					<div class="content">
+						<strong>视图坐标：</strong>
+						<p>空间中的点相对于观察者的位置。</p>
+						<p>如果观察者置于原点处，面向Z轴负半轴，那么点的世界坐标就是其视图坐标。</p>
+						<strong>模型视图矩阵:</strong>
+						<p>视图矩阵乘以模型矩阵得到的矩阵。</p>
+						<p>模型视图矩阵的作用是：乘以一个点坐标，获得一个新的点坐标，获得的点坐标表示点在世界里变换，观察者也变换后，
+							点相对于观察者的位置。</p>
+					</div>
+				</section>
+				<section id="projectMatrix">
+					<h4>投影矩阵：</h4>
+					<p>将眼睛坐标变换为裁剪坐标.</p>
+					<div class="content">
+						<strong>投影算法:</strong>
+						<p>三维空间中的物体，投射在相机视平面的转换算法。</p>
 
-            <strong>投影类型:</strong>
-            <ul class="ul-2-num">
-              <li>
-                <strong>正交投影(orthographic projection):</strong>
-                投影线垂直于投影面的投影属于正交投影，也称平行投影。
-              </li>
-              <li>
-                <strong>透视投影（perspective projection):</strong>
-                透视投影（透视图、透视）是中心投影，从某个投影中心将物体投影到单一投影面所得到的图形。
-              </li>
-            </ul>
+						<strong>投影类型:</strong>
+						<ul class="ul-2-num">
+							<li>
+								<strong>正交投影(orthographic projection):</strong>
+								投影线垂直于投影面的投影属于正交投影，也称平行投影。
+							</li>
+							<li>
+								<strong>透视投影（perspective projection):</strong>
+								透视投影（透视图、透视）是中心投影，从某个投影中心将物体投影到单一投影面所得到的图形。
+							</li>
+						</ul>
 
-            <strong>投影相关因素：</strong>
-            <ul class="ul-2-num">
-              <li>相机的投影类型（<a href="#orthographicProjection">正射投影</a>、<a href="#perspectiveProjection">透视投影</a>）：投影矩阵（ProjectMatrix）
-              </li>
-              <li>相机的位置和方向：<a href="#viewMatrix">视图矩阵(CameraMatrixWorldInverse或ViewMatrix)</a></li>
-              <li>物体的位置和形变（旋转/缩放/平移）：模型矩阵( ObjectWorldMatrix )</li>
-              <li>对结果图像拉伸或者压缩，变换为需要的图片大小(视口变换,viewpoint transform)</li>
-            </ul>
-            <p>三维投影算法就是将上诉因素抽象为数学算法，用来计算三维物体在相机视平面上的位置。实际应用中我们是通过矩阵计算来实现的。简而言之，我们将相机的位置方向, 相机的类型, 物体的位置和形变能转换为 矩阵 ,
-              将这些矩阵进行一系列计算后, 最终得到三维投影矩阵.</p>
+						<strong>投影相关因素：</strong>
+						<ul class="ul-2-num">
+							<li>相机的投影类型（<a href="#orthographicProjection">正射投影</a>、<a
+									href="#perspectiveProjection">透视投影</a>）：投影矩阵（ProjectMatrix）
+							</li>
+							<li>相机的位置和方向：<a href="#viewMatrix">视图矩阵(CameraMatrixWorldInverse或ViewMatrix)</a></li>
+							<li>物体的位置和形变（旋转/缩放/平移）：模型矩阵( ObjectWorldMatrix )</li>
+							<li>对结果图像拉伸或者压缩，变换为需要的图片大小(视口变换,viewpoint transform)</li>
+						</ul>
+						<p>三维投影算法就是将上诉因素抽象为数学算法，用来计算三维物体在相机视平面上的位置。实际应用中我们是通过矩阵计算来实现的。简而言之，我们将相机的位置方向, 相机的类型,
+							物体的位置和形变能转换为 矩阵 ,
+							将这些矩阵进行一系列计算后, 最终得到三维投影矩阵.</p>
 
-            <strong>三维投影矩阵计算公式：</strong>
-            <p>uMatrix = ProjectMatrix * CameraMatrixWorldInverse * ObjectMatrixWorld</p>
+						<strong>三维投影矩阵计算公式：</strong>
+						<p>uMatrix = ProjectMatrix * CameraMatrixWorldInverse * ObjectMatrixWorld</p>
 
-            <strong>可视空间：</strong>
-            <ul class="ul-2-num">
-              <li>长方形可视空间，也称盒状空间，由<a href="#orthographicProjection">正射投影（orthographic projection）</a>产生。</li>
-              <li>四棱锥/金字塔可视空间，由<a href="#perspectiveProjection">透视投影(perspective projection)</a>产生</li>
-            </ul>
+						<strong>可视空间：</strong>
+						<ul class="ul-2-num">
+							<li>长方形可视空间，也称盒状空间，由<a href="#orthographicProjection">正射投影（orthographic projection）</a>产生。
+							</li>
+							<li>四棱锥/金字塔可视空间，由<a href="#perspectiveProjection">透视投影(perspective projection)</a>产生</li>
+						</ul>
 
-            <h4>获取屏幕二维坐标:</h4>
-            <p>const [x, y] = ProjectionMatrix * CameraWorldMatrixInverse * [x, y, z]</p>
+						<h4>获取屏幕二维坐标:</h4>
+						<p>const [x, y] = ProjectionMatrix * CameraWorldMatrixInverse * [x, y, z]</p>
 
-            <h4>屏幕坐标转化为三维坐标:</h4>
-            <p>const [x, y, z] = CameraWorldMatrix * ProjectionMatrixInverse * [x, y, z]</p>
-            <p>不过屏幕坐标转化为三维坐标不是这么简单，因为屏幕上的二维坐标在三维空间中其实对应的是一条射线，其可以对应了无限个三维坐标点.</p>
-          </div>
-        </section>
-        <section id="library">
-          <h4>矩阵变换库</h4>
-          <div class="content">
-            <ul class="ul-1-num">
-              <li><a href="../../example/WebGL编程指南/lib/cuon-matrix说明.html">WebGL编程指南书中提供的矩阵变换库</a></li>
-            </ul>
-          </div>
-        </section>
-      </section>
-      <section class="section1" id="light">
-        <div class="title">光照</div>
-        <section id="lightBase">
-          <h4>光照基础</h4>
-          <div class="content">
-            <strong>反射：</strong>
-            <ul class="ul-1-num">
-              <li>漫反射：漫反射光颜色 = 入射光颜色 * 表面基地颜色 * cos</li>
-              <li>环境反射：漫反射光颜色 = 入射光颜色 * 表面基地颜色</li>
-            </ul>
-          </div>
-        </section>
-        <section id="Blinn-Phone">
-          <h4>Blinn-Phone</h4>
-          <p>Ambient + Diffuse + Specular = Blinn-Phone Refection</p>
-          <div class="content">
-            <strong>Ambient：</strong>
-            <p>常数</p>
+						<h4>屏幕坐标转化为三维坐标:</h4>
+						<p>const [x, y, z] = CameraWorldMatrix * ProjectionMatrixInverse * [x, y, z]</p>
+						<p>不过屏幕坐标转化为三维坐标不是这么简单，因为屏幕上的二维坐标在三维空间中其实对应的是一条射线，其可以对应了无限个三维坐标点.</p>
+					</div>
+				</section>
+				<section id="library">
+					<h4>矩阵变换库</h4>
+					<div class="content">
+						<ul class="ul-1-num">
+							<li><a href="../../example/WebGL编程指南/lib/cuon-matrix说明.html">WebGL编程指南书中提供的矩阵变换库</a></li>
+						</ul>
+					</div>
+				</section>
+			</section>
+			<section class="section1" id="light">
+				<div class="title">光照</div>
+				<section id="lightBase">
+					<h4>光照基础</h4>
+					<div class="content">
+						<strong>反射：</strong>
+						<ul class="ul-1-num">
+							<li>漫反射：漫反射光颜色 = 入射光颜色 * 表面基地颜色 * cos</li>
+							<li>环境反射：漫反射光颜色 = 入射光颜色 * 表面基地颜色</li>
+						</ul>
+					</div>
+				</section>
+				<section id="Blinn-Phone">
+					<h4>Blinn-Phone</h4>
+					<p>Ambient + Diffuse + Specular = Blinn-Phone Refection</p>
+					<div class="content">
+						<strong>Ambient：</strong>
+						<p>常数</p>
 
-            <strong>Diffuse：</strong>
-            <ul class="ul-2-num">
-              <li>均匀的反射到其他方向</li>
-              <li>反射强度与入射光距离、夹角有关</li>
-            </ul>
+						<strong>Diffuse：</strong>
+						<ul class="ul-2-num">
+							<li>均匀的反射到其他方向</li>
+							<li>反射强度与入射光距离、夹角有关</li>
+						</ul>
 
-            <strong>Specular：</strong>
-            <ul class="ul-2-num">
-              <li>观察到的方向与反射光方向接近</li>
-            </ul>
-          </div>
-        </section>
-      </section>
-      <section id="CoordinateSystem" class="section1">
-        <div class="title">坐标系</div>
-        <div id="Three-dimensionalCoordinateSystem">
-          <h4>三维坐标系</h4>
-          <p>三维笛卡儿坐标系是在二维笛卡儿坐标系的基础上根据右手定则增加第三维坐标（即Z轴）而形成的。</p>
-          <div class="content">
-            <strong>矩阵法坐标系转换：</strong>
-            <ul class="ul-2-num">
-              <li>获取原坐标系到目标坐标系的矩阵m</li>
-              <li>计算矩阵m的逆转置矩阵T</li>
-              <li>原坐标系中的点在目标坐标系中的对应点 v1 = T * v2</li>
-            </ul>
-            <strong>实例:</strong>
-            <p>var matrix = new THREE.Matrix4();</p>
-            <p>matrix.set(0, 1, 0, 0,0, 0, 1, 0,1, 0, 0, 0,0, 0, 0, 1);</p>
-            <p>矩阵matrix可以把c中的坐标系转换到three中</p>
-          </div>
-        </div>
-        <div id="SphericalCoordinateSystem">
-          <h4>球面坐标系</h4>
-          <div class="content">
-            <strong>定义:</strong>
-            <p>设P是R^3中一点，在球面坐标系中的三个坐标变量是(r,θ, φ):
-            <p>
-            <p>r: 原点到点P的距离。</p>
-            <p>倾角(或极角) θ：是天顶方向和线段OP之间的夹角。</p>
-            <p>方位(或方位角) φ：是从方位参考方向到参照平面上线段OP的正交投影的有符号角度。</p>
-            <div><img src="img/map1.png"/></div>
-            <strong>特点：</strong>
-            <p>球面坐标系相同的同一点，具有无限多个等效坐标,，你可以在不改变角度的情况下, 增加或减去任意数量倍的，从而不改变角点。</p>
-            <p>在许多情况下，允许负径向距离也很方便,，该惯例是(−r,θ,φ)等效于(r,θ+ 180 °,φ)为任意r，θ和φ。此外，(r,−θ,φ)等效于(r,θ,φ+ 180 °)。</p>
-            <strong>坐标转换:</strong>
-            <p>球坐标系(r,θ,φ)与直角坐标系(x,y,z)的转换关系:</p>
-            <pre><code>
+						<strong>Specular：</strong>
+						<ul class="ul-2-num">
+							<li>观察到的方向与反射光方向接近</li>
+						</ul>
+					</div>
+				</section>
+			</section>
+			<section id="CoordinateSystem" class="section1">
+				<div class="title">坐标系</div>
+				<div id="Three-dimensionalCoordinateSystem">
+					<h4>三维坐标系</h4>
+					<p>三维笛卡儿坐标系是在二维笛卡儿坐标系的基础上根据右手定则增加第三维坐标（即Z轴）而形成的。</p>
+					<div class="content">
+						<strong>矩阵法坐标系转换：</strong>
+						<ul class="ul-2-num">
+							<li>获取原坐标系到目标坐标系的矩阵m</li>
+							<li>计算矩阵m的逆转置矩阵T</li>
+							<li>原坐标系中的点在目标坐标系中的对应点 v1 = T * v2</li>
+						</ul>
+						<strong>实例:</strong>
+						<p>var matrix = new THREE.Matrix4();</p>
+						<p>matrix.set(0, 1, 0, 0,0, 0, 1, 0,1, 0, 0, 0,0, 0, 0, 1);</p>
+						<p>矩阵matrix可以把c中的坐标系转换到three中</p>
+					</div>
+				</div>
+				<div id="SphericalCoordinateSystem">
+					<h4>球面坐标系</h4>
+					<div class="content">
+						<strong>定义:</strong>
+						<p>设P是R^3中一点，在球面坐标系中的三个坐标变量是(r,θ, φ):
+						<p>
+						<p>r: 原点到点P的距离。</p>
+						<p>倾角(或极角) θ：是天顶方向和线段OP之间的夹角。</p>
+						<p>方位(或方位角) φ：是从方位参考方向到参照平面上线段OP的正交投影的有符号角度。</p>
+						<div><img src="img/map1.png"/></div>
+						<strong>特点：</strong>
+						<p>球面坐标系相同的同一点，具有无限多个等效坐标,，你可以在不改变角度的情况下, 增加或减去任意数量倍的，从而不改变角点。</p>
+						<p>在许多情况下，允许负径向距离也很方便,，该惯例是(−r,θ,φ)等效于(r,θ+ 180 °,φ)为任意r，θ和φ。此外，(r,−θ,φ)等效于(r,θ,φ+ 180 °)。</p>
+						<strong>坐标转换:</strong>
+						<p>球坐标系(r,θ,φ)与直角坐标系(x,y,z)的转换关系:</p>
+						<pre><code>
             x = rsinθcosφ.
             y = rsinθsinφ.
             z = rcosθ.
           </code></pre>
-            <p>直角坐标系(x,y,z)与球坐标系(r,θ,φ)的转换关系为:</p>
-            <pre><code>
+						<p>直角坐标系(x,y,z)与球坐标系(r,θ,φ)的转换关系为:</p>
+						<pre><code>
             r = sqrt(x^2 + y^2 + z^2)
             θ = arccos(z/r)
             φ = arctan(y/x)
           </code></pre>
-          </div>
-        </div>
-        <div id="BarycentricCoordinateSpace">
-          <h4>重心坐标空间</h4>
-          <p>重心坐标空间是一个与三角形表面相关联且独立于三角形所在3D坐标空间的坐标空间。三角形所在平面的任意点都能表示
-            为顶点的加权平均值，这个权就称为<strong>重心坐标</strong>。</p>
-          <div class="content">
-            <strong>三角形重心坐标定义:</strong>
-            <div><img src="img/01.png" width="400" align="right"></div>
-            <p>三角形所在平面上的任意一点P（笛卡尔坐标），可以通过三角形的三个顶点A、B、C（笛卡尔坐标）来表示：
-              P = Ax + By + C * Z，其中（x、y、z）便是<strong>重心坐标</strong>。由此可以看出P点其实是A、B、C点加权之和。</p>
-            <p>如图所示，A点的重心坐标是(1，0，0)，B点的重心坐标是（0，1，0），C点的重心坐标是（0，0，1）</p>
-            <strong>重心坐标确定三角形的边:</strong>
-            <p>由上面的讲解和图片展示可以得知，重心坐标（x，y，z）中任何一个值为0的点，都在三角形的边上。不过在实际的图形
-              渲染中，边的宽度不可能是0，而应该是一个大于0的值，所以一般可以指定一个要绘制的线宽width，如果重心坐标
-              （x，y，z）中的任一个分量的值小于这个线宽width，可以认为在边上。</p>
-            <strong>特点：</strong>
-            <ul class="ul-2-num">
-              <li>三角形三个顶点的重心坐标都是单位向量（1，0，0）、（0，1，0）、（0，0，1）。</li>
-              <li>在某顶点的相对边上的所有点的对应重心坐标分量为0.</li>
-              <li>不只是三角形内的点，该平面上的所有点都能用重心坐标描述。</li>
-            </ul>
-            <strong>重心坐标的应用：</strong>
-            <ul class="ul-2-num">
-              <li>渲染中，三角形内作插值</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
+					</div>
+				</div>
+				<div id="BarycentricCoordinateSpace">
+					<h4>重心坐标空间</h4>
+					<p>重心坐标空间是一个与三角形表面相关联且独立于三角形所在3D坐标空间的坐标空间。三角形所在平面的任意点都能表示
+						为顶点的加权平均值，这个权就称为<strong>重心坐标</strong>。</p>
+					<div class="content">
+						<strong>三角形重心坐标定义:</strong>
+						<div><img src="img/01.png" width="400" align="right"></div>
+						<p>三角形所在平面上的任意一点P（笛卡尔坐标），可以通过三角形的三个顶点A、B、C（笛卡尔坐标）来表示：
+							P = Ax + By + C * Z，其中（x、y、z）便是<strong>重心坐标</strong>。由此可以看出P点其实是A、B、C点加权之和。</p>
+						<p>如图所示，A点的重心坐标是(1，0，0)，B点的重心坐标是（0，1，0），C点的重心坐标是（0，0，1）</p>
+						<strong>重心坐标确定三角形的边:</strong>
+						<p>由上面的讲解和图片展示可以得知，重心坐标（x，y，z）中任何一个值为0的点，都在三角形的边上。不过在实际的图形
+							渲染中，边的宽度不可能是0，而应该是一个大于0的值，所以一般可以指定一个要绘制的线宽width，如果重心坐标
+							（x，y，z）中的任一个分量的值小于这个线宽width，可以认为在边上。</p>
+						<strong>特点：</strong>
+						<ul class="ul-2-num">
+							<li>三角形三个顶点的重心坐标都是单位向量（1，0，0）、（0，1，0）、（0，0，1）。</li>
+							<li>在某顶点的相对边上的所有点的对应重心坐标分量为0.</li>
+							<li>不只是三角形内的点，该平面上的所有点都能用重心坐标描述。</li>
+						</ul>
+						<strong>重心坐标的应用：</strong>
+						<ul class="ul-2-num">
+							<li>渲染中，三角形内作插值</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
 </div>
 </body>
 </html>

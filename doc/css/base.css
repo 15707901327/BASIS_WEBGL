@@ -36,7 +36,7 @@ section .img1{
 }
 
 section pre{
-    background: black;
+    background: #7a888c;
     color: #ffffff;
     border-radius: 0.5rem;
 }

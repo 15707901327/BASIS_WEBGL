@@ -21,12 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="1. 多边形交集">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/base.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/doc/css/base.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/graphics/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/graphics/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/shader/BuiltInFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/shader/BuiltInFunction.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/shader/customFunction.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/shader/basicAlgorithm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/shader/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/shader/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/shader/basicAlgorithm.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/shader/basicAlgorithm.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +61,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/doc/shader" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -369,14 +364,8 @@
       <workItem from="1634539588223" duration="5000" />
       <workItem from="1635481778812" duration="776000" />
       <workItem from="1635486556414" duration="24000" />
-      <workItem from="1635739511504" duration="4401000" />
-    </task>
-    <task id="LOCAL-00057" summary="1.修改文档结构">
-      <created>1576135430754</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1576135430754</updated>
+      <workItem from="1635739511504" duration="4504000" />
+      <workItem from="1635751990525" duration="91000" />
     </task>
     <task id="LOCAL-00058" summary="1.更新">
       <created>1576228065871</created>
@@ -714,7 +703,14 @@
       <option name="project" value="LOCAL" />
       <updated>1631694309121</updated>
     </task>
-    <option name="localTasksCounter" value="106" />
+    <task id="LOCAL-00106" summary="1. 修改API">
+      <created>1635748752416</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1635748752416</updated>
+    </task>
+    <option name="localTasksCounter" value="107" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -733,7 +729,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.偏导函数" />
     <MESSAGE value="1.GLSE文档" />
     <MESSAGE value="1.绘制渐变颜色实例" />
     <MESSAGE value="1.绘制cube渐变颜色实例" />
@@ -758,7 +753,8 @@
     <MESSAGE value="1. 着色" />
     <MESSAGE value="1. 着色器文档更新" />
     <MESSAGE value="1. 多边形交集" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. 多边形交集" />
+    <MESSAGE value="1. 修改API" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. 修改API" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

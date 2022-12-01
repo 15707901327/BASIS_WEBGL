@@ -1,0 +1,10 @@
+{
+  "name": "BASIS_WEBGL",
+  "version": "0.0.1",
+  "scripts": {
+    "jsdoc": "jsdoc -r -c ./jsdoc/Jaguar-template/conf.json --verbose ./jsdoc/Jaguar-template/README.md"
+  },
+  "devDependencies": {
+    "jsdoc": "3.5.5"
+  }
+}

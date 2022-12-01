@@ -20,7 +20,58 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="1. ceshi">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ceshi.js" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/static/fonts/glyphicons-halflings-regular.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/static/fonts/glyphicons-halflings-regular.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/static/fonts/glyphicons-halflings-regular.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/Gruntfile.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/LICENSE" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/README.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/conf.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/demo/sample/Car.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/demo/sample/Child.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/demo/sample/Namespace.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/demo/sample/Parent.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/less/common.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/less/footer.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/less/jaguar.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/less/main.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/less/navigation.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/publish.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/static/fonts/glyphicons-halflings-regular.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/static/scripts/bootstrap.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/static/scripts/jquery.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/static/scripts/jquery.min.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/static/scripts/linenumber.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/static/scripts/main.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/static/scripts/prettify/Apache-License-2.0.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/static/scripts/prettify/lang-css.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/static/scripts/prettify/prettify.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/static/scripts/underscore-min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/static/scripts/underscore-min.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/static/styles/bootstrap.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/static/styles/jaguar.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/static/styles/prettify-jsdoc.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/static/styles/prettify-tomorrow.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/tmpl/container.tmpl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/tmpl/details.tmpl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/tmpl/example.tmpl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/tmpl/examples.tmpl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/tmpl/exceptions.tmpl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/tmpl/layout.tmpl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/tmpl/mainpage.tmpl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/tmpl/members.tmpl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/tmpl/method.tmpl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/tmpl/navigation.tmpl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/tmpl/params.tmpl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/tmpl/properties.tmpl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/tmpl/returns.tmpl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/tmpl/source.tmpl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/tmpl/tutorial.tmpl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/jsdoc/Jaguar-template/tmpl/type.tmpl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -32,7 +83,18 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/out/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="197">
+              <caret line="141" column="7" lean-forward="true" selection-start-line="141" selection-start-column="7" selection-end-line="141" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -68,6 +130,9 @@
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="164" />
@@ -128,6 +193,7 @@
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/../ThreeSourceCodeAnalysis/src/renderers/webgl/WebGLUniforms.js" />
     <property name="vue.rearranger.settings.migration" value="true" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -430,14 +496,7 @@
       <workItem from="1635486556414" duration="24000" />
       <workItem from="1635739511504" duration="4504000" />
       <workItem from="1635751990525" duration="91000" />
-      <workItem from="1669867528347" duration="117000" />
-    </task>
-    <task id="LOCAL-00059" summary="1.更新矩阵">
-      <created>1577092879071</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1577092879071</updated>
+      <workItem from="1669867528347" duration="380000" />
     </task>
     <task id="LOCAL-00060" summary="1.更新webgl实例">
       <created>1577261804530</created>
@@ -775,24 +834,32 @@
       <option name="project" value="LOCAL" />
       <updated>1669867591240</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="1. ceshi">
+      <created>1669867649821</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1669867649821</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="117000" />
+    <option name="totallyTimeSpent" value="380000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="164" y="51" width="1197" height="709" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Debug Logs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32899022" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32899022" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32899022" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Salesforce" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -878,6 +945,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="141" column="7" lean-forward="true" selection-start-line="141" selection-start-column="7" selection-end-line="141" selection-end-column="7" />
           <folding />
         </state>
       </provider>

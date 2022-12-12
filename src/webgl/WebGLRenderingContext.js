@@ -6,6 +6,12 @@ class WebGLRenderingContext {
 	constructor(){}
 	
 	/**
+	 * 将定义好的WebGLProgram 对象添加到当前的渲染状态中。
+	 * @param program {WebGLProgram} 指定待使用的程序对象
+	 */
+	useProgram(program){}
+	
+	/**
 	 * 执行着色器，按照mode参数指定的方式，根据绑定到gl.ELEMENT_ARRAY_BUFFER的缓存区中的顶点索引值绘制图形。
 	 * 异常:
 	 * 如果 mode 不是正确值， gl.INVALID_ENUM 将会抛出错误异常。
@@ -30,8 +36,6 @@ class WebGLRenderingContext {
 	 *
 	 * @return {None}
 	 */
-	drawElements(mode, count, type, offset){
-	
-	}
+	drawElements(mode, count, type, offset){}
 
 }

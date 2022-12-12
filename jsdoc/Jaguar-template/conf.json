@@ -4,7 +4,7 @@
   },
   "source": {
       "include": [
-        "./src/webgl/WebGLRenderingContext.js"
+        "./src/webgl/"
       ]
     },
 	"plugins": ["plugins/markdown"],

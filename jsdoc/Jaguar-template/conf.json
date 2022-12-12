@@ -4,7 +4,7 @@
   },
   "source": {
       "include": [
-        "./WebGL API/webgl.js"
+        "./src/webgl/WebGLRenderingContext.js"
       ]
     },
 	"plugins": ["plugins/markdown"],
@@ -37,6 +37,7 @@
 		"tags": ["examples"]
 	},
   "opts": {
+	"destination": "./doc/webgl_API/",
     "encoding": "utf8",
     "template": "./jsdoc/Jaguar-template/"
   }

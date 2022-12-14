@@ -39,7 +39,7 @@
       <h4><a href="#draw">绘制方法</a></h4>
       <ul class="ul-1">
         <li><a href="#scissor">gl.scissor()</a></li>
-        <li><a href="#viewport">gl.viewport()</a></li>
+        <li><a href="../../webgl_API/WebGLRenderingContext.html#viewport">gl.viewport()</a></li>
         <li><a href="#drawArrays">gl.drawArrays()</a></li>
         <li><a href="../../webgl_API/WebGLRenderingContext.html#drawElements">gl.drawElements()</a></li>
         <li><a href="#drawBuffers">gl.drawBuffers()</a></li>
@@ -82,7 +82,7 @@
         <li><a href="#getActiveAttrib">gl.getActiveAttrib()</a></li>
         <li><a href="#WebGLActiveInfo">WebGLActiveInfo</a></li>
         <li><h4>uniform变量方法</h4></li>
-        <li><a href="#getUniformLocation" title="gl.getUniformLocation()">gl.getUniformLocation()</a></li>
+        <li><a href="../../webgl_API/WebGLRenderingContext.html#getUniformLocation" title="gl.getUniformLocation()">gl.getUniformLocation()</a></li>
         <li><a href="#uniform" title="gl.uniform[1234][fi][v]()">gl.uniform[1234][fi][v]()</a></li>
         <li><a href="#uniformMatrix4fv" title="gl.uniformMatrix4fv()">gl.uniformMatrix4fv()</a></li>
         <li><a href="#getActiveUniform" title="gl.getActiveUniform()">gl.getActiveUniform()</a></li>
@@ -229,21 +229,6 @@
         <section id="scissor">
           <h4>gl.scissor(x,y,width,height)</h4>
           <p>剪裁测试用于限制绘制区域。我们可以指定一个矩形的剪裁窗口，当启用剪裁测试后，只有在这个窗口之内的像素才能被绘制，其它像素则会被丢弃。换句话说，无论怎么绘制，剪裁窗口以外的像素将不会被修改。</p>
-          <div class="content">
-            <strong>参数</strong>
-            <ul class="ul-1">
-              <li>x,y:指定绘图区域的左上角，以像素为单位</li>
-              <li>width,height:指定绘图区域的宽度和高度</li>
-            </ul>
-            <strong>返回值</strong>
-            <p>无</p>
-            <strong>错误</strong>
-            <p>无</p>
-          </div>
-        </section>
-        <section id="viewport">
-          <h4>viewport(x,y,width,height)</h4>
-          <p>设置gl.drawArrays()和gl.drawElements()函数的绘图区域。在canvas上绘图时，x和y就是canvas中的坐标</p>
           <div class="content">
             <strong>参数</strong>
             <ul class="ul-1">
@@ -871,27 +856,6 @@
           </div>
         </section>
         <!--与uniform变量相关方法-->
-        <section id="getUniformLocation">
-          <h4>gl.getUniformLocation(program, name);</h4>
-          <p>获取指定名称的uniform变量的存储位置</p>
-          <div class="content">
-            <strong>参数：</strong>
-            <ul>
-              <li>program：指定包含顶点着色器和片元着色器的着色器程序对象。</li>
-              <li>name：指定想要获取其存储位置的uniform变量名称</li>
-            </ul>
-            <strong>返回值：</strong>
-            <ul>
-              <li>non-unll:指定uniform变量的位置</li>
-              <li>null：指定的uniform变量不存在，或者其命名具有gl_或webgl_前缀</li>
-            </ul>
-            <strong>错误：</strong>
-            <ul>
-              <li>INVALID_OPERATION:程序对象未能成功连接</li>
-              <li>INVALID_VALUE：name参数的长度大于attribute变量名的最大长度（默认256字节）</li>
-            </ul>
-          </div>
-        </section>
         <section id="uniform">
           <h4>gl.uniform[1234][fi][v]()</h4>
           <p>gl.uniform[1234]f(location, v0, v1, v2, v3);</p>

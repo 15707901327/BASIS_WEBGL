@@ -79,7 +79,11 @@
             
                 <li data-name="WebGLRenderingContext#drawElements"><a href="WebGLRenderingContext.html#drawElements">drawElements</a></li>
             
+                <li data-name="WebGLRenderingContext#getUniformLocation"><a href="WebGLRenderingContext.html#getUniformLocation">getUniformLocation</a></li>
+            
                 <li data-name="WebGLRenderingContext#useProgram"><a href="WebGLRenderingContext.html#useProgram">useProgram</a></li>
+            
+                <li data-name="WebGLRenderingContext#viewport"><a href="WebGLRenderingContext.html#viewport">viewport</a></li>
             
             </ul>
             <ul class="events itemMembers">
@@ -206,7 +210,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line39">line 39</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line49">line 49</a>
         </div>
         
     </div>
@@ -413,6 +417,154 @@
             
 <dt>
     <div class="nameContainer">
+        <h4 class="name" id="getUniformLocation">
+            
+            getUniformLocation<span class="signature">(program, name)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line59">line 59</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>获取指定名称的uniform变量的存储位置<br>INVALID_OPERATION:程序对象未能成功连接<br>INVALID_VALUE：name参数的长度大于attribute变量名的最大长度（默认256字节）</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>program</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="WebGLProgram.html">WebGLProgram</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定包含顶点着色器和片元着色器的着色器程序对象。</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定想要获取其存储位置的uniform变量名称</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+
+none-unll 指定uniform变量的位置 null 指定的uniform变量不存在，或者其命名具有gl_或webgl_前缀
+
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
         <h4 class="name" id="useProgram">
             
             useProgram<span class="signature">(program)</span>
@@ -525,6 +677,191 @@
     
 </dd>
 
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="viewport">
+            
+            viewport<span class="signature">(x, y, width, height)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line22">line 22</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>用来设置视口，即指定从标准设备到窗口坐标的 x、y 仿射变换。<br>设置gl.drawArrays()和gl.drawElements()函数的绘图区域。在canvas上绘图时，x和y就是canvas中的坐标</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">GLint</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>用来设定视口的左下角水平坐标。默认值：0。</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">GLint</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>用来设定视口的左下角垂直坐标。默认值：0。</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">GLsizei</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>用来设定视口的宽度。默认值：canvas 的宽度。</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">GLsizei</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>用来设定视口的高度。默认值：canvas 的高度。</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
         </dl>
     
     
@@ -542,7 +879,7 @@
         
 
         <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Dec 12 2022 22:32:46 GMT+0800 (China Standard Time)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Dec 14 2022 10:40:45 GMT+0800 (China Standard Time)
         </footer>
     </div>
 </div>

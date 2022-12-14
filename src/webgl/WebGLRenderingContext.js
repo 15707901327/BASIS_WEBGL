@@ -12,6 +12,16 @@ class WebGLRenderingContext {
 	useProgram(program){}
 	
 	/**
+	 * 用来设置视口，即指定从标准设备到窗口坐标的 x、y 仿射变换。
+	 * 设置gl.drawArrays()和gl.drawElements()函数的绘图区域。在canvas上绘图时，x和y就是canvas中的坐标
+	 * @param x {GLint} 用来设定视口的左下角水平坐标。默认值：0。
+	 * @param y {GLint} 用来设定视口的左下角垂直坐标。默认值：0。
+	 * @param width {GLsizei} 用来设定视口的宽度。默认值：canvas 的宽度。
+	 * @param height {GLsizei} 用来设定视口的高度。默认值：canvas 的高度。
+	 */
+	viewport(x,y,width,height){}
+	
+	/**
 	 * 执行着色器，按照mode参数指定的方式，根据绑定到gl.ELEMENT_ARRAY_BUFFER的缓存区中的顶点索引值绘制图形。
 	 * 异常:
 	 * 如果 mode 不是正确值， gl.INVALID_ENUM 将会抛出错误异常。
@@ -37,5 +47,15 @@ class WebGLRenderingContext {
 	 * @return {None}
 	 */
 	drawElements(mode, count, type, offset){}
+	
+	/**
+	 * 获取指定名称的uniform变量的存储位置
+	 * INVALID_OPERATION:程序对象未能成功连接
+	 * INVALID_VALUE：name参数的长度大于attribute变量名的最大长度（默认256字节）
+	 * @param program {WebGLProgram} 指定包含顶点着色器和片元着色器的着色器程序对象。
+	 * @param name {string} 指定想要获取其存储位置的uniform变量名称
+	 * @return none-unll 指定uniform变量的位置 null 指定的uniform变量不存在，或者其命名具有gl_或webgl_前缀
+	 */
+	getUniformLocation(program, name){}
 
 }

@@ -79,13 +79,12 @@
         <li><a href="../../webgl_API/WebGLRenderingContext.html#getAttribLocation" target="_blank">gl.getAttribLocation()</a></li>
         <li><a href="#vertexAttrib[1234]f">gl.vertexAttrib[1234]f()</a></li>
         <li><a href="#vertexAttribPointer">gl.vertexAttribPointer()</a></li>
-        <li><a href="#getActiveAttrib">gl.getActiveAttrib()</a></li>
-        <li><a href="#WebGLActiveInfo">WebGLActiveInfo</a></li>
+        <li><a href="../../webgl_API/WebGLRenderingContext.html##getActiveAttrib" target="_blank">gl.getActiveAttrib()</a></li>
         <li><h4>uniform变量方法</h4></li>
         <li><a href="../../webgl_API/WebGLRenderingContext.html#getUniformLocation" target="_blank">gl.getUniformLocation()</a></li>
         <li><a href="#uniform" title="gl.uniform[1234][fi][v]()">gl.uniform[1234][fi][v]()</a></li>
         <li><a href="#uniformMatrix4fv" title="gl.uniformMatrix4fv()">gl.uniformMatrix4fv()</a></li>
-        <li><a href="#getActiveUniform" title="gl.getActiveUniform()">gl.getActiveUniform()</a></li>
+        <li><a href="../../webgl_API/WebGLRenderingContext.html#getActiveUniform" title="gl.getActiveUniform()" target="_blank">gl.getActiveUniform()</a></li>
       </ul>
       <h4><a href="#texture">纹理对象</a></h4>
       <ul class="ul-1">
@@ -117,7 +116,7 @@
         <li><a href="#attachShader" title="gl.attachShader()">gl.attachShader()</a></li>
         <li><a href="#detachShader" title="gl.detachShader()">gl.detachShader()</a></li>
         <li><a href="#linkProgram" title="gl.linkProgram()">gl.linkProgram()</a></li>
-        <li><a href="#getProgramParameter" title="gl.getProgramParameter()">gl.getProgramParameter()</a></li>
+        <li><a href="../../webgl_API/WebGLRenderingContext.html#getProgramParameter" target="_blank" title="gl.getProgramParameter()">gl.getProgramParameter()</a></li>
         <li><a href="#getProgramInfoLog" title="gl.getProgramInfoLog()">gl.getProgramInfoLog()</a></li>
         <li><a href="../../webgl_API/WebGLRenderingContext.html#useProgram" target="_blank">gl.useProgram()</a></li>
       </ul>
@@ -803,37 +802,6 @@
             </ul>
           </div>
         </section>
-        <section id="WebGLActiveInfo">
-          <h4>WebGLActiveInfo</h4>
-          <p>代表了调用 <a href="#getActiveAttrib">WebGLRenderingContext.getActiveAttrib()</a>
-            和<a href="#getActiveUniform">WebGLRenderingContext.getActiveUniform()</a> 这两个方法后传回的信息。</p>
-          <div class="ul-1">
-            <strong>返回值：</strong>
-            <ul class="ul-1">
-              <li>info.name:请求变量的只读名称。</li>
-              <li>info.size:请求变量的只读尺寸。</li>
-              <li>info.type:请求变量的只读类型。</li>
-            </ul>
-          </div>
-        </section>
-        <section id="getActiveAttrib">
-          <h4>gl.getActiveAttrib(program,index)</h4>
-          <p>WebGL API的WebGLRenderingContext.getActiveAttrib（）方法返回包含顶点属性的大小，类型和名称的WebGLActiveInfo对象。
-            它通常在查询未知的制服时用于调试或创建通用库。</p>
-          <div class="ul-1">
-            <strong>参数：</strong>
-            <ul class="ul-1">
-              <li>program:包含顶点属性的WebGL程序。</li>
-              <li>index:一个GLuint，指定要获取的顶点属性的索引。 该值是<a href="#getProgramParameter">gl.getProgramParameter（program，gl.ACTIVE_ATTRIBUTES）</a>返回的索引0到N-1。
-              </li>
-            </ul>
-            <strong>返回值：</strong>
-            <p>A WebGLActiveInfo object.</p>
-            <strong>实例：</strong>
-            <p>var info = gl.getActiveAttrib( program, i );</p>
-            <p>var name = info.name;</p>
-          </div>
-        </section>
         <!--与uniform变量相关方法-->
         <section id="uniform">
           <h4>gl.uniform[1234][fi][v]()</h4>
@@ -882,72 +850,7 @@
             </ul>
           </div>
         </section>
-        <section id="getActiveUniform">
-          <h4>gl.getActiveUniform(program,index)</h4>
-          <p>WebGL API的WebGLRenderingContext.getActiveUniform（）方法返回包含统一属性的大小，类型和名称的WebGLActiveInfo对象。
-            它通常在查询未知的制服时用于调试或创建通用库。</p>
-          <div class="ul-1">
-            <strong>参数：</strong>
-            <ul class="ul-1">
-              <li>program:一个WebGL程序，指定WebGL着色器程序，从中获取统一变量的信息。</li>
-              <li>index:一个GLuint，指定要获取的顶点属性的索引。 该值是<a href="#getProgramParameter">gl.getProgramParameter（program，gl.ACTIVE_ATTRIBUTES）</a>返回的索引0到N-1。
-              </li>
-            </ul>
-            <strong>返回值：</strong>
-            <p>A WebGLActiveInfo object describing the uniform.</p>
-            <strong>The type attribute of the return value will be one of the following:</strong>
-            <ul class="ul-1">
-              <li>gl.FLOAT</li>
-              <li>gl.FLOAT_VEC2</li>
-              <li> gl.FLOAT_VEC3</li>
-              <li> gl.FLOAT_VEC4</li>
-              <li> gl.INT</li>
-              <li> gl.INT_VEC2</li>
-              <li> gl.INT_VEC3</li>
-              <li> gl.INT_VEC4</li>
-              <li> gl.BOOL</li>
-              <li> gl.BOOL_VEC2</li>
-              <li>gl.BOOL_VEC3</li>
-              <li> gl.BOOL_VEC4</li>
-              <li>gl.FLOAT_MAT2</li>
-              <li>gl.FLOAT_MAT3</li>
-              <li>gl.FLOAT_MAT4</li>
-              <li>gl.SAMPLER_2D</li>
-              <li>gl.SAMPLER_CUBE</li>
-            </ul>
-            <strong>When using a WebGL 2 context, the following values are possible additionally:</strong>
-            <ul class="ul-1">
-              <li>gl.UNSIGNED_INT</li>
-              <li>gl.UNSIGNED_INT_VEC2</li>
-              <li>gl.UNSIGNED_INT_VEC3</li>
-              <li>gl.UNSIGNED_INT_VEC4</li>
-              <li>gl.FLOAT_MAT2x3</li>
-              <li>gl.FLOAT_MAT2x4</li>
-              <li>gl.FLOAT_MAT3x2</li>
-              <li>gl.FLOAT_MAT3x4</li>
-              <li>gl.FLOAT_MAT4x2</li>
-              <li>gl.FLOAT_MAT4x3</li>
-              <li>gl.SAMPLER_2D</li>
-              <li>gl.SAMPLER_3D</li>
-              <li> gl.SAMPLER_CUBE</li>
-              <li>gl.SAMPLER_2D_SHADOW</li>
-              <li>gl.SAMPLER_2D_ARRAY</li>
-              <li>gl.SAMPLER_2D_ARRAY_SHADOW</li>
-              <li>gl.SAMPLER_CUBE_SHADOW</li>
-              <li>gl.INT_SAMPLER_2D</li>
-              <li>gl.INT_SAMPLER_3D</li>
-              <li>gl.INT_SAMPLER_CUBE</li>
-              <li>gl.INT_SAMPLER_2D_ARRAY</li>
-              <li>gl.UNSIGNED_INT_SAMPLER_2D</li>
-              <li>gl.UNSIGNED_INT_SAMPLER_3D</li>
-              <li>gl.UNSIGNED_INT_SAMPLER_CUBE</li>
-              <li>gl.UNSIGNED_INT_SAMPLER_2D_ARRAY</li>
-            </ul>
-            <strong>实例：</strong>
-            <p>var info = gl.getActiveAttrib( program, i );</p>
-            <p>var name = info.name;</p>
-          </div>
-        </section>
+
       </section>
       <!-- 纹理对象 -->
       <section class="section1" id="texture">
@@ -1738,33 +1641,6 @@
             <p>无</p>
             <strong>错误</strong>
             <p>无</p>
-          </div>
-        </section>
-        <section id="getProgramParameter">
-          <h4>gl.getProgramParameter(program，pname)</h4>
-          <p>获取program指定的程序对象中，pname指定的参数信息。返回的值随着panme的不同而不同</p>
-          <div class="content">
-            <strong>参数</strong>
-            <ul class="ul-1">
-              <li>program : 指定程序对象</li>
-              <li>pname :
-                指定待获取参数的类型，可以是gl.DELETE_STATUS、gl.LINK_STATUS、gl.VALIDATE_STATUS、gl.ATTACHED_SHADERS、gl.ACTIVE_ATTRIBUTES或gl.ACTIVE_UNIFORMS
-              </li>
-            </ul>
-            <strong>返回值</strong>
-            <ul class="ul-1">
-              <li>根据pname的不同，返回不同的值</li>
-              <li>gl.DELETE_STATUS：返回是程序是否已被删除（true或false）</li>
-              <li>gl.LINK_STATUS：返回是程序是否已连接成功（true或false）</li>
-              <li>gl.VALIDATE_STATUS：返回是程序是否已通过验证（true或false）</li>
-              <li>gl.ATTACHED_SHADERS：已被分配给着色器的数量</li>
-              <li>gl.ACTIVE_ATTRIBUTES：顶点着色器中attribute变量的数量</li>
-              <li>gl.ACTIVE_UNIFORMS：程序中uniform变量的数量</li>
-            </ul>
-            <strong>错误</strong>
-            <ul class="ul-1">
-              <li>INVALID_ENUM: pname的值无效</li>
-            </ul>
           </div>
         </section>
         <section id="getProgramInfoLog">

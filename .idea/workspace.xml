@@ -19,8 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="1. 修改getUniformLocation API">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/webgl/GLint.js" />
+    <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="1. 修改getAttribLocation API">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.js.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/webgl/GLenum.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/webgl/WebGLActiveInfo.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/webgl/js_API/gl.html" afterPath="$PROJECT_DIR$/doc/webgl/js_API/gl.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLProgram.html" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLProgram.html" />
@@ -50,35 +53,30 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WebGLRenderingContext.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="WebGLRenderingContext.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/webgl/WebGLRenderingContext.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="67" column="5" lean-forward="false" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
+            <state relative-caret-position="302">
+              <caret line="150" column="17" lean-forward="false" selection-start-line="150" selection-start-column="2" selection-end-line="150" selection-end-column="17" />
               <folding>
                 <element signature="n#!!doc;n#useProgram#0;n#WebGLRenderingContext#0" expanded="false" />
                 <element signature="n#!!doc;n#viewport#0;n#WebGLRenderingContext#0" expanded="false" />
                 <element signature="n#!!doc;n#drawElements#0;n#WebGLRenderingContext#0" expanded="false" />
+                <element signature="n#!!doc;n#getProgramParameter#0;n#WebGLRenderingContext#0" expanded="false" />
+                <element signature="n#!!doc;n#getUniformLocation#0;n#WebGLRenderingContext#0" expanded="false" />
+                <element signature="n#!!doc;n#getActiveUniform#0;n#WebGLRenderingContext#0" expanded="false" />
+                <element signature="n#!!doc;n#getAttribLocation#0;n#WebGLRenderingContext#0" expanded="false" />
+                <element signature="n#!!doc;n#getActiveAttrib#0;n#WebGLRenderingContext#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WebGLProgram.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/webgl/WebGLProgram.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="5" column="1" lean-forward="false" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="gl.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="gl.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/doc/webgl/js_API/gl.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2479">
-              <caret line="121" column="91" lean-forward="false" selection-start-line="121" selection-start-column="91" selection-end-line="121" selection-end-column="91" />
+            <state relative-caret-position="144">
+              <caret line="81" column="80" lean-forward="false" selection-start-line="81" selection-start-column="65" selection-end-line="81" selection-end-column="80" />
               <folding />
             </state>
           </provider>
@@ -108,6 +106,11 @@
       <find>viewport</find>
       <find>getUniformLocation</find>
       <find>getAttribLocation</find>
+      <find>initArrayBuffer</find>
+      <find>getProgramParameter</find>
+      <find>&lt;/li&gt;</find>
+      <find>getActiveUniform</find>
+      <find>getActiveAttrib</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -130,9 +133,11 @@
         <option value="$PROJECT_DIR$/jsdoc/Jaguar-template/README.md" />
         <option value="$PROJECT_DIR$/jsdoc/Jaguar-template/conf.json" />
         <option value="$PROJECT_DIR$/src/webgl/WebGLProgram.js" />
-        <option value="$PROJECT_DIR$/doc/webgl/js_API/gl.html" />
-        <option value="$PROJECT_DIR$/src/webgl/WebGLRenderingContext.js" />
         <option value="$PROJECT_DIR$/src/webgl/GLint.js" />
+        <option value="$PROJECT_DIR$/src/webgl/GLenum.js" />
+        <option value="$PROJECT_DIR$/src/webgl/WebGLRenderingContext.js" />
+        <option value="$PROJECT_DIR$/src/webgl/WebGLActiveInfo.js" />
+        <option value="$PROJECT_DIR$/doc/webgl/js_API/gl.html" />
       </list>
     </option>
   </component>
@@ -173,6 +178,17 @@
             <path>
               <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
               <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
+              <item name="doc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
+              <item name="doc" type="462c0819:PsiDirectoryNode" />
+              <item name="webgl_API" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
@@ -532,14 +548,7 @@
       <workItem from="1670512323579" duration="624000" />
       <workItem from="1670555960682" duration="633000" />
       <workItem from="1670833303720" duration="3776000" />
-      <workItem from="1670854898709" duration="20856000" />
-    </task>
-    <task id="LOCAL-00065" summary="1.法线矩阵">
-      <created>1583906371334</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1583906371335</updated>
+      <workItem from="1670854898709" duration="29873000" />
     </task>
     <task id="LOCAL-00066" summary="1.矩阵的行列式">
       <created>1583910915112</created>
@@ -877,24 +886,31 @@
       <option name="project" value="LOCAL" />
       <updated>1670985788916</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="1. 修改getAttribLocation API">
+      <created>1671766269157</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1671766269161</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28109000" />
+    <option name="totallyTimeSpent" value="37126000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="80" y="23" width="1197" height="713" extended-state="0" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16241497" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16411565" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Debug Logs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20873787" sideWeight="0.50680274" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1407767" sideWeight="0.5102041" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26860842" sideWeight="0.49659863" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.49659863" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20873787" sideWeight="0.4931973" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1407767" sideWeight="0.48979592" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Salesforce" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -932,7 +948,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.水晶开发" />
     <MESSAGE value="1.法线计算" />
     <MESSAGE value="1.测试灯光" />
     <MESSAGE value="1.实现环境光" />
@@ -957,7 +972,8 @@
     <MESSAGE value="1. 修改drawElements API" />
     <MESSAGE value="1. 修改着色器程序对象 API" />
     <MESSAGE value="1. 修改getUniformLocation API" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. 修改getUniformLocation API" />
+    <MESSAGE value="1. 修改getAttribLocation API" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. 修改getAttribLocation API" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -968,6 +984,7 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
+      <option name="time" value="1" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -976,41 +993,6 @@
     <select />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/example/WebGL编程指南/ch07/ColoredCube.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" column="28" lean-forward="true" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/WebGL编程指南/ch10/MQOParser.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/WebGL编程指南/ch09/MultiJointModel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="6" column="25" lean-forward="false" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/WebGL编程指南/ch07/ColoredCube.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2688">
-          <caret line="133" column="17" lean-forward="true" selection-start-line="133" selection-start-column="17" selection-end-line="133" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/WebGL编程指南/ch09/JointModel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1560">
-          <caret line="80" column="12" lean-forward="false" selection-start-line="80" selection-start-column="12" selection-end-line="80" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/out/index.html" />
     <entry file="file://$PROJECT_DIR$/example/WebGL编程指南/ch10/OBJViewer.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -1044,6 +1026,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1080,6 +1065,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1134,6 +1122,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1234,14 +1225,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/doc/webgl_API/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/doc/webgl/js_API/WebGL_extensions.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1344">
@@ -1258,22 +1241,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/webgl/WebGLProgram.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="5" column="1" lean-forward="false" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc/webgl/js_API/gl.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2479">
-          <caret line="121" column="91" lean-forward="false" selection-start-line="121" selection-start-column="91" selection-end-line="121" selection-end-column="91" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/webgl/GLint.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
@@ -1282,15 +1249,93 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/webgl/GLenum.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="1" column="16" lean-forward="false" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/WebGL编程指南/ch08/LightedCube.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="162" column="40" lean-forward="false" selection-start-line="162" selection-start-column="23" selection-end-line="162" selection-end-column="40" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+            <element signature="e#2723#3274#0" expanded="false" />
+            <element signature="e#3310#3712#0" expanded="false" />
+            <element signature="e#3749#4289#0" expanded="false" />
+            <element signature="e#4334#4558#0" expanded="false" />
+            <element signature="e#4848#4926#0" expanded="false" />
+            <element signature="e#5227#5305#0" expanded="false" />
+            <element signature="e#5525#5619#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="513" column="84" lean-forward="false" selection-start-line="513" selection-start-column="65" selection-end-line="513" selection-end-column="84" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.js.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/webgl_API/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="85" column="72" lean-forward="false" selection-start-line="85" selection-start-column="53" selection-end-line="85" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/webgl/WebGLProgram.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="3" column="18" lean-forward="false" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/webgl/WebGLActiveInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="6" column="24" lean-forward="true" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/webgl/WebGLRenderingContext.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="67" column="5" lean-forward="false" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
+        <state relative-caret-position="302">
+          <caret line="150" column="17" lean-forward="false" selection-start-line="150" selection-start-column="2" selection-end-line="150" selection-end-column="17" />
           <folding>
             <element signature="n#!!doc;n#useProgram#0;n#WebGLRenderingContext#0" expanded="false" />
             <element signature="n#!!doc;n#viewport#0;n#WebGLRenderingContext#0" expanded="false" />
             <element signature="n#!!doc;n#drawElements#0;n#WebGLRenderingContext#0" expanded="false" />
+            <element signature="n#!!doc;n#getProgramParameter#0;n#WebGLRenderingContext#0" expanded="false" />
+            <element signature="n#!!doc;n#getUniformLocation#0;n#WebGLRenderingContext#0" expanded="false" />
+            <element signature="n#!!doc;n#getActiveUniform#0;n#WebGLRenderingContext#0" expanded="false" />
+            <element signature="n#!!doc;n#getAttribLocation#0;n#WebGLRenderingContext#0" expanded="false" />
+            <element signature="n#!!doc;n#getActiveAttrib#0;n#WebGLRenderingContext#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/webgl/js_API/gl.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="81" column="80" lean-forward="false" selection-start-line="81" selection-start-column="65" selection-end-line="81" selection-end-column="80" />
+          <folding />
         </state>
       </provider>
     </entry>

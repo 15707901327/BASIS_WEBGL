@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Source: WebGLProgram.js</title>
+    <title>Source: WebGLActiveInfo.js</title>
     
     
     
@@ -129,7 +129,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="WebGLProgram.js.html">Source: WebGLProgram.js</h1>
+        <h1 class="page-title" data-filename="WebGLActiveInfo.js.html">Source: WebGLActiveInfo.js</h1>
         
 
 
@@ -137,11 +137,29 @@
     <section>
         <article>
             <pre class="prettyprint source "><code>/**
- * 着色器程序对象
+ * 代表了调用[gl.getActiveAttrib()]{@link WebGLRenderingContext#getActiveAttrib}和[gl.getActiveUniform()]{@link WebGLRenderingContext#getActiveUniform}这两个方法后传回的信息。
  */
-class WebGLProgram{
-	constructor(){}
-}</code></pre>
+class WebGLActiveInfo{
+	constructor(){
+		/**
+		 * @property name 名称
+		 * @readonly
+		 */
+		this.name = "name";
+		/**
+		 * @property size 大小
+		 * @readonly
+		 */
+		this.size = "size";
+		/**
+		 * @property type 类型
+		 * @readonly
+		 */
+		this.type = "type";
+	}
+}
+
+export {WebGLActiveInfo};</code></pre>
         </article>
     </section>
 

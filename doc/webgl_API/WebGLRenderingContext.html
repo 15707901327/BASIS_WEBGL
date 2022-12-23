@@ -43,6 +43,33 @@
     </div>
     <ul class="list">
     
+        <li class="item" data-name="WebGLActiveInfo">
+            <span class="title">
+                <a href="WebGLActiveInfo.html">WebGLActiveInfo</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="WebGLActiveInfo#name"><a href="WebGLActiveInfo.html#name">name</a></li>
+            
+                <li data-name="WebGLActiveInfo#size"><a href="WebGLActiveInfo.html#size">size</a></li>
+            
+                <li data-name="WebGLActiveInfo#type"><a href="WebGLActiveInfo.html#type">type</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
         <li class="item" data-name="WebGLProgram">
             <span class="title">
                 <a href="WebGLProgram.html">WebGLProgram</a>
@@ -79,7 +106,13 @@
             
                 <li data-name="WebGLRenderingContext#drawElements"><a href="WebGLRenderingContext.html#drawElements">drawElements</a></li>
             
+                <li data-name="WebGLRenderingContext#getActiveAttrib"><a href="WebGLRenderingContext.html#getActiveAttrib">getActiveAttrib</a></li>
+            
+                <li data-name="WebGLRenderingContext#getActiveUniform"><a href="WebGLRenderingContext.html#getActiveUniform">getActiveUniform</a></li>
+            
                 <li data-name="WebGLRenderingContext#getAttribLocation"><a href="WebGLRenderingContext.html#getAttribLocation">getAttribLocation</a></li>
+            
+                <li data-name="WebGLRenderingContext#getProgramParameter"><a href="WebGLRenderingContext.html#getProgramParameter">getProgramParameter</a></li>
             
                 <li data-name="WebGLRenderingContext#getUniformLocation"><a href="WebGLRenderingContext.html#getUniformLocation">getUniformLocation</a></li>
             
@@ -419,6 +452,358 @@
             
 <dt>
     <div class="nameContainer">
+        <h4 class="name" id="getActiveAttrib">
+            
+            getActiveAttrib<span class="signature">(program, index)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="WebGLActiveInfo.html">WebGLActiveInfo</a>}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line151">line 151</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>返回包含顶点属性的大小，类型和名称的WebGLActiveInfo对象。<br>它通常在查询未知的制服时用于调试或创建通用库。</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>program</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="WebGLProgram.html">WebGLProgram</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>包含顶点属性的WebGL程序。</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">GLuint</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定要获取的顶点属性的索引。该值是 <a href="WebGLRenderingContext.html#getProgramParameter"><code>getProgramParameter</code></a> 返回的索引0到N-1。</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        <a href="WebGLActiveInfo.html">WebGLActiveInfo</a>
+                        
+                    
+            </td>
+            <td class="description last">info</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><p>var info = gl.getActiveAttrib( program, i );<br>var name = info.name;</p></code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="getActiveUniform">
+            
+            getActiveUniform<span class="signature">(program, index)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="WebGLActiveInfo.html">WebGLActiveInfo</a>}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line129">line 129</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>返回包含统一属性的大小，类型和名称的WebGLActiveInfo对象。它通常在查询未知的制服时用于调试或创建通用库。</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>program</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="WebGLProgram.html">WebGLProgram</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>一个WebGL程序，指定WebGL着色器程序，从中获取统一变量的信息。</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">GLuint</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定要获取的顶点属性的索引。该值是<a href="WebGLRenderingContext.html#getProgramParameter"><code>gl.getProgramParameter(program，gl.ACTIVE_ATTRIBUTES)</code></a>返回的索引0到N-1。</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        <a href="WebGLActiveInfo.html">WebGLActiveInfo</a>
+                        
+                    
+            </td>
+            <td class="description last">info<br>返回值的type属性将是以下属性之一：<br>    gl.FLOAT<br>    gl.FLOAT_VEC2<br>    gl.FLOAT_VEC3<br>    gl.FLOAT_VEC4<br>    gl.INT<br>    gl.INT_VEC2<br>    gl.INT_VEC3<br>    gl.INT_VEC4<br>    gl.BOOL<br>    gl.BOOL_VEC2<br>    gl.BOOL_VEC3<br>    gl.BOOL_VEC4<br>    gl.FLOAT_MAT2<br>    gl.FLOAT_MAT3<br>    gl.FLOAT_MAT4<br>    gl.SAMPLER_2D<br>    gl.SAMPLER_CUBE<br>    使用WebGL 2上下文时，还可以使用以下值:<br>    gl.UNSIGNED_INT<br>    gl.UNSIGNED_INT_VEC2<br>    gl.UNSIGNED_INT_VEC3<br>    gl.UNSIGNED_INT_VEC4<br>    gl.FLOAT_MAT2x3<br>    gl.FLOAT_MAT2x4<br>    gl.FLOAT_MAT3x2<br>    gl.FLOAT_MAT3x4<br>    gl.FLOAT_MAT4x2<br>    gl.FLOAT_MAT4x3<br>    gl.SAMPLER_2D<br>    gl.SAMPLER_3D<br>    gl.SAMPLER_CUBE<br>    gl.SAMPLER_2D_SHADOW<br>    gl.SAMPLER_2D_ARRAY<br>    gl.SAMPLER_2D_ARRAY_SHADOW<br>    gl.SAMPLER_CUBE_SHADOW<br>    gl.INT_SAMPLER_2D<br>    gl.INT_SAMPLER_3D<br> gl.INT_SAMPLER_CUBE<br> gl.INT_SAMPLER_2D_ARRAY<br> gl.UNSIGNED_INT_SAMPLER_2D<br> gl.UNSIGNED_INT_SAMPLER_3D<br> gl.UNSIGNED_INT_SAMPLER_CUBE<br> gl.UNSIGNED_INT_SAMPLER_2D_ARRAY</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><p>var info = gl.getActiveAttrib( program, i );<br> var name = info.name;</p></code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
         <h4 class="name" id="getAttribLocation">
             
             getAttribLocation<span class="signature">(program, name)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{GLint}</span>
@@ -426,7 +811,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line69">line 69</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line139">line 139</a>
         </div>
         
     </div>
@@ -587,6 +972,154 @@
             
 <dt>
     <div class="nameContainer">
+        <h4 class="name" id="getProgramParameter">
+            
+            getProgramParameter<span class="signature">(program, name)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line64">line 64</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>获取program指定的程序对象中，name指定的参数信息。返回的值随着name的不同而不同<br>错误：INVALID_ENUM: pname的值无效</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>program</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="WebGLProgram.html">WebGLProgram</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定程序对象</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">GLenum</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定待获取参数的类型，可以是gl.DELETE_STATUS、gl.LINK_STATUS、gl.VALIDATE_STATUS、gl.ATTACHED_SHADERS、gl.ACTIVE_ATTRIBUTES或gl.ACTIVE_UNIFORMS</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+
+根据pname的不同，返回不同的值<br> gl.DELETE_STATUS：返回是程序是否已被删除（true或false）<br> gl.LINK_STATUS：返回是程序是否已连接成功（true或false）<br> gl.VALIDATE_STATUS：返回是程序是否已通过验证（true或false）<br> gl.ATTACHED_SHADERS：已被分配给着色器的数量<br> gl.ACTIVE_ATTRIBUTES：顶点着色器中attribute变量的数量'<br> gl.ACTIVE_UNIFORMS：程序中uniform变量的数量
+
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
         <h4 class="name" id="getUniformLocation">
             
             getUniformLocation<span class="signature">(program, name)</span>
@@ -594,7 +1127,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line59">line 59</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line74">line 74</a>
         </div>
         
     </div>
@@ -1049,7 +1582,7 @@ none-unll 指定uniform变量的位置 null 指定的uniform变量不存在，�
         
 
         <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Dec 23 2022 11:29:42 GMT+0800 (China Standard Time)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Dec 23 2022 18:26:34 GMT+0800 (China Standard Time)
         </footer>
     </div>
 </div>

@@ -76,13 +76,13 @@
       <h4><a href="#variable">变量相关方法</a></h4>
       <ul class="ul-1">
         <li><h4>attribute变量相关方法</h4></li>
-        <li><a href="#getAttribLocation">gl.getAttribLocation()</a></li>
+        <li><a href="../../webgl_API/WebGLRenderingContext.html#getAttribLocation" target="_blank">gl.getAttribLocation()</a></li>
         <li><a href="#vertexAttrib[1234]f">gl.vertexAttrib[1234]f()</a></li>
         <li><a href="#vertexAttribPointer">gl.vertexAttribPointer()</a></li>
         <li><a href="#getActiveAttrib">gl.getActiveAttrib()</a></li>
         <li><a href="#WebGLActiveInfo">WebGLActiveInfo</a></li>
         <li><h4>uniform变量方法</h4></li>
-        <li><a href="../../webgl_API/WebGLRenderingContext.html#getUniformLocation" title="gl.getUniformLocation()">gl.getUniformLocation()</a></li>
+        <li><a href="../../webgl_API/WebGLRenderingContext.html#getUniformLocation" target="_blank">gl.getUniformLocation()</a></li>
         <li><a href="#uniform" title="gl.uniform[1234][fi][v]()">gl.uniform[1234][fi][v]()</a></li>
         <li><a href="#uniformMatrix4fv" title="gl.uniformMatrix4fv()">gl.uniformMatrix4fv()</a></li>
         <li><a href="#getActiveUniform" title="gl.getActiveUniform()">gl.getActiveUniform()</a></li>
@@ -119,7 +119,7 @@
         <li><a href="#linkProgram" title="gl.linkProgram()">gl.linkProgram()</a></li>
         <li><a href="#getProgramParameter" title="gl.getProgramParameter()">gl.getProgramParameter()</a></li>
         <li><a href="#getProgramInfoLog" title="gl.getProgramInfoLog()">gl.getProgramInfoLog()</a></li>
-        <li><a href="../../webgl_API/WebGLRenderingContext.html#useProgram" title="gl.useProgram()">gl.useProgram()</a></li>
+        <li><a href="../../webgl_API/WebGLRenderingContext.html#useProgram" target="_blank">gl.useProgram()</a></li>
       </ul>
       <h4><a href="#enableInnerFun">Webgl内置功能</a></h4>
       <ul class="ul-1">
@@ -728,28 +728,7 @@
       <!-- 变量相关方法 -->
       <section class="section1" id="variable">
         <div class="title">变量相关方法</div>
-        <section id="getAttribLocation">
-          <h4>gl.getAttribLocation(gl.program, name);</h4>
-          <p>获取由name参数指定的attribute变量的存储位置</p>
-          <div class="content">
-            <strong>参数：</strong>
-            <ul class="ul-1">
-              <li>gl.program：指定包含顶点着色器和片元着色器的着色器程序对象。</li>
-              <li>name：指定想要获取其存储地址的attribute变量的名称</li>
-              <li>name：指定想要获取其存储地址的attribute变量的名称</li>
-            </ul>
-            <strong>返回值：</strong>
-            <ul class="ul-1">
-              <li>大于等于0：attribute变量的存储地址</li>
-              <li>-1：指定的attribute变量不存在，或者其命名具有gl_或webgl_前缀</li>
-            </ul>
-            <strong>错误：</strong>
-            <ul class="ul-1">
-              <li>INVALID_OPERATION:程序对象未能成功连接</li>
-              <li>-1：指定的attribute变量不存在，或者其命名具有gl_或webgl_前缀</li>
-            </ul>
-          </div>
-        </section>
+
         <section id="vertexAttrib[1234]f">
           <h4>gl.vertexAttrib[1234]f(location, v0, v1, v2, v3);</h4>
           <p>

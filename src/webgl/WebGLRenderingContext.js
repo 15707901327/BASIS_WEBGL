@@ -32,8 +32,8 @@ class WebGLRenderingContext {
 	 * 	gl.LINE_STRIP: 画一条直线到下一个顶点。
 	 * 	gl.LINE_LOOP: 绘制一条直线到下一个顶点，并将最后一个顶点返回到第一个顶点。
 	 * 	gl.LINES: 在一对顶点之间画一条线。
-	 * 	gl.TRIANGLE_STRIP,
-	 * 	gl.TRIANGLE_FAN.
+	 * 	gl.TRIANGLE_STRIP：绘制三角形带
+	 * 	gl.TRIANGLE_FAN：绘制三角形扇
 	 * 	gl.TRIANGLES, 为一组三个顶点绘制一个三角形。
 	 * @param count {int} 指定要渲染的元素数量。
 	 * @param type {enum} 指定元素数组缓冲区中的值的类型。可能的值是：
@@ -57,5 +57,15 @@ class WebGLRenderingContext {
 	 * @return none-unll 指定uniform变量的位置 null 指定的uniform变量不存在，或者其命名具有gl_或webgl_前缀
 	 */
 	getUniformLocation(program, name){}
+	
+	/**
+	 * 获取由name参数指定的attribute变量的存储位置
+	 * INVALID_OPERATION:程序对象未能成功连接
+	 * -1：指定的attribute变量不存在，或者其命名具有gl_或webgl_前缀
+	 * @param program {WebGLProgram} 指定包含顶点着色器和片元着色器的着色器程序对象
+	 * @param name {String} 指定想要获取其存储地址的attribute变量的名称
+	 * @return {GLint}大于等于0：attribute变量的存储地址,-1：指定的attribute变量不存在，或者其命名具有gl_或webgl_前缀
+	 */
+	getAttribLocation(program,name){}
 
 }

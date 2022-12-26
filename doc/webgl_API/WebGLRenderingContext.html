@@ -116,6 +116,38 @@
             
                 <li data-name="WebGLRenderingContext#getUniformLocation"><a href="WebGLRenderingContext.html#getUniformLocation">getUniformLocation</a></li>
             
+                <li data-name="WebGLRenderingContext#uniform1f"><a href="WebGLRenderingContext.html#uniform1f">uniform1f</a></li>
+            
+                <li data-name="WebGLRenderingContext#uniform1fv"><a href="WebGLRenderingContext.html#uniform1fv">uniform1fv</a></li>
+            
+                <li data-name="WebGLRenderingContext#uniform1i"><a href="WebGLRenderingContext.html#uniform1i">uniform1i</a></li>
+            
+                <li data-name="WebGLRenderingContext#uniform1iv"><a href="WebGLRenderingContext.html#uniform1iv">uniform1iv</a></li>
+            
+                <li data-name="WebGLRenderingContext#uniform2f"><a href="WebGLRenderingContext.html#uniform2f">uniform2f</a></li>
+            
+                <li data-name="WebGLRenderingContext#uniform2fv"><a href="WebGLRenderingContext.html#uniform2fv">uniform2fv</a></li>
+            
+                <li data-name="WebGLRenderingContext#uniform2i"><a href="WebGLRenderingContext.html#uniform2i">uniform2i</a></li>
+            
+                <li data-name="WebGLRenderingContext#uniform2iv"><a href="WebGLRenderingContext.html#uniform2iv">uniform2iv</a></li>
+            
+                <li data-name="WebGLRenderingContext#uniform3f"><a href="WebGLRenderingContext.html#uniform3f">uniform3f</a></li>
+            
+                <li data-name="WebGLRenderingContext#uniform3fv"><a href="WebGLRenderingContext.html#uniform3fv">uniform3fv</a></li>
+            
+                <li data-name="WebGLRenderingContext#uniform3i"><a href="WebGLRenderingContext.html#uniform3i">uniform3i</a></li>
+            
+                <li data-name="WebGLRenderingContext#uniform3iv"><a href="WebGLRenderingContext.html#uniform3iv">uniform3iv</a></li>
+            
+                <li data-name="WebGLRenderingContext#uniform4f"><a href="WebGLRenderingContext.html#uniform4f">uniform4f</a></li>
+            
+                <li data-name="WebGLRenderingContext#uniform4fv"><a href="WebGLRenderingContext.html#uniform4fv">uniform4fv</a></li>
+            
+                <li data-name="WebGLRenderingContext#uniform4i"><a href="WebGLRenderingContext.html#uniform4i">uniform4i</a></li>
+            
+                <li data-name="WebGLRenderingContext#uniform4iv"><a href="WebGLRenderingContext.html#uniform4iv">uniform4iv</a></li>
+            
                 <li data-name="WebGLRenderingContext#useProgram"><a href="WebGLRenderingContext.html#useProgram">useProgram</a></li>
             
                 <li data-name="WebGLRenderingContext#viewport"><a href="WebGLRenderingContext.html#viewport">viewport</a></li>
@@ -459,7 +491,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line151">line 151</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line295">line 295</a>
         </div>
         
     </div>
@@ -811,7 +843,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line139">line 139</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line283">line 283</a>
         </div>
         
     </div>
@@ -1268,6 +1300,2366 @@ none-unll 指定uniform变量的位置 null 指定的uniform变量不存在，�
             
 <dt>
     <div class="nameContainer">
+        <h4 class="name" id="uniform1f">
+            
+            uniform1f<span class="signature">(location, v0)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line138">line 138</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。<br>gl.uniform[1234][fi]<a href="">v</a><br>错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>location</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">WebGLUniformLocation</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定将要修改的uniform变量的存储位置</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>v0</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第一个分量的值</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="uniform1fv">
+            
+            uniform1fv<span class="signature">(location, value)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line146">line 146</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。<br>gl.uniform[1234][fi]<a href="">v</a><br>错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>location</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">WebGLUniformLocation</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定将要修改的uniform变量的存储位置</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第一个分量的值</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="uniform1i">
+            
+            uniform1i<span class="signature">(location, v0)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line154">line 154</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。<br>gl.uniform[1234][fi]<a href="">v</a><br>错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>location</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">WebGLUniformLocation</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定将要修改的uniform变量的存储位置</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>v0</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第一个分量的值</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="uniform1iv">
+            
+            uniform1iv<span class="signature">(location, value)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line162">line 162</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。<br>gl.uniform[1234][fi]<a href="">v</a><br>错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>location</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">WebGLUniformLocation</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定将要修改的uniform变量的存储位置</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第一个分量的值</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="uniform2f">
+            
+            uniform2f<span class="signature">(location, v0, v1)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line172">line 172</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。<br>gl.uniform[1234][fi]<a href="">v</a><br>错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>location</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">WebGLUniformLocation</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定将要修改的uniform变量的存储位置</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>v0</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第一个分量的值</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>v1</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第二个分量的值</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="uniform2fv">
+            
+            uniform2fv<span class="signature">(location, value)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line180">line 180</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。<br>gl.uniform[1234][fi]<a href="">v</a><br>错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>location</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">WebGLUniformLocation</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定将要修改的uniform变量的存储位置</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第一个分量的值</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="uniform2i">
+            
+            uniform2i<span class="signature">(location, v0, v1)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line189">line 189</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。<br>gl.uniform[1234][fi]<a href="">v</a><br>错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>location</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">WebGLUniformLocation</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定将要修改的uniform变量的存储位置</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>v0</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第一个分量的值</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>v1</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第二个分量的值</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="uniform2iv">
+            
+            uniform2iv<span class="signature">(location, value)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line197">line 197</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。<br>gl.uniform[1234][fi]<a href="">v</a><br>错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>location</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">WebGLUniformLocation</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定将要修改的uniform变量的存储位置</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第一个分量的值</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="uniform3f">
+            
+            uniform3f<span class="signature">(location, v0, v1, v2)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line208">line 208</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。<br>gl.uniform[1234][fi]<a href="">v</a><br>错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>location</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">WebGLUniformLocation</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定将要修改的uniform变量的存储位置</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>v0</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第一个分量的值</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>v1</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第二个分量的值</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>v2</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第三个分量的值</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="uniform3fv">
+            
+            uniform3fv<span class="signature">(location, value)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line216">line 216</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。<br>gl.uniform[1234][fi]<a href="">v</a><br>错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>location</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">WebGLUniformLocation</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定将要修改的uniform变量的存储位置</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第一个分量的值</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="uniform3i">
+            
+            uniform3i<span class="signature">(location, v0, v1, v2)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line226">line 226</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。<br>gl.uniform[1234][fi]<a href="">v</a><br>错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>location</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">WebGLUniformLocation</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定将要修改的uniform变量的存储位置</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>v0</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第一个分量的值</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>v1</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第二个分量的值</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>v2</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第三个分量的值</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="uniform3iv">
+            
+            uniform3iv<span class="signature">(location, value)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line234">line 234</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。<br>gl.uniform[1234][fi]<a href="">v</a><br>错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>location</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">WebGLUniformLocation</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定将要修改的uniform变量的存储位置</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第一个分量的值</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="uniform4f">
+            
+            uniform4f<span class="signature">(location, v0, v1, v2, v3)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line246">line 246</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。<br>gl.uniform[1234][fi]<a href="">v</a><br>错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>location</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">WebGLUniformLocation</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定将要修改的uniform变量的存储位置</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>v0</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第一个分量的值</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>v1</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第二个分量的值</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>v2</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第三个分量的值</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>v3</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第四个个分量的值</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="uniform4fv">
+            
+            uniform4fv<span class="signature">(location, value)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line254">line 254</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。<br>gl.uniform[1234][fi]<a href="">v</a><br>错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>location</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">WebGLUniformLocation</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定将要修改的uniform变量的存储位置</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第一个分量的值</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="uniform4i">
+            
+            uniform4i<span class="signature">(location, v0, v1, v2, v3)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line265">line 265</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。<br>gl.uniform[1234][fi]<a href="">v</a><br>错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>location</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">WebGLUniformLocation</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定将要修改的uniform变量的存储位置</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>v0</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第一个分量的值</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>v1</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第二个分量的值</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>v2</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第三个分量的值</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>v3</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第四个个分量的值</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="uniform4iv">
+            
+            uniform4iv<span class="signature">(location, value)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line273">line 273</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。<br>gl.uniform[1234][fi]<a href="">v</a><br>错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>location</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">WebGLUniformLocation</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定将要修改的uniform变量的存储位置</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定填充uniform变量第一个分量的值</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
         <h4 class="name" id="useProgram">
             
             useProgram<span class="signature">(program)</span>
@@ -1582,7 +3974,7 @@ none-unll 指定uniform变量的位置 null 指定的uniform变量不存在，�
         
 
         <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Dec 23 2022 18:26:34 GMT+0800 (China Standard Time)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Dec 25 2022 15:27:44 GMT+0800 (China Standard Time)
         </footer>
     </div>
 </div>

@@ -82,7 +82,7 @@
         <li><a href="../../webgl_API/WebGLRenderingContext.html##getActiveAttrib" target="_blank">gl.getActiveAttrib()</a></li>
         <li><h4>uniform变量方法</h4></li>
         <li><a href="../../webgl_API/WebGLRenderingContext.html#getUniformLocation" target="_blank">gl.getUniformLocation()</a></li>
-        <li><a href="#uniform" title="gl.uniform[1234][fi][v]()">gl.uniform[1234][fi][v]()</a></li>
+        <li><a href="../../webgl_API/WebGLRenderingContext.html#uniform4fv" title="gl.uniform[1234][fi][v]()" target="_blank">gl.uniform[1234][fi][v]()</a></li>
         <li><a href="#uniformMatrix4fv" title="gl.uniformMatrix4fv()">gl.uniformMatrix4fv()</a></li>
         <li><a href="../../webgl_API/WebGLRenderingContext.html#getActiveUniform" title="gl.getActiveUniform()" target="_blank">gl.getActiveUniform()</a></li>
       </ul>
@@ -802,33 +802,10 @@
             </ul>
           </div>
         </section>
-        <!--与uniform变量相关方法-->
-        <section id="uniform">
-          <h4>gl.uniform[1234][fi][v]()</h4>
-          <p>gl.uniform[1234]f(location, v0, v1, v2, v3);</p>
-          <p>gl.uniform[1234]v(location, value);</p>
-          <p>将数据（v0，v1，v2,v3）传给由location参数指定的uniform变量</p>
-          <div class="content">
-            <strong>参数：</strong>
-            <ul class="ul-2">
-              <li>location：指定将要修改的uniform变量的存储位置</li>
-              <li>v0：指定填充uniform变量第一个分量的值</li>
-              <li>v1：指定填充uniform变量第二个分量的值</li>
-              <li>v2：指定填充uniform变量第三个分量的值</li>
-              <li>v3：指定填充uniform变量第四个个分量的值</li>
-            </ul>
-            <strong>返回值：</strong>
-            <p>无</p>
-            <strong>错误：</strong>
-            <ul>
-              <li>INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置</li>
-            </ul>
-          </div>
-        </section>
+        <!--与变量相关方法-->
         <section id="uniformMatrix4fv">
           <h4>gl.uniformMatrix4fv(location, transpose, array)</h4>
           <p>将array表示的4X4矩阵分配给由location指定的uniform存储的变量</p>
-          <div class="content">
             <strong>参数：</strong>
             <ul class="ul-2">
               <li>location：uniform变量的存储位置</li>

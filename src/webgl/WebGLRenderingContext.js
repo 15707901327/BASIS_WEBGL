@@ -129,6 +129,150 @@ class WebGLRenderingContext {
 	getActiveUniform(program,index){}
 	
 	/**
+	 * 指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。
+	 * gl.uniform[1234][fi][v]()
+	 * 错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置
+	 * @param location {WebGLUniformLocation} 指定将要修改的uniform变量的存储位置
+	 * @param v0 指定填充uniform变量第一个分量的值
+	 */
+	uniform1f(location, v0){}
+	/**
+	 * 指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。
+	 * gl.uniform[1234][fi][v]()
+	 * 错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置
+	 * @param location {WebGLUniformLocation} 指定将要修改的uniform变量的存储位置
+	 * @param value 指定填充uniform变量第一个分量的值
+	 */
+	uniform1fv(location, value){}
+	/**
+	 * 指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。
+	 * gl.uniform[1234][fi][v]()
+	 * 错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置
+	 * @param location {WebGLUniformLocation} 指定将要修改的uniform变量的存储位置
+	 * @param v0 指定填充uniform变量第一个分量的值
+	 */
+	uniform1i(location, v0){}
+	/**
+	 * 指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。
+	 * gl.uniform[1234][fi][v]()
+	 * 错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置
+	 * @param location {WebGLUniformLocation} 指定将要修改的uniform变量的存储位置
+	 * @param value 指定填充uniform变量第一个分量的值
+	 */
+	uniform1iv(location, value){}
+	
+	/**
+	 * 指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。
+	 * gl.uniform[1234][fi][v]()
+	 * 错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置
+	 * @param location {WebGLUniformLocation} 指定将要修改的uniform变量的存储位置
+	 * @param v0 指定填充uniform变量第一个分量的值
+	 * @param v1 指定填充uniform变量第二个分量的值
+	 */
+	uniform2f(location, v0, v1){}
+	/**
+	 * 指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。
+	 * gl.uniform[1234][fi][v]()
+	 * 错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置
+	 * @param location {WebGLUniformLocation} 指定将要修改的uniform变量的存储位置
+	 * @param value 指定填充uniform变量第一个分量的值
+	 */
+	uniform2fv(location, value){}
+	/**
+	 * 指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。
+	 * gl.uniform[1234][fi][v]()
+	 * 错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置
+	 * @param location {WebGLUniformLocation} 指定将要修改的uniform变量的存储位置
+	 * @param v0 指定填充uniform变量第一个分量的值
+	 * @param v1 指定填充uniform变量第二个分量的值
+	 */
+	uniform2i(location, v0, v1){}
+	/**
+	 * 指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。
+	 * gl.uniform[1234][fi][v]()
+	 * 错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置
+	 * @param location {WebGLUniformLocation} 指定将要修改的uniform变量的存储位置
+	 * @param value 指定填充uniform变量第一个分量的值
+	 */
+	uniform2iv(location, value){}
+	
+	/**
+	 * 指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。
+	 * gl.uniform[1234][fi][v]()
+	 * 错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置
+	 * @param location {WebGLUniformLocation} 指定将要修改的uniform变量的存储位置
+	 * @param v0 指定填充uniform变量第一个分量的值
+	 * @param v1 指定填充uniform变量第二个分量的值
+	 * @param v2 指定填充uniform变量第三个分量的值
+	 */
+	uniform3f(location, v0, v1, v2){}
+	/**
+	 * 指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。
+	 * gl.uniform[1234][fi][v]()
+	 * 错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置
+	 * @param location {WebGLUniformLocation} 指定将要修改的uniform变量的存储位置
+	 * @param value 指定填充uniform变量第一个分量的值
+	 */
+	uniform3fv(location, value){}
+	/**
+	 * 指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。
+	 * gl.uniform[1234][fi][v]()
+	 * 错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置
+	 * @param location {WebGLUniformLocation} 指定将要修改的uniform变量的存储位置
+	 * @param v0 指定填充uniform变量第一个分量的值
+	 * @param v1 指定填充uniform变量第二个分量的值
+	 * @param v2 指定填充uniform变量第三个分量的值
+	 */
+	uniform3i(location, v0, v1, v2){}
+	/**
+	 * 指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。
+	 * gl.uniform[1234][fi][v]()
+	 * 错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置
+	 * @param location {WebGLUniformLocation} 指定将要修改的uniform变量的存储位置
+	 * @param value 指定填充uniform变量第一个分量的值
+	 */
+	uniform3iv(location, value){}
+	
+	/**
+	 * 指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。
+	 * gl.uniform[1234][fi][v]()
+	 * 错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置
+	 * @param location {WebGLUniformLocation} 指定将要修改的uniform变量的存储位置
+	 * @param v0 指定填充uniform变量第一个分量的值
+	 * @param v1 指定填充uniform变量第二个分量的值
+	 * @param v2 指定填充uniform变量第三个分量的值
+	 * @param v3 指定填充uniform变量第四个个分量的值
+	 */
+	uniform4f(location, v0, v1, v2, v3){}
+	/**
+	 * 指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。
+	 * gl.uniform[1234][fi][v]()
+	 * 错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置
+	 * @param location {WebGLUniformLocation} 指定将要修改的uniform变量的存储位置
+	 * @param value 指定填充uniform变量第一个分量的值
+	 */
+	uniform4fv(location, value){}
+	/**
+	 * 指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。
+	 * gl.uniform[1234][fi][v]()
+	 * 错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置
+	 * @param location {WebGLUniformLocation} 指定将要修改的uniform变量的存储位置
+	 * @param v0 指定填充uniform变量第一个分量的值
+	 * @param v1 指定填充uniform变量第二个分量的值
+	 * @param v2 指定填充uniform变量第三个分量的值
+	 * @param v3 指定填充uniform变量第四个个分量的值
+	 */
+	uniform4i(location, v0, v1, v2, v3){}
+	/**
+	 * 指定统一变量的值。当程序对象成功链接时，程序对象中定义的所有活动统一变量都初始化为0。它们保留通过调用此方法分配给它们的值，直到程序对象上发生下一次成功的链接操作，此时它们再次初始化为0。
+	 * gl.uniform[1234][fi][v]()
+	 * 错误：INVALID_OPERATION:程序对象未能成功连接，或者localhost是非法的变量的存储位置
+	 * @param location {WebGLUniformLocation} 指定将要修改的uniform变量的存储位置
+	 * @param value 指定填充uniform变量第一个分量的值
+	 */
+	uniform4iv(location, value){}
+	
+	/**
 	 * 获取由name参数指定的attribute变量的存储位置
 	 * INVALID_OPERATION:程序对象未能成功连接
 	 * -1：指定的attribute变量不存在，或者其命名具有gl_或webgl_前缀

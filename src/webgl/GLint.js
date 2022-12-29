@@ -1,3 +1,3 @@
 class GLint{
-	constructor
+	constructor(){}
 }

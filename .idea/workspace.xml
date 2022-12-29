@@ -19,10 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="1. 修改 WebGLActiveInfo API">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/webgl/WebGLUniformLocation.js" />
+    <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="1. 修改法线的计算方式">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/webgl/GLboolean.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/webgl/WebGLTexture.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/graphics/index.html" afterPath="$PROJECT_DIR$/doc/graphics/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/webgl/index.html" afterPath="$PROJECT_DIR$/doc/webgl/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/webgl/js_API/gl.html" afterPath="$PROJECT_DIR$/doc/webgl/js_API/gl.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.html" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.js.html" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.js.html" />
@@ -31,8 +32,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.html" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.js.html" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.js.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/webgl_API/index.html" afterPath="$PROJECT_DIR$/doc/webgl_API/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch08/LightedCube.js" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch08/LightedCube.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch08/LightedTranslatedRotatedCube.js" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch08/LightedTranslatedRotatedCube.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webgl/GLint.js" afterPath="$PROJECT_DIR$/src/webgl/GLint.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webgl/WebGLRenderingContext.js" afterPath="$PROJECT_DIR$/src/webgl/WebGLRenderingContext.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -48,8 +48,8 @@
       <file leaf-file-name="WebGLRenderingContext.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/webgl/WebGLRenderingContext.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="198" column="0" lean-forward="false" selection-start-line="198" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
+            <state relative-caret-position="243">
+              <caret line="434" column="13" lean-forward="false" selection-start-line="434" selection-start-column="2" selection-end-line="434" selection-end-column="13" />
               <folding>
                 <element signature="n#!!doc;n#useProgram#0;n#WebGLRenderingContext#0" expanded="false" />
                 <element signature="n#!!doc;n#viewport#0;n#WebGLRenderingContext#0" expanded="false" />
@@ -80,54 +80,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gl.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/doc/webgl/js_API/gl.html">
+      <file leaf-file-name="WebGLTexture.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/webgl/WebGLTexture.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="85" column="38" lean-forward="false" selection-start-line="85" selection-start-column="22" selection-end-line="85" selection-end-column="38" />
+            <state relative-caret-position="48">
+              <caret line="2" column="3" lean-forward="false" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LightedTranslatedRotatedCube.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/example/WebGL编程指南/ch08/LightedTranslatedRotatedCube.js">
+      <file leaf-file-name="gl.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/doc/webgl/js_API/gl.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="99" column="27" lean-forward="true" selection-start-line="99" selection-start-column="27" selection-end-line="99" selection-end-column="27" />
+            <state relative-caret-position="119">
+              <caret line="73" column="27" lean-forward="false" selection-start-line="73" selection-start-column="27" selection-end-line="73" selection-end-column="27" />
               <folding>
-                <element signature="n#!!block;n#initVertexBuffers#0" expanded="false" />
-                <element signature="n#!!block;n#initArrayBuffer#0" expanded="false" />
+                <element signature="n#section#0;n#section#3;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#section#4;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#section#5;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="math.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/doc/graphics/math.html">
+      <file leaf-file-name="LightedTranslatedRotatedCube.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/example/WebGL编程指南/ch08/LightedTranslatedRotatedCube.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="126" column="30" lean-forward="false" selection-start-line="126" selection-start-column="30" selection-end-line="126" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/doc/graphics/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2613">
-              <caret line="194" column="26" lean-forward="false" selection-start-line="194" selection-start-column="26" selection-end-line="194" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LightedTranslatedRotatedCube.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/example/WebGL编程指南/ch08/LightedTranslatedRotatedCube.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="16" column="33" lean-forward="true" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+            <state relative-caret-position="96">
+              <caret line="4" column="39" lean-forward="false" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -147,17 +128,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>drawBox</find>
-      <find>g_objDoc</find>
-      <find>mode, count, type, offset</find>
-      <find>Uint32Array</find>
-      <find>drawElements</find>
-      <find>gl.useProgram(program)</find>
-      <find>useProgram</find>
-      <find>viewport</find>
-      <find>getUniformLocation</find>
-      <find>getAttribLocation</find>
-      <find>initArrayBuffer</find>
       <find>getProgramParameter</find>
       <find>&lt;/li&gt;</find>
       <find>getActiveUniform</find>
@@ -165,14 +135,34 @@
       <find>u_LightColor</find>
       <find>normalMatrix</find>
       <find>u_AmbientLight</find>
-      <find>uniform</find>
       <find>u_NormalMatrix</find>
       <find>模型视图</find>
+      <find>uniform</find>
+      <find>createTexture()</find>
+      <find>createTexture</find>
+      <find>textureObject</find>
+      <find>float</find>
+      <find>deleteTexture</find>
+      <find>blendFunc()</find>
       <find>uniform2i</find>
+      <find>DEPTH_TEST</find>
+      <find>sampleCoverage</find>
+      <find>stencilFuncstencilFunc</find>
+      <find>enable</find>
+      <find>disable</find>
+      <find>isEnabled</find>
+      <find>blending_equation_param</find>
+      <find>blendFunc</find>
+      <find>cullFace</find>
+      <find>depthFunc</find>
+      <find>polygonOffset</find>
+      <find>scissor</find>
+      <find>stencilFunc</find>
     </findStrings>
     <dirStrings>
-      <dir>$PROJECT_DIR$/example/WebGL编程指南</dir>
       <dir>$PROJECT_DIR$/doc</dir>
+      <dir>$PROJECT_DIR$/example/WebGL编程指南</dir>
+      <dir>$PROJECT_DIR$</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -195,16 +185,19 @@
         <option value="$PROJECT_DIR$/jsdoc/Jaguar-template/README.md" />
         <option value="$PROJECT_DIR$/jsdoc/Jaguar-template/conf.json" />
         <option value="$PROJECT_DIR$/src/webgl/WebGLProgram.js" />
-        <option value="$PROJECT_DIR$/src/webgl/GLint.js" />
         <option value="$PROJECT_DIR$/src/webgl/GLenum.js" />
         <option value="$PROJECT_DIR$/src/webgl/WebGLActiveInfo.js" />
         <option value="$PROJECT_DIR$/example/WebGL编程指南/ch08/LightedCube.html" />
         <option value="$PROJECT_DIR$/example/WebGL编程指南/ch08/LightedCube.js" />
         <option value="$PROJECT_DIR$/src/webgl/WebGLUniformLocation.js" />
+        <option value="$PROJECT_DIR$/doc/graphics/index.html" />
+        <option value="$PROJECT_DIR$/example/WebGL编程指南/ch08/LightedTranslatedRotatedCube.js" />
+        <option value="$PROJECT_DIR$/src/webgl/WebGLTexture.js" />
+        <option value="$PROJECT_DIR$/src/webgl/GLint.js" />
+        <option value="$PROJECT_DIR$/src/webgl/GLboolean.js" />
+        <option value="$PROJECT_DIR$/doc/webgl/index.html" />
         <option value="$PROJECT_DIR$/doc/webgl/js_API/gl.html" />
         <option value="$PROJECT_DIR$/src/webgl/WebGLRenderingContext.js" />
-        <option value="$PROJECT_DIR$/example/WebGL编程指南/ch08/LightedTranslatedRotatedCube.js" />
-        <option value="$PROJECT_DIR$/doc/graphics/index.html" />
       </list>
     </option>
   </component>
@@ -254,7 +247,8 @@
             <path>
               <item name="BASIS_WEBGL" type="b2602c69:ProjectViewProjectNode" />
               <item name="BASIS_WEBGL" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="doc" type="462c0819:PsiDirectoryNode" />
+              <item name="webgl" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -603,14 +597,7 @@
       <workItem from="1670512323579" duration="624000" />
       <workItem from="1670555960682" duration="633000" />
       <workItem from="1670833303720" duration="3776000" />
-      <workItem from="1670854898709" duration="38931000" />
-    </task>
-    <task id="LOCAL-00067" summary="1.wireframe单通道渲染器">
-      <created>1583985624256</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1583985624257</updated>
+      <workItem from="1670854898709" duration="54559000" />
     </task>
     <task id="LOCAL-00068" summary="1.添加单通道wireframe渲染实例">
       <created>1583997566274</created>
@@ -948,24 +935,31 @@
       <option name="project" value="LOCAL" />
       <updated>1671791365423</updated>
     </task>
-    <option name="localTasksCounter" value="116" />
+    <task id="LOCAL-00116" summary="1. 修改法线的计算方式">
+      <created>1672040017704</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1672040017707</updated>
+    </task>
+    <option name="localTasksCounter" value="117" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46184000" />
+    <option name="totallyTimeSpent" value="61812000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="80" y="23" width="1197" height="709" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug Logs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14169382" sideWeight="0.5102041" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16612378" sideWeight="0.5102041" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26860842" sideWeight="0.49659863" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.49659863" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14169382" sideWeight="0.48979592" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20663266" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25407165" sideWeight="0.48979592" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14455782" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1004,7 +998,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.测试灯光" />
     <MESSAGE value="1.实现环境光" />
     <MESSAGE value="1.实现平行光" />
     <MESSAGE value="1.修改 API" />
@@ -1029,7 +1022,8 @@
     <MESSAGE value="1. 修改getUniformLocation API" />
     <MESSAGE value="1. 修改getAttribLocation API" />
     <MESSAGE value="1. 修改 WebGLActiveInfo API" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. 修改 WebGLActiveInfo API" />
+    <MESSAGE value="1. 修改法线的计算方式" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. 修改法线的计算方式" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1049,48 +1043,6 @@
     <select />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/example/WebGL编程指南/ch10/OBJViewer.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="16" column="20" lean-forward="true" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/WebGL编程指南/ch09/JointModel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1560">
-          <caret line="80" column="12" lean-forward="false" selection-start-line="80" selection-start-column="12" selection-end-line="80" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/WebGL编程指南/ch10/MQOParser.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/WebGL编程指南/ch09/MultiJointModel.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/WebGL编程指南/ch09/MultiJointModel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="6" column="25" lean-forward="false" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/example/WebGL编程指南/ch10/OBJViewer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3600">
@@ -1151,6 +1103,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1179,6 +1134,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="519">
           <caret line="133" column="17" lean-forward="true" selection-start-line="133" selection-start-column="17" selection-end-line="133" selection-end-column="17" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+            <element signature="e#2016#2567#0" expanded="false" />
+            <element signature="e#2603#3150#0" expanded="false" />
+            <element signature="e#3195#3452#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1203,6 +1164,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-4871">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1235,22 +1197,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1344">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/webgl/GLint.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" column="1" lean-forward="true" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/webgl/GLenum.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="1" column="16" lean-forward="false" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -1323,15 +1269,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="15" column="36" lean-forward="false" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="36" />
-          <folding>
-            <element signature="e#2756#3307#0" expanded="false" />
-            <element signature="e#3343#3745#0" expanded="false" />
-            <element signature="e#3782#4322#0" expanded="false" />
-            <element signature="e#4367#4591#0" expanded="false" />
-            <element signature="e#4881#4959#0" expanded="false" />
-            <element signature="e#5260#5338#0" expanded="false" />
-            <element signature="e#5558#5652#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1339,14 +1277,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="226">
           <caret line="70" column="3" lean-forward="true" selection-start-line="70" selection-start-column="3" selection-end-line="70" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc/webgl/js_API/gl.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="85" column="38" lean-forward="false" selection-start-line="85" selection-start-column="22" selection-end-line="85" selection-end-column="38" />
           <folding />
         </state>
       </provider>
@@ -1401,10 +1331,66 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/doc/graphics/Quaternion.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="559">
+          <caret line="137" column="41" lean-forward="false" selection-start-line="137" selection-start-column="41" selection-end-line="137" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/WebGL编程指南/ch08/LightedTranslatedRotatedCube.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="4" column="39" lean-forward="false" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/webgl/GLenum.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="2" column="1" lean-forward="true" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/WebGL编程指南/lib/webgl-debug.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="857">
+          <caret line="294" column="6" lean-forward="false" selection-start-line="294" selection-start-column="6" selection-end-line="294" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/webgl/GLint.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="1" column="16" lean-forward="false" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/webgl/GLboolean.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="4" column="19" lean-forward="false" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/webgl/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="338" column="18" lean-forward="false" selection-start-line="338" selection-start-column="18" selection-end-line="338" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/webgl/WebGLRenderingContext.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="198" column="0" lean-forward="false" selection-start-line="198" selection-start-column="0" selection-end-line="198" selection-end-column="0" />
+        <state relative-caret-position="243">
+          <caret line="434" column="13" lean-forward="false" selection-start-line="434" selection-start-column="2" selection-end-line="434" selection-end-column="13" />
           <folding>
             <element signature="n#!!doc;n#useProgram#0;n#WebGLRenderingContext#0" expanded="false" />
             <element signature="n#!!doc;n#viewport#0;n#WebGLRenderingContext#0" expanded="false" />
@@ -1434,14 +1420,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/example/WebGL编程指南/ch08/LightedTranslatedRotatedCube.js">
+    <entry file="file://$PROJECT_DIR$/doc/webgl/js_API/gl.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="99" column="27" lean-forward="true" selection-start-line="99" selection-start-column="27" selection-end-line="99" selection-end-column="27" />
+        <state relative-caret-position="119">
+          <caret line="73" column="27" lean-forward="false" selection-start-line="73" selection-start-column="27" selection-end-line="73" selection-end-column="27" />
           <folding>
-            <element signature="n#!!block;n#initVertexBuffers#0" expanded="false" />
-            <element signature="n#!!block;n#initArrayBuffer#0" expanded="false" />
+            <element signature="n#section#0;n#section#3;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#section#4;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#section#5;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/webgl/WebGLTexture.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="2" column="3" lean-forward="false" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+          <folding />
         </state>
       </provider>
     </entry>

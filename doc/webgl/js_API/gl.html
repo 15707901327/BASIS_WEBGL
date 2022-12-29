@@ -38,7 +38,7 @@
       </ul>
       <h4><a href="#draw">绘制方法</a></h4>
       <ul class="ul-1">
-        <li><a href="#scissor">gl.scissor()</a></li>
+        <li><a href="../../webgl_API/WebGLRenderingContext.html#scissor" target="_blank">gl.scissor()</a></li>
         <li><a href="../../webgl_API/WebGLRenderingContext.html#viewport">gl.viewport()</a></li>
         <li><a href="#drawArrays">gl.drawArrays()</a></li>
         <li><a href="../../webgl_API/WebGLRenderingContext.html#drawElements">gl.drawElements()</a></li>
@@ -71,7 +71,7 @@
       <ul class="ul-1">
         <li><a href="#clearStencil">gl.clearStencil()</a></li>
         <li><a href="#stencilOp">gl.stencilOp()</a></li>
-        <li><a href="#stencilFunc">gl.stencilFunc()</a></li>
+        <li><a href="../../webgl_API/WebGLRenderingContext.html#stencilFunc" target="_blank">gl.stencilFunc()</a></li>
       </ul>
       <h4><a href="#variable">变量相关方法</a></h4>
       <ul class="ul-1">
@@ -88,8 +88,8 @@
       </ul>
       <h4><a href="#texture">纹理对象</a></h4>
       <ul class="ul-1">
-        <li><a href="#createTexture" title="gl.createTexture()">gl.createTexture()</a></li>
-        <li><a href="#deleteTexture" title="gl.deleteTexture()">gl.deleteTexture()</a></li>
+        <li><a href="../../webgl_API/WebGLRenderingContext.html#createTexture" title="gl.createTexture()" target="_blank">gl.createTexture()</a></li>
+        <li><a href="../../webgl_API/WebGLRenderingContext.html#deleteTexture" title="gl.deleteTexture()" target="_blank">gl.deleteTexture()</a></li>
         <li><a href="#pixelStorei" title="gl.pixelStorei()">gl.pixelStorei()</a></li>
         <li><a href="#activeTexture" title="gl.activeTexture()">gl.activeTexture()</a></li>
         <li><a href="#bindTexture" title="gl.bindTexture()">gl.bindTexture()</a></li>
@@ -122,20 +122,20 @@
       </ul>
       <h4><a href="#enableInnerFun">Webgl内置功能</a></h4>
       <ul class="ul-1">
-        <li><a href="#enable" title="gl.enable()">gl.enable()</a></li>
-        <li><a href="#disable" title="gl.disable()">gl.disable()</a></li>
-        <li><a href="#polygonOffset" title="gl.polygonOffset()">gl.polygonOffset()</a></li>
-        <li><a href="#cullFace" title="gl.cullFace()">gl.cullFace()</a></li>
+        <li><a href="../../webgl_API/WebGLRenderingContext.html#enable" title="gl.enable()" target="_blank">gl.enable()</a></li>
+        <li><a href="../../webgl_API/WebGLRenderingContext.html#disable" title="gl.disable()" target="_blank">gl.disable()</a></li>
+        <li><a href="../../webgl_API/WebGLRenderingContext.html#polygonOffset" title="gl.polygonOffset()" target="_blank">gl.polygonOffset()</a></li>
+        <li><a href="../../webgl_API/WebGLRenderingContext.html#cullFace" title="gl.cullFace()" target="_blank">gl.cullFace()</a></li>
         <li><a href="#frontFace" title="gl.frontFace()">gl.frontFace()</a></li>
       </ul>
       <h4><a href="#depth">深度方法</a></h4>
       <ul class="ul-1">
         <li><a href="#depthMask" title="gl.depthMask()">gl.depthMask()</a></li>
-        <li><a href="#depthFunc" title="gl.depthFunc()">gl.depthFunc()</a></li>
+        <li><a href="../../webgl_API/WebGLRenderingContext.html#depthFunc" title="gl.depthFunc()" target="_blank">gl.depthFunc()</a></li>
       </ul>
       <h4><a href="#blending">混合方法</a></h4>
       <ul class="ul-1">
-        <li><a href="#blendFunc" title="gl.blendFunc()">gl.blendFunc()</a></li>
+        <li><a href="../../webgl_API/WebGLRenderingContext.html#blendFunc" title="gl.blendFunc()" target="_blank">gl.blendFunc()</a></li>
         <li><a href="#blendColor" title="gl.blendColor()">gl.blendColor()</a></li>
         <li><a href="#blendEquation" title="gl.blendEquation()">gl.blendEquation()</a></li>
         <li><a href="#blendEquationSeparate" title="gl.blendEquationSeparate()">gl.blendEquationSeparate()</a></li>
@@ -225,21 +225,7 @@
       <!--绘制图形的基本方法-->
       <section id="draw" class="section1">
         <h4 class="title">绘制图形的基本方法</h4>
-        <section id="scissor">
-          <h4>gl.scissor(x,y,width,height)</h4>
-          <p>剪裁测试用于限制绘制区域。我们可以指定一个矩形的剪裁窗口，当启用剪裁测试后，只有在这个窗口之内的像素才能被绘制，其它像素则会被丢弃。换句话说，无论怎么绘制，剪裁窗口以外的像素将不会被修改。</p>
-          <div class="content">
-            <strong>参数</strong>
-            <ul class="ul-1">
-              <li>x,y:指定绘图区域的左上角，以像素为单位</li>
-              <li>width,height:指定绘图区域的宽度和高度</li>
-            </ul>
-            <strong>返回值</strong>
-            <p>无</p>
-            <strong>错误</strong>
-            <p>无</p>
-          </div>
-        </section>
+
         <section id="drawArrays">
           <h4>gl.drawArrays(mode, first, count);</h4>
           <p>执行顶点着色器，按照mode参数指定的方式绘制图形</p>
@@ -683,7 +669,7 @@
               </tr>
               <tr>
                 <td>REPLACE</td>
-                <td>使用测试条件中的设定值来代替当前模板值，<a href="#stencilFunc">stencilFunc()</a>中的ref参数</td>
+                <td>使用测试条件中的设定值来代替当前模板值，<a href="../../webgl_API/WebGLRenderingContext.html#stencilFunc" target="_blank">stencilFunc()</a>中的ref参数</td>
               </tr>
               <tr>
                 <td>INCR</td>
@@ -706,21 +692,6 @@
                 <td>按位取反</td>
               </tr>
             </table>
-          </div>
-        </section>
-        <section id="stencilFunc">
-          <h4>gl.stencilFunc(func, ref, mask);</h4>
-          <p>设置正面和背面功能以及模板测试的参考值。</p>
-          <p>模具启用和禁用每个像素的绘图。它通常用于多通道渲染中以获得特殊效果。</p>
-          <div class="content">
-            <strong>参数：</strong>
-            <ul class="ul-1">
-              <li>func：指定测试功能。 默认功能是gl.ALWAYS。</li>
-              <li>ref：指定模板测试的参考值。此值被限制在0到2n -1的范围内，其中n是模板缓冲区中的位平面数。默认值为0。</li>
-              <li>mask：指定按位掩码，用于在完成测试时对参考值和存储的模板值进行“与”运算。默认值为全1。</li>
-            </ul>
-            <strong>返回值：</strong>
-            <p>无</p>
           </div>
         </section>
       </section>
@@ -1088,25 +1059,6 @@
               <th colspan="4">WebGL2 对照表</th>
             </tr>
           </table>
-        </section>
-        <section id="createTexture">
-          <h4>gl.createTexture()</h4>
-          <p>创建 <a href="../index.html#textureObject">纹理对象</a> 以存储纹理图像。</p>
-          <div class="content">
-            <strong>返回值：</strong>
-            <ul class="ul-2">
-              <li>non-null:新创建的纹理对象</li>
-              <li>null:创建纹理对象失败</li>
-            </ul>
-          </div>
-        </section>
-        <section id="deleteTexture">
-          <h4>gl.deleteTexture(texture)</h4>
-          <p>删除 <a href="../index.html#textureObject">纹理对象</a></p>
-          <div class="content">
-            <strong>参数:</strong>
-            <p>texture：待删除的 <a href="../index.html#textureObject">纹理对象</a></p>
-          </div>
         </section>
         <section id="pixelStorei">
           <h4>gl.pixelStorei(pname,param)</h4>
@@ -1641,86 +1593,7 @@
       <!--开启相关功能-->
       <section id="enableInnerFun" class="section1">
         <div class="title">Webgl内置功能</div>
-        <section id="enable">
-          <h4>gl.enable(cap)</h4>
-          <p>开启cap表示的功能（capability）</p>
-          <div class="content">
-            <strong>参数：</strong>
-            <ul class="ul-1">
-              <li>
-                cap:指定开启的功能
-                <p>gl.DEPTH_TEST:消除隐藏面</p>
-                <p>gl.BLEND:混合</p>
-                <p>gl.POLYGON_OFFSET_FILL:多边形位移</p>
-                <p>gl.CULL_FACE:开启剔除效果</p>
-                <p>gl.SCISSOR_TEST:开启裁剪功能</p>
-                <p>gl.STENCIL_TEST:激活模板测试并更新模板缓冲区。</p>
-              </li>
-            </ul>
-            <strong>返回值</strong>
-            <p>无</p>
-            <strong>错误</strong>
-            <p>INVALID_ENUM:cap的值无效</p>
-          </div>
-        </section>
-        <section id="disable">
-          <h4>gl.disable(cap)</h4>
-          <p>关闭cap表示的功能（capability）</p>
-          <div class="content">
-            <strong>参数：</strong>
-            <ul class="ul-1">
-              <li>
-                cap:指定开启的功能，有可能是以下的几个
-                <p>gl.DEPTH_TEST:消除隐藏面</p>
-                <p>gl.BLEND:混合</p>
-                <p>gl.POLYGON_OFFSET_FILL:多边形位移</p>
-                <p>gl.CULL_FACE:关闭剔除效果</p>
-              </li>
-            </ul>
-            <strong>返回值</strong>
-            <p>无</p>
-            <strong>错误</strong>
-            <p>INVALID_ENUM:cap的值无效</p>
-          </div>
-        </section>
-        <section id="polygonOffset">
-          <h4>gl.polygonOffset(factor,units)</h4>
-          <p>指定加到每个顶点绘制后z值上的偏移量，偏移量按照公式m*factor+r*units计算，其中m表示顶点所在表面相对于观察者的视线的角度，而r表示硬件能够区分两个z值之差的最小值。</p>
-          <div class="content">
-            <strong>返回值</strong>
-            <p>无</p>
-            <strong>错误</strong>
-            <p>无</p>
-          </div>
-        </section>
-        <section id="cullFace">
-          <h4>gl.cullFace(mode)</h4>
-          <p>指定前面或后面的多边形是否剔除。默认情况下禁用多边形剔除。</p>
-          <div class="content">
-            <strong>参数</strong>
-            <ul>
-              <li>gl.FRONT</li>
-              <li>gl.BACK</li>
-              <li>gl.FRONT_AND_BACK</li>
-            </ul>
-            <strong>返回值</strong>
-            <p>无</p>
-            <strong>错误</strong>
-            <p>无</p>
-            <strong>实例</strong>
-            <ul>
-              <li>
-                <p>开启</p>
-                <p>gl.enable(gl.CULL_FACE);</p>
-                <p>gl.cullFace(gl.FRONT_AND_BACK);</p>
-              </li>
-              <li>
-                <p>获取当前模式</p>
-                <p>gl.getParameter(gl.CULL_FACE_MODE) === gl.FRONT_AND_BACK;</p>
-              </li>
-            </ul>
-          </div>
-        </section>
+
         <section id="frontFace">
           <h4>gl.frontFace(mode)</h4>
           <p>通过设置缠绕方向来指定多边形是正面还是背面。默认 gl.CW</p>
@@ -1746,31 +1619,6 @@
           <div class="content">
             <strong>参数</strong>
             <p>mask：指定是锁定深度缓存区的写入操作（false），还是释放（true）。</p>
-            <strong>返回值</strong>
-            <p>无</p>
-            <strong>错误</strong>
-            <p>无</p>
-          </div>
-        </section>
-        <section id="depthFunc">
-          <h4>gl.depthFunc(func)</h4>
-          <p>指定了一个将传入像素深度与当前深度缓冲区值进行比较的函数</p>
-          <div class="content">
-            <strong>参数</strong>
-            <ul class="ul-1">
-              <li>func：于设置绘制像素的条件。默认值为gl.LESS，可能值：
-                <ul class="ul-1">
-                  <li>gl.NEVER: 不通过</li>
-                  <li>gl.LESS: 如果传入值小于深度缓冲区值则传递</li>
-                  <li>gl.EQUAL: 如果传入值等于深度缓冲区值则传递</li>
-                  <li>gl.LEQUAL: 如果传入值小于或等于深度缓冲区值，则传递</li>
-                  <li>gl.GREATER: 如果传入值大于深度缓冲区值则传递</li>
-                  <li>gl.NOTEQUAL: 如果传入值不等于深度缓冲区值则传递</li>
-                  <li>gl.GEQUAL: 如果传入值大于或等于深度缓冲区值则传递</li>
-                  <li>gl.ALWAYS: 通过</li>
-                </ul>
-              </li>
-            </ul>
             <strong>返回值</strong>
             <p>无</p>
             <strong>错误</strong>
@@ -1931,23 +1779,7 @@
             <p>gl.blendEquationSeparate(gl.FUNC_ADD, gl.FUNC_ADD);</p>
           </div>
         </section>
-        <section id="blendFunc">
-          <h4>gl.blendFunc(src_factor, dst_factor)</h4>
-          <p>定义了用于混合像素算术的函数。</p>
-          <p>通过参数src_factor和dst_factor指定进行混合操作的函数，混合后的颜色如下计算：</p>
-          <p>混合后的颜色 = 源颜色 * src_factor + 目标颜色 * dst_factor</p>
-          <div class="content">
-            <strong>参数</strong>
-            <ul class="ul-1">
-              <li>src_factor：指定源颜色在混合后颜色中的<a href="#blending_equation_param">权重因子</a>.</li>
-              <li>dst_factor：指定目标颜色在混合后颜色中的<a href="#blending_equation_param">权重因子</a>。</li>
-            </ul>
-            <strong>返回值</strong>
-            <p>无</p>
-            <strong>错误</strong>
-            <p>INVALID_ENUM:src_factor, dst_factor的值不正确。</p>
-          </div>
-        </section>
+
         <section id="blendFuncSeparate">
           <h4>gl.blendFuncSeparate(srcRGB, destRGB, srcAlpha, destAlpha)</h4>
           <p>分别指定源和目标的颜色（RGB）分量和A（alpha）分量</p>

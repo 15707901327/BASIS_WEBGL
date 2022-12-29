@@ -104,7 +104,21 @@
             
             <span class="subtitle">Methods</span>
             
+                <li data-name="WebGLRenderingContext#blendFunc"><a href="WebGLRenderingContext.html#blendFunc">blendFunc</a></li>
+            
+                <li data-name="WebGLRenderingContext#createTexture"><a href="WebGLRenderingContext.html#createTexture">createTexture</a></li>
+            
+                <li data-name="WebGLRenderingContext#cullFace"><a href="WebGLRenderingContext.html#cullFace">cullFace</a></li>
+            
+                <li data-name="WebGLRenderingContext#deleteTexture"><a href="WebGLRenderingContext.html#deleteTexture">deleteTexture</a></li>
+            
+                <li data-name="WebGLRenderingContext#depthFunc"><a href="WebGLRenderingContext.html#depthFunc">depthFunc</a></li>
+            
+                <li data-name="WebGLRenderingContext#disable"><a href="WebGLRenderingContext.html#disable">disable</a></li>
+            
                 <li data-name="WebGLRenderingContext#drawElements"><a href="WebGLRenderingContext.html#drawElements">drawElements</a></li>
+            
+                <li data-name="WebGLRenderingContext#enable"><a href="WebGLRenderingContext.html#enable">enable</a></li>
             
                 <li data-name="WebGLRenderingContext#getActiveAttrib"><a href="WebGLRenderingContext.html#getActiveAttrib">getActiveAttrib</a></li>
             
@@ -115,6 +129,16 @@
                 <li data-name="WebGLRenderingContext#getProgramParameter"><a href="WebGLRenderingContext.html#getProgramParameter">getProgramParameter</a></li>
             
                 <li data-name="WebGLRenderingContext#getUniformLocation"><a href="WebGLRenderingContext.html#getUniformLocation">getUniformLocation</a></li>
+            
+                <li data-name="WebGLRenderingContext#isEnabled"><a href="WebGLRenderingContext.html#isEnabled">isEnabled</a></li>
+            
+                <li data-name="WebGLRenderingContext#polygonOffset"><a href="WebGLRenderingContext.html#polygonOffset">polygonOffset</a></li>
+            
+                <li data-name="WebGLRenderingContext#sampleCoverage"><a href="WebGLRenderingContext.html#sampleCoverage">sampleCoverage</a></li>
+            
+                <li data-name="WebGLRenderingContext#scissor"><a href="WebGLRenderingContext.html#scissor">scissor</a></li>
+            
+                <li data-name="WebGLRenderingContext#stencilFunc"><a href="WebGLRenderingContext.html#stencilFunc">stencilFunc</a></li>
             
                 <li data-name="WebGLRenderingContext#uniform1f"><a href="WebGLRenderingContext.html#uniform1f">uniform1f</a></li>
             
@@ -151,6 +175,25 @@
                 <li data-name="WebGLRenderingContext#useProgram"><a href="WebGLRenderingContext.html#useProgram">useProgram</a></li>
             
                 <li data-name="WebGLRenderingContext#viewport"><a href="WebGLRenderingContext.html#viewport">viewport</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="WebGLTexture">
+            <span class="title">
+                <a href="WebGLTexture.html">WebGLTexture</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
             
             </ul>
             <ul class="events itemMembers">
@@ -267,6 +310,728 @@
         <h3 class="subsection-title">Methods</h3>
         
         <dl>
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="blendFunc">
+            
+            blendFunc<span class="signature">(src_factor, dst_factor)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line371">line 371</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>定义了用于混合像素算术的函数。<br>通过参数src_factor和dst_factor指定进行混合操作的函数，混合后的颜色如下计算：<br>混合后的颜色 = 源颜色 <em> src_factor + 目标颜色 </em> dst_factor<br>INVALID_ENUM:src_factor, dst_factor的值不正确。</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>src_factor</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定源颜色在混合后颜色中的<a href="../webgl/js_API/gl.html#blending_equation_param" target="_blank">权重因子</a>.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>dst_factor</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定目标颜色在混合后颜色中的<a href="../webgl/js_API/gl.html##blending_equation_param" target="_blank">权重因子</a>。</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="createTexture">
+            
+            createTexture<span class="signature">()</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="WebGLTexture.html">WebGLTexture</a>|null}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line301">line 301</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>创建纹理对象, 以存储纹理图像。</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        <a href="WebGLTexture.html">WebGLTexture</a>
+                         | 
+                    
+                        null
+                        
+                    
+            </td>
+            <td class="description last">texture  null:创建纹理对象失败</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="cullFace">
+            
+            cullFace<span class="signature">(mode)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line386">line 386</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>指定前面或后面的多边形是否剔除。默认情况下禁用多边形剔除。</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>mode</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">GLenum</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定是正面多边形还是背面多边形是剔除的候选对象。默认值为gl.BACK。可能的值有：<br>gl.FRONT<br>gl.BACK<br>gl.FRONT_AND_BACK</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Examples</h5>
+        
+
+    
+    <pre class="prettyprint"><code><p>gl.enable(gl.CULL_FACE);<br>gl.cullFace(gl.FRONT_AND_BACK);</p></code></pre>
+    
+
+
+    
+    <pre class="prettyprint"><code><p>// 获取当前模式<br>gl.getParameter(gl.CULL_FACE_MODE) === gl.FRONT_AND_BACK;</p></code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="deleteTexture">
+            
+            deleteTexture<span class="signature">(texture)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line307">line 307</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>删除纹理对象</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>texture</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="WebGLTexture.html">WebGLTexture</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>纹理对象</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="depthFunc">
+            
+            depthFunc<span class="signature">(func)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line405">line 405</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>指定了一个将传入像素深度与当前深度缓冲区值进行比较的函数</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>func</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">GLenum</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>于设置绘制像素的条件。默认值为gl.LESS，可能值：<br>gl.NEVER: 不通过<br>gl.LESS: 如果传入值小于深度缓冲区值则传递<br>gl.EQUAL: 如果传入值等于深度缓冲区值则传递<br>gl.LEQUAL: 如果传入值小于或等于深度缓冲区值，则传递<br>gl.GREATER: 如果传入值大于深度缓冲区值则传递<br>gl.NOTEQUAL: 如果传入值不等于深度缓冲区值则传递<br>gl.GEQUAL: 如果传入值大于或等于深度缓冲区值则传递<br>gl.ALWAYS: 通过</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Examples</h5>
+        
+
+    
+    <pre class="prettyprint"><code><p>gl.enable(gl.DEPTH_TEST);<br>gl.depthFunc(gl.NEVER);</p></code></pre>
+    
+
+
+    
+    <pre class="prettyprint"><code><p>gl.getParameter(gl.DEPTH_FUNC) === gl.NEVER;</p></code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="disable">
+            
+            disable<span class="signature">(cap)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line361">line 361</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>禁用此上下文的特定WebGL功能。<br>INVALID_ENUM:cap的值无效</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>cap</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">GLenum</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>表示WebGl能力，可能的值：<br>gl.BLEND    计算片段颜色值的混合, 相关接口：<a href="WebGLRenderingContext.html#blendFunc"><code>blendFunc</code></a><br>gl.CULL_FACE    多边形的剔除。相关接口：<a href="WebGLRenderingContext.html#cullFace"><code>cullFace</code></a><br>gl.DEPTH_TEST 深度比较并更新深度缓冲区。<a href="WebGLRenderingContext.html#depthFunc"><code>depthFunc</code></a><br>gl.DITHER    在将颜色组件写入颜色缓冲区之前激活颜色组件的抖动。<br>gl.POLYGON_OFFSET_FILL    向多边形片段的深度值添加偏移。<a href="WebGLRenderingContext.html#polygonOffset"><code>polygonOffset</code></a><br>gl.SAMPLE_ALPHA_TO_COVERAGE 由alpha值确定的临时覆盖值的计算。<br>gl.SAMPLE_COVERAGE    片段覆盖范围与临时覆盖范围值的AND。 <a href="WebGLRenderingContext.html#sampleCoverage"><code>sampleCoverage</code></a><br>gl.SCISSOR_TEST    剪刀测试(裁剪功能)，丢弃剪刀矩形之外的碎片。 <a href="WebGLRenderingContext.html#scissor"><code>scissor</code></a><br>gl.STENCIL_TEST    模具测试并更新模具缓冲区. <a href="WebGLRenderingContext.html#stencilFunc"><code>stencilFunc</code></a><br>WebGL2:<br>gl.RASTERIZER_DISCARD 基本体在光栅化阶段之前立即丢弃，但在可选变换反馈阶段之后丢弃。gl.clear（）命令被忽略。</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
             
 <dt>
     <div class="nameContainer">
@@ -475,6 +1240,122 @@
     </tbody>
 </table>
 
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="enable">
+            
+            enable<span class="signature">(cap)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line325">line 325</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>开启cap表示的功能<br>INVALID_ENUM:cap的值无效</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>cap</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">GLenum</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>表示WebGl能力，可能的值：<br>gl.BLEND    激活计算片段颜色值的混合, 相关接口：<a href="WebGLRenderingContext.html#blendFunc"><code>blendFunc</code></a><br>gl.CULL_FACE    激活多边形的剔除。相关接口：<a href="WebGLRenderingContext.html#cullFace"><code>cullFace</code></a><br>gl.DEPTH_TEST 激活深度比较并更新深度缓冲区。<a href="WebGLRenderingContext.html#depthFunc"><code>depthFunc</code></a><br>gl.DITHER    在将颜色组件写入颜色缓冲区之前激活颜色组件的抖动。<br>gl.POLYGON_OFFSET_FILL    激活向多边形片段的深度值添加偏移。<a href="WebGLRenderingContext.html#polygonOffset"><code>polygonOffset</code></a><br>gl.SAMPLE_ALPHA_TO_COVERAGE 激活由alpha值确定的临时覆盖值的计算。<br>gl.SAMPLE_COVERAGE    激活片段覆盖范围与临时覆盖范围值的AND。 <a href="WebGLRenderingContext.html#sampleCoverage"><code>sampleCoverage</code></a><br>gl.SCISSOR_TEST    激活剪刀测试(裁剪功能)，丢弃剪刀矩形之外的碎片。 <a href="WebGLRenderingContext.html#scissor"><code>scissor</code></a><br>gl.STENCIL_TEST    激活模具测试并更新模具缓冲区. <a href="WebGLRenderingContext.html#stencilFunc"><code>stencilFunc</code></a><br>WebGL2:<br>gl.RASTERIZER_DISCARD 基本体在光栅化阶段之前立即丢弃，但在可选变换反馈阶段之后丢弃。gl.clear（）命令被忽略。</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
     
     
     
@@ -1291,6 +2172,663 @@
 none-unll 指定uniform变量的位置 null 指定的uniform变量不存在，或者其命名具有gl_或webgl_前缀
 
 
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="isEnabled">
+            
+            isEnabled<span class="signature">(cap)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{GLboolean}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line343">line 343</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>测试是否为此上下文启用了特定的WebGL功能。默认情况下，禁用除gl.DITHER之外的所有功能。</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>cap</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">GLenum</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>表示WebGl能力，可能的值：<br>gl.BLEND    计算片段颜色值的混合, 相关接口：<a href="WebGLRenderingContext.html#blendFunc"><code>blendFunc</code></a><br>gl.CULL_FACE    多边形的剔除。相关接口：<a href="WebGLRenderingContext.html#cullFace"><code>cullFace</code></a><br>gl.DEPTH_TEST 深度比较并更新深度缓冲区。<a href="WebGLRenderingContext.html#depthFunc"><code>depthFunc</code></a><br>gl.DITHER    在将颜色组件写入颜色缓冲区之前激活颜色组件的抖动。<br>gl.POLYGON_OFFSET_FILL    向多边形片段的深度值添加偏移。<a href="WebGLRenderingContext.html#polygonOffset"><code>polygonOffset</code></a><br>gl.SAMPLE_ALPHA_TO_COVERAGE 由alpha值确定的临时覆盖值的计算。<br>gl.SAMPLE_COVERAGE    片段覆盖范围与临时覆盖范围值的AND。 <a href="WebGLRenderingContext.html#sampleCoverage"><code>sampleCoverage</code></a><br>gl.SCISSOR_TEST    剪刀测试(裁剪功能)，丢弃剪刀矩形之外的碎片。 <a href="WebGLRenderingContext.html#scissor"><code>scissor</code></a><br>gl.STENCIL_TEST    模具测试并更新模具缓冲区. <a href="WebGLRenderingContext.html#stencilFunc"><code>stencilFunc</code></a><br>WebGL2:<br>gl.RASTERIZER_DISCARD 基本体在光栅化阶段之前立即丢弃，但在可选变换反馈阶段之后丢弃。gl.clear（）命令被忽略。</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        GLboolean
+                        
+                    
+            </td>
+            <td class="description last">bool  true 激活 false 未激活</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="polygonOffset">
+            
+            polygonOffset<span class="signature">(factor, units)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line412">line 412</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>指定加到每个顶点绘制后z值上的偏移量，偏移量按照公式m<em>factor+r</em>units计算，其中m表示顶点所在表面相对于观察者的视线的角度，而r表示硬件能够区分两个z值之差的最小值。</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>factor</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>units</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                </td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="sampleCoverage">
+            
+            sampleCoverage<span class="signature">()</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line417">line 417</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>sampleCoverage</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="scissor">
+            
+            scissor<span class="signature">(x, y, width, height)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line426">line 426</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>剪裁测试用于限制绘制区域。我们可以指定一个矩形的剪裁窗口，当启用剪裁测试后，只有在这个窗口之内的像素才能被绘制，其它像素则会被丢弃。换句话说，无论怎么绘制，剪裁窗口以外的像素将不会被修改。</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定绘图区域的左上角，以像素为单位</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定绘图区域的左上角，以像素为单位</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定绘图区域的宽度和高度</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定绘图区域的宽度和高度</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="stencilFunc">
+            
+            stencilFunc<span class="signature">(func, ref, mask)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line435">line 435</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>设置正面和背面功能以及模板测试的参考值。<br>模具启用和禁用每个像素的绘图。它通常用于多通道渲染中以获得特殊效果。</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>func</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定测试功能。 默认功能是gl.ALWAYS。</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>ref</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定模板测试的参考值。此值被限制在0到2n -1的范围内，其中n是模板缓冲区中的位平面数。默认值为0。</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>mask</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定按位掩码，用于在完成测试时对参考值和存储的模板值进行“与”运算。默认值为全1。</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
     
     
     
@@ -3974,7 +5512,7 @@ none-unll 指定uniform变量的位置 null 指定的uniform变量不存在，�
         
 
         <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Dec 25 2022 15:27:44 GMT+0800 (China Standard Time)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Dec 29 2022 22:19:54 GMT+0800 (China Standard Time)
         </footer>
     </div>
 </div>

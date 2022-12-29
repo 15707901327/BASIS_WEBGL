@@ -104,7 +104,21 @@
             
             <span class="subtitle">Methods</span>
             
+                <li data-name="WebGLRenderingContext#blendFunc"><a href="WebGLRenderingContext.html#blendFunc">blendFunc</a></li>
+            
+                <li data-name="WebGLRenderingContext#createTexture"><a href="WebGLRenderingContext.html#createTexture">createTexture</a></li>
+            
+                <li data-name="WebGLRenderingContext#cullFace"><a href="WebGLRenderingContext.html#cullFace">cullFace</a></li>
+            
+                <li data-name="WebGLRenderingContext#deleteTexture"><a href="WebGLRenderingContext.html#deleteTexture">deleteTexture</a></li>
+            
+                <li data-name="WebGLRenderingContext#depthFunc"><a href="WebGLRenderingContext.html#depthFunc">depthFunc</a></li>
+            
+                <li data-name="WebGLRenderingContext#disable"><a href="WebGLRenderingContext.html#disable">disable</a></li>
+            
                 <li data-name="WebGLRenderingContext#drawElements"><a href="WebGLRenderingContext.html#drawElements">drawElements</a></li>
+            
+                <li data-name="WebGLRenderingContext#enable"><a href="WebGLRenderingContext.html#enable">enable</a></li>
             
                 <li data-name="WebGLRenderingContext#getActiveAttrib"><a href="WebGLRenderingContext.html#getActiveAttrib">getActiveAttrib</a></li>
             
@@ -115,6 +129,16 @@
                 <li data-name="WebGLRenderingContext#getProgramParameter"><a href="WebGLRenderingContext.html#getProgramParameter">getProgramParameter</a></li>
             
                 <li data-name="WebGLRenderingContext#getUniformLocation"><a href="WebGLRenderingContext.html#getUniformLocation">getUniformLocation</a></li>
+            
+                <li data-name="WebGLRenderingContext#isEnabled"><a href="WebGLRenderingContext.html#isEnabled">isEnabled</a></li>
+            
+                <li data-name="WebGLRenderingContext#polygonOffset"><a href="WebGLRenderingContext.html#polygonOffset">polygonOffset</a></li>
+            
+                <li data-name="WebGLRenderingContext#sampleCoverage"><a href="WebGLRenderingContext.html#sampleCoverage">sampleCoverage</a></li>
+            
+                <li data-name="WebGLRenderingContext#scissor"><a href="WebGLRenderingContext.html#scissor">scissor</a></li>
+            
+                <li data-name="WebGLRenderingContext#stencilFunc"><a href="WebGLRenderingContext.html#stencilFunc">stencilFunc</a></li>
             
                 <li data-name="WebGLRenderingContext#uniform1f"><a href="WebGLRenderingContext.html#uniform1f">uniform1f</a></li>
             
@@ -151,6 +175,25 @@
                 <li data-name="WebGLRenderingContext#useProgram"><a href="WebGLRenderingContext.html#useProgram">useProgram</a></li>
             
                 <li data-name="WebGLRenderingContext#viewport"><a href="WebGLRenderingContext.html#viewport">viewport</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="WebGLTexture">
+            <span class="title">
+                <a href="WebGLTexture.html">WebGLTexture</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
             
             </ul>
             <ul class="events itemMembers">
@@ -463,6 +506,146 @@ class WebGLRenderingContext {
 	 * var name = info.name;
 	 */
 	getActiveAttrib(program,index){}
+	
+	/**
+	 * 创建纹理对象, 以存储纹理图像。
+	 * @return texture {WebGLTexture|null} null:创建纹理对象失败
+	 */
+	createTexture(){}
+	
+	/**
+	 * 删除纹理对象
+	 * @param texture {WebGLTexture} 纹理对象
+	 */
+	deleteTexture(texture){}
+	
+	/**
+	 * 开启cap表示的功能
+	 * INVALID_ENUM:cap的值无效
+	 * @param cap {GLenum} 表示WebGl能力，可能的值：
+	 * gl.BLEND	激活计算片段颜色值的混合, 相关接口：[blendFunc]{@link WebGLRenderingContext#blendFunc}
+	 * gl.CULL_FACE	激活多边形的剔除。相关接口：[cullFace]{@link WebGLRenderingContext#cullFace}
+	 * gl.DEPTH_TEST 激活深度比较并更新深度缓冲区。[depthFunc]{@link WebGLRenderingContext#depthFunc}
+	 * gl.DITHER	在将颜色组件写入颜色缓冲区之前激活颜色组件的抖动。
+	 * gl.POLYGON_OFFSET_FILL	激活向多边形片段的深度值添加偏移。[polygonOffset]{@link WebGLRenderingContext#polygonOffset}
+	 * gl.SAMPLE_ALPHA_TO_COVERAGE 激活由alpha值确定的临时覆盖值的计算。
+	 * gl.SAMPLE_COVERAGE	激活片段覆盖范围与临时覆盖范围值的AND。 [sampleCoverage]{@link WebGLRenderingContext#sampleCoverage}
+	 * gl.SCISSOR_TEST	激活剪刀测试(裁剪功能)，丢弃剪刀矩形之外的碎片。 [scissor]{@link WebGLRenderingContext#scissor}
+	 * gl.STENCIL_TEST	激活模具测试并更新模具缓冲区. [stencilFunc]{@link WebGLRenderingContext#stencilFunc}
+	 * WebGL2:
+	 * gl.RASTERIZER_DISCARD 基本体在光栅化阶段之前立即丢弃，但在可选变换反馈阶段之后丢弃。gl.clear（）命令被忽略。
+	 */
+	enable(cap){}
+	
+	/**
+	 * 测试是否为此上下文启用了特定的WebGL功能。默认情况下，禁用除gl.DITHER之外的所有功能。
+	 * @param cap {GLenum} 表示WebGl能力，可能的值：
+	 * gl.BLEND	计算片段颜色值的混合, 相关接口：[blendFunc]{@link WebGLRenderingContext#blendFunc}
+	 * gl.CULL_FACE	多边形的剔除。相关接口：[cullFace]{@link WebGLRenderingContext#cullFace}
+	 * gl.DEPTH_TEST 深度比较并更新深度缓冲区。[depthFunc]{@link WebGLRenderingContext#depthFunc}
+	 * gl.DITHER	在将颜色组件写入颜色缓冲区之前激活颜色组件的抖动。
+	 * gl.POLYGON_OFFSET_FILL	向多边形片段的深度值添加偏移。[polygonOffset]{@link WebGLRenderingContext#polygonOffset}
+	 * gl.SAMPLE_ALPHA_TO_COVERAGE 由alpha值确定的临时覆盖值的计算。
+	 * gl.SAMPLE_COVERAGE	片段覆盖范围与临时覆盖范围值的AND。 [sampleCoverage]{@link WebGLRenderingContext#sampleCoverage}
+	 * gl.SCISSOR_TEST	剪刀测试(裁剪功能)，丢弃剪刀矩形之外的碎片。 [scissor]{@link WebGLRenderingContext#scissor}
+	 * gl.STENCIL_TEST	模具测试并更新模具缓冲区. [stencilFunc]{@link WebGLRenderingContext#stencilFunc}
+	 * WebGL2:
+	 * gl.RASTERIZER_DISCARD 基本体在光栅化阶段之前立即丢弃，但在可选变换反馈阶段之后丢弃。gl.clear（）命令被忽略。
+	 * @return bool {GLboolean} true 激活 false 未激活
+	 */
+	isEnabled(cap){}
+	
+	/**
+	 * 禁用此上下文的特定WebGL功能。
+	 * INVALID_ENUM:cap的值无效
+	 * @param cap {GLenum} 表示WebGl能力，可能的值：
+	 * gl.BLEND	计算片段颜色值的混合, 相关接口：[blendFunc]{@link WebGLRenderingContext#blendFunc}
+	 * gl.CULL_FACE	多边形的剔除。相关接口：[cullFace]{@link WebGLRenderingContext#cullFace}
+	 * gl.DEPTH_TEST 深度比较并更新深度缓冲区。[depthFunc]{@link WebGLRenderingContext#depthFunc}
+	 * gl.DITHER	在将颜色组件写入颜色缓冲区之前激活颜色组件的抖动。
+	 * gl.POLYGON_OFFSET_FILL	向多边形片段的深度值添加偏移。[polygonOffset]{@link WebGLRenderingContext#polygonOffset}
+	 * gl.SAMPLE_ALPHA_TO_COVERAGE 由alpha值确定的临时覆盖值的计算。
+	 * gl.SAMPLE_COVERAGE	片段覆盖范围与临时覆盖范围值的AND。 [sampleCoverage]{@link WebGLRenderingContext#sampleCoverage}
+	 * gl.SCISSOR_TEST	剪刀测试(裁剪功能)，丢弃剪刀矩形之外的碎片。 [scissor]{@link WebGLRenderingContext#scissor}
+	 * gl.STENCIL_TEST	模具测试并更新模具缓冲区. [stencilFunc]{@link WebGLRenderingContext#stencilFunc}
+	 * WebGL2:
+	 * gl.RASTERIZER_DISCARD 基本体在光栅化阶段之前立即丢弃，但在可选变换反馈阶段之后丢弃。gl.clear（）命令被忽略。
+	 */
+	disable(cap){}
+	
+	/**
+	 * 定义了用于混合像素算术的函数。
+	 * 通过参数src_factor和dst_factor指定进行混合操作的函数，混合后的颜色如下计算：
+	 * 混合后的颜色 = 源颜色 * src_factor + 目标颜色 * dst_factor
+	 * INVALID_ENUM:src_factor, dst_factor的值不正确。
+	 * @param src_factor 指定源颜色在混合后颜色中的&lt;a href="../webgl/js_API/gl.html#blending_equation_param" target="_blank">权重因子&lt;/a>.
+	 * @param dst_factor 指定目标颜色在混合后颜色中的&lt;a href="../webgl/js_API/gl.html##blending_equation_param" target="_blank">权重因子&lt;/a>。
+	 */
+	blendFunc(src_factor, dst_factor){}
+	
+	/**
+	 * 指定前面或后面的多边形是否剔除。默认情况下禁用多边形剔除。
+	 * @param mode {GLenum} 指定是正面多边形还是背面多边形是剔除的候选对象。默认值为gl.BACK。可能的值有：
+	 * gl.FRONT
+	 * gl.BACK
+	 * gl.FRONT_AND_BACK
+	 * @example
+	 * gl.enable(gl.CULL_FACE);
+	 * gl.cullFace(gl.FRONT_AND_BACK);
+	 * @example
+	 * // 获取当前模式
+	 * gl.getParameter(gl.CULL_FACE_MODE) === gl.FRONT_AND_BACK;
+	 */
+	cullFace(mode){}
+	
+	/**
+	 * 指定了一个将传入像素深度与当前深度缓冲区值进行比较的函数
+	 * @param func {GLenum} 于设置绘制像素的条件。默认值为gl.LESS，可能值：
+	 * gl.NEVER: 不通过
+	 * gl.LESS: 如果传入值小于深度缓冲区值则传递
+	 * gl.EQUAL: 如果传入值等于深度缓冲区值则传递
+	 * gl.LEQUAL: 如果传入值小于或等于深度缓冲区值，则传递
+	 * gl.GREATER: 如果传入值大于深度缓冲区值则传递
+	 * gl.NOTEQUAL: 如果传入值不等于深度缓冲区值则传递
+	 * gl.GEQUAL: 如果传入值大于或等于深度缓冲区值则传递
+	 * gl.ALWAYS: 通过
+	 * @example
+	 * gl.enable(gl.DEPTH_TEST);
+	 * gl.depthFunc(gl.NEVER);
+	 * @example
+	 * gl.getParameter(gl.DEPTH_FUNC) === gl.NEVER;
+	 */
+	depthFunc(func){}
+	
+	/**
+	 * 指定加到每个顶点绘制后z值上的偏移量，偏移量按照公式m*factor+r*units计算，其中m表示顶点所在表面相对于观察者的视线的角度，而r表示硬件能够区分两个z值之差的最小值。
+	 * @param factor
+	 * @param units
+	 */
+	polygonOffset(factor,units){}
+	
+	/**
+	 * sampleCoverage
+	 */
+	sampleCoverage(){}
+	
+	/**
+	 * 剪裁测试用于限制绘制区域。我们可以指定一个矩形的剪裁窗口，当启用剪裁测试后，只有在这个窗口之内的像素才能被绘制，其它像素则会被丢弃。换句话说，无论怎么绘制，剪裁窗口以外的像素将不会被修改。
+	 * @param x 指定绘图区域的左上角，以像素为单位
+	 * @param y 指定绘图区域的左上角，以像素为单位
+	 * @param width 指定绘图区域的宽度和高度
+	 * @param height 指定绘图区域的宽度和高度
+	 */
+	scissor(x,y,width,height){}
+	
+	/**
+	 * 设置正面和背面功能以及模板测试的参考值。
+	 * 模具启用和禁用每个像素的绘图。它通常用于多通道渲染中以获得特殊效果。
+	 * @param func 指定测试功能。 默认功能是gl.ALWAYS。
+	 * @param ref 指定模板测试的参考值。此值被限制在0到2n -1的范围内，其中n是模板缓冲区中的位平面数。默认值为0。
+	 * @param mask 指定按位掩码，用于在完成测试时对参考值和存储的模板值进行“与”运算。默认值为全1。
+	 */
+	stencilFunc(func, ref, mask){}
 }</code></pre>
         </article>
     </section>
@@ -475,7 +658,7 @@ class WebGLRenderingContext {
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Dec 25 2022 15:27:44 GMT+0800 (China Standard Time)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Dec 29 2022 22:19:54 GMT+0800 (China Standard Time)
         </footer>
     </div>
 </div>

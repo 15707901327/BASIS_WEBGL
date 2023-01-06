@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -20,101 +23,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="1. 修改法线的计算方式">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/webgl/GLboolean.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/webgl/WebGLTexture.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/webgl/index.html" afterPath="$PROJECT_DIR$/doc/webgl/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/webgl/js_API/gl.html" afterPath="$PROJECT_DIR$/doc/webgl/js_API/gl.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.html" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.js.html" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.js.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLProgram.html" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLProgram.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLProgram.js.html" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLProgram.js.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.html" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.js.html" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.js.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/webgl_API/index.html" afterPath="$PROJECT_DIR$/doc/webgl_API/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webgl/GLint.js" afterPath="$PROJECT_DIR$/src/webgl/GLint.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webgl/WebGLRenderingContext.js" afterPath="$PROJECT_DIR$/src/webgl/WebGLRenderingContext.js" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLTexture.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLTexture.js.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Default_Changelist.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Default_Changelist.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/webgl/js_API/gl.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl/js_API/gl.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.js.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLProgram.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLProgram.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLProgram.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLProgram.js.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.js.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/webgl_API/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/webgl/WebGLRenderingContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/webgl/WebGLRenderingContext.js" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/.idea/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="WebGLRenderingContext.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/webgl/WebGLRenderingContext.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="434" column="13" lean-forward="false" selection-start-line="434" selection-start-column="2" selection-end-line="434" selection-end-column="13" />
-              <folding>
-                <element signature="n#!!doc;n#useProgram#0;n#WebGLRenderingContext#0" expanded="false" />
-                <element signature="n#!!doc;n#viewport#0;n#WebGLRenderingContext#0" expanded="false" />
-                <element signature="n#!!doc;n#drawElements#0;n#WebGLRenderingContext#0" expanded="false" />
-                <element signature="n#!!doc;n#getProgramParameter#0;n#WebGLRenderingContext#0" expanded="false" />
-                <element signature="n#!!doc;n#getUniformLocation#0;n#WebGLRenderingContext#0" expanded="false" />
-                <element signature="n#!!doc;n#getActiveUniform#0;n#WebGLRenderingContext#0" expanded="false" />
-                <element signature="n#!!doc;n#uniform1f#0;n#WebGLRenderingContext#0" expanded="false" />
-                <element signature="n#!!doc;n#uniform1fv#0;n#WebGLRenderingContext#0" expanded="false" />
-                <element signature="n#!!doc;n#uniform1i#0;n#WebGLRenderingContext#0" expanded="false" />
-                <element signature="n#!!doc;n#uniform1iv#0;n#WebGLRenderingContext#0" expanded="false" />
-                <element signature="n#!!doc;n#uniform2f#0;n#WebGLRenderingContext#0" expanded="false" />
-                <element signature="n#!!doc;n#uniform2fv#0;n#WebGLRenderingContext#0" expanded="false" />
-                <element signature="n#!!doc;n#uniform2i#0;n#WebGLRenderingContext#0" expanded="false" />
-                <element signature="n#!!doc;n#uniform2iv#0;n#WebGLRenderingContext#0" expanded="false" />
-                <element signature="n#!!doc;n#uniform3f#0;n#WebGLRenderingContext#0" expanded="false" />
-                <element signature="n#!!doc;n#uniform3fv#0;n#WebGLRenderingContext#0" expanded="false" />
-                <element signature="n#!!doc;n#uniform3i#0;n#WebGLRenderingContext#0" expanded="false" />
-                <element signature="n#!!doc;n#uniform3iv#0;n#WebGLRenderingContext#0" expanded="false" />
-                <element signature="n#!!doc;n#uniform4f#0;n#WebGLRenderingContext#0" expanded="false" />
-                <element signature="n#!!doc;n#uniform4fv#0;n#WebGLRenderingContext#0" expanded="false" />
-                <element signature="n#!!doc;n#uniform4i#0;n#WebGLRenderingContext#0" expanded="false" />
-                <element signature="n#!!doc;n#uniform4iv#0;n#WebGLRenderingContext#0" expanded="false" />
-                <element signature="n#!!doc;n#getAttribLocation#0;n#WebGLRenderingContext#0" expanded="false" />
-                <element signature="n#!!doc;n#getActiveAttrib#0;n#WebGLRenderingContext#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WebGLTexture.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/webgl/WebGLTexture.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="2" column="3" lean-forward="false" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="gl.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/doc/webgl/js_API/gl.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="73" column="27" lean-forward="false" selection-start-line="73" selection-start-column="27" selection-end-line="73" selection-end-column="27" />
-              <folding>
-                <element signature="n#section#0;n#section#3;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#section#4;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-                <element signature="n#section#5;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LightedTranslatedRotatedCube.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/example/WebGL编程指南/ch08/LightedTranslatedRotatedCube.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="4" column="39" lean-forward="false" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -207,6 +133,9 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
@@ -262,26 +191,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.path.for.package.eslint" value="project" />
-    <property name="node.js.path.for.package.tslint" value="project" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
-    <property name="two.files.diff.last.used.file" value="$USER_HOME$/yuanhui/share/jsdocDemo/jsdoc/Jaguar-template/conf.json" />
-    <property name="vue.rearranger.settings.migration" value="true" />
-    <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/14296/workhome/BASIS_WEBGL&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\workhome\BASIS_WEBGL\doc\shader" />
@@ -298,29 +220,16 @@
       <recent name="D:\workHome\BASIS_WEBGL\doc\graphics\img\noise" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager">
-    <configuration name="MathUtils.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-node="project" path-to-js-file="$PROJECT_DIR$/lib/MathUtils.js" working-dir="$PROJECT_DIR$/lib" />
+    <configuration name="MathUtils.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/lib/MathUtils.js" working-dir="$PROJECT_DIR$/lib">
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SFStoredExecutionPersistentComponent">
     <executions>
       <execution name="Default" sourceToExecute="" />
     </executions>
     <lastSelectedExecutionName>Default</lastSelectedExecutionName>
-  </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -598,6 +507,10 @@
       <workItem from="1670555960682" duration="633000" />
       <workItem from="1670833303720" duration="3776000" />
       <workItem from="1670854898709" duration="54559000" />
+      <workItem from="1672889214595" duration="613000" />
+      <workItem from="1672901234844" duration="793000" />
+      <workItem from="1672902068576" duration="2059000" />
+      <workItem from="1672983418737" duration="1187000" />
     </task>
     <task id="LOCAL-00068" summary="1.添加单通道wireframe渲染实例">
       <created>1583997566274</created>
@@ -974,28 +887,18 @@
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1.实现环境光" />
@@ -1034,9 +937,7 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="1" />
     </breakpoint-manager>
-    <watches-manager />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

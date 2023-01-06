@@ -433,4 +433,28 @@ class WebGLRenderingContext {
 	 * @param mask 指定按位掩码，用于在完成测试时对参考值和存储的模板值进行“与”运算。默认值为全1。
 	 */
 	stencilFunc(func, ref, mask){}
+
+	/**
+	 * 启用WebGL扩展
+	 * @param name {string} WebGL扩展功能的名称
+	 * @return extension 一个 WebGL 扩展对象。
+	 * 如果扩展名称（区分大小写）与 WebGLRenderingContext.getSupportedExtensions 中的任何结果都不匹配，则只会返回 null 。
+	 * 扩展项:<a href="../webgl/js_API/WebGL_extensions.html" target="_blank">扩展项</a>
+	 */
+	getExtension(name){}
+
+	/**
+	 * 返回传递参数名称的值
+	 * @param pname {GLenum} 指定要返回的参数值
+	 * @return 取决于参数。
+	 * 参数列表：
+	 * gl.COLOR_WRITEMASK:获取当前每个颜色分量是否可以写入帧缓冲区
+	 * gl.MAX_VERTEX_ATTRIBS:获取最多的顶点attribute变量
+	 * gl.MAX_TEXTURE_SIZE:获取纹理的最大尺寸
+	 * gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS:获取当前纹理单元的数量。
+	 * gl.ACTIVE_TEXTURE:获取激活的纹理单元
+	 * gl.VERSION:获取版本 DOMString
+	 */
+	getParameter(pname){}
+
 }

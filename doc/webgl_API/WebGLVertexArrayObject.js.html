@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Source: WebGLActiveInfo.js</title>
+    <title>Source: WebGLVertexArrayObject.js</title>
     
     
     
@@ -235,7 +235,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="WebGLActiveInfo.js.html">Source: WebGLActiveInfo.js</h1>
+        <h1 class="page-title" data-filename="WebGLVertexArrayObject.js.html">Source: WebGLVertexArrayObject.js</h1>
         
 
 
@@ -243,29 +243,15 @@
     <section>
         <article>
             <pre class="prettyprint source "><code>/**
- * 代表了调用[gl.getActiveAttrib()]{@link WebGLRenderingContext#getActiveAttrib}和[gl.getActiveUniform()]{@link WebGLRenderingContext#getActiveUniform}这两个方法后传回的信息。
+ * WebGLVertexArrayObject接口是WebGL 2 API的一部分，顶点数组对象 (VAOs) 指向顶点数组数据，并提供不同顶点数据集合的名称。
+ * @see [WebGL2RenderingContext.createVertexArray()]{@link WebGLRenderingContext#createVertexArray}
+ * @see [WebGL2RenderingContext.deleteVertexArray()]{@link WebGLRenderingContext#deleteVertexArray}
+ * @see [WebGL2RenderingContext.isVertexArray()]{@link WebGLRenderingContext#isVertexArray}
+ * @see [WebGL2RenderingContext.bindVertexArray()]{@link WebGLRenderingContext#bindVertexArray}
  */
-class WebGLActiveInfo{
-	constructor(){
-		/**
-		 * @property name 名称
-		 * @readonly
-		 */
-		this.name = "name";
-		/**
-		 * @property size 大小
-		 * @readonly
-		 */
-		this.size = "size";
-		/**
-		 * @property type 类型
-		 * @readonly
-		 */
-		this.type = "type";
-	}
-}
-
-export {WebGLActiveInfo};</code></pre>
+class WebGLVertexArrayObject{
+    constructor() {}
+}</code></pre>
         </article>
     </section>
 

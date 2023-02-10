@@ -480,4 +480,15 @@ class WebGLRenderingContext {
 	 */
 	disableVertexAttribArray(index){}
 
+	/**
+	 * WebGL 2 API 中的方法创建并初始化一个 WebGLVertexArrayObject 的对象，它代表一个指向顶点数组数据的顶点数组对象(VAO)，并为不同的顶点数据集提供名称。
+	 */
+	createVertexArray(){}
+
+	/**
+	 * WebGL 2 API的方法将传递的WebGLVertexArrayObject对象绑定到缓冲区。
+	 * @param vertexArray {WebGLVertexArrayObject} 顶点数组对象
+	 */
+	bindVertexArray(vertexArray){}
+
 }

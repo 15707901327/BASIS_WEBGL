@@ -22,10 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="1. 修改法线的计算方式">
-      <change afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLTexture.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLTexture.js.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Default_Changelist.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Default_Changelist.xml" afterDir="false" />
+    <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="1. 修改API">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl/js_API/gl.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl/js_API/gl.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.html" afterDir="false" />
@@ -34,6 +31,8 @@
       <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLProgram.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLProgram.js.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.js.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLTexture.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLTexture.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLTexture.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLTexture.js.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl_API/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/webgl/WebGLRenderingContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/webgl/WebGLRenderingContext.js" afterDir="false" />
     </list>
@@ -510,14 +509,10 @@
       <workItem from="1672889214595" duration="613000" />
       <workItem from="1672901234844" duration="793000" />
       <workItem from="1672902068576" duration="2059000" />
-      <workItem from="1672983418737" duration="1187000" />
-    </task>
-    <task id="LOCAL-00068" summary="1.添加单通道wireframe渲染实例">
-      <created>1583997566274</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1583997566274</updated>
+      <workItem from="1672983418737" duration="1320000" />
+      <workItem from="1673229794719" duration="982000" />
+      <workItem from="1673428719301" duration="2716000" />
+      <workItem from="1675996161407" duration="2754000" />
     </task>
     <task id="LOCAL-00069" summary="1.修改文档结构">
       <created>1584001728859</created>
@@ -855,7 +850,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672040017707</updated>
     </task>
-    <option name="localTasksCounter" value="117" />
+    <task id="LOCAL-00117" summary="1. 修改API">
+      <created>1672999840179</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1672999840179</updated>
+    </task>
+    <option name="localTasksCounter" value="118" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -916,7 +918,6 @@
     <MESSAGE value="1. 着色" />
     <MESSAGE value="1. 着色器文档更新" />
     <MESSAGE value="1. 多边形交集" />
-    <MESSAGE value="1. 修改API" />
     <MESSAGE value="1. ceshi" />
     <MESSAGE value="1. 添加jsdoc" />
     <MESSAGE value="1. 添加上下文API" />
@@ -926,7 +927,8 @@
     <MESSAGE value="1. 修改getAttribLocation API" />
     <MESSAGE value="1. 修改 WebGLActiveInfo API" />
     <MESSAGE value="1. 修改法线的计算方式" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. 修改法线的计算方式" />
+    <MESSAGE value="1. 修改API" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. 修改API" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

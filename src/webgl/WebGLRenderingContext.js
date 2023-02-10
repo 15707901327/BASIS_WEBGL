@@ -457,4 +457,27 @@ class WebGLRenderingContext {
 	 */
 	getParameter(pname){}
 
+	/**
+	 * 开启location指定的attribute变量
+	 * 错误：
+	 * INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）
+	 *
+	 * @param index {GLuint} 指定待分配attribute变量的存储位置
+	 *
+	 * @see disableVertexAttribArray
+	 * @see <a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点</a>
+	 */
+	enableVertexAttribArray(index){}
+
+	/**
+	 * 关闭location指定的attribute变量
+	 * 错误：
+	 * INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）
+	 * @param index {GLuint} 指定attribute变量的存储位置
+	 *
+	 * @see enableVertexAttribArray
+	 * @see <a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点</a>
+	 */
+	disableVertexAttribArray(index){}
+
 }

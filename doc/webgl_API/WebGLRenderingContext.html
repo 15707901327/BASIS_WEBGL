@@ -116,9 +116,13 @@
             
                 <li data-name="WebGLRenderingContext#disable"><a href="WebGLRenderingContext.html#disable">disable</a></li>
             
+                <li data-name="WebGLRenderingContext#disableVertexAttribArray"><a href="WebGLRenderingContext.html#disableVertexAttribArray">disableVertexAttribArray</a></li>
+            
                 <li data-name="WebGLRenderingContext#drawElements"><a href="WebGLRenderingContext.html#drawElements">drawElements</a></li>
             
                 <li data-name="WebGLRenderingContext#enable"><a href="WebGLRenderingContext.html#enable">enable</a></li>
+            
+                <li data-name="WebGLRenderingContext#enableVertexAttribArray"><a href="WebGLRenderingContext.html#enableVertexAttribArray">enableVertexAttribArray</a></li>
             
                 <li data-name="WebGLRenderingContext#getActiveAttrib"><a href="WebGLRenderingContext.html#getActiveAttrib">getActiveAttrib</a></li>
             
@@ -1039,6 +1043,131 @@
             
 <dt>
     <div class="nameContainer">
+        <h4 class="name" id="disableVertexAttribArray">
+            
+            disableVertexAttribArray<span class="signature">(index)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line481">line 481</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>关闭location指定的attribute变量<br>错误：<br>INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">GLuint</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定attribute变量的存储位置</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>enableVertexAttribArray</li>
+        
+            <li><a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点</a></li>
+        </ul>
+    </dd>
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
         <h4 class="name" id="drawElements">
             
             drawElements<span class="signature">(mode, count, type, offset)</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{None}</span>
@@ -1346,6 +1475,131 @@
     
     
     
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="enableVertexAttribArray">
+            
+            enableVertexAttribArray<span class="signature">(index)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line470">line 470</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>开启location指定的attribute变量<br>错误：<br>INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">GLuint</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定待分配attribute变量的存储位置</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>disableVertexAttribArray</li>
+        
+            <li><a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点</a></li>
+        </ul>
+    </dd>
     
     
     
@@ -5766,7 +6020,7 @@ none-unll 指定uniform变量的位置 null 指定的uniform变量不存在，�
         
 
         <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Jan 05 2023 15:26:37 GMT+0800 (GMT+08:00)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Feb 10 2023 11:21:56 GMT+0800 (GMT+08:00)
         </footer>
     </div>
 </div>

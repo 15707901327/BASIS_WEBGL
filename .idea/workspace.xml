@@ -23,7 +23,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="1. 修改API">
+      <change afterPath="$PROJECT_DIR$/doc/webgl_API/GLboolean.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl_API/GLboolean.js.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl_API/GLint.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl_API/GLint.js.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/webgl/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl/js_API/gl.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl/js_API/gl.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.js.html" afterDir="false" />
@@ -33,7 +38,11 @@
       <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.js.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLTexture.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLTexture.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLTexture.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLTexture.js.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLVertexArrayObject.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLVertexArrayObject.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLVertexArrayObject.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLVertexArrayObject.js.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl_API/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/webgl/GLboolean.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/webgl/GLboolean.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/webgl/GLint.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/webgl/GLint.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/webgl/WebGLRenderingContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/webgl/WebGLRenderingContext.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -513,20 +522,15 @@
       <workItem from="1673229794719" duration="982000" />
       <workItem from="1673428719301" duration="2716000" />
       <workItem from="1675996161407" duration="2754000" />
-    </task>
-    <task id="LOCAL-00069" summary="1.修改文档结构">
-      <created>1584001728859</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1584001728859</updated>
-    </task>
-    <task id="LOCAL-00070" summary="1.添加重心坐标空间概念">
-      <created>1584067199429</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1584067199430</updated>
+      <workItem from="1676257707701" duration="3706000" />
+      <workItem from="1676339621581" duration="610000" />
+      <workItem from="1676431776290" duration="608000" />
+      <workItem from="1676444620258" duration="1954000" />
+      <workItem from="1676512468895" duration="597000" />
+      <workItem from="1676855797391" duration="2164000" />
+      <workItem from="1676942576995" duration="820000" />
+      <workItem from="1676967699342" duration="5258000" />
+      <workItem from="1677046528809" duration="5432000" />
     </task>
     <task id="LOCAL-00071" summary="1.添加重心坐标空间概念">
       <created>1584070586007</created>
@@ -857,7 +861,21 @@
       <option name="project" value="LOCAL" />
       <updated>1672999840179</updated>
     </task>
-    <option name="localTasksCounter" value="118" />
+    <task id="LOCAL-00118" summary="1. 修改API">
+      <created>1676025834346</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1676025834346</updated>
+    </task>
+    <task id="LOCAL-00119" summary="1. 修改API">
+      <created>1676268580107</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1676268580107</updated>
+    </task>
+    <option name="localTasksCounter" value="120" />
     <servers />
   </component>
   <component name="TimeTrackingManager">

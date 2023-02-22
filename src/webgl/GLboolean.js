@@ -1,3 +1,6 @@
+/**
+ * 布尔类型
+ */
 class GLboolean{
 	constructor(){}
 }

@@ -555,8 +555,8 @@ class WebGLRenderingContext {
      * 通过参数src_factor和dst_factor指定进行混合操作的函数，混合后的颜色如下计算：
      * 混合后的颜色 = 源颜色 * src_factor + 目标颜色 * dst_factor
      * INVALID_ENUM:src_factor, dst_factor的值不正确。
-     * @param src_factor 指定源颜色在混合后颜色中的<a href="../webgl/js_API/gl.html#blending_equation_param" target="_blank">权重因子</a>.
-     * @param dst_factor 指定目标颜色在混合后颜色中的<a href="../webgl/js_API/gl.html##blending_equation_param" target="_blank">权重因子</a>。
+     * @param src_factor 指定源颜色在混合后颜色中的<a href="../webgl/index.html#blending_equation_param" target="_blank">权重因子</a>.
+     * @param dst_factor 指定目标颜色在混合后颜色中的<a href="../webgl/index.html#blending_equation_param" target="_blank">权重因子</a>。
      */
     blendFunc(src_factor, dst_factor) {
     }

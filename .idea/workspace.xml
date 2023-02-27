@@ -24,6 +24,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="1. 修改API">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/webgl/js_API/gl.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl/js_API/gl.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl_API/GLboolean.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/GLboolean.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl_API/GLboolean.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/GLboolean.js.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl_API/GLint.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/GLint.html" afterDir="false" />
@@ -195,19 +196,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/14296/workhome/BASIS_WEBGL&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/14296/workhome/BASIS_WEBGL",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\workhome\BASIS_WEBGL\doc\shader" />
@@ -527,14 +529,9 @@
       <workItem from="1676942576995" duration="820000" />
       <workItem from="1676967699342" duration="5258000" />
       <workItem from="1677046528809" duration="7805000" />
-      <workItem from="1677116091263" duration="1283000" />
-    </task>
-    <task id="LOCAL-00072" summary="1.canvas2D API">
-      <created>1584079428997</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1584079428997</updated>
+      <workItem from="1677116091263" duration="1393000" />
+      <workItem from="1677461644632" duration="2245000" />
+      <workItem from="1677490536842" duration="1458000" />
     </task>
     <task id="LOCAL-00073" summary="1.修改内置函数dom">
       <created>1584085062699</created>
@@ -872,7 +869,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677052926539</updated>
     </task>
-    <option name="localTasksCounter" value="121" />
+    <task id="LOCAL-00121" summary="1. 修改API">
+      <created>1677133730590</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1677133730590</updated>
+    </task>
+    <option name="localTasksCounter" value="122" />
     <servers />
   </component>
   <component name="TimeTrackingManager">

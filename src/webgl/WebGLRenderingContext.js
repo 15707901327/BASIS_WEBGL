@@ -518,7 +518,8 @@ class WebGLRenderingContext {
      * 锁定或释放深度缓存区的写入操作。
      * @param mask 指定是锁定深度缓存区的写入操作（false），还是释放（true）。
      */
-    depthMask(mask){}
+    depthMask(mask) {
+    }
 
     /************************** 多边形剔除 *****************************/
 
@@ -596,6 +597,19 @@ class WebGLRenderingContext {
      * @param destAlpha Alpha值的目标<a href="#blending_equation_param">混合因子</a>
      */
     blendFuncSeparate(srcRGB, destRGB, srcAlpha, destAlpha) {
+    }
+
+    /************************** 缓冲区 *********************************/
+
+    /************************** 帧缓冲区 *******************************/
+
+    /**
+     * 将framebuffer指定的帧缓冲区对象绑定到target目标上。如果framebuffer为null，那么已经绑定到target目标上的帧缓冲区对象那个将被解除绑定。
+     * 错误：INVALID_ENUM:target不是gl.FRAMEBUFFER
+     * @param target 必须是gl.FRAMEBUFFER
+     * @param framebuffer 指定被绑定的帧缓存对象
+     */
+    bindFramebuffer(target, framebuffer) {
     }
 
 }

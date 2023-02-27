@@ -146,7 +146,6 @@
             <ul class="ul-1">
                 <li><a href="#createFramebuffer">gl.createFramebuffer()</a></li>
                 <li><a href="#deleteFramebuffer">gl.deleteFramebuffer()</a></li>
-                <li><a href="#bindFramebuffer">gl.bindFramebuffer()</a></li>
                 <li><a href="#framebufferTexture2D">gl.framebufferTexture2D()</a></li>
                 <li><a href="#framebufferRenderbuffer">gl.framebufferRenderbuffer()</a></li>
                 <li><a href="#checkFramebufferStatus">gl.checkFramebufferStatus()</a></li>
@@ -1764,22 +1763,7 @@
                         <p>无</p>
                     </div>
                 </section>
-                <section id="bindFramebuffer">
-                    <h4>gl.bindFramebuffer(target,framebuffer)</h4>
-                    <p>
-                        将framebuffer指定的帧缓冲区对象绑定到target目标上。如果framebuffer为null，那么已经绑定到target目标上的帧缓冲区对象那个将被解除绑定。</p>
-                    <div class="content">
-                        <strong>参数</strong>
-                        <ul class="ul-1">
-                            <li>target:必须是gl.FRAMEBUFFER</li>
-                            <li>framebuffer：指定被绑定的帧缓存对象</li>
-                        </ul>
-                        <strong>返回值</strong>
-                        <p>无</p>
-                        <strong>错误</strong>
-                        <p>INVALID_ENUM:target不是gl.FRAMEBUFFER</p>
-                    </div>
-                </section>
+
                 <section id="framebufferTexture2D">
                     <h4>gl.framebufferTexture2D(target,attachment,textarget,texture,level)</h4>
                     <p>将texture指定的纹理对象关联到绑定在target目标上的帧缓冲区。</p>

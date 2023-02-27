@@ -142,6 +142,8 @@
             
             <span class="subtitle">Methods</span>
             
+                <li data-name="WebGLRenderingContext#bindFramebuffer"><a href="WebGLRenderingContext.html#bindFramebuffer">bindFramebuffer</a></li>
+            
                 <li data-name="WebGLRenderingContext#bindVertexArray"><a href="WebGLRenderingContext.html#bindVertexArray">bindVertexArray</a></li>
             
                 <li data-name="WebGLRenderingContext#blendColor"><a href="WebGLRenderingContext.html#blendColor">blendColor</a></li>
@@ -392,6 +394,135 @@
             
 <dt>
     <div class="nameContainer">
+        <h4 class="name" id="bindFramebuffer">
+            
+            bindFramebuffer<span class="signature">(target, framebuffer)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line612">line 612</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>将framebuffer指定的帧缓冲区对象绑定到target目标上。如果framebuffer为null，那么已经绑定到target目标上的帧缓冲区对象那个将被解除绑定。<br>错误：INVALID_ENUM:target不是gl.FRAMEBUFFER</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>target</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>必须是gl.FRAMEBUFFER</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>framebuffer</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定被绑定的帧缓存对象</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
         <h4 class="name" id="bindVertexArray">
             
             bindVertexArray<span class="signature">(vertexArray)</span>
@@ -515,7 +646,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line571">line 571</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line572">line 572</a>
         </div>
         
     </div>
@@ -680,7 +811,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line578">line 578</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line579">line 579</a>
         </div>
         
     </div>
@@ -796,7 +927,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line588">line 588</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line589">line 589</a>
         </div>
         
     </div>
@@ -943,7 +1074,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line561">line 561</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line562">line 562</a>
         </div>
         
     </div>
@@ -1014,7 +1145,7 @@
             
             <td class="description last">
                 
-                <p>指定目标颜色在混合后颜色中的<a href="../webgl/index.html##blending_equation_param" target="_blank">权重因子</a>。</p></td>
+                <p>指定目标颜色在混合后颜色中的<a href="../webgl/index.html#blending_equation_param" target="_blank">权重因子</a>。</p></td>
         </tr>
 	
 	
@@ -1072,7 +1203,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line598">line 598</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line599">line 599</a>
         </div>
         
     </div>
@@ -1411,7 +1542,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line548">line 548</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line549">line 549</a>
         </div>
         
     </div>
@@ -3803,7 +3934,7 @@ none-unll 指定uniform变量的位置 null 指定的uniform变量不存在，�
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line530">line 530</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line531">line 531</a>
         </div>
         
     </div>
@@ -6982,7 +7113,7 @@ none-unll 指定uniform变量的位置 null 指定的uniform变量不存在，�
         
 
         <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Feb 22 2023 16:49:28 GMT+0800 (GMT+08:00)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Feb 27 2023 17:44:30 GMT+0800 (GMT+08:00)
         </footer>
     </div>
 </div>

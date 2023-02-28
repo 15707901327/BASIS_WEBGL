@@ -108,6 +108,25 @@
             </ul>
         </li>
     
+        <li class="item" data-name="WebGLBuffer">
+            <span class="title">
+                <a href="WebGLBuffer.html">WebGLBuffer</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
         <li class="item" data-name="WebGLProgram">
             <span class="title">
                 <a href="WebGLProgram.html">WebGLProgram</a>
@@ -142,6 +161,8 @@
             
             <span class="subtitle">Methods</span>
             
+                <li data-name="WebGLRenderingContext#bindBuffer"><a href="WebGLRenderingContext.html#bindBuffer">bindBuffer</a></li>
+            
                 <li data-name="WebGLRenderingContext#bindFramebuffer"><a href="WebGLRenderingContext.html#bindFramebuffer">bindFramebuffer</a></li>
             
                 <li data-name="WebGLRenderingContext#bindVertexArray"><a href="WebGLRenderingContext.html#bindVertexArray">bindVertexArray</a></li>
@@ -156,11 +177,19 @@
             
                 <li data-name="WebGLRenderingContext#blendFuncSeparate"><a href="WebGLRenderingContext.html#blendFuncSeparate">blendFuncSeparate</a></li>
             
+                <li data-name="WebGLRenderingContext#bufferData"><a href="WebGLRenderingContext.html#bufferData">bufferData</a></li>
+            
+                <li data-name="WebGLRenderingContext#bufferSubData"><a href="WebGLRenderingContext.html#bufferSubData">bufferSubData</a></li>
+            
+                <li data-name="WebGLRenderingContext#createBuffer"><a href="WebGLRenderingContext.html#createBuffer">createBuffer</a></li>
+            
                 <li data-name="WebGLRenderingContext#createTexture"><a href="WebGLRenderingContext.html#createTexture">createTexture</a></li>
             
                 <li data-name="WebGLRenderingContext#createVertexArray"><a href="WebGLRenderingContext.html#createVertexArray">createVertexArray</a></li>
             
                 <li data-name="WebGLRenderingContext#cullFace"><a href="WebGLRenderingContext.html#cullFace">cullFace</a></li>
+            
+                <li data-name="WebGLRenderingContext#deleteBuffer"><a href="WebGLRenderingContext.html#deleteBuffer">deleteBuffer</a></li>
             
                 <li data-name="WebGLRenderingContext#deleteTexture"><a href="WebGLRenderingContext.html#deleteTexture">deleteTexture</a></li>
             
@@ -394,6 +423,154 @@
             
 <dt>
     <div class="nameContainer">
+        <h4 class="name" id="bindBuffer">
+            
+            bindBuffer<span class="signature">(target, buffer)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line639">line 639</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>允许使用buffer表示的缓存区对象并将其绑定到target表示的目标上<br>错误：<br>target不是上诉值之一，这时将保持原有的绑定情况不变</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>target</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">GLenum</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>gl.ARRAY_BUFFER：表示缓存区对象中包含了顶点的数据<br>gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值&quot;OpenGL ES着色器语言[GLSLES]&quot;</p>
+<p>webgl2:<br>gl.UNIFORM_BUFFER：用于存储统一块的缓冲区</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>buffer</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="WebGLBuffer.html">WebGLBuffer</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定之前由gl.createBuffer()返回的待绑定的缓存区对象，如果指定为空，则禁用对target的绑定</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><p><a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点</a></p></code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
         <h4 class="name" id="bindFramebuffer">
             
             bindFramebuffer<span class="signature">(target, framebuffer)</span>
@@ -401,7 +578,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line612">line 612</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line704">line 704</a>
         </div>
         
     </div>
@@ -1361,6 +1538,519 @@
             
 <dt>
     <div class="nameContainer">
+        <h4 class="name" id="bufferData">
+            
+            bufferData<span class="signature">(target, size, srcData, usage, srcOffset)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line669">line 669</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>开辟存储空间，向绑定在target上的缓存区对象中写入数据data<br>重载函数:<br>bufferData(target, size, usage)<br>bufferData(target, ArrayBuffer? srcData, usage)<br>bufferData(target, ArrayBufferView srcData, usage)<br>WebGL2:<br>bufferData(target, ArrayBufferView srcData, usage, srcOffset, length)</p>
+<p> 错误：<br> INVALID_ENUM target不是上诉值之一，这时将保持原有的绑定情况不变</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>target</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">GLenum</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>gl.ARRAY_BUFFER：表示缓存区对象中包含了顶点的数据<br>gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值&quot;OpenGL ES着色器语言[GLSL ES]&quot;</p><br>webgl2:<br>gl.UNIFORM_BUFFER：用于存储统一块的缓冲区</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>size</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>设定Buffer对象的数据存储区大小</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>srcData</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>一个ArrayBuffer，SharedArrayBuffer 或者 ArrayBufferView类型的数组对象，将被复制到Buffer的数据存储区。如果为null，数据存储区仍会被创建，但是不会进行初始化和定义。</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>usage</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>表示程序将如何使用存储在缓存区对象中的数据。该参数将帮助webgl优化操作，但是就算你传入了错误的值，也不会终止程序（仅仅是降低程序的效率）<br>gl.STATIC_DRAW:只会向缓存区对象中写入一次数据，但需要绘制很多次<br>gl.STREAM_DRAW:只会向缓存区对象中写入一次数据，然后绘制若干次<br>gl.DYNAMIC_DRAW:会向缓存区对象中写入多次数据，并绘制很多次</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>srcOffset</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定读取缓冲时的初始元素索引偏移量</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><p><a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点</a></p></code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="bufferSubData">
+            
+            bufferSubData<span class="signature">(target, offset, srcData, dstByteOffset, srcOffset, length)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line694">line 694</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>更新缓冲区对象的数据存储的子集。<br>重载函数:</p>
+<p>void gl.bufferSubData(target, offset, ArrayBufferView srcData);</p><br><p>void gl.bufferSubData(target, offset, ArrayBuffer srcData);</p><br><strong>webGL2:</strong><br><p>void gl.bufferSubData(target, dstByteOffset, ArrayBufferView srcData, srcOffset, length);</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>target</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">GLenum</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>gl.ARRAY_BUFFER：包含顶点属性的缓存区，例如顶点坐标、纹理坐标数据或顶点颜色数据。<br>gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值&quot;OpenGL ES着色器语言[GLSLES]&quot;<br>webgl2:</p>
+<li>gl.COPY_READ_BUFFER:用于从一个缓冲区对象复制到另一个</li><br><li>gl.COPY_WRITE_BUFFER:用于从一个缓冲区对象复制到另一个</li><br><li>gl.TRANSFORM_FEEDBACK_BUFFER:缓冲区用于变换反馈操作</li><br><li>gl.UNIFORM_BUFFER:缓冲区用于存储统一块</li><br><li>gl.PIXEL_PACK_BUFFER:用于像素传输操作的缓冲区</li><br><li>gl.PIXEL_UNPACK_BUFFER:用于像素传输操作的缓冲区</li></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>offset</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                </td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>srcData</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>ArrayBuffer，SharedArrayBuffer或将复制到数据存储中的ArrayBufferView类型数组类型之一。</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>dstByteOffset</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>GLintptr指定数据替换将开始的字节偏移量</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>srcOffset</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>一个GLuint，指定元素索引偏移量从哪里开始读取缓冲区。</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>length</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>GLuint默认为0。</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="createBuffer">
+            
+            createBuffer<span class="signature">()</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="WebGLBuffer.html">WebGLBuffer</a>}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line613">line 613</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>创建缓存区对象</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        <a href="WebGLBuffer.html">WebGLBuffer</a>
+                        
+                    
+            </td>
+            <td class="description last">buffer 新创建的缓存区对象, null 创建缓存区对象失败</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><p><a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点</a></p></code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
         <h4 class="name" id="createTexture">
             
             createTexture<span class="signature">()</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="WebGLTexture.html">WebGLTexture</a>|null}</span>
@@ -1655,6 +2345,130 @@
 
     
     <pre class="prettyprint"><code><p>// 获取当前模式<br>gl.getParameter(gl.CULL_FACE_MODE) === gl.FRONT_AND_BACK;</p></code></pre>
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="deleteBuffer">
+            
+            deleteBuffer<span class="signature">(buffer)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line622">line 622</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>删除参数buffer表示的缓存区对象</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>buffer</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="WebGLBuffer.html">WebGLBuffer</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>待删除的缓存区对象</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+        <h5>Example</h5>
+        
+
+    
+    <pre class="prettyprint"><code><p><a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点</a></p></code></pre>
     
 
     
@@ -7113,7 +7927,7 @@ none-unll 指定uniform变量的位置 null 指定的uniform变量不存在，�
         
 
         <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Feb 27 2023 17:44:30 GMT+0800 (GMT+08:00)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Feb 28 2023 20:27:50 GMT+0800 (GMT+08:00)
         </footer>
     </div>
 </div>

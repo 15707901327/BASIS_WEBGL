@@ -34,6 +34,7 @@
                 <li><a href="canvas标签.html" target="_blank">canvas标签</a></li>
                 <li><a href="#type_array">类型化数组</a></li>
             </ul>
+            <h4><a href="#basicConcept">基本概念</a></h4>
             <h4><a href="#texture">纹理贴图</a></h4>
             <ul class="ul-1">
                 <li><a href="#textureFiltering">纹理过滤</a></li>
@@ -686,19 +687,17 @@
                 <h4 class="title">缓冲区</h4>
                 <section id="bufferObject">
                     <h4>缓冲区对象</h4>
-                    <p>
-                        缓冲区对象是WebGL系统中的一块内存区域，我们可以一次性地向缓存区对象中填充大量的顶点数据，然后将这些数据保存在其中，供顶点使用。</p>
-                    <p>
+                    <p>缓冲区对象是WebGL系统中的一块内存区域，我们可以一次性地向缓冲区对象中填充大量的顶点数据，然后将这些数据保存在其中，供顶点使用。
                         默认情况下，WebGL在颜色缓冲区中进行绘图，在开启隐藏面消除功能时，还会用到深度缓冲区。总之，绘制的结果图像是存储在颜色缓冲区中的。</p>
+                    <p>使用缓冲区对象向着色器中传入多个数据步骤：</p>
                     <div class="content">
-                        <strong>使用缓冲区对象向着色器中传入多个数据步骤：</strong>
                         <ul class="ul-1-num">
-                            <li>创建缓冲区对象（<a href="js_API/gl.html#createBuffer"
+                            <li>创建缓冲区对象（<a href="../webgl_API/WebGLRenderingContext.html#createBuffer"
                                                   target="_blank">gl.createBuffer()</a>）
                             </li>
-                            <li>绑定缓冲区对象（<a href="js_API/gl.html#bindBuffer" target="_blank">gl.bindBuffer()</a>）
+                            <li>绑定缓冲区对象（<a href="../webgl_API/WebGLRenderingContext.html#bindBuffer" target="_blank">gl.bindBuffer()</a>）
                             </li>
-                            <li>将数据写入缓冲区对象（<a href="js_API/gl.html#bufferData"
+                            <li>将数据写入缓冲区对象（<a href="../webgl_API/WebGLRenderingContext.html#bufferData"
                                                         target="_blank">gl.bufferData()</a>）
                             </li>
                             <li>将缓冲区对象分配给一个attribute变量（<a href="js_API/gl.html#vertexAttribPointer"
@@ -710,14 +709,13 @@
                         </ul>
                         <strong>实例</strong>
                         <ul class="ul-1-num">
-                            <li><a href="../../WebGL编程指南/ch3/MultiPoints.html" target="_blank">显示多个顶点</a></li>
+                            <li><a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">显示多个顶点</a></li>
                         </ul>
                     </div>
                 </section>
                 <section id="depthBuffer">
-                    <h4>深度缓存区</h4>
-                    <p>
-                        深度缓存区是一个中间对象，其作用就是帮助WebGL进行隐藏面消除。如果隐藏面消除，就必须知道每个几何图形的深度信息，而深度缓冲区就是用来存储深度信息的（Z缓冲区）。</p>
+                    <h4>深度缓冲区</h4>
+                    <p>深度缓冲区是一个中间对象，其作用就是帮助WebGL进行隐藏面消除。如果隐藏面消除，就必须知道每个几何图形的深度信息，而深度缓冲区就是用来存储深度信息的（Z缓冲区）。</p>
                 </section>
                 <section id="renderbufferObject">
                     <h4>渲染缓冲区对象</h4>
@@ -740,9 +738,9 @@
                         </ul>
                         <p>每一个关联对象可以是两种类型：<a href="#">纹理对象</a> 或 <a href="#renderbufferObject">渲染缓冲区对象</a>。
                         </p>
-                        <h4>实例1: <a href="../../WebGL编程指南/ch10/FramebufferObject.html"
+                        <h4>实例1: <a href="../../example/WebGL编程指南/ch10/FramebufferObject.html"
                                       target="_blank">帧缓冲对象实例</a></h4>
-                        <p>实例帧缓冲区配置实现步骤:</p>
+                        <p>帧缓冲区配置实现步骤:</p>
                         <ul class="ul-3-num">
                             <li>创建帧缓冲区对象<a href="js_API/gl.html#createFramebuffer" target="_blank">（gl.createFramebuffer()）</a>
                             </li>
@@ -910,7 +908,8 @@
                         </ul>
                         <strong>实例</strong>
                         <ul class="ul-1-num">
-                            <li><a href="../../example/WebGL编程指南/ch07/Zfighting.html" target="_blank">深度缓存</a></li>
+                            <li><a href="../../example/WebGL编程指南/ch07/Zfighting.html" target="_blank">深度缓存</a>
+                            </li>
                         </ul>
                     </div>
                 </section>

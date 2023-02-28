@@ -601,6 +601,98 @@ class WebGLRenderingContext {
 
     /************************** 缓冲区 *********************************/
 
+    /************************** 缓冲区对象 *****************************/
+
+    /**
+     * 创建缓存区对象
+     * @example
+     * <a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点</a>
+     * @return {WebGLBuffer} buffer 新创建的缓存区对象, null 创建缓存区对象失败
+     *
+     */
+    createBuffer() {
+    }
+
+    /**
+     * 删除参数buffer表示的缓存区对象
+     * @example
+     * <a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点</a>
+     * @param buffer {WebGLBuffer} 待删除的缓存区对象
+     */
+    deleteBuffer(buffer){}
+
+    /**
+     * 允许使用buffer表示的缓存区对象并将其绑定到target表示的目标上
+     * 错误：
+     * target不是上诉值之一，这时将保持原有的绑定情况不变
+     * @param target {GLenum}
+     * gl.ARRAY_BUFFER：表示缓存区对象中包含了顶点的数据
+     * gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值"OpenGL ES着色器语言[GLSLES]"
+     *
+     * webgl2:
+     * gl.UNIFORM_BUFFER：用于存储统一块的缓冲区
+     *
+     * @example
+     * <a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点</a>
+     * @param buffer {WebGLBuffer} 指定之前由gl.createBuffer()返回的待绑定的缓存区对象，如果指定为空，则禁用对target的绑定
+     */
+    bindBuffer(target, buffer){}
+
+    /**
+     * 开辟存储空间，向绑定在target上的缓存区对象中写入数据data
+     * 重载函数:
+     * bufferData(target, size, usage)
+     * bufferData(target, ArrayBuffer? srcData, usage)
+     * bufferData(target, ArrayBufferView srcData, usage)
+     * WebGL2:
+     * bufferData(target, ArrayBufferView srcData, usage, srcOffset, length)
+     *
+     *  错误：
+     *  INVALID_ENUM target不是上诉值之一，这时将保持原有的绑定情况不变
+     *
+     * @param target {GLenum}
+     * gl.ARRAY_BUFFER：表示缓存区对象中包含了顶点的数据
+     * gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值"OpenGL ES着色器语言[GLSL ES]"</p>
+     * webgl2:
+     * gl.UNIFORM_BUFFER：用于存储统一块的缓冲区
+     * @param size 设定Buffer对象的数据存储区大小
+     * @param srcData 一个ArrayBuffer，SharedArrayBuffer 或者 ArrayBufferView类型的数组对象，将被复制到Buffer的数据存储区。如果为null，数据存储区仍会被创建，但是不会进行初始化和定义。
+     * @param usage 表示程序将如何使用存储在缓存区对象中的数据。该参数将帮助webgl优化操作，但是就算你传入了错误的值，也不会终止程序（仅仅是降低程序的效率）
+     * gl.STATIC_DRAW:只会向缓存区对象中写入一次数据，但需要绘制很多次
+     * gl.STREAM_DRAW:只会向缓存区对象中写入一次数据，然后绘制若干次
+     * gl.DYNAMIC_DRAW:会向缓存区对象中写入多次数据，并绘制很多次
+     * @param srcOffset 指定读取缓冲时的初始元素索引偏移量
+     *
+     * @example
+     * <a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点</a>
+     */
+    bufferData(target, srcData,usage){}
+
+    /**
+     * 更新缓冲区对象的数据存储的子集。
+     * 重载函数:
+     * <p>void gl.bufferSubData(target, offset, ArrayBufferView srcData);</p>
+     * <p>void gl.bufferSubData(target, offset, ArrayBuffer srcData);</p>
+     * <strong>webGL2:</strong>
+     * <p>void gl.bufferSubData(target, dstByteOffset, ArrayBufferView srcData, srcOffset, length);</p>
+     * @param target {GLenum}
+     * gl.ARRAY_BUFFER：包含顶点属性的缓存区，例如顶点坐标、纹理坐标数据或顶点颜色数据。
+     * gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值"OpenGL ES着色器语言[GLSLES]"
+     * webgl2:
+     * <li>gl.COPY_READ_BUFFER:用于从一个缓冲区对象复制到另一个</li>
+     * <li>gl.COPY_WRITE_BUFFER:用于从一个缓冲区对象复制到另一个</li>
+     * <li>gl.TRANSFORM_FEEDBACK_BUFFER:缓冲区用于变换反馈操作</li>
+     * <li>gl.UNIFORM_BUFFER:缓冲区用于存储统一块</li>
+     * <li>gl.PIXEL_PACK_BUFFER:用于像素传输操作的缓冲区</li>
+     * <li>gl.PIXEL_UNPACK_BUFFER:用于像素传输操作的缓冲区</li>
+     * @param offset
+     * @param srcData ArrayBuffer，SharedArrayBuffer或将复制到数据存储中的ArrayBufferView类型数组类型之一。
+     * @param dstByteOffset  GLintptr指定数据替换将开始的字节偏移量
+     * @param srcOffset  一个GLuint，指定元素索引偏移量从哪里开始读取缓冲区。
+     * @param length  GLuint默认为0。
+     */
+    bufferSubData(target, offset, srcData){}
+
     /************************** 帧缓冲区 *******************************/
 
     /**

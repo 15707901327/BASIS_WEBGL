@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Source: WebGLTexture.js</title>
+    <title>Source: WebGLBuffer.js</title>
     
     
     
@@ -356,7 +356,7 @@
     </ul>
 </div>
     <div class="main">
-        <h1 class="page-title" data-filename="WebGLTexture.js.html">Source: WebGLTexture.js</h1>
+        <h1 class="page-title" data-filename="WebGLBuffer.js.html">Source: WebGLBuffer.js</h1>
         
 
 
@@ -364,13 +364,15 @@
     <section>
         <article>
             <pre class="prettyprint source "><code>/**
- * 纹理对象用来管理WebGL系统中的纹理。
+ * 一个不透明的缓冲区对象，储存诸如顶点或着色之类的数据。
+ * WebGLBuffer 对象没有定义任何自己的方法或属性，且内容不能被直接访问。
  */
-class WebGLTexture{
-	constructor(){}
+class WebGLBuffer{
+    constructor() {
+    }
 }
 
-export {WebGLTexture};</code></pre>
+export {WebGLBuffer};</code></pre>
         </article>
     </section>
 

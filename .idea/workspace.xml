@@ -23,10 +23,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="1. 修改API">
-      <change afterPath="$PROJECT_DIR$/doc/webgl/WebGL绘图.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/webgl/WebGLBuffer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLBuffer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLBuffer.js.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLFramebuffer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLFramebuffer.js.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/webgl/GLbitfield.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/webgl/WebGLFramebuffer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl/img/pipeline.png" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl/img/pipeline.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl/js_API/gl.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl/js_API/gl.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl_API/GLboolean.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/GLboolean.html" afterDir="false" />
@@ -204,7 +207,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/14296/workhome/BASIS_WEBGL&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/14296/workhome/ThreeSourceCodeAnalysis&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -536,14 +539,9 @@
       <workItem from="1677116091263" duration="1393000" />
       <workItem from="1677461644632" duration="2245000" />
       <workItem from="1677490536842" duration="1534000" />
-      <workItem from="1677555281573" duration="5554000" />
-    </task>
-    <task id="LOCAL-00074" summary="1.偏导函数">
-      <created>1584093491595</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1584093491595</updated>
+      <workItem from="1677555281573" duration="6401000" />
+      <workItem from="1677634044412" duration="7258000" />
+      <workItem from="1677721017291" duration="1153000" />
     </task>
     <task id="LOCAL-00075" summary="1.GLSE文档">
       <created>1585107241111</created>
@@ -881,7 +879,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677492346853</updated>
     </task>
-    <option name="localTasksCounter" value="123" />
+    <task id="LOCAL-00123" summary="1. 修改API">
+      <created>1677588509873</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1677588509873</updated>
+    </task>
+    <option name="localTasksCounter" value="124" />
     <servers />
   </component>
   <component name="TimeTrackingManager">

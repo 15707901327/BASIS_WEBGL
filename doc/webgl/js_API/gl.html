@@ -50,7 +50,6 @@
             </ul>
             <h4><a href="#buffer">缓冲区方法</a></h4>
             <ul class="ul-1">
-                <li><a href="#clear">gl.clear()</a></li>
                 <li><a href="#clearDepth">gl.clearDepth()</a></li>
                 <li><a href="../../webgl_API/WebGLRenderingContext.html#enableVertexAttribArray"
                        title="gl.enableVertexAttribArray()" target="_blank">gl.enableVertexAttribArray()</a></li>
@@ -340,27 +339,7 @@
             <!--缓冲区相关方法-->
             <section id="buffer" class="section1">
                 <h4 class="title">缓冲区相关方法</h4>
-                <section id="clear">
-                    <h4>gl.clear(buffer);</h4>
-                    <p>将指定缓存区设定为预定的值。如果清空是颜色缓存区，那么将使用gl.clearColor()指定的值（作为预定值）</p>
-                    <div class="content">
-                        <strong>参数：</strong>
-                        <ul class="ul-1">
-                            <li>
-                                buffer：指定待清空的缓存区，位操作符OR(|)可用来指定多个缓存区<br>
-                                gl.COLOR_BUFFER_BIT：指定颜色缓存区<br>
-                                gl.DEPTH_BUFFER_BIT：指定深度缓存区<br>
-                                gl.STENCIL_BUFFER_BIT：指定模版缓存区<br>
-                            </li>
-                        </ul>
-                        <strong>返回值：</strong>
-                        <p>无</p>
-                        <strong>错误：</strong>
-                        <ul>
-                            <li>INVALID_VALUE：缓存区不是以上三种类型</li>
-                        </ul>
-                    </div>
-                </section>
+
                 <section id="clearDepth">
                     <h4>gl.clearDepth(depth);</h4>
                     <p>指定绘图区域的深度，默认值 1.0</p>

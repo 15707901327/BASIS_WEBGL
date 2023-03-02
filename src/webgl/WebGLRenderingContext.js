@@ -601,6 +601,18 @@ class WebGLRenderingContext {
 
     /************************** 缓冲区 *********************************/
 
+    /**
+     * 将指定缓存区设定为预定的值。如果清空是颜色缓冲区，那么将使用gl.clearColor()指定的值（作为预定值）
+     * 异常：
+     * INVALID_VALUE：缓冲区不是以上三种类型
+     * @param mask {GLbitfield} 指定待清空的缓冲区，位操作符OR(|)可用来指定多个缓冲区
+     * gl.COLOR_BUFFER_BIT：指定颜色缓冲区
+     * gl.DEPTH_BUFFER_BIT：指定深度缓冲区
+     * gl.STENCIL_BUFFER_BIT：指定模版缓冲区
+     */
+    clear(mask) {
+    }
+
     /************************** 缓冲区对象 *****************************/
 
     /**
@@ -619,7 +631,8 @@ class WebGLRenderingContext {
      * <a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点</a>
      * @param buffer {WebGLBuffer} 待删除的缓存区对象
      */
-    deleteBuffer(buffer){}
+    deleteBuffer(buffer) {
+    }
 
     /**
      * 允许使用buffer表示的缓存区对象并将其绑定到target表示的目标上
@@ -636,7 +649,8 @@ class WebGLRenderingContext {
      * <a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点</a>
      * @param buffer {WebGLBuffer} 指定之前由gl.createBuffer()返回的待绑定的缓存区对象，如果指定为空，则禁用对target的绑定
      */
-    bindBuffer(target, buffer){}
+    bindBuffer(target, buffer) {
+    }
 
     /**
      * 开辟存储空间，向绑定在target上的缓存区对象中写入数据data
@@ -666,7 +680,8 @@ class WebGLRenderingContext {
      * @example
      * <a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点</a>
      */
-    bufferData(target, srcData,usage){}
+    bufferData(target, srcData, usage) {
+    }
 
     /**
      * 更新缓冲区对象的数据存储的子集。
@@ -691,17 +706,33 @@ class WebGLRenderingContext {
      * @param srcOffset  一个GLuint，指定元素索引偏移量从哪里开始读取缓冲区。
      * @param length  GLuint默认为0。
      */
-    bufferSubData(target, offset, srcData){}
+    bufferSubData(target, offset, srcData) {
+    }
 
     /************************** 帧缓冲区 *******************************/
 
     /**
      * 将framebuffer指定的帧缓冲区对象绑定到target目标上。如果framebuffer为null，那么已经绑定到target目标上的帧缓冲区对象那个将被解除绑定。
-     * 错误：INVALID_ENUM:target不是gl.FRAMEBUFFER
-     * @param target 必须是gl.FRAMEBUFFER
-     * @param framebuffer 指定被绑定的帧缓存对象
+     * 异常：
+     * 如果目标不是 gl.FRAMEBUFFER ，gl.DRAW_FRAMEBUFFER 或 gl.READ_FRAMEBUFFER ，则抛出 gl.INVALID_ENUM 错误。
+     * @param target {GLenum}
+     * gl.FRAMEBUFFER:收集用于渲染图像的颜色，alpha，深度和模板缓冲区的缓冲区数据存储。
+     * WebGL2:
+     * gl.DRAW_FRAMEBUFFER: 相当于gl.FRAMEBUFFER，用作绘图，渲染，清除和写入操作。
+     * gl.READ_FRAMEBUFFER: 用作读取操作的资源。
+     * @param framebuffer {WebGLFramebuffer} 指定被绑定的帧缓存对象
      */
     bindFramebuffer(target, framebuffer) {
+    }
+
+    /**
+     * 方法定义了写入片元颜色的绘制缓冲区。绘制缓冲区设置了当前绑定帧缓冲区的状态。
+     * @param buffers {Array} 一个GLenum数组，指定将写入片段颜色的缓冲区。可能的值：
+     * gl.NONE:片元着色器的输出未被写入到任何颜色缓冲区中。
+     * gl.BACK: 片元着色器的输出被写入到输出的颜色缓冲区中。
+     * gl.COLOR_ATTACHMENT{0-15}:片元着色器的输出被写入到第n个当前帧缓冲区中的颜色关联对象。
+     */
+    drawBuffers(buffers) {
     }
 
 }

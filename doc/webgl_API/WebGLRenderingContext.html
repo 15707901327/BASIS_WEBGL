@@ -43,6 +43,25 @@
     </div>
     <ul class="list">
     
+        <li class="item" data-name="GLbitfield">
+            <span class="title">
+                <a href="GLbitfield.html">GLbitfield</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
         <li class="item" data-name="GLboolean">
             <span class="title">
                 <a href="GLboolean.html">GLboolean</a>
@@ -127,6 +146,25 @@
             </ul>
         </li>
     
+        <li class="item" data-name="WebGLFramebuffer">
+            <span class="title">
+                <a href="WebGLFramebuffer.html">WebGLFramebuffer</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
         <li class="item" data-name="WebGLProgram">
             <span class="title">
                 <a href="WebGLProgram.html">WebGLProgram</a>
@@ -181,6 +219,8 @@
             
                 <li data-name="WebGLRenderingContext#bufferSubData"><a href="WebGLRenderingContext.html#bufferSubData">bufferSubData</a></li>
             
+                <li data-name="WebGLRenderingContext#clear"><a href="WebGLRenderingContext.html#clear">clear</a></li>
+            
                 <li data-name="WebGLRenderingContext#createBuffer"><a href="WebGLRenderingContext.html#createBuffer">createBuffer</a></li>
             
                 <li data-name="WebGLRenderingContext#createTexture"><a href="WebGLRenderingContext.html#createTexture">createTexture</a></li>
@@ -200,6 +240,8 @@
                 <li data-name="WebGLRenderingContext#disable"><a href="WebGLRenderingContext.html#disable">disable</a></li>
             
                 <li data-name="WebGLRenderingContext#disableVertexAttribArray"><a href="WebGLRenderingContext.html#disableVertexAttribArray">disableVertexAttribArray</a></li>
+            
+                <li data-name="WebGLRenderingContext#drawBuffers"><a href="WebGLRenderingContext.html#drawBuffers">drawBuffers</a></li>
             
                 <li data-name="WebGLRenderingContext#drawElements"><a href="WebGLRenderingContext.html#drawElements">drawElements</a></li>
             
@@ -430,7 +472,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line639">line 639</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line652">line 652</a>
         </div>
         
     </div>
@@ -578,7 +620,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line704">line 704</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line725">line 725</a>
         </div>
         
     </div>
@@ -589,7 +631,7 @@
     
     
     <div class="description">
-        <p>将framebuffer指定的帧缓冲区对象绑定到target目标上。如果framebuffer为null，那么已经绑定到target目标上的帧缓冲区对象那个将被解除绑定。<br>错误：INVALID_ENUM:target不是gl.FRAMEBUFFER</p>
+        <p>将framebuffer指定的帧缓冲区对象绑定到target目标上。如果framebuffer为null，那么已经绑定到target目标上的帧缓冲区对象那个将被解除绑定。<br>异常：<br>如果目标不是 gl.FRAMEBUFFER ，gl.DRAW_FRAMEBUFFER 或 gl.READ_FRAMEBUFFER ，则抛出 gl.INVALID_ENUM 错误。</p>
     </div>
     
 
@@ -625,13 +667,18 @@
             
             <td class="type">
             
+                
+<span class="param-type">GLenum</span>
+
+
+            
             </td>
             
             
             
             <td class="description last">
                 
-                <p>必须是gl.FRAMEBUFFER</p></td>
+                <p>gl.FRAMEBUFFER:收集用于渲染图像的颜色，alpha，深度和模板缓冲区的缓冲区数据存储。<br>WebGL2:<br>gl.DRAW_FRAMEBUFFER: 相当于gl.FRAMEBUFFER，用作绘图，渲染，清除和写入操作。<br>gl.READ_FRAMEBUFFER: 用作读取操作的资源。</p></td>
         </tr>
 	
 	
@@ -642,6 +689,11 @@
             
             
             <td class="type">
+            
+                
+<span class="param-type"><a href="WebGLFramebuffer.html">WebGLFramebuffer</a></span>
+
+
             
             </td>
             
@@ -1545,7 +1597,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line669">line 669</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line683">line 683</a>
         </div>
         
     </div>
@@ -1742,7 +1794,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line694">line 694</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line709">line 709</a>
         </div>
         
     </div>
@@ -1943,6 +1995,122 @@
             
 <dt>
     <div class="nameContainer">
+        <h4 class="name" id="clear">
+            
+            clear<span class="signature">(mask)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line613">line 613</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>将指定缓存区设定为预定的值。如果清空是颜色缓冲区，那么将使用gl.clearColor()指定的值（作为预定值）<br>异常：<br>INVALID_VALUE：缓冲区不是以上三种类型</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>mask</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="GLbitfield.html">GLbitfield</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定待清空的缓冲区，位操作符OR(|)可用来指定多个缓冲区<br>gl.COLOR_BUFFER_BIT：指定颜色缓冲区<br>gl.DEPTH_BUFFER_BIT：指定深度缓冲区<br>gl.STENCIL_BUFFER_BIT：指定模版缓冲区</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
         <h4 class="name" id="createBuffer">
             
             createBuffer<span class="signature">()</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="WebGLBuffer.html">WebGLBuffer</a>}</span>
@@ -1950,7 +2118,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line613">line 613</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line625">line 625</a>
         </div>
         
     </div>
@@ -2361,7 +2529,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line622">line 622</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line634">line 634</a>
         </div>
         
     </div>
@@ -3052,6 +3220,122 @@
             <li><a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点</a></li>
         </ul>
     </dd>
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="drawBuffers">
+            
+            drawBuffers<span class="signature">(buffers)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line735">line 735</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>方法定义了写入片元颜色的绘制缓冲区。绘制缓冲区设置了当前绑定帧缓冲区的状态。</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>buffers</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>一个GLenum数组，指定将写入片段颜色的缓冲区。可能的值：<br>gl.NONE:片元着色器的输出未被写入到任何颜色缓冲区中。<br>gl.BACK: 片元着色器的输出被写入到输出的颜色缓冲区中。<br>gl.COLOR_ATTACHMENT{0-15}:片元着色器的输出被写入到第n个当前帧缓冲区中的颜色关联对象。</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -7927,7 +8211,7 @@ none-unll 指定uniform变量的位置 null 指定的uniform变量不存在，�
         
 
         <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Feb 28 2023 20:27:50 GMT+0800 (GMT+08:00)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Mar 01 2023 14:42:44 GMT+0800 (GMT+08:00)
         </footer>
     </div>
 </div>

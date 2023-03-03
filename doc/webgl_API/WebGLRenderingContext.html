@@ -199,9 +199,13 @@
             
             <span class="subtitle">Methods</span>
             
+                <li data-name="WebGLRenderingContext#activeTexture"><a href="WebGLRenderingContext.html#activeTexture">activeTexture</a></li>
+            
                 <li data-name="WebGLRenderingContext#bindBuffer"><a href="WebGLRenderingContext.html#bindBuffer">bindBuffer</a></li>
             
                 <li data-name="WebGLRenderingContext#bindFramebuffer"><a href="WebGLRenderingContext.html#bindFramebuffer">bindFramebuffer</a></li>
+            
+                <li data-name="WebGLRenderingContext#bindTexture"><a href="WebGLRenderingContext.html#bindTexture">bindTexture</a></li>
             
                 <li data-name="WebGLRenderingContext#bindVertexArray"><a href="WebGLRenderingContext.html#bindVertexArray">bindVertexArray</a></li>
             
@@ -222,6 +226,8 @@
                 <li data-name="WebGLRenderingContext#clear"><a href="WebGLRenderingContext.html#clear">clear</a></li>
             
                 <li data-name="WebGLRenderingContext#createBuffer"><a href="WebGLRenderingContext.html#createBuffer">createBuffer</a></li>
+            
+                <li data-name="WebGLRenderingContext#createFramebuffer"><a href="WebGLRenderingContext.html#createFramebuffer">createFramebuffer</a></li>
             
                 <li data-name="WebGLRenderingContext#createTexture"><a href="WebGLRenderingContext.html#createTexture">createTexture</a></li>
             
@@ -272,6 +278,10 @@
                 <li data-name="WebGLRenderingContext#scissor"><a href="WebGLRenderingContext.html#scissor">scissor</a></li>
             
                 <li data-name="WebGLRenderingContext#stencilFunc"><a href="WebGLRenderingContext.html#stencilFunc">stencilFunc</a></li>
+            
+                <li data-name="WebGLRenderingContext#texImage2D"><a href="WebGLRenderingContext.html#texImage2D">texImage2D</a></li>
+            
+                <li data-name="WebGLRenderingContext#texParameter"><a href="WebGLRenderingContext.html#texParameter">texParameter</a></li>
             
                 <li data-name="WebGLRenderingContext#uniform1f"><a href="WebGLRenderingContext.html#uniform1f">uniform1f</a></li>
             
@@ -465,6 +475,117 @@
             
 <dt>
     <div class="nameContainer">
+        <h4 class="name" id="activeTexture">
+            
+            activeTexture<span class="signature">(texUnit)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line466">line 466</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>激活texUnit指定的<a href="../index.html#textureUnit">纹理单元</a></p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>texUnit</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>指定准备激活的纹理单元,其值是 gl.TEXTUREI ，其中的 I 在 0 到gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS - 1范围内。例如：gl.TEXTURE0、gl.TEXTURE1......gl.TEXTURE7。最后的数字表示纹理单元的编号。<br>纹理单元的数量视实现而定， 你可以通过访问常量 MAX_COMBINED_TEXTURE_IMAGE_UNITS来获取这个值。按照规范来说，最少是8个。<br>获取纹理单元个数：gl.getParameter(gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS);<br>获取激活的纹理单元：gl.getParameter(gl.ACTIVE_TEXTURE);<br>异常：<br>INVALID_ENUM：texture不是合法的值</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
         <h4 class="name" id="bindBuffer">
             
             bindBuffer<span class="signature">(target, buffer)</span>
@@ -472,7 +593,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line652">line 652</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line742">line 742</a>
         </div>
         
     </div>
@@ -620,7 +741,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line725">line 725</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line822">line 822</a>
         </div>
         
     </div>
@@ -752,6 +873,145 @@
             
 <dt>
     <div class="nameContainer">
+        <h4 class="name" id="bindTexture">
+            
+            bindTexture<span class="signature">(target, texture)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line455">line 455</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>开启texture指定的纹理对象，并将其绑定到target上。此外，如果已经通过gl.activeTexture()激活<br>了某个纹理单元，则纹理对象也会绑定到这个纹理单元上。<br>异常：<br>INVALID_ENUM：target不是合法的值</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>target</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">GLenum</span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>可能值：<br>gl.TEXTURE_2D：二维纹理<br>gl.TEXTURE_CUBE_MAP：立方体纹理<br>WebGl2：<br>gl.TEXTURE_3D：三维纹理<br>gl.TEXTURE_2D_ARRAY：二维数组纹理</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>texture</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="WebGLTexture.html">WebGLTexture</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>表示绑定的纹理单元</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
         <h4 class="name" id="bindVertexArray">
             
             bindVertexArray<span class="signature">(vertexArray)</span>
@@ -759,7 +1019,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line434">line 434</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line405">line 405</a>
         </div>
         
     </div>
@@ -875,7 +1135,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line572">line 572</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line662">line 662</a>
         </div>
         
     </div>
@@ -1040,7 +1300,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line579">line 579</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line669">line 669</a>
         </div>
         
     </div>
@@ -1156,7 +1416,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line589">line 589</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line679">line 679</a>
         </div>
         
     </div>
@@ -1303,7 +1563,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line562">line 562</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line652">line 652</a>
         </div>
         
     </div>
@@ -1432,7 +1692,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line599">line 599</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line689">line 689</a>
         </div>
         
     </div>
@@ -1597,7 +1857,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line683">line 683</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line773">line 773</a>
         </div>
         
     </div>
@@ -1656,7 +1916,7 @@
             
             <td class="description last">
                 
-                <p>gl.ARRAY_BUFFER：表示缓存区对象中包含了顶点的数据<br>gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值&quot;OpenGL ES着色器语言[GLSL ES]&quot;</p><br>webgl2:<br>gl.UNIFORM_BUFFER：用于存储统一块的缓冲区</p></td>
+                <p>gl.ARRAY_BUFFER：表示缓存区对象中包含了顶点的数据<br>gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值&quot;OpenGL ES着色器语言[GLSL ES]&quot;<br>webgl2:<br>gl.UNIFORM_BUFFER：用于存储统一块的缓冲区</p></td>
         </tr>
 	
 	
@@ -1794,7 +2054,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line709">line 709</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line799">line 799</a>
         </div>
         
     </div>
@@ -1805,8 +2065,7 @@
     
     
     <div class="description">
-        <p>更新缓冲区对象的数据存储的子集。<br>重载函数:</p>
-<p>void gl.bufferSubData(target, offset, ArrayBufferView srcData);</p><br><p>void gl.bufferSubData(target, offset, ArrayBuffer srcData);</p><br><strong>webGL2:</strong><br><p>void gl.bufferSubData(target, dstByteOffset, ArrayBufferView srcData, srcOffset, length);</p>
+        <p>更新缓冲区对象的数据存储的子集。<br>重载函数:<br>void gl.bufferSubData(target, offset, ArrayBufferView srcData);<br>void gl.bufferSubData(target, offset, ArrayBuffer srcData);<br><strong>webGL2:</strong><br>void gl.bufferSubData(target, dstByteOffset, ArrayBufferView srcData, srcOffset, length);</p>
     </div>
     
 
@@ -1853,8 +2112,7 @@
             
             <td class="description last">
                 
-                <p>gl.ARRAY_BUFFER：包含顶点属性的缓存区，例如顶点坐标、纹理坐标数据或顶点颜色数据。<br>gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值&quot;OpenGL ES着色器语言[GLSLES]&quot;<br>webgl2:</p>
-<li>gl.COPY_READ_BUFFER:用于从一个缓冲区对象复制到另一个</li><br><li>gl.COPY_WRITE_BUFFER:用于从一个缓冲区对象复制到另一个</li><br><li>gl.TRANSFORM_FEEDBACK_BUFFER:缓冲区用于变换反馈操作</li><br><li>gl.UNIFORM_BUFFER:缓冲区用于存储统一块</li><br><li>gl.PIXEL_PACK_BUFFER:用于像素传输操作的缓冲区</li><br><li>gl.PIXEL_UNPACK_BUFFER:用于像素传输操作的缓冲区</li></td>
+                <p>gl.ARRAY_BUFFER：包含顶点属性的缓存区，例如顶点坐标、纹理坐标数据或顶点颜色数据。<br>gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值&quot;OpenGL ES着色器语言[GLSLES]&quot;<br>webgl2:<br>gl.COPY_READ_BUFFER:用于从一个缓冲区对象复制到另一个<br>gl.COPY_WRITE_BUFFER:用于从一个缓冲区对象复制到另一个<br>gl.TRANSFORM_FEEDBACK_BUFFER:缓冲区用于变换反馈操作<br>gl.UNIFORM_BUFFER:缓冲区用于存储统一块<br>gl.PIXEL_PACK_BUFFER:用于像素传输操作的缓冲区<br>gl.PIXEL_UNPACK_BUFFER:用于像素传输操作的缓冲区</p></td>
         </tr>
 	
 	
@@ -2002,7 +2260,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line613">line 613</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line703">line 703</a>
         </div>
         
     </div>
@@ -2118,7 +2376,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line625">line 625</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line715">line 715</a>
         </div>
         
     </div>
@@ -2219,6 +2477,109 @@
             
 <dt>
     <div class="nameContainer">
+        <h4 class="name" id="createFramebuffer">
+            
+            createFramebuffer<span class="signature">()</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="WebGLFramebuffer.html">WebGLFramebuffer</a>|null}</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line808">line 808</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>创建帧缓存区对象。</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Type</th>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            
+            <td class="type">
+            
+                        <a href="WebGLFramebuffer.html">WebGLFramebuffer</a>
+                         | 
+                    
+                        null
+                        
+                    
+            </td>
+            <td class="description last">新创建的帧缓存区对象</td>
+        </tr>
+    
+    </tbody>
+</table>
+
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
         <h4 class="name" id="createTexture">
             
             createTexture<span class="signature">()</span><span class="glyphicon glyphicon-circle-arrow-right"></span><span class="type-signature returnType">{<a href="WebGLTexture.html">WebGLTexture</a>|null}</span>
@@ -2226,7 +2587,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line338">line 338</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line431">line 431</a>
         </div>
         
     </div>
@@ -2329,7 +2690,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line427">line 427</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line398">line 398</a>
         </div>
         
     </div>
@@ -2400,7 +2761,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line549">line 549</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line639">line 639</a>
         </div>
         
     </div>
@@ -2529,7 +2890,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line634">line 634</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line724">line 724</a>
         </div>
         
     </div>
@@ -2653,7 +3014,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line345">line 345</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line438">line 438</a>
         </div>
         
     </div>
@@ -2769,7 +3130,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line514">line 514</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line604">line 604</a>
         </div>
         
     </div>
@@ -2898,7 +3259,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line521">line 521</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line611">line 611</a>
         </div>
         
     </div>
@@ -3009,7 +3370,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line493">line 493</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line583">line 583</a>
         </div>
         
     </div>
@@ -3125,7 +3486,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line421">line 421</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line392">line 392</a>
         </div>
         
     </div>
@@ -3250,7 +3611,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line735">line 735</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line832">line 832</a>
         </div>
         
     </div>
@@ -3580,7 +3941,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line455">line 455</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line545">line 545</a>
         </div>
         
     </div>
@@ -3696,7 +4057,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line409">line 409</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line380">line 380</a>
         </div>
         
     </div>
@@ -4341,7 +4702,7 @@
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line381">line 381</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line367">line 367</a>
         </div>
         
     </div>
@@ -4466,7 +4827,7 @@ extension 一个 WebGL 扩展对象。<br>如果扩展名称（区分大小写�
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line396">line 396</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line422">line 422</a>
         </div>
         
     </div>
@@ -4887,7 +5248,7 @@ none-unll 指定uniform变量的位置 null 指定的uniform变量不存在，�
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line474">line 474</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line564">line 564</a>
         </div>
         
     </div>
@@ -5032,7 +5393,7 @@ none-unll 指定uniform变量的位置 null 指定的uniform变量不存在，�
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line531">line 531</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line621">line 621</a>
         </div>
         
     </div>
@@ -5161,7 +5522,7 @@ none-unll 指定uniform变量的位置 null 指定的uniform变量不存在，�
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line351">line 351</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line337">line 337</a>
         </div>
         
     </div>
@@ -5232,7 +5593,7 @@ none-unll 指定uniform变量的位置 null 指定的uniform变量不存在，�
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line361">line 361</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line347">line 347</a>
         </div>
         
     </div>
@@ -5397,7 +5758,7 @@ none-unll 指定uniform变量的位置 null 指定的uniform变量不存在，�
     
         
         <div class="tag-source">
-            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line371">line 371</a>
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line357">line 357</a>
         </div>
         
     </div>
@@ -5487,6 +5848,408 @@ none-unll 指定uniform变量的位置 null 指定的uniform变量不存在，�
             <td class="description last">
                 
                 <p>指定按位掩码，用于在完成测试时对参考值和存储的模板值进行“与”运算。默认值为全1。</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="texImage2D">
+            
+            texImage2D<span class="signature">(target, level, internalformat, width, height, border, format, type, image)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line525">line 525</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>void gl.texImage2D(target, level, internalformat, width, height, border, format, type, ArrayBufferView?<br>pixels);<br>void gl.texImage2D(target, level, internalformat, format, type, ImageData? pixels);<br>void gl.texImage2D(target, level, internalformat, format, type, HTMLImageElement? pixels);<br>void gl.texImage2D(target, level, internalformat, format, type, HTMLCanvasElement? pixels);<br>void gl.texImage2D(target, level, internalformat, format, type, HTMLVideoElement? pixels);<br>void gl.texImage2D(target, level, internalformat, format, type, ImageBitmap? pixels);<br>webgl2<br>void gl.texImage2D(target, level, internalformat, width, height, border, format, type, GLint ptroffset);<br>void gl.texImage2D(target, level, internalformat, width, height, border, format, type, HTMLCanvasElement source);<br>void gl.texImage2D(target, level, internalformat, width, height, border, format, type, HTMLImageElement source);<br>void gl.texImage2D(target, level, internalformat, width, height, border, format, type, HTMLVideoElement source);<br>void gl.texImage2D(target, level, internalformat, width, height, border, format, type, ImageBitmap source);<br>void gl.texImage2D(target, level, internalformat, width, height, border, format, type, ImageData source);<br>void gl.texImage2D(target, level, internalformat, width, height, border, format, type, ArrayBufferView srcData, srcOffset);<br>将image指定的图像分配给绑定的目标上的纹理对象。<br>异常：<br>INVALID_ENUM:target不是合法的<br>INVALID_OPERATION:当前目标上没有绑定纹理对象</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>target</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>激活纹理绑定点<br>gl.TEXTURE_2D:二维纹理<br>gl.TEXTURE_CUBE_MAP_POSITIVE_X: Positive X face for a cube-mapped texture.<br>gl.TEXTURE_CUBE_MAP_NEGATIVE_X: Negative X face for a cube-mapped texture.<br>gl.TEXTURE_CUBE_MAP_POSITIVE_Y: Positive Y face for a cube-mapped texture.<br>gl.TEXTURE_CUBE_MAP_NEGATIVE_Y: Negative Y face for a cube-mapped texture.<br>gl.TEXTURE_CUBE_MAP_POSITIVE_Z: Positive Z face for a cube-mapped texture.<br>gl.TEXTURE_CUBE_MAP_NEGATIVE_Z: Negative Z face for a cube-mapped texture</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>level</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>级别0是基本图像级别，级别n是第n个mipmap缩减级别。</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>internalformat</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>图像的<a href="#internalFormat">内部格式</a>。</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>纹理的宽度</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>纹理的高度</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>border</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>A GLint specifying the width of the border. Must be 0.</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>format</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p><a href="#internalFormat">纹理数据的格式</a>，参考图像内部格式设置（<a href="#internalFormatType">参考关系表</a>）。</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p><a href="#internalFormat">纹理数据类型</a>，参考纹理数据的格式设置（<a href="#internalFormatType">参考关系表</a>）</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>image</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>包含纹理图像的Image对象</p></td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="texParameter">
+            
+            texParameter<span class="signature">(target, pname, param)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            <a href="WebGLRenderingContext.js.html">WebGLRenderingContext.js</a>, <a href="WebGLRenderingContext.js.html#line485">line 485</a>
+        </div>
+        
+    </div>
+
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>texParameter[fi]<br>gl.texParameterf(GLenum target, GLenum pname, GLfloat param);<br>gl.texParameteri(GLenum target, GLenum pname, GLint param);<br>将param的值赋给绑定到目标的纹理对象的pname参数上<br>异常：<br>INVALID_ENUM：target不是合法的值<br>INVALID_OPERATION：当前目标上没有绑定纹理对象</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>target</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p>gl.TEXTURE_2D:二维纹理<br>gl.TEXTURE_CUBE_MAP:立方体纹理<br>WebGl2:<br>gl.TEXTURE_3D:三维纹理<br>gl.TEXTURE_2D_ARRAY:二维数组纹理</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>pname</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p><a href="#textureParam">纹理参数</a></p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>param</code></td>
+            
+            
+            <td class="type">
+            
+            </td>
+            
+            
+            
+            <td class="description last">
+                
+                <p><a href="#textureParamValue">纹理参数值</a></p></td>
         </tr>
 	
 	
@@ -8211,7 +8974,7 @@ none-unll 指定uniform变量的位置 null 指定的uniform变量不存在，�
         
 
         <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Mar 01 2023 14:42:44 GMT+0800 (GMT+08:00)
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Mar 03 2023 17:38:40 GMT+0800 (GMT+08:00)
         </footer>
     </div>
 </div>

@@ -332,20 +332,6 @@ class WebGLRenderingContext {
     }
 
     /**
-     * 创建纹理对象, 以存储纹理图像。
-     * @return texture {WebGLTexture|null} null:创建纹理对象失败
-     */
-    createTexture() {
-    }
-
-    /**
-     * 删除纹理对象
-     * @param texture {WebGLTexture} 纹理对象
-     */
-    deleteTexture(texture) {
-    }
-
-    /**
      * sampleCoverage
      */
     sampleCoverage() {
@@ -379,21 +365,6 @@ class WebGLRenderingContext {
      * 扩展项:<a href="../webgl/js_API/WebGL_extensions.html" target="_blank">扩展项</a>
      */
     getExtension(name) {
-    }
-
-    /**
-     * 返回传递参数名称的值
-     * @param pname {GLenum} 指定要返回的参数值
-     * @return 取决于参数。
-     * 参数列表：
-     * gl.COLOR_WRITEMASK:获取当前每个颜色分量是否可以写入帧缓冲区
-     * gl.MAX_VERTEX_ATTRIBS:获取最多的顶点attribute变量
-     * gl.MAX_TEXTURE_SIZE:获取纹理的最大尺寸
-     * gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS:获取当前纹理单元的数量。
-     * gl.ACTIVE_TEXTURE:获取激活的纹理单元
-     * gl.VERSION:获取版本 DOMString
-     */
-    getParameter(pname) {
     }
 
     /**
@@ -433,6 +404,125 @@ class WebGLRenderingContext {
      */
     bindVertexArray(vertexArray) {
     }
+
+    /************************** 状态查询 *******************************/
+
+    /**
+     * 返回传递参数名称的值
+     * @param pname {GLenum} 指定要返回的参数值
+     * @return 取决于参数。
+     * 参数列表：
+     * gl.COLOR_WRITEMASK:获取当前每个颜色分量是否可以写入帧缓冲区
+     * gl.MAX_VERTEX_ATTRIBS:获取最多的顶点attribute变量
+     * gl.MAX_TEXTURE_SIZE:获取纹理的最大尺寸
+     * gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS:获取当前纹理单元的数量。
+     * gl.ACTIVE_TEXTURE:获取激活的纹理单元
+     * gl.VERSION:获取版本 DOMString
+     */
+    getParameter(pname) {
+    }
+
+    /************************** 纹理对象 *******************************/
+
+    /**
+     * 创建纹理对象, 以存储纹理图像。
+     * @return texture {WebGLTexture|null} null:创建纹理对象失败
+     */
+    createTexture() {
+    }
+
+    /**
+     * 删除纹理对象
+     * @param texture {WebGLTexture} 纹理对象
+     */
+    deleteTexture(texture) {
+    }
+
+    /**
+     * 开启texture指定的纹理对象，并将其绑定到target上。此外，如果已经通过gl.activeTexture()激活
+     * 了某个纹理单元，则纹理对象也会绑定到这个纹理单元上。
+     * 异常：
+     * INVALID_ENUM：target不是合法的值
+     * @param target {GLenum} 可能值：
+     * gl.TEXTURE_2D：二维纹理
+     * gl.TEXTURE_CUBE_MAP：立方体纹理
+     * WebGl2：
+     * gl.TEXTURE_3D：三维纹理
+     * gl.TEXTURE_2D_ARRAY：二维数组纹理
+     *
+     * @param texture {WebGLTexture} 表示绑定的纹理单元
+     */
+    bindTexture(target,texture){}
+
+    /**
+     * 激活texUnit指定的<a href="../index.html#textureUnit">纹理单元</a>
+     * @param texUnit 指定准备激活的纹理单元,其值是 gl.TEXTUREI ，其中的 I 在 0 到gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS - 1范围内。例如：gl.TEXTURE0、gl.TEXTURE1......gl.TEXTURE7。最后的数字表示纹理单元的编号。
+     * 纹理单元的数量视实现而定， 你可以通过访问常量 MAX_COMBINED_TEXTURE_IMAGE_UNITS来获取这个值。按照规范来说，最少是8个。
+     * 获取纹理单元个数：gl.getParameter(gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS);
+     * 获取激活的纹理单元：gl.getParameter(gl.ACTIVE_TEXTURE);
+     * 异常：
+     * INVALID_ENUM：texture不是合法的值
+     */
+    activeTexture(texUnit){}
+
+    /**
+     * texParameter[fi]
+     * gl.texParameterf(GLenum target, GLenum pname, GLfloat param);
+     * gl.texParameteri(GLenum target, GLenum pname, GLint param);
+     * 将param的值赋给绑定到目标的纹理对象的pname参数上
+     * 异常：
+     * INVALID_ENUM：target不是合法的值
+     * INVALID_OPERATION：当前目标上没有绑定纹理对象
+     * @param target 
+     * gl.TEXTURE_2D:二维纹理
+     * gl.TEXTURE_CUBE_MAP:立方体纹理
+     * WebGl2:
+     * gl.TEXTURE_3D:三维纹理
+     * gl.TEXTURE_2D_ARRAY:二维数组纹理
+     * @param pname  <a href="#textureParam">纹理参数</a>
+     * @param param <a href="#textureParamValue">纹理参数值</a>
+     */
+    texParameter(target,pname,param){}
+
+    /**
+     * void gl.texImage2D(target, level, internalformat, width, height, border, format, type, ArrayBufferView?
+     * pixels);
+     * void gl.texImage2D(target, level, internalformat, format, type, ImageData? pixels);
+     * void gl.texImage2D(target, level, internalformat, format, type, HTMLImageElement? pixels);
+     * void gl.texImage2D(target, level, internalformat, format, type, HTMLCanvasElement? pixels);
+     * void gl.texImage2D(target, level, internalformat, format, type, HTMLVideoElement? pixels);
+     * void gl.texImage2D(target, level, internalformat, format, type, ImageBitmap? pixels);
+     * webgl2
+     * void gl.texImage2D(target, level, internalformat, width, height, border, format, type, GLint ptroffset);
+     * void gl.texImage2D(target, level, internalformat, width, height, border, format, type, HTMLCanvasElement source);
+     * void gl.texImage2D(target, level, internalformat, width, height, border, format, type, HTMLImageElement source);
+     * void gl.texImage2D(target, level, internalformat, width, height, border, format, type, HTMLVideoElement source);
+     * void gl.texImage2D(target, level, internalformat, width, height, border, format, type, ImageBitmap source);
+     * void gl.texImage2D(target, level, internalformat, width, height, border, format, type, ImageData source);
+     * void gl.texImage2D(target, level, internalformat, width, height, border, format, type, ArrayBufferView srcData, srcOffset);
+     * 将image指定的图像分配给绑定的目标上的纹理对象。
+     * 异常：
+     * INVALID_ENUM:target不是合法的
+     * INVALID_OPERATION:当前目标上没有绑定纹理对象
+     * @param target 激活纹理绑定点
+     * gl.TEXTURE_2D:二维纹理
+     * gl.TEXTURE_CUBE_MAP_POSITIVE_X: Positive X face for a cube-mapped texture.
+     * gl.TEXTURE_CUBE_MAP_NEGATIVE_X: Negative X face for a cube-mapped texture.
+     * gl.TEXTURE_CUBE_MAP_POSITIVE_Y: Positive Y face for a cube-mapped texture.
+     * gl.TEXTURE_CUBE_MAP_NEGATIVE_Y: Negative Y face for a cube-mapped texture.
+     * gl.TEXTURE_CUBE_MAP_POSITIVE_Z: Positive Z face for a cube-mapped texture.
+     * gl.TEXTURE_CUBE_MAP_NEGATIVE_Z: Negative Z face for a cube-mapped texture
+     * @param level 级别0是基本图像级别，级别n是第n个mipmap缩减级别。
+     * @param internalformat 图像的<a href="#internalFormat">内部格式</a>。
+     * @param width 纹理的宽度
+     * @param height 纹理的高度
+     * @param border A GLint specifying the width of the border. Must be 0.
+     * @param format <a href="#internalFormat">纹理数据的格式</a>，参考图像内部格式设置（<a href="#internalFormatType">参考关系表</a>）。
+     * @param type <a href="#internalFormat">纹理数据类型</a>，参考纹理数据的格式设置（<a href="#internalFormatType">参考关系表</a>）
+     * @param image 包含纹理图像的Image对象
+     *
+     */
+    texImage2D(target, level, internalformat, format, type, image){}
 
     /************************** WebGL内置功能 **************************/
 
@@ -666,7 +756,7 @@ class WebGLRenderingContext {
      *
      * @param target {GLenum}
      * gl.ARRAY_BUFFER：表示缓存区对象中包含了顶点的数据
-     * gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值"OpenGL ES着色器语言[GLSL ES]"</p>
+     * gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值"OpenGL ES着色器语言[GLSL ES]"
      * webgl2:
      * gl.UNIFORM_BUFFER：用于存储统一块的缓冲区
      * @param size 设定Buffer对象的数据存储区大小
@@ -686,20 +776,20 @@ class WebGLRenderingContext {
     /**
      * 更新缓冲区对象的数据存储的子集。
      * 重载函数:
-     * <p>void gl.bufferSubData(target, offset, ArrayBufferView srcData);</p>
-     * <p>void gl.bufferSubData(target, offset, ArrayBuffer srcData);</p>
+     * void gl.bufferSubData(target, offset, ArrayBufferView srcData);
+     * void gl.bufferSubData(target, offset, ArrayBuffer srcData);
      * <strong>webGL2:</strong>
-     * <p>void gl.bufferSubData(target, dstByteOffset, ArrayBufferView srcData, srcOffset, length);</p>
+     * void gl.bufferSubData(target, dstByteOffset, ArrayBufferView srcData, srcOffset, length);
      * @param target {GLenum}
      * gl.ARRAY_BUFFER：包含顶点属性的缓存区，例如顶点坐标、纹理坐标数据或顶点颜色数据。
      * gl.ELEMENT_ARRAY_BUFFER:表示缓存区对象中包含了顶点的索引值"OpenGL ES着色器语言[GLSLES]"
      * webgl2:
-     * <li>gl.COPY_READ_BUFFER:用于从一个缓冲区对象复制到另一个</li>
-     * <li>gl.COPY_WRITE_BUFFER:用于从一个缓冲区对象复制到另一个</li>
-     * <li>gl.TRANSFORM_FEEDBACK_BUFFER:缓冲区用于变换反馈操作</li>
-     * <li>gl.UNIFORM_BUFFER:缓冲区用于存储统一块</li>
-     * <li>gl.PIXEL_PACK_BUFFER:用于像素传输操作的缓冲区</li>
-     * <li>gl.PIXEL_UNPACK_BUFFER:用于像素传输操作的缓冲区</li>
+     * gl.COPY_READ_BUFFER:用于从一个缓冲区对象复制到另一个
+     * gl.COPY_WRITE_BUFFER:用于从一个缓冲区对象复制到另一个
+     * gl.TRANSFORM_FEEDBACK_BUFFER:缓冲区用于变换反馈操作
+     * gl.UNIFORM_BUFFER:缓冲区用于存储统一块
+     * gl.PIXEL_PACK_BUFFER:用于像素传输操作的缓冲区
+     * gl.PIXEL_UNPACK_BUFFER:用于像素传输操作的缓冲区
      * @param offset
      * @param srcData ArrayBuffer，SharedArrayBuffer或将复制到数据存储中的ArrayBufferView类型数组类型之一。
      * @param dstByteOffset  GLintptr指定数据替换将开始的字节偏移量
@@ -710,6 +800,13 @@ class WebGLRenderingContext {
     }
 
     /************************** 帧缓冲区 *******************************/
+
+    /**
+     * 创建帧缓存区对象。
+     * @return {WebGLFramebuffer|null} 新创建的帧缓存区对象
+     */
+    createFramebuffer() {
+    }
 
     /**
      * 将framebuffer指定的帧缓冲区对象绑定到target目标上。如果framebuffer为null，那么已经绑定到target目标上的帧缓冲区对象那个将被解除绑定。

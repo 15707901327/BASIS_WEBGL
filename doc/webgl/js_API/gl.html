@@ -95,11 +95,7 @@
                 <li><a href="../../webgl_API/WebGLRenderingContext.html#deleteTexture" title="gl.deleteTexture()"
                        target="_blank">gl.deleteTexture()</a></li>
                 <li><a href="#pixelStorei" title="gl.pixelStorei()">gl.pixelStorei()</a></li>
-                <li><a href="#activeTexture" title="gl.activeTexture()">gl.activeTexture()</a></li>
-                <li><a href="#bindTexture" title="gl.bindTexture()">gl.bindTexture()</a></li>
                 <li><a href="#generateMipmap" title="gl.generateMipmap()">gl.generateMipmap()</a></li>
-                <li><a href="#texParameteri" title="gl.texParameter[fi]()">gl.texParameter[fi]()</a></li>
-                <li><a href="#texImage2D" title="gl.texImage2D()">gl.texImage2D()</a></li>
                 <li><a href="#copyTexImage2D" title="gl.copyTexImage2D()">gl.copyTexImage2D()</a></li>
             </ul>
             <h4>与像素点相关的方法</h4>
@@ -139,7 +135,6 @@
             </ul>
             <h4><a href="#Framebuffer">帧缓冲区对象</a></h4>
             <ul class="ul-1">
-                <li><a href="#createFramebuffer">gl.createFramebuffer()</a></li>
                 <li><a href="#deleteFramebuffer">gl.deleteFramebuffer()</a></li>
                 <li><a href="#framebufferTexture2D">gl.framebufferTexture2D()</a></li>
                 <li><a href="#framebufferRenderbuffer">gl.framebufferRenderbuffer()</a></li>
@@ -149,7 +144,6 @@
             <ul class="ul-1">
                 <li><a href="../../webgl_API/WebGLRenderingContext.html#getExtension" target="_blank">getExtension()</a>
                 </li>
-                <li><a href="#getParameter">getParameter()</a></li>
             </ul>
         </div>
         <div class="right">
@@ -915,70 +909,6 @@
                         <p>INVALID_ENUM：pname不是合法的值</p>
                     </div>
                 </section>
-                <section id="activeTexture">
-                    <h4>gl.activeTexture(texUnit)</h4>
-                    <p>激活texUnit指定的<a href="../index.html#textureUnit">纹理单元</a></p>
-                    <div class="content">
-                        <strong>参数：</strong>
-                        <ul class="ul-1">
-                            <li>
-                                texUnit：指定准备激活的纹理单元,其值是 gl.TEXTUREI ，其中的 I 在 0 到
-                                gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS - 1
-                                范围内。例如：gl.TEXTURE0、gl.TEXTURE1......gl.TEXTURE7。
-                                最后的数字表示纹理单元的编号。
-                            </li>
-                        </ul>
-                        <strong>返回值</strong>
-                        <p>无</p>
-                        <strong>错误</strong>
-                        <p>INVALID_ENUM：texture不是合法的值</p>
-                        <strong>实例：获取纹理单元个数</strong>
-                        <p>纹理单元的数量视实现而定， 你可以通过访问常量 MAX_COMBINED_TEXTURE_IMAGE_UNITS
-                            来获取这个值。按照规范来说，最少是
-                            8 个。</p>
-                        <p>gl.getParameter(gl.MAX_COMBINED_TEXTURE_IMAGE_UNITS);</p>
-                        <strong>实例：获取激活的纹理单元</strong>
-                        <p>想要获取激活的纹理，可以查询常量 ACTIVE_TEXTURE。</p>
-                        <p>gl.getParameter(gl.ACTIVE_TEXTURE);</p>
-                    </div>
-                </section>
-                <section id="bindTexture">
-                    <h4>gl.bindTexture(target,texture)</h4>
-                    <p>
-                        开启texture指定的纹理对象，并将其绑定到target上。此外，如果已经通过gl.activeTexture()激活
-                        了某个纹理单元，则纹理对象也会绑定到这个纹理单元上。
-                    </p>
-                    <div class="content">
-                        <strong>参数</strong>
-                        <ul class="ul-1">
-                            <li>target：<a href="#textureType">纹理类型</a></li>
-                            <li>texture：表示绑定的纹理单元</li>
-                        </ul>
-                        <strong>返回值</strong>
-                        <p>无</p>
-                        <strong>错误</strong>
-                        <p>INVALID_ENUM：target不是合法的值</p>
-                    </div>
-                </section>
-                <section id="texParameteri">
-                    <h4>gl.texParameter[fi]()</h4>
-                    <p>gl.texParameterf(GLenum target, GLenum pname, GLfloat param);</p>
-                    <p>gl.texParameteri(GLenum target, GLenum pname, GLint param);</p>
-                    <p>将param的值赋给绑定到目标的纹理对象的pname参数上。</p>
-                    <div class="content">
-                        <strong>参数</strong>
-                        <ul class="ul-2">
-                            <li>target：<a href="#textureType">纹理类型</a></li>
-                            <li>pname：<a href="#textureParam">纹理参数</a></li>
-                            <li>param：<a href="#textureParamValue">纹理参数值</a></li>
-                        </ul>
-                        <strong>返回值</strong>
-                        <p>无</p>
-                        <strong>错误</strong>
-                        <p>INVALID_ENUM：target不是合法的值</p>
-                        <p>INVALID_OPERATION：当前目标上没有绑定纹理对象</p>
-                    </div>
-                </section>
                 <section id="generateMipmap">
                     <h4>gl.generateMipmap(target);</h4>
                     <p>对象生成一组mipmap。</p>
@@ -986,73 +916,6 @@
                         <strong>参数</strong>
                         <ul class="ul-2">
                             <li>target：<a href="#textureType">纹理类型</a></li>
-                        </ul>
-                    </div>
-                </section>
-                <section id="texImage2D">
-                    <h4>gl.texImage2D(target, level, internalformat, format, type, image)</h4>
-                    <p>void gl.texImage2D(target, level, internalformat, width, height, border, format, type,
-                        ArrayBufferView?
-                        pixels);</p>
-                    <p>void gl.texImage2D(target, level, internalformat, format, type, ImageData? pixels);</p>
-                    <p>void gl.texImage2D(target, level, internalformat, format, type, HTMLImageElement? pixels);</p>
-                    <p>void gl.texImage2D(target, level, internalformat, format, type, HTMLCanvasElement? pixels);</p>
-                    <p>void gl.texImage2D(target, level, internalformat, format, type, HTMLVideoElement? pixels);</p>
-                    <p>void gl.texImage2D(target, level, internalformat, format, type, ImageBitmap? pixels);</p>
-                    <p><strong>webgl2</strong></p>
-                    <p>void gl.texImage2D(target, level, internalformat, width, height, border, format, type, GLintptr
-                        offset);</p>
-                    <p>void gl.texImage2D(target, level, internalformat, width, height, border, format, type,
-                        HTMLCanvasElement
-                        source);</p>
-                    <p>void gl.texImage2D(target, level, internalformat, width, height, border, format, type,
-                        HTMLImageElement
-                        source);</p>
-                    <p>void gl.texImage2D(target, level, internalformat, width, height, border, format, type,
-                        HTMLVideoElement
-                        source);</p>
-                    <p>void gl.texImage2D(target, level, internalformat, width, height, border, format, type,
-                        ImageBitmap
-                        source);</p>
-                    <p>void gl.texImage2D(target, level, internalformat, width, height, border, format, type, ImageData
-                        source);</p>
-                    <p>void gl.texImage2D(target, level, internalformat, width, height, border, format, type,
-                        ArrayBufferView
-                        srcData, srcOffset);</p>
-                    <p>将image指定的图像分配给绑定的目标上的纹理对象。</p>
-                    <div class="content">
-                        <strong>参数:</strong>
-                        <ul class="ul-1">
-                            <li>target：激活纹理绑定点
-                                <ul class="ul-1">
-                                    <li>gl.TEXTURE_2D:二维纹理</li>
-                                    <li>gl.TEXTURE_CUBE_MAP_POSITIVE_X: Positive X face for a cube-mapped texture.</li>
-                                    <li>gl.TEXTURE_CUBE_MAP_NEGATIVE_X: Negative X face for a cube-mapped texture.</li>
-                                    <li>gl.TEXTURE_CUBE_MAP_POSITIVE_Y: Positive Y face for a cube-mapped texture.</li>
-                                    <li>gl.TEXTURE_CUBE_MAP_NEGATIVE_Y: Negative Y face for a cube-mapped texture.</li>
-                                    <li>gl.TEXTURE_CUBE_MAP_POSITIVE_Z: Positive Z face for a cube-mapped texture.</li>
-                                    <li>gl.TEXTURE_CUBE_MAP_NEGATIVE_Z: Negative Z face for a cube-mapped texture</li>
-                                </ul>
-                            </li>
-                            <li>level: 级别0是基本图像级别，级别n是第n个mipmap缩减级别。</li>
-                            <li>internal format: 图像的<a href="#internalFormat">内部格式</a>。</li>
-                            <li>width : 纹理的宽度</li>
-                            <li>height : 纹理的高度</li>
-                            <li>border :A GLint specifying the width of the border. Must be 0.</li>
-                            <li>format: <a href="#internalFormat">纹理数据的格式</a>，参考图像内部格式设置（<a
-                                    href="#internalFormatType">参考关系表</a>）。
-                            </li>
-                            <li>type: <a href="#internalFormat">纹理数据类型</a>，参考纹理数据的格式设置（<a
-                                    href="#internalFormatType">参考关系表</a>）
-                            </li>
-                            <li>image: 包含纹理图像的Image对象</li>
-                        </ul>
-                        <strong>返回值</strong>
-                        <p>无</p>
-                        <strong>错误</strong>
-                        <ul class="ul-1">
-                            <li>INVALID_ENUM:target不是合法的</li>
-                            <li>INVALID_OPERATION:当前目标上没有绑定纹理对象</li>
                         </ul>
                     </div>
                 </section>
@@ -1555,21 +1418,6 @@
             <!-- 帧缓冲区对象 -->
             <section id="Framebuffer" class="section1">
                 <div class="title">帧缓冲区对象</div>
-                <section id="createFramebuffer">
-                    <h4>gl.createFramebuffer()</h4>
-                    <p>创建帧缓存区对象。</p>
-                    <div class="content">
-                        <strong>参数</strong>
-                        <p>无</p>
-                        <strong>返回值</strong>
-                        <ul class="ul-1">
-                            <li>non-null: 新创建的帧缓存区对象</li>
-                            <li>null: 创建帧缓存区对象失败</li>
-                        </ul>
-                        <strong>错误</strong>
-                        <p>无</p>
-                    </div>
-                </section>
                 <section id="deleteFramebuffer">
                     <h4>gl.deleteFramebuffer(framebuffer)</h4>
                     <p>删除帧缓存区对象。</p>

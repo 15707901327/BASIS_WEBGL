@@ -23,12 +23,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="1. 修改API">
-      <change afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLBuffer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLBuffer.js.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLFramebuffer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLFramebuffer.js.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/webgl/GLbitfield.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/webgl/WebGLFramebuffer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl/js_API/gl.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl/js_API/gl.html" afterDir="false" />
@@ -38,6 +32,10 @@
       <change beforePath="$PROJECT_DIR$/doc/webgl_API/GLint.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/GLint.js.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.js.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLBuffer.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLBuffer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLBuffer.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLBuffer.js.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLFramebuffer.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLFramebuffer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLFramebuffer.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLFramebuffer.js.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLProgram.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLProgram.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLProgram.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLProgram.js.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.html" afterDir="false" />
@@ -203,20 +201,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/14296/workhome/ThreeSourceCodeAnalysis&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/14296/workhome/BASIS_WEBGL",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\workhome\BASIS_WEBGL\doc\shader" />
@@ -542,13 +540,8 @@
       <workItem from="1677555281573" duration="6401000" />
       <workItem from="1677634044412" duration="7258000" />
       <workItem from="1677721017291" duration="1153000" />
-    </task>
-    <task id="LOCAL-00075" summary="1.GLSE文档">
-      <created>1585107241111</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1585107241112</updated>
+      <workItem from="1677725430144" duration="305000" />
+      <workItem from="1677823745456" duration="4659000" />
     </task>
     <task id="LOCAL-00076" summary="1.绘制渐变颜色实例">
       <created>1585292022373</created>
@@ -886,7 +879,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677588509873</updated>
     </task>
-    <option name="localTasksCounter" value="124" />
+    <task id="LOCAL-00124" summary="1. 修改API">
+      <created>1677725717316</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1677725717316</updated>
+    </task>
+    <option name="localTasksCounter" value="125" />
     <servers />
   </component>
   <component name="TimeTrackingManager">

@@ -832,4 +832,47 @@ class WebGLRenderingContext {
     drawBuffers(buffers) {
     }
 
+    /************************** 渲染缓冲区对象 *************************/
+
+    /**
+     * 创建渲染缓冲区对象
+     * @return {WebGLFramebuffer} 新创建的渲染缓冲区对象 null: 创建渲染缓冲区对象失败
+     */
+    createRenderbuffer(){}
+
+    /**
+     * 删除渲染缓冲区对象
+     * @param renderbuffer {WebGLFramebuffer} 指定被删除的渲染缓冲对象
+     */
+    deleteRenderbuffer(renderbuffer){}
+
+    /**
+     * 将renderbuffer指定的渲染缓冲区对象绑定到target目标上。如果renderbuffer为null，则将已经绑定在target目标上的渲染缓冲区对象解除绑定.
+     * @param targer 必须为gl.RENDERBUFFER
+     * @param renderbuffer 指定被绑定的渲染缓冲区
+     */
+    bindRenderbuffer(targer,renderbuffer){}
+
+    /**
+     * 创建并初始化渲染缓冲区的数据
+     * @param targer 必须为gl.RENDERBUFFER
+     * @param internalformat 指定渲染缓冲区中的数据格式
+     * @param width 指定缓冲区对象的宽度
+     * @param height 指定缓冲区对象的高度
+     */
+    renderbufferStorage(targer,internalformat,width,height){}
+
+    /**
+     * 将renderbuffer指定的 渲染缓冲区对象关联到绑定在target上的帧缓冲对象关联到绑定在target上的帧缓冲区对象
+     * @param target 必须是gl.FRAMEBUFFER
+     * @param attachment 指定关联的类型
+     * gl.DEPTH_ATTACHMENT:表示renderbuffer是深度关联对象
+     * gl.COLOR_ATTACHMENTO:表示renderbuffer是颜色关联对象
+     * gl._ATTACHMENT:表示renderbuffer是STENCIL模板关联对象
+     * @param renderbuffertarget 指定关联的类型 必须是gl.RENDERBUFFER
+     * @param renderbuffer 指定被关联的渲染缓冲区对
+     */
+    framebufferRenderbuffer(target,attachment,renderbuffertarget,renderbuffer){}
+
+
 }

@@ -316,7 +316,6 @@ function initFramebufferObject(gl) {
   gl.bindTexture(gl.TEXTURE_2D, null);
   gl.bindRenderbuffer(gl.RENDERBUFFER, null);
 
-
   return framebuffer;
 }
 function draw(gl, canvas, fbo, plane, cube, angle, texture, viewProjMatrix, viewProjMatrixFBO) {

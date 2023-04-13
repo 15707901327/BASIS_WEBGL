@@ -6,6 +6,76 @@ class WebGLRenderingContext {
     constructor() {
     }
 
+    //********************* attribute变量相关方法 *************************/
+
+    /**
+     * 将数据（v0，v1，v2,v3）传给由location参数指定的attribute变量，如果没有传递后面的v1, v2, v3，使用默认值0.0、0.0、1.0
+     * 重构方法：vertexAttrib[1234]f
+     * 矢量方法：
+     * gl.vertexAttrib1fv(location,Float32Array);
+     * gl.vertexAttrib4fv(location,Float32Array);
+     * 错误：
+     * INVALID_OPERATION:程序对象未能成功连接（没有当前program对象）
+     * INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）
+     * @param location 指定将要修改的attribute变量的存储位置
+     * @param v0 指定填充attribute变量第一个分量的值
+     * @param v1 指定填充attribute变量第二个分量的值
+     * @param v2 指定填充attribute变量第三个分量的值
+     * @param v3 指定填充attribute变量第四个个分量的值
+     * @example
+     * var position = new Float32Array([0.0,0.0,0.0,1.0]);
+     * gl.vertexAttrib4fv(a_Position, position);
+     */
+    vertexAttrib_1234_f(location, v0, v1, v2, v3){}
+
+    /**
+     * 将绑定到gl.ARRAY_BUFFER上的缓存区对象分配给由location指定的attribute变量
+     * 错误：
+     * INVALID_OPERATION:程序对象未能成功连接（没有当前program对象）
+     * INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）,或则stride或offset是负值
+     *
+     * @param location 指定待分配attribute变量的存储位置
+     * @param size 指定缓存区中每个顶点的分量个数（1到4）。若size比attribute变量需要的分量数少，缺失分量将按照与vertexAttrib[1234]f（）相同的规则补全。
+     * @param type 用以下类型之一来指定格式(与类型化数据数据类型对应):
+     * gl.UNSIGNED_BYTE:无符号字节，Unit8Array
+     * gl.SHORT:短整型，Int16Array
+     * gl.UNSIGNED_SHORT:无符号短整型，Unit16Array
+     * gl.INT:无符号整型，Int16Array
+     * gl.UNSIGNED_INT:无符号整型，Unit16Array
+     * gl.FLOAT:浮点型，Float32Array
+     * @param normalized 传入true或false，表明是否将非浮点型的数据归一化到[0,1]或[-1,1]区间
+     * @param stride 指定相邻两个顶点的字节数，默认为0
+     * @param offset 指定缓存区对象中的偏移量（以字节为单位），即attribute变量从缓存区中的何处开始储存，如果是起始位置开始的，offset设置为0
+     * @example
+     * <a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点</a>
+     */
+    vertexAttribPointer(location, size, type, normalized, stride, offset){}
+
+    /**
+     * 开启location指定的attribute变量
+     * 错误：
+     * INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）
+     *
+     * @param index {GLuint} 指定待分配attribute变量的存储位置
+     *
+     * @see disableVertexAttribArray
+     * @see <a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点</a>
+     */
+    enableVertexAttribArray(index) {
+    }
+
+    /**
+     * 关闭location指定的attribute变量
+     * 错误：
+     * INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）
+     * @param index {GLuint} 指定attribute变量的存储位置
+     *
+     * @see enableVertexAttribArray
+     * @see <a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点</a>
+     */
+    disableVertexAttribArray(index) {
+    }
+
     /**
      * 将定义好的WebGLProgram 对象添加到当前的渲染状态中。
      * @param program {WebGLProgram} 指定待使用的程序对象
@@ -365,31 +435,6 @@ class WebGLRenderingContext {
      * 扩展项:<a href="../webgl/js_API/WebGL_extensions.html" target="_blank">扩展项</a>
      */
     getExtension(name) {
-    }
-
-    /**
-     * 开启location指定的attribute变量
-     * 错误：
-     * INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）
-     *
-     * @param index {GLuint} 指定待分配attribute变量的存储位置
-     *
-     * @see disableVertexAttribArray
-     * @see <a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点</a>
-     */
-    enableVertexAttribArray(index) {
-    }
-
-    /**
-     * 关闭location指定的attribute变量
-     * 错误：
-     * INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）
-     * @param index {GLuint} 指定attribute变量的存储位置
-     *
-     * @see enableVertexAttribArray
-     * @see <a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点</a>
-     */
-    disableVertexAttribArray(index) {
     }
 
     /**

@@ -34,22 +34,30 @@ class WebGLRenderingContext {
      * INVALID_OPERATION:程序对象未能成功连接（没有当前program对象）
      * INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）,或则stride或offset是负值
      *
-     * @param location 指定待分配attribute变量的存储位置
+     * @param index 指定待分配attribute变量的存储位置
      * @param size 指定缓存区中每个顶点的分量个数（1到4）。若size比attribute变量需要的分量数少，缺失分量将按照与vertexAttrib[1234]f（）相同的规则补全。
-     * @param type 用以下类型之一来指定格式(与类型化数据数据类型对应):
-     * gl.UNSIGNED_BYTE:无符号字节，Unit8Array
-     * gl.SHORT:短整型，Int16Array
-     * gl.UNSIGNED_SHORT:无符号短整型，Unit16Array
-     * gl.INT:无符号整型，Int16Array
-     * gl.UNSIGNED_INT:无符号整型，Unit16Array
-     * gl.FLOAT:浮点型，Float32Array
+     * @param type {GLenum} 用以下类型之一来指定格式(与类型化数据数据类型对应):
+     * gl.BYTE:带符号的8位整数，值在[-128,127]中
+     * gl.SHORT:短整型，带符号的16位整数，值在[-32768,32767]中 Int16Array
+     * gl.UNSIGNED_BYTE:无符号字节，无符号8位整数，值在[0,255]中 Unit8Array
+     * gl.UNSIGNED_SHORT:无符号短整型，无符号16位整数，值在[0,65535]中 Unit16Array
+     * gl.FLOAT: 32位浮点型，Float32Array
+     *
+     * WebGL2:
+     * gl.HALF_FLOAT:16位浮点型，Float16Array
+     * gl.INT:32-bit 无符号整型，Int16Array
+     * gl.UNSIGNED_INT:32-bit 无符号整型，Unit16Array
+     * gl.INT_2_10_10_10_REV:32位有符号整数，值在[-512,511]中
+     * gl.UNSIGNED_INT_2_10_10_10_REV：32位无符号整数，值在[0,1023]中
+     *
      * @param normalized 传入true或false，表明是否将非浮点型的数据归一化到[0,1]或[-1,1]区间
      * @param stride 指定相邻两个顶点的字节数，默认为0
      * @param offset 指定缓存区对象中的偏移量（以字节为单位），即attribute变量从缓存区中的何处开始储存，如果是起始位置开始的，offset设置为0
      * @example
      * <a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点</a>
      */
-    vertexAttribPointer(location, size, type, normalized, stride, offset){}
+    vertexAttribPointer(index, size, type, normalized, stride, offset){}
+
 
     /**
      * 开启location指定的attribute变量

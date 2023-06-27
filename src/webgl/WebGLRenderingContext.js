@@ -434,28 +434,16 @@ class WebGLRenderingContext {
      */
     stencilFunc(func, ref, mask) {
     }
-
+    
     /**
      * 启用WebGL扩展
-     * @param name {string} WebGL扩展功能的名称
+     * @param name {string} WebGL扩展功能的名称，例如：
+     * OES_vertex_array_object <a href="../webgl/index.html#VAO" target="_blank">顶点数组对象</a>
      * @return extension 一个 WebGL 扩展对象。
      * 如果扩展名称（区分大小写）与 WebGLRenderingContext.getSupportedExtensions 中的任何结果都不匹配，则只会返回 null 。
      * 扩展项:<a href="../webgl/js_API/WebGL_extensions.html" target="_blank">扩展项</a>
      */
     getExtension(name) {
-    }
-
-    /**
-     * WebGL 2 API 中的方法创建并初始化一个 WebGLVertexArrayObject 的对象，它代表一个指向顶点数组数据的顶点数组对象(VAO)，并为不同的顶点数据集提供名称。
-     */
-    createVertexArray() {
-    }
-
-    /**
-     * WebGL 2 API的方法将传递的WebGLVertexArrayObject对象绑定到缓冲区。
-     * @param vertexArray {WebGLVertexArrayObject} 顶点数组对象
-     */
-    bindVertexArray(vertexArray) {
     }
 
     /************************** 状态查询 *******************************/

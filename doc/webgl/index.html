@@ -34,7 +34,6 @@
                 <li><a href="canvas标签.html" target="_blank">canvas标签</a></li>
                 <li><a href="#type_array">类型化数组</a></li>
             </ul>
-            <h4><a href="#basicConcept">基本概念</a></h4>
             <h4><a href="#texture">纹理贴图</a></h4>
             <ul class="ul-1">
                 <li><a href="#textureFiltering">纹理过滤</a></li>
@@ -63,7 +62,13 @@
                 <li><a href="#blendFunc">混合功能</a></li>
                 <li><a href="#polygonCulling">多边形剔除</a></li>
             </ul>
-            <h4><a href="#blending">混合原理</a></h4>
+
+            <h4><a href="#principle">实现原理</a></h4>
+            <ul class="ul-1">
+                <li><a href="#blending">混合实现原理</a></li>
+                <li><a href="#VAO">顶点数组对象</a></li>
+            </ul>
+
             <h4><a href="../canvas2D_API/ctx.html" target="_blank">canvas 2D API</a></h4>
             <h4><a href="js_API/WebGL_extensions.html" target="_blank">WebGL扩展注册表</a></h4>
             <h4>常用技术</h4>
@@ -74,7 +79,8 @@
             <ul class="ul-1">
                 <li><a href="#example_1">WebGL编程指南</a></li>
                 <li><a href="#example_2">WebGL水箱效果</a></li>
-                <li><a href="../../example/交互式计算机图形学第七版/index.html" target="_blank">交互式计算机图形学第七版</a>
+                <li><a href="../../example/交互式计算机图形学第七版/index.html"
+                       target="_blank">交互式计算机图形学第七版</a>
                 </li>
             </ul>
             <h4><a href="#book">相关资料</a></h4>
@@ -701,11 +707,13 @@
                             <li>将数据写入缓冲区对象（<a href="../webgl_API/WebGLRenderingContext.html#bufferData"
                                                         target="_blank">gl.bufferData()</a>）
                             </li>
-                            <li>将缓冲区对象分配给一个attribute变量（<a href="../webgl_API/WebGLRenderingContext.html#vertexAttribPointer"
-                                                                       target="_blank">gl.vertexAttribPointer()</a>）
+                            <li>将缓冲区对象分配给一个attribute变量（<a
+                                    href="../webgl_API/WebGLRenderingContext.html#vertexAttribPointer"
+                                    target="_blank">gl.vertexAttribPointer()</a>）
                             </li>
-                            <li>开启attribute变量（<a href="../webgl_API/WebGLRenderingContext.html#enableVertexAttribArray"
-                                                     target="_blank">gl.enableVertexAttribArray()</a>）
+                            <li>开启attribute变量（<a
+                                    href="../webgl_API/WebGLRenderingContext.html#enableVertexAttribArray"
+                                    target="_blank">gl.enableVertexAttribArray()</a>）
                             </li>
                         </ul>
                         <strong>实例</strong>
@@ -745,14 +753,16 @@
                                       target="_blank">帧缓冲对象实例</a></h4>
                         <p>帧缓冲区配置实现步骤:</p>
                         <ul class="ul-3-num">
-                            <li>创建帧缓冲区对象<a href="../webgl_API/WebGLRenderingContext.html#createFramebuffer" target="_blank">（gl.createFramebuffer()）</a>
+                            <li>创建帧缓冲区对象<a href="../webgl_API/WebGLRenderingContext.html#createFramebuffer"
+                                                   target="_blank">（gl.createFramebuffer()）</a>
                             </li>
                             <li>创建纹理对象并设置其尺寸和参数<a href="js_API/gl.html#texture"
                                                                  target="_blank">（gl.createTexture()...）</a></li>
                             <li>创建渲染缓冲区对象<a href="../webgl_API/WebGLRenderingContext.html#createRenderBuffer"
                                                      target="_blank">（gl.createRenderBuffer）</a></li>
-                            <li>绑定渲染缓冲区并设置其尺寸<a href="../webgl_API/WebGLRenderingContext.html#bindRenderBuffer"
-                                                             target="_blank">（gl.bindRenderBuffer）</a></li>
+                            <li>绑定渲染缓冲区并设置其尺寸<a
+                                    href="../webgl_API/WebGLRenderingContext.html#bindRenderBuffer"
+                                    target="_blank">（gl.bindRenderBuffer）</a></li>
                             <li>将帧缓冲区的颜色关联对象指定为一个纹理对象<a href="js_API/gl.html#framebufferTexture2D"
                                                                              target="_blank">（gl.framebufferTexture2D）</a>
                             </li>
@@ -983,200 +993,235 @@
                     </div>
                 </section>
             </section>
-            <section id="blending" class="section1">
-                <div class="title">混合原理（blending）</div>
-                <p>
-                    blending是一种颜色和另一种颜色相结合，以获取第三种颜色的行为。我们看到现实世界中一直存在混合：光线穿过玻璃、光线从表面反射、光源叠加到背景上、耀斑、夜晚周围点亮的灯。</p>
-                <p>OpenGL提供了多种不同的混合模式来模拟这些效果。在OpenGL中,混合发生在渲染过程的后期阶段:一旦片源着色器计算出片源的最终输出颜色，并把颜色写入到
-                    <a href="#framebuffer">帧缓冲区</a>中，就会发生混合。 通常情况下，片源仅仅覆盖之前的所有内容，但是如果打开混合，片源将与之前的片源混合。
-                </p>
-                <p>OpenGL通过<a href="#blending_equation">混合方程</a>来控制混合效果，因此我们可以通过控制混合方程以及混合方程参数来控制混合效果。使用
-                    <a href="../webgl_API/WebGLRenderingContext.html#blendEquation"
-                       target="_blank">gl.BlendEquation()</a>、
-                    <a href="../webgl_API/WebGLRenderingContext.html#blendEquationSeparate" target="_blank">gl.blendEquationSeparate()</a>方法来设置混合方程。
-                    默认情况下，OpenGL中混合方程默认设置为GL_FUNC_ADD(
-                    <a href="#blending_equation_param">混合方程详细说明</a>)。使用
-                    <a href="../webgl_API/../webgl_API/WebGLRenderingContext.html#blendFunc" target="_blank">gl.blendFunc(src_factor,
-                        dst_factor)</a>方法来设置混合方程参数。
-                </p>
-                <p>
-                    常用的混合方程参数设置：
-                <ul class="ul-3-num">
-                    <li><a href="#additiveBlending">Additive blending</a></li>
-                    <li><a href="#multiplicativeBlending">Multiplicative blending</a></li>
-                    <li><a href="#interpolativeBlending">Interpolative blending</a></li>
-                    <li><a href="http://www.learnopengles.com/android-lesson-five-an-introduction-to-blending/"
-                           target="_blank">资料地址</a></li>
-                </ul>
-                </p>
-                <section>
-                    <h4 id="blending_equation">混合方程</h4>
-                    <div class="content">
-                        <table border="1">
-                            <tr>
-                                <th colspan="2">混合方程</th>
-                            </tr>
-                            <tr>
-                                <th>mode</th>
-                                <th>说明</th>
-                            </tr>
-                            <tr>
-                                <td>gl.FUNC_ADD</td>
-                                <td>默认模式：output = (source factor * source fragment) + (destination factor *
-                                    destination
-                                    fragment)
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>gl.FUNC_SUBTRACT</td>
-                                <td>output = (source factor * source fragment) - (destination factor * destination
-                                    fragment)
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>gl.FUNC_REVERSE_SUBTRACT</td>
-                                <td>output = (destination factor * destination fragment) - (source factor * source
-                                    fragment)
-                                </td>
-                            </tr>
-                            <tr>
-                                <th colspan="2">WebGL2模式</th>
-                            </tr>
-                            <tr>
-                                <td>gl.MIN</td>
-                                <td>获取源与目标的最小值。</td>
-                            </tr>
-                            <tr>
-                                <td>gl.MAX</td>
-                                <td>获取源与目标的最大值。</td>
-                            </tr>
-                        </table>
-                    </div>
+            <section id="principle" class="section1">
+                <div class="title">技术实现</div>
+                <section id="blending">
+                    <div>混合原理（blending）</div>
+                    <p>
+                        blending是一种颜色和另一种颜色相结合，以获取第三种颜色的行为。我们看到现实世界中一直存在混合：光线穿过玻璃、光线从表面反射、光源叠加到背景上、耀斑、夜晚周围点亮的灯。</p>
+                    <p>OpenGL提供了多种不同的混合模式来模拟这些效果。在OpenGL中,混合发生在渲染过程的后期阶段:一旦片源着色器计算出片源的最终输出颜色，并把颜色写入到
+                        <a href="#framebuffer">帧缓冲区</a>中，就会发生混合。 通常情况下，片源仅仅覆盖之前的所有内容，但是如果打开混合，片源将与之前的片源混合。
+                    </p>
+                    <p>OpenGL通过<a href="#blending_equation">混合方程</a>来控制混合效果，因此我们可以通过控制混合方程以及混合方程参数来控制混合效果。使用
+                        <a href="../webgl_API/WebGLRenderingContext.html#blendEquation"
+                           target="_blank">gl.BlendEquation()</a>、
+                        <a href="../webgl_API/WebGLRenderingContext.html#blendEquationSeparate" target="_blank">gl.blendEquationSeparate()</a>方法来设置混合方程。
+                        默认情况下，OpenGL中混合方程默认设置为GL_FUNC_ADD(
+                        <a href="#blending_equation_param">混合方程详细说明</a>)。使用
+                        <a href="../webgl_API/../webgl_API/WebGLRenderingContext.html#blendFunc" target="_blank">gl.blendFunc(src_factor,
+                            dst_factor)</a>方法来设置混合方程参数。
+                    </p>
+                    <p>
+                        常用的混合方程参数设置：
+                    <ul class="ul-3-num">
+                        <li><a href="#additiveBlending">Additive blending</a></li>
+                        <li><a href="#multiplicativeBlending">Multiplicative blending</a></li>
+                        <li><a href="#interpolativeBlending">Interpolative blending</a></li>
+                        <li><a href="http://www.learnopengles.com/android-lesson-five-an-introduction-to-blending/"
+                               target="_blank">资料地址</a></li>
+                    </ul>
+                    </p>
+                    <section>
+                        <h4 id="blending_equation">混合方程</h4>
+                        <div class="content">
+                            <table border="1">
+                                <tr>
+                                    <th colspan="2">混合方程</th>
+                                </tr>
+                                <tr>
+                                    <th>mode</th>
+                                    <th>说明</th>
+                                </tr>
+                                <tr>
+                                    <td>gl.FUNC_ADD</td>
+                                    <td>默认模式：output = (source factor * source fragment) + (destination factor *
+                                        destination
+                                        fragment)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>gl.FUNC_SUBTRACT</td>
+                                    <td>output = (source factor * source fragment) - (destination factor * destination
+                                        fragment)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>gl.FUNC_REVERSE_SUBTRACT</td>
+                                    <td>output = (destination factor * destination fragment) - (source factor * source
+                                        fragment)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">WebGL2模式</th>
+                                </tr>
+                                <tr>
+                                    <td>gl.MIN</td>
+                                    <td>获取源与目标的最小值。</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.MAX</td>
+                                    <td>获取源与目标的最大值。</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </section>
+                    <section>
+                        <h4 id="blending_equation_param">混合方程参数</h4>
+                        <div class="content">
+                            <table border="1">
+                                <tr>
+                                    <th colspan="4">混合方程参数列表</th>
+                                </tr>
+                                <tr>
+                                    <th>常量</th>
+                                    <th>R分量的系数</th>
+                                    <th>G分量的系数</th>
+                                    <th>B分量的系数</th>
+                                </tr>
+                                <tr>
+                                    <td>gl.ZERO</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.ONE</td>
+                                    <td>1.0</td>
+                                    <td>1.0</td>
+                                    <td>1.0</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.SRC_COLOR</td>
+                                    <td>Rs</td>
+                                    <td>Gs</td>
+                                    <td>Bs</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.ONE_MINUS_SRC_COLOR</td>
+                                    <td>(1-Rs)</td>
+                                    <td>(1-Gs)</td>
+                                    <td>(1-Bs)</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.DST_COLOR</td>
+                                    <td>Rd</td>
+                                    <td>Gd</td>
+                                    <td>Bd</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.ONE_MINUS_DST_COLOR</td>
+                                    <td>(1-Rd)</td>
+                                    <td>(1-Gd)</td>
+                                    <td>(1-Bd)</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.SRC_ALPHA</td>
+                                    <td>As</td>
+                                    <td>As</td>
+                                    <td>As</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.ONE_MINUS_SRC_ALPHA</td>
+                                    <td>(1-As)</td>
+                                    <td>(1-As)</td>
+                                    <td>(1-As)</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.DST_ALPHA</td>
+                                    <td>Ad</td>
+                                    <td>Ad</td>
+                                    <td>Ad</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.ONE_MINUS_DST_ALPHA</td>
+                                    <td>(1-Ad)</td>
+                                    <td>(1-Ad)</td>
+                                    <td>(1-Ad)</td>
+                                </tr>
+                                <tr>
+                                    <td>gl.SRC_ALPHA_SATURATE</td>
+                                    <td>min(As,Ad)</td>
+                                    <td>min(As,Ad)</td>
+                                    <td>min(As,Ad)</td>
+                                </tr>
+                            </table>
+                            <strong>注意：</strong>
+                            <ul class="ul-1-num">
+                                <li>(Rs,Gs,Bs,As)和(Rd,Gd,Bd,Ad)表示源颜色和目标颜色的各个分量。</li>
+                            </ul>
+                        </div>
+                    </section>
+                    <section>
+                        <h4 id="additiveBlending">Additive blending</h4>
+                        <p>将不同颜色添加到一起并添加结果时所做的混合类型。这就是我们的视觉与光一起工作的方式，这就是我们如何在我们的显示器上感知数百万种不同的颜色
+                            - 它们实际上只是将三种不同的原色混合在一起。</p>
+                        <p>
+                            这种类型的混合在3D渲染中具有许多用途，例如在粒子效果中，其似乎发出光或覆盖物，例如围绕光的电晕，或围绕光剑的发光效果。</p>
+                        <p>可以通过调用<a href="js_API/gl.html#blendFunc"> gl.BlendFunc(GL_ONE，GL_ONE) </a>来指定加法混合。
+                            这导致混合方程output
+                            =
+                            (1 * source fragment) + (1 * destination fragment)，其折叠成output = source fragment +
+                            destination
+                            fragment.</p>
+                    </section>
+                    <section>
+                        <h4 id="multiplicativeBlending">Multiplicative blending</h4>
+                        <p>表示光在通过滤色器时的行为方式，或者从被点亮的物体反射并进入我们的眼睛时的行为。红色物体对我们来说是红色的，因为当白光照射到物体上时，蓝色和绿色光被吸收。
+                            只有红光反射回我们的眼睛。
+                            在左边的例子中，我们可以看到一个表面反射一些红色和一些绿色，但很少蓝色。</p>
+                        <p>当多纹理不可用时，乘法混合用于在游戏中实现光照贴图。
+                            纹理与光照贴图相乘，以填充亮起和阴影区域。</p>
+                        <p>可以通过调用<a href="../webgl_API/../webgl_API/WebGLRenderingContext.html#blendFunc">gl.BlendFunc(GL_DST_COLOR，GL_ZERO)</a>来指定乘法混合。
+                            这导致混合方程output = (destination fragment * source fragment) + (0 * destination
+                            fragment)，其折叠成output
+                            = source
+                            fragment * destination fragment.</p>
+                    </section>
+                    <section>
+                        <h4 id="interpolativeBlending">Interpolative blending</h4>
+                        <p>结合了Additive blending和Multiplicative blending，以提供插值效果。
+                            与自身的加法和调制不同，这种混合模式也可以依赖于绘制顺序，因此在某些情况下，如果先绘制最远的半透明对象，然后再绘制较近的半透明对象，结果才会正确。
+                            即使排序也不是完美的，因为三角形可能重叠并相交，但产生的伪像可能是可接受的。</p>
+                        <p>插值通常用于将相邻表面混合在一起，以及做有色玻璃或淡入/淡出等效果。
+                            左侧的图像显示了使用插值混合在一起的两个纹理。</p>
+                        <p>通过调用<a href="../webgl_API/../webgl_API/WebGLRenderingContext.html#blendFunc">gl.BlendFunc（GL_SRC_ALPHA，GL_ONE_MINUS_SRC_ALPHA）</a>指定插值。
+                            这导致混合方程output = (source alpha * source fragment) + ((1 – source alpha) * destination
+                            fragment).
+                        </p>
+                    </section>
                 </section>
-                <section>
-                    <h4 id="blending_equation_param">混合方程参数</h4>
+                <section id="VAO">
+                    <h4>顶点数组对象(VAO)</h4>
+                    <p>
+                        使用了顶点缓冲技术后，绘制效率有了较大的提升。但是还有一点不尽如人意，那就是顶点的位置坐标、法向量、纹理坐标等不同方面的数据每次使用时需要单独指定，重复了一些不必要的工作。VAO封装了与顶点处理器有关的所有数据，它记录了顶点缓存区和索引缓冲区的引用，以及顶点的各种属性的布局而不是实际的数据。在WebGL1中，是一个扩展对象，该扩展对象的名称是OES_vertex_array_object。</p>
+                   <p><a href="../webgl_API/WebGLVertexArrayObject.html" target="_blank">WebGLVertexArrayObject</a></p>
                     <div class="content">
-                        <table border="1">
-                            <tr>
-                                <th colspan="4">混合方程参数列表</th>
-                            </tr>
-                            <tr>
-                                <th>常量</th>
-                                <th>R分量的系数</th>
-                                <th>G分量的系数</th>
-                                <th>B分量的系数</th>
-                            </tr>
-                            <tr>
-                                <td>gl.ZERO</td>
-                                <td>0.0</td>
-                                <td>0.0</td>
-                                <td>0.0</td>
-                            </tr>
-                            <tr>
-                                <td>gl.ONE</td>
-                                <td>1.0</td>
-                                <td>1.0</td>
-                                <td>1.0</td>
-                            </tr>
-                            <tr>
-                                <td>gl.SRC_COLOR</td>
-                                <td>Rs</td>
-                                <td>Gs</td>
-                                <td>Bs</td>
-                            </tr>
-                            <tr>
-                                <td>gl.ONE_MINUS_SRC_COLOR</td>
-                                <td>(1-Rs)</td>
-                                <td>(1-Gs)</td>
-                                <td>(1-Bs)</td>
-                            </tr>
-                            <tr>
-                                <td>gl.DST_COLOR</td>
-                                <td>Rd</td>
-                                <td>Gd</td>
-                                <td>Bd</td>
-                            </tr>
-                            <tr>
-                                <td>gl.ONE_MINUS_DST_COLOR</td>
-                                <td>(1-Rd)</td>
-                                <td>(1-Gd)</td>
-                                <td>(1-Bd)</td>
-                            </tr>
-                            <tr>
-                                <td>gl.SRC_ALPHA</td>
-                                <td>As</td>
-                                <td>As</td>
-                                <td>As</td>
-                            </tr>
-                            <tr>
-                                <td>gl.ONE_MINUS_SRC_ALPHA</td>
-                                <td>(1-As)</td>
-                                <td>(1-As)</td>
-                                <td>(1-As)</td>
-                            </tr>
-                            <tr>
-                                <td>gl.DST_ALPHA</td>
-                                <td>Ad</td>
-                                <td>Ad</td>
-                                <td>Ad</td>
-                            </tr>
-                            <tr>
-                                <td>gl.ONE_MINUS_DST_ALPHA</td>
-                                <td>(1-Ad)</td>
-                                <td>(1-Ad)</td>
-                                <td>(1-Ad)</td>
-                            </tr>
-                            <tr>
-                                <td>gl.SRC_ALPHA_SATURATE</td>
-                                <td>min(As,Ad)</td>
-                                <td>min(As,Ad)</td>
-                                <td>min(As,Ad)</td>
-                            </tr>
-                        </table>
-                        <strong>注意：</strong>
-                        <ul class="ul-1-num">
-                            <li>(Rs,Gs,Bs,As)和(Rd,Gd,Bd,Ad)表示源颜色和目标颜色的各个分量。</li>
+                        <strong>使用：</strong>
+                        <pre>
+    // WebGL2中使用,
+    var triangleArray = gl.createVertexArray();
+    // 后面关于顶点缓冲对象的操作和状态，都会被记录到这个VAO对象中，以后绘制的时候，只需要调用gl.bindVertexArray方法，绑定该对象，就会自动使用相关的状态。
+    gl.bindVertexArray(triangleArray);
+</pre>
+                        <pre>
+    // WebGL1中使用
+    var ext = gl.getExtension("OES_vertex_array_object");
+    var vao = ext.createVertexArrayOES();
+    ext.bindVertexArrayOES(vao);
+    ext.bindVertexArrayOES(null);
+</pre>
+                        <strong>优点：</strong>
+                        <p>一旦为一个
+                            对象指定了一个VAO之后，可以通过对该VAO对象进行简单的绑定操作来导入对象的所有引用和状态。在之后绘制对象时候，不需要在手动来导入对象的引用和状态，VAO替你记住了它。
+                            通过VAO可以简化缓冲区的绑定过程，即可以减少代码的调用次数，也提升了WebGL状态切换的效率。（减少了WebGL相关函数的调用，并且WebGL内部对VAO进行了优化）</p>
+                        <strong>实例：</strong>
+                        <ul class="ul-3-num">
+                            <li><a href="../../example/webgl2/VAO/VAO.html" target="_blank">顶点数组对象实例</a></li>
                         </ul>
                     </div>
                 </section>
-                <section>
-                    <h4 id="additiveBlending">Additive blending</h4>
-                    <p>将不同颜色添加到一起并添加结果时所做的混合类型。这就是我们的视觉与光一起工作的方式，这就是我们如何在我们的显示器上感知数百万种不同的颜色
-                        - 它们实际上只是将三种不同的原色混合在一起。</p>
-                    <p>
-                        这种类型的混合在3D渲染中具有许多用途，例如在粒子效果中，其似乎发出光或覆盖物，例如围绕光的电晕，或围绕光剑的发光效果。</p>
-                    <p>可以通过调用<a href="js_API/gl.html#blendFunc"> gl.BlendFunc(GL_ONE，GL_ONE) </a>来指定加法混合。
-                        这导致混合方程output
-                        =
-                        (1 * source fragment) + (1 * destination fragment)，其折叠成output = source fragment +
-                        destination
-                        fragment.</p>
-                </section>
-                <section>
-                    <h4 id="multiplicativeBlending">Multiplicative blending</h4>
-                    <p>表示光在通过滤色器时的行为方式，或者从被点亮的物体反射并进入我们的眼睛时的行为。红色物体对我们来说是红色的，因为当白光照射到物体上时，蓝色和绿色光被吸收。
-                        只有红光反射回我们的眼睛。
-                        在左边的例子中，我们可以看到一个表面反射一些红色和一些绿色，但很少蓝色。</p>
-                    <p>当多纹理不可用时，乘法混合用于在游戏中实现光照贴图。 纹理与光照贴图相乘，以填充亮起和阴影区域。</p>
-                    <p>可以通过调用<a href="../webgl_API/../webgl_API/WebGLRenderingContext.html#blendFunc">gl.BlendFunc(GL_DST_COLOR，GL_ZERO)</a>来指定乘法混合。
-                        这导致混合方程output = (destination fragment * source fragment) + (0 * destination
-                        fragment)，其折叠成output
-                        = source
-                        fragment * destination fragment.</p>
-                </section>
-                <section>
-                    <h4 id="interpolativeBlending">Interpolative blending</h4>
-                    <p>结合了Additive blending和Multiplicative blending，以提供插值效果。
-                        与自身的加法和调制不同，这种混合模式也可以依赖于绘制顺序，因此在某些情况下，如果先绘制最远的半透明对象，然后再绘制较近的半透明对象，结果才会正确。
-                        即使排序也不是完美的，因为三角形可能重叠并相交，但产生的伪像可能是可接受的。</p>
-                    <p>插值通常用于将相邻表面混合在一起，以及做有色玻璃或淡入/淡出等效果。
-                        左侧的图像显示了使用插值混合在一起的两个纹理。</p>
-                    <p>通过调用<a href="../webgl_API/../webgl_API/WebGLRenderingContext.html#blendFunc">gl.BlendFunc（GL_SRC_ALPHA，GL_ONE_MINUS_SRC_ALPHA）</a>指定插值。
-                        这导致混合方程output = (source alpha * source fragment) + ((1 – source alpha) * destination
-                        fragment).
-                    </p>
-                </section>
             </section>
+
             <section id="WebGL-example" class="section1">
                 <div class="title">WebGL相关实例</div>
                 <section id="example_1">

@@ -51,8 +51,6 @@
             <h4><a href="#buffer">缓冲区方法</a></h4>
             <ul class="ul-1">
                 <li><a href="#clearDepth">gl.clearDepth()</a></li>
-                <li><strong>webgl2</strong></li>
-                <li><a href="#WebGLVertexArrayObject">顶点数组对象</a></li>
             </ul>
             <h4><a href="#color">颜色缓冲</a></h4>
             <ul class="ul-1">
@@ -125,11 +123,6 @@
                 <li><a href="#deleteFramebuffer">gl.deleteFramebuffer()</a></li>
                 <li><a href="#framebufferTexture2D">gl.framebufferTexture2D()</a></li>
                 <li><a href="#checkFramebufferStatus">gl.checkFramebufferStatus()</a></li>
-            </ul>
-            <h4>>全局方法</a></h4>
-            <ul class="ul-1">
-                <li><a href="../../webgl_API/WebGLRenderingContext.html#getExtension" target="_blank">getExtension()</a>
-                </li>
             </ul>
         </div>
         <div class="right">
@@ -331,19 +324,6 @@
                         <strong>返回值：</strong>
                         <p>无</p>
                         <strong>说明：</strong>
-                    </div>
-                </section>
-                <section id="WebGLVertexArrayObject">
-                    <h4>顶点数组对象</h4>
-                    <p>顶点数组对象 (VAOs) 指向顶点数组数据，并提供不同顶点数据集合的名称。</p>
-                    <p>顶点数组对象（ VAO ）封装了与顶点处理器有关的所有数据，它记录了顶点缓存区和索引缓冲区的引用，以及顶点的各种属性的布局而不是实际的数据。</p>
-                    <p><a href="../../webgl_API/WebGLVertexArrayObject.html" target="_blank">WebGLVertexArrayObject</a></p>
-                    <div class="content">
-                        <strong>优点：</strong>
-                        <ul class="ul-2">
-                            <li><p>一旦为一个对象指定了一个VAO之后，可以通过对该VAO对象进行简单的绑定操作来导入对象的所有引用和状态。在之后绘制对象时候，不需要在手动来导入对象的引用和状态。</p></li>
-                            <li><p>通过VAO可以简化缓冲区的绑定过程，即可以减少代码的调用次数，也提升了WebGL状态切换的效率。</p></li>
-                        </ul>
                     </div>
                 </section>
             </section>

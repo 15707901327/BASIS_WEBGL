@@ -3,68 +3,104 @@
 <head>
   <meta charset="UTF-8">
   <title>WebGL扩展注册表</title>
+  <link rel="stylesheet" href="../../../css/base.css">
   <link rel="stylesheet" href="../../css/base.css">
 </head>
 <body>
-<div class="l-r-wrapper">
-  <div class="left">
-    <h4>WebGL API的扩展</h4>
-    <ul class="ul-1">
-      <li><a href="#ANGLE_instanced_arrays">ANGLE_instanced_arrays</a></li>
-      <li><a href="#EXT_texture_filter_anisotropic">EXT_texture_filter_anisotropic</a></li>
-      <li><a href="#OES_texture_float">OES_texture_float</a></li>
-      <li><a href="#OES_texture_float_linear">OES_texture_float_linear</a></li>
-      <li><a href="#OES_texture_half_float">OES_texture_half_float</a></li>
-      <li><a href="#OES_texture_half_float_linear">OES_texture_half_float_linear</a></li>
-      <li><a href="#OES_standard_derivatives">OES_standard_derivatives</a></li>
-      <li><a href="#OES_element_index_uint">OES_element_index_uint</a></li>
-      <li><a href="#WEBGL_depth_texture">WEBGL_depth_texture</a></li>
-      <li><a href="#WEBGL_compressed_texture_s3tc">WEBGL_compressed_texture_s3tc</a></li>
-      <li><a href="#WEBGL_compressed_texture_pvrtc">WEBGL_compressed_texture_pvrtc</a></li>
-    </ul>
-  </div>
-  <div class="right">
-    <!--扩展方法-->
-    <section id="ANGLE_instanced_arrays">
-      <h4>ANGLE_instanced_arrays</h4>
-    </section>
-    <section id="EXT_texture_filter_anisotropic">
-      <h4>EXT_texture_filter_anisotropic</h4>
-      <p>各向异性过滤（AF）</p>
-      <p>当以倾斜角度查看纹理图元时，AF可提高mipmap纹理访问的质量。仅使用mipmapping，这些查找具有平均灰色的趋势。</p>
-    </section>
-    <section id="OES_texture_float">
-      <h4>OES_texture_float</h4>
-      <p>判断是否支持`gl.FLOAT`作为纹理类型</p>
-    </section>
-    <section id="OES_texture_float_linear">
-      <h4>OES_texture_float_linear</h4>
-      <p>判断是否支持支持`gl.LINEAR`作为纹理过滤器模式</p>
-    </section>
-    <section id="OES_texture_half_float">
-      <h4>OES_texture_half_float</h4>
-      <p>判断是否支持支持`gl.HALF_FLOAT_OES`作为纹理类型</p>
-    </section>
-    <section id="OES_texture_half_float_linear">
-      <h4>OES_texture_half_float_linear</h4>
-    </section>
-    <section id="OES_standard_derivatives">
-      <h4>OES_standard_derivatives</h4>
-    </section>
-    <section id="OES_element_index_uint">
-      <h4>OES_element_index_uint</h4>
-    </section>
-    <section id="WEBGL_depth_texture">
-      <h4>WEBGL_depth_texture</h4>
-    </section>
-    <section id="WEBGL_compressed_texture_s3tc">
-      <h4>WEBGL_compressed_texture_s3tc</h4>
-    </section>
-    <section id="WEBGL_compressed_texture_pvrtc">
-      <h4>WEBGL_compressed_texture_pvrtc</h4>
-    </section>
-
+<div class="header">
+  <ul class="ul_1">
+    <li class="li_1"><a href="../../../index.html">首页</a></li>
+    <li class="li_1"><a href="../../webgl/index.html">webgl概述</a></li>
+    <li class="li_1"><a href="../../opengl/index.html">OpenGL概述</a></li>
+    <li class="li_1"><a href="../../graphics/index.html">图形学</a></li>
+    <li class="li_1">
+      <a href="../../shader/index.html">GLSL ES</a>
+      <ul class="ul_2">
+        <li><a href="../../shader/BuiltInFunction.html">内置函数</a></li>
+      </ul>
+    </li>
+    <li class="li_1 li_heightLight"><a href="../../webgl/js_API/gl.html">WebGL API</a></li>
+    <li class="li_1"><a href="../../../example/index.html">WebGL实例</a></li>
+  </ul>
+</div>
+<div class="content">
+  <div class="l-r-wrapper">
+    <div class="left">
+      <h4><a href="#extension">扩展项</a></h4>
+      <ul class="ul-1">
+        <li><a href="#ANGLE_instanced_arrays">ANGLE_instanced_arrays</a></li>
+        <li><a href="#EXT_texture_filter_anisotropic">EXT_texture_filter_anisotropic</a></li>
+        <li><a href="#OES_texture_float">OES_texture_float</a></li>
+        <li><a href="#OES_texture_float_linear">OES_texture_float_linear</a></li>
+        <li><a href="#OES_texture_half_float">OES_texture_half_float</a></li>
+        <li><a href="#OES_texture_half_float_linear">OES_texture_half_float_linear</a></li>
+        <li><a href="#OES_standard_derivatives">OES_standard_derivatives</a></li>
+        <li><a href="#OES_element_index_uint">OES_element_index_uint</a></li>
+        <li><a href="#WEBGL_depth_texture">WEBGL_depth_texture</a></li>
+        <li><a href="#WEBGL_compressed_texture_s3tc">WEBGL_compressed_texture_s3tc</a></li>
+        <li><a href="#WEBGL_compressed_texture_pvrtc">WEBGL_compressed_texture_pvrtc</a></li>
+        <li><a href="#OES_vertex_array_object">OES_vertex_array_object</a></li>
+      </ul>
+    </div>
+    <div class="right">
+      <!--扩展方法-->
+      <section id="extension" class="section1">
+        <h4 class="title">扩展项</h4>
+        <section id="ANGLE_instanced_arrays">
+          <h4>ANGLE_instanced_arrays</h4>
+        </section>
+        <section id="EXT_texture_filter_anisotropic">
+          <h4>EXT_texture_filter_anisotropic</h4>
+          <p>各向异性过滤（AF）</p>
+          <p>当以倾斜角度查看纹理图元时，AF可提高mipmap纹理访问的质量。仅使用mipmapping，这些查找具有平均灰色的趋势。</p>
+        </section>
+        <section id="OES_texture_float">
+          <h4>OES_texture_float</h4>
+          <p>判断是否支持`gl.FLOAT`作为纹理类型</p>
+        </section>
+        <section id="OES_texture_float_linear">
+          <h4>OES_texture_float_linear</h4>
+          <p>判断是否支持支持`gl.LINEAR`作为纹理过滤器模式</p>
+        </section>
+        <section id="OES_texture_half_float">
+          <h4>OES_texture_half_float</h4>
+          <p>判断是否支持支持`gl.HALF_FLOAT_OES`作为纹理类型</p>
+        </section>
+        <section id="OES_texture_half_float_linear">
+          <h4>OES_texture_half_float_linear</h4>
+        </section>
+        <section id="OES_standard_derivatives">
+          <h4>OES_standard_derivatives</h4>
+        </section>
+        <section id="OES_element_index_uint">
+          <h4>OES_element_index_uint</h4>
+        </section>
+        <section id="WEBGL_depth_texture">
+          <h4>WEBGL_depth_texture</h4>
+        </section>
+        <section id="WEBGL_compressed_texture_s3tc">
+          <h4>WEBGL_compressed_texture_s3tc</h4>
+        </section>
+        <section id="WEBGL_compressed_texture_pvrtc">
+          <h4>WEBGL_compressed_texture_pvrtc</h4>
+        </section>
+        <section id="OES_vertex_array_object">
+          <h4>OES_vertex_array_object(顶点数组扩展对象)</h4>
+          <div class="content">
+            <strong>扩展方法：</strong>
+            <ul class="ul-1">
+              <li>ext.createVertexArrayOES() 创建一个新的 WebGLVertexArrayObject</li>
+              <li>ext.deleteVertexArrayOES() 删除一个给定的 WebGLVertexArrayObject</li>
+              <li>ext.isVertexArrayOES() 如果参数是一个 WebGLVertexArrayObject则返回 true</li>
+              <li>ext.bindVertexArrayOES() 绑定一个给定的WebGLVertexArrayObject到缓冲区。</li>
+            </ul>
+            <a href="../../webgl/index.html#VAO" target="_blank">顶点数组对象</a>
+          </div>
+        </section>
+      </section>
+    </div>
   </div>
 </div>
+
 </body>
 </html>

@@ -100,6 +100,33 @@
             </ul>
         </li>
     
+        <li class="item" data-name="WebGL2RenderingContext">
+            <span class="title">
+                <a href="WebGL2RenderingContext.html">WebGL2RenderingContext</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="WebGL2RenderingContext#bindVertexArray"><a href="WebGL2RenderingContext.html#bindVertexArray">bindVertexArray</a></li>
+            
+                <li data-name="WebGL2RenderingContext#createVertexArray"><a href="WebGL2RenderingContext.html#createVertexArray">createVertexArray</a></li>
+            
+                <li data-name="WebGL2RenderingContext#vertexAttribIPointer"><a href="WebGL2RenderingContext.html#vertexAttribIPointer">vertexAttribIPointer</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
         <li class="item" data-name="WebGLActiveInfo">
             <span class="title">
                 <a href="WebGLActiveInfo.html">WebGLActiveInfo</a>
@@ -209,8 +236,6 @@
             
                 <li data-name="WebGLRenderingContext#bindTexture"><a href="WebGLRenderingContext.html#bindTexture">bindTexture</a></li>
             
-                <li data-name="WebGLRenderingContext#bindVertexArray"><a href="WebGLRenderingContext.html#bindVertexArray">bindVertexArray</a></li>
-            
                 <li data-name="WebGLRenderingContext#blendColor"><a href="WebGLRenderingContext.html#blendColor">blendColor</a></li>
             
                 <li data-name="WebGLRenderingContext#blendEquation"><a href="WebGLRenderingContext.html#blendEquation">blendEquation</a></li>
@@ -234,8 +259,6 @@
                 <li data-name="WebGLRenderingContext#createRenderbuffer"><a href="WebGLRenderingContext.html#createRenderbuffer">createRenderbuffer</a></li>
             
                 <li data-name="WebGLRenderingContext#createTexture"><a href="WebGLRenderingContext.html#createTexture">createTexture</a></li>
-            
-                <li data-name="WebGLRenderingContext#createVertexArray"><a href="WebGLRenderingContext.html#createVertexArray">createVertexArray</a></li>
             
                 <li data-name="WebGLRenderingContext#cullFace"><a href="WebGLRenderingContext.html#cullFace">cullFace</a></li>
             
@@ -423,22 +446,55 @@ class WebGLRenderingContext {
      * INVALID_OPERATION:程序对象未能成功连接（没有当前program对象）
      * INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）,或则stride或offset是负值
      *
-     * @param location 指定待分配attribute变量的存储位置
+     * @param index 指定待分配attribute变量的存储位置
      * @param size 指定缓存区中每个顶点的分量个数（1到4）。若size比attribute变量需要的分量数少，缺失分量将按照与vertexAttrib[1234]f（）相同的规则补全。
-     * @param type 用以下类型之一来指定格式(与类型化数据数据类型对应):
-     * gl.UNSIGNED_BYTE:无符号字节，Unit8Array
-     * gl.SHORT:短整型，Int16Array
-     * gl.UNSIGNED_SHORT:无符号短整型，Unit16Array
-     * gl.INT:无符号整型，Int16Array
-     * gl.UNSIGNED_INT:无符号整型，Unit16Array
-     * gl.FLOAT:浮点型，Float32Array
+     * @param type {GLenum} 用以下类型之一来指定格式(与类型化数据数据类型对应):
+     * gl.BYTE:带符号的8位整数，值在[-128,127]中
+     * gl.SHORT:短整型，带符号的16位整数，值在[-32768,32767]中 Int16Array
+     * gl.UNSIGNED_BYTE:无符号字节，无符号8位整数，值在[0,255]中 Unit8Array
+     * gl.UNSIGNED_SHORT:无符号短整型，无符号16位整数，值在[0,65535]中 Unit16Array
+     * gl.FLOAT: 32位浮点型，Float32Array
+     *
+     * WebGL2:
+     * gl.HALF_FLOAT:16位浮点型，Float16Array
+     * gl.INT:32-bit 无符号整型，Int16Array
+     * gl.UNSIGNED_INT:32-bit 无符号整型，Unit16Array
+     * gl.INT_2_10_10_10_REV:32位有符号整数，值在[-512,511]中
+     * gl.UNSIGNED_INT_2_10_10_10_REV：32位无符号整数，值在[0,1023]中
+     *
      * @param normalized 传入true或false，表明是否将非浮点型的数据归一化到[0,1]或[-1,1]区间
      * @param stride 指定相邻两个顶点的字节数，默认为0
      * @param offset 指定缓存区对象中的偏移量（以字节为单位），即attribute变量从缓存区中的何处开始储存，如果是起始位置开始的，offset设置为0
      * @example
      * &lt;a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点&lt;/a>
      */
-    vertexAttribPointer(location, size, type, normalized, stride, offset){}
+    vertexAttribPointer(index, size, type, normalized, stride, offset){}
+
+
+    /**
+     * 开启location指定的attribute变量
+     * 错误：
+     * INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）
+     *
+     * @param index {GLuint} 指定待分配attribute变量的存储位置
+     *
+     * @see disableVertexAttribArray
+     * @see &lt;a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点&lt;/a>
+     */
+    enableVertexAttribArray(index) {
+    }
+
+    /**
+     * 关闭location指定的attribute变量
+     * 错误：
+     * INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）
+     * @param index {GLuint} 指定attribute变量的存储位置
+     *
+     * @see enableVertexAttribArray
+     * @see &lt;a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点&lt;/a>
+     */
+    disableVertexAttribArray(index) {
+    }
 
     /**
      * 将定义好的WebGLProgram 对象添加到当前的渲染状态中。
@@ -790,53 +846,16 @@ class WebGLRenderingContext {
      */
     stencilFunc(func, ref, mask) {
     }
-
+    
     /**
      * 启用WebGL扩展
-     * @param name {string} WebGL扩展功能的名称
+     * @param name {string} WebGL扩展功能的名称，例如：
+     * OES_vertex_array_object &lt;a href="../webgl/index.html#VAO" target="_blank">顶点数组对象&lt;/a>
      * @return extension 一个 WebGL 扩展对象。
      * 如果扩展名称（区分大小写）与 WebGLRenderingContext.getSupportedExtensions 中的任何结果都不匹配，则只会返回 null 。
      * 扩展项:&lt;a href="../webgl/js_API/WebGL_extensions.html" target="_blank">扩展项&lt;/a>
      */
     getExtension(name) {
-    }
-
-    /**
-     * 开启location指定的attribute变量
-     * 错误：
-     * INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）
-     *
-     * @param index {GLuint} 指定待分配attribute变量的存储位置
-     *
-     * @see disableVertexAttribArray
-     * @see &lt;a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点&lt;/a>
-     */
-    enableVertexAttribArray(index) {
-    }
-
-    /**
-     * 关闭location指定的attribute变量
-     * 错误：
-     * INVALID_VALUE：location大于等于attribute变量名的最大数目（默认为8）
-     * @param index {GLuint} 指定attribute变量的存储位置
-     *
-     * @see enableVertexAttribArray
-     * @see &lt;a href="../../example/WebGL编程指南/ch3/MultiPoints.html" target="_blank">绘制三角形的三个顶点&lt;/a>
-     */
-    disableVertexAttribArray(index) {
-    }
-
-    /**
-     * WebGL 2 API 中的方法创建并初始化一个 WebGLVertexArrayObject 的对象，它代表一个指向顶点数组数据的顶点数组对象(VAO)，并为不同的顶点数据集提供名称。
-     */
-    createVertexArray() {
-    }
-
-    /**
-     * WebGL 2 API的方法将传递的WebGLVertexArrayObject对象绑定到缓冲区。
-     * @param vertexArray {WebGLVertexArrayObject} 顶点数组对象
-     */
-    bindVertexArray(vertexArray) {
     }
 
     /************************** 状态查询 *******************************/
@@ -1321,7 +1340,7 @@ class WebGLRenderingContext {
         
 
         <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Apr 13 2023 11:01:02 GMT+0800 (GMT+08:00)
+            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Jun 27 2023 17:32:19 GMT+0800 (GMT+08:00)
         </footer>
     </div>
 </div>

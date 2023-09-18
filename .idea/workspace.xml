@@ -23,33 +23,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="1. 修改API">
+      <change afterPath="$PROJECT_DIR$/example/WebGL编程指南/left.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl_API/GLbitfield.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/GLbitfield.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl_API/GLbitfield.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/GLbitfield.js.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl_API/GLboolean.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/GLboolean.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl_API/GLboolean.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/GLboolean.js.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl_API/GLint.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/GLint.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl_API/GLint.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/GLint.js.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGL2RenderingContext.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGL2RenderingContext.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGL2RenderingContext.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGL2RenderingContext.js.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLActiveInfo.js.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLBuffer.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLBuffer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLBuffer.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLBuffer.js.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLFramebuffer.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLFramebuffer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLFramebuffer.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLFramebuffer.js.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLProgram.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLProgram.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLProgram.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLProgram.js.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLRenderingContext.js.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLTexture.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLTexture.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLTexture.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLTexture.js.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLVertexArrayObject.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLVertexArrayObject.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl_API/WebGLVertexArrayObject.js.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/WebGLVertexArrayObject.js.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/webgl_API/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/doc/webgl_API/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/left.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/left.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/webgl/WebGLRenderingContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/webgl/WebGLRenderingContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/ClickedPoints.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/ClickedPoints.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/ClickedPoints.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/ClickedPoints.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/ColoredPoints.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/ColoredPoints.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/ColoredPoints.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/ColoredPoints.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/DrawRectangle.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/DrawRectangle.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/DrawRectangle.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/DrawRectangle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/HelloCanvas.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/HelloCanvas.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/HelloCanvas.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/HelloCanvas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/HelloPoint1.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/HelloPoint1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/HelloPoint1.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/HelloPoint1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/HelloPoint2.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/HelloPoint2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/HelloPoint2.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/HelloPoint2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/top.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/top.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,7 +198,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/14296/workhome/ThreeSourceCodeAnalysis",
+    "last_opened_file_path": "C:/Users/14296/workhome/BASIS_WEBGL/example/WebGL编程指南",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -221,18 +210,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\14296\workhome\BASIS_WEBGL\example\WebGL编程指南" />
       <recent name="C:\Users\14296\workhome\BASIS_WEBGL\example\WebGL编程指南\ch07" />
       <recent name="C:\Users\14296\workhome\BASIS_WEBGL\src\webgl" />
       <recent name="D:\workhome\BASIS_WEBGL\doc\shader" />
       <recent name="D:\workhome\BASIS_WEBGL\lib" />
-      <recent name="D:\workhome\BASIS_WEBGL\doc\graphics" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\14296\workhome\BASIS_WEBGL\example\webgl2\VAO" />
       <recent name="C:\Users\14296\workhome\BASIS_WEBGL\example" />
+      <recent name="C:\Users\14296\workhome\BASIS_WEBGL" />
+      <recent name="C:\Users\14296\workhome\BASIS_WEBGL\example\webgl2\VAO" />
       <recent name="D:\workhome\BASIS_WEBGL\example" />
       <recent name="D:\workhome\BASIS_WEBGL" />
-      <recent name="D:\workhome\BASIS_WEBGL\doc\graphics\img" />
     </key>
   </component>
   <component name="RunManager">
@@ -557,14 +546,13 @@
       <workItem from="1688452613263" duration="80000" />
       <workItem from="1689736327160" duration="776000" />
       <workItem from="1690950374020" duration="767000" />
-      <workItem from="1691032408609" duration="2243000" />
-    </task>
-    <task id="LOCAL-00082" summary="1.法线计算">
-      <created>1585632715278</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1585632715279</updated>
+      <workItem from="1691032408609" duration="2498000" />
+      <workItem from="1691056402591" duration="84000" />
+      <workItem from="1691148112033" duration="13000" />
+      <workItem from="1692693374272" duration="1209000" />
+      <workItem from="1692698792598" duration="629000" />
+      <workItem from="1692931211592" duration="19000" />
+      <workItem from="1695008457315" duration="4814000" />
     </task>
     <task id="LOCAL-00083" summary="1.测试灯光">
       <created>1585907878032</created>
@@ -902,7 +890,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687858414166</updated>
     </task>
-    <option name="localTasksCounter" value="131" />
+    <task id="LOCAL-00131" summary="1. 修改API">
+      <created>1691036478805</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1691036478805</updated>
+    </task>
+    <option name="localTasksCounter" value="132" />
     <servers />
   </component>
   <component name="TimeTrackingManager">

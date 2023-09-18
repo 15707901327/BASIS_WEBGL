@@ -22,23 +22,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="1. 修改API">
-      <change afterPath="$PROJECT_DIR$/example/WebGL编程指南/left.html" afterDir="false" />
+    <list default="true" id="9dd47383-ce21-4741-a774-5971c20f8600" name="Default Changelist" comment="1. 点击绘制简单点">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/ClickedPoints.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/ClickedPoints.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/ClickedPoints.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/ClickedPoints.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/ColoredPoints.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/ColoredPoints.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/ColoredPoints.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/ColoredPoints.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/DrawRectangle.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/DrawRectangle.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/DrawRectangle.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/DrawRectangle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/HelloCanvas.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/HelloCanvas.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/HelloCanvas.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/HelloCanvas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/HelloPoint1.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/HelloPoint1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/HelloPoint1.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/HelloPoint1.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/HelloPoint2.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/HelloPoint2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch2/HelloPoint2.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/HelloPoint2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/top.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/top.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch02/ClickedPoints.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/ClickedPoints.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch02/ClickedPoints.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/ClickedPoints.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch02/HelloPoint1.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/HelloPoint1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/ch02/HelloPoint1.js" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/ch02/HelloPoint1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/WebGL编程指南/left.html" beforeDir="false" afterPath="$PROJECT_DIR$/example/WebGL编程指南/left.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -552,14 +542,7 @@
       <workItem from="1692693374272" duration="1209000" />
       <workItem from="1692698792598" duration="629000" />
       <workItem from="1692931211592" duration="19000" />
-      <workItem from="1695008457315" duration="4814000" />
-    </task>
-    <task id="LOCAL-00083" summary="1.测试灯光">
-      <created>1585907878032</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1585907878032</updated>
+      <workItem from="1695008457315" duration="7809000" />
     </task>
     <task id="LOCAL-00084" summary="1.实现环境光">
       <created>1586414838252</created>
@@ -897,7 +880,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691036478805</updated>
     </task>
-    <option name="localTasksCounter" value="132" />
+    <task id="LOCAL-00132" summary="1. 点击绘制简单点">
+      <created>1695018549304</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1695018549304</updated>
+    </task>
+    <option name="localTasksCounter" value="133" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -943,7 +933,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.实现环境光" />
     <MESSAGE value="1.实现平行光" />
     <MESSAGE value="1.修改 API" />
     <MESSAGE value="1.用index渲染一个正方形" />
@@ -968,7 +957,8 @@
     <MESSAGE value="1. 修改 WebGLActiveInfo API" />
     <MESSAGE value="1. 修改法线的计算方式" />
     <MESSAGE value="1. 修改API" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. 修改API" />
+    <MESSAGE value="1. 点击绘制简单点" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. 点击绘制简单点" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
